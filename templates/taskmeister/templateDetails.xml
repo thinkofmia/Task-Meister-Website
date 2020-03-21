@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension version="2.5" type="template">
+	<name>Task Meister Template</name>
+	<creationDate>2020-03-20</creationDate>
+	<author>Fremont Teng</author>
+	<authorEmail>fremontteng@gmail.com</authorEmail>
+	<authorUrl>https://github.com/FremontTeng</authorUrl>
+	<copyright>Task Meister 2020</copyright>
+	<license>GNU/GPL</license>
+	<version>1.0.2</version>
+	<description>New Templates</description>
+	<files>
+		<filename>index.php</filename>
+		<filename>templateDetails.xml</filename>
+		<folder>images</folder>
+		<folder>css</folder>
+	</files>
+	<positions>
+		<position>breadcrumb</position>
+		<position>left</position>
+		<position>right</position>
+		<position>top</position>
+		<position>Recommended</position>
+		<position>LikedList</position>
+		<position>Popular</position>
+		<position>Trending</position>
+		<position>DeployedBefore</position>
+		<position>Effortless</position>
+		<position>PhysicalManipulative</position>
+		<position>Fun</position>
+		<position>OutOfOrdinary</position>
+		<position>Scaffold</position>
+		<position>AI</position>
+		<position>bottom</position>
+		<position>footer</position>
+	</positions>
+</extension>

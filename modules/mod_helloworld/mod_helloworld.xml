@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="module" client="site" version="3.1.0" method="upgrade">
+	<name>Hello, World!</name>
+	<author>CS</author>
+	<version>1.0.0</version>
+	<description>A simple module</description>
+	<files>
+		<filename>mod_helloworld.xml</filename>
+		<filename module="mod_helloworld">mod_helloworld.php</filename>
+		<filename>index.html</filename>
+		<filename>helper.php</filename>
+		<filename>tmpl/default.php</filename>
+		<filename>tmpl/index.html</filename>
+	</files>
+	<config>
+	</config>
+</extension>
