@@ -1,11 +1,12 @@
+/*Variables*/
 /*Set css for body*/
 body {
-    margin-left: 5%;
-    background-color: black;
-    color: white;
-    width: 90%;
-    word-wrap: break-word;
-    overflow-wrap: break-word;
+  margin-left: 5%;
+  background-color: black;
+  color: white;
+  width: 90%;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 
 /*Set css for Top Wrapper*/
@@ -17,62 +18,65 @@ body {
 }
 
 /*Set css for Top Left*/
-#topLeft{
-    position: relative;
-    left: 0%;
+#topLeft {
+  position: relative;
+  left: 0%;
 }
 
 /*Set css for Top Right*/
-#topRight{
-    position: relative;
-    right: -80%;
+#topRight {
+  position: relative;
+  right: -80%;
 }
 
 /*Set css for logo*/
-.logo{
-    height: 100px;
-    width: 200px;
+.logo {
+  height: 100px;
+  width: 200px;
 }
 
 /*Set CSS for center Wrapper*/
-#centerWrapper{
+#centerWrapper {
   height: 500px;
   width: 100%;
   background-color: white;
 }
 
 /*CSS for MOE learning generator Wrapper*/
-#rightBanner{
-    position: relative;
-    width: 40%;
-    left: 50%;
-    top: -5%;
-    height: 100%;
-    background-color: gray;
-    opacity: 0.7;
+#rightBanner {
+  position: relative;
+  width: 40%;
+  left: 50%;
+  top: -5%;
+  height: 100%;
+  background-color: gray;
+  opacity: 0.7;
 }
+
 #rightBanner p {
-    margin: 0;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    text-align: center;
-    font-size: 72px;
-    font-style: bold;
-    color: yellow;
-    -ms-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%);
-  }
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  text-align: center;
+  font-size: 72px;
+  font-style: bold;
+  color: yellow;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
 
 /*CSS for general wrapper*/
 .wrapper {
-    text-align: center;
-    background-color: rgb(51, 51, 51);
-    padding: 10%
+  text-align: center;
+  background-color: #333333;
+  padding: 10%;
 }
 
 .wrapper h1 {
-    font-size: 72px;
-    font-style: bold;
-    color: yellow;
+  font-size: 72px;
+  font-style: bold;
+  color: yellow;
 }
+
+/*# sourceMappingURL=template.css.map */
