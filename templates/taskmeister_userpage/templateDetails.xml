@@ -16,8 +16,15 @@
 		<folder>css</folder>
 	</files>
 	<positions>
-		<position>login</position>
+		<position>top-left</position>
+		<position>top</position>
+		<position>top-right</position>	
+		<position>center-left</position>
+		<position>center</position>
+		<position>center-right</position>	
+		<position>bottom-left</position>
 		<position>bottom</position>
+		<position>bottom-right</position>
 		<position>footer</position>
 	</positions>
 </extension>

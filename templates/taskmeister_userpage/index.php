@@ -18,14 +18,24 @@
 
 <!-- Contain the website code which controls the layout-->
 <body>
-    <div id = "topWrapper"><!-- Top Wrapper -->
-        <div id = "topRight">
-            <a href = "homePage">X</a>
-            </div>
+    <div id="topRow">
+        <jdoc:include type="modules" name="top-left"/><!-- Module Position: 'top-left'-->
+        <a href = "https://iwant2study.org/taskmeister/index.php/home"><!-- Put clickable logo below-->
+            <img class = "logo"  src="<?php echo $this->baseurl; ?>/templates/<?php echo $this->template; ?>/images/TaskMeisterLogo.JPG" alt="Task Meister Logo" class="logo" />
+        </a>
+        <jdoc:include type="modules" name="top"/><!-- Module Position: 'top'-->
+        <jdoc:include type="modules" name="top-right"/><!-- Module Position: 'top-right'-->
     </div>
-<div id="contentArea">
-    <jdoc:include type="modules" name="login" />
-</div>
+    <div id="centerRow">
+        <jdoc:include type="modules" name="center-left"/><!-- Module Position: 'center-left'-->
+        <jdoc:include type="modules" name="center"/><!-- Module Position: 'center'-->
+        <jdoc:include type="modules" name="center-right"/><!-- Module Position: 'center-right'-->
+    </div>
+    <div id="bottomRow">
+        <jdoc:include type="modules" name="bottom-left"/><!-- Module Position: 'bottom-left'-->
+        <jdoc:include type="modules" name="bottom"/><!-- Module Position: 'bottom'-->
+        <jdoc:include type="modules" name="bottom-right"/><!-- Module Position: 'bottom-right'-->
+    </div>
 
 <jdoc:include type="modules" name="bottom" /><!-- Module Position: 'bottom'-->
 <jdoc:include type="modules" name="footer" /><!-- Module Position: 'footer'-->

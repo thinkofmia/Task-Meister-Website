@@ -2,9 +2,9 @@
 /*Default Tags*/
 body {
   margin-left: 5%;
-  background-color: white;
-  color: black;
-  width: 90%;
+  background-color: black;
+  color: white;
+  width: 100%;
   word-wrap: break-word;
   overflow-wrap: break-word;
   overflow-x: hidden;
@@ -12,97 +12,23 @@ body {
 }
 
 /*Custom Tags*/
-#topWrapper {
-  background-color: white;
-  padding-top: 2%;
-  color: white;
-  border-bottom: 7px solid blue;
-  position: relative;
-  height: 150px;
-}
-
-#topLeft {
-  /*Set css for Top Left*/
-  position: absolute;
-  left: 0%;
-}
-
-#topRight {
+#topRow {
   /*Set css for Top Right*/
   position: absolute;
-  right: 0%;
-  width: 20%;
+  width: 100%;
   display: inline-block;
   /*CSS for internal link*/
 }
-#topRight a {
+#topRow a {
+  width: 30%;
+  left: 0%;
   padding: 2%;
   font-size: x-large;
 }
 
 .logo {
   /*Set css for logo*/
-  width: 70%;
-}
-
-#centerWrapper {
-  /*Set CSS for center Wrapper*/
-  height: 500px;
-  width: 100%;
-  background-color: white;
-  display: inline-block;
-}
-
-#rightBanner {
-  /*CSS for MOE learning generator Wrapper*/
-  position: relative;
-  width: 40%;
-  left: 50%;
-  bottom: 100%;
-  height: 100%;
-  background-color: gray;
-  opacity: 0.7;
-}
-
-#rightBanner p {
-  margin: 0;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  text-align: center;
-  font-size: 72px;
-  font-style: bold;
-  color: yellow;
-  -ms-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
-}
-
-.wrapper {
-  /*CSS for general wrapper*/
-  text-align: center;
-  background-color: #333333;
-  padding: 10%;
-}
-.wrapper h1 {
-  font-size: 72px;
-  font-style: bold;
-  color: yellow;
-}
-
-#contentArea {
-  display: inline-block;
-  width: 100%;
-  position: relative;
-}
-
-.background {
-  position: relative;
-  width: 100%;
-}
-
-.accountIcon {
-  width: 30px;
-  height: 30px;
+  width: 30%;
 }
 
 /*# sourceMappingURL=template.css.map */
