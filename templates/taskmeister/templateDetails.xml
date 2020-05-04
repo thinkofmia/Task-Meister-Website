@@ -7,7 +7,7 @@
 	<authorUrl>https://github.com/FremontTeng</authorUrl>
 	<copyright>Task Meister 2020</copyright>
 	<license>GNU/GPL</license>
-	<version>1.0.2</version>
+	<version>1.0.3</version>
 	<description>New Templates</description>
 	<files>
 		<filename>index.php</filename>
