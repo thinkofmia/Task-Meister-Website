@@ -8,6 +8,7 @@ body {
   word-wrap: break-word;
   overflow-wrap: break-word;
   overflow-x: hidden;
+  display: inline-block;
 }
 
 /*Custom Tags*/
@@ -16,25 +17,27 @@ body {
   padding-top: 2%;
   color: white;
   border-bottom: 7px solid blue;
+  position: relative;
+  height: 150px;
 }
 
 #topLeft {
   /*Set css for Top Left*/
-  position: relative;
+  position: absolute;
   left: 0%;
 }
 
 #topRight {
   /*Set css for Top Right*/
-  position: relative;
-  right: -80%;
+  position: absolute;
+  right: 0%;
   display: inline-flex;
   padding: 1%;
 }
 
 .logo {
   /*Set css for logo*/
-  width: 30%;
+  width: 70%;
 }
 
 #centerWrapper {
