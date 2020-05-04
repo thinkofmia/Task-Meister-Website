@@ -4,6 +4,8 @@
 //Variables - Edit this to change the respective names
 $rightBannerText = "THE MOE LEARNING TASK GENERATOR"; //Set the right banner text for the animated BG
 
+$animatedImg = "animatedPreview.gif";//Sets animated Image
+
 $noHeaders = 11; //Set the total number of headers to display
 
 ////Set the header's names and text
@@ -76,7 +78,7 @@ $summary11 = "Expert tutor to guide students how to solve quadratic equations";
 <div id="contentArea">
     <div id="centerWrapper"><!-- Center Content: Includes animated background and banner-->
         <!-- Animated Background-->
-        <img src="<?php echo $this->baseurl; ?>/templates/<?php echo $this->template; ?>/images/animatedPreview.gif" alt="fake background" class="background" />
+        <img src="<?php echo $this->baseurl; ?>/templates/<?php echo $this->template; ?>/images/<?php echo $animatedImg; ?>" alt="fake background" class="background" />
         <!-- Right Banner-->
         <div id="rightBanner">
             <p><?php echo $rightBannerText; ?></p>
