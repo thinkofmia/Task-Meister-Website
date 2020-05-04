@@ -24,10 +24,12 @@
             <jdoc:include type="modules" name="top-left"/><!-- Module Position: 'top-left'-->
         </a>
         <jdoc:include type="modules" name="top"/><!-- Module Position: 'top'-->
-        <a class= "right" href="/taskmeister/index.php/loginPage"><!--Login-->
-            <img src="<?php echo $this->baseurl; ?>/templates/<?php echo $this->template; ?>/images/accountIcon.jpg" class = "accountIcon" alt="Login Account" title="Click here to Login. "/>
+        <div id = "topRight">
             <jdoc:include type="modules" name="top-right"/><!-- Module Position: 'top-right'-->
-        </a>
+            <a class= "right" href="/taskmeister/index.php/loginPage"><!--Login-->
+                <img src="<?php echo $this->baseurl; ?>/templates/<?php echo $this->template; ?>/images/accountIcon.jpg" class = "accountIcon" alt="Login Account" title="Click here to Login. "/>            
+            </a>
+        </div>
     </div>
     <div id="centerRow">
         <jdoc:include type="modules" name="center-left"/><!-- Module Position: 'center-left'-->
