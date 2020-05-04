@@ -20,15 +20,32 @@ body {//Body Tag
     position: absolute;
     width: 100%;
     display: inline-block;
+    height: 30%;
     background-color: $headerBackground;
     /*CSS for internal link*/
     a {
         width: 30%;
+        position: absolute;
         font-size: x-large;
     }
 }
 
 .logo{/*Set css for logo*/
-    width: 30%;
+    width: 100%;
     top:1%;
+}
+
+.left {
+    left: 0%;
+}
+
+.right{
+    left: 90%;
+}
+
+.accountIcon{
+    width: 20%;
+    height: 20%;
+    text-align: center;
+    padding: 2%;
 }

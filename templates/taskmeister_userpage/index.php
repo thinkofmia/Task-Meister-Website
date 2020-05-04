@@ -19,12 +19,15 @@
 <!-- Contain the website code which controls the layout-->
 <body>
     <div id="topRow">
-        <jdoc:include type="modules" name="top-left"/><!-- Module Position: 'top-left'-->
-        <a href = "https://iwant2study.org/taskmeister/index.php/home"><!-- Put clickable logo below-->
+        <a class = "left" href = "https://iwant2study.org/taskmeister/index.php/home"><!-- Put clickable logo below-->
             <img class = "logo"  src="<?php echo $this->baseurl; ?>/templates/<?php echo $this->template; ?>/images/TaskMeisterLogo.JPG" alt="Task Meister Logo" class="logo" />
+            <jdoc:include type="modules" name="top-left"/><!-- Module Position: 'top-left'-->
         </a>
         <jdoc:include type="modules" name="top"/><!-- Module Position: 'top'-->
-        <jdoc:include type="modules" name="top-right"/><!-- Module Position: 'top-right'-->
+        <a class= "right" href="/taskmeister/index.php/loginPage"><!--Login-->
+            <img src="<?php echo $this->baseurl; ?>/templates/<?php echo $this->template; ?>/images/accountIcon.jpg" class = "accountIcon" alt="Login Account" title="Click here to Login. "/>
+            <jdoc:include type="modules" name="top-right"/><!-- Module Position: 'top-right'-->
+        </a>
     </div>
     <div id="centerRow">
         <jdoc:include type="modules" name="center-left"/><!-- Module Position: 'center-left'-->
