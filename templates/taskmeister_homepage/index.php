@@ -73,7 +73,7 @@ $summary[10] = "Expert tutor to guide students how to solve quadratic equations"
             <a href = "index.php">Browse</a>
             <a href="/taskmeister/index.php/loginPage"><!--Login-->
                 <img src="<?php echo $this->baseurl; ?>/templates/<?php echo $this->template; ?>/images/accountIcon.jpg" class = "accountIcon" alt="Login Account" title="Click here to Login. "/>
-                Login
+                Account
             </a>
             </div>
     </div>
