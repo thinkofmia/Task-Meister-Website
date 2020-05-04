@@ -33,8 +33,13 @@ body {//Body Tag
 #topRight{/*Set css for Top Right*/
     position: absolute;
     right: 0%;
-    display: inline-flex;
-    padding: 1%;
+    width: 20%;
+    display: inline-block;
+    /*CSS for internal link*/
+    a {
+        padding: 2%;
+        font-size: x-large;
+    }
 }
 
 .logo{/*Set css for logo*/
@@ -93,4 +98,9 @@ body {//Body Tag
 .background {//For animated img
     position: relative;
     width: 100%;
+}
+
+.accountIcon{//For Account Login Icon
+    width: 20px;
+    height: 20px;
 }

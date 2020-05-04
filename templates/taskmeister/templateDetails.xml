@@ -21,16 +21,6 @@
 		<position>right</position>
 		<position>top</position>
 		<position>Recommended</position>
-		<position>LikedList</position>
-		<position>Popular</position>
-		<position>Trending</position>
-		<position>DeployedBefore</position>
-		<position>Effortless</position>
-		<position>PhysicalManipulative</position>
-		<position>Fun</position>
-		<position>OutOfOrdinary</position>
-		<position>Scaffold</position>
-		<position>AI</position>
 		<position>bottom</position>
 		<position>footer</position>
 	</positions>

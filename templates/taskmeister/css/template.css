@@ -31,8 +31,13 @@ body {
   /*Set css for Top Right*/
   position: absolute;
   right: 0%;
-  display: inline-flex;
-  padding: 1%;
+  width: 20%;
+  display: inline-block;
+  /*CSS for internal link*/
+}
+#topRight a {
+  padding: 2%;
+  font-size: x-large;
 }
 
 .logo {
@@ -93,6 +98,11 @@ body {
 .background {
   position: relative;
   width: 100%;
+}
+
+.accountIcon {
+  width: 20px;
+  height: 20px;
 }
 
 /*# sourceMappingURL=template.css.map */

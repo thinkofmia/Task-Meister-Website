@@ -70,9 +70,12 @@ $summary[10] = "Expert tutor to guide students how to solve quadratic equations"
             </a>
         </div>
         <div id = "topRight">
-            <a href = "/taskmeister/index.php">Browse </a>
-            <jdoc:include type="modules" name="right" /> <!-- Module Position: 'right'-->
-        </div>
+            <a href = "index.php">Browse</a>
+            <a href="login.php"><!--Login-->
+                <img src="<?php echo $this->baseurl; ?>/templates/<?php echo $this->template; ?>/images/accountIcon.jpg" class = "accountIcon" alt="Login Account" title="Click here to Login. "/>
+                Login
+            </a>
+            </div>
     </div>
 <jdoc:include type="modules" name="top" /> <!-- Module Position: 'top'-->
 <jdoc:include type="modules" name="breadcrumb" /> <!-- Module Position: 'breadcrumb'-->
