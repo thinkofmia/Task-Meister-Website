@@ -1,7 +1,6 @@
 /*Variables*/
 /*Default Tags*/
 body {
-  margin-left: 5%;
   background-color: black;
   color: white;
   width: 100%;
@@ -17,18 +16,18 @@ body {
   position: absolute;
   width: 100%;
   display: inline-block;
+  background-color: darkgray;
   /*CSS for internal link*/
 }
 #topRow a {
   width: 30%;
-  left: 0%;
-  padding: 2%;
   font-size: x-large;
 }
 
 .logo {
   /*Set css for logo*/
   width: 30%;
+  top: 1%;
 }
 
 /*# sourceMappingURL=template.css.map */

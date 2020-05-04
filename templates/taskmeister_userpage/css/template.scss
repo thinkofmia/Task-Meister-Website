@@ -1,11 +1,11 @@
 /*Variables*/
 $pageBackground: black; //For background
+$headerBackground: darkgray;
 $mainFontColor: white; //For default font color
 $altFontColor: yellow; //For alt default font color
 
 /*Default Tags*/
 body {//Body Tag
-    margin-left: 5%;
     background-color: $pageBackground;
     color: $mainFontColor;
     width: 100%;
@@ -20,15 +20,15 @@ body {//Body Tag
     position: absolute;
     width: 100%;
     display: inline-block;
+    background-color: $headerBackground;
     /*CSS for internal link*/
     a {
         width: 30%;
-        left: 0%;
-        padding: 2%;
         font-size: x-large;
     }
 }
 
 .logo{/*Set css for logo*/
     width: 30%;
+    top:1%;
 }
