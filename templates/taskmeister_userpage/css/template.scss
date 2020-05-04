@@ -1,0 +1,106 @@
+/*Variables*/
+$pageBackground: white; //For background
+$mainFontColor: black; //For default font color
+$altFontColor: yellow; //For alt default font color
+
+/*Default Tags*/
+body {//Body Tag
+    margin-left: 5%;
+    background-color: $pageBackground;
+    color: $mainFontColor;
+    width: 90%;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    overflow-x: hidden;
+    display: inline-block;
+}
+
+/*Custom Tags*/
+#topWrapper {//Top Wrapper
+    background-color: $pageBackground;
+    padding-top: 2%;
+    color: white;
+    border-bottom: 7px solid blue;
+    position: relative;
+    height: 150px;
+}
+
+#topLeft{/*Set css for Top Left*/
+    position: absolute;
+    left: 0%;
+}
+
+#topRight{/*Set css for Top Right*/
+    position: absolute;
+    right: 0%;
+    width: 20%;
+    display: inline-block;
+    /*CSS for internal link*/
+    a {
+        padding: 2%;
+        font-size: x-large;
+    }
+}
+
+.logo{/*Set css for logo*/
+    width: 70%;
+}
+
+#centerWrapper{/*Set CSS for center Wrapper*/
+  height: 500px;
+  width: 100%;
+  background-color: white;
+  display: inline-block;
+}
+
+
+#rightBanner{/*CSS for MOE learning generator Wrapper*/
+    position: relative;
+    width: 40%;
+    left: 50%;
+    bottom: 100%;
+    height: 100%;
+    background-color: gray;
+    opacity: 0.7;
+}
+
+#rightBanner p {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    text-align: center;
+    font-size: 72px;
+    font-style: bold;
+    color: $altFontColor;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+  }
+
+.wrapper {/*CSS for general wrapper*/
+    text-align: center;
+    background-color: rgb(51, 51, 51);
+    padding: 10%;
+
+    h1 {//Wrap
+    font-size: 72px;
+    font-style: bold;
+    color: $altFontColor;
+    }
+}
+
+#contentArea{//Bottom half of page
+    display: inline-block;
+    width: 100%;
+    position: relative;
+}
+
+.background {//For animated img
+    position: relative;
+    width: 100%;
+}
+
+.accountIcon{//For Account Login Icon
+    width: 30px;
+    height: 30px;
+}
