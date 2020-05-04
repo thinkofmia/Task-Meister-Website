@@ -40,6 +40,7 @@ body {//Body Tag
   height: 500px;
   width: 100%;
   background-color: white;
+  display: inline-block;
 }
 
 
@@ -81,6 +82,7 @@ body {//Body Tag
 #contentArea{//Bottom half of page
     display: inline-block;
     width: 100%;
+    position: relative;
 }
 
 .background {//For animated img

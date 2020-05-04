@@ -35,7 +35,7 @@
 <div id="contentArea">
     <div id="centerWrapper"><!-- Center Content: Includes animated background and banner-->
         <!-- Animated Background-->
-        <img src="<?php echo $this->baseurl; ?>/templates/<?php echo $this->template; ?>/images/fakeBackground.JPG" alt="fake background" class="background" />
+        <img src="<?php echo $this->baseurl; ?>/templates/<?php echo $this->template; ?>/images/animatedPreview.gif" alt="fake background" class="background" />
         <!-- Right Banner-->
         <div id="rightBanner">
             <p>THE MOE LEARNING TASK GENERATOR</p>

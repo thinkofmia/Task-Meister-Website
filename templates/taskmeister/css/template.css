@@ -40,6 +40,7 @@ body {
   height: 500px;
   width: 100%;
   background-color: white;
+  display: inline-block;
 }
 
 #rightBanner {
@@ -81,6 +82,7 @@ body {
 #contentArea {
   display: inline-block;
   width: 100%;
+  position: relative;
 }
 
 .background {
