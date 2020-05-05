@@ -17,7 +17,7 @@ body {//Body Tag
 
 /*Custom Tags*/
 .columnCenter{
-    left: 40%;
+    left: 25%;
     position: absolute;
 }
 
@@ -47,7 +47,7 @@ body {//Body Tag
 #centerRow{
     position: absolute;
     width: 100%;
-    top: 30%;
+    top: 20%;
     .center {
         @extend .columnCenter;
     }

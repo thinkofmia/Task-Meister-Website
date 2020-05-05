@@ -26,8 +26,8 @@
         <jdoc:include type="modules" name="top"/><!-- Module Position: 'top'-->
         <div id = "topRight">
             <jdoc:include type="modules" name="top-right"/><!-- Module Position: 'top-right'-->
-            <a class= "right" href="/taskmeister/index.php/loginPage"><!--Login-->
-                <img src="<?php echo $this->baseurl; ?>/templates/<?php echo $this->template; ?>/images/accountIcon.jpg" class = "accountIcon" alt="Login Account" title="Click here to Login. "/>            
+            <a class= "right" href="/taskmeister/index.php/userPage"><!--User-->
+                <img src="<?php echo $this->baseurl; ?>/templates/<?php echo $this->template; ?>/images/accountIcon.jpg" class = "accountIcon" alt="User Page" title="Click here to go to your user page. "/>            
             </a>
         </div>
     </div>

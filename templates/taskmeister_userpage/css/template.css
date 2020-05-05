@@ -12,7 +12,7 @@ body {
 
 /*Custom Tags*/
 .columnCenter, #bottomRow .center, #centerRow .center {
-  left: 40%;
+  left: 25%;
   position: absolute;
 }
 
@@ -43,7 +43,7 @@ body {
 #centerRow {
   position: absolute;
   width: 100%;
-  top: 30%;
+  top: 20%;
 }
 #bottomRow {
   position: absolute;
