@@ -31,6 +31,18 @@ body {//Body Tag
     }
 }
 
+#bottomRow{
+    position: absolute;
+    width: 100%;
+    top: 60%;
+    .center {
+        left: 50%;
+        position: absolute;
+    }
+}
+
+
+
 .logo{/*Set css for logo*/
     width: 100%;
     top:1%;

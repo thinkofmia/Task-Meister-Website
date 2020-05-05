@@ -27,6 +27,16 @@ body {
   height: 100%;
 }
 
+#bottomRow {
+  position: absolute;
+  width: 100%;
+  top: 60%;
+}
+#bottomRow .center {
+  left: 50%;
+  position: absolute;
+}
+
 .logo {
   /*Set css for logo*/
   width: 100%;
