@@ -81,14 +81,14 @@ h3 {
   display: inline-flex;
   overflow-x: hidden;
   overflow-y: hidden;
-  height: 200px;
+  height: 125px;
   width: 125%;
 }
 .recommendedArticles .article {
   position: relative;
   padding-right: 5px;
-  width: 175px;
-  height: 175px;
+  width: 100px;
+  height: 100px;
   text-align: center;
 }
 .recommendedArticles .article img {
@@ -111,9 +111,9 @@ h3 {
   padding: 3px;
   width: 20px;
   height: 20px;
-  top: 50%;
   position: absolute;
   cursor: pointer;
+  margin-top: 30px;
 }
 
 .arrowLeft {
