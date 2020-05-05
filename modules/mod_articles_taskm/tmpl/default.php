@@ -16,8 +16,8 @@ $categoryName = "Strongly Recommended";
 <ul class="scrollbarnews<?php echo $moduleclass_sfx; ?> mod-list">
 <h3><?php echo $categoryName; ?><h3>
 <div class="articlesRow">
-  <i class="arrowLeft"></i>
-  <div class="recommendedArticles">
+  <i class="arrowLeft" onclick="document.getElementById('recommendation').scrollLeft -= 100;"></i>
+  <div class="recommendedArticles" id= "recommendation">
     <?php foreach ($list as $item) : ?>
     <a href="<?php echo $item->link; ?>" itemprop="url">
         <div class="article">
@@ -27,6 +27,6 @@ $categoryName = "Strongly Recommended";
     </a>
     <?php endforeach; ?>
   </div>
-  <i class="arrowRight"></i>
+  <i class="arrowRight" onclick="document.getElementById('recommendation').scrollLeft += 100;"></i>
 </div>
 </ul>
