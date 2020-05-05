@@ -17,8 +17,10 @@ body {//Body Tag
 
 /*Custom Tags*/
 .columnCenter{
-    left: 25%;
+    left: 30%;
     position: absolute;
+    width: 33%;
+    text-align: center;
 }
 
 .left {
@@ -33,14 +35,16 @@ body {//Body Tag
     position: absolute;
     width: 100%;
     display: inline-block;
-    height: 18%;
+    height: 100px;
     background-color: $headerBackground;
     /*CSS for internal link*/
     a {
-        width: 30%;
         position: absolute;
         font-size: x-large;
         height: 100%;
+    }
+    .logo{/*Set css for logo*/
+        height:100%;
     }
 }
 
@@ -56,20 +60,19 @@ body {//Body Tag
 #bottomRow{
     position: absolute;
     width: 100%;
-    top: 60%;
+    top: 80%;
     .center {
         @extend .columnCenter;
+        text-align: center;
     }
 }
 
-.logo{/*Set css for logo*/
-    width: 100%;
-    top:1%;
-}
+
 
 .accountIcon{
-    width: 35%;
-    height: 75%;
-    text-align: center;
-    padding: 2.5%;
+    width: 75px;
+    height: 75px;
+    text-align: right;
+    padding: 15px;
+    margin-left: 5%;
 }

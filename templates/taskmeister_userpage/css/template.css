@@ -12,8 +12,10 @@ body {
 
 /*Custom Tags*/
 .columnCenter, #bottomRow .center, #centerRow .center {
-  left: 25%;
+  left: 30%;
   position: absolute;
+  width: 33%;
+  text-align: center;
 }
 
 .left {
@@ -29,14 +31,17 @@ body {
   position: absolute;
   width: 100%;
   display: inline-block;
-  height: 18%;
+  height: 100px;
   background-color: darkgray;
   /*CSS for internal link*/
 }
 #topRow a {
-  width: 30%;
   position: absolute;
   font-size: x-large;
+  height: 100%;
+}
+#topRow .logo {
+  /*Set css for logo*/
   height: 100%;
 }
 
@@ -48,19 +53,18 @@ body {
 #bottomRow {
   position: absolute;
   width: 100%;
-  top: 60%;
+  top: 80%;
 }
-.logo {
-  /*Set css for logo*/
-  width: 100%;
-  top: 1%;
+#bottomRow .center {
+  text-align: center;
 }
 
 .accountIcon {
-  width: 35%;
-  height: 75%;
-  text-align: center;
-  padding: 2.5%;
+  width: 75px;
+  height: 75px;
+  text-align: right;
+  padding: 15px;
+  margin-left: 5%;
 }
 
 /*# sourceMappingURL=template.css.map */
