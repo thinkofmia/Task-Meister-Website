@@ -126,4 +126,11 @@ h3 {
   left: 100%;
 }
 
+.customtopMsg {
+  text-align: right;
+  left: 50%;
+  position: absolute;
+  width: 100%;
+}
+
 /*# sourceMappingURL=template.css.map */
