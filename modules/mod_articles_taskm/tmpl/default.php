@@ -9,12 +9,12 @@
 
 defined('_JEXEC') or die;
 
-//Variables
-$categoryName = "Strongly Recommended";
 ?>
 
 <ul class="scrollbarnews<?php echo $moduleclass_sfx; ?> mod-list">
-<h3><?php echo $categoryName; ?><h3>
+  <?php if ($params->get('headerName')) : ?>
+  	<h3><?php echo $params->get('headerName'); ?></h3>
+	<?php endif; ?>
 <div class="articlesRow">
   <i class="arrowLeft" onclick="document.getElementById('recommendation').scrollLeft -= 100;"></i>
   <div class="recommendedArticles" id= "recommendation">

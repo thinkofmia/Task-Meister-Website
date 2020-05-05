@@ -20,6 +20,16 @@
 		<fields name="params">
 			<fieldset name="basic">
 				<field
+					name="headerName"
+					type="textarea"
+					label="Header"
+					description="Input your custom header here"
+					filter="safehtml"
+					cols="30"
+					rows="1"
+				/>
+
+				<field
 					name="catid"
 					type="category"
 					label="Category"
