@@ -11,6 +11,19 @@ body {
 }
 
 /*Custom Tags*/
+.columnCenter, #bottomRow .center, #centerRow .center {
+  left: 40%;
+  position: absolute;
+}
+
+.left {
+  left: 0%;
+}
+
+.right {
+  left: 80%;
+}
+
 #topRow {
   /*Set css for Top Right*/
   position: absolute;
@@ -27,28 +40,20 @@ body {
   height: 100%;
 }
 
+#centerRow {
+  position: absolute;
+  width: 100%;
+  top: 30%;
+}
 #bottomRow {
   position: absolute;
   width: 100%;
   top: 60%;
 }
-#bottomRow .center {
-  left: 50%;
-  position: absolute;
-}
-
 .logo {
   /*Set css for logo*/
   width: 100%;
   top: 1%;
-}
-
-.left {
-  left: 0%;
-}
-
-.right {
-  left: 80%;
 }
 
 .accountIcon {

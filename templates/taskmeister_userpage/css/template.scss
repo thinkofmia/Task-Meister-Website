@@ -16,6 +16,19 @@ body {//Body Tag
 }
 
 /*Custom Tags*/
+.columnCenter{
+    left: 40%;
+    position: absolute;
+}
+
+.left {
+    left: 0%;
+}
+
+.right{
+    left: 80%;
+}
+
 #topRow{/*Set css for Top Right*/
     position: absolute;
     width: 100%;
@@ -31,29 +44,27 @@ body {//Body Tag
     }
 }
 
+#centerRow{
+    position: absolute;
+    width: 100%;
+    top: 30%;
+    .center {
+        @extend .columnCenter;
+    }
+}
+
 #bottomRow{
     position: absolute;
     width: 100%;
     top: 60%;
     .center {
-        left: 50%;
-        position: absolute;
+        @extend .columnCenter;
     }
 }
-
-
 
 .logo{/*Set css for logo*/
     width: 100%;
     top:1%;
-}
-
-.left {
-    left: 0%;
-}
-
-.right{
-    left: 80%;
 }
 
 .accountIcon{
