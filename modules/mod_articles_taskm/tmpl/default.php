@@ -15,14 +15,18 @@ $categoryName = "Strongly Recommended";
 
 <ul class="scrollbarnews<?php echo $moduleclass_sfx; ?> mod-list">
 <h3><?php echo $categoryName; ?><h3>
-<div class="recommendedArticles">
-  <?php foreach ($list as $item) : ?>
-  <a href="<?php echo $item->link; ?>" itemprop="url">
-      <div class="article">
-        <img src="<?php echo json_decode($item->images)->image_intro; ?>" width="100%" height="100%" />
-        <p><?php echo $item->title; ?></p>
-      </div>
-  </a>
-  <?php endforeach; ?>
+<div class="articlesRow">
+  <i class="arrowLeft"></i>
+  <div class="recommendedArticles">
+    <?php foreach ($list as $item) : ?>
+    <a href="<?php echo $item->link; ?>" itemprop="url">
+        <div class="article">
+          <img src="<?php echo json_decode($item->images)->image_intro; ?>" width="100%" height="100%" />
+          <p><?php echo $item->title; ?></p>
+        </div>
+    </a>
+    <?php endforeach; ?>
+  </div>
+  <i class="arrowRight"></i>
 </div>
 </ul>

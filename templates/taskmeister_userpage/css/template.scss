@@ -17,6 +17,7 @@ body {//Body Tag
 
 h3 {
     color: $altFontColor;
+    text-align: left;
 }
 
 /*Custom Tags*/
@@ -79,11 +80,17 @@ h3 {
     margin-left: 5%;
 }
 
+.articlesRow {
+    display: inline-flex;
+    width: 100%;
+}
+
 .recommendedArticles{
     display:inline-flex; 
-    overflow-x: scroll; 
-    height:200px; 
-    width:125%;
+    overflow-x: hidden;
+    overflow-y: hidden; 
+    height: 200px; 
+    width: 125%;
 
     .article {
         position: relative;
@@ -106,4 +113,27 @@ h3 {
             color: $mainFontColor;
         }
     }
+}
+
+.arrow {
+    border: solid $mainFontColor;
+    border-width: 0 5px 5px 0;
+    display: inline-block;
+    padding: 3px;
+    width: 20px;
+    height: 20px;
+    top: 50%;
+    position: absolute;
+  }
+
+.arrowLeft {
+    @extend .arrow;
+    left: 0%;
+    transform: rotate(135deg);
+}
+
+.arrowRight {
+    @extend .arrow;
+    transform: rotate(-45deg);
+    left: 100%;
 }
