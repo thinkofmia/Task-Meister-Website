@@ -23,7 +23,9 @@
             <img class = "logo"  src="<?php echo $this->baseurl; ?>/templates/<?php echo $this->template; ?>/images/TaskMeisterLogo.JPG" alt="Task Meister Logo" class="logo" />
             <jdoc:include type="modules" name="top-left"/><!-- Module Position: 'top-left'-->
         </a>
-        <jdoc:include type="modules" name="top"/><!-- Module Position: 'top'-->
+        <div class = "columnCenter">
+            <jdoc:include type="modules" name="top"/><!-- Module Position: 'top'-->
+        </div>
         <div id = "topRight">
             <jdoc:include type="modules" name="top-right"/><!-- Module Position: 'top-right'-->
             <a class= "right" href="/taskmeister/index.php/userPage"><!--User-->
