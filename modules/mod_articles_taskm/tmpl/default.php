@@ -22,7 +22,7 @@ defined('_JEXEC') or die;
   <!--Displays list of articles-->
   <div class="recommendedArticles" id= "recommendation">
     <?php foreach ($list as $item) : ?>
-    <a href="<?php echo $item->link; ?>" itemprop="url">
+    <a href="?option=com_content&view=article&id=<?php echo $item->id; ?>" itemprop="url">
         <div class="article">
           <img src="<?php echo json_decode($item->images)->image_intro; ?>" width="100%" height="100%" />
           <p><?php echo $item->title; ?></p>
