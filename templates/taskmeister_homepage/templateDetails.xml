@@ -18,6 +18,7 @@
 	<positions>
 		<position>breadcrumb</position>
 		<position>left</position>
+		<position>centre</position>
 		<position>right</position>
 		<position>top</position>
 		<position>Recommended</position>

@@ -69,12 +69,16 @@ $summary[10] = "Expert tutor to guide students how to solve quadratic equations"
                 <jdoc:include type="modules" name="left" /> <!-- Module Position: 'left'-->
             </a>
         </div>
+        <div id = "topCentre">
+            <jdoc:include type="modules" name="centre" /> <!-- Module Position: 'centre'-->
+        </div>
         <div id = "topRight">
             <a href = "/taskmeister/index.php/userPage">Browse</a>
             <a href="/taskmeister/index.php/loginPage"><!--Login-->
                 <img src="<?php echo $this->baseurl; ?>/templates/<?php echo $this->template; ?>/images/accountIcon.jpg" class = "accountIcon" alt="Login Account" title="Click here to Login. "/>
                 Account
             </a>
+            <jdoc:include type="modules" name="right" /> <!-- Module Position: 'right'-->
             </div>
     </div>
 <jdoc:include type="modules" name="top" /> <!-- Module Position: 'top'-->
