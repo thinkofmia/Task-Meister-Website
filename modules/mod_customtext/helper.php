@@ -22,6 +22,10 @@ class ModCustomTextHelper
      */    
     public static function getText($params)
     {
-        return 'Custom Text here!';
+        return $params->get('customtext');
+    }
+    public static function getHeader($params)
+    {
+        return $params->get('customheader');
     }
 }
