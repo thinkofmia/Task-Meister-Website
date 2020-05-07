@@ -60,6 +60,10 @@ h3 {
     .center {
         @extend .columnCenter;
     }
+    .left {
+        position: absolute;
+        left: 0%;
+    }
 }
 
 #bottomRow{

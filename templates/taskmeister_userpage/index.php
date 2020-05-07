@@ -34,7 +34,9 @@
         </div>
     </div>
     <div id="centerRow">
-        <jdoc:include type="modules" name="center-left"/><!-- Module Position: 'center-left'-->
+        <div class="left">
+            <jdoc:include type="modules" name="center-left"/><!-- Module Position: 'center-left'-->
+        </div>
         <div class="center">
             <jdoc:include type="modules" name="center"/><!-- Module Position: 'center'-->
         </div>

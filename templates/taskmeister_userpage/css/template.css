@@ -55,6 +55,11 @@ h3 {
   width: 100%;
   top: 20%;
 }
+#centerRow .left {
+  position: absolute;
+  left: 0%;
+}
+
 #bottomRow {
   position: absolute;
   width: 100%;
