@@ -133,4 +133,13 @@ h3 {
   width: 100%;
 }
 
+.customtext {
+  text-align: center;
+  color: white;
+}
+.customtext h3 {
+  color: yellow;
+  text-align: center;
+}
+
 /*# sourceMappingURL=template.css.map */

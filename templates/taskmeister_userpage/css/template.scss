@@ -145,3 +145,13 @@ h3 {
     position: absolute;
     width: 100%;
 }
+
+.customtext{
+    text-align: center;
+    color: $mainFontColor;
+    h3 {
+        color: $altFontColor;
+        text-align: center;
+    }
+
+}
