@@ -18,9 +18,9 @@ defined('_JEXEC') or die; // ensures that this file is being invoked from the Jo
 require_once dirname(__FILE__) . '/helper.php';//used because our helper functions are defined within a class, and we only want the class defined once. 
 
 
-$displayHeader = modTest::getHeader($params);//invoke helper class method
-$displayText = modTest::getText($params);//invoke helper class method
-require JModuleHelper::getLayoutPath('mod_testmod_ft');
+$displayHeader = modArticleList::getHeader($params);//invoke helper class method
+$displayText = modArticleList::getText($params);//invoke helper class method
+require JModuleHelper::getLayoutPath('mod_articlelist');
 
 //Database code
 use Joomla\CMS\Factory;
@@ -36,10 +36,23 @@ $query->select($db->quoteName(array('title','id','hits','featured','catid')))
 
 $db->setQuery($query);
 
-echo $db->replacePrefix((string) $query);
+//echo $db->replacePrefix((string) $query);
 
 $results = $db->loadAssocList();
 
+echo "<table>
+<tr>
+    <th>Id</th>
+    <th>Title</th>
+    <th>Category</th>
+    <th>Hits</th>
+    <th>Featured</th>
+</tr>";
 foreach ($results as $row) {
-	echo "<p> Id: " . $row['id'] . ", Title: " . $row['title'] . ", Category: " . $row['catid'] . ", Hits: " . $row['hits'] . ", Featured?: " . $row['featured'] . "<br></p>";
+    echo "<tr><td>" . $row['id'] . "</td>" . 
+    "<td>" . $row['title'] . "</td>" . 
+    "<td>" . $row['catid'] . "</td>" .
+    "<td>" . $row['hits'] . "</td>" . 
+    "<td>" . $row['featured'] . "</td></tr>"; 
 }
+echo "</table>";

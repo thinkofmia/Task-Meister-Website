@@ -15,6 +15,14 @@ h3 {
   text-align: left;
 }
 
+table {
+  border: 1px solid white;
+  border-collapse: collapse;
+}
+table th, table td {
+  border: 1px solid white;
+}
+
 /*Custom Tags*/
 .columnCenter, #bottomRow .center, #centerRow .center {
   left: 30%;
