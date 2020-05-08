@@ -6,9 +6,11 @@ use Joomla\CMS\Factory;
 $db = Factory::getDbo();
 $me = Factory::getUser();
 
+$userID = $me->id;
+
 //Querying
 $query = $db->getQuery(true);
-$query->select($db->quoteName(array('title','id','hits','featured','catid','likes')))
+$query->select($db->quoteName(array('title','id','hits','featured','catid','likes','dislikes')))
     ->from($db->quoteName('#__content'))
     ->where($db->quoteName('id') . ' = ' . JRequest::getVar('id'));
 $db->setQuery($query);
@@ -20,6 +22,7 @@ foreach ($results as $row) {
     $articleHits = $row['hits'];
     $articleFeatured =  $row['featured'];
     $articleLikes = $row['likes'];
+    $articleDislikes = $row['dislikes'];
 }
 
 //Set Alert Message
@@ -32,22 +35,35 @@ else {
     $thumbsDown = modTMLikes::giveThumbsDown();//Invoke thumbs down method
     }
 
-function addThumbsUp(){
+
+function setThumbsUp($userID,$articleID){
+    if ($userID == 0){
+        echo "alert(".modTMLikes::loginFirst().")";
+    } 
+    else {
+        
     if (isset($articleLikes)){//If array for likes in the article even exists
-        if (isset($articleLikes[$me->id])){//Check if user has liked or disliked
-            $articleLikes[$me->id] = "Liked";
+        if (isset($articleLikes[$userID])){//Check if user has liked or disliked
+            $articleLikes[$userID] = "Liked";
         }
     }
     else{
-        $articleLikes = array($me->id=>"Liked");
+        $articleLikes = [
+            $userID => "Liked"
+        ];
     }
-    echo $articleLikes;
+    foreach ($articleLikes as $paramName => $paramValue){
+        echo $paramName . " gave ". $paramValue . "<br>";
+    }
+    echo "Article Selected: " . $articleID;
+
     // Create and populate an object.
     $articleInfo = new stdClass();
     $articleInfo->likes =  $articleLikes;
-
-    // Insert the object into the user profile table.
-    $result = JFactory::getDbo()->insertObject('#__contents', $articleInfo, $articleID);
+    
+    // Update the object into the user profile table.
+    $result = JFactory::getDbo()->updateObject('#__content', $articleInfo, $articleID);
+    }
 }
     
 ?>
@@ -61,6 +77,13 @@ function addThumbsUp(){
     <?php endif; ?>
 </div>
 <div id="thumbsBox">
-    <button id= "thumbsUp" type="button" onclick="alert('<?php echo $thumbsUp; ?>')">👍</button>
-    <button id = "thumbsDown" type="button" onclick="alert('<?php echo $thumbsDown ?>')">👎</button>
+<form method="post">
+    <button name= "tUp" id= "thumbsUp">👍</button>
+    <button name= "tDown" id = "thumbsDown">👎</button>  
+</form>
 </div>
+<?php 
+    if(isset($_POST["tUp"])){
+        setThumbsUp($userID,$articleID);
+    }
+?>
