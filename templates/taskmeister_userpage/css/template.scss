@@ -9,8 +9,6 @@ body {//Body Tag
     background-color: $pageBackground;
     color: $mainFontColor;
     width: 100%;
-    word-wrap: break-word;
-    overflow-wrap: break-word;
     overflow-x: hidden;
     display: inline-block;
 }
@@ -63,10 +61,11 @@ table {
 
 #centerRow{
     position: relative;
-    width: 100%;
+    width: 95%;
     top: 30%;
     height: 400px;
     margin: 10px;
+    overflow-y: auto;
     .center {
         @extend .columnCenter;
     }
@@ -80,6 +79,7 @@ table {
     position: relative;
     width: 100%;
     top: 80%;
+    margin: 10px;
     .center {
         @extend .columnCenter;
         text-align: center;

@@ -4,8 +4,6 @@ body {
   background-color: black;
   color: white;
   width: 100%;
-  word-wrap: break-word;
-  overflow-wrap: break-word;
   overflow-x: hidden;
   display: inline-block;
 }
@@ -60,10 +58,11 @@ table th, table td {
 
 #centerRow {
   position: relative;
-  width: 100%;
+  width: 95%;
   top: 30%;
   height: 400px;
   margin: 10px;
+  overflow-y: auto;
 }
 #centerRow .left {
   position: absolute;
@@ -74,6 +73,7 @@ table th, table td {
   position: relative;
   width: 100%;
   top: 80%;
+  margin: 10px;
 }
 #bottomRow .center {
   text-align: center;
