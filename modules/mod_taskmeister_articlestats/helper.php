@@ -1,6 +1,6 @@
 <?php
 /**
- * Helper class for Taskmeister Likes module
+ * Helper class for Hello World! module
  * 
  * @package    Joomla.Tutorials
  * @subpackage Modules
@@ -11,7 +11,7 @@
  * is derivative of works licensed under the GNU General Public License or
  * other free or open source software licenses.
  */
-class modTMLikes
+class modArticleStats
 {
     /**
      * Retrieves the hello message
@@ -28,23 +28,4 @@ class modTMLikes
     {
         return $params->get('customheader');
     }
-    public static function giveThumbsUp(){//Give thumbs up
-        // Create and populate an object.
-        $articleInfo = new stdClass();
-        $articleInfo->user_id = 1001;
-        $articleInfo->profile_key='custom.message';
-        $articleInfo->profile_value='Inserting a record using insertObject()';
-        $articleInfo->ordering=1;
-
-        // Insert the object into the user profile table.
-        $result = JFactory::getDbo()->insertObject('#__user_profiles', $profile);
-        return 'You gave a thumbs up!'; 
-    }
-    public static function giveThumbsDown(){//Give thumbs down
-        return 'You gave a thumbs down!'; 
-    }
-    public static function loginFirst(){//Give thumbs down
-        return 'Login first!!!'; 
-    }
-
 }

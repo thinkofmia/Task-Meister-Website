@@ -6,6 +6,22 @@ use Joomla\CMS\Factory;
 $db = Factory::getDbo();
 $me = Factory::getUser();
 
+//Querying
+$query = $db->getQuery(true);
+$query->select($db->quoteName(array('title','id','hits','featured','catid')))
+    ->from($db->quoteName('#__content'))
+    ->where($db->quoteName('id') . ' = ' . JRequest::getVar('id'));
+$db->setQuery($query);
+$results = $db->loadAssocList();
+foreach ($results as $row) {
+    $articleID = $row['id'];
+    $articleTitle = $row['title'];
+    $articleCat = $row['catid'];
+    $articleHits = $row['hits'];
+    $articleFeatured =  $row['featured'];
+}
+
+//Set Alert Message
 if ($me->id == 0){
     $thumbsUp = modTMLikes::loginFirst();//Invoke thumbs up method
     $thumbsDown = modTMLikes::loginFirst();//Invoke thumbs down method
@@ -15,18 +31,6 @@ else {
     $thumbsDown = modTMLikes::giveThumbsDown();//Invoke thumbs down method
     }
 
-    echo "Debug Table";
-
-    //Querying
-    $query = $db->getQuery(true);
-    $query->select($db->quoteName(array('title','id','hits','featured','catid')))
-        ->from($db->quoteName('#__content'))
-        ->where($db->quoteName('id') . ' = ' . JRequest::getVar('id'));
-    $db->setQuery($query);
-    $results = $db->loadAssocList();
-    foreach ($results as $row) {
-        echo "<p> Id: " . $row['id'] . ", Title: " . $row['title'] . ", Category: " . $row['catid'] . ", Hits: " . $row['hits'] . ", Featured?: " . $row['featured'] . "<br></p>";
-    }
 ?>
 
 <div class="customtext">
