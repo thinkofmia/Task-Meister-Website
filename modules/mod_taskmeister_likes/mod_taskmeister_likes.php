@@ -21,18 +21,3 @@ require_once dirname(__FILE__) . '/helper.php';//used because our helper functio
 $displayHeader = modTMLikes::getHeader($params);//invoke helper class method
 $displayText = modTMLikes::getText($params);//invoke helper class method
 require JModuleHelper::getLayoutPath('mod_taskmeister_likes');
-
-/*$query = $db->getQuery(true);
-
-$query->select($db->quoteName(array('title','id','hits','featured','catid')))
-    ->from($db->quoteName('#__content'));
-
-$db->setQuery($query);
-
-echo $db->replacePrefix((string) $query);
-
-$results = $db->loadAssocList();
-
-foreach ($results as $row) {
-	echo "<p> Id: " . $row['id'] . ", Title: " . $row['title'] . ", Category: " . $row['catid'] . ", Hits: " . $row['hits'] . ", Featured?: " . $row['featured'] . "<br></p>";
-}*/
