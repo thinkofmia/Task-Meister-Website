@@ -2,11 +2,8 @@
 // No direct access
 defined('_JEXEC') or die; 
 //Displays module output
-$thumbsUp = "YEs";
 use Joomla\CMS\Factory;
-
 $db = Factory::getDbo();
-
 $me = Factory::getUser();
 
 if ($me->id == 0){
@@ -16,6 +13,19 @@ if ($me->id == 0){
 else {
     $thumbsUp = modTMLikes::giveThumbsUp();//Invoke thumbs up method
     $thumbsDown = modTMLikes::giveThumbsDown();//Invoke thumbs down method
+    }
+
+    echo "Debug Table";
+
+    //Querying
+    $query = $db->getQuery(true);
+    $query->select($db->quoteName(array('title','id','hits','featured','catid')))
+        ->from($db->quoteName('#__content'))
+        ->where($db->quoteName('id') . ' = ' . JRequest::getVar('id'));
+    $db->setQuery($query);
+    $results = $db->loadAssocList();
+    foreach ($results as $row) {
+        echo "<p> Id: " . $row['id'] . ", Title: " . $row['title'] . ", Category: " . $row['catid'] . ", Hits: " . $row['hits'] . ", Featured?: " . $row['featured'] . "<br></p>";
     }
 ?>
 
