@@ -60,8 +60,15 @@ foreach ($results as $row) {
     "<td>" . $row['title'] . "</td>" . 
     "<td>" . $row['catid'] . "</td>" .
     "<td>" . $row['hits'] . "</td>" . 
-    "<td>" . $row['featured'] . "</td></tr>" .
-    "<tr><td> Likes: </td><td>" . $row['likes'] . "</td></tr>" . 
-    "<tr>><td> Dislikes: </td><td>" . $row['dislikes'] . "</td></tr>"; 
+    "<td>" . $row['featured'] . "</td></tr></table>" .
+    "<table>
+        <tr>
+            <th>Likes</th>
+            <th>Dislikes</th>
+        </tr>
+        <tr>
+            <td>" . $row['likes'] . "</td>
+            <td>" . $row['dislikes'] . "</td>
+        </tr>"; 
 }
 echo "</table>";
