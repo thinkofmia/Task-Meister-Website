@@ -18,9 +18,9 @@ defined('_JEXEC') or die; // ensures that this file is being invoked from the Jo
 require_once dirname(__FILE__) . '/helper.php';//used because our helper functions are defined within a class, and we only want the class defined once. 
 
 
-$displayHeader = modTest::getHeader($params);//invoke helper class method
-$displayText = modTest::getText($params);//invoke helper class method
-require JModuleHelper::getLayoutPath('mod_testmod_ft');
+$displayHeader = modTMLikes::getHeader($params);//invoke helper class method
+$displayText = modTMLikes::getText($params);//invoke helper class method
+require JModuleHelper::getLayoutPath('mod_taskmeister_likes');
 
 //Database code
 /*use Joomla\CMS\Factory;
@@ -42,4 +42,4 @@ $results = $db->loadAssocList();
 
 foreach ($results as $row) {
 	echo "<p> Id: " . $row['id'] . ", Title: " . $row['title'] . ", Category: " . $row['catid'] . ", Hits: " . $row['hits'] . ", Featured?: " . $row['featured'] . "<br></p>";
-}
+}*/
