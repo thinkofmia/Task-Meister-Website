@@ -28,4 +28,14 @@ class modTMLikes
     {
         return $params->get('customheader');
     }
+    public static function giveThumbsUp(){//Give thumbs up
+        return 'You gave a thumbs up!'; 
+    }
+    public static function giveThumbsDown(){//Give thumbs down
+        return 'You gave a thumbs down!'; 
+    }
+    public static function loginFirst(){//Give thumbs down
+        return 'Login first!!!'; 
+    }
+
 }

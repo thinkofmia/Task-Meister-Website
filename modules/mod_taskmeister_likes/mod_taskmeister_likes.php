@@ -22,14 +22,7 @@ $displayHeader = modTMLikes::getHeader($params);//invoke helper class method
 $displayText = modTMLikes::getText($params);//invoke helper class method
 require JModuleHelper::getLayoutPath('mod_taskmeister_likes');
 
-//Database code
-/*use Joomla\CMS\Factory;
-
-$db = Factory::getDbo();
-
-$me = Factory::getUser();
-
-$query = $db->getQuery(true);
+/*$query = $db->getQuery(true);
 
 $query->select($db->quoteName(array('title','id','hits','featured','catid')))
     ->from($db->quoteName('#__content'));
