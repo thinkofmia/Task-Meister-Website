@@ -61,7 +61,7 @@ table th, table td {
 #centerRow {
   position: absolute;
   width: 100%;
-  top: 20%;
+  top: 40%;
 }
 #centerRow .left {
   position: absolute;
@@ -87,7 +87,7 @@ table th, table td {
 
 .articlesRow {
   display: inline-flex;
-  width: 100%;
+  width: 400px;
 }
 
 .recommendedArticles {
@@ -136,7 +136,7 @@ table th, table td {
 
 .arrowRight {
   transform: rotate(-45deg);
-  left: 100%;
+  left: 430px;
 }
 
 .customtopMsg {
