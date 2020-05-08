@@ -19,7 +19,7 @@
 <!-- Contain the website code which controls the layout-->
 <body>
     <div id="topRow">
-        <a class = "left" href = "https://iwant2study.org/taskmeister/index.php/home"><!-- Set clickable logo-->
+        <a class = "left" href = "<?php echo $this->baseurl; ?>/index.php/homepage"><!-- Set clickable logo-->
             <img class = "logo"  src="<?php echo $this->baseurl; ?>/templates/<?php echo $this->template; ?>/images/TaskMeisterLogo.JPG" alt="Task Meister Logo" class="logo" />
             <jdoc:include type="modules" name="top-left"/><!-- Module Position: 'top-left'-->
         </a>
@@ -28,7 +28,7 @@
         </div>
         <div id = "topRight">
             <jdoc:include type="modules" name="top-right"/><!-- Module Position: 'top-right'-->
-            <a class= "right" href="/taskmeister/index.php/userPage"><!--User-->
+            <a class= "right" href="<?php echo $this->baseurl; ?>/index.php/your-profile"><!--User-->
                 <img src="<?php echo $this->baseurl; ?>/templates/<?php echo $this->template; ?>/images/accountIcon.jpg" class = "accountIcon" alt="User Page" title="Click here to go to your user page. "/>            
             </a>
         </div>
