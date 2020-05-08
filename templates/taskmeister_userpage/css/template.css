@@ -41,7 +41,7 @@ table th, table td {
 
 #topRow {
   /*Set css for Top Right*/
-  position: absolute;
+  position: relative;
   width: 100%;
   display: inline-block;
   height: 100px;
@@ -59,9 +59,11 @@ table th, table td {
 }
 
 #centerRow {
-  position: absolute;
+  position: relative;
   width: 100%;
-  top: 40%;
+  top: 30%;
+  height: 400px;
+  margin: 10px;
 }
 #centerRow .left {
   position: absolute;
@@ -69,7 +71,7 @@ table th, table td {
 }
 
 #bottomRow {
-  position: absolute;
+  position: relative;
   width: 100%;
   top: 80%;
 }
@@ -87,21 +89,21 @@ table th, table td {
 
 .articlesRow {
   display: inline-flex;
-  width: 400px;
+  width: 500px;
 }
 
 .recommendedArticles {
   display: inline-flex;
   overflow-x: hidden;
   overflow-y: hidden;
-  height: 125px;
+  height: 175px;
   width: 125%;
 }
 .recommendedArticles .article {
   position: relative;
   padding-right: 5px;
-  width: 100px;
-  height: 100px;
+  width: 150px;
+  height: 150px;
   text-align: center;
 }
 .recommendedArticles .article img {
@@ -113,7 +115,7 @@ table th, table td {
   bottom: -10%;
   width: 97%;
   background-color: darkgray;
-  opacity: 0.9;
+  opacity: 0.8;
   color: white;
 }
 
@@ -126,7 +128,7 @@ table th, table td {
   height: 20px;
   position: absolute;
   cursor: pointer;
-  margin-top: 30px;
+  margin-top: 70px;
 }
 
 .arrowLeft {
@@ -136,7 +138,7 @@ table th, table td {
 
 .arrowRight {
   transform: rotate(-45deg);
-  left: 430px;
+  left: 550px;
 }
 
 .customtopMsg {
