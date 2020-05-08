@@ -21,9 +21,11 @@ foreach ($results as $row) {
     $articleCat = $row['catid'];
     $articleHits = $row['hits'];
     $articleFeatured =  $row['featured'];
-    $articleLikes = $row['likes'];
+    $articleLikes = unserialize($row['likes']);
     $articleDislikes = $row['dislikes'];
 }
+
+echo "Liked: " . $articleLikes;
 
 //Set Alert Message
 if ($me->id == 0){
@@ -59,9 +61,10 @@ function setThumbsUp($userID,$articleID){
 
     // Create and populate an object.
     $articleInfo = new stdClass();
+    $articleInfo = $articleID;
     $articleInfo->likes =  $articleLikes;
     
-    // Update the object into the user profile table.
+    // Update the object into the article profile table.
     $result = JFactory::getDbo()->updateObject('#__content', $articleInfo, $articleID);
     }
 }
