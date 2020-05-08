@@ -64,7 +64,7 @@ $summary[10] = "Expert tutor to guide students how to solve quadratic equations"
 <body>
     <div id = "topWrapper"><!-- Top Wrapper -->
         <div id = "topLeft">
-            <a href = "/taskmeister/index.php"><!-- Put clickable logo below-->
+            <a href = "<?php echo $this->baseurl; ?>/index.php"><!-- Put clickable logo below-->
                 <img  src="<?php echo $this->baseurl; ?>/templates/<?php echo $this->template; ?>/images/TaskMeisterLogo.JPG" alt="Task Meister Logo" class="logo" />
                 <jdoc:include type="modules" name="left" /> <!-- Module Position: 'left'-->
             </a>
@@ -73,8 +73,8 @@ $summary[10] = "Expert tutor to guide students how to solve quadratic equations"
             <jdoc:include type="modules" name="centre" /> <!-- Module Position: 'centre'-->
         </div>
         <div id = "topRight">
-            <a href = "/taskmeister/index.php/userPage">Browse</a>
-            <a href="/taskmeister/index.php/loginPage"><!--Login-->
+            <a href = "<?php echo $this->baseurl; ?>/index.php/testpage">Browse</a>
+            <a href="<?php echo $this->baseurl; ?>/index.php/your-profile"><!--Login-->
                 <img src="<?php echo $this->baseurl; ?>/templates/<?php echo $this->template; ?>/images/accountIcon.jpg" class = "accountIcon" alt="Login Account" title="Click here to Login. "/>
                 Account
             </a>
