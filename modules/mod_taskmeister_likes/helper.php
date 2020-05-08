@@ -29,15 +29,6 @@ class modTMLikes
         return $params->get('customheader');
     }
     public static function giveThumbsUp(){//Give thumbs up
-        // Create and populate an object.
-        $articleInfo = new stdClass();
-        $articleInfo->user_id = 1001;
-        $articleInfo->profile_key='custom.message';
-        $articleInfo->profile_value='Inserting a record using insertObject()';
-        $articleInfo->ordering=1;
-
-        // Insert the object into the user profile table.
-        $result = JFactory::getDbo()->insertObject('#__user_profiles', $profile);
         return 'You gave a thumbs up!'; 
     }
     public static function giveThumbsDown(){//Give thumbs down

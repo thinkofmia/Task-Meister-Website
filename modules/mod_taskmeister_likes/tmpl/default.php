@@ -8,7 +8,7 @@ $me = Factory::getUser();
 
 //Querying
 $query = $db->getQuery(true);
-$query->select($db->quoteName(array('title','id','hits','featured','catid')))
+$query->select($db->quoteName(array('title','id','hits','featured','catid','likes')))
     ->from($db->quoteName('#__content'))
     ->where($db->quoteName('id') . ' = ' . JRequest::getVar('id'));
 $db->setQuery($query);
@@ -19,6 +19,7 @@ foreach ($results as $row) {
     $articleCat = $row['catid'];
     $articleHits = $row['hits'];
     $articleFeatured =  $row['featured'];
+    $articleLikes = $row['likes'];
 }
 
 //Set Alert Message
@@ -31,6 +32,24 @@ else {
     $thumbsDown = modTMLikes::giveThumbsDown();//Invoke thumbs down method
     }
 
+function addThumbsUp(){
+    if (isset($articleLikes)){//If array for likes in the article even exists
+        if (isset($articleLikes[$me->id])){//Check if user has liked or disliked
+            $articleLikes[$me->id] = "Liked";
+        }
+    }
+    else{
+        $articleLikes = array($me->id=>"Liked");
+    }
+    echo $articleLikes;
+    // Create and populate an object.
+    $articleInfo = new stdClass();
+    $articleInfo->likes =  $articleLikes;
+
+    // Insert the object into the user profile table.
+    $result = JFactory::getDbo()->insertObject('#__contents', $articleInfo, $articleID);
+}
+    
 ?>
 
 <div class="customtext">

@@ -31,7 +31,7 @@ $me = Factory::getUser();
 
 $query = $db->getQuery(true);
 
-$query->select($db->quoteName(array('title','id','hits','featured','catid')))
+$query->select($db->quoteName(array('title','id','hits','featured','catid','likes','dislikes')))
     ->from($db->quoteName('#__content'))
     ->where($db->quoteName('id') . ' = ' . JRequest::getVar('id'));
 
@@ -60,6 +60,8 @@ foreach ($results as $row) {
     "<td>" . $row['title'] . "</td>" . 
     "<td>" . $row['catid'] . "</td>" .
     "<td>" . $row['hits'] . "</td>" . 
-    "<td>" . $row['featured'] . "</td></tr>"; 
+    "<td>" . $row['featured'] . "</td></tr>" .
+    "<tr><td> Likes: </td><td>" . $row['likes'] . "</td></tr>" . 
+    "<tr>><td> Dislikes: </td><td>" . $row['dislikes'] . "</td></tr>"; 
 }
 echo "</table>";
