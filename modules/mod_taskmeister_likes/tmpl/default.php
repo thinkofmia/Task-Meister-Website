@@ -55,14 +55,16 @@ function setThumbsUp($userID,$articleID){
         ];
     }
     foreach ($articleLikes as $paramName => $paramValue){
-        echo $paramName . " gave ". $paramValue . "<br>";
+        echo "Key: " . $paramName . " Value: ". $paramValue . "<br>";
     }
-    echo "Article Selected: " . $articleID;
-
+    echo "Article Selected: " . $articleID . "<br>";
+    $array_string=serialize($articleLikes);
+    echo "Array Str: " . $array_string . "<br>";
+    echo "Deserialized: " . unserialize ( $array_string) . "<br>";
     // Create and populate an object.
     $articleInfo = new stdClass();
     $articleInfo = $articleID;
-    $articleInfo->likes =  $articleLikes;
+    $articleInfo->likes =  $array_string;
     
     // Update the object into the article profile table.
     $result = JFactory::getDbo()->updateObject('#__content', $articleInfo, $articleID);
