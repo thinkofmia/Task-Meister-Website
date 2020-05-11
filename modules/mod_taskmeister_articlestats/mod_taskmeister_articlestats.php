@@ -72,6 +72,7 @@ foreach ($results as $row) {
     $articleID = $row['id'];
 }
 
+//Functions
 function countPreference($userchoice,$preference){
     //Calculate Number of likes and dislikes
     $count = 0;
@@ -85,14 +86,17 @@ function countPreference($userchoice,$preference){
 foreach ($results2 as $row) {
     if ($articleID==$row['es_articleid']){
         $preferenceList = json_decode($row['es_userchoice']);
+        $deploymentList = json_decode($row['es_deployed']);
         $NoOfLikes = countPreference($preferenceList,"Liked");
         $NoOfDislikes = countPreference($preferenceList,"Disliked");
+        $NoOfDeployment = sizeof($deploymentList);
         echo "<table>
         <tr>
             <th>All Users' Choice</th>
             <th>Who has deployed</th>
             <th>Total # of Likes</th>
             <th>Total # of Dislikes</th>
+            <th>Total # of Deployment</th>
         </tr>
         <tr>
             <td>" . $row['es_userchoice'] . "</td>";
@@ -101,6 +105,7 @@ foreach ($results2 as $row) {
         echo "<td> ". $deployed. " </td> 
             <td>" . $NoOfLikes . "</td>
             <td>" . $NoOfDislikes . "</td>
+            <td>" . $NoOfDeployment . "</td>
         </tr>"; 
     echo "</table>";
     }
