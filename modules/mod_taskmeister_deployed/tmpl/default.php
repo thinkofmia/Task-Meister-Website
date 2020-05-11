@@ -48,7 +48,11 @@ function setDeployed($userID,$articleID,$list){
         $list = array($userID);
     }
     else if (in_array($userID,$list)){
-        unset($list[$userID]);
+        foreach($list as $row){
+            if ($row==$userID){
+                unset($row);
+            }
+        }
     }
     else {
         $list[] = $userID;

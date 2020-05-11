@@ -43,7 +43,7 @@ $results = $db->loadAssocList();
 
 //Querying
 $query = $db->getQuery(true);
-$query->select($db->quoteName(array('es_articleid','es_userchoice','es_visited')))
+$query->select($db->quoteName(array('es_articleid','es_userchoice','es_deployed')))
     ->from($db->quoteName('#__customtables_table_articlestats'))
     ->where($db->quoteName('es_articleid') . ' = ' . JRequest::getVar('id'));
 $db->setQuery($query);
@@ -90,13 +90,13 @@ foreach ($results2 as $row) {
         echo "<table>
         <tr>
             <th>All Users' Choice</th>
-            <th>Number of Unique Registered Visitors</th>
+            <th>Who has deployed</th>
             <th>Total # of Likes</th>
             <th>Total # of Dislikes</th>
         </tr>
         <tr>
             <td>" . $row['es_userchoice'] . "</td>";
-        if (isset($row['es_visited'])) $visitors = $row['es_visited'];
+        if (isset($row['es_deployed'])) $visitors = $row['es_deployed'];
         else $visitors = "No one deployed this yet";
         echo "<td> ". $visitors. " </td> 
             <td>" . $NoOfLikes . "</td>
