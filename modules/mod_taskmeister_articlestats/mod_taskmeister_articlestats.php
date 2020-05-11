@@ -96,9 +96,9 @@ foreach ($results2 as $row) {
         </tr>
         <tr>
             <td>" . $row['es_userchoice'] . "</td>";
-        if (isset($row['es_deployed'])) $visitors = $row['es_deployed'];
-        else $visitors = "No one deployed this yet";
-        echo "<td> ". $visitors. " </td> 
+        if (isset($row['es_deployed'])&&$row['es_deployed']!="[]") $deployed = $row['es_deployed'];
+        else $deployed = "No one deployed this yet";
+        echo "<td> ". $deployed. " </td> 
             <td>" . $NoOfLikes . "</td>
             <td>" . $NoOfDislikes . "</td>
         </tr>"; 
