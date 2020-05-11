@@ -56,7 +56,7 @@ function setThumbsDown($userID,$articleID,$userchoice){
     else{
             $userchoice[$userID_Str] = "Disliked";
     }
-    //Debu Messages
+    /*Debug Messages
     echo "<br>Article Selected: " . $articleID . "<br>";
     $array_string=json_encode($userchoice);
     echo "Encoded: " . $array_string . "<br>";
@@ -65,7 +65,7 @@ function setThumbsDown($userID,$articleID,$userchoice){
     foreach ($decoded as $paramName => $paramValue){
         echo "<li>Key: " . $paramName . " Value: ". $paramValue . "</li>";
     }
-    echo "</ul>";    
+    echo "</ul>";  */
     // Create and populate an object.
     $articleInfo = new stdClass();
     $articleInfo->es_articleid = $articleID;
@@ -88,7 +88,7 @@ function setThumbsUp($userID,$articleID,$userchoice){
     else{
             $userchoice[$userID_Str] = "Liked";
     }
-    //Debu Messages
+    /*Debug Messages
     echo "<br>Article Selected: " . $articleID . "<br>";
     $array_string=json_encode($userchoice);
     echo "Encoded: " . $array_string . "<br>";
@@ -97,7 +97,7 @@ function setThumbsUp($userID,$articleID,$userchoice){
     foreach ($decoded as $paramName => $paramValue){
         echo "<li>Key: " . $paramName . " Value: ". $paramValue . "</li>";
     }
-    echo "</ul>";    
+    echo "</ul>";*/    
     // Create and populate an object.
     $articleInfo = new stdClass();
     $articleInfo->es_articleid = $articleID;
