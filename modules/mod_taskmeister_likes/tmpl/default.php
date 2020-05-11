@@ -17,10 +17,20 @@ $query->select($db->quoteName(array('es_articleid','es_userchoice')))
 $db->setQuery($query);
 $results = $db->loadAssocList();
 $userchoice;
+$dataNotExist = true;
 foreach ($results as $row) {
     if (JRequest::getVar('id')==$row['es_articleid']){
         $userchoice=json_decode($row['es_userchoice'],true);
+        $dataNotExist = false;
     } 
+}
+if ($dataNotExist){//If no record exists
+    // Create and populate an object.
+    $articleInfo = new stdClass();
+    $articleInfo->es_articleid = $articleID;
+
+    // Update the object into the article profile table.
+    $result = JFactory::getDbo()->insertObject('#__customtables_table_articlestats', $articleInfo, 'es_articleid');
 }
 
 //Set Alert Message
