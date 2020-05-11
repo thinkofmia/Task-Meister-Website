@@ -76,7 +76,7 @@ function setDeployed($userID,$articleID,$list){
 </div>
 <div id="deployedBox">
     <form method="post">
-        <button name= "dButton" id= "deployedButton">👨‍💻</button>
+        <button name= "dButton" id= "deployedButton" title="Deployment Button">👨‍💻</button>
     </form>
 </div>
 

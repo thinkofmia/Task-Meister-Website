@@ -153,7 +153,7 @@ $NoDislikes = getDislikes($userchoice);
 </div>
 <div id="thumbsBox">
 <form method="post">
-    <button name= "tUp" id= "thumbsUp">👍</button>
-    <button name= "tDown" id = "thumbsDown">👎</button>  
+    <button name= "tUp" id= "thumbsUp" title ="Like Button">👍</button>
+    <button name= "tDown" id = "thumbsDown" title ="Dislike Button">👎</button>  
 </form>
 </div>
