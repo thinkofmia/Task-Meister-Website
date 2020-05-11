@@ -8,21 +8,22 @@ $me = Factory::getUser();
 
 $userID = $me->id;
 
-$articleID_Str = "".JRequest::getVar('id')."";
+$articleID = JRequest::getVar('id');
 //Querying
 $query = $db->getQuery(true);
 $query->select($db->quoteName(array('es_articleid','es_userchoice')))
     ->from($db->quoteName('#__customtables_table_articlestats'))
-    ->where($db->quoteName('es_articleid') . ' = ' . $articleID_Str);
+    ->where($db->quoteName('es_articleid') . ' = ' . $articleID);
 $db->setQuery($query);
 $results = $db->loadAssocList();
 $userchoice;
 foreach ($results as $row) {
-    if (isset($row['es_userchoice'])){
+    //if (JRequest::getVar('id')==$row['es_articleID']){
         $userchoice=json_decode($row['es_userchoice'],true);
-    } 
+        echo "Current List of ".$row['es_articleid']." : " . $row['es_userchoice'];
+    //} 
 }
-echo "Current List of ".$row['es_articleid'].": " . $row['es_userchoice'];
+
 echo $userchoice;
 
 //Set Alert Message
@@ -83,6 +84,6 @@ function setThumbsUp($userID,$articleID,$userchoice){
 </div>
 <?php 
     if(isset($_POST["tUp"])){
-        setThumbsUp($userID,$articleID_Str,$userchoice);
+        setThumbsUp($userID,$articleID,$userchoice);
     }
 ?>

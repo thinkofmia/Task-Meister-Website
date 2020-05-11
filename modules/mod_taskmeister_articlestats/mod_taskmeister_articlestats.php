@@ -69,9 +69,12 @@ foreach ($results as $row) {
     "<td>" . $row['catid'] . "</td>" .
     "<td>" . $row['hits'] . "</td>" . 
     "<td>" . $row['featured'] . "</td></tr></table>";
+    $articleID = $row['id'];
 }
 foreach ($results2 as $row) {
-    echo "<table>
+    echo " F".$row['es_articleID']." F";
+    if ($articleID==$row['es_articleID']){
+        echo "<table>
         <tr>
             <th>User's Choice</th>
         </tr>
@@ -79,4 +82,5 @@ foreach ($results2 as $row) {
             <td>" . $row['es_userchoice'] . "</td>
         </tr>"; 
     echo "</table>";
+    }
 }
