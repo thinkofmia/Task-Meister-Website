@@ -18,13 +18,13 @@ $db->setQuery($query);
 $results = $db->loadAssocList();
 $userchoice;
 foreach ($results as $row) {
-    //if (JRequest::getVar('id')==$row['es_articleID']){
+    if (JRequest::getVar('id')==$row['es_articleid']){
         $userchoice=json_decode($row['es_userchoice'],true);
-        echo "Current List of ".$row['es_articleid']." : " . $row['es_userchoice'];
-    //} 
+        echo "Current List of ".$row['es_articleid']." : ";
+        if ($row['es_userchoice']) echo $row['es_userchoice'];
+        else echo "Empty";
+    } 
 }
-
-echo $userchoice;
 
 //Set Alert Message
 if ($me->id == 0){
@@ -37,25 +37,32 @@ else {
     }
 
 
+if(isset($_POST["tUp"])){
+        setThumbsUp($userID,$articleID,$userchoice);
+    }
+
 function setThumbsUp($userID,$articleID,$userchoice){
     if ($userID == 0){//If User yet to login
         echo "alert(".modTMLikes::loginFirst().")";
     } 
     else {//If user logined
     $userID_Str = "".$userID."";
-    if (!isset($userchoice)||$userchoice = "{}"){//If empty dict
+    if (empty($userchoice)){//If empty dict
         $userchoice = array($userID_Str=>"Liked");
     }
     else{
             $userchoice[$userID_Str] = "Liked";
     }
-    foreach ($userchoice as $paramName => $paramValue){
-        echo "Key: " . $paramName . " Value: ". $paramValue . "<br>";
-    }
-    echo "Article Selected: " . $articleID . "<br>";
+    //Debu Messages
+    echo "<br>Article Selected: " . $articleID . "<br>";
     $array_string=json_encode($userchoice);
     echo "Encoded: " . $array_string . "<br>";
-    echo "Decoded: " . json_decode($array_string) . "<br>";
+    $decoded = json_decode($array_string);
+    echo "<ul>Decoded: <br>";
+    foreach ($decoded as $paramName => $paramValue){
+        echo "<li>Key: " . $paramName . " Value: ". $paramValue . "</li>";
+    }
+    echo "</ul>";    
     // Create and populate an object.
     $articleInfo = new stdClass();
     $articleInfo->es_articleid = $articleID;
@@ -82,8 +89,4 @@ function setThumbsUp($userID,$articleID,$userchoice){
     <button name= "tDown" id = "thumbsDown">👎</button>  
 </form>
 </div>
-<?php 
-    if(isset($_POST["tUp"])){
-        setThumbsUp($userID,$articleID,$userchoice);
-    }
-?>
+
