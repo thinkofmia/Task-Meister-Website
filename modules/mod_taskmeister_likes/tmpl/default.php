@@ -20,9 +20,6 @@ $userchoice;
 foreach ($results as $row) {
     if (JRequest::getVar('id')==$row['es_articleid']){
         $userchoice=json_decode($row['es_userchoice'],true);
-        echo "Current List of ".$row['es_articleid']." : ";
-        if ($row['es_userchoice']) echo $row['es_userchoice'];
-        else echo "Empty";
     } 
 }
 
@@ -56,9 +53,9 @@ function setThumbsDown($userID,$articleID,$userchoice){
     else{
             $userchoice[$userID_Str] = "Disliked";
     }
+    $array_string=json_encode($userchoice);
     /*Debug Messages
     echo "<br>Article Selected: " . $articleID . "<br>";
-    $array_string=json_encode($userchoice);
     echo "Encoded: " . $array_string . "<br>";
     $decoded = json_decode($array_string);
     echo "<ul>Decoded: <br>";
@@ -88,9 +85,9 @@ function setThumbsUp($userID,$articleID,$userchoice){
     else{
             $userchoice[$userID_Str] = "Liked";
     }
+    $array_string=json_encode($userchoice);
     /*Debug Messages
     echo "<br>Article Selected: " . $articleID . "<br>";
-    $array_string=json_encode($userchoice);
     echo "Encoded: " . $array_string . "<br>";
     $decoded = json_decode($array_string);
     echo "<ul>Decoded: <br>";
