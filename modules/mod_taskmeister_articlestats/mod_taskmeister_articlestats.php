@@ -41,6 +41,14 @@ $db->setQuery($query);
 
 $results = $db->loadAssocList();
 
+//Querying
+$query = $db->getQuery(true);
+$query->select($db->quoteName(array('es_articleid','es_userchoice')))
+    ->from($db->quoteName('#__customtables_table_articlestats'))
+    ->where($db->quoteName('es_articleid') . ' = ' . JRequest::getVar('id'));
+$db->setQuery($query);
+$results2 = $db->loadAssocList();
+
 echo "
 <style>
     table, tr, th, td {
@@ -60,15 +68,15 @@ foreach ($results as $row) {
     "<td>" . $row['title'] . "</td>" . 
     "<td>" . $row['catid'] . "</td>" .
     "<td>" . $row['hits'] . "</td>" . 
-    "<td>" . $row['featured'] . "</td></tr></table>" .
-    "<table>
+    "<td>" . $row['featured'] . "</td></tr></table>";
+}
+foreach ($results2 as $row) {
+    echo "<table>
         <tr>
-            <th>Likes</th>
-            <th>Dislikes</th>
+            <th>User's Choice</th>
         </tr>
         <tr>
-            <td>" . $row['likes'] . "</td>
-            <td>" . $row['dislikes'] . "</td>
+            <td>" . $row['es_userchoice'] . "</td>
         </tr>"; 
+    echo "</table>";
 }
-echo "</table>";

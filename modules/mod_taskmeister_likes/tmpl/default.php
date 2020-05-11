@@ -10,22 +10,19 @@ $userID = $me->id;
 
 //Querying
 $query = $db->getQuery(true);
-$query->select($db->quoteName(array('title','id','hits','featured','catid','likes','dislikes')))
-    ->from($db->quoteName('#__content'))
-    ->where($db->quoteName('id') . ' = ' . JRequest::getVar('id'));
+$query->select($db->quoteName(array('es_articleid','es_userchoice')))
+    ->from($db->quoteName('#__customtables_table_articlestats'))
+    ->where($db->quoteName('es_articleid') . ' = ' . JRequest::getVar('id'));
 $db->setQuery($query);
 $results = $db->loadAssocList();
+$articleID = JRequest::getVar('id');
+$userchoice;
 foreach ($results as $row) {
-    $articleID = $row['id'];
-    $articleTitle = $row['title'];
-    $articleCat = $row['catid'];
-    $articleHits = $row['hits'];
-    $articleFeatured =  $row['featured'];
-    $articleLikes = unserialize($row['likes']);
-    $articleDislikes = $row['dislikes'];
+    if (isset($row['es_userchoice'])){
+        $userchoice=json_decode($row['es_userchoice'],true);
+        echo "Current List of ".$row['es_articleid'].": " . $row['es_userchoice'];
+    } 
 }
-
-echo "Liked: " . $articleLikes;
 
 //Set Alert Message
 if ($me->id == 0){
@@ -38,36 +35,31 @@ else {
     }
 
 
-function setThumbsUp($userID,$articleID){
-    if ($userID == 0){
+function setThumbsUp($userID,$articleID,$userchoice){
+    if ($userID == 0){//If User yet to login
         echo "alert(".modTMLikes::loginFirst().")";
     } 
-    else {
-        
-    if (isset($articleLikes)){//If array for likes in the article even exists
-        if (isset($articleLikes[$userID])){//Check if user has liked or disliked
-            $articleLikes[$userID] = "Liked";
-        }
+    else {//If user logined
+    if (!isset($userchoice)||$userchoice = "{}"){//If empty dict
+        $userchoice = array("$userID"=>"Liked");
     }
     else{
-        $articleLikes = [
-            $userID => "Liked"
-        ];
+            $userchoice["$userID"] = "Liked";
     }
-    foreach ($articleLikes as $paramName => $paramValue){
+    foreach ($userchoice as $paramName => $paramValue){
         echo "Key: " . $paramName . " Value: ". $paramValue . "<br>";
     }
     echo "Article Selected: " . $articleID . "<br>";
-    $array_string=serialize($articleLikes);
-    echo "Array Str: " . $array_string . "<br>";
-    echo "Deserialized: " . unserialize ( $array_string) . "<br>";
+    $array_string=json_encode($userchoice);
+    echo "Encoded: " . $array_string . "<br>";
+    echo "Decoded: " . json_decode($array_string) . "<br>";
     // Create and populate an object.
     $articleInfo = new stdClass();
-    $articleInfo = $articleID;
-    $articleInfo->likes =  $array_string;
+    $articleInfo->es_articleid = $articleID;
+    $articleInfo->es_userchoice =  $array_string;
     
     // Update the object into the article profile table.
-    $result = JFactory::getDbo()->updateObject('#__content', $articleInfo, $articleID);
+    $result = JFactory::getDbo()->updateObject('#__customtables_table_articlestats', $articleInfo, 'es_articleid');
     }
 }
     
@@ -89,6 +81,6 @@ function setThumbsUp($userID,$articleID){
 </div>
 <?php 
     if(isset($_POST["tUp"])){
-        setThumbsUp($userID,$articleID);
+        setThumbsUp($userID,$articleID,$userchoice);
     }
 ?>

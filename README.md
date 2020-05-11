@@ -7,5 +7,9 @@ Free Lance Work involving Joomla-cms
 2. Then go into extension manager and click on Discover in the sub menu.
 3. Click the checkbox to the left of your template and click on the button 'Install'.
 
+## Additional Installation
+Extensions:
+For custom tables: https://joomlaboat.com/custom-tables
+
 ### Other ways of installation
 See the website: https://docs.joomla.org/J3.x:Installing_a_template
