@@ -43,12 +43,18 @@ else {
     $thumbsDown = modTMLikes::giveThumbsDown();//Invoke thumbs down method
     }
 
+
+//Functions
 if(isset($_POST["tDown"])){
     setThumbsDown($userID,$articleID,$userchoice);
+    $NoLikes = getLikes($userchoice);
+    $NoDislikes = getDislikes($userchoice);
 }
 
 if(isset($_POST["tUp"])){
     setThumbsUp($userID,$articleID,$userchoice);
+    $NoLikes = getLikes($userchoice);
+    $NoDislikes = getDislikes($userchoice);
 }
 
 function setThumbsDown($userID,$articleID,$userchoice){
@@ -114,7 +120,27 @@ function setThumbsUp($userID,$articleID,$userchoice){
     $result = JFactory::getDbo()->updateObject('#__customtables_table_articlestats', $articleInfo, 'es_articleid');
     }
 }
-    
+
+function getLikes($userchoice){
+    //Calculate Number of likes and dislikes
+    $NoLikes = 0;
+    foreach ($userchoice as $row){
+        if ($row == "Liked") $NoLikes +=1;
+    }
+    return $NoLikes;
+}
+
+function getDislikes($userchoice){
+    //Calculate Number of likes and dislikes
+    $count = 0;
+    foreach ($userchoice as $row){
+        if ($row == "Disliked") $count +=1;
+    }
+    return $count;
+}
+
+$NoLikes = getLikes($userchoice);
+$NoDislikes = getDislikes($userchoice);
 ?>
 
 <div class="customtext">

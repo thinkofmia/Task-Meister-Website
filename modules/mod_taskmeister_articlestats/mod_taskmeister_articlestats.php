@@ -43,7 +43,7 @@ $results = $db->loadAssocList();
 
 //Querying
 $query = $db->getQuery(true);
-$query->select($db->quoteName(array('es_articleid','es_userchoice')))
+$query->select($db->quoteName(array('es_articleid','es_userchoice','es_visited')))
     ->from($db->quoteName('#__customtables_table_articlestats'))
     ->where($db->quoteName('es_articleid') . ' = ' . JRequest::getVar('id'));
 $db->setQuery($query);
@@ -71,14 +71,36 @@ foreach ($results as $row) {
     "<td>" . $row['featured'] . "</td></tr></table>";
     $articleID = $row['id'];
 }
+
+function countPreference($userchoice,$preference){
+    //Calculate Number of likes and dislikes
+    $count = 0;
+    foreach ($userchoice as $row){
+        if ($row == "Liked" && $preference == "Liked") $count +=1;
+        else if ($row == "Disliked" && $preference == "Disliked") $count +=1;
+    }
+    return $count;
+}
+
 foreach ($results2 as $row) {
     if ($articleID==$row['es_articleid']){
+        $preferenceList = json_decode($row['es_userchoice']);
+        $NoOfLikes = countPreference($preferenceList,"Liked");
+        $NoOfDislikes = countPreference($preferenceList,"Disliked");
         echo "<table>
         <tr>
-            <th>User's Choice</th>
+            <th>All Users' Choice</th>
+            <th>Number of Unique Registered Visitors</th>
+            <th>Total # of Likes</th>
+            <th>Total # of Dislikes</th>
         </tr>
         <tr>
-            <td>" . $row['es_userchoice'] . "</td>
+            <td>" . $row['es_userchoice'] . "</td>";
+        if (isset($row['es_visited'])) $visitors = $row['es_visited'];
+        else $visitors = "No one deployed this yet";
+        echo "<td> ". $visitors. " </td> 
+            <td>" . $NoOfLikes . "</td>
+            <td>" . $NoOfDislikes . "</td>
         </tr>"; 
     echo "</table>";
     }
