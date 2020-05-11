@@ -36,10 +36,45 @@ else {
     $thumbsDown = modTMLikes::giveThumbsDown();//Invoke thumbs down method
     }
 
+if(isset($_POST["tDown"])){
+    setThumbsDown($userID,$articleID,$userchoice);
+}
 
 if(isset($_POST["tUp"])){
-        setThumbsUp($userID,$articleID,$userchoice);
+    setThumbsUp($userID,$articleID,$userchoice);
+}
+
+function setThumbsDown($userID,$articleID,$userchoice){
+    if ($userID == 0){//If User yet to login
+        echo "alert(".modTMLikes::loginFirst().")";
+    } 
+    else {//If user logined
+    $userID_Str = "".$userID."";
+    if (empty($userchoice)){//If empty dict
+        $userchoice = array($userID_Str=>"Disliked");
     }
+    else{
+            $userchoice[$userID_Str] = "Disliked";
+    }
+    //Debu Messages
+    echo "<br>Article Selected: " . $articleID . "<br>";
+    $array_string=json_encode($userchoice);
+    echo "Encoded: " . $array_string . "<br>";
+    $decoded = json_decode($array_string);
+    echo "<ul>Decoded: <br>";
+    foreach ($decoded as $paramName => $paramValue){
+        echo "<li>Key: " . $paramName . " Value: ". $paramValue . "</li>";
+    }
+    echo "</ul>";    
+    // Create and populate an object.
+    $articleInfo = new stdClass();
+    $articleInfo->es_articleid = $articleID;
+    $articleInfo->es_userchoice =  $array_string;
+    
+    // Update the object into the article profile table.
+    $result = JFactory::getDbo()->updateObject('#__customtables_table_articlestats', $articleInfo, 'es_articleid');
+    }
+}
 
 function setThumbsUp($userID,$articleID,$userchoice){
     if ($userID == 0){//If User yet to login
