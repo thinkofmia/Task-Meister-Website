@@ -9,7 +9,7 @@ Free Lance Work involving Joomla-cms
 
 ## Additional Installation
 Extensions:
-For custom tables: https://joomlaboat.com/custom-tables
+- For custom tables: https://joomlaboat.com/custom-tables
 
 ### Other ways of installation
 See the website: https://docs.joomla.org/J3.x:Installing_a_template

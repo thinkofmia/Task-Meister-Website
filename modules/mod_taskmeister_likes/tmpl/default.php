@@ -8,21 +8,22 @@ $me = Factory::getUser();
 
 $userID = $me->id;
 
+$articleID_Str = "".JRequest::getVar('id')."";
 //Querying
 $query = $db->getQuery(true);
 $query->select($db->quoteName(array('es_articleid','es_userchoice')))
     ->from($db->quoteName('#__customtables_table_articlestats'))
-    ->where($db->quoteName('es_articleid') . ' = ' . JRequest::getVar('id'));
+    ->where($db->quoteName('es_articleid') . ' = ' . $articleID_Str);
 $db->setQuery($query);
 $results = $db->loadAssocList();
-$articleID = JRequest::getVar('id');
 $userchoice;
 foreach ($results as $row) {
     if (isset($row['es_userchoice'])){
         $userchoice=json_decode($row['es_userchoice'],true);
-        echo "Current List of ".$row['es_articleid'].": " . $row['es_userchoice'];
     } 
 }
+echo "Current List of ".$row['es_articleid'].": " . $row['es_userchoice'];
+echo $userchoice;
 
 //Set Alert Message
 if ($me->id == 0){
@@ -40,11 +41,12 @@ function setThumbsUp($userID,$articleID,$userchoice){
         echo "alert(".modTMLikes::loginFirst().")";
     } 
     else {//If user logined
+    $userID_Str = "".$userID."";
     if (!isset($userchoice)||$userchoice = "{}"){//If empty dict
-        $userchoice = array("$userID"=>"Liked");
+        $userchoice = array($userID_Str=>"Liked");
     }
     else{
-            $userchoice["$userID"] = "Liked";
+            $userchoice[$userID_Str] = "Liked";
     }
     foreach ($userchoice as $paramName => $paramValue){
         echo "Key: " . $paramName . " Value: ". $paramValue . "<br>";
@@ -81,6 +83,6 @@ function setThumbsUp($userID,$articleID,$userchoice){
 </div>
 <?php 
     if(isset($_POST["tUp"])){
-        setThumbsUp($userID,$articleID,$userchoice);
+        setThumbsUp($userID,$articleID_Str,$userchoice);
     }
 ?>
