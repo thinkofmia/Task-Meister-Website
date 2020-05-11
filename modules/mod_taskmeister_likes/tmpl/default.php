@@ -45,30 +45,30 @@ else {
 
 
 //Functions
-if(isset($_POST["tDown"])){
+if(isset($_POST["tDown"])&&$userID!=0){
     setThumbsDown($userID,$articleID,$userchoice);
     $NoLikes = getLikes($userchoice);
     $NoDislikes = getDislikes($userchoice);
 }
 
-if(isset($_POST["tUp"])){
+if(isset($_POST["tUp"])&&$userID!=0){
     setThumbsUp($userID,$articleID,$userchoice);
     $NoLikes = getLikes($userchoice);
     $NoDislikes = getDislikes($userchoice);
 }
 
 function setThumbsDown($userID,$articleID,$userchoice){
-    if ($userID == 0){//If User yet to login
-        echo "alert(".modTMLikes::loginFirst().")";
+    if ($userID == 0||!isset($userID)){//If User yet to login
+        echo "alert('Login First!!!')";
     } 
     else {//If user logined
     $userID_Str = "".$userID."";
-    if (empty($userchoice)){//If empty dict
-        $userchoice = array($userID_Str=>"Disliked");
-    }
-    else{
+        if (empty($userchoice)){//If empty dict
+            $userchoice = array($userID_Str=>"Disliked");
+        }
+        else{
             $userchoice[$userID_Str] = "Disliked";
-    }
+        }
     $array_string=json_encode($userchoice);
     /*Debug Messages
     echo "<br>Article Selected: " . $articleID . "<br>";
@@ -90,8 +90,8 @@ function setThumbsDown($userID,$articleID,$userchoice){
 }
 
 function setThumbsUp($userID,$articleID,$userchoice){
-    if ($userID == 0){//If User yet to login
-        echo "alert(".modTMLikes::loginFirst().")";
+    if ($userID == 0||!isset($userID)){//If User yet to login
+        echo "alert('Login First!!!')";
     } 
     else {//If user logined
     $userID_Str = "".$userID."";
@@ -157,4 +157,3 @@ $NoDislikes = getDislikes($userchoice);
     <button name= "tDown" id = "thumbsDown">👎</button>  
 </form>
 </div>
-
