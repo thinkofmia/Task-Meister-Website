@@ -72,8 +72,7 @@ foreach ($results as $row) {
     $articleID = $row['id'];
 }
 foreach ($results2 as $row) {
-    echo " F".$row['es_articleID']." F";
-    if ($articleID==$row['es_articleID']){
+    if ($articleID==$row['es_articleid']){
         echo "<table>
         <tr>
             <th>User's Choice</th>
