@@ -31,7 +31,7 @@ $me = Factory::getUser();
 
 $query = $db->getQuery(true);
 
-$query->select($db->quoteName(array('title','id','hits','featured','catid','likes','dislikes')))
+$query->select($db->quoteName(array('title','id','hits','featured','catid')))
     ->from($db->quoteName('#__content'))
     ->where($db->quoteName('id') . ' = ' . JRequest::getVar('id'));
 
@@ -43,7 +43,7 @@ $results = $db->loadAssocList();
 
 //Querying
 $query = $db->getQuery(true);
-$query->select($db->quoteName(array('es_articleid','es_userchoice','es_deployed')))
+$query->select($db->quoteName(array('es_articleid','es_userchoice','es_deployed','es_totallikes','es_totaldislikes')))
     ->from($db->quoteName('#__customtables_table_articlestats'))
     ->where($db->quoteName('es_articleid') . ' = ' . JRequest::getVar('id'));
 $db->setQuery($query);
@@ -87,8 +87,8 @@ foreach ($results2 as $row) {
     if ($articleID==$row['es_articleid']){
         $preferenceList = json_decode($row['es_userchoice']);
         $deploymentList = json_decode($row['es_deployed']);
-        $NoOfLikes = countPreference($preferenceList,"Liked");
-        $NoOfDislikes = countPreference($preferenceList,"Disliked");
+        $NoOfLikes = $row['es_totallikes'];
+        $NoOfDislikes = $row['es_totaldislikes'];
         $NoOfDeployment = sizeof($deploymentList);
         echo "<table>
         <tr>
