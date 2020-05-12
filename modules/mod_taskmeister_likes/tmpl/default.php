@@ -204,7 +204,8 @@ $NoDislikes = getDislikes($userchoice);
 </div>
 <div id="thumbsBox">
     <?php if ($userID==0) : ?>
-        <h3><?php echo "Login to like/dislike"; ?></h3>
+        <button name= "fakeButton1" id= "thumbsUp" onclick="alert('Login First!!')" title ="Like Button">👍</button>
+        <button name= "fakeButton2" id = "thumbsDown" onclick="alert('Login First!!')" title ="Dislike Button">👎</button>  
     <?php else : ?>
         <form method="post">
             <button name= "tUp" id= "thumbsUp" title ="Like Button">👍</button>

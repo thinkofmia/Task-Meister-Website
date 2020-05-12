@@ -124,7 +124,7 @@ function setDeployed($userID,$articleID,$list,$deployedList_user){
 </div>
 <div id="deployedBox">
     <?php if ($userID==0) : ?>
-        <h3><?php echo "Login to deploy"; ?></h3>
+        <button name= "fakeButton" id= "deployedButton" onclick="alert('Login First!!')" title="Deployment Button">👨‍💻</button> 
     <?php else : ?>
         <form method="post">
             <button name= "dButton" id= "deployedButton" title="Deployment Button">👨‍💻</button> 
