@@ -9,7 +9,7 @@ $me = Factory::getUser();
 $userID = $me->id;
 
 $articleID = JRequest::getVar('id');
-//Querying
+//Querying for article stats
 $query = $db->getQuery(true);
 $query->select($db->quoteName(array('es_articleid','es_userchoice')))
     ->from($db->quoteName('#__customtables_table_articlestats'))
@@ -33,31 +33,66 @@ if ($dataNotExist){//If no record exists
     $result = JFactory::getDbo()->insertObject('#__customtables_table_articlestats', $articleInfo, 'es_articleid');
 }
 
-//Set Alert Message
-if ($me->id == 0){
-    $thumbsUp = modTMLikes::loginFirst();//Invoke thumbs up method
-    $thumbsDown = modTMLikes::loginFirst();//Invoke thumbs down method
-} 
-else {
-    $thumbsUp = modTMLikes::giveThumbsUp();//Invoke thumbs up method
-    $thumbsDown = modTMLikes::giveThumbsDown();//Invoke thumbs down method
-    }
+//Querying for User Stats table
+$query = $db->getQuery(true);
+$query->select($db->quoteName(array('es_userid','es_pageliked','es_pagedisliked')))
+    ->from($db->quoteName('#__customtables_table_userstats'))
+    ->where($db->quoteName('es_userid') . ' = ' . $userID);
+$db->setQuery($query);
+$results = $db->loadAssocList();
+$dataNotExist = true;
+foreach ($results as $row) {
+    if ($userID==$row['es_userid']){
+        $userLikedList=json_decode($row['es_pageliked'],true);
+        $userDislikedList=json_decode($row['es_pagedisliked'],true);
+        $dataNotExist = false;
+    } 
+}
+if ($dataNotExist){//If no record exists
+    // Create and populate an object.
+    $userInfo = new stdClass();
+    $userInfo->es_userid = $userID;
 
+    // Update the object into the article profile table.
+    $result = JFactory::getDbo()->insertObject('#__customtables_table_userstats', $userInfo, 'es_userid');
+}
 
 //Functions
 if(isset($_POST["tDown"])&&$userID!=0){
-    setThumbsDown($userID,$articleID,$userchoice);
+    setThumbsDown($userID,$articleID,$userchoice,$userLikedList,$userDislikedList);
     $NoLikes = getLikes($userchoice);
     $NoDislikes = getDislikes($userchoice);
 }
 
 if(isset($_POST["tUp"])&&$userID!=0){
-    setThumbsUp($userID,$articleID,$userchoice);
+    setThumbsUp($userID,$articleID,$userchoice,$userLikedList,$userDislikedList);
     $NoLikes = getLikes($userchoice);
     $NoDislikes = getDislikes($userchoice);
 }
 
-function setThumbsDown($userID,$articleID,$userchoice){
+function disableSwitch($list,$articleID){
+    if (in_array($articleID,$list)){
+        $key = array_search($articleID, $list);
+        unset($list[$key]);
+    }
+    return $list;
+}
+
+function updateUserDB($userID,$likedList,$dislikedList){//Updates user database
+    $likedList_str=json_encode($likedList);
+    $dislikedList_str=json_encode($dislikedList);
+
+    // Create and populate an user table.
+    $userInfo = new stdClass();
+    $userInfo->es_userid = $userID;
+    $userInfo->es_pageliked =  $likedList_str;
+    $userInfo->es_pagedisliked =  $dislikedList_str;
+    
+    // Update the object into the article profile table.
+    $result = JFactory::getDbo()->updateObject('#__customtables_table_userstats', $userInfo, 'es_userid');
+}
+
+function setThumbsDown($userID,$articleID,$userchoice,$userLikedList,$userDislikedList){
     if ($userID == 0||!isset($userID)){//If User yet to login
         echo "alert('Login First!!!')";
     } 
@@ -70,15 +105,6 @@ function setThumbsDown($userID,$articleID,$userchoice){
             $userchoice[$userID_Str] = "Disliked";
         }
     $array_string=json_encode($userchoice);
-    /*Debug Messages
-    echo "<br>Article Selected: " . $articleID . "<br>";
-    echo "Encoded: " . $array_string . "<br>";
-    $decoded = json_decode($array_string);
-    echo "<ul>Decoded: <br>";
-    foreach ($decoded as $paramName => $paramValue){
-        echo "<li>Key: " . $paramName . " Value: ". $paramValue . "</li>";
-    }
-    echo "</ul>";  */
     // Create and populate an object.
     $articleInfo = new stdClass();
     $articleInfo->es_articleid = $articleID;
@@ -86,10 +112,24 @@ function setThumbsDown($userID,$articleID,$userchoice){
     
     // Update the object into the article profile table.
     $result = JFactory::getDbo()->updateObject('#__customtables_table_articlestats', $articleInfo, 'es_articleid');
+
+    //For user profile
+    if (empty($userDislikedList)){//If empty array
+        $userDislikedList = array($articleID);//Update disliked list
+        $userLikedList = disableSwitch($userLikedList,$articleID);//Update liked list as well
+    }
+    else if (in_array($articleID,$userDislikedList)){
+        $userDislikedList = disableSwitch($userDislikedList,$articleID);//Remove from disliked list
+    }
+    else {
+        $userDislikedList[] = $articleID;//Update disliked list
+        $userLikedList = disableSwitch($userLikedList,$articleID);//Update liked list as well
+    }
+    updateUserDB($userID,$userLikedList,$userDislikedList);
     }
 }
 
-function setThumbsUp($userID,$articleID,$userchoice){
+function setThumbsUp($userID,$articleID,$userchoice,$userLikedList,$userDislikedList){
     if ($userID == 0||!isset($userID)){//If User yet to login
         echo "alert('Login First!!!')";
     } 
@@ -102,15 +142,6 @@ function setThumbsUp($userID,$articleID,$userchoice){
             $userchoice[$userID_Str] = "Liked";
     }
     $array_string=json_encode($userchoice);
-    /*Debug Messages
-    echo "<br>Article Selected: " . $articleID . "<br>";
-    echo "Encoded: " . $array_string . "<br>";
-    $decoded = json_decode($array_string);
-    echo "<ul>Decoded: <br>";
-    foreach ($decoded as $paramName => $paramValue){
-        echo "<li>Key: " . $paramName . " Value: ". $paramValue . "</li>";
-    }
-    echo "</ul>";*/    
     // Create and populate an object.
     $articleInfo = new stdClass();
     $articleInfo->es_articleid = $articleID;
@@ -118,6 +149,20 @@ function setThumbsUp($userID,$articleID,$userchoice){
     
     // Update the object into the article profile table.
     $result = JFactory::getDbo()->updateObject('#__customtables_table_articlestats', $articleInfo, 'es_articleid');
+    
+    //For user profile
+    if (empty($userLikedList)){//If empty array
+        $userLikedList = array($articleID);//Update liked list
+        $userDislikedList = disableSwitch($userDislikedList,$articleID);//Update disliked list as well
+    }
+    else if (in_array($articleID,$userLikedList)){
+        $userLikedList = disableSwitch($userLikedList,$articleID);//Remove from liked list
+    }
+    else {
+        $userLikedList[] = $articleID;//Update liked list
+        $userDislikedList = disableSwitch($userDislikedList,$articleID);//Update disliked list as well
+    }    
+    updateUserDB($userID,$userLikedList,$userDislikedList);
     }
 }
 
