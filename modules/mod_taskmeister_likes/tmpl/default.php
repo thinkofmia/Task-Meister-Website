@@ -203,8 +203,12 @@ $NoDislikes = getDislikes($userchoice);
     <?php endif; ?>
 </div>
 <div id="thumbsBox">
-<form method="post">
-    <button name= "tUp" id= "thumbsUp" title ="Like Button">👍</button>
-    <button name= "tDown" id = "thumbsDown" title ="Dislike Button">👎</button>  
-</form>
+    <?php if ($userID==0) : ?>
+        <h3><?php echo "Login to like/dislike"; ?></h3>
+    <?php else : ?>
+        <form method="post">
+            <button name= "tUp" id= "thumbsUp" title ="Like Button">👍</button>
+            <button name= "tDown" id = "thumbsDown" title ="Dislike Button">👎</button>  
+        </form>
+    <?php endif; ?>
 </div>
