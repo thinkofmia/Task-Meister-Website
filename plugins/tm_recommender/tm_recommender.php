@@ -23,7 +23,12 @@ class plgTaskMeisterTM_recommender extends JPlugin
 		 * You can access database and application objects and parameters via $this->db,
 		 * $this->app and $this->params respectively
 		 */
-        return "Wonderful ".$number;
-	}
+        return "Wonderful ".($number*2);
+    }
+    
+    function welcomeText($number){
+        
+        return "Welcome user: Working Now";
+    }
 }
 ?>
