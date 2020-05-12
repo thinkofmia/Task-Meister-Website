@@ -1,9 +1,11 @@
 <?php
 // no direct access
 defined( '_JEXEC' ) or die;
+use Joomla\CMS\Factory;
 
 class plgTaskMeisterTM_recommender extends JPlugin
 {
+    
 	/**
 	 * Load the language file on instantiation. Note this is only available in Joomla 3.1 and higher.
 	 * If you want to support 3.0 series you must override the constructor
@@ -25,10 +27,26 @@ class plgTaskMeisterTM_recommender extends JPlugin
 		 */
         return "Wonderful ".($number*2);
     }
+
+    function updateArticleInfo(){
+        return false;
+    }
+
+    function countArticleLikes($list){
+        $NoLikes = 0;
+        $NoDislikes = 0;
+        foreach ($list as $row){
+            if ($row == "Liked") $NoLikes +=1;
+            else if ($row == "Disliked") $NoDislikes +=1;
+        }
+        return array($NoLikes,$NoDislikes);
+    }
     
-    function welcomeText($number){
-        
-        return "Welcome user: Working Now";
+    function welcomeText(){
+        $db = Factory::getDbo();
+        $me = Factory::getUser();
+        $username = $me->username;
+        return "Welcome ".$username."!";
     }
 }
 ?>

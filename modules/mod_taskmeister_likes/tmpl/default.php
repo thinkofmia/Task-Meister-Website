@@ -60,14 +60,10 @@ if ($dataNotExist){//If no record exists
 //Functions
 if(isset($_POST["tDown"])&&$userID!=0){
     setThumbsDown($userID,$articleID,$userchoice,$userLikedList,$userDislikedList);
-    $NoLikes = getLikes($userchoice);
-    $NoDislikes = getDislikes($userchoice);
 }
 
 if(isset($_POST["tUp"])&&$userID!=0){
     setThumbsUp($userID,$articleID,$userchoice,$userLikedList,$userDislikedList);
-    $NoLikes = getLikes($userchoice);
-    $NoDislikes = getDislikes($userchoice);
 }
 
 function disableSwitch($list,$articleID){
@@ -90,6 +86,7 @@ function updateUserDB($userID,$likedList,$dislikedList){//Updates user database
     
     // Update the object into the article profile table.
     $result = JFactory::getDbo()->updateObject('#__customtables_table_userstats', $userInfo, 'es_userid');
+
 }
 
 function setThumbsDown($userID,$articleID,$userchoice,$userLikedList,$userDislikedList){
@@ -108,10 +105,22 @@ function setThumbsDown($userID,$articleID,$userchoice,$userLikedList,$userDislik
             $userchoice[$userID_Str] = "Disliked";
         }
     $array_string=json_encode($userchoice);
+    
+    //Extension for counting article likes and dislikes
+    JPluginHelper::importPlugin('taskmeister','tm_recommender');
+    $dispatcher = JDispatcher::getInstance();
+
+    $results = $dispatcher->trigger('countArticleLikes', array($userchoice));
+    $totalLikes = $results[0][0];
+    $totalDislikes = $results[0][1];
+
+    $array_string=json_encode($userchoice);
     // Create and populate an object.
     $articleInfo = new stdClass();
     $articleInfo->es_articleid = $articleID;
     $articleInfo->es_userchoice =  $array_string;
+    $articleInfo->es_totallikes = $totalLikes;
+    $articleInfo->es_totaldislikes = $totalDislikes;
     
     // Update the object into the article profile table.
     $result = JFactory::getDbo()->updateObject('#__customtables_table_articlestats', $articleInfo, 'es_articleid');
@@ -147,15 +156,28 @@ function setThumbsUp($userID,$articleID,$userchoice,$userLikedList,$userDisliked
     else{
             $userchoice[$userID_Str] = "Liked";
     }
+
+    //Extension for counting article likes and dislikes
+    JPluginHelper::importPlugin('taskmeister','tm_recommender');
+    $dispatcher = JDispatcher::getInstance();
+
+    $results = $dispatcher->trigger('countArticleLikes', array($userchoice));
+    $totalLikes = $results[0][0];
+    $totalDislikes = $results[0][1];
+
     $array_string=json_encode($userchoice);
     // Create and populate an object.
     $articleInfo = new stdClass();
     $articleInfo->es_articleid = $articleID;
     $articleInfo->es_userchoice =  $array_string;
-    
+    $articleInfo->es_totallikes = $totalLikes;
+    $articleInfo->es_totaldislikes = $totalDislikes;
+        
     // Update the object into the article profile table.
     $result = JFactory::getDbo()->updateObject('#__customtables_table_articlestats', $articleInfo, 'es_articleid');
     
+    
+
     //For user profile
     if (empty($userLikedList)){//If empty array
         $userLikedList = array($articleID);//Update liked list
@@ -172,26 +194,6 @@ function setThumbsUp($userID,$articleID,$userchoice,$userLikedList,$userDisliked
     }
 }
 
-function getLikes($userchoice){
-    //Calculate Number of likes and dislikes
-    $NoLikes = 0;
-    foreach ($userchoice as $row){
-        if ($row == "Liked") $NoLikes +=1;
-    }
-    return $NoLikes;
-}
-
-function getDislikes($userchoice){
-    //Calculate Number of likes and dislikes
-    $count = 0;
-    foreach ($userchoice as $row){
-        if ($row == "Disliked") $count +=1;
-    }
-    return $count;
-}
-
-$NoLikes = getLikes($userchoice);
-$NoDislikes = getDislikes($userchoice);
 ?>
 
 <div class="customtext">
