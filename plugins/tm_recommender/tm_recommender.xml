@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension version="3.1" type="plugin" group="taskmeister">
+	<name>tm_recommender</name>
+	<author>Fremont Teng</author>
+	<creationDate>May 2020</creationDate>
+	<copyright>Copyright (C) 2005 - 2013 Open Source Matters. All rights reserved.</copyright>
+	<license>GNU General Public License version 2 or later; see LICENSE.txt</license>
+	<authorEmail>fremontteng@gmail.com</authorEmail>
+	<authorUrl>https://github.com/FremontTeng</authorUrl>
+	<version>3.1.0</version>
+	<description>A recommender system for Jooma CMS (Work in progress)</description>
+	<files>
+		<filename plugin="tm_recommender">tm_recommender.php</filename>
+	</files>
+	<config>
+		<fields name="params">
+
+			<fieldset name="basic">
+				<field name="sometext" type="text"
+					default="50"
+					description="Some Text"
+					label="Some Text: "
+					size="50"
+				/>
+			</fieldset>
+
+		</fields>
+	</config>
+</extension>
