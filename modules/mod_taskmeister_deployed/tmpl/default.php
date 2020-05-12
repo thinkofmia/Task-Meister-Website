@@ -9,7 +9,7 @@ $me = Factory::getUser();
 $userID = $me->id;
 
 $articleID = JRequest::getVar('id');
-//Querying
+//Querying for Article stats table
 $query = $db->getQuery(true);
 $query->select($db->quoteName(array('es_articleid','es_deployed')))
     ->from($db->quoteName('#__customtables_table_articlestats'))
@@ -33,35 +33,83 @@ if ($dataNotExist){//If no record exists
     $result = JFactory::getDbo()->insertObject('#__customtables_table_articlestats', $articleInfo, 'es_articleid');
 }
 
-//Functions
-if(isset($_POST["dButton"])){
-    setDeployed($userID,$articleID,$deployedList);
+//Querying for User Stats table
+$query = $db->getQuery(true);
+$query->select($db->quoteName(array('es_userid','es_pagedeployed')))
+    ->from($db->quoteName('#__customtables_table_userstats'))
+    ->where($db->quoteName('es_userid') . ' = ' . $userID);
+$db->setQuery($query);
+$results = $db->loadAssocList();
+$deployedList;
+$dataNotExist = true;
+foreach ($results as $row) {
+    if ($userID==$row['es_userid']){
+        $deployedList_user=json_decode($row['es_pagedeployed'],true);
+        $dataNotExist = false;
+    } 
+}
+if ($dataNotExist){//If no record exists
+    // Create and populate an object.
+    $userInfo = new stdClass();
+    $userInfo->es_userid = $userID;
+
+    // Update the object into the article profile table.
+    $result = JFactory::getDbo()->insertObject('#__customtables_table_userstats', $userInfo, 'es_userid');
 }
 
-function setDeployed($userID,$articleID,$list){
+
+
+//Functions
+if(isset($_POST["dButton"])){
+    setDeployed($userID,$articleID,$deployedList,$deployedList_user);
+}
+
+function setDeployed($userID,$articleID,$list,$deployedList_user){
     if ($userID == 0){//If User yet to login
         echo "alert('Login First!!')";
     } 
     else {//If user logined
-    $userID_Str = "".$userID."";
-    if (empty($list)){//If empty array
-        $list = array($userID);
-    }
-    else if (in_array($userID,$list)){
-        $key = array_search($userID, $list);
-        unset($list[$key]);
-    }
-    else {
-        $list[] = $userID;
-    }
-    $array_string=json_encode($list);
-    // Create and populate an object.
-    $articleInfo = new stdClass();
-    $articleInfo->es_articleid = $articleID;
-    $articleInfo->es_deployed =  $array_string;
-    
-    // Update the object into the article profile table.
-    $result = JFactory::getDbo()->updateObject('#__customtables_table_articlestats', $articleInfo, 'es_articleid');
+        $userID_Str = "".$userID."";
+        if (empty($list)){//If empty array
+            $list = array($userID);
+        }
+        else if (in_array($userID,$list)){
+            $key = array_search($userID, $list);
+            unset($list[$key]);
+        }
+        else {
+            $list[] = $userID;
+        }
+        $array_string=json_encode($list);
+        // Create and populate an object.
+        $articleInfo = new stdClass();
+        $articleInfo->es_articleid = $articleID;
+        $articleInfo->es_deployed =  $array_string;
+        
+        // Update the object into the article profile table.
+        $result = JFactory::getDbo()->updateObject('#__customtables_table_articlestats', $articleInfo, 'es_articleid');
+        
+        //For user profile
+        if (empty($deployedList_user)){//If empty array
+            $deployedList_user = array($articleID);
+        }
+        else if (in_array($articleID,$deployedList_user)){
+            $key = array_search($articleID, $deployedList_user);
+            unset($deployedList_user[$key]);
+        }
+        else {
+            $deployedList_user[] = $articleID;
+        }
+        $array_string2=json_encode($deployedList_user);
+
+        // Create and populate an user table.
+        $userInfo = new stdClass();
+        $userInfo->es_userid = $userID;
+        $userInfo->es_pagedeployed =  $array_string2;
+        
+        // Update the object into the article profile table.
+        $result = JFactory::getDbo()->updateObject('#__customtables_table_userstats', $userInfo, 'es_userid');
+        
     }
 }
 ?>
