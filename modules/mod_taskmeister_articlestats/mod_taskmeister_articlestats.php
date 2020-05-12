@@ -60,7 +60,7 @@ echo "
     <th>Id</th>
     <th>Title</th>
     <th>Category</th>
-    <th>Hits</th>
+    <th>Views</th>
     <th>Featured</th>
 </tr>";
 foreach ($results as $row) {
