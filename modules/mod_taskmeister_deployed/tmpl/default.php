@@ -123,8 +123,12 @@ function setDeployed($userID,$articleID,$list,$deployedList_user){
     <?php endif; ?>
 </div>
 <div id="deployedBox">
-    <form method="post">
-        <button name= "dButton" id= "deployedButton" title="Deployment Button">👨‍💻</button>
-    </form>
+    <?php if ($userID==0) : ?>
+        <h3><?php echo "Login to deploy"; ?></h3>
+    <?php else : ?>
+        <form method="post">
+            <button name= "dButton" id= "deployedButton" title="Deployment Button">👨‍💻</button> 
+        </form>
+    <?php endif; ?>
 </div>
 
