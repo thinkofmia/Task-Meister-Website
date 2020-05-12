@@ -101,6 +101,9 @@ function setThumbsDown($userID,$articleID,$userchoice,$userLikedList,$userDislik
         if (empty($userchoice)){//If empty dict
             $userchoice = array($userID_Str=>"Disliked");
         }
+        else if ($userchoice[$userID_Str] == "Disliked"){
+            unset($userchoice[$userID_Str]);//Remove from $userchoice
+        }
         else{
             $userchoice[$userID_Str] = "Disliked";
         }
@@ -137,6 +140,9 @@ function setThumbsUp($userID,$articleID,$userchoice,$userLikedList,$userDisliked
     $userID_Str = "".$userID."";
     if (empty($userchoice)){//If empty dict
         $userchoice = array($userID_Str=>"Liked");
+    }
+    else if ($userchoice[$userID_Str] == "Liked"){
+        unset($userchoice[$userID_Str]);//Remove from $userchoice
     }
     else{
             $userchoice[$userID_Str] = "Liked";
