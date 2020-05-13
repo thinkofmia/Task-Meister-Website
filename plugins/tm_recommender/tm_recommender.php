@@ -28,6 +28,33 @@ class plgTaskMeisterTM_recommender extends JPlugin
 		 */
         return "Wonderful ".($number*2);
     }
+    /* Function: Personal Recommend Articles
+    Recommend articles for a particular user
+    Used only for articles module
+    Maybe just 10 articles
+     */
+    function recommendPersonalArticles($userid){//WIP
+        $db = Factory::getDbo();//Gets database
+        //Get external user table (custom table) To find out list of liked, deployed and disliked articles
+        $query = $db->getQuery(true);
+        $query->select($db->quoteName(array('es_userid','es_pageliked','es_pagedisliked','es_pagedeployed')))
+            ->from($db->quoteName('#__customtables_table_userstats'))
+            ->where($db->quoteName('es_userid') . ' = ' . $userid);
+        $db->setQuery($query);
+        $results_ext = $db->loadAssocList();
+
+        //Save information into a list
+        foreach ($results_ext as $row){
+            if ($row['es_userid']==$userid){//Just to be sure if user id is same
+                $likedlist = $row['es_pageliked'];
+                $blacklist = $row['es_pagedisliked'];
+                $deployedlist = $row['es_pagedeployed'];
+            }
+            
+        }
+        return array($likedlist,$blacklist,$deployedlist);////WIP Currently displaying three lists
+    }
+
     /* Function: Create List
     This function creates an unordered array from an existing one.
     Can be used anywhere
