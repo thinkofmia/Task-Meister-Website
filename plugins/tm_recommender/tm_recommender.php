@@ -39,8 +39,57 @@ class plgTaskMeisterTM_recommender extends JPlugin
         if (!isset($list_str)) $list_str = '[]';//If null, set as empty instead
         return $list_str;//Return new unordered array
     }
-
+    
+    /* Function: Fix Article Statistics
+    This function automatically updates/refreshes the article statistics.
+     It should be used when adding new articles
+     */
     function fixArticleStats(){
+        $db = Factory::getDbo();//Gets database
+        //Get article bank from database query
+        $query2 = $db->getQuery(true);
+        $query2->select($db->quoteName(array('id','title','state')))
+            ->from($db->quoteName('#__content'));
+        $db->setQuery($query2);
+        $results_bank = $db->loadAssocList();
+
+        //Get external article table (custom table)
+        $query = $db->getQuery(true);
+        $query->select($db->quoteName(array('a.*')))
+            ->from($db->quoteName('#__customtables_table_articlestats','a'));
+        $db->setQuery($query);
+        $results_ext = $db->loadAssocList();
+
+        //Store the current articles in external table into an array
+        $curr_articles =array();
+        foreach ($results_ext as $row2) { 
+            array_push($curr_articles, $row2['es_articleid']);
+        }
+
+        //Add in new articles if any
+        foreach ($results_bank as $row){
+            //Update article class
+            $articleInfo = new stdClass();
+            $articleInfo->es_articleid = $row['id'];
+            $articleInfo->es_title = $row['title'];
+            if (($row['state']!=1)){// delete if article is unpublished
+                $query3 = $db->getQuery(true);
+                $conditions = array(
+                    $db->quoteName('es_articleid') . ' = ' . $row['id']
+                );
+                $query3->delete($db->quoteName('#__customtables_table_articlestats'));
+                $query3->where($conditions);
+                $db->setQuery($query3);
+                $result = $db->execute();
+            }
+            else if (in_array($row['id'], $curr_articles)&& ($row['state']==1)){
+                // Update article info if exists.
+                $result = JFactory::getDbo()->updateObject('#__customtables_table_articlestats', $articleInfo, 'es_articleid');
+            }
+            else if ($row['state']==1){//Insert article info if doesn't exists
+                $result = JFactory::getDbo()->insertObject('#__customtables_table_articlestats', $articleInfo, 'es_articleid');
+            }
+        }   
         return false;
     }
     
