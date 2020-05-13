@@ -33,8 +33,10 @@ class plgTaskMeisterTM_recommender extends JPlugin
     Used only for articles module
     Maybe just 10 articles
      */
-    function recommendPersonalArticles($userid){//WIP
+    function recommendmostLikedArticles(){//WIP
         $db = Factory::getDbo();//Gets database
+        $me = Factory::getUser();//Gets user
+        $userid = $me->id;
         //Get external user table (custom table) To find out list of liked, deployed and disliked articles
         $query = $db->getQuery(true);
         $query->select($db->quoteName(array('es_userid','es_pageliked','es_pagedisliked','es_pagedeployed')))
@@ -46,13 +48,34 @@ class plgTaskMeisterTM_recommender extends JPlugin
         //Save information into a list
         foreach ($results_ext as $row){
             if ($row['es_userid']==$userid){//Just to be sure if user id is same
-                $likedlist = $row['es_pageliked'];
-                $blacklist = $row['es_pagedisliked'];
-                $deployedlist = $row['es_pagedeployed'];
+                $likedlist = json_decode($row['es_pageliked']);
+                $blacklist = json_decode($row['es_pagedisliked']);
+                $deployedlist = json_decode($row['es_pagedeployed']);
             }
             
         }
-        return array($likedlist,$blacklist,$deployedlist);////WIP Currently displaying three lists
+        //Get article info database
+        $query2 = $db->getQuery(true);
+        $query2->select($db->quoteName(array('es_articleid','es_totallikes','es_totaldislikes')))
+            ->from($db->quoteName('#__customtables_table_articlestats'))
+            ->order($db->quoteName('es_totallikes') . ' DESC');
+        $db->setQuery($query2);
+        $results_art = $db->loadAssocList();
+        
+        //Set up list of most liked articles recommended
+        $mostLikedArticles = array();
+        $count = 0;//initialize count
+        foreach ($results_art as $row){
+            if (in_array($row['es_articleid'],$blacklist)){
+
+            }
+            else if ($count<10){//If articles collected is less than 10
+                $count += 1;
+                array_push($mostLikedArticles,$row['es_articleid']);
+            }
+        }
+        $mostLikedArticles_str = json_encode($mostLikedArticles);
+        return $mostLikedArticles_str;////WIP Currently displaying three lists
     }
 
     /* Function: Create List
