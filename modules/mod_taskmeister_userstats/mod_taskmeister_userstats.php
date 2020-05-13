@@ -64,6 +64,8 @@ else{//If logined
             $likedList = createList($row['es_pageliked']);
             //For Disliked pages
             $dislikedList = createList($row['es_pagedisliked']);
+            //For user preference
+            $preferenceList = createList($row['es_userpreference']);
             //Print
             echo "<table>
             <tr>
@@ -77,7 +79,7 @@ else{//If logined
             <tr>
                 <td>" . $username . "</td>
                 <td>" . $userID . "</td>
-                <td>" . $row['es_userpreference'] . "</td>
+                <td>" . $preferenceList . "</td>
                 <td> ". $deployedList. " </td> 
                 <td>" . $likedList . "</td>
                 <td>" . $dislikedList . "</td>

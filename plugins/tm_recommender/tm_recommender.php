@@ -32,6 +32,10 @@ class plgTaskMeisterTM_recommender extends JPlugin
         return false;
     }
 
+    function getUserStats(){
+        
+    }
+
     function countArticleLikes($list){
         $NoLikes = 0;
         $NoDislikes = 0;
