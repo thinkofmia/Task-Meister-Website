@@ -63,7 +63,23 @@ class plgTaskMeisterTM_recommender extends JPlugin
         //Store the current articles in external table into an array
         $curr_articles =array();
         foreach ($results_ext as $row2) { 
+            //Add to store
             array_push($curr_articles, $row2['es_articleid']);
+            //Count total likes/dislikes
+            $results = $this->countArticleLikes($row2['es_userchoice']);
+            $totalLikes = $results[0][0];
+            $totalDislikes = $results[0][1];
+            //Update total if not same
+            if ($totalLikes!=$row2['es_totallikes']||$totalDislikes!=$row2['es_totaldislikes']){
+                // Create and populate an object.
+                $articleInfo = new stdClass();
+                $articleInfo->es_articleid = $row2['es_articleid'];
+                $articleInfo->es_totallikes = $totalLikes;
+                $articleInfo->es_totaldislikes = $totalDislikes;
+                    
+                // Update the object into the article profile table.
+                $result = JFactory::getDbo()->updateObject('#__customtables_table_articlestats', $articleInfo, 'es_articleid');
+            }
         }
 
         //Add in new articles if any
