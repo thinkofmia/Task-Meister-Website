@@ -22,6 +22,12 @@ $displayHeader = modUserStats::getHeader($params);//invoke helper class method
 $displayText = modUserStats::getText($params);//invoke helper class method
 require JModuleHelper::getLayoutPath('mod_taskmeister_userstats');
 
+function createList($array_str){
+    $array = json_decode($array_str,true);
+    $list = array_values($array);
+    return json_encode($list);
+}
+
 //Database code
 use Joomla\CMS\Factory;
 
@@ -32,7 +38,7 @@ $username = $me->username;
 
 //Querying
 $query = $db->getQuery(true);
-$query->select($db->quoteName(array('es_userid','es_preference','es_pagedeployed','es_pageliked','es_pagedisliked')))
+$query->select($db->quoteName(array('es_userid','es_userpreference','es_pagedeployed','es_pageliked','es_pagedisliked')))
     ->from($db->quoteName('#__customtables_table_userstats'))
     ->where($db->quoteName('es_userid') . ' = ' . $userID);
 $db->setQuery($query);
@@ -50,8 +56,15 @@ if ($userID==0){
 }
 //Display Results
 else{//If logined 
-    foreach ($results2 as $row) {
+    foreach ($results2 as $row) {  
         if ($userID==$row['es_userid']){
+            //For deployment list
+            $deployedList = createList($row['es_pagedeployed']);
+            //For Liked pages
+            $likedList = createList($row['es_pageliked']);
+            //For Disliked pages
+            $dislikedList = createList($row['es_pagedisliked']);
+            //Print
             echo "<table>
             <tr>
                 <th>Username</th>
@@ -64,10 +77,10 @@ else{//If logined
             <tr>
                 <td>" . $username . "</td>
                 <td>" . $userID . "</td>
-                <td>" . $row['es_preference'] . "</td>
-                <td> ". $row['es_pagedeployed']. " </td> 
-                <td>" . $row['es_pageliked'] . "</td>
-                <td>" . $row['es_pagedisliked'] . "</td>
+                <td>" . $row['es_userpreference'] . "</td>
+                <td> ". $deployedList. " </td> 
+                <td>" . $likedList . "</td>
+                <td>" . $dislikedList . "</td>
             </tr>"; 
             echo "</table>";
             }

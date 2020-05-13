@@ -28,7 +28,7 @@ class plgTaskMeisterTM_recommender extends JPlugin
         return "Wonderful ".($number*2);
     }
 
-    function updateArticleInfo(){
+    function updateArticleInfo(){//WIP
         return false;
     }
 
