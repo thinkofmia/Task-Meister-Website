@@ -33,6 +33,19 @@
 					cols="30"
 					rows="1"
 				/>
+                <field
+					name="filter"
+					type="list"
+					label="Order"
+					description="The filter for the articles"
+					default="choice_personal"
+					>
+                    <option value="choice_personal">Your personal recommendation</option>
+					<option value="choice_liked">Most liked articles</option>
+					<option value="choice_deployed">Most deployed articles</option>
+					<option value="choice_new">New yet popular articles</option>
+					<option	value="choice_random">Random</option>
+				</field>
             </fieldset>
         </fields>
     </config>

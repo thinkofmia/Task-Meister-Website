@@ -20,3 +20,10 @@ require_once dirname(__FILE__) . '/helper.php';//used because our helper functio
 $displayHeader = ModRecommendArticlesHelper::getHeader($params);//invoke helper class method
 $displayText = ModRecommendArticlesHelper::getText($params);//invoke helper class method
 require JModuleHelper::getLayoutPath('mod_taskmeister_recommendarticles');
+
+//Call our recommender
+JPluginHelper::importPlugin('taskmeister','tm_recommender');
+$dispatcher = JDispatcher::getInstance();
+$results2 = $dispatcher->trigger( 'recommendmostLikedArticles', array());
+//Print out most liked articles string
+echo "Most Liked Articles: ". json_encode($results2[0]) ;
