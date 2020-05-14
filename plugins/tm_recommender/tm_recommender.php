@@ -28,8 +28,8 @@ class plgTaskMeisterTM_recommender extends JPlugin
 		 */
         return "Wonderful ".($number*2);
     }
-    /* Function: Most Deployed Articles
-    Recommend most deployed articles followed by likes for a particular user
+    /* Function: Personal Recommended Articles
+    Recommend personal articles that excludes what is already liked/disliked by the user
     Used only for articles module
     Returns a string of recommended articles
      */
