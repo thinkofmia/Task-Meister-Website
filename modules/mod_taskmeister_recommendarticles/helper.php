@@ -40,8 +40,10 @@ class ModRecommendArticlesHelper
             case 'choice_personal':
                 $results = $dispatcher->trigger( 'recommendmostLikedArticles', array());
                 break;
-            case 'choice_random':
             case 'choice_deployed':
+                $results = $dispatcher->trigger( 'recommendmostDeployedArticles', array());
+                break;
+            case 'choice_random':
             case 'choice_new':
                 $results = array("Not implemented yet. Please select another filter. ");
                 break;
