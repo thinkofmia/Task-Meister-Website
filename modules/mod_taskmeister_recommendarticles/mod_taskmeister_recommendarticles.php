@@ -22,8 +22,32 @@ $displayText = ModRecommendArticlesHelper::getText($params);//invoke helper clas
 require JModuleHelper::getLayoutPath('mod_taskmeister_recommendarticles');
 
 //Call our recommender
-JPluginHelper::importPlugin('taskmeister','tm_recommender');
-$dispatcher = JDispatcher::getInstance();
-$results2 = $dispatcher->trigger( 'recommendmostLikedArticles', array());
+$resultsSelected= ModRecommendArticlesHelper::getArticleList($params->get('filter'));
 //Print out most liked articles string
-echo "Most Liked Articles: ". json_encode($results2[0]) ;
+echo $params->get('filter').": ". $resultsSelected ."<br>";
+
+//For debug the entire call
+$choice = 'choice_random';
+$resultsSelected= ModRecommendArticlesHelper::getArticleList($choice);
+//Print out most liked articles string
+echo $choice.": ". $resultsSelected ."<br>";
+
+$choice = 'choice_liked';
+$resultsSelected= ModRecommendArticlesHelper::getArticleList($choice);
+//Print out most liked articles string
+echo $choice.": ". $resultsSelected ."<br>";
+
+$choice = 'choice_personal';
+$resultsSelected= ModRecommendArticlesHelper::getArticleList($choice);
+//Print out most liked articles string
+echo $choice.": ". $resultsSelected ."<br>";
+
+$choice = 'choice_new';
+$resultsSelected= ModRecommendArticlesHelper::getArticleList($choice);
+//Print out most liked articles string
+echo $choice.": ". $resultsSelected ."<br>";
+
+$choice = 'choice_deployed';
+$resultsSelected= ModRecommendArticlesHelper::getArticleList($choice);
+//Print out most liked articles string
+echo $choice.": ". $resultsSelected ."<br>";

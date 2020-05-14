@@ -20,12 +20,34 @@ class ModRecommendArticlesHelper
      *
      * @access public
      */    
-    public static function getText($params)
+    public static function getText($params)//Function to get text from the parameter fields
     {
         return $params->get('customtext');
     }
-    public static function getHeader($params)
+    public static function getHeader($params)//Function to get text from the parameter fields
     {
         return $params->get('customheader');
+    }
+    function getArticleList($params){//Function to get selection from parameter fields
+        //Call our recommender
+        JPluginHelper::importPlugin('taskmeister','tm_recommender');
+        $dispatcher = JDispatcher::getInstance();
+        //Initialize result
+        $results = array("Calculating... ");
+        //Check parameters
+        switch($params){
+            case 'choice_liked':
+            case 'choice_personal':
+                $results = $dispatcher->trigger( 'recommendmostLikedArticles', array());
+                break;
+            case 'choice_random':
+            case 'choice_deployed':
+            case 'choice_new':
+                $results = array("Not implemented yet. Please select another filter. ");
+                break;
+        }
+        
+        //Return string
+        return json_encode($results[0]) ;
     }
 }
