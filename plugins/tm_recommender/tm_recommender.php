@@ -33,7 +33,66 @@ class plgTaskMeisterTM_recommender extends JPlugin
     Used only for articles module
     Returns a string of recommended articles
      */
-    function recommendmostDeployedArticles(){//WIP
+    function recommendPersonalArticles(){
+        $db = Factory::getDbo();//Gets database
+        $me = Factory::getUser();//Gets user
+        $userid = $me->id;
+        //Get external user table (custom table) To find out list of liked, deployed and disliked articles
+        $query = $db->getQuery(true);
+        $query->select($db->quoteName(array('es_userid','es_pageliked','es_pagedisliked','es_pagedeployed')))
+            ->from($db->quoteName('#__customtables_table_userstats'))
+            ->where($db->quoteName('es_userid') . ' = ' . $userid);
+        $db->setQuery($query);
+        $results_ext = $db->loadAssocList();
+        //Save information into a list
+        foreach ($results_ext as $row){
+            if ($row['es_userid']==$userid){//Just to be sure if user id is same
+                $likedlist = json_decode($row['es_pageliked']);
+                $blacklist = json_decode($row['es_pagedisliked']);
+                $deployedlist = json_decode($row['es_pagedeployed']);
+            }
+        }
+        //Get article info database
+        $query2 = $db->getQuery(true);
+        $query2->select($db->quoteName(array('es_articleid','es_totallikes','es_totaldislikes','es_totaldeployed')))
+            ->from($db->quoteName('#__customtables_table_articlestats'));
+        $db->setQuery($query2);
+        $results_art = $db->loadAssocList();
+        //Set up weightage list of articles
+        $weighArticlesList = array();
+        //Weigh articles
+        foreach ($results_art as $row){
+            if (in_array($row['es_articleid'],$blacklist)||in_array($row['es_articleid'],$likedlist)){//If blacklisted or liked already
+                //Do nothing
+            }
+            else{//If articles collected is less than 10
+                //Initializes vars
+                $weightage = 0;
+                //Store weightage
+                $weighArticlesList[$row['es_articleid']]= $weightage + $row['es_totallikes'] - $row['es_totaldislikes'] + $row['es_totaldeployed']; 
+            }
+        }
+        arsort($weighArticlesList);//Sort articles in descending order
+        //Return articles
+        $finalList = array();
+        $count = 0;
+        foreach ($weighArticlesList as $key => $val){
+            if ($count<10){
+                array_push($finalList, $key);
+                $count+=1;
+            }
+        }
+        $weighArticlesList_str = json_encode($finalList);
+        return $weighArticlesList_str;
+        
+        
+    }
+    /* Function: Most Deployed Articles
+    Recommend most deployed articles followed by likes for a particular user
+    Used only for articles module
+    Returns a string of recommended articles
+     */
+    function recommendmostDeployedArticles(){
         $db = Factory::getDbo();//Gets database
         $me = Factory::getUser();//Gets user
         $userid = $me->id;
@@ -75,7 +134,7 @@ class plgTaskMeisterTM_recommender extends JPlugin
             }
         }
         $mostDeployedArticles_str = json_encode($mostDeployedArticles);
-        return $mostDeployedArticles_str;////WIP Currently displaying three lists
+        return $mostDeployedArticles_str;
     }
     /* Function: Most Liked Articles
     Recommend most liked articles for a particular user
@@ -124,7 +183,7 @@ class plgTaskMeisterTM_recommender extends JPlugin
             }
         }
         $mostLikedArticles_str = json_encode($mostLikedArticles);
-        return $mostLikedArticles_str;////WIP Currently displaying three lists
+        return $mostLikedArticles_str;
     }
 
     /* Function: Create List

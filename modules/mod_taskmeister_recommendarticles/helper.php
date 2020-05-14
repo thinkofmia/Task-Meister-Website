@@ -37,8 +37,10 @@ class ModRecommendArticlesHelper
         //Check parameters
         switch($params){
             case 'choice_liked':
-            case 'choice_personal':
                 $results = $dispatcher->trigger( 'recommendmostLikedArticles', array());
+                break;
+            case 'choice_personal':
+                $results = $dispatcher->trigger( 'recommendPersonalArticles', array());
                 break;
             case 'choice_deployed':
                 $results = $dispatcher->trigger( 'recommendmostDeployedArticles', array());
