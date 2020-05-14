@@ -24,30 +24,14 @@ require JModuleHelper::getLayoutPath('mod_taskmeister_recommendarticles');
 //Call our recommender
 $resultsSelected= ModRecommendArticlesHelper::getArticleList($params->get('filter'));
 //Print out most liked articles string
-echo $params->get('filter').": ". $resultsSelected ."<br>";
+echo "Selected - ". $params->get('filter').": ". $resultsSelected ."<br>";
 
-//For debug the entire call
-$choice = 'choice_random';
-$resultsSelected= ModRecommendArticlesHelper::getArticleList($choice);
-//Print out most liked articles string
-echo $choice.": ". $resultsSelected ."<br>";
+$selection_arr = array('choice_random','choice_liked','choice_personal','choice_new','choice_deployed');
 
-$choice = 'choice_liked';
-$resultsSelected= ModRecommendArticlesHelper::getArticleList($choice);
-//Print out most liked articles string
-echo $choice.": ". $resultsSelected ."<br>";
-
-$choice = 'choice_personal';
-$resultsSelected= ModRecommendArticlesHelper::getArticleList($choice);
-//Print out most liked articles string
-echo $choice.": ". $resultsSelected ."<br>";
-
-$choice = 'choice_new';
-$resultsSelected= ModRecommendArticlesHelper::getArticleList($choice);
-//Print out most liked articles string
-echo $choice.": ". $resultsSelected ."<br>";
-
-$choice = 'choice_deployed';
-$resultsSelected= ModRecommendArticlesHelper::getArticleList($choice);
-//Print out most liked articles string
-echo $choice.": ". $resultsSelected ."<br>";
+foreach ($selection_arr as $row){//Debug purposes, display rest
+    if ($row != $params->get('filter')){
+        $resultsSelected= ModRecommendArticlesHelper::getArticleList($row);
+        //Print out most liked articles string
+        echo $row.": ". $resultsSelected ."<br>";
+    }
+}
