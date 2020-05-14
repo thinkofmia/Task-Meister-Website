@@ -45,8 +45,10 @@ class ModRecommendArticlesHelper
             case 'choice_deployed':
                 $results = $dispatcher->trigger( 'recommendmostDeployedArticles', array());
                 break;
-            case 'choice_random':
-            case 'choice_new':
+            case 'choice_untouched':
+                $results = $dispatcher->trigger( 'recommendUntouchedArticles', array());
+                break;
+            default:
                 $results = array("Not implemented yet. Please select another filter. ");
                 break;
         }

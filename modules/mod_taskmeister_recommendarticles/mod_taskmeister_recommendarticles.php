@@ -26,7 +26,7 @@ $resultsSelected= ModRecommendArticlesHelper::getArticleList($params->get('filte
 //Print out most liked articles string
 echo "Selected - ". $params->get('filter').": ". $resultsSelected ."<br>";
 
-$selection_arr = array('choice_random','choice_liked','choice_personal','choice_new','choice_deployed');
+$selection_arr = array('choice_random','choice_liked','choice_personal','choice_untouched','choice_deployed');
 
 foreach ($selection_arr as $row){//Debug purposes, display rest
     if ($row != $params->get('filter')){

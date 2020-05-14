@@ -43,7 +43,7 @@
                     <option value="choice_personal">Your personal recommendation</option>
 					<option value="choice_liked">Most liked articles</option>
 					<option value="choice_deployed">Most deployed articles</option>
-					<option value="choice_new">New yet popular articles</option>
+					<option value="choice_untouched">Something you have not tried before</option>
 					<option	value="choice_random">Random</option>
 				</field>
             </fieldset>
