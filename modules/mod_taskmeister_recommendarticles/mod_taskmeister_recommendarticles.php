@@ -27,7 +27,7 @@ $recommendedContents = ModRecommendArticlesHelper::getArticles($resultsSelected)
 require JModuleHelper::getLayoutPath('mod_taskmeister_recommendarticles');//Calls out default.php
 
 //Debug purposes, display rest of the possible rows
-$selection_arr = array('choice_random','choice_liked','choice_personal','choice_untouched','choice_deployed');
+/*$selection_arr = array('choice_random','choice_liked','choice_personal','choice_untouched','choice_deployed');
 
 foreach ($selection_arr as $row){
     if ($row != $params->get('filter')){
@@ -35,4 +35,4 @@ foreach ($selection_arr as $row){
         //Print out most liked articles string
         echo $row.": ". $resultsSelected ."<br>";
     }
-}
+}*/

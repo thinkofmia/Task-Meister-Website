@@ -16,7 +16,6 @@ defined('_JEXEC') or die;
 
 <?php 
 echo "Selected - ". $params->get('filter').": ". $resultsSelected ."<br>";
-//echo "Selected - Article Contents: ". $recommendedContents ."<br>";
 $list2 = json_decode($recommendedContents);
 
 ?>
