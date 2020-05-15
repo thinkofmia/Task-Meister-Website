@@ -130,7 +130,7 @@ class plgTaskMeisterTM_recommender extends JPlugin
             }
             else if ($count<10){//If articles collected is less than 10
                 $count += 1;
-                array_push($untouchedArticles,$row['es_articleid']);
+                array_push($untouchedArticles,intval($row['es_articleid']));
             }
         }
         $untouchedArticles_str = json_encode($untouchedArticles);
@@ -179,7 +179,7 @@ class plgTaskMeisterTM_recommender extends JPlugin
             }
             else if ($count<10){//If articles collected is less than 10
                 $count += 1;
-                array_push($mostDeployedArticles,$row['es_articleid']);
+                array_push($mostDeployedArticles,intval($row['es_articleid']));
             }
         }
         $mostDeployedArticles_str = json_encode($mostDeployedArticles);
@@ -228,7 +228,7 @@ class plgTaskMeisterTM_recommender extends JPlugin
             }
             else if ($count<10){//If articles collected is less than 10
                 $count += 1;
-                array_push($mostLikedArticles,$row['es_articleid']);
+                array_push($mostLikedArticles,intval($row['es_articleid']));
             }
         }
         $mostLikedArticles_str = json_encode($mostLikedArticles);
