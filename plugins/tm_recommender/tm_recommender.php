@@ -108,7 +108,7 @@ class plgTaskMeisterTM_recommender extends JPlugin
             }
         }
         $weighArticlesList_str = json_encode($finalList);
-        return $weighArticlesList;
+        return $finalList;
     }
 
     /* Function: Recommend Untouched Articles
