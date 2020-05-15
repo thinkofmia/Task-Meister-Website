@@ -30,7 +30,7 @@ $list2 = json_decode($recommendedContents);
     <?php foreach ($list2 as $key => $value) : ?>
     <a href="?option=com_content&view=article&id=<?php echo $key; ?>" itemprop="url">
         <div class="article">
-          <img src="<?php echo json_encode($value[1]['image_intro']); ?>" width="100%" height="100%" />
+          <img src="<?php echo json_decode($value[1])->image_intro; ?>" width="100%" height="100%" />
           <p><?php echo json_encode($value[0]); ?></p>
         </div>
     </a>
