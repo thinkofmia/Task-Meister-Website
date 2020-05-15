@@ -19,16 +19,17 @@ require_once dirname(__FILE__) . '/helper.php';//used because our helper functio
 
 $displayHeader = ModRecommendArticlesHelper::getHeader($params);//invoke helper class method
 $displayText = ModRecommendArticlesHelper::getText($params);//invoke helper class method
-require JModuleHelper::getLayoutPath('mod_taskmeister_recommendarticles');
 
 //Call our recommender
 $resultsSelected= ModRecommendArticlesHelper::getArticleList($params->get('filter'));
-//Print out most liked articles string
-echo "Selected - ". $params->get('filter').": ". $resultsSelected ."<br>";
+$recommendedContents = ModRecommendArticlesHelper::getArticles($resultsSelected);
 
+require JModuleHelper::getLayoutPath('mod_taskmeister_recommendarticles');//Calls out default.php
+
+//Debug purposes, display rest of the possible rows
 $selection_arr = array('choice_random','choice_liked','choice_personal','choice_untouched','choice_deployed');
 
-foreach ($selection_arr as $row){//Debug purposes, display rest
+foreach ($selection_arr as $row){
     if ($row != $params->get('filter')){
         $resultsSelected= ModRecommendArticlesHelper::getArticleList($row);
         //Print out most liked articles string

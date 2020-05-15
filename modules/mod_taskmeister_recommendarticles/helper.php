@@ -28,6 +28,15 @@ class ModRecommendArticlesHelper
     {
         return $params->get('customheader');
     }
+    function getArticles($list){
+        //Call our recommender
+        JPluginHelper::importPlugin('taskmeister','tm_recommender');
+        $dispatcher = JDispatcher::getInstance();
+        $results = $dispatcher->trigger( 'getArticleContents', array($list));
+        //Return string
+        return json_encode($results) ;
+        
+    }
     function getArticleList($params){//Function to get selection from parameter fields
         //Call our recommender
         JPluginHelper::importPlugin('taskmeister','tm_recommender');

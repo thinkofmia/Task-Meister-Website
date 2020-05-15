@@ -28,6 +28,31 @@ class plgTaskMeisterTM_recommender extends JPlugin
 		 */
         return "Wonderful ".($number*2);
     }
+    /* Function: Get Article Contents
+    Gets all the selected articles to display from a list
+    Can be used after having a list of recommended article
+    */
+    function getArticleContents($list_str){//Parameter is a string ver of the list
+        //Convert the string to a list
+        $list = json_decode($list_str);
+        //Set up an array to store all the information into a collection
+        $displayCollection = array();
+        //Gets Database
+        $db = Factory::getDbo();
+        //Get article info database
+        $query = $db->getQuery(true);
+        $query->select($db->quoteName(array('id','title','images')))
+            ->from($db->quoteName('#__content'));
+        $db->setQuery($query);
+        $results_art = $db->loadAssocList();
+        //For loop
+        foreach ($results_art as $row){
+            if(in_array($row['id'], $list)){
+                $displayCollection[$row['id']] = array($row['title'],$row['images']);
+            }
+        }
+        return $displayCollection;
+    }
     /* Function: Personal Recommended Articles
     Recommend personal articles that excludes what is already liked/disliked by the user
     Used only for articles module
@@ -83,7 +108,7 @@ class plgTaskMeisterTM_recommender extends JPlugin
             }
         }
         $weighArticlesList_str = json_encode($finalList);
-        return $weighArticlesList_str;
+        return $weighArticlesList;
     }
 
     /* Function: Recommend Untouched Articles
@@ -134,7 +159,7 @@ class plgTaskMeisterTM_recommender extends JPlugin
             }
         }
         $untouchedArticles_str = json_encode($untouchedArticles);
-        return $untouchedArticles_str;
+        return $untouchedArticles;
     }
     /* Function: Most Deployed Articles
     Recommend most deployed articles followed by likes for a particular user
@@ -183,7 +208,7 @@ class plgTaskMeisterTM_recommender extends JPlugin
             }
         }
         $mostDeployedArticles_str = json_encode($mostDeployedArticles);
-        return $mostDeployedArticles_str;
+        return $mostDeployedArticles;
     }
     /* Function: Most Liked Articles
     Recommend most liked articles for a particular user
@@ -232,7 +257,7 @@ class plgTaskMeisterTM_recommender extends JPlugin
             }
         }
         $mostLikedArticles_str = json_encode($mostLikedArticles);
-        return $mostLikedArticles_str;
+        return $mostLikedArticles;
     }
 
     /* Function: Create List
