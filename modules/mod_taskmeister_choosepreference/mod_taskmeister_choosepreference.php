@@ -21,4 +21,8 @@ $displayHeader = ModChoosePreferenceHelper::getHeader($params);//invoke helper c
 $displayText = ModChoosePreferenceHelper::getText($params);//invoke helper class method
 require JModuleHelper::getLayoutPath('mod_customtext');
 $tagList = ModChoosePreferenceHelper::findTags();
-echo "List of available tags: " . $tagList;
+//Display debug
+echo "List of available tags: ";
+foreach ($tagList as $key => $value){
+    echo $key." used ".$value." times!<br>";
+}

@@ -31,7 +31,22 @@ class plgTaskMeisterTM_recommender extends JPlugin
     /* Function: Get list of tags that are currently in used.
     */
     function getTagList(){
-        return array("Testing");
+        //Gets Database
+        $db = Factory::getDbo();
+        //Get tags info database
+        $query = $db->getQuery(true);
+        $query->select($db->quoteName(array('*')))
+            ->from($db->quoteName('#__tags'));
+        $db->setQuery($query);
+        $results_tags = $db->loadAssocList();
+        //Create list
+        $tagList = array();
+        //For loop to populate tag list
+        foreach($results_tags as $row){
+            $tagList[$row['title']] = $row['hits'];
+        }
+        arsort($tagList);
+        return $tagList;
     }
     /* Function: Get Article Contents
     Gets all the selected articles to display from a list

@@ -35,6 +35,12 @@ class ModChoosePreferenceHelper
         $dispatcher = JDispatcher::getInstance();
         $results = $dispatcher->trigger('getTagList', array());
         //Return string
-        return json_encode($results[0]) ;
+        return $results[0] ;
+    }
+    function displayTags($list){//Display tags from list_str
+        foreach ($list as $key => $value){
+            echo $key." used ".$value." times!<br>";
+        }
+        return true;
     }
 }
