@@ -34,7 +34,7 @@ class ModRecommendArticlesHelper
         $dispatcher = JDispatcher::getInstance();
         $results = $dispatcher->trigger( 'getArticleContents', array($list));
         //Return string
-        return json_encode($results) ;
+        return json_encode($results[0]) ;
         
     }
     function getArticleList($params){//Function to get selection from parameter fields
