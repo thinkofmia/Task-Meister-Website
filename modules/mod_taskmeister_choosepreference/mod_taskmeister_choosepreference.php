@@ -20,3 +20,5 @@ require_once dirname(__FILE__) . '/helper.php';//used because our helper functio
 $displayHeader = ModChoosePreferenceHelper::getHeader($params);//invoke helper class method
 $displayText = ModChoosePreferenceHelper::getText($params);//invoke helper class method
 require JModuleHelper::getLayoutPath('mod_customtext');
+$tagList = ModChoosePreferenceHelper::findTags();
+echo "List of available tags: " . $tagList;

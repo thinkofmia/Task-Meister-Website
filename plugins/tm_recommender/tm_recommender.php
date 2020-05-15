@@ -28,6 +28,11 @@ class plgTaskMeisterTM_recommender extends JPlugin
 		 */
         return "Wonderful ".($number*2);
     }
+    /* Function: Get list of tags that are currently in used.
+    */
+    function getTagList(){
+        return array("Testing");
+    }
     /* Function: Get Article Contents
     Gets all the selected articles to display from a list
     Can be used after having a list of recommended article
