@@ -43,4 +43,10 @@ class ModChoosePreferenceHelper
         }
         return true;
     }
+    function displayTags_String($list){//Display tags from list_str
+        foreach ($list as $key => $value){
+            echo $key." used ".$value." times!<br>";
+        }
+        return true;
+    }
 }

@@ -19,10 +19,11 @@ require_once dirname(__FILE__) . '/helper.php';//used because our helper functio
 
 $displayHeader = ModChoosePreferenceHelper::getHeader($params);//invoke helper class method
 $displayText = ModChoosePreferenceHelper::getText($params);//invoke helper class method
-require JModuleHelper::getLayoutPath('mod_customtext');
+
 $tagList = ModChoosePreferenceHelper::findTags();
 //Display debug
-echo "List of available tags: ";
+/*echo "List of available tags: ";
 foreach ($tagList as $key => $value){
     echo $key." used ".$value." times!<br>";
-}
+}*/
+require JModuleHelper::getLayoutPath('mod_taskmeister_choosepreference');

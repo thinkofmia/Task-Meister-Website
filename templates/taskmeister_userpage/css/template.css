@@ -157,4 +157,31 @@ table th, table td {
   text-align: center;
 }
 
+.preferenceList {
+  width: 250%;
+  height: 100%;
+  display: inline-block;
+  text-align: center;
+  position: absolute;
+  right: -120%;
+}
+
+.preferenceBox {
+  width: 100px;
+  height: 100px;
+  position: relative;
+  display: inline-flex;
+  padding: 5px;
+}
+.preferenceBox p {
+  position: absolute;
+  z-index: 10;
+  bottom: 0px;
+  background-color: darkgray;
+  text-align: center;
+  width: 100px;
+  word-wrap: wrap;
+  font-size: smaller;
+}
+
 /*# sourceMappingURL=template.css.map */
