@@ -25,5 +25,5 @@ $tagList = ModChoosePreferenceHelper::findTags();
 /*echo "List of available tags: ";
 foreach ($tagList as $key => $value){
     echo $key." used ".$value." times!<br>";
-}*/
+}*/ 
 require JModuleHelper::getLayoutPath('mod_taskmeister_choosepreference');

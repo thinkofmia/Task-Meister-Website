@@ -173,14 +173,27 @@ table th, table td {
   right: -120%;
 }
 
-.preferenceBox {
+.userPreferred {
+  background-color: green;
+}
+
+.userNotPreferred {
+  background-color: red;
+}
+
+.userMayTry {
+  background-color: goldenrod;
+}
+
+.preferenceBox, .userPreferred, .userNotPreferred, .userMayTry {
   width: 100px;
   height: 100px;
   position: relative;
   display: inline-flex;
   padding: 5px;
+  cursor: pointer;
 }
-.preferenceBox p {
+.preferenceBox p, .userPreferred p, .userNotPreferred p, .userMayTry p {
   position: absolute;
   z-index: 10;
   bottom: -10%;

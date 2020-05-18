@@ -186,12 +186,29 @@ table {
     right: -120%;
 }
  
+.userPreferred {
+    @extend .preferenceBox; 
+    background-color: green;
+}
+ 
+.userNotPreferred {
+    @extend .preferenceBox;
+    background-color: red;       
+}
+
+.userMayTry {
+    @extend .preferenceBox;
+    background-color: goldenrod;       
+}
+
 .preferenceBox {
     width: 100px;
     height: 100px;
     position: relative;
     display: inline-flex;
     padding: 5px;
+    cursor: pointer;
+
     p {
         position: absolute;
         z-index: 10;
