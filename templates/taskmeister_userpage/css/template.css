@@ -183,7 +183,7 @@ table th, table td {
 .preferenceBox p {
   position: absolute;
   z-index: 10;
-  bottom: 0px;
+  bottom: -10%;
   background-color: darkgray;
   text-align: center;
   width: 100px;
