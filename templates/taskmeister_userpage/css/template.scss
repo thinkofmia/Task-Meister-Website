@@ -170,6 +170,13 @@ table {
 
 }
 
+//For the User Preference Mod
+.preferenceOptions {
+    position: absolute;
+    z-index: 1;
+    right: 110%;
+    width: 90%;
+}
 .preferenceList {
     width: 250%;
     height: 100%;
