@@ -358,7 +358,7 @@ class plgTaskMeisterTM_recommender extends JPlugin
             //Store tags id in array
             $tagsID_arr = array();
             foreach ($results_tagsID as $row){
-                array_push($tagsID_arr, $row['tag_id']);
+                array_push($tagsID_arr, intval($row['tag_id']));
             }
             //Get tags info database
             $query = $db->getQuery(true);
@@ -370,11 +370,10 @@ class plgTaskMeisterTM_recommender extends JPlugin
             $tagList = array();
             //For loop to populate tag list
             foreach($results_tags as $row){
-                if (in_array($tagID_arr,$row['tag_id']))
+                if (in_array(intval($row['id']), $tagsID_arr))
                 array_push($tagList, $row['title']);
             }
             $tagList_json = json_encode($tagList);
-            //Update total if not same
             if ($tagList_json != $row2['es_tags'] ||$totalLikes!=$row2['es_totallikes']||$totalDislikes!=$row2['es_totaldislikes']||$totalDeployed!=$row2['es_totaldeployed']){
                 // Create and populate an object.
                 $articleInfo = new stdClass();
