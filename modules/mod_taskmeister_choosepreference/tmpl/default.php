@@ -11,7 +11,19 @@ defined('_JEXEC') or die;
     <?php// foreach ($tagList as $key => $value) : ?>
       //  userPreferenceList_JS.push("<?php echo $key; ?>");
     <?php //endforeach; ?>
-    
+
+    //Javascript function to update lists
+    updateLists = function(){
+        //Get Elements
+        var list1 = document.getElementById("userPreferredList");
+        var list2 = document.getElementById("userNotPreferredList");
+        var list3 = document.getElementById("userMayTryList");
+        //Set contents
+        list1.innerHTML = userPreferredList;
+        list2.innerHTML = userNotPreferredList;
+        list3.innerHTML = userMayTryList;
+    }
+
     //Javascript function to select preference
     togglePreference = function(tag){
         var element = document.getElementById(tag); //Set selected element
@@ -21,6 +33,7 @@ defined('_JEXEC') or die;
             //Change classes
             element.classList.add("userNotPreferred");
             element.classList.remove("userPreferred");
+            element.classList.remove("userMayTry");
             console.log("Added "+tag+" to not preferred list! ");
         }
         else if (userNotPreferredList.includes(tag)){//If exists inside not preferred list
@@ -29,6 +42,7 @@ defined('_JEXEC') or die;
             //Change classes
             element.classList.add("userMayTry");
             element.classList.remove("userNotPreferred");
+            element.classList.remove("userPreferred");
             console.log("Added "+tag+" to may try list! ");
         }
         else if (userMayTryList.includes(tag)){//If exists inside may try list
@@ -36,14 +50,18 @@ defined('_JEXEC') or die;
             console.log("Remove "+tag+" from lists! ");
             //Change Classes
             element.classList.remove("userMayTry");
+            element.classList.remove("userPreferred");
+            element.classList.remove("userNotPreferred");
         }
         else {//If not in any list
             userPreferredList.push(tag);
             console.log("Added "+tag+" to preferred list! ");
             //Change classes
             element.classList.add("userPreferred");
+            element.classList.remove("userNotPreferred");
+            element.classList.remove("userMayTry");
         }
-
+        updateLists();//Update list display
     }
 </script>
 
@@ -54,6 +72,9 @@ defined('_JEXEC') or die;
     <?php if ($displayText) : ?>
         <?php echo $displayText; ?>
     <?php endif; ?>
+    <br>List of User Preferred: [<span id = "userPreferredList"></span>]
+    <br>List of User Not Preferred: [<span id = "userNotPreferredList"></span>]
+    <br>List of User May Try: [<span id = "userMayTryList"></span>]
 </div>
 
 <div class="preferenceList">
