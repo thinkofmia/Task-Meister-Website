@@ -103,7 +103,7 @@ class plgTaskMeisterTM_recommender extends JPlugin
     Used only for articles module
     Returns a string of recommended articles
      */
-    function recommendPersonalArticles(){
+    function recommendPersonalArticles($mode){
         $db = Factory::getDbo();//Gets database
         $me = Factory::getUser();//Gets user
         $userid = $me->id;
@@ -125,7 +125,7 @@ class plgTaskMeisterTM_recommender extends JPlugin
         }
         //Get article info database
         $query2 = $db->getQuery(true);
-        $query2->select($db->quoteName(array('es_articleid','es_totallikes','es_totaldislikes','es_totaldeployed')))
+        $query2->select($db->quoteName(array('es_articleid','es_totallikes','es_totaldislikes','es_totaldeployed','es_tags')))
             ->from($db->quoteName('#__customtables_table_articlestats'));
         $db->setQuery($query2);
         $results_art = $db->loadAssocList();
@@ -133,14 +133,45 @@ class plgTaskMeisterTM_recommender extends JPlugin
         $weighArticlesList = array();
         //Weigh articles
         foreach ($results_art as $row){
-            if (in_array($row['es_articleid'],$blacklist)||in_array($row['es_articleid'],$likedlist)){//If blacklisted or liked already
+            if (in_array($row['es_articleid'],$blacklist)){//If blacklisted or liked already
                 //Do nothing
             }
             else{//If articles collected is less than 10
                 //Initializes vars
                 $weightage = 0;
+                //Weightage for tags
+                $articleTags = json_decode($row['es_tags']);
+                foreach ($preferencelist as $key => $value){
+                    if (in_array($key,$articleTags)){
+                        switch($value){
+                            default://generic
+                                $weightage += 0;
+                            case 0://If not preferred
+                                $weightage -= 100;
+                            case 1://May Try
+                                $weightage += 5;
+                            case 2://Preferred
+                                $weightage += 10;
+                        }
+                    }
+                }
+                //Modifiers
+                $deployedModifier = 1;
+                $likedModifier = 1;
+                $touchBeforeModifier = 0;
+                switch($mode){
+                    case "Untouched":
+                        if(in_array($row['es_articleid'],$likedlist)||in_array($row['es_articleid'],$deployedlist))
+                            $touchBeforeModifier = 99999;
+                    case "Deployed":
+                        $deployedModifier = 20; 
+                    case "Likes":
+                        $likedModifier = 20; 
+                    default:
+                         
+                }
                 //Store weightage
-                $weighArticlesList[$row['es_articleid']]= $weightage + $row['es_totallikes'] - $row['es_totaldislikes'] + $row['es_totaldeployed']; 
+                $weighArticlesList[$row['es_articleid']] = $weightage - $touchBeforeModifier + $likedModifier*($row['es_totallikes'] - $row['es_totaldislikes']) + $row['es_totaldeployed']*$deployedModifier; 
             }
         }
         arsort($weighArticlesList);//Sort articles in descending order
@@ -157,155 +188,7 @@ class plgTaskMeisterTM_recommender extends JPlugin
         return $finalList;
     }
 
-    /* Function: Recommend Untouched Articles
-    Recommend untouched articles for a particular user
-    Used only for articles module
-    Returns a string of recommended articles
-     */
-    function recommendUntouchedArticles(){
-        $db = Factory::getDbo();//Gets database
-        $me = Factory::getUser();//Gets user
-        $userid = $me->id;
-        //Get external user table (custom table) To find out list of liked, deployed and disliked articles
-        $query = $db->getQuery(true);
-        $query->select($db->quoteName(array('es_userid','es_pageliked','es_pagedisliked','es_pagedeployed')))
-            ->from($db->quoteName('#__customtables_table_userstats'))
-            ->where($db->quoteName('es_userid') . ' = ' . $userid);
-        $db->setQuery($query);
-        $results_ext = $db->loadAssocList();
-
-        //Save information into a list
-        foreach ($results_ext as $row){
-            if ($row['es_userid']==$userid){//Just to be sure if user id is same
-                $likedlist = json_decode($row['es_pageliked']);
-                $blacklist = json_decode($row['es_pagedisliked']);
-                $deployedlist = json_decode($row['es_pagedeployed']);
-            }
-            
-        }
-        //Get article info database
-        $query2 = $db->getQuery(true);
-        $query2->select($db->quoteName(array('es_articleid','es_totallikes','es_totaldislikes')))
-            ->from($db->quoteName('#__customtables_table_articlestats'))
-            ->order($db->quoteName('es_totallikes') . ' DESC');
-        $db->setQuery($query2);
-        $results_art = $db->loadAssocList();
-        
-        //Set up list of untouched articles to recommend
-        $untouchedArticles = array();
-        $count = 0;//initialize count
-        foreach ($results_art as $row){
-            $articleID = $row['es_articleid'];
-            if (in_array($articleID,$blacklist)||in_array($articleID,$likedList)||in_array($articleID,$deployedList)){
-                //Exclude if already liked/disliked/deployed
-            }
-            else if ($count<10){//If articles collected is less than 10
-                $count += 1;
-                array_push($untouchedArticles,intval($row['es_articleid']));
-            }
-        }
-        $untouchedArticles_str = json_encode($untouchedArticles);
-        return $untouchedArticles;
-    }
-    /* Function: Most Deployed Articles
-    Recommend most deployed articles followed by likes for a particular user
-    Used only for articles module
-    Returns a string of recommended articles
-     */
-    function recommendmostDeployedArticles(){
-        $db = Factory::getDbo();//Gets database
-        $me = Factory::getUser();//Gets user
-        $userid = $me->id;
-        //Get external user table (custom table) To find out list of liked, deployed and disliked articles
-        $query = $db->getQuery(true);
-        $query->select($db->quoteName(array('es_userid','es_pageliked','es_pagedisliked','es_pagedeployed')))
-            ->from($db->quoteName('#__customtables_table_userstats'))
-            ->where($db->quoteName('es_userid') . ' = ' . $userid);
-        $db->setQuery($query);
-        $results_ext = $db->loadAssocList();
-
-        //Save information into a list
-        foreach ($results_ext as $row){
-            if ($row['es_userid']==$userid){//Just to be sure if user id is same
-                $likedlist = json_decode($row['es_pageliked']);
-                $blacklist = json_decode($row['es_pagedisliked']);
-                $deployedlist = json_decode($row['es_pagedeployed']);
-            }
-        }
-        
-        //Get article info database
-        $query2 = $db->getQuery(true);
-        $query2->select($db->quoteName(array('es_articleid','es_totallikes','es_totaldislikes','es_totaldeployed')))
-            ->from($db->quoteName('#__customtables_table_articlestats'))
-            ->order($db->quoteName('es_totaldeployed') . ' DESC');
-        $db->setQuery($query2);
-        $results_art = $db->loadAssocList();
-        
-        //Set up list of most deployed articles to recommended
-        $mostDeployedArticles = array();
-        $count = 0;//initialize count
-        foreach ($results_art as $row){
-            if (in_array($row['es_articleid'],$blacklist)){//If blacklisted already
-                //Do nothing
-            }
-            else if ($count<10){//If articles collected is less than 10
-                $count += 1;
-                array_push($mostDeployedArticles,intval($row['es_articleid']));
-            }
-        }
-        $mostDeployedArticles_str = json_encode($mostDeployedArticles);
-        return $mostDeployedArticles;
-    }
-    /* Function: Most Liked Articles
-    Recommend most liked articles for a particular user
-    Used only for articles module
-    Returns a string of recommended articles
-     */
-    function recommendmostLikedArticles(){//WIP
-        $db = Factory::getDbo();//Gets database
-        $me = Factory::getUser();//Gets user
-        $userid = $me->id;
-        //Get external user table (custom table) To find out list of liked, deployed and disliked articles
-        $query = $db->getQuery(true);
-        $query->select($db->quoteName(array('es_userid','es_pageliked','es_pagedisliked','es_pagedeployed')))
-            ->from($db->quoteName('#__customtables_table_userstats'))
-            ->where($db->quoteName('es_userid') . ' = ' . $userid);
-        $db->setQuery($query);
-        $results_ext = $db->loadAssocList();
-
-        //Save information into a list
-        foreach ($results_ext as $row){
-            if ($row['es_userid']==$userid){//Just to be sure if user id is same
-                $likedlist = json_decode($row['es_pageliked']);
-                $blacklist = json_decode($row['es_pagedisliked']);
-                $deployedlist = json_decode($row['es_pagedeployed']);
-            }
-            
-        }
-        //Get article info database
-        $query2 = $db->getQuery(true);
-        $query2->select($db->quoteName(array('es_articleid','es_totallikes','es_totaldislikes')))
-            ->from($db->quoteName('#__customtables_table_articlestats'))
-            ->order($db->quoteName('es_totallikes') . ' DESC');
-        $db->setQuery($query2);
-        $results_art = $db->loadAssocList();
-        
-        //Set up list of most liked articles recommended
-        $mostLikedArticles = array();
-        $count = 0;//initialize count
-        foreach ($results_art as $row){
-            if (in_array($row['es_articleid'],$blacklist)){
-
-            }
-            else if ($count<10){//If articles collected is less than 10
-                $count += 1;
-                array_push($mostLikedArticles,intval($row['es_articleid']));
-            }
-        }
-        $mostLikedArticles_str = json_encode($mostLikedArticles);
-        return $mostLikedArticles;
-    }
-
+    
     /* Function: Create List
     This function creates an unordered array from an existing one.
     Can be used anywhere

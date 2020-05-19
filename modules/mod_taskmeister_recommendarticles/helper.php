@@ -46,16 +46,16 @@ class ModRecommendArticlesHelper
         //Check parameters
         switch($params){
             case 'choice_liked':
-                $results = $dispatcher->trigger( 'recommendmostLikedArticles', array());
+                $results = $dispatcher->trigger( 'recommendPersonalArticles', array("Likes"));
                 break;
             case 'choice_personal':
-                $results = $dispatcher->trigger( 'recommendPersonalArticles', array());
+                $results = $dispatcher->trigger( 'recommendPersonalArticles', array("Personal"));
                 break;
             case 'choice_deployed':
-                $results = $dispatcher->trigger( 'recommendmostDeployedArticles', array());
+                $results = $dispatcher->trigger( 'recommendPersonalArticles', array("Deployed"));
                 break;
             case 'choice_untouched':
-                $results = $dispatcher->trigger( 'recommendUntouchedArticles', array());
+                $results = $dispatcher->trigger( 'recommendPersonalArticles', array("Untouched"));
                 break;
             default:
                 $results = array("Not implemented yet. Please select another filter. ");
