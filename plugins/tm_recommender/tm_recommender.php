@@ -29,13 +29,12 @@ class plgTaskMeisterTM_recommender extends JPlugin
         return "Wonderful ".($number*2);
     }
     //Function: Save User Preference
-    function saveUserPreference($preferredList,$notPreferredList,$mayTryList){
+    function saveUserPreference($preferredList, $notPreferredList, $mayTryList){
         //Set database and user
         $db = Factory::getDbo();
         $me = Factory::getUser();
         $userID = $me->id;
         $username = $me->username;
-
         $newPreferenceList = array();
         //Loop items in preferred list
         foreach (json_decode($preferredList) as $row){//2 means preferred
@@ -51,14 +50,11 @@ class plgTaskMeisterTM_recommender extends JPlugin
         $userInfo = new stdClass();
         $userInfo->es_userid = $userID;
         $userInfo->es_userpreference = json_encode($newPreferenceList);
-        
         // Update the object into the article profile table.
         $result = JFactory::getDbo()->updateObject('#__customtables_table_userstats', $userInfo, 'es_userid');
-
         return "Saved!";
     }
-    /* Function: Get list of tags that are currently in used.
-    */
+    /* Function: Get list of tags that are currently in used. */
     function getTagList(){
         //Gets Database
         $db = Factory::getDbo();
@@ -113,7 +109,7 @@ class plgTaskMeisterTM_recommender extends JPlugin
         $userid = $me->id;
         //Get external user table (custom table) To find out list of liked, deployed and disliked articles
         $query = $db->getQuery(true);
-        $query->select($db->quoteName(array('es_userid','es_pageliked','es_pagedisliked','es_pagedeployed')))
+        $query->select($db->quoteName(array('es_userid','es_pageliked','es_pagedisliked','es_pagedeployed','es_userpreference')))
             ->from($db->quoteName('#__customtables_table_userstats'))
             ->where($db->quoteName('es_userid') . ' = ' . $userid);
         $db->setQuery($query);
@@ -124,6 +120,7 @@ class plgTaskMeisterTM_recommender extends JPlugin
                 $likedlist = json_decode($row['es_pageliked']);
                 $blacklist = json_decode($row['es_pagedisliked']);
                 $deployedlist = json_decode($row['es_pagedeployed']);
+                $preferencelist = json_decode($row['es_userpreference']);
             }
         }
         //Get article info database
@@ -351,14 +348,41 @@ class plgTaskMeisterTM_recommender extends JPlugin
             $totalLikes = $results[0][0];
             $totalDislikes = $results[0][1];
             $totalDeployed = sizeof(json_decode($row2['es_deployed']));
+            //Find tags map DB
+            $query = $db->getQuery(true);
+            $query->select($db->quoteName(array('a.*')))
+                ->from($db->quoteName('#__contentitem_tag_map','a'))
+                ->where($db->quoteName('content_item_id') . ' = ' . $row2['es_articleid']);
+            $db->setQuery($query);
+            $results_tagsID = $db->loadAssocList();
+            //Store tags id in array
+            $tagsID_arr = array();
+            foreach ($results_tagsID as $row){
+                array_push($tagsID_arr, $row['tag_id']);
+            }
+            //Get tags info database
+            $query = $db->getQuery(true);
+            $query->select($db->quoteName(array('*')))
+                ->from($db->quoteName('#__tags'));
+            $db->setQuery($query);
+            $results_tags = $db->loadAssocList();
+            //Create list
+            $tagList = array();
+            //For loop to populate tag list
+            foreach($results_tags as $row){
+                if (in_array($tagID_arr,$row['tag_id']))
+                array_push($tagList, $row['title']);
+            }
+            $tagList_json = json_encode($tagList);
             //Update total if not same
-            if ($totalLikes!=$row2['es_totallikes']||$totalDislikes!=$row2['es_totaldislikes']||$totalDeployed!=$row2['es_totaldeployed']){
+            if ($tagList_json != $row2['es_tags'] ||$totalLikes!=$row2['es_totallikes']||$totalDislikes!=$row2['es_totaldislikes']||$totalDeployed!=$row2['es_totaldeployed']){
                 // Create and populate an object.
                 $articleInfo = new stdClass();
                 $articleInfo->es_articleid = $row2['es_articleid'];
                 $articleInfo->es_totallikes = $totalLikes;
                 $articleInfo->es_totaldislikes = $totalDislikes;
                 $articleInfo->es_totaldeployed = $totalDeployed;
+                $articleInfo->es_tags = $tagList_json;
                     
                 // Update the object into the article profile table.
                 $result = JFactory::getDbo()->updateObject('#__customtables_table_articlestats', $articleInfo, 'es_articleid');
@@ -446,7 +470,7 @@ class plgTaskMeisterTM_recommender extends JPlugin
                 if (isset($row['es_pagedisliked'])) $dislikedList = $this->createList($row['es_pagedisliked']);
                 else $dislikedList = "[]";
                 //For user preference
-                if (isset($row['es_userpreference'])) $preferenceList = $this->createList($row['es_userpreference']);
+                if (isset($row['es_userpreference'])) $preferenceList = $row['es_userpreference'];
                 else $preferenceList = "[]";
                 //Create user class
                 $userInfo = new stdClass();

@@ -43,7 +43,7 @@ $results = $db->loadAssocList();
 
 //Querying
 $query = $db->getQuery(true);
-$query->select($db->quoteName(array('es_articleid','es_userchoice','es_deployed','es_totallikes','es_totaldislikes')))
+$query->select($db->quoteName(array('es_articleid','es_userchoice','es_deployed','es_totallikes','es_totaldislikes','es_tags')))
     ->from($db->quoteName('#__customtables_table_articlestats'))
     ->where($db->quoteName('es_articleid') . ' = ' . JRequest::getVar('id'));
 $db->setQuery($query);
@@ -90,6 +90,7 @@ foreach ($results2 as $row) {
         $NoOfLikes = $row['es_totallikes'];
         $NoOfDislikes = $row['es_totaldislikes'];
         $NoOfDeployment = sizeof($deploymentList);
+        $tags = $row['es_tags'];
         echo "<table>
         <tr>
             <th>All Users' Choice</th>
@@ -97,6 +98,7 @@ foreach ($results2 as $row) {
             <th>Total # of Likes</th>
             <th>Total # of Dislikes</th>
             <th>Total # of Deployment</th>
+            <th>Tags</th>
         </tr>
         <tr>
             <td>" . $row['es_userchoice'] . "</td>";
@@ -106,6 +108,7 @@ foreach ($results2 as $row) {
             <td>" . $NoOfLikes . "</td>
             <td>" . $NoOfDislikes . "</td>
             <td>" . $NoOfDeployment . "</td>
+            <td>" . $tags . "</td>
         </tr>"; 
     echo "</table>";
     }
