@@ -65,7 +65,7 @@ else{//If logined
             //For Disliked pages
             $dislikedList = createList($row['es_pagedisliked']);
             //For user preference
-            $preferenceList = createList($row['es_userpreference']);
+            $preferenceList = $row['es_userpreference'];
             //Print
             echo "<table>
             <tr>

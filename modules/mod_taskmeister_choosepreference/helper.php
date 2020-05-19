@@ -49,4 +49,12 @@ class ModChoosePreferenceHelper
         }
         return true;
     }
+    function saveLists($list1,$list2,$list3){//Save list into datavase
+        //Call our recommender
+        JPluginHelper::importPlugin('taskmeister','tm_recommender');
+        $dispatcher = JDispatcher::getInstance();
+        $results = $dispatcher->trigger('saveUserPreference', array($list1,$list2,$list3));
+        //Return string
+        return $results[0];
+    }
 }

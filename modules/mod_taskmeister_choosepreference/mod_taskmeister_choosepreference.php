@@ -27,3 +27,9 @@ foreach ($tagList as $key => $value){
     echo $key." used ".$value." times!<br>";
 }*/ 
 require JModuleHelper::getLayoutPath('mod_taskmeister_choosepreference');
+
+if (isset($_POST["submit"])){
+    ModChoosePreferenceHelper::saveLists($_POST['list1'],$_POST['list2'],$_POST['list3']);
+    Header('Location: '.$_SERVER['PHP_SELF']);//Refreshes page
+    Exit();
+}

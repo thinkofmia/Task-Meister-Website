@@ -28,6 +28,35 @@ class plgTaskMeisterTM_recommender extends JPlugin
 		 */
         return "Wonderful ".($number*2);
     }
+    //Function: Save User Preference
+    function saveUserPreference($preferredList,$notPreferredList,$mayTryList){
+        //Set database and user
+        $db = Factory::getDbo();
+        $me = Factory::getUser();
+        $userID = $me->id;
+        $username = $me->username;
+
+        $newPreferenceList = array();
+        //Loop items in preferred list
+        foreach (json_decode($preferredList) as $row){//2 means preferred
+            $newPreferenceList[$row] = 2;
+        }
+        foreach (json_decode($notPreferredList) as $row){//0 means preferred
+            $newPreferenceList[$row] = 0;
+        }
+        foreach (json_decode($mayTryList) as $row){//1 means preferred
+            $newPreferenceList[$row] = 1;
+        }
+        // Create and populate an user table.
+        $userInfo = new stdClass();
+        $userInfo->es_userid = $userID;
+        $userInfo->es_userpreference = json_encode($newPreferenceList);
+        
+        // Update the object into the article profile table.
+        $result = JFactory::getDbo()->updateObject('#__customtables_table_userstats', $userInfo, 'es_userid');
+
+        return "Saved!";
+    }
     /* Function: Get list of tags that are currently in used.
     */
     function getTagList(){
