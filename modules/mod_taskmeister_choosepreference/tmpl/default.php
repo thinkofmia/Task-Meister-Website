@@ -2,6 +2,8 @@
 // No direct access
 defined('_JEXEC') or die; 
 //Displays module output
+//PHP list
+$userPreferenceList = array();//User Preferred List
 ?>
 
 <script type="text/javascript">
@@ -15,13 +17,17 @@ defined('_JEXEC') or die;
     //Javascript function to update lists
     updateLists = function(){
         //Get Elements
-        var list1 = document.getElementById("userPreferredList");
-        var list2 = document.getElementById("userNotPreferredList");
-        var list3 = document.getElementById("userMayTryList");
+        //var list1 = document.getElementById("userPreferredList");
+        //var list2 = document.getElementById("userNotPreferredList");
+        //var list3 = document.getElementById("userMayTryList");
         //Set contents
-        list1.innerHTML = userPreferredList;
-        list2.innerHTML = userNotPreferredList;
-        list3.innerHTML = userMayTryList;
+        //list1.innerHTML = userPreferredList;
+        //list2.innerHTML = userNotPreferredList;
+        //list3.innerHTML = userMayTryList;
+        //Set values
+        document.getElementById("input_list1").value = JSON.stringify(userPreferredList);
+        document.getElementById("input_list2").value = JSON.stringify(userNotPreferredList);
+        document.getElementById("input_list3").value = JSON.stringify(userMayTryList);
     }
 
     //Javascript function to select preference
@@ -65,6 +71,7 @@ defined('_JEXEC') or die;
     }
 </script>
 
+<!-- Display left hand side text-->
 <div class="customtext preferenceOptions">
     <?php if ($displayHeader) : ?>
         <h3><?php echo $displayHeader; ?></h3>
@@ -72,9 +79,22 @@ defined('_JEXEC') or die;
     <?php if ($displayText) : ?>
         <?php echo $displayText; ?>
     <?php endif; ?>
-    <br>List of User Preferred: [<span id = "userPreferredList"></span>]
-    <br>List of User Not Preferred: [<span id = "userNotPreferredList"></span>]
-    <br>List of User May Try: [<span id = "userMayTryList"></span>]
+    <br>
+    <form method="GET">
+        <br>Preferred: <input type="text" name="list1" id="input_list1" placeholder = "[]"> 
+        <br>Not Preferred: <input type="text" name="list2" id="input_list2" placeholder = "[]"> 
+        <br>May Try:<input type="text" name="list3" id="input_list3" placeholder = "[]"> 
+        <br><input type="submit" name="submit">
+    </form>
+    <?php if ($_GET["list1"]) : ?>
+        <?php echo "<br>List 1 saved: ". $_GET['list1']; ?>
+    <?php endif; ?>
+    <?php if ($_GET["list2"]) : ?>
+        <?php echo "<br>List 2 saved: ". $_GET['list2']; ?>
+    <?php endif; ?>
+    <?php if ($_GET["list3"]) : ?>
+        <?php echo "<br>List 3 saved: ". $_GET['list3']; ?>
+    <?php endif; ?>
 </div>
 
 <div class="preferenceList">
