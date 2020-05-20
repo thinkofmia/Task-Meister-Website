@@ -71,7 +71,40 @@ class plgTaskMeisterTM_recommender extends JPlugin
             $tagList[$row['title']] = $row['hits'];
         }
         arsort($tagList);
-        return $tagList;
+        //Add default tag list based on pptx
+        $tagNames_pptx = array(
+            "Music" => 0,
+            "Sports" => 0,
+            "Food" => 0,
+            "Drama" => 0,
+            "Movies" => 0,
+            "VR" => 0,
+            "Digital Manipulatives" => 0,
+            "Fashion" => 0,
+            "Board Games"=> 0,
+            "Outdoor Tasks" => 0,
+            "Physical Manipulatives" => 0,
+            "Stories" => 0,
+            "Nature" => 0,
+            "Science" => 0,
+            "Treasure Hunts" => 0,
+            "Simulations" => 0,
+            "Online Games" => 0,
+            "Puzzles"=> 0,
+            "Dance" => 0,
+            "Poems" => 0,
+            "Current Affairs" => 0,
+            "Escape Rooms" => 0,
+            "Statistics" => 0,
+            "Travelling" => 0,
+            "Cosplay" => 0,
+            "Model Making" => 0
+        );
+        //Add old tag list into default list.
+        foreach ($tagList as $key => $value){
+            $tagNames_pptx[$key] = $value;
+        }
+        return $tagNames_pptx;
     }
     /* Function: Get Article Contents
     Gets all the selected articles to display from a list
