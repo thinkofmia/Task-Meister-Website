@@ -91,7 +91,7 @@ $userPreferenceList = array();//User Preferred List
 <div class="preferenceList">
     <?php foreach ($tagList as $key => $value) : ?>
         <div class="preferenceBox" id="<?php echo $key;?>" onclick="togglePreference('<?php echo $key;?>')">
-            <img src="/taskmeisterx/templates/taskmeistertemplate-userpage/images/<?php echo $key;?>.jpg" width="100%" height="100%" onerror="this.src='/taskmeisterx/templates/taskmeistertemplate-userpage/images/accountIcon.jpg';"/>
+            <img src="/taskmeisterx/modules/mod_taskmeister_choosepreference/images/<?php echo $key;?>.jpg" width="100%" height="100%" onerror="this.src='/taskmeisterx/modules/mod_taskmeister_choosepreference/images/default.jpg';"/>
             <p class = "preferenceLabel"><?php echo $key; ?>: <?php echo $value; ?> uses</p>
         </div>
         </script>
