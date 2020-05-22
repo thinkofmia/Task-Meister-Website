@@ -1,6 +1,6 @@
 <?php
 /**
- * Choose Prefence Module Entry Point
+ * Choose Preference Module Entry Point
  * 
  * @package    Joomla.Tutorials
  * @subpackage Modules
@@ -17,19 +17,22 @@ defined('_JEXEC') or die; // ensures that this file is being invoked from the Jo
 // Include the syndicate functions only once
 require_once dirname(__FILE__) . '/helper.php';//used because our helper functions are defined within a class, and we only want the class defined once. 
 
-$displayHeader = ModChoosePreferenceHelper::getHeader($params);//invoke helper class method
-$displayText = ModChoosePreferenceHelper::getText($params);//invoke helper class method
+$displayHeader = ModChoosePreferenceHelper::getHeader($params);//Get and save out custom header
+$displayText = ModChoosePreferenceHelper::getText($params);//Get and save our custom text
 
-$tagList = ModChoosePreferenceHelper::findTags();
-//Display debug
+$tagList = ModChoosePreferenceHelper::findTags();//Get our list of tags using helper method fingTags()
+//Display debug/str version of tag list below
 /*echo "List of available tags: ";
 foreach ($tagList as $key => $value){
     echo $key." used ".$value." times!<br>";
 }*/ 
-require JModuleHelper::getLayoutPath('mod_taskmeister_choosepreference');
+require JModuleHelper::getLayoutPath('mod_taskmeister_choosepreference');//Call out default.php display
 
 if (isset($_POST["submit"])){
-    ModChoosePreferenceHelper::saveLists($_POST['list1'],$_POST['list2'],$_POST['list3']);
-    Header('Location: '.$_SERVER['PHP_SELF']);//Refreshes page
+/*
+    If user clicks 'Submit Query' or save preference
+*/
+    ModChoosePreferenceHelper::saveLists($_POST['list1'],$_POST['list2'],$_POST['list3']);//Stores the results via using the helper method saveLists
+    Header('Location: '.$_SERVER['PHP_SELF']);//Force Refreshes page - necessary to show the updated results
     Exit();
 }
