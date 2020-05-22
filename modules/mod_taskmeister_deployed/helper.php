@@ -22,19 +22,27 @@ class modTMDeployed
      */    
     public static function getText($params)
     {
+        /**
+         * Function: Get Text
+         * $params refers to the Joomla input parameters
+         */
+        //Return the text input in the Joomla interface
         return $params->get('customtext');
     }
     public static function getHeader($params)
     {
+        /**
+         * Function: Get Header
+         * $params refers to the Joomla input parameters
+         */
+        //Return the header input in the Joomla interface
         return $params->get('customheader');
     }
-    public static function giveThumbsUp(){//Give thumbs up
-        return 'You gave a thumbs up!'; 
-    }
-    public static function giveThumbsDown(){//Give thumbs down
-        return 'You gave a thumbs down!'; 
-    }
-    public static function loginFirst(){//Give thumbs down
+    public static function loginFirst(){
+        /**
+         * Function: Gives alert msg to login first
+         * No parameters required
+         */
         return 'Login first!!!'; 
     }
 

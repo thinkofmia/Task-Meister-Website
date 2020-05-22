@@ -18,6 +18,6 @@ defined('_JEXEC') or die; // ensures that this file is being invoked from the Jo
 require_once dirname(__FILE__) . '/helper.php';//used because our helper functions are defined within a class, and we only want the class defined once. 
 
 
-$displayHeader = modTMDeployed::getHeader($params);//invoke helper class method
-$displayText = modTMDeployed::getText($params);//invoke helper class method
-require JModuleHelper::getLayoutPath('mod_taskmeister_deployed');
+$displayHeader = modTMDeployed::getHeader($params);//Get header var using helper method getHeader()
+$displayText = modTMDeployed::getText($params);//Get text var using helper method getText()
+require JModuleHelper::getLayoutPath('mod_taskmeister_deployed');//Display default.php layout
