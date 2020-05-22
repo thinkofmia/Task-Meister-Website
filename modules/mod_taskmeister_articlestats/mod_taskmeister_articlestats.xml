@@ -3,7 +3,7 @@
     <name>Article Stats Module (Task Meister)</name>
     <author>Fremont Teng</author>
     <version>1.0.0</version>
-    <description>A module for Task Meister, to display the (new) stats of an article.</description>
+    <description>A module for Task Meister, to display the (new) stats of an article from the external database.</description>
     <files>
         <filename>mod_taskmeister_articlestats.xml</filename>
         <filename module="mod_taskmeister_articlestats">mod_taskmeister_articlestats.php</filename>

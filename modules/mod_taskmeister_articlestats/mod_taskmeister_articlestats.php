@@ -1,6 +1,6 @@
 <?php
 /**
- * Hello World! Module Entry Point
+ * Article Stats Module Entry Point
  * 
  * @package    Joomla.Tutorials
  * @subpackage Modules
@@ -18,37 +18,32 @@ defined('_JEXEC') or die; // ensures that this file is being invoked from the Jo
 require_once dirname(__FILE__) . '/helper.php';//used because our helper functions are defined within a class, and we only want the class defined once. 
 
 
-$displayHeader = modArticleStats::getHeader($params);//invoke helper class method
-$displayText = modArticleStats::getText($params);//invoke helper class method
-require JModuleHelper::getLayoutPath('mod_taskmeister_articlestats');
+$displayHeader = modArticleStats::getHeader($params);//set variable of header using helper class
+$displayText = modArticleStats::getText($params);//set variable of text using helper class
+require JModuleHelper::getLayoutPath('mod_taskmeister_articlestats');//call out default.php display
 
 //Database code
 use Joomla\CMS\Factory;
+$db = Factory::getDbo();//Get database
+$me = Factory::getUser();//Ger User
 
-$db = Factory::getDbo();
-
-$me = Factory::getUser();
-
+//Query database for articles based on current article id
 $query = $db->getQuery(true);
-
-$query->select($db->quoteName(array('title','id','hits','featured','catid')))
-    ->from($db->quoteName('#__content'))
-    ->where($db->quoteName('id') . ' = ' . JRequest::getVar('id'));
-
+$query->select($db->quoteName(array('title','id','hits','featured','catid')))//Get which columns
+    ->from($db->quoteName('#__content'))//Sets which database
+    ->where($db->quoteName('id') . ' = ' . JRequest::getVar('id'));//Set condition of query to find current article ID.
 $db->setQuery($query);
+$results = $db->loadAssocList();//Save results of main article database query
 
-//echo $db->replacePrefix((string) $query);
-
-$results = $db->loadAssocList();
-
-//Querying
+//Querying SQL database for articles (external database) based on current article id
 $query = $db->getQuery(true);
-$query->select($db->quoteName(array('es_articleid','es_userchoice','es_deployed','es_totallikes','es_totaldislikes','es_tags')))
-    ->from($db->quoteName('#__customtables_table_articlestats'))
-    ->where($db->quoteName('es_articleid') . ' = ' . JRequest::getVar('id'));
+$query->select($db->quoteName(array('es_articleid','es_userchoice','es_deployed','es_totallikes','es_totaldislikes','es_tags')))//Sets which columns of database
+    ->from($db->quoteName('#__customtables_table_articlestats'))//Sets which database
+    ->where($db->quoteName('es_articleid') . ' = ' . JRequest::getVar('id'));//Set condition of query to find current article ID.
 $db->setQuery($query);
-$results2 = $db->loadAssocList();
+$results2 = $db->loadAssocList();//Save results of external article database query
 
+//Display table, table header and css style
 echo "
 <style>
     table, tr, th, td {
@@ -63,7 +58,17 @@ echo "
     <th>Views</th>
     <th>Featured</th>
 </tr>";
+
+
 foreach ($results as $row) {
+/*
+    Display rows based on main database result
+        $row['id'] refers to the article id
+        $row['title'] refers to the article title
+        $row['catid'] refers to the article category
+        $row['hits'] refers to the article hits
+        $row['featured'] refers whether the article is featured or not
+*/
     echo "<tr><td>" . $row['id'] . "</td>" . 
     "<td>" . $row['title'] . "</td>" . 
     "<td>" . $row['catid'] . "</td>" .
@@ -72,25 +77,39 @@ foreach ($results as $row) {
     $articleID = $row['id'];
 }
 
-//Functions
 function countPreference($userchoice,$preference){
-    //Calculate Number of likes and dislikes
-    $count = 0;
-    foreach ($userchoice as $row){
-        if ($row == "Liked" && $preference == "Liked") $count +=1;
-        else if ($row == "Disliked" && $preference == "Disliked") $count +=1;
+/*
+    Function: To count total likes or dislikes
+    Parameter $userchoice: List of all user's choices, format array
+    Parameter $preference: Mode (Count like or dislike), format string
+*/
+    $count = 0;//Initialize
+    foreach ($userchoice as $row){//For Loop for each user
+        if ($row == "Liked" && $preference == "Liked") $count +=1;//If mode == user choice, then count +1
+        else if ($row == "Disliked" && $preference == "Disliked") $count +=1;//If mode == user choice, then count +1
     }
-    return $count;
+    return $count;//Return final count
 }
 
 foreach ($results2 as $row) {
-    if ($articleID==$row['es_articleid']){
+/*
+    For loop to display second table of data - Article External Database
+    var $preferenceList refers to the array of all the user's opinion of this article
+    var $deploymentList refers to the array of all the users that deployed this article
+    var $NoOfLikes refers to the total likes of this article
+    var $NoOfDislikes refers to the total dislikes of this article
+    var $NoOfDeployment refers to the total deployment of this article
+    var $tags refers to all the tags used in this article
+*/
+    if ($articleID==$row['es_articleid']){//Check if article id is the same just to be sure.
+        //Save the bottom vars with the results from the database
         $preferenceList = json_decode($row['es_userchoice']);
         $deploymentList = json_decode($row['es_deployed']);
         $NoOfLikes = $row['es_totallikes'];
         $NoOfDislikes = $row['es_totaldislikes'];
         $NoOfDeployment = sizeof($deploymentList);
         $tags = $row['es_tags'];
+        //Display table with the above variables
         echo "<table>
         <tr>
             <th>All Users' Choice</th>
@@ -102,8 +121,10 @@ foreach ($results2 as $row) {
         </tr>
         <tr>
             <td>" . $row['es_userchoice'] . "</td>";
+        //Check if any deployment in the article, otherwise display msg.
         if (isset($row['es_deployed'])&&$row['es_deployed']!="[]") $deployed = $row['es_deployed'];
         else $deployed = "No one deployed this yet";
+        //Display the rest of the variables
         echo "<td> ". $deployed. " </td> 
             <td>" . $NoOfLikes . "</td>
             <td>" . $NoOfDislikes . "</td>

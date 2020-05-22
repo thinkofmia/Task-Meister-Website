@@ -20,11 +20,11 @@ class modArticleStats
      *
      * @access public
      */    
-    public static function getText($params)
+    public static function getText($params) //Get text input from the Joomla's interface
     {
         return $params->get('customtext');
     }
-    public static function getHeader($params)
+    public static function getHeader($params)//Get header input from the Joomla's interface
     {
         return $params->get('customheader');
     }
