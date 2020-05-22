@@ -1,6 +1,6 @@
 <?php
 /**
- * Hello World! Module Entry Point
+ * Custom Text Module Entry Point
  * 
  * @package    Joomla.Tutorials
  * @subpackage Modules
@@ -17,6 +17,6 @@ defined('_JEXEC') or die; // ensures that this file is being invoked from the Jo
 // Include the syndicate functions only once
 require_once dirname(__FILE__) . '/helper.php';//used because our helper functions are defined within a class, and we only want the class defined once. 
 
-$displayHeader = ModCustomTextHelper::getHeader($params);//invoke helper class method
-$displayText = ModCustomTextHelper::getText($params);//invoke helper class method
-require JModuleHelper::getLayoutPath('mod_customtext');
+$displayHeader = ModCustomTextHelper::getHeader($params);//Set variable of inputtable header
+$displayText = ModCustomTextHelper::getText($params);//Set variable of inputtable text
+require JModuleHelper::getLayoutPath('mod_customtext');//Opens up default.php
