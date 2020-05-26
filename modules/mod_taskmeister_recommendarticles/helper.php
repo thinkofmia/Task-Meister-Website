@@ -35,27 +35,29 @@ class ModRecommendArticlesHelper
         $results = $dispatcher->trigger( 'getArticleContents', array($list));
         //Return string results of the article contents
         return json_encode($results[0]) ;
-        
     }
-    function getArticleList($params){//Function to get selection from parameter fields
+
+    function getArticleList($params,$noOfArticles){//Function to get selection from parameter fields
         //Call our recommender
         JPluginHelper::importPlugin('taskmeister','tm_recommender');
         $dispatcher = JDispatcher::getInstance();
         //Initialize result
         $results = array("Calculating... ");
+        //If never set no of articles
+        if (!$noOfArticles) $noOfArticles=10;
         //Check parameters
         switch($params){//Based on parameters, call out the functions accordingly in the plugin
             case 'choice_liked'://If mode selected to be by top likes
-                $results = $dispatcher->trigger( 'recommendPersonalArticles', array("Likes"));
+                $results = $dispatcher->trigger( 'recommendPersonalArticles', array("Likes",$noOfArticles));
                 break;
             case 'choice_personal'://If mode selected to be personal recommendation
-                $results = $dispatcher->trigger( 'recommendPersonalArticles', array("Personal"));
+                $results = $dispatcher->trigger( 'recommendPersonalArticles', array("Personal",$noOfArticles));
                 break;
             case 'choice_deployed'://If mode selected to be by most deployed
-                $results = $dispatcher->trigger( 'recommendPersonalArticles', array("Deployed"));
+                $results = $dispatcher->trigger( 'recommendPersonalArticles', array("Deployed",$noOfArticles));
                 break;
             case 'choice_untouched'://If mode selected to be articles that the user never touched before
-                $results = $dispatcher->trigger( 'recommendPersonalArticles', array("Untouched"));
+                $results = $dispatcher->trigger( 'recommendPersonalArticles', array("Untouched",$noOfArticles));
                 break;
             default:
                 $results = array("Not implemented yet. Please select another filter. ");

@@ -136,7 +136,7 @@ class plgTaskMeisterTM_recommender extends JPlugin
     Used only for articles module
     Returns a string of recommended articles
      */
-    function recommendPersonalArticles($mode){
+    function recommendPersonalArticles($mode,$noOfArticles){
         $db = Factory::getDbo();//Gets database
         $me = Factory::getUser();//Gets user
         $userid = $me->id;
@@ -212,7 +212,7 @@ class plgTaskMeisterTM_recommender extends JPlugin
         $finalList = array();
         $count = 0;
         foreach ($weighArticlesList as $key => $val){
-            if ($count<10){
+            if ($count<$noOfArticles){
                 array_push($finalList, $key);
                 $count+=1;
             }

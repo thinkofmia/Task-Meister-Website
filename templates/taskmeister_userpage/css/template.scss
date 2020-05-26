@@ -98,7 +98,7 @@ table {
 
 .articlesRow {
     display: inline-flex;
-    width: 70%;
+    width: 22%;
     padding-left: 5px;
 }
 
@@ -107,7 +107,8 @@ table {
     overflow-x: hidden;
     overflow-y: hidden; 
     height: 175px; 
-    width: 125%;
+    width: 100%;
+    padding-left: 3%;
 
     .article {
         position: relative;
@@ -153,7 +154,7 @@ table {
 .arrowRight {
     @extend .arrow;
     transform: rotate(-45deg);
-    left: 71%;
+    left: 23%;
 }
 
 .customtopMsg{
@@ -168,7 +169,7 @@ table {
     color: $mainFontColor;
     h3 {
         color: $altFontColor;
-        text-align: center;
+        text-align: left;
     }
 
 }
