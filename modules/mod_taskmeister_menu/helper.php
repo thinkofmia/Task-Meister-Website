@@ -22,10 +22,59 @@ class ModCustomMenuHelper
      */    
     public static function getText($params)
     {
+        /**
+         * Function: Get Text from interface
+         * Parameter $params: Parameters/Inputs from the Joomla interface
+         */
         return $params->get('customtext');
     }
     public static function getHeader($params)
     {
+        /**
+         * Function: Get Header from interface
+         * Parameter $params: Parameters/Inputs from the Joomla interface
+         */
         return $params->get('customheader');
+    }
+    public static function getWebsite($params)
+    {
+        /**
+         * Function: Get Website from interface
+         * Parameter $params: Parameters/Inputs from the Joomla interface
+         */
+        if ($params->get('website')) return $params->get('website');
+        else return "taskmeisterx";
+    }
+    public static function getCustomLabel($params,$labelNo)
+    {
+        /**
+         * Function: Get Custom Label 1 from interface
+         * Parameter $params: Parameters/Inputs from the Joomla interface
+         * Parameter $labelNo: Refers to the label number of the custom label
+         */
+        switch($labelNo){//Based on the label number, return the right inputs
+            case 3:
+                return $params->get('customLabel3');
+            case 2:
+                return $params->get('customLabel2');
+            default:
+                return $params->get('customLabel1');
+        }
+    }
+    public static function getCustomAlias($params,$labelNo)
+    {
+        /**
+         * Function: Get Custom Alias 1 from interface
+         * Parameter $params: Parameters/Inputs from the Joomla interface
+         * Parameter $labelNo: Refers to the label number of the custom alias
+         */
+        switch($labelNo){//Based on the label number, return the right inputs
+            case 3:
+                return $params->get('customAlias3');
+            case 2:
+                return $params->get('customAlias2');
+            default:
+                return $params->get('customAlias1');
+        }
     }
 }

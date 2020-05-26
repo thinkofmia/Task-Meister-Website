@@ -19,4 +19,13 @@ require_once dirname(__FILE__) . '/helper.php';//used because our helper functio
 
 $displayHeader = ModCustomMenuHelper::getHeader($params);//Set variable of inputtable header
 $displayText = ModCustomMenuHelper::getText($params);//Set variable of inputtable text
-require JModuleHelper::getLayoutPath('mod_customtext');//Opens up default.php
+
+//Get labels and alias/links of the menu
+$baseSite = ModCustomMenuHelper::getWebsite($params);
+$label1 = ModCustomMenuHelper::getCustomLabel($params,1);
+$label2 = ModCustomMenuHelper::getCustomLabel($params,2);
+$label3 = ModCustomMenuHelper::getCustomLabel($params,3);
+$alias1 = ModCustomMenuHelper::getCustomAlias($params,1);
+$alias2 = ModCustomMenuHelper::getCustomAlias($params,2);
+$alias3 = ModCustomMenuHelper::getCustomAlias($params,3);
+require JModuleHelper::getLayoutPath('mod_taskmeister_menu');//Opens up default.php

@@ -14,3 +14,18 @@ defined('_JEXEC') or die;
         <?php echo $displayText; ?>
     <?php endif; ?>
 </div>
+
+<div id="customMenu">
+    <!--Displays Label 1 if exists-->
+    <?php if ($alias1) : ?>
+        <a href='/<?php echo $baseSite; ?>/index.php/<?php echo $alias1; ?>'><?php echo $label1; ?></a>
+    <?php endif; ?>
+    <!--Displays Label 2 if exists-->
+    <?php if ($alias2) : ?>
+        <a href='/<?php echo $baseSite; ?>/index.php/<?php echo $alias2; ?>'><?php echo $label2; ?></a>
+    <?php endif; ?>   
+    <!--Displays Label 3 if exists-->
+    <?php if ($alias3) : ?>
+        <a href='/<?php echo $baseSite; ?>/index.php/<?php echo $alias3; ?>'><?php echo $label3; ?></a>
+    <?php endif; ?>   
+</div>

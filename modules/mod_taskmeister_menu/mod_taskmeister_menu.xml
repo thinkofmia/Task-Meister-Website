@@ -15,10 +15,20 @@
     <config>
         <fields name="params">
             <fieldset name="basic">
+				<field
+					name="website"
+					placeholder="taskmeisterx"
+					type="textarea"
+					label="Website"
+					description="Place website title here. Default: taskmeisterx"
+					filter="safehtml"
+					cols="30"
+					rows="1"
+				/>
                 <field
 					name="customtext"
 					type="textarea"
-					label="CustomText"
+					label="Custom Text"
 					description="Input your custom text here"
 					filter="safehtml"
 					cols="30"
@@ -27,8 +37,62 @@
                 <field
 					name="customheader"
 					type="textarea"
-					label="CustomHeader"
+					label="Custom Header"
 					description="Input your custom header here"
+					filter="safehtml"
+					cols="30"
+					rows="1"
+				/>
+                <field
+					name="customLabel1"
+					type="textarea"
+					label="Custom Label 1"
+					description="Input your custom label 1 here"
+					filter="safehtml"
+					cols="30"
+					rows="1"
+				/>
+                <field
+					name="customAlias1"
+					type="textarea"
+					label="Custom Alias 1"
+					description="Input your custom alias 1 here"
+					filter="safehtml"
+					cols="30"
+					rows="1"
+				/>
+                <field
+					name="customLabel2"
+					type="textarea"
+					label="Custom Label 2"
+					description="Input your custom label 2 here"
+					filter="safehtml"
+					cols="30"
+					rows="1"
+				/>
+                <field
+					name="customAlias2"
+					type="textarea"
+					label="Custom Alias 2"
+					description="Input your custom alias 2 here"
+					filter="safehtml"
+					cols="30"
+					rows="1"
+				/>
+				<field
+					name="customLabel3"
+					type="textarea"
+					label="Custom Label 3"
+					description="Input your custom label 3 here"
+					filter="safehtml"
+					cols="30"
+					rows="1"
+				/>
+                <field
+					name="customAlias3"
+					type="textarea"
+					label="Custom Alias 3"
+					description="Input your custom alias 3 here"
 					filter="safehtml"
 					cols="30"
 					rows="1"
