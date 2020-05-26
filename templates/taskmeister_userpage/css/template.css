@@ -210,7 +210,7 @@ table th, table td {
 }
 #customMenu a {
   position: relative;
-  padding-right: 5px;
+  padding: 10px;
   color: yellow;
   text-decoration: none;
 }
@@ -218,6 +218,11 @@ table th, table td {
   color: white;
   background-color: yellow;
   text-decoration: none;
+}
+
+#topRight {
+  position: absolute;
+  left: 90%;
 }
 
 /*# sourceMappingURL=template.css.map */

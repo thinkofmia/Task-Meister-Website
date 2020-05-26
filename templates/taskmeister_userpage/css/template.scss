@@ -226,7 +226,7 @@ table {
     padding: 30px;
     a {
         position: relative;
-        padding-right: 5px;
+        padding: 10px;
         color: $altFontColor;
         text-decoration: none ;
     }
@@ -236,3 +236,8 @@ table {
         text-decoration: none ;
     }
 } 
+
+#topRight{
+    position: absolute;
+    left: 90%;
+}
