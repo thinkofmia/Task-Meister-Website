@@ -211,6 +211,13 @@ table th, table td {
 #customMenu a {
   position: relative;
   padding-right: 5px;
+  color: yellow;
+  text-decoration: none;
+}
+#customMenu a:hover {
+  color: white;
+  background-color: yellow;
+  text-decoration: none;
 }
 
 /*# sourceMappingURL=template.css.map */

@@ -227,5 +227,12 @@ table {
     a {
         position: relative;
         padding-right: 5px;
+        color: $altFontColor;
+        text-decoration: none ;
+    }
+    a:hover{
+        color: $mainFontColor;
+        background-color: $altFontColor;
+        text-decoration: none ;
     }
 } 

@@ -1,6 +1,6 @@
 <?php
 /**
- * Custom Text Module Entry Point
+ * Custom Menu Module Entry Point
  * 
  * @package    Joomla.Tutorials
  * @subpackage Modules
