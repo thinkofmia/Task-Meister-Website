@@ -66,6 +66,8 @@ table {
     height: 400px;
     margin: 10px;
     overflow-y: auto;
+    overflow-x: hidden;
+    scrollbar-color: gray black;
     .center {
         @extend .columnCenter;
     }
@@ -96,7 +98,8 @@ table {
 
 .articlesRow {
     display: inline-flex;
-    width: 500px;
+    width: 70%;
+    padding-left: 5px;
 }
 
 .recommendedArticles{
@@ -143,14 +146,14 @@ table {
 
 .arrowLeft {
     @extend .arrow;
-    left: 0%;
+    left: 1%;
     transform: rotate(135deg);
 }
 
 .arrowRight {
     @extend .arrow;
     transform: rotate(-45deg);
-    left: 550px;
+    left: 71%;
 }
 
 .customtopMsg{
