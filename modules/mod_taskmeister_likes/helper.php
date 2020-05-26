@@ -22,19 +22,39 @@ class modTMLikes
      */    
     public static function getText($params)
     {
-        return $params->get('customtext');
+        /**
+         * Function: Get custom input text from Joomla interface
+         * Parameter $params: parameter from the joomla input box
+         */
+        return $params->get('customtext');//Return the value of id customtext in the joomla input box
     }
     public static function getHeader($params)
     {
-        return $params->get('customheader');
+        /**
+         * Function: Get custom input header from Joomla interface
+         * Parameter $params: parameter from the joomla input box
+         */
+        return $params->get('customheader');//Return the value of id customheader in the joomla input box
     }
-    public static function giveThumbsUp(){//Give thumbs up
+    public static function giveThumbsUp(){
+        /**
+         * Function: Give a thumbs up string
+         * Requires no parameters
+         */
         return 'You gave a thumbs up!'; 
     }
-    public static function giveThumbsDown(){//Give thumbs down
+    public static function giveThumbsDown(){
+        /**
+         * Function: Give a thumbs down string
+         * Requires no parameters
+         */
         return 'You gave a thumbs down!'; 
     }
-    public static function loginFirst(){//Give thumbs down
+    public static function loginFirst(){
+        /**
+         * Function: Give a login warning string
+         * Requires no parameters
+         */
         return 'Login first!!!'; 
     }
 
