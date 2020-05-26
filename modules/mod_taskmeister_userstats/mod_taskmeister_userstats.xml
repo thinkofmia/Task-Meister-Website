@@ -3,7 +3,7 @@
     <name>User Stats Module (Task Meister)</name>
     <author>Fremont Teng</author>
     <version>1.0.0</version>
-    <description>A module for Task Meister, to display the (new) stats of the user.</description>
+    <description>A module for Task Meister, to display the external stats of the user.</description>
     <files>
         <filename>mod_taskmeister_userstats.xml</filename>
         <filename module="mod_taskmeister_userstats">mod_taskmeister_userstats.php</filename>

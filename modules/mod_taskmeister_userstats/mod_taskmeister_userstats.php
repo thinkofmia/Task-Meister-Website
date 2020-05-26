@@ -23,26 +23,35 @@ $displayText = modUserStats::getText($params);//invoke helper class method
 require JModuleHelper::getLayoutPath('mod_taskmeister_userstats');
 
 function createList($array_str){
+    /**
+     * Function: Create a list based on the array (string) and remove their keys
+     * Parameter $array_str: String version of the array
+     */
+    //Convert string to array
     $array = json_decode($array_str,true);
+    //Take out the array values and stores it into $list
     $list = array_values($array);
+    //Returns the list with only the array values
     return json_encode($list);
 }
 
 //Database code
 use Joomla\CMS\Factory;
-
+//Set database variable
 $db = Factory::getDbo();
+//Set current user variable
 $me = Factory::getUser();
+//Set user id and username
 $userID = $me->id;
 $username = $me->username;
 
-//Querying
+//Querying for stats of a particular user
 $query = $db->getQuery(true);
-$query->select($db->quoteName(array('es_userid','es_userpreference','es_pagedeployed','es_pageliked','es_pagedisliked')))
-    ->from($db->quoteName('#__customtables_table_userstats'))
-    ->where($db->quoteName('es_userid') . ' = ' . $userID);
+$query->select($db->quoteName(array('es_userid','es_userpreference','es_pagedeployed','es_pageliked','es_pagedisliked')))//Get user id, user preference, page deployed, likes and dislikes
+    ->from($db->quoteName('#__customtables_table_userstats'))//From our external user stats table
+    ->where($db->quoteName('es_userid') . ' = ' . $userID);//Where it is the current user's userid
 $db->setQuery($query);
-$results2 = $db->loadAssocList();
+$results2 = $db->loadAssocList();//Save results as $results2
 
 //Style for table
 echo "<style> 
@@ -50,23 +59,22 @@ echo "<style>
     border: 2px solid black;
     }
 </style>";
-
+//If user is a guest, hide the table instead
 if ($userID==0){
     echo "You have to login first to see this stats. ";
 }
-//Display Results
-else{//If logined 
-    foreach ($results2 as $row) {  
-        if ($userID==$row['es_userid']){
-            //For deployment list
+else{//If user has already login, show the external user stats
+    foreach ($results2 as $row) {//For loop for each item in $results2
+        if ($userID==$row['es_userid']){//Double confirmation that $userID is equal to the current user's
+            //Create a list for deployed pages
             $deployedList = createList($row['es_pagedeployed']);
-            //For Liked pages
+            //Create a list for liked pages
             $likedList = createList($row['es_pageliked']);
-            //For Disliked pages
+            //Create a list for disliked pages
             $dislikedList = createList($row['es_pagedisliked']);
-            //For user preference
+            //Set the preference list as the one in the results
             $preferenceList = $row['es_userpreference'];
-            //Print
+            //Print out the data
             echo "<table>
             <tr>
                 <th>Username</th>
