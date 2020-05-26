@@ -19,9 +19,10 @@
 <!-- Contain the website code which controls the layout-->
 <body>
     <div id="topRow">
-        <a class = "left" href = "<?php echo $this->baseurl; ?>/index.php/homepage"><!-- Set clickable logo-->
+        <a class = "left" href="<?php echo $this->baseurl; ?>/index.php/home"><!-- Set clickable logo-->
             <img class = "logo"  src="<?php echo $this->baseurl; ?>/templates/<?php echo $this->template; ?>/images/TaskMeisterLogo.JPG" alt="Task Meister Logo" class="logo" />
             <jdoc:include type="modules" name="top-left"/><!-- Module Position: 'top-left'-->
+            
         </a>
         <div class = "columnCenter">
             <jdoc:include type="modules" name="top"/><!-- Module Position: 'top'-->
