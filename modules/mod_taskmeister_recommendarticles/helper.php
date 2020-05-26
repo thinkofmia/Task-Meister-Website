@@ -33,7 +33,7 @@ class ModRecommendArticlesHelper
         JPluginHelper::importPlugin('taskmeister','tm_recommender');
         $dispatcher = JDispatcher::getInstance();
         $results = $dispatcher->trigger( 'getArticleContents', array($list));
-        //Return string
+        //Return string results of the article contents
         return json_encode($results[0]) ;
         
     }
@@ -44,25 +44,24 @@ class ModRecommendArticlesHelper
         //Initialize result
         $results = array("Calculating... ");
         //Check parameters
-        switch($params){
-            case 'choice_liked':
+        switch($params){//Based on parameters, call out the functions accordingly in the plugin
+            case 'choice_liked'://If mode selected to be by top likes
                 $results = $dispatcher->trigger( 'recommendPersonalArticles', array("Likes"));
                 break;
-            case 'choice_personal':
+            case 'choice_personal'://If mode selected to be personal recommendation
                 $results = $dispatcher->trigger( 'recommendPersonalArticles', array("Personal"));
                 break;
-            case 'choice_deployed':
+            case 'choice_deployed'://If mode selected to be by most deployed
                 $results = $dispatcher->trigger( 'recommendPersonalArticles', array("Deployed"));
                 break;
-            case 'choice_untouched':
+            case 'choice_untouched'://If mode selected to be articles that the user never touched before
                 $results = $dispatcher->trigger( 'recommendPersonalArticles', array("Untouched"));
                 break;
             default:
                 $results = array("Not implemented yet. Please select another filter. ");
                 break;
-        }
-        
-        //Return string
+        }       
+        //Return string results of recommended articles
         return json_encode($results[0]) ;
     }
 }
