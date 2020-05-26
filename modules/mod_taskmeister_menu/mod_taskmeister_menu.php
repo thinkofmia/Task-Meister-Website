@@ -25,7 +25,11 @@ $baseSite = ModCustomMenuHelper::getWebsite($params);
 $label1 = ModCustomMenuHelper::getCustomLabel($params,1);
 $label2 = ModCustomMenuHelper::getCustomLabel($params,2);
 $label3 = ModCustomMenuHelper::getCustomLabel($params,3);
+$label4 = ModCustomMenuHelper::getCustomLabel($params,4);
+$label5 = ModCustomMenuHelper::getCustomLabel($params,5);
 $alias1 = ModCustomMenuHelper::getCustomAlias($params,1);
 $alias2 = ModCustomMenuHelper::getCustomAlias($params,2);
 $alias3 = ModCustomMenuHelper::getCustomAlias($params,3);
+$alias4 = ModCustomMenuHelper::getCustomAlias($params,4);
+$alias5 = ModCustomMenuHelper::getCustomAlias($params,5);
 require JModuleHelper::getLayoutPath('mod_taskmeister_menu');//Opens up default.php

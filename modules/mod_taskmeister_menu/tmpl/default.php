@@ -28,4 +28,12 @@ defined('_JEXEC') or die;
     <?php if ($alias3) : ?>
         <a href='/<?php echo $baseSite; ?>/index.php/<?php echo $alias3; ?>'><?php echo $label3; ?></a>
     <?php endif; ?>   
+    <!--Displays Label 4 if exists-->
+    <?php if ($alias4) : ?>
+        <a href='/<?php echo $baseSite; ?>/index.php/<?php echo $alias4; ?>'><?php echo $label4; ?></a>
+    <?php endif; ?>   
+    <!--Displays Label 3 if exists-->
+    <?php if ($alias5) : ?>
+        <a href='/<?php echo $baseSite; ?>/index.php/<?php echo $alias5; ?>'><?php echo $label5; ?></a>
+    <?php endif; ?>  
 </div>

@@ -53,6 +53,10 @@ class ModCustomMenuHelper
          * Parameter $labelNo: Refers to the label number of the custom label
          */
         switch($labelNo){//Based on the label number, return the right inputs
+            case 5:
+                return $params->get('customLabel5');
+            case 4:
+                return $params->get('customLabel4');
             case 3:
                 return $params->get('customLabel3');
             case 2:
@@ -69,6 +73,10 @@ class ModCustomMenuHelper
          * Parameter $labelNo: Refers to the label number of the custom alias
          */
         switch($labelNo){//Based on the label number, return the right inputs
+            case 5:
+                return $params->get('customAlias5');
+            case 4:
+                return $params->get('customAlias4');
             case 3:
                 return $params->get('customAlias3');
             case 2:
