@@ -11,7 +11,7 @@ body {
 }
 
 h3, .featuredArticle .featuredArticleText h3 {
-  color: yellow;
+  color: gold;
   text-align: left;
 }
 
@@ -160,7 +160,7 @@ table th, table td {
   color: white;
 }
 .customtext h3, .customtext .featuredArticle .featuredArticleText h3, .featuredArticle .featuredArticleText .customtext h3 {
-  color: yellow;
+  color: gold;
   text-align: left;
 }
 
@@ -219,12 +219,12 @@ table th, table td {
 #customMenu a {
   position: relative;
   padding: 10px;
-  color: yellow;
+  color: gold;
   text-decoration: none;
 }
 #customMenu a:hover {
   color: white;
-  background-color: yellow;
+  background-color: gold;
   text-decoration: none;
 }
 
@@ -248,6 +248,23 @@ table th, table td {
 }
 .featuredArticle .featuredArticleText h3 {
   text-align: center;
+}
+
+.login-button {
+  background-color: gold;
+  color: white;
+}
+
+.userdata, .input-prepend, #form-login-submit {
+  padding: 2%;
+}
+
+#modlgn-passwd, #modlgn-username, .login-button {
+  width: 80%;
+  padding-top: 2%;
+  font-size: large;
+  text-align: center;
+  border-radius: 8px;
 }
 
 /*# sourceMappingURL=template.css.map */

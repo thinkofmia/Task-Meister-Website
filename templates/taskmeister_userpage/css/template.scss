@@ -2,7 +2,7 @@
 $pageBackground: black; //For background
 $headerBackground: darkgray;
 $mainFontColor: white; //For default font color
-$altFontColor: yellow; //For alt default font color
+$altFontColor: gold; //For alt default font color
 
 /*Default Tags*/
 body {//Body Tag
@@ -267,4 +267,21 @@ table {
             text-align: center;
         }
     }
+}
+
+.login-button {
+    background-color: $altFontColor;
+    color: $mainFontColor;
+}
+
+.userdata, .input-prepend, #form-login-submit {
+    padding: 2%;
+}
+
+#modlgn-passwd, #modlgn-username, .login-button {
+    width: 80%;
+    padding-top: 2%;
+    font-size: large;
+    text-align: center;
+    border-radius: 8px;
 }
