@@ -8,7 +8,7 @@ $altFontColor: yellow; //For alt default font color
 body {//Body Tag
     background-color: $pageBackground;
     color: $mainFontColor;
-    width: 100%;
+    width: 100vw;
     overflow-x: hidden;
     display: inline-block;
     position: relative;
@@ -68,7 +68,7 @@ table {
     display: inline-block;
     margin: 10px;
     overflow-x: hidden;
-    height: 400px;
+    height: 80vh;
     scrollbar-color: gray black;
     .center {
         @extend .columnCenter;

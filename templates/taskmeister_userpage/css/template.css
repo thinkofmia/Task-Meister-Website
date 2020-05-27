@@ -3,7 +3,7 @@
 body {
   background-color: black;
   color: white;
-  width: 100%;
+  width: 100vw;
   overflow-x: hidden;
   display: inline-block;
   position: relative;
@@ -65,7 +65,7 @@ table th, table td {
   display: inline-block;
   margin: 10px;
   overflow-x: hidden;
-  height: 400px;
+  height: 80vh;
   scrollbar-color: gray black;
 }
 #centerRow .left {
