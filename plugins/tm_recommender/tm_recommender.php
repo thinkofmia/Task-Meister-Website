@@ -18,7 +18,7 @@ class plgTaskMeisterTM_recommender extends JPlugin
 	/**
 	 * Plugin method with the same name as the event will be called automatically.
 	 */
-    //Test Function
+    //Test Function (Unused)
 	 function calculateMetrics($number)
 	 {
 		/*

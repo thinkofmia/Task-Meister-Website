@@ -16,10 +16,29 @@
         <fields name="params">
             <fieldset name="basic">
                 <field
+					name="articleID"
+					type="integer"
+					default="900"
+					label="Article ID"
+					description="Input your featured article id here. "
+					first="1"
+					step="1"
+                    last="9999"
+				/>
+                <field
+					name="videolink"
+					type="textarea"
+					label="Video Link"
+					description="Input your youtube link here. If left blank, the article image will be shown instead. "
+					filter="safehtml"
+					cols="30"
+					rows="1"
+				/>
+                <field
 					name="customtext"
 					type="textarea"
-					label="CustomText"
-					description="Input your custom text here"
+					label="Custom Intro Text"
+					description="Input your custom intro text here"
 					filter="safehtml"
 					cols="30"
 					rows="1"
@@ -27,7 +46,7 @@
                 <field
 					name="customheader"
 					type="textarea"
-					label="CustomHeader"
+					label="Custom Header"
 					description="Input your custom header here"
 					filter="safehtml"
 					cols="30"

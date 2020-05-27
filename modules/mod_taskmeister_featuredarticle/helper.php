@@ -28,4 +28,19 @@ class ModFeaturedArticleHelper
     {
         return $params->get('customheader');
     }
+    function getArticle($articleId){
+        $db =& JFactory::getDbo();
+        //Query
+        $query = $db->getQuery(true);
+        $query->select($db->quoteName(array('*')))
+            ->from($db->quoteName('#__content'))
+            ->where($db->quoteName('id') . ' = ' . intval($articleId));
+        $db->setQuery($query);
+        $results = $db->loadAssocList();
+        foreach($results as $row){
+            $fullArticle = $row;
+        }
+        if (!$fullArticle) $fullArticle = "No article found. ";
+        return $fullArticle;
+    }
 }
