@@ -47,6 +47,12 @@ class ModRecommendArticlesHelper
         if (!$noOfArticles) $noOfArticles=10;
         //Check parameters
         switch($params){//Based on parameters, call out the functions accordingly in the plugin
+            case 'choice_myLikedList':
+                $results = $dispatcher->trigger( 'getMyList', array("Liked",$noOfArticles));
+                break;
+            case 'choice_myDeployedList':
+                $results = $dispatcher->trigger( 'getMyList', array("Deployed",$noOfArticles));
+                break;
             case 'choice_liked'://If mode selected to be by top likes
                 $results = $dispatcher->trigger( 'recommendPersonalArticles', array("Likes",$noOfArticles));
                 break;
