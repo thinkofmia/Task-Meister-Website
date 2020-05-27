@@ -28,6 +28,10 @@ class ModFeaturedArticleHelper
     {
         return $params->get('customheader');
     }
+    public static function getVideo($params)
+    {
+        return $params->get('videolink');
+    }
     function getArticle($articleId){
         $db =& JFactory::getDbo();
         //Query

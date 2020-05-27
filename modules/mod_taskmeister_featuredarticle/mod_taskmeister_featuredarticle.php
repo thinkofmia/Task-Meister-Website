@@ -19,11 +19,18 @@ require_once dirname(__FILE__) . '/helper.php';//used because our helper functio
 
 $displayHeader = ModFeaturedArticleHelper::getHeader($params);//Set variable of inputtable header
 $displayText = ModFeaturedArticleHelper::getText($params);//Set variable of inputtable text
+$videoLink = ModFeaturedArticleHelper::getVideo($params);//Set variable of video link
 
 //Article Contents
 $articleContents = ModFeaturedArticleHelper::getArticle($params->get('articleID'));
-$articleTitle = $articleContents['title'];
-$articleImage = json_decode($articleContents['images'])->image_intro;
+if ($articleContents == "No article found. "){
+    $articleTitle = "No article found. ";
+    $articleImage = "No article found. ";
+}
+else{
+    $articleTitle = $articleContents['title'];
+    $articleImage = json_decode($articleContents['images'])->image_intro;
+}
+
 
 require JModuleHelper::getLayoutPath('mod_taskmeister_featuredarticle');//Opens up default.php
-echo $articleImage;
