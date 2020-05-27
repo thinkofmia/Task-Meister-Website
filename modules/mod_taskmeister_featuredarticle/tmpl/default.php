@@ -29,7 +29,7 @@ defined('_JEXEC') or die;
             <p><b>Users who deploy this: </b><?php echo "Work In Progress"; ?></p>
             <!--Displays play button-->
             <p>
-                <a>▶ Play</a>
+                <a href="?option=com_content&view=article&id=<?php echo $articleID; ?>" itemprop="url" title="Go to the article site">▶ Play</a>
             </p>
         </div>
     </div>

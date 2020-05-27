@@ -20,9 +20,10 @@ require_once dirname(__FILE__) . '/helper.php';//used because our helper functio
 $displayHeader = ModFeaturedArticleHelper::getHeader($params);//Set variable of inputtable header
 $displayText = ModFeaturedArticleHelper::getText($params);//Set variable of inputtable text
 $videoLink = ModFeaturedArticleHelper::getVideo($params);//Set variable of video link
+$articleID = $params->get('articleID');
 
 //Article Contents
-$articleContents = ModFeaturedArticleHelper::getArticle($params->get('articleID'));
+$articleContents = ModFeaturedArticleHelper::getArticle($articleID);
 if ($articleContents == "No article found. "){
     $articleTitle = "No article found. ";
     $articleImage = "No article found. ";
