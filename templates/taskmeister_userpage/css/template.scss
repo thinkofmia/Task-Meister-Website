@@ -249,3 +249,22 @@ table {
     position: absolute;
     left: 90%;
 }
+
+.featuredArticle{
+    display: inline-flex;
+    text-align: center;
+    left: 30%;
+    position: relative;
+    background-color: brown;
+    .featuredArticleText{
+        display: inline-block;
+        padding-top: 5%;
+        padding-left: 2%;
+        padding-right: 2%;
+
+        h3{
+            @extend h3;
+            text-align: center;
+        }
+    }
+}

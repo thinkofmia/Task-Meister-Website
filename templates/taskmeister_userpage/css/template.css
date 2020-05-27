@@ -10,7 +10,7 @@ body {
   height: auto;
 }
 
-h3 {
+h3, .featuredArticle .featuredArticleText h3 {
   color: yellow;
   text-align: left;
 }
@@ -159,7 +159,7 @@ table th, table td {
   text-align: center;
   color: white;
 }
-.customtext h3 {
+.customtext h3, .customtext .featuredArticle .featuredArticleText h3, .featuredArticle .featuredArticleText .customtext h3 {
   color: yellow;
   text-align: left;
 }
@@ -231,6 +231,23 @@ table th, table td {
 #topRight {
   position: absolute;
   left: 90%;
+}
+
+.featuredArticle {
+  display: inline-flex;
+  text-align: center;
+  left: 30%;
+  position: relative;
+  background-color: brown;
+}
+.featuredArticle .featuredArticleText {
+  display: inline-block;
+  padding-top: 5%;
+  padding-left: 2%;
+  padding-right: 2%;
+}
+.featuredArticle .featuredArticleText h3 {
+  text-align: center;
 }
 
 /*# sourceMappingURL=template.css.map */
