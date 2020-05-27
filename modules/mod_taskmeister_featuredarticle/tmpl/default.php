@@ -23,10 +23,12 @@ defined('_JEXEC') or die;
             <?php if ($displayText) : ?>
                 <p><?php echo $displayText; ?></p>
             <?php endif; ?>
+            <!--Displays Number of likes-->
+            <p><b># of Likes: </b><?php echo $articleTotalLikes; ?><br>
             <!--Displays who has liked it-->
-            <p><b>Users who like this: </b><?php echo "Work In Progress"; ?></p>
+            <b>Users who like this: </b><?php echo $articleLikedUsers; ?><br>
             <!--Displays those in your school that has deployed it-->
-            <p><b>Users who deploy this: </b><?php echo "Work In Progress"; ?></p>
+            <b>Users who deploy this: </b><?php echo $articleDeployedUsers; ?></p>
             <!--Displays play button-->
             <p>
                 <a href="?option=com_content&view=article&id=<?php echo $articleID; ?>" itemprop="url" title="Go to the article site">▶ Play</a>

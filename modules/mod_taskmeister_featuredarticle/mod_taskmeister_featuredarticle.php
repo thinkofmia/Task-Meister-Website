@@ -21,6 +21,9 @@ $displayHeader = ModFeaturedArticleHelper::getHeader($params);//Set variable of 
 $displayText = ModFeaturedArticleHelper::getText($params);//Set variable of inputtable text
 $videoLink = ModFeaturedArticleHelper::getVideo($params);//Set variable of video link
 $articleID = $params->get('articleID');
+$articleLikedUsers = "None";
+$articleDeployedUsers = "None";
+$articleTotalLikes = 0;
 
 //Article Contents
 $articleContents = ModFeaturedArticleHelper::getArticle($articleID);
@@ -31,6 +34,33 @@ if ($articleContents == "No article found. "){
 else{
     $articleTitle = $articleContents['title'];
     $articleImage = json_decode($articleContents['images'])->image_intro;
+}
+
+//External contents
+$externalContents = ModFeaturedArticleHelper::getArticleExternalStats($articleID);
+if ($externalContents != "Nothing is found. "){
+    $articleTotalLikes = $externalContents['es_totallikes'];
+    $deployedUsersList = json_decode($externalContents['es_deployed']);
+    $usersPreferenceList = json_decode($externalContents['es_userchoice']);
+    //For Loops
+    if ($deployedUsersList){
+        $articleDeployedUsers = "";
+        foreach ($deployedUsersList as $row)
+        {
+            $user = JFactory::getUser(intval($row))->username;
+            $articleDeployedUsers = $user.", ".$articleDeployedUsers;
+        }
+    } 
+    if ($articleTotalLikes>0){
+        $articleLikedUsers = "";
+        foreach($usersPreferenceList as $key => $value){
+            if ($value=="Liked"){
+                $user = JFactory::getUser(intval($key))->username;
+                $articleLikedUsers = $user.", ".$articleLikedUsers;
+            }
+        }
+    }
+
 }
 
 

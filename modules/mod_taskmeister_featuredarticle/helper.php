@@ -32,6 +32,21 @@ class ModFeaturedArticleHelper
     {
         return $params->get('videolink');
     }
+    function getArticleExternalStats($articleId){
+        $db =& JFactory::getDbo();
+        //Query
+        $query = $db->getQuery(true);
+        $query->select($db->quoteName(array('*')))
+            ->from($db->quoteName('#__customtables_table_articlestats'))
+            ->where($db->quoteName('es_articleid') . ' = ' . intval($articleId));
+        $db->setQuery($query);
+        $results = $db->loadAssocList();
+        foreach($results as $row){
+            $contents = $row;
+        }
+        if (!$contents) $contents = "Nothing is found. ";
+        return $contents;
+    }
     function getArticle($articleId){
         $db =& JFactory::getDbo();
         //Query
