@@ -6,6 +6,8 @@ body {
   width: 100%;
   overflow-x: hidden;
   display: inline-block;
+  position: relative;
+  height: auto;
 }
 
 h3 {
@@ -60,10 +62,10 @@ table th, table td {
   position: relative;
   width: 95%;
   top: 30%;
-  height: 400px;
+  display: inline-block;
   margin: 10px;
-  overflow-y: auto;
   overflow-x: hidden;
+  height: 400px;
   scrollbar-color: gray black;
 }
 #centerRow .left {
@@ -75,7 +77,7 @@ table th, table td {
 #bottomRow {
   position: relative;
   width: 100%;
-  top: 80%;
+  bottom: 100%;
   margin: 10px;
 }
 #bottomRow .center {

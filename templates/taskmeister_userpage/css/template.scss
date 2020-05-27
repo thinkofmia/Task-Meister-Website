@@ -11,6 +11,8 @@ body {//Body Tag
     width: 100%;
     overflow-x: hidden;
     display: inline-block;
+    position: relative;
+    height: auto;
 }
 
 h3 {
@@ -63,10 +65,10 @@ table {
     position: relative;
     width: 95%;
     top: 30%;
-    height: 400px;
+    display: inline-block;
     margin: 10px;
-    overflow-y: auto;
     overflow-x: hidden;
+    height: 400px;
     scrollbar-color: gray black;
     .center {
         @extend .columnCenter;
@@ -81,7 +83,7 @@ table {
 #bottomRow{
     position: relative;
     width: 100%;
-    top: 80%;
+    bottom: 100%;
     margin: 10px;
     .center {
         @extend .columnCenter;
