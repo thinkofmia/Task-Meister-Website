@@ -6,18 +6,22 @@ defined('_JEXEC') or die;
 use Joomla\CMS\Factory;
 $db = Factory::getDbo();//Sets Database variable
 $me = Factory::getUser();//Sets User variable
-//Sets user id from User var
-$userID = $me->id;
+
+$userID = 0;
+
 //Sets article id
 $articleID = JRequest::getVar('id');
-//Querying for article stats table based on article id
-$query = $db->getQuery(true);
-$query->select($db->quoteName(array('es_articleid','es_userchoice')))//Get the article id and the user choice list
-    ->from($db->quoteName('#__customtables_table_articlestats'))//From the Article Stats Database
-    ->where($db->quoteName('es_articleid') . ' = ' . $articleID);//Where it is this article id
-$db->setQuery($query);
-$results = $db->loadAssocList();//Save under var results
-//Initialize variables for users choice list.
+if ($articleID){
+    //Sets user id from User var
+    $userID = $me->id;
+    //Querying for article stats table based on article id
+    $query = $db->getQuery(true);
+    $query->select($db->quoteName(array('es_articleid','es_userchoice')))//Get the article id and the user choice list
+        ->from($db->quoteName('#__customtables_table_articlestats'))//From the Article Stats Database
+        ->where($db->quoteName('es_articleid') . ' = ' . $articleID);//Where it is this article id
+    $db->setQuery($query);
+    $results = $db->loadAssocList();//Save under var results
+    //Initialize variables for users choice list.
 $userchoice;//List of all user choices/opinion of an article
 $dataNotExist = true;//Boolean to determine if any record is found in the database
 //For loop to check if record exists
@@ -37,8 +41,10 @@ if ($dataNotExist){
     $articleInfo->es_articleid = $articleID;
     // Insert the record into the article stats table.
     $result = JFactory::getDbo()->insertObject('#__customtables_table_articlestats', $articleInfo, 'es_articleid');
+    }
 }
 
+if ($userID != 0 ){
 //Querying for User Stats table
 $query = $db->getQuery(true);
 $query->select($db->quoteName(array('es_userid','es_pageliked','es_pagedisliked')))//Get the user id, their list of liked and disliked pages
@@ -67,6 +73,8 @@ if ($dataNotExist){
     $userInfo->es_userid = $userID;
     // Insert record into the User Stats table.
     $result = JFactory::getDbo()->insertObject('#__customtables_table_userstats', $userInfo, 'es_userid');
+}
+
 }
 
 //If thumbs down button is pressed and user has logined

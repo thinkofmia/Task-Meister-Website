@@ -22,29 +22,49 @@ class ModFeaturedArticleHelper
      */    
     public static function getText($params)
     {
+        /**
+         * Function Get Text: Get text input from Joomla Interface
+         * Parameter: $params
+         */
         return $params->get('customtext');
     }
     public static function getHeader($params)
     {
+        /**
+         * Function Get Header: Get header input from Joomla Interface
+         * Parameter: $params
+         */
         return $params->get('customheader');
     }
     public static function getVideo($params)
     {
+        /**
+         * Function Get Video Link: Get video link input from Joomla Interface
+         * Parameter: $params
+         */
         return $params->get('videolink');
     }
     function getArticleExternalStats($articleId){
+        /**
+         * Function Get External Article Stats: Get article stats from an external database
+         * Parameter $articleId: Refers to the id of the chosen article
+         */
+        //Set up Database Variable
         $db =& JFactory::getDbo();
-        //Query
+        //Query for SQL for external article states
         $query = $db->getQuery(true);
-        $query->select($db->quoteName(array('*')))
-            ->from($db->quoteName('#__customtables_table_articlestats'))
-            ->where($db->quoteName('es_articleid') . ' = ' . intval($articleId));
+        $query->select($db->quoteName(array('*')))// Get all of the contents
+            ->from($db->quoteName('#__customtables_table_articlestats'))//From the external article stats table
+            ->where($db->quoteName('es_articleid') . ' = ' . intval($articleId));//Where the article id is equal to the chosen article
         $db->setQuery($query);
-        $results = $db->loadAssocList();
+        $results = $db->loadAssocList(); //Save results as a list
+        //For each item in the restuls
         foreach($results as $row){
-            $contents = $row;
+            $contents = $row;//Save the item as the contents
         }
+        //If no contents is found, return default message
         if (!$contents) $contents = "Nothing is found. ";
+        //Else return contents
         return $contents;
     }
     function getArticle($articleId){

@@ -26,12 +26,14 @@ require JModuleHelper::getLayoutPath('mod_taskmeister_articlestats');//call out 
 use Joomla\CMS\Factory;
 $db = Factory::getDbo();//Get database
 $me = Factory::getUser();//Ger User
+$articleID = JRequest::getVar('id');
 
+if ($articleID){
 //Query database for articles based on current article id
 $query = $db->getQuery(true);
 $query->select($db->quoteName(array('title','id','hits','featured','catid')))//Get which columns
     ->from($db->quoteName('#__content'))//Sets which database
-    ->where($db->quoteName('id') . ' = ' . JRequest::getVar('id'));//Set condition of query to find current article ID.
+    ->where($db->quoteName('id') . ' = ' . $articleID);//Set condition of query to find current article ID.
 $db->setQuery($query);
 $results = $db->loadAssocList();//Save results of main article database query
 
@@ -39,9 +41,10 @@ $results = $db->loadAssocList();//Save results of main article database query
 $query = $db->getQuery(true);
 $query->select($db->quoteName(array('es_articleid','es_userchoice','es_deployed','es_totallikes','es_totaldislikes','es_tags')))//Sets which columns of database
     ->from($db->quoteName('#__customtables_table_articlestats'))//Sets which database
-    ->where($db->quoteName('es_articleid') . ' = ' . JRequest::getVar('id'));//Set condition of query to find current article ID.
+    ->where($db->quoteName('es_articleid') . ' = ' . $articleID);//Set condition of query to find current article ID.
 $db->setQuery($query);
 $results2 = $db->loadAssocList();//Save results of external article database query
+}
 
 //Display table, table header and css style
 echo "
@@ -133,4 +136,5 @@ foreach ($results2 as $row) {
         </tr>"; 
     echo "</table>";
     }
+
 }

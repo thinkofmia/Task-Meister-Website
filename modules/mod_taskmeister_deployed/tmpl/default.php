@@ -8,10 +8,15 @@ use Joomla\CMS\Factory;
 $db = Factory::getDbo();
 //Set User Var and save user id
 $me = Factory::getUser();
-$userID = $me->id;
+$userID = 0; //By default
 
 //Get article id
 $articleID = JRequest::getVar('id');
+
+if ($articleID){
+
+//Set User id
+$userID = $me->id;
 //Querying for Article stats table for this article
 $query = $db->getQuery(true);
 $query->select($db->quoteName(array('es_articleid','es_deployed')))//Get article id and deployment list
@@ -64,6 +69,9 @@ if ($dataNotExist){
     // Update the object into the user stats table.
     $result = JFactory::getDbo()->insertObject('#__customtables_table_userstats', $userInfo, 'es_userid');
 }
+
+}
+
 
 
 //If clicked on the deployment button
