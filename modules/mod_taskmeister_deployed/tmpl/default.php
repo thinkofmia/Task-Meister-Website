@@ -14,7 +14,6 @@ $userID = 0; //By default
 $articleID = JRequest::getVar('id');
 
 if ($articleID){
-
 //Set User id
 $userID = $me->id;
 //Querying for Article stats table for this article
@@ -154,16 +153,17 @@ function setDeployed($userID,$articleID,$list,$deployedList_user){
     <?php endif; ?>
 </div>
 
-<!--Display for the deployment box/icon-->
-<div id="deployedBox">
-    <!--If the user is a guest, set the onclick button to login first -->
-    <?php if ($userID==0) : ?>
-        <button name= "fakeButton" id= "deployedButton" onclick="alert('Login First!!')" title="Deployment Button">👨‍💻</button> 
-    <!--Else if already logined, set post button for the deployment -->
-    <?php else : ?>
-        <form method="post">
-            <button name= "dButton" id= "deployedButton" title="Deployment Button">👨‍💻</button> 
-        </form>
-    <?php endif; ?>
-</div>
-
+<?php if ($dataNotExist) : ?>
+    <!--Display for the deployment box/icon-->
+    <div id="deployedBox">
+        <!--If the user is a guest, set the onclick button to login first -->
+        <?php if ($userID==0) : ?>
+            <button name= "fakeButton" id= "deployedButton" onclick="alert('Login First!!')" title="Deployment Button">👨‍💻</button> 
+        <!--Else if already logined, set post button for the deployment -->
+        <?php else : ?>
+            <form method="post">
+                <button name= "dButton" id= "deployedButton" title="Deployment Button">👨‍💻</button> 
+            </form>
+        <?php endif; ?>
+    </div>
+<?php endif; ?>

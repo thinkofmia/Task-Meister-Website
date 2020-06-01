@@ -263,16 +263,18 @@ function setThumbsUp($userID,$articleID,$userchoice,$userLikedList,$userDisliked
         <?php echo $displayText; ?>
     <?php endif; ?>
 </div>
-<div id="thumbsBox">
-    <!--If user is a guest, create fake buttons with alert messages-->
-    <?php if ($userID==0) : ?>
-        <button name= "fakeButton1" id= "thumbsUp" onclick="alert('Login First!!')" title ="Like Button">👍</button>
-        <button name= "fakeButton2" id = "thumbsDown" onclick="alert('Login First!!')" title ="Dislike Button">👎</button>  
-    <!--If user has logined, create buttons with actual functions-->
-    <?php else : ?>
-        <form method="post">
-            <button name= "tUp" id= "thumbsUp" title ="Like Button">👍</button>
-            <button name= "tDown" id = "thumbsDown" title ="Dislike Button">👎</button>  
-        </form>
-    <?php endif; ?>
-</div>
+<?php if ($dataNotExist) : ?>
+    <div id="thumbsBox">
+        <!--If user is a guest, create fake buttons with alert messages-->
+        <?php if ($userID==0) : ?>
+            <button name= "fakeButton1" id= "thumbsUp" onclick="alert('Login First!!')" title ="Like Button">👍</button>
+            <button name= "fakeButton2" id = "thumbsDown" onclick="alert('Login First!!')" title ="Dislike Button">👎</button>  
+        <!--If user has logined, create buttons with actual functions-->
+        <?php else : ?>
+            <form method="post">
+                <button name= "tUp" id= "thumbsUp" title ="Like Button">👍</button>
+                <button name= "tDown" id = "thumbsDown" title ="Dislike Button">👎</button>  
+            </form>
+        <?php endif; ?>
+    </div>
+<?php endif; ?>

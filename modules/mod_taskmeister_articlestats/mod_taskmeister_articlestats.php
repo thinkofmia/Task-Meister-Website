@@ -46,6 +46,8 @@ $db->setQuery($query);
 $results2 = $db->loadAssocList();//Save results of external article database query
 }
 
+if ($results){//If inside article table
+
 //Display table, table header and css style
 echo "
 <style>
@@ -137,4 +139,5 @@ foreach ($results2 as $row) {
     echo "</table>";
     }
 
+}
 }
