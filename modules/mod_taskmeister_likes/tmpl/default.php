@@ -9,8 +9,23 @@ $me = Factory::getUser();//Sets User variable
 
 $userID = 0;
 
-//Sets article id
-$articleID = JRequest::getVar('id');
+//Sets item id
+$itemID = JRequest::getVar('id');
+
+//Check if its an article
+if ($itemID){
+    //Query database for articles based on current article id
+    $query = $db->getQuery(true);
+    $query->select($db->quoteName(array('title','id','hits','featured','catid')))//Get which columns
+        ->from($db->quoteName('#__content'))//Sets which database
+        ->where($db->quoteName('id') . ' = ' . $itemID);//Set condition of query to find current article ID.
+    $db->setQuery($query);
+    $results = $db->loadAssocList();//Save results of main article database query
+    if ($results){
+        $articleID = $itemID;
+    }
+}
+
 if ($articleID){
     //Sets user id from User var
     $userID = $me->id;
@@ -263,7 +278,7 @@ function setThumbsUp($userID,$articleID,$userchoice,$userLikedList,$userDisliked
         <?php echo $displayText; ?>
     <?php endif; ?>
 </div>
-<?php if ($dataNotExist) : ?>
+<?php if ($articleID) : ?>
     <div id="thumbsBox">
         <!--If user is a guest, create fake buttons with alert messages-->
         <?php if ($userID==0) : ?>

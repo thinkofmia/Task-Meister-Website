@@ -10,8 +10,22 @@ $db = Factory::getDbo();
 $me = Factory::getUser();
 $userID = 0; //By default
 
-//Get article id
-$articleID = JRequest::getVar('id');
+//Sets item id
+$itemID = JRequest::getVar('id');
+
+//Check if its an article
+if ($itemID){
+    //Query database for articles based on current article id
+    $query = $db->getQuery(true);
+    $query->select($db->quoteName(array('title','id','hits','featured','catid')))//Get which columns
+        ->from($db->quoteName('#__content'))//Sets which database
+        ->where($db->quoteName('id') . ' = ' . $itemID);//Set condition of query to find current article ID.
+    $db->setQuery($query);
+    $results = $db->loadAssocList();//Save results of main article database query
+    if ($results){
+        $articleID = $itemID;
+    }
+}
 
 if ($articleID){
 //Set User id
@@ -153,7 +167,7 @@ function setDeployed($userID,$articleID,$list,$deployedList_user){
     <?php endif; ?>
 </div>
 
-<?php if ($dataNotExist) : ?>
+<?php if ($articleID) : ?>
     <!--Display for the deployment box/icon-->
     <div id="deployedBox">
         <!--If the user is a guest, set the onclick button to login first -->
