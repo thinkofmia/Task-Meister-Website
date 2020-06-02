@@ -235,14 +235,16 @@ table {
 }
 
 #customMenu {
-    width: 900px;
-    padding: 10px;
+    width: 70vw;
+    padding-left: 5vw;
     text-align: left;
+    padding-top: 2vw;
     a {
         position: relative;
         padding: 10px;
         color: $altFontColor;
         text-decoration: none ;
+        font-size: 1.7vw;
     }
     a:hover{
         color: $mainFontColor;
@@ -290,4 +292,9 @@ table {
     font-size: large;
     text-align: center;
     border-radius: 8px;
+}
+
+.search {
+    padding: 1vw;
+    padding-left: 5vw;
 }
