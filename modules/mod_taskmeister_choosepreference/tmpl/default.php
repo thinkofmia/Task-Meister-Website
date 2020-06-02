@@ -117,9 +117,9 @@ Display left hand side text
             list3 refers to the May Try List
     -->
     <form method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>" >
-        <br>Preferred: <input type="text" name="list1" id="input_list1" placeholder = "[]"> 
-        <br>Not Preferred: <input type="text" name="list2" id="input_list2" placeholder = "[]"> 
-        <br>May Try:<input type="text" name="list3" id="input_list3" placeholder = "[]"> 
+        <br><span style="background-color: green;">Preferred: </span><input type="text" name="list1" id="input_list1" placeholder = "[]"> 
+        <br><span style="background-color: red;">Not Preferred: </span><input type="text" name="list2" id="input_list2" placeholder = "[]"> 
+        <br><span style="background-color: goldenrod;">May Try: </span><input type="text" name="list3" id="input_list3" placeholder = "[]"> 
         <br><input type="submit" name="submit">
     </form>
 </div>
