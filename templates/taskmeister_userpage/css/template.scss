@@ -264,6 +264,12 @@ table {
     left: 30%;
     position: relative;
     background-color: brown;
+    width: 50vw;
+    iframe, img {
+        width: 25vw;
+        height: 25vw;
+    }
+
     .featuredArticleText{
         display: inline-block;
         padding-top: 5%;

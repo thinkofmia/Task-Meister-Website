@@ -247,6 +247,11 @@ table th, table td {
   left: 30%;
   position: relative;
   background-color: brown;
+  width: 50vw;
+}
+.featuredArticle iframe, .featuredArticle img {
+  width: 25vw;
+  height: 25vw;
 }
 .featuredArticle .featuredArticleText {
   display: inline-block;

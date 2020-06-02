@@ -7,10 +7,10 @@ defined('_JEXEC') or die;
     <div class="featuredArticle">
         <!--If exists video, play video. Else show image of article.-->
         <?php if ($videoLink) : ?>
-            <iframe width="300" height="300" src="<?php echo $videoLink; ?>">
+            <iframe src="<?php echo $videoLink; ?>">
             </iframe>
         <?php else : ?>
-            <img width="300" height="300" src="<?php echo $articleImage; ?>"></img>
+            <img src="<?php echo $articleImage; ?>"></img>
         <?php endif; ?>
         <div class="featuredArticleText">
             <!--Displays Custom Header if exists, else use article title-->
