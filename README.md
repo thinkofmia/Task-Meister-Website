@@ -1,5 +1,6 @@
 # Task-Meister
-Work involving Joomla-cms
+Work involving Joomla-cms.
+
 Check our website at: https://iwant2study.org/taskmeisterx/index.php/
 
 ## Installing a template/module/plugin
