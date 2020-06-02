@@ -37,7 +37,7 @@ class ModRecommendArticlesHelper
         return json_encode($results[0]) ;
     }
 
-    function getArticleList($params,$noOfArticles){//Function to get selection from parameter fields
+    function getArticleList($params,$noOfArticles, $selectedTag){//Function to get selection from parameter fields
         //Call our recommender
         JPluginHelper::importPlugin('taskmeister','tm_recommender');
         $dispatcher = JDispatcher::getInstance();
@@ -48,22 +48,25 @@ class ModRecommendArticlesHelper
         //Check parameters
         switch($params){//Based on parameters, call out the functions accordingly in the plugin
             case 'choice_myLikedList':
-                $results = $dispatcher->trigger( 'getMyList', array("Liked",$noOfArticles));
+                $results = $dispatcher->trigger( 'getMyList', array("Liked",$noOfArticles,""));
                 break;
             case 'choice_myDeployedList':
-                $results = $dispatcher->trigger( 'getMyList', array("Deployed",$noOfArticles));
+                $results = $dispatcher->trigger( 'getMyList', array("Deployed",$noOfArticles,""));
                 break;
             case 'choice_liked'://If mode selected to be by top likes
-                $results = $dispatcher->trigger( 'recommendPersonalArticles', array("Likes",$noOfArticles));
+                $results = $dispatcher->trigger( 'recommendPersonalArticles', array("Likes",$noOfArticles,""));
                 break;
             case 'choice_personal'://If mode selected to be personal recommendation
-                $results = $dispatcher->trigger( 'recommendPersonalArticles', array("Personal",$noOfArticles));
+                $results = $dispatcher->trigger( 'recommendPersonalArticles', array("Personal",$noOfArticles,""));
                 break;
             case 'choice_deployed'://If mode selected to be by most deployed
-                $results = $dispatcher->trigger( 'recommendPersonalArticles', array("Deployed",$noOfArticles));
+                $results = $dispatcher->trigger( 'recommendPersonalArticles', array("Deployed",$noOfArticles,""));
                 break;
             case 'choice_untouched'://If mode selected to be articles that the user never touched before
-                $results = $dispatcher->trigger( 'recommendPersonalArticles', array("Untouched",$noOfArticles));
+                $results = $dispatcher->trigger( 'recommendPersonalArticles', array("Untouched",$noOfArticles,""));
+                break;
+            case 'choice_selectedTag'://If mode selected to be articles of a particular tag
+                $results = $dispatcher->trigger( 'recommendPersonalArticles', array("Selected Tag",$noOfArticles,$selectedTag));
                 break;
             default:
                 $results = array("Not implemented yet. Please select another filter. ");

@@ -56,8 +56,18 @@
 					<option value="choice_untouched">Something you have not tried before</option>
 					<option value="choice_myLikedList">What you have liked</option>
 					<option value="choice_myDeployedList">What you have deployed</option>
+					<option value="choice_selectedTag">Recommends only the Selected Tag</option>
 					<option	value="choice_random">Random</option>
 				</field>
+				<field
+					name="selectedtag"
+					type="textarea"
+					label="Selected Tag"
+					description="Only for selected tag mode. Leave blank if any other mode is used. "
+					filter="safehtml"
+					cols="30"
+					rows="1"
+				/>
             </fieldset>
         </fields>
     </config>

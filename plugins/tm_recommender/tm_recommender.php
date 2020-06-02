@@ -180,7 +180,7 @@ class plgTaskMeisterTM_recommender extends JPlugin
     Used only for articles module
     Returns a string of recommended articles
      */
-    function recommendPersonalArticles($mode,$noOfArticles){
+    function recommendPersonalArticles($mode,$noOfArticles, $parameter1){
         $db = Factory::getDbo();//Gets database
         $me = Factory::getUser();//Gets user
         $userid = $me->id;
@@ -215,20 +215,34 @@ class plgTaskMeisterTM_recommender extends JPlugin
             }
             else{//If articles collected is less than 10
                 //Initializes vars
-                $weightage = 0;
+                $weightage = 0; //Weightage Value
+                $checkIfSelectedTag = false; //Only for selected tag mode
                 //Weightage for tags
                 $articleTags = json_decode($row['es_tags']);
+                if ($mode == "Selected Tag"){//If its just for one tag
+                    if (in_array($parameter1,$articleTags)){
+                        $weightage = 90;
+                    }
+                    else{
+                        $weightage = -999999;
+                    }
+                }
                 foreach ($preferencelist as $key => $value){
+                    //Else check if within array of user's favourited tags
                     if (in_array($key,$articleTags)){
                         switch($value){
                             default://generic
                                 $weightage += 0;
+                                break;
                             case 0://If not preferred
                                 $weightage -= 100;
+                                break;
                             case 1://May Try
                                 $weightage += 5;
+                                break;
                             case 2://Preferred
                                 $weightage += 10;
+                                break;
                         }
                     }
                 }
@@ -240,15 +254,20 @@ class plgTaskMeisterTM_recommender extends JPlugin
                     case "Untouched":
                         if(in_array($row['es_articleid'],$likedlist)||in_array($row['es_articleid'],$deployedlist))
                             $touchBeforeModifier = 99999;
+                        break;
                     case "Deployed":
-                        $deployedModifier = 20; 
+                        $deployedModifier = 20;
+                        break; 
                     case "Likes":
                         $likedModifier = 20; 
+                        break;
                     default:
-                         
+                        break; 
                 }
                 //Store weightage
-                $weighArticlesList[$row['es_articleid']] = $weightage - $touchBeforeModifier + $likedModifier*($row['es_totallikes'] - $row['es_totaldislikes']) + $row['es_totaldeployed']*$deployedModifier; 
+                $weighingValue = $weightage - $touchBeforeModifier + $likedModifier*($row['es_totallikes'] - $row['es_totaldislikes']) + $row['es_totaldeployed']*$deployedModifier;
+                //Only if weightage is higher or equal to 0
+                if ($weightage>=0) $weighArticlesList[$row['es_articleid']] = $weighingValue; 
             }
         }
         arsort($weighArticlesList);//Sort articles in descending order

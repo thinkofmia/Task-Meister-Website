@@ -21,7 +21,7 @@ $displayHeader = ModRecommendArticlesHelper::getHeader($params);//invoke helper 
 $displayText = ModRecommendArticlesHelper::getText($params);//invoke helper class method
 
 //Call our recommender
-$resultsSelected= ModRecommendArticlesHelper::getArticleList($params->get('filter'),$params->get('noOfArticles'));
+$resultsSelected= ModRecommendArticlesHelper::getArticleList($params->get('filter'),$params->get('noOfArticles'), $params->get('selectedtag'));
 $recommendedContents = ModRecommendArticlesHelper::getArticles($resultsSelected);
 
 require JModuleHelper::getLayoutPath('mod_taskmeister_recommendarticles');//Calls out default.php
