@@ -327,6 +327,14 @@ table th, table td {
     opacity: 1;
   }
 }
+@keyframes fromTop {
+  from {
+    top: -100%;
+  }
+  to {
+    top: 0%;
+  }
+}
 @keyframes fromLeft {
   from {
     left: -100%;

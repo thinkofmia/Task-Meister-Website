@@ -351,6 +351,15 @@ table {
     }
 }
 
+@keyframes fromTop {
+    from {
+        top: -100%;
+    }
+    to {
+        top: 0%;
+    }
+}
+
 @keyframes fromLeft {
     from {
         left: -100%;
