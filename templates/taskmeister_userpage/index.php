@@ -52,7 +52,6 @@
         <jdoc:include type="modules" name="bottom-right"/><!-- Module Position: 'bottom-right'-->
         <jdoc:include type="modules" name="footer" /><!-- Module Position: 'footer'-->
     </div>
-
 </body>
 
 <!-- End-->

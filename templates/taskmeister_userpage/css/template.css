@@ -79,7 +79,7 @@ table th, table td {
   display: inline-block;
   margin: 10px;
   overflow-x: hidden;
-  height: 80vh;
+  height: 300vh;
   scrollbar-color: gray black;
   animation-name: fromLeft;
   animation-duration: 3s;
@@ -147,6 +147,10 @@ table th, table td {
   font-size: 1.3vw;
 }
 
+.arrow:hover, .arrowRight:hover, .arrowLeft:hover {
+  cursor: pointer;
+}
+
 .arrow, .arrowRight, .arrowLeft {
   border: solid white;
   border-width: 0 5px 5px 0;
@@ -157,10 +161,6 @@ table th, table td {
   position: absolute;
   cursor: pointer;
   margin-top: 70px;
-}
-
-.arrow:hover, .arrowRight:hover, .arrowLeft:hover {
-  cursor: pointer;
 }
 
 .arrowLeft {
@@ -271,14 +271,13 @@ table th, table td {
 .featuredArticle {
   display: inline-flex;
   text-align: center;
-  left: 30%;
   position: relative;
   background-color: brown;
-  width: 50vw;
+  width: 90vw;
 }
 .featuredArticle iframe, .featuredArticle img {
-  width: 25vw;
-  height: 25vw;
+  width: 30vw;
+  height: 30vw;
 }
 .featuredArticle .featuredArticleText {
   display: inline-block;

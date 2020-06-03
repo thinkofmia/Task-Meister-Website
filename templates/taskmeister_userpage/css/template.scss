@@ -83,7 +83,7 @@ table {
     display: inline-block;
     margin: 10px;
     overflow-x: hidden;
-    height: 80vh;
+    height: 300vh;
     scrollbar-color: gray black;
     //Animation
     animation-name: fromLeft;
@@ -160,6 +160,10 @@ table {
     }
 }
 
+.arrow:hover {
+    cursor: pointer;
+}
+
 .arrow {
     border: solid $mainFontColor;
     border-width: 0 5px 5px 0;
@@ -171,10 +175,6 @@ table {
     cursor: pointer;
     margin-top: 70px;
   }
-
-.arrow:hover {
-    cursor: pointer;
-}
 
 .arrowLeft {
     @extend .arrow;
@@ -291,13 +291,12 @@ table {
 .featuredArticle{
     display: inline-flex;
     text-align: center;
-    left: 30%;
     position: relative;
     background-color: brown;
-    width: 50vw;
+    width: 90vw;
     iframe, img {
-        width: 25vw;
-        height: 25vw;
+        width: 30vw;
+        height: 30vw;
     }
     .featuredArticleText{
         display: inline-block;
