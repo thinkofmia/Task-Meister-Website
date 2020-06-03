@@ -8,21 +8,29 @@ $altFontColor: gold; //For alt default font color
 body {//Body Tag
     background-color: $pageBackground;
     color: $mainFontColor;
-    width: 100vw;
+    width: 97vw;
     overflow-x: hidden;
     display: inline-block;
     position: relative;
     height: auto;
+    font-size: 1.5vw;
+}
+
+p {
+    color: $mainFontColor;
+    font-size: 1vw;
 }
 
 h3 {
     color: $altFontColor;
     text-align: left;
+    font-size: 2vw;
 }
 
 table {
     border: 1px solid white; 
     border-collapse: collapse;
+    font-size: 1.25vw;
     th, td {
         border: 1px solid white; 
     }
@@ -58,6 +66,10 @@ table {
     }
     .logo{/*Set css for logo*/
         height:100%;
+        width: 30vw;
+    }
+    .right{
+        left: 0vw;
     }
 }
 
@@ -92,16 +104,16 @@ table {
 }
 
 .accountIcon{
-    width: 75px;
-    height: 75px;
+    width: 5vw;
+    height: 5vw;
     text-align: right;
-    padding: 15px;
-    margin-left: 5%;
+    padding: 1vw;
+    margin-left: 1vw;
 }
 
 .articlesRow {
     display: inline-flex;
-    width: 90%;
+    width: 80vw;
     padding-left: 5px;
 }
 
@@ -109,16 +121,16 @@ table {
     display:inline-flex; 
     overflow-x: hidden;
     overflow-y: hidden; 
-    height: 175px; 
+    height: 15vw; 
     width: 100%;
     padding-left: 3%;
 
     .article {
         position: relative;
-        padding-right:5px; 
-        width:150px; 
-        height:150px; 
-        text-align:center;
+        padding-right: 5px; 
+        width: 15vw; 
+        height: 15vw; 
+        text-align: center;
 
         img {
             width: 100%;
@@ -129,9 +141,11 @@ table {
             position: absolute;
             bottom: -10%;
             width: 97%;
-            background-color: darkgray;
+            background-color: #695f00;
             opacity: 0.8;
             color: $mainFontColor;
+            position: absolute;
+            font-size: 1.3vw;
         }
     }
 }
@@ -141,12 +155,16 @@ table {
     border-width: 0 5px 5px 0;
     display: inline-block;
     padding: 3px;
-    width: 20px;
-    height: 20px;
+    width: 2vw;
+    height: 2vw;
     position: absolute;
     cursor: pointer;
     margin-top: 70px;
   }
+
+.arrow:hover {
+    cursor: pointer;
+}
 
 .arrowLeft {
     @extend .arrow;
@@ -191,7 +209,7 @@ table {
     }
 }
 .preferenceList {
-    width: 300%;
+    width: 90vw;
     height: 100%;
     display: inline-block;
     text-align: center;
@@ -215,28 +233,28 @@ table {
 }
 
 .preferenceBox {
-    width: 100px;
-    height: 100px;
+    height: 15vw;
     position: relative;
     display: inline-flex;
-    padding: 5px;
+    padding: 1vw;
     cursor: pointer;
 
     p {
         position: absolute;
         z-index: 10;
-        bottom: -10%;
-        background-color: darkgray;
+        bottom: -0.5vw;
+        background-color: $altFontColor;
+        opacity: 0.9;
         text-align: center;
-        width: 100px;
+        width: 15vw;
         word-wrap: wrap;
-        font-size: smaller;
+        font-size: 1.5vw;
     }
 }
 
 #customMenu {
     width: 70vw;
-    padding-left: 5vw;
+    padding-left: 3vw;
     text-align: left;
     padding-top: 2vw;
     a {
@@ -303,4 +321,6 @@ table {
 .search {
     padding: 1vw;
     padding-left: 5vw;
+    width: 20vw;
+    font-size: 1vw;
 }
