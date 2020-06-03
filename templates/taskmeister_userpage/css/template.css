@@ -54,6 +54,9 @@ table th, table td {
   display: inline-block;
   height: 100px;
   background-color: darkgray;
+  animation-name: fadeIn;
+  animation-duration: 3s;
+  animation-fill-mode: forwards;
   /*CSS for internal link*/
 }
 #topRow a {
@@ -73,12 +76,14 @@ table th, table td {
 #centerRow {
   position: relative;
   width: 95%;
-  top: 30%;
   display: inline-block;
   margin: 10px;
   overflow-x: hidden;
   height: 80vh;
   scrollbar-color: gray black;
+  animation-name: fromLeft;
+  animation-duration: 3s;
+  animation-fill-mode: forwards;
 }
 #centerRow .left {
   position: absolute;
@@ -89,8 +94,10 @@ table th, table td {
 #bottomRow {
   position: relative;
   width: 100%;
-  bottom: 100%;
   margin: 10px;
+  animation-name: fromLeft;
+  animation-duration: 4s;
+  animation-fill-mode: forwards;
 }
 #bottomRow .center {
   text-align: center;
@@ -192,7 +199,8 @@ table th, table td {
 }
 .preferenceOptions input {
   display: inline-block;
-  min-width: 50px;
+  min-width: 20vw;
+  font-size: 1.5vw;
 }
 
 .preferenceList {
@@ -305,6 +313,29 @@ table th, table td {
   padding-left: 5vw;
   width: 30vw;
   font-size: 1vw;
+}
+
+.latestnews {
+  font-size: 1vw;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes fromLeft {
+  from {
+    left: -100%;
+    opacity: 0;
+  }
+  to {
+    left: 0%;
+    opacity: 1;
+  }
 }
 
 /*# sourceMappingURL=template.css.map */
