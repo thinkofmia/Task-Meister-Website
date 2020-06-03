@@ -130,6 +130,7 @@ Display left hand side text
 -->
 <div class="preferenceList">
     <!--For loop to display tag list-->
+    <?php $count=0;//To count number of tags ?>
     <?php foreach ($tagList as $key => $value) : ?>
         <!--Set the div id as the tag name and give it onclick togglePreference func-->
         <div class="preferenceBox" id="<?php echo $key;?>" onclick="togglePreference('<?php echo $key;?>')">
@@ -141,6 +142,34 @@ Display left hand side text
             <!--Display label of tags, including tag name and number of uses-->
             <p class = "preferenceLabel"><?php echo $key; ?>: <?php echo $value; ?> uses</p>
         </div>
+        <?php $count = $count + 1; ?>
+        <?php if ($count==25): ?>
+            <button onclick="getAllTags();" id="getMoreBtn">Get All Tags</button><br>
+            <?php echo "<span id='getMore'>"; ?>
+        <?php endif; ?>
         </script>
     <?php endforeach; ?>
+    <!--Make a get more button-->
+    <?php if ($count>=25): ?>
+            <?php echo "</span>"; ?>
+    <?php endif; ?>
 </div>
+
+<script>
+var moreText = document.getElementById("getMore");
+moreText.style.display = "none";
+
+function getAllTags() {
+  var moreText = document.getElementById("getMore");
+  var btnText = document.getElementById("getMoreBtn");
+
+  if (moreText.style.display == "inline") {
+    btnText.innerHTML = "Get All"; 
+    moreText.style.display = "none";
+  } 
+  else {
+    btnText.innerHTML = "Hide Rest"; 
+    moreText.style.display = "inline";
+  }
+}
+</script>
