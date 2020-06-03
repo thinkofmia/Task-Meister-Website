@@ -25,7 +25,7 @@ $list2 = json_decode($recommendedContents);
 <div class="articlesRow">
   <!-- Arrow button to scroll left-->
   <i class="arrowLeft" onclick="var left = this.closest('div').querySelector('.recommendedArticles').scrollLeft; this.closest('div').querySelector('.recommendedArticles').scrollTo({
-          left: left - 200,
+          left: left - 300,
           behavior: 'smooth',
         });"></i>
   <!--Displays list of recommended articles based on the article contents-->
@@ -45,7 +45,7 @@ $list2 = json_decode($recommendedContents);
   </div>
   <!-- Arrow button to scroll right-->
   <i class="arrowRight" onclick="var left = this.closest('div').querySelector('.recommendedArticles').scrollLeft; this.closest('div').querySelector('.recommendedArticles').scrollTo({
-          left: left + 200,
+          left: left + 300,
           behavior: 'smooth',
         });"></i>
 </div>
