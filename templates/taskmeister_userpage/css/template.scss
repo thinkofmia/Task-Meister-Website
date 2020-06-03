@@ -134,7 +134,7 @@ table {
     height: 15vw; 
     width: 100%;
     padding-left: 3%;
-
+    transition: transform .4s ease-in;
     .article {
         position: relative;
         padding-right: 5px; 
@@ -310,6 +310,9 @@ table {
         h3{//Style for the header
             @extend h3;
             text-align: center;
+        }
+        p {
+            font-size: 1.5vw;
         }
     }
 }

@@ -24,7 +24,10 @@ $list2 = json_decode($recommendedContents);
 <ul class="scrollbarnews<?php echo $moduleclass_sfx; ?> mod-list">
 <div class="articlesRow">
   <!-- Arrow button to scroll left-->
-  <i class="arrowLeft" onclick="this.closest('div').querySelector('.recommendedArticles').scrollLeft -= 100;"></i>
+  <i class="arrowLeft" onclick="var left = this.closest('div').querySelector('.recommendedArticles').scrollLeft; this.closest('div').querySelector('.recommendedArticles').scrollTo({
+          left: left - 200,
+          behavior: 'smooth',
+        });"></i>
   <!--Displays list of recommended articles based on the article contents-->
   <div class="recommendedArticles" id= "recommendation">
     <!--For loop for the items in the list-->
@@ -41,6 +44,9 @@ $list2 = json_decode($recommendedContents);
     <?php endforeach; ?>
   </div>
   <!-- Arrow button to scroll right-->
-  <i class="arrowRight" onclick="this.closest('div').querySelector('.recommendedArticles').scrollLeft += 100;"></i>
+  <i class="arrowRight" onclick="var left = this.closest('div').querySelector('.recommendedArticles').scrollLeft; this.closest('div').querySelector('.recommendedArticles').scrollTo({
+          left: left + 200,
+          behavior: 'smooth',
+        });"></i>
 </div>
 </ul>

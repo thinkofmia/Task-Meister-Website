@@ -124,6 +124,7 @@ table th, table td {
   height: 15vw;
   width: 100%;
   padding-left: 3%;
+  transition: transform 0.4s ease-in;
 }
 .recommendedArticles .article {
   position: relative;
@@ -288,6 +289,9 @@ table th, table td {
 }
 .featuredArticle .featuredArticleText h3 {
   text-align: center;
+}
+.featuredArticle .featuredArticleText p {
+  font-size: 1.5vw;
 }
 
 .login-button {
