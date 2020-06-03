@@ -288,24 +288,26 @@ table {
     left: 90%;
 }
 
+//This is the style for the Featured Article Mod (Or the Youtube Mod)
 .featuredArticle{
     display: inline-flex;
     text-align: center;
     position: relative;
     background-color: brown;
     width: 90vw;
+    //Style for the youtube video or display picture
     iframe, img {
         width: 30vw;
         height: 30vw;
     }
+    //Style for the Featured Article Mod Texts
     .featuredArticleText{
         display: inline-block;
         font-size: 1.5vw;
         padding-top: 5%;
         padding-left: 2%;
         padding-right: 2%;
-
-        h3{
+        h3{//Style for the header
             @extend h3;
             text-align: center;
         }
