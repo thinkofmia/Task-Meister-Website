@@ -13,3 +13,5 @@ defined('_JEXEC') or die;
 // include the syndicate functions only once
 require_once dirname(__FILE__).'/helper.php';
 ?>
+
+<p>Hi, this is from mod_taskmeister_review.php of mod_taskmeister_review</p>
