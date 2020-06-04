@@ -79,7 +79,7 @@ table th, table td {
   display: inline-block;
   margin: 10px;
   overflow-x: hidden;
-  height: 300vh;
+  height: 500vh;
   scrollbar-color: gray black;
   animation-name: fromLeft;
   animation-duration: 3s;
@@ -117,14 +117,28 @@ table th, table td {
   padding-left: 5px;
 }
 
+.recommendedArticles:focus-within .article,
+.recommendedArticles:hover .article {
+  transform: translateX(-25%);
+}
+
 .recommendedArticles {
   display: inline-flex;
   overflow-x: hidden;
-  overflow-y: hidden;
   height: 15vw;
   width: 100%;
   padding-left: 3%;
   transition: transform 0.4s ease-in;
+  padding-top: 5vw;
+  padding-bottom: 5vw;
+}
+.recommendedArticles .article:focus, .recommendedArticles .article:hover {
+  transform: scale(1.5);
+  z-index: 99;
+}
+.recommendedArticles .article:focus ~ .article,
+.recommendedArticles .article:hover ~ .article {
+  transform: translateX(25%);
 }
 .recommendedArticles .article {
   position: relative;
@@ -132,6 +146,7 @@ table th, table td {
   width: 15vw;
   height: 15vw;
   text-align: center;
+  transition: transform 500ms;
 }
 .recommendedArticles .article img {
   width: 100%;
@@ -150,6 +165,8 @@ table th, table td {
 
 .arrow:hover, .arrowRight:hover, .arrowLeft:hover {
   cursor: pointer;
+  border: solid gold;
+  border-width: 0 5px 5px 0;
 }
 
 .arrow, .arrowRight, .arrowLeft {
@@ -161,7 +178,7 @@ table th, table td {
   height: 2vw;
   position: absolute;
   cursor: pointer;
-  margin-top: 70px;
+  margin-top: 10vw;
 }
 
 .arrowLeft {

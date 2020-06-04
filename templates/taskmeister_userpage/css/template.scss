@@ -83,7 +83,7 @@ table {
     display: inline-block;
     margin: 10px;
     overflow-x: hidden;
-    height: 300vh;
+    height: 500vh;
     scrollbar-color: gray black;
     //Animation
     animation-name: fromLeft;
@@ -127,20 +127,37 @@ table {
     padding-left: 5px;
 }
 
+.recommendedArticles:focus-within,
+.recommendedArticles:hover{
+  .article {
+    transform: translateX(-25%);
+  }
+}
+
 .recommendedArticles{
     display:inline-flex; 
     overflow-x: hidden;
-    overflow-y: hidden; 
     height: 15vw; 
     width: 100%;
     padding-left: 3%;
     transition: transform .4s ease-in;
+    padding-top: 5vw;
+    padding-bottom: 5vw;
+    .article:focus, .article:hover {
+        transform: scale(1.5);
+        z-index: 99;
+    }
+    .article:focus ~ .article,
+    .article:hover ~ .article {
+        transform: translateX(25%);
+    }
     .article {
         position: relative;
         padding-right: 5px; 
         width: 15vw; 
         height: 15vw; 
         text-align: center;
+        transition: transform 500ms;
 
         img {
             width: 100%;
@@ -160,8 +177,12 @@ table {
     }
 }
 
+
+//CSS for Recommend Articles Arrows
 .arrow:hover {
     cursor: pointer;
+    border: solid $altFontColor;
+    border-width: 0 5px 5px 0;
 }
 
 .arrow {
@@ -173,7 +194,7 @@ table {
     height: 2vw;
     position: absolute;
     cursor: pointer;
-    margin-top: 70px;
+    margin-top: 10vw;
   }
 
 .arrowLeft {
