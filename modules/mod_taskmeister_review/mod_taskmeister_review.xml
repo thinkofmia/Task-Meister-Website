@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="module" version="3.9" client="site" method="upgrade">
+  <name>mod_taskmeister_review</name>
+  <author>Tan Lim Chai Seng</author>
+  <creationDate>June 2020</creationDate>
+  <license>GNU General Public License version 2 or later; see LICENSE.txt</license>
+  <authorEmail>tanlimcs@gmail.com</authorEmail>
+  <version>1.0.0</version>
+  <description>A module to handle the submission, displaying and manipulation of article reviews.</description>
+  
+  <files>
+    <filename module="mod_taskmeister_review">mod_taskmeister_review.php</filename>
+    <filename>helper.php</filename>
+    <folder>tmpl</folder>
+  </files>
+  
+  <languages>
+    <language tag="en_GB">en_GB.mod_taskmeister_review.ini</language>
+    <language tag="en_GB">en_GB.mod_taskmeister_review.sys.ini</language>
+  </languages>
+  
+  <config>
+    <fields name="params">
+      <fieldset name="basic">
+      
+        <field name="sampleField" type="list" required="true" label="SAMPLE_FIELD_LABEL" description="SAMPLE_FIELD_DESCRIPTION">
+          <option value="0">SAMPLE_OPTION_1</option>
+          <option value="1">SAMPLE_OPTION_2</option>
+        </field>
+        
+      </fieldset>
+    </fields>
+    
+  </config>
+</extension>
