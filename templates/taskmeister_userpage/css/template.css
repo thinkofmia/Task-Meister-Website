@@ -136,8 +136,8 @@ table th, table td {
   transform: scale(1.5);
   z-index: 99;
 }
-.recommendedArticles .article:focus ~ .article,
-.recommendedArticles .article:hover ~ .article {
+.recommendedArticles a:focus ~ a .article,
+.recommendedArticles a:hover ~ a .article {
   transform: translateX(25%);
 }
 .recommendedArticles .article {

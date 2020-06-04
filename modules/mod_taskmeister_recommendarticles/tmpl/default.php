@@ -29,7 +29,7 @@ $list2 = json_decode($recommendedContents);
           behavior: 'smooth',
         });"></i>
   <!--Displays list of recommended articles based on the article contents-->
-  <div class="recommendedArticles" id= "recommendation">
+  <div class="recommendedArticles dragscroll" id= "recommendation">
     <!--For loop for the items in the list-->
     <?php foreach ($list2 as $key => $value) : ?>
     <!--Url link to the article page-->
@@ -50,3 +50,5 @@ $list2 = json_decode($recommendedContents);
         });"></i>
 </div>
 </ul>
+
+<script type="text/javascript" src="https://cdn.rawgit.com/asvd/dragscroll/master/dragscroll.js"></script>
