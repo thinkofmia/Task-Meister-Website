@@ -11,7 +11,6 @@
   <files>
     <filename module="mod_taskmeister_review">mod_taskmeister_review.php</filename>
     <filename>helper.php</filename>
-    <folder>tmpl</folder>
   </files>
   
   <languages>
