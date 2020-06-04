@@ -59,7 +59,7 @@ table {
     height: 100px;
     background-color: $headerBackground;
     animation-name: fadeIn;
-    animation-duration: 3s;
+    animation-duration: 2s;
     animation-fill-mode: forwards;
 
     /*CSS for internal link*/
@@ -318,7 +318,7 @@ table {
     width: 90vw;
     //Style for the youtube video or display picture
     iframe, img {
-        width: 30vw;
+        width: 50vw;
         height: 30vw;
     }
     //Style for the Featured Article Mod Texts
@@ -362,7 +362,7 @@ table {
     font-size: 1vw;
 }
 
-.latestnews {
+.latestnews, .whosonline li {
     font-size: 1vw;
 }
 

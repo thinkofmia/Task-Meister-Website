@@ -55,7 +55,7 @@ table th, table td {
   height: 100px;
   background-color: darkgray;
   animation-name: fadeIn;
-  animation-duration: 3s;
+  animation-duration: 2s;
   animation-fill-mode: forwards;
   /*CSS for internal link*/
 }
@@ -294,7 +294,7 @@ table th, table td {
   width: 90vw;
 }
 .featuredArticle iframe, .featuredArticle img {
-  width: 30vw;
+  width: 50vw;
   height: 30vw;
 }
 .featuredArticle .featuredArticleText {
@@ -335,7 +335,7 @@ table th, table td {
   font-size: 1vw;
 }
 
-.latestnews {
+.latestnews, .whosonline li {
   font-size: 1vw;
 }
 
