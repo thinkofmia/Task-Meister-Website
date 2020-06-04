@@ -24,7 +24,11 @@ $list2 = json_decode($recommendedContents);
 <ul class="scrollbarnews<?php echo $moduleclass_sfx; ?> mod-list">
 <div class="articlesRow">
   <!-- Arrow button to scroll left-->
-  <i class="arrowLeft" onclick="var left = this.closest('div').querySelector('.recommendedArticles').scrollLeft; this.closest('div').querySelector('.recommendedArticles').scrollTo({
+  <i class="arrowLeft" onmouseover="var left = this.closest('div').querySelector('.recommendedArticles').scrollLeft; this.closest('div').querySelector('.recommendedArticles').scrollTo({
+          left: left - 300,
+          behavior: 'smooth',
+        });" 
+        onclick="var left = this.closest('div').querySelector('.recommendedArticles').scrollLeft; this.closest('div').querySelector('.recommendedArticles').scrollTo({
           left: left - 300,
           behavior: 'smooth',
         });"></i>
@@ -45,6 +49,10 @@ $list2 = json_decode($recommendedContents);
   </div>
   <!-- Arrow button to scroll right-->
   <i class="arrowRight" onclick="var left = this.closest('div').querySelector('.recommendedArticles').scrollLeft; this.closest('div').querySelector('.recommendedArticles').scrollTo({
+          left: left + 300,
+          behavior: 'smooth',
+        });"
+        onmouseover="var left = this.closest('div').querySelector('.recommendedArticles').scrollLeft; this.closest('div').querySelector('.recommendedArticles').scrollTo({
           left: left + 300,
           behavior: 'smooth',
         });"></i>
