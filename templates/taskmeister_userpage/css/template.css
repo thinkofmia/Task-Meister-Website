@@ -339,6 +339,10 @@ table th, table td {
   font-size: 1vw;
 }
 
+#preferenceForm #input_list1, #preferenceForm #input_list2, #preferenceForm #input_list3 {
+  display: none;
+}
+
 @keyframes fadeIn {
   from {
     opacity: 0;

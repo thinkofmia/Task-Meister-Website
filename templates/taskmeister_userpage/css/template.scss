@@ -366,6 +366,12 @@ table {
     font-size: 1vw;
 }
 
+#preferenceForm {
+    #input_list1, #input_list2, #input_list3 {
+        display: none;
+    }
+}
+
 //Animations
 @keyframes fadeIn {
     from {

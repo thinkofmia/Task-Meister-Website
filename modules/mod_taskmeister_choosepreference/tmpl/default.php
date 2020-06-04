@@ -24,6 +24,9 @@ $userPreferenceList = array();//User Preferred List
         document.getElementById("input_list1").value = JSON.stringify(userPreferredList);
         document.getElementById("input_list2").value = JSON.stringify(userNotPreferredList);
         document.getElementById("input_list3").value = JSON.stringify(userMayTryList);
+        document.getElementById("text_list1").innerHTML = JSON.stringify(userPreferredList);
+        document.getElementById("text_list2").innerHTML = JSON.stringify(userNotPreferredList);
+        document.getElementById("text_list3").innerHTML = JSON.stringify(userMayTryList);
     }
 
     togglePreference = function(tag){
@@ -116,10 +119,10 @@ Display left hand side text
             list2 refers to the Not Preferred List
             list3 refers to the May Try List
     -->
-    <form method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>" >
-        <br><span style="background-color: green;">Preferred: </span><input type="text" name="list1" id="input_list1" placeholder = "[]"> 
-        <br><span style="background-color: red;">Not Preferred: </span><input type="text" name="list2" id="input_list2" placeholder = "[]"> 
-        <br><span style="background-color: goldenrod;">May Try: </span><input type="text" name="list3" id="input_list3" placeholder = "[]"> 
+    <form id="preferenceForm" method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>" >
+        <br><span style="background-color: green;">Preferred: </span><span id="text_list1">[]</span><input type="text" name="list1" id="input_list1" placeholder = "[]"> 
+        <br><span style="background-color: red;">Not Preferred: </span><span id="text_list2">[]</span><input type="text" name="list2" id="input_list2" placeholder = "[]"> 
+        <br><span style="background-color: goldenrod;">May Try: </span><span id="text_list3">[]</span><input type="text" name="list3" id="input_list3" placeholder = "[]"> 
         <br><input type="submit" name="submit">
     </form>
 </div>
