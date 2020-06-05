@@ -339,6 +339,12 @@ table th, table td {
   font-size: 1vw;
 }
 
+#preferenceForm {
+  text-align: center;
+  width: 90vw;
+  position: relative;
+  left: -27vw;
+}
 #preferenceForm #input_list1, #preferenceForm #input_list2, #preferenceForm #input_list3 {
   display: none;
 }
