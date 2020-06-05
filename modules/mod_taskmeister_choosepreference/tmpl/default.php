@@ -4,7 +4,7 @@ defined('_JEXEC') or die;
 //Displays module output
 $userPreferenceList = array();//User Preferred List
 ?>
-
+<?php //echo json_encode($currentList); ?>
 <script type="text/javascript">
 //Javascript to store JS functions and initialize array
     //List of user preferred tags - default empty
@@ -13,7 +13,7 @@ $userPreferenceList = array();//User Preferred List
     userNotPreferredList = [];
     //List of user may try tags - default empty
     userMayTryList = [];
-
+    //Js function to load the list
     updateLists = function(){
         /*
             JavaScript function: Update all of the lists in html based on the lists
@@ -175,4 +175,19 @@ function getAllTags() {
     moreText.style.display = "inline";
   }
 }
+//Function to add current list to menu
+<?php foreach ($currentList as $key => $value) : ?>
+    <?php if ($key): ?>
+        <?php if ($value==0): ?>//No way
+            togglePreference('<?php echo $key; ?>');
+            togglePreference('<?php echo $key; ?>');
+        <?php elseif ($value==1) : ?>
+            togglePreference('<?php echo $key; ?>');
+            togglePreference('<?php echo $key; ?>');
+            togglePreference('<?php echo $key; ?>');
+        <?php elseif ($value==2) : ?>//$value ==2
+            togglePreference('<?php echo $key; ?>');
+        <?php endif; ?>
+    <?php endif; ?>
+<?php endforeach; ?>
 </script>

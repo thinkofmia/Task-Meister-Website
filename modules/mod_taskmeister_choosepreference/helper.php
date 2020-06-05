@@ -20,7 +20,7 @@ class ModChoosePreferenceHelper
      *
      * @access public
      */    
-
+    
     public static function getText($params)//Function to get custom text from Joomla interface
     {
         return $params->get('customtext');
@@ -73,5 +73,24 @@ class ModChoosePreferenceHelper
         $results = $dispatcher->trigger('saveUserPreference', array($list1,$list2,$list3));//Returns results in the form of an array
         
         return $results[0];//Return first index of results, which is mostly a boolean to show if the func completes
+    }
+    function getPreferenceLists($userid, $db){
+        if ($userid != 0 ){//If user is not a guest
+            //Get external user table (custom table) To find out list of liked, deployed and disliked articles
+            $query = $db->getQuery(true);
+            $query->select($db->quoteName(array('es_userid','es_userpreference')))
+            ->from($db->quoteName('#__customtables_table_userstats'))
+            ->where($db->quoteName('es_userid') . ' = ' . $userid);
+            $db->setQuery($query);
+            $results_ext = $db->loadAssocList();
+            //Save information into a list
+            foreach ($results_ext as $row){
+                if ($row['es_userid']==$userid){//Just to be sure if user id is same
+                    $preferencelist = json_decode($row['es_userpreference']);
+                }
+            }
+            return $preferencelist;
+        }
+        
     }
 }

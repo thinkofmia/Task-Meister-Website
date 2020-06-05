@@ -20,6 +20,7 @@ require_once dirname(__FILE__) . '/helper.php';//used because our helper functio
 
 use Joomla\CMS\Factory;
 $user = Factory::getUser();
+$db = Factory::getDbo();//Gets database
 
 if ($user->guest) {
 	echo "<h3>You must login to see the content. Click on the account icon on the right.</h3>";
@@ -28,6 +29,7 @@ if ($user->guest) {
     $displayText = ModChoosePreferenceHelper::getText($params);//Get and save our custom text
     
     $tagList = ModChoosePreferenceHelper::findTags();//Get our list of tags using helper method fingTags()
+    $currentList = ModChoosePreferenceHelper::getPreferenceLists($user->id, $db);
     //Display debug/str version of tag list below
     /*echo "List of available tags: ";
     foreach ($tagList as $key => $value){
