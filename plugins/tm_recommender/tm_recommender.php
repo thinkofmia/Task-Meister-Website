@@ -113,8 +113,6 @@ class plgTaskMeisterTM_recommender extends JPlugin
     function getArticleContents($list_str){//Parameter is a string ver of the list
         //Convert the string to a list
         $list = json_decode($list_str);
-        //Set up an array to store all the information into a collection
-        $displayCollection = array();
         //Gets Database
         $db = Factory::getDbo();
         //Get article info database
@@ -124,10 +122,17 @@ class plgTaskMeisterTM_recommender extends JPlugin
         $db->setQuery($query);
         $results_art = $db->loadAssocList();
         //For loop
+        $contentCollection = array();
         foreach ($results_art as $row){
             if(in_array($row['id'], $list)){
-                $displayCollection[$row['id']] = array($row['title'],$row['images']);
+                $contentCollection[$row['id']] = array($row['title'],$row['images']);
             }
+        
+        }
+        //Set up an array to store all the information into a collection
+        $displayCollection = array();
+        foreach ($list as $item){
+            $displayCollection[intval($item)] = $contentCollection[intval($item)];
         }
         return $displayCollection;
     }
@@ -160,7 +165,7 @@ class plgTaskMeisterTM_recommender extends JPlugin
         if ($mode == "Deployed"){
             foreach ($deployedlist as $row){
                 if ($count<$noOfArticles){
-                    array_push($resultList, $row);
+                    array_push($resultList, intval($row));
                     $count = $count + 1;
                 }
             }
@@ -168,7 +173,7 @@ class plgTaskMeisterTM_recommender extends JPlugin
         else {
             foreach ($likedlist as $row){
                 if ($count<$noOfArticles){
-                    array_push($resultList, $row);
+                    array_push($resultList, intval($row));
                     $count = $count + 1;
                 }
             }
