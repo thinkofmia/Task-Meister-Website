@@ -73,6 +73,6 @@ class ModRecommendArticlesHelper
                 break;
         }       
         //Return string results of recommended articles
-        return json_encode($results[0]) ;
+        return json_encode($results[0],JSON_FORCE_OBJECT) ;
     }
 }

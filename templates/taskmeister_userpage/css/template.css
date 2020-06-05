@@ -152,6 +152,16 @@ table th, table td {
   width: 100%;
   height: 100%;
 }
+.recommendedArticles .article .articleSimilarity {
+  position: absolute;
+  bottom: 90%;
+  text-align: left;
+  background-color: darkgreen;
+  opacity: 0.8;
+  color: white;
+  position: absolute;
+  font-size: 1.3vw;
+}
 .recommendedArticles .article p {
   position: absolute;
   bottom: -10%;

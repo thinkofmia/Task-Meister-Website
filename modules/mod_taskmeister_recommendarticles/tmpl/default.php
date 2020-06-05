@@ -42,6 +42,7 @@ $list2 = json_decode($recommendedContents);
           <!--Image of the article-->
           <img onerror="this.src='/taskmeisterx/modules/mod_taskmeister_recommendarticles/img/default.jpg';" src="<?php echo json_decode($value[1])->image_intro; ?>" width="100%" height="100%" />
           <!--Text found on the article-->
+          <p class="articleSimilarity">Similarity: <?php echo json_encode($value[2]); ?>%</p>
           <p><?php echo json_encode($value[0]); ?></p>
         </div>
     </a>

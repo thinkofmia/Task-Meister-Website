@@ -163,7 +163,16 @@ table {
             width: 100%;
             height: 100%;
         }
-
+        .articleSimilarity {
+            position: absolute;
+            bottom: 90%;
+            text-align: left;
+            background-color: darkgreen;
+            opacity: 0.8;
+            color: $mainFontColor;
+            position: absolute;
+            font-size: 1.3vw;
+        }
         p {
             position: absolute;
             bottom: -10%;

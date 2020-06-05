@@ -112,7 +112,7 @@ class plgTaskMeisterTM_recommender extends JPlugin
     */
     function getArticleContents($list_str){//Parameter is a string ver of the list
         //Convert the string to a list
-        $list = json_decode($list_str);
+        $list = json_decode($list_str,true);
         //Gets Database
         $db = Factory::getDbo();
         //Get article info database
@@ -123,16 +123,22 @@ class plgTaskMeisterTM_recommender extends JPlugin
         $results_art = $db->loadAssocList();
         //For loop
         $contentCollection = array();
+        //array
+        $result_array = array();
+        //foreach ($list as $key => $val){
+          //  $result_array[$key] = $val;
+        //}
         foreach ($results_art as $row){
-            if(in_array($row['id'], $list)){
-                $contentCollection[$row['id']] = array($row['title'],$row['images']);
+            $key_str = "".$row['id'];
+            if(array_key_exists($key_str,$list)){
+                $contentCollection[$row['id']] = array($row['title'],$row['images'],$list[$key_str]);
             }
         
         }
         //Set up an array to store all the information into a collection
         $displayCollection = array();
-        foreach ($list as $item){
-            $displayCollection[intval($item)] = $contentCollection[intval($item)];
+        foreach ($list as $key => $val){
+            $displayCollection[intval($key)] = $contentCollection[intval($key)];
         }
         return $displayCollection;
     }
@@ -165,7 +171,7 @@ class plgTaskMeisterTM_recommender extends JPlugin
         if ($mode == "Deployed"){
             foreach ($deployedlist as $row){
                 if ($count<$noOfArticles){
-                    array_push($resultList, intval($row));
+                    $resultList[$row] = 100;
                     $count = $count + 1;
                 }
             }
@@ -173,7 +179,7 @@ class plgTaskMeisterTM_recommender extends JPlugin
         else {
             foreach ($likedlist as $row){
                 if ($count<$noOfArticles){
-                    array_push($resultList, intval($row));
+                    $resultList[$row] = 100;
                     $count = $count + 1;
                 }
             }
@@ -213,6 +219,7 @@ class plgTaskMeisterTM_recommender extends JPlugin
         $results_art = $db->loadAssocList();
         //Set up weightage list of articles
         $weighArticlesList = array();
+        $highestWeighValue = 0;
         //Weigh articles
         foreach ($results_art as $row){
             if (in_array($row['es_articleid'],$blacklist)){//If blacklisted or liked already
@@ -243,17 +250,17 @@ class plgTaskMeisterTM_recommender extends JPlugin
                                 $weightage -= 100;
                                 break;
                             case 1://May Try
-                                $weightage += 5;
+                                $weightage += 10;
                                 break;
                             case 2://Preferred
-                                $weightage += 10;
+                                $weightage += 20;
                                 break;
                         }
                     }
                 }
                 //Modifiers
-                $deployedModifier = 1;
-                $likedModifier = 1;
+                $deployedModifier = 1.1;
+                $likedModifier = 1.1;
                 $touchBeforeModifier = 0;
                 switch($mode){
                     case "Untouched":
@@ -261,10 +268,14 @@ class plgTaskMeisterTM_recommender extends JPlugin
                             $touchBeforeModifier = 99999;
                         break;
                     case "Deployed":
-                        $deployedModifier = 20;
+                        $deployedModifier = 21;
                         break; 
                     case "Likes":
-                        $likedModifier = 20; 
+                        $likedModifier = 25; 
+                        break;
+                    case "Personal":
+                        $likedModifier = 10; 
+                        $deployedModifier = 5;
                         break;
                     default:
                         break; 
@@ -273,6 +284,7 @@ class plgTaskMeisterTM_recommender extends JPlugin
                 $weighingValue = $weightage - $touchBeforeModifier + $likedModifier*($row['es_totallikes'] - $row['es_totaldislikes']) + $row['es_totaldeployed']*$deployedModifier;
                 //Only if weightage is higher or equal to 0
                 if ($weightage>=0) $weighArticlesList[$row['es_articleid']] = $weighingValue; 
+                if ($highestWeighValue<$weighingValue) $highestWeighValue = $weighingValue;
             }
         }
         arsort($weighArticlesList);//Sort articles in descending order
@@ -281,7 +293,8 @@ class plgTaskMeisterTM_recommender extends JPlugin
         $count = 0;
         foreach ($weighArticlesList as $key => $val){
             if ($count<$noOfArticles){
-                array_push($finalList, $key);
+                $finalList[intval($key)] = floor($val/$highestWeighValue*100);
+                //array_push($finalList, $key);
                 $count+=1;
             }
         }
