@@ -52,6 +52,16 @@
 					cols="30"
 					rows="1"
 				/>
+				<field
+					name="automated"
+					type="list"
+					label="Automated"
+					description="Sets if the recommendation is automated or not. "
+					default="yes"
+					>
+                    <option value="choice_yes">Yes</option>
+					<option value="choice_no">No</option>
+				</field>
             </fieldset>
         </fields>
     </config>

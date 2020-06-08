@@ -19,8 +19,15 @@ require_once dirname(__FILE__) . '/helper.php';//used because our helper functio
 
 $displayHeader = ModFeaturedArticleHelper::getHeader($params);//Set variable of inputtable header
 $displayText = ModFeaturedArticleHelper::getText($params);//Set variable of inputtable text
+
+if ($params->get('automated')=="choice_no"){
+    $articleID = $params->get('articleID');
+}
+else {
+    $articleID = ModFeaturedArticleHelper::recommendArticle();
+}
+
 $videoLink = ModFeaturedArticleHelper::getVideo($params);//Set variable of video link
-$articleID = $params->get('articleID');
 $articleLikedUsers = "None";
 $articleDeployedUsers = "None";
 $articleTotalLikes = 0;

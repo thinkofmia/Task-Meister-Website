@@ -44,6 +44,25 @@ class ModFeaturedArticleHelper
          */
         return $params->get('videolink');
     }
+    function recommendArticle(){
+        /**
+         * Function Recommend Article: Recommend an article for the user
+         * Parameter: None
+         */
+        //Call our recommender
+        JPluginHelper::importPlugin('taskmeister','tm_recommender');
+        $dispatcher = JDispatcher::getInstance();
+        //Initialize result
+        $results = array("Calculating... ");
+        //Set Number of articles to 1
+        $noOfArticles=1;
+        //Call recommender engine function
+        $results = $dispatcher->trigger( 'recommendPersonalArticles', array("Personal",$noOfArticles,""));
+        //Return string results of recommended articles
+        foreach ($results[0] as $key => $value){
+            return $key;
+        }
+    }
     function getArticleExternalStats($articleId){
         /**
          * Function Get External Article Stats: Get article stats from an external database
