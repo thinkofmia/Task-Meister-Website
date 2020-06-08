@@ -7,7 +7,7 @@ CREATE TABLE `#__helloworld` (
     PRIMARY KEY (`id`)
 )
     ENGINE =InnoDB
-    DEFAULT CHARSET =uft8mb4
+    DEFAULT CHARSET =utf8mb4
     DEFAULT COLLATE=utf8mb4_unicode_ci;
 
 INSERT INTO `#__helloworld` (`greeting`) VALUES
