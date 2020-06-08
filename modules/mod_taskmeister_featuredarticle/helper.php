@@ -66,17 +66,20 @@ class ModFeaturedArticleHelper
                     $crawledLink = strstr($fullText,"youtube.com/watch?v=");
                     $crawledLink = str_replace("watch?v=","embed/",$crawledLink);
                     $crawledLink = strstr($crawledLink,">", true);
+                    $crawledLink = strstr($crawledLink,"\"", true);
                     return "https://www.".$crawledLink;
                 }
                 if (strstr($fullText,"youtu.be/")){//If sharing link
                     $crawledLink = strstr($fullText,"youtu.be/");
                     $crawledLink = str_replace("youtu.be/","youtube.com/embed/",$crawledLink);
                     $crawledLink = strstr($crawledLink,">", true);
+                    $crawledLink = strstr($crawledLink,"\"", true);
                     return "https://www.".$crawledLink;
                 }
                 if (strstr($fullText,"youtube.com/embed/")){//If embeded link
                     $crawledLink = strstr($fullText,"youtube.com/embed/");
                     $crawledLink = strstr($crawledLink,">", true);
+                    $crawledLink = strstr($crawledLink,"\"", true);
                     return "https://www.".$crawledLink;
                 }
             }
@@ -93,12 +96,21 @@ class ModFeaturedArticleHelper
         //Initialize result
         $results = array("Calculating... ");
         //Set Number of articles to 1
-        $noOfArticles=1;
+        $noOfArticles=3;
         //Call recommender engine function
         $results = $dispatcher->trigger( 'recommendPersonalArticles', array("Personal",$noOfArticles,""));
         //Return string results of recommended articles
+        $articleList = array();
         foreach ($results[0] as $key => $value){
-            return $key;
+            array_push($articleList, $key);
+        }
+        switch(rand(0,2)){
+            case 2:
+                return $articleList[2];
+            case 1:
+                return $articleList[1];
+            default:
+                return $articleList[0];
         }
     }
     function getArticleExternalStats($articleId){
