@@ -31,7 +31,20 @@ class HelloWorldModelHelloWorld extends JModelItem
     {
         if(!isset($this->message))
         {
-            $this->message = 'Hello World!';
+            $jinput = JFactory::getApplication()->input;
+            // get(string param_name, mixed default_value, string filter);
+            $id = $jinput->get('id', 1, 'INT');
+
+            switch($id)
+            {
+                case 2:
+                    $this->message = 'Good bye world!';
+                break;
+                default:
+                case 1:
+                    $this->message = 'Hello World!';
+                break;
+            }
         }
 
         return $this->message;
