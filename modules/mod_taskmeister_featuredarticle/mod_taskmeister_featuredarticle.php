@@ -47,7 +47,7 @@ else{
 //External contents
 $externalContents = ModFeaturedArticleHelper::getArticleExternalStats($articleID);
 if ($externalContents != "Nothing is found. "){
-    $articleTotalLikes = $externalContents['es_totallikes'];
+    if ($externalContents['es_totallikes']) $articleTotalLikes = $externalContents['es_totallikes'];
     $deployedUsersList = json_decode($externalContents['es_deployed']);
     $usersPreferenceList = json_decode($externalContents['es_userchoice']);
     //For Loops
