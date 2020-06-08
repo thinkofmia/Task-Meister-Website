@@ -411,7 +411,51 @@ class plgTaskMeisterTM_recommender extends JPlugin
         }   
         return false;
     }
-    
+    /* Function: Fix Teacher Statistics
+    This function automatically updates/refreshes the teacher statistics.
+     It should be used when adding a new teacher/updating teacher profiles
+     */
+    function fixTeacherStats(){
+        $db = Factory::getDbo();//Gets database
+        $me = Factory::getUser();//Gets user 
+        //Get user bank from database query
+        $query2 = $db->getQuery(true);
+        $query2->select($db->quoteName(array('user_id','group_id')))
+            ->from($db->quoteName('#__user_usergroup_map'));
+        $db->setQuery($query2);
+        $results_bank = $db->loadAssocList();
+        //Get external teacher table (custom table)
+        $query = $db->getQuery(true);
+        $query->select($db->quoteName(array('a.*')))
+            ->from($db->quoteName('#__customtables_table_teacherstats','a'));
+        $db->setQuery($query);
+        $results_ext = $db->loadAssocList();
+        //Store the current teachers in external table into an array
+        $teachers = array();
+        foreach ($results_ext as $row) {
+            array_push($teachers, $row['es_teacherid']);//Change group id based on the one that fits the teacher. In our case, its 11.
+        }
+        //Add in new teachers if any
+        foreach ($results_bank as $row2){
+            if ($row2['group_id']==11){
+                //Update teacher class
+                $teacherInfo = new stdClass();
+                $teacherInfo->es_teacherid = $row2['user_id'];
+                //Check in already exists
+                if (in_array($row2['user_id'], $teachers)){
+                    // Update teacher info if exists.
+                    $result = JFactory::getDbo()->updateObject('#__customtables_table_teacherstats', $teacherInfo, 'es_teacherid');
+                }
+                else{//Insert teacher info if doesn't exists
+                    $teacherInfo->es_code = $row2['user_id'];
+                    $teacherInfo->es_students = "[]";
+                    $result = JFactory::getDbo()->insertObject('#__customtables_table_teacherstats', $teacherInfo, 'es_teacherid');
+                }
+            }
+            
+        }   
+
+    }
     /* Function: Fix User Statistics
     This function automatically updates/refreshes the user statistics.
      It should be used when adding a new user/updating user profiles
