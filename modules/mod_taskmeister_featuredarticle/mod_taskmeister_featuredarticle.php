@@ -27,10 +27,11 @@ else {
     $articleID = ModFeaturedArticleHelper::recommendArticle();
 }
 
-$videoLink = ModFeaturedArticleHelper::getVideo($params);//Set variable of video link
+$videoLink = ModFeaturedArticleHelper::getVideo($params, $params->get('automated'), $articleID);//Set variable of video link
 $articleLikedUsers = "None";
 $articleDeployedUsers = "None";
 $articleTotalLikes = 0;
+echo "Crawling Video link... ".$videoLink;
 
 //Article Contents
 $articleContents = ModFeaturedArticleHelper::getArticle($articleID);

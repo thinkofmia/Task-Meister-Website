@@ -36,13 +36,51 @@ class ModFeaturedArticleHelper
          */
         return $params->get('customheader');
     }
-    public static function getVideo($params)
+    function getVideo($params, $mode, $articleId)
     {
         /**
          * Function Get Video Link: Get video link input from Joomla Interface
          * Parameter: $params
          */
-        return $params->get('videolink');
+        if ($mode == "choice_no") return $params->get('videolink');//Gives back set video link
+        //Else crawl for the video link
+        else {
+            //Set up Database Variable
+            $db =& JFactory::getDbo();
+            //Query for SQL for external article states
+            $query = $db->getQuery(true);
+            $query->select($db->quoteName(array('id','fulltext')))// Get all of the contents
+                ->from($db->quoteName('#__content'))//From the external article stats table
+                ->where($db->quoteName('id') . ' = ' . intval($articleId));//Where the article id is equal to the chosen article
+            $db->setQuery($query);
+            $results = $db->loadAssocList(); //Save results as a list
+            //if(!strlen(trim($results))) return null;
+            //For each item in the restuls
+            foreach($results as $row){
+                if ($row['id']==$articleId) $fullText = ($row['fulltext']);//Save the full text
+            }
+            //return $fullText;
+            if ($fullText){
+                //$crawledLink = "GC_9w9IV3CI"; Test value
+                if(strstr($fullText,"youtube.com/watch?v=")){//If default link
+                    $crawledLink = strstr($fullText,"youtube.com/watch?v=");
+                    $crawledLink = str_replace("watch?v=","embed/",$crawledLink);
+                    $crawledLink = strstr($crawledLink,">", true);
+                    return "https://www.".$crawledLink;
+                }
+                if (strstr($fullText,"youtu.be/")){//If sharing link
+                    $crawledLink = strstr($fullText,"youtu.be/");
+                    $crawledLink = str_replace("youtu.be/","youtube.com/embed/",$crawledLink);
+                    $crawledLink = strstr($crawledLink,">", true);
+                    return "https://www.".$crawledLink;
+                }
+                if (strstr($fullText,"youtube.com/embed/")){//If embeded link
+                    $crawledLink = strstr($fullText,"youtube.com/embed/");
+                    $crawledLink = strstr($crawledLink,">", true);
+                    return "https://www.".$crawledLink;
+                }
+            }
+        }
     }
     function recommendArticle(){
         /**

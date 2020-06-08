@@ -19,7 +19,7 @@
 					name="articleID"
 					type="integer"
 					default="900"
-					label="Article ID"
+					label="Article ID (Not Automated)"
 					description="Input your featured article id here. "
 					first="1"
 					step="1"
@@ -28,7 +28,7 @@
                 <field
 					name="videolink"
 					type="textarea"
-					label="Embeded Video Link"
+					label="Embeded Video Link (Not Automated)"
 					description="Input your youtube link here. If left blank, the article image will be shown instead. Note that you have to use the embed format as such 'https://www.youtube.com/embed/mIYzp5rcTvU' rather than the normal watch youtube link like 'https://www.youtube.com/watch?v=qiI9Wso3pDw'."
 					filter="safehtml"
 					cols="30"
@@ -46,7 +46,7 @@
                 <field
 					name="customheader"
 					type="textarea"
-					label="Custom Title"
+					label="Custom Title (Not Automated)"
 					description="Input your custom title here. Leave blank if you want to use the current article title."
 					filter="safehtml"
 					cols="30"
