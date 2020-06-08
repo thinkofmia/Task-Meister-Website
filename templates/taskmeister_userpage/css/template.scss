@@ -73,7 +73,7 @@ table {
         width: 30vw;
     }
     .right{
-        left: 0vw;
+        //left: 0vw;
     }
 }
 
@@ -114,11 +114,10 @@ table {
 }
 
 .accountIcon{
-    width: 5vw;
-    height: 5vw;
+    width: 4vw;
+    height: 4vw;
     text-align: right;
-    padding: 1vw;
-    margin-left: 1vw;
+    padding: 3vw;
 }
 
 .articlesRow {
@@ -298,7 +297,7 @@ table {
     width: 70vw;
     padding-left: 3vw;
     text-align: left;
-    padding-top: 2vw;
+    padding-top: 1vw;
     a {
         position: relative;
         padding: 10px;
@@ -315,7 +314,8 @@ table {
 
 #topRight{
     position: absolute;
-    left: 90%;
+    left: 62%;
+    text-align: right;
 }
 
 //This is the style for the Featured Article Mod (Or the Youtube Mod)
@@ -365,10 +365,10 @@ table {
 }
 
 .search {
-    padding: 1vw;
     padding-left: 5vw;
     width: 30vw;
     font-size: 1vw;
+    padding-top: 1vw;
 }
 
 .latestnews, .whosonline li {

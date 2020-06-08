@@ -69,10 +69,6 @@ table th, table td {
   height: 100%;
   width: 30vw;
 }
-#topRow .right {
-  left: 0vw;
-}
-
 #centerRow {
   position: relative;
   width: 95%;
@@ -104,11 +100,10 @@ table th, table td {
 }
 
 .accountIcon {
-  width: 5vw;
-  height: 5vw;
+  width: 4vw;
+  height: 4vw;
   text-align: right;
-  padding: 1vw;
-  margin-left: 1vw;
+  padding: 3vw;
 }
 
 .articlesRow {
@@ -276,7 +271,7 @@ table th, table td {
   width: 70vw;
   padding-left: 3vw;
   text-align: left;
-  padding-top: 2vw;
+  padding-top: 1vw;
 }
 #customMenu a {
   position: relative;
@@ -293,7 +288,8 @@ table th, table td {
 
 #topRight {
   position: absolute;
-  left: 90%;
+  left: 62%;
+  text-align: right;
 }
 
 .featuredArticle {
@@ -339,10 +335,10 @@ table th, table td {
 }
 
 .search {
-  padding: 1vw;
   padding-left: 5vw;
   width: 30vw;
   font-size: 1vw;
+  padding-top: 1vw;
 }
 
 .latestnews, .whosonline li {

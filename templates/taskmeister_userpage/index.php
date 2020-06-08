@@ -29,10 +29,10 @@
             <jdoc:include type="modules" name="top"/><!-- Module Position: 'top'-->
         </div>
         <div id = "topRight">
-            <jdoc:include type="modules" name="top-right"/><!-- Module Position: 'top-right'-->
             <a class= "right" href="<?php echo $this->baseurl; ?>/index.php/login"><!--User-->
                 <img src="<?php echo $this->baseurl; ?>/templates/<?php echo $this->template; ?>/images/accountIcon.jpg" class = "accountIcon" alt="User Page" title="Click here to go to your user page. "/>            
             </a>
+            <jdoc:include type="modules" name="top-right"/><!-- Module Position: 'top-right'-->
         </div>
     </div>
     <div id="centerRow">
