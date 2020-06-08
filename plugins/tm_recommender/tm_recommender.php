@@ -106,6 +106,24 @@ class plgTaskMeisterTM_recommender extends JPlugin
         }
         return $tagNames_pptx;
     }
+    /* Function: Get list of teachers available. */
+    function getTeachersList(){
+        //Gets Database
+        $db = Factory::getDbo();
+        //Get tags info database
+        $query = $db->getQuery(true);
+        $query->select($db->quoteName(array('*')))
+            ->from($db->quoteName('#__customtables_table_teacherstats'));
+        $db->setQuery($query);
+        $results_teachers = $db->loadAssocList();
+        //Create list
+        $teacherList = array();
+        //For loop to populate tag list
+        foreach($results_teachers as $row){
+            $teacherList[$row['es_teacherid']] = $row['es_code'];
+        }
+        return $teacherList;
+    }
     /* Function: Get Article Contents
     Gets all the selected articles to display from a list
     Can be used after having a list of recommended article

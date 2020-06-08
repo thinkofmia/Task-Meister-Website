@@ -28,8 +28,8 @@ if ($user->guest) {
     $displayHeader = ModChooseClassHelper::getHeader($params);//Get and save out custom header
     $displayText = ModChooseClassHelper::getText($params);//Get and save our custom text
     
-    $tagList = ModChooseClassHelper::findTags();//Get our list of tags using helper method fingTags()
-    $currentList = ModChooseClassHelper::getPreferenceLists($user->id, $db);
+    $tagList = ModChooseClassHelper::findTeachers();//Get our list of tags using helper method fingTags()
+    $currentList = ModChooseClassHelper::getTeachers($user->id, $db);
     //Display debug/str version of tag list below
     /*echo "List of available tags: ";
     foreach ($tagList as $key => $value){
@@ -37,13 +37,13 @@ if ($user->guest) {
     }*/ 
     require JModuleHelper::getLayoutPath('mod_taskmeister_chooseclass');//Call out default.php display
     
-    if (isset($_POST["submit"])){
+    //if (isset($_POST["submit"])){
     /*
         If user clicks 'Submit Query' or save preference
     */
-        ModChooseClassHelper::saveLists($_POST['list1'],$_POST['list2'],$_POST['list3']);//Stores the results via using the helper method saveLists
-        Header('Location: '.$_SERVER['PHP_SELF']);//Force Refreshes page - necessary to show the updated results
-        Exit();
-    }
+    //    ModChooseClassHelper::saveLists($_POST['list1'],$_POST['list2'],$_POST['list3']);//Stores the results via using the helper method saveLists
+    //    Header('Location: '.$_SERVER['PHP_SELF']);//Force Refreshes page - necessary to show the updated results
+    //    Exit();
+    //}
 
 }

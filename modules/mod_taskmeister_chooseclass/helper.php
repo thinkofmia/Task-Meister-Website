@@ -29,15 +29,15 @@ class ModChooseClassHelper
     {
         return $params->get('customheader');
     }
-    function findTags(){//Get list of available
+    function findTeachers(){//Get list of available teachers
         /*
-            Function: to get all the available tags being currently used 
+            Function: to get all the available teachers being currently used 
             Call our recommender plugin to invoke function getTagList()
             Requires no parameters
         */
         JPluginHelper::importPlugin('taskmeister','tm_recommender');
         $dispatcher = JDispatcher::getInstance();
-        $results = $dispatcher->trigger('getTagList', array());//Results returned is in a form of an array
+        $results = $dispatcher->trigger('getTeachersList', array());//Results returned is in a form of an array
         
         return $results[0] ;//Return the first index of the resulting array
     }
@@ -74,7 +74,7 @@ class ModChooseClassHelper
         
         return $results[0];//Return first index of results, which is mostly a boolean to show if the func completes
     }
-    function getPreferenceLists($userid, $db){
+    function getTeachers($userid, $db){
         if ($userid != 0 ){//If user is not a guest
             //Get external user table (custom table) To find out list of liked, deployed and disliked articles
             $query = $db->getQuery(true);
