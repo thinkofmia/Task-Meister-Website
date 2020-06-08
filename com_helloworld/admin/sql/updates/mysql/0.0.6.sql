@@ -1,0 +1,15 @@
+DROP TABLE IF EXISTS `#__helloworld`;
+
+CREATE TABLE `#__helloworld` (
+    `id`        INT(11)     NOT NULL AUTO_INCREMENT,
+    `greeting`  VARCHAR(25) NOT NULL,
+    `published` tinyint(4)  NOT NULL DEFAULT '1',
+    PRIMARY KEY (`id`)
+)
+    ENGINE =InnoDB
+    DEFAULT CHARSET =uft8mb4
+    DEFAULT COLLATE=utf8mb4_unicode_ci;
+
+INSERT INTO `#__helloworld` (`greeting`) VALUES
+('Hello World'),
+('Good bye World!');
