@@ -29,7 +29,7 @@ function drawChart() {
 ]);
 
   // Optional; add a title and set the width and height of the chart
-  var options = {'title':'Your Class Recommended Preferences', 'width':400, 'height':400};
+  var options = {'title':'Your Class Recommended Preferences', is3D: true, 'width':400, 'height':400};
 
   // Display the chart inside the <div> element with id="piechart"
   var chart = new google.visualization.PieChart(document.getElementById('piechart'));
@@ -47,7 +47,9 @@ function drawDislikedChart() {
 ]);
 
   // Optional; add a title and set the width and height of the chart
-  var options = {'title':'Your Class Disliked Preferences', 'width':400, 'height':400};
+  var options = {'title':'Your Class Disliked Preferences',
+                pieHole: 0.2,
+                'width':400, 'height':400};
 
   // Display the chart inside the <div> element with id="piechart"
   var chart = new google.visualization.PieChart(document.getElementById('dislikedchart'));
@@ -55,6 +57,7 @@ function drawDislikedChart() {
 }
 </script>
 
+<?php if ($params->get('customtext')) : ?>
 <table class='yourClassStatsTable'>
     <tr>
         <th>Teacher</th>
@@ -96,3 +99,4 @@ function drawDislikedChart() {
         </td>
     </tr>
 </table>
+<?php endif ?>

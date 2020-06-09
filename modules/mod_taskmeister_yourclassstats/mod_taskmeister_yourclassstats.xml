@@ -33,6 +33,16 @@
 					cols="30"
 					rows="1"
 				/>
+                <field
+					name="wordstats"
+					type="list"
+					label="Display Table Stats?"
+					description="Display stats in table form as well. "
+					default="choice_no"
+					>
+                    <option value="choice_yes">Yes</option>
+					<option value="choice_no">No</option>
+				</field>
             </fieldset>
         </fields>
     </config>
