@@ -41,25 +41,6 @@ class ModChooseClassHelper
         
         return $results[0] ;//Return the first index of the resulting array
     }
-    function displayTags($list){
-        /*
-            Function: To display the list of tags in a string - Normally for debugging
-            Parameter $list: An array of tags
-        */
-        foreach ($list as $key => $value){//For loop to display contents of the array
-            echo $key." used ".$value." times!<br>";
-        }
-        return true;//Return that the func has successfully carried out
-    }
-    function displayTags_String($list){
-        /*
-            Function: Does the same as displayTags() above
-        */
-        foreach ($list as $key => $value){
-            echo $key." used ".$value." times!<br>";
-        }
-        return true;
-    }
     function saveLists($list){
         /*
             Function: Save the user's teacher lists into the database
