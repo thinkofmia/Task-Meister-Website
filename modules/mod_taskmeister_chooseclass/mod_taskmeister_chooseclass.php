@@ -30,18 +30,32 @@ if ($user->guest) {
     
     $teacherList = ModChooseClassHelper::findTeachers();//Get our list of teachers using helper method 
     $studentList = ModChooseClassHelper::findStudents($teacherList, $db);//Get our list of students using helper method
-    $currentList = ModChooseClassHelper::getYourTeachers($user->id, $db);
     
     $isTeacher = array_key_exists(intval($user->id), $teacherList);
+    if ($isTeacher){
+        $currentList = ModChooseClassHelper::getYourStudents($user->id, $db);
+        
+    }
+    else{//If you are a student
+        $currentList = ModChooseClassHelper::getYourTeachers($user->id, $db);
+    }
     require JModuleHelper::getLayoutPath('mod_taskmeister_chooseclass');//Call out default.php display
     
     if (isset($_POST["submit"])){
     /*
         If user clicks 'Submit Query' or save preference
     */
-        ModChooseClassHelper::saveLists($_POST['list1']);//Stores the results via using the helper method saveLists
+        ModChooseClassHelper::saveListOfTeachers($_POST['list1']);//Stores the results via using the helper method saveLists
         Header('Location: '.$_SERVER['PHP_SELF']);//Force Refreshes page - necessary to show the updated results
         Exit();
     }
+    else if (isset($_POST["submit2"])){
+        /*
+            If user clicks 'Submit Query' or save preference
+        */
+            ModChooseClassHelper::saveListOfStudents($_POST['list2']);//Stores the results via using the helper method saveLists
+            Header('Location: '.$_SERVER['PHP_SELF']);//Force Refreshes page - necessary to show the updated results
+            Exit();
+        }
 
 }

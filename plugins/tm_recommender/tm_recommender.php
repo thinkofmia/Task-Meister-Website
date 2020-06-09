@@ -98,6 +98,23 @@ class plgTaskMeisterTM_recommender extends JPlugin
         }
         return "Saved!";
     }
+    //Function: Save a particular user's students
+    function saveOurStudents($studentList_str){
+        //Set database and user
+        $db = Factory::getDbo();
+        $me = Factory::getUser();
+        $userID = $me->id;
+        $username = $me->username;
+        $studentList = "[]";
+        if ($studentList_str) $studentList = $studentList_str;
+        //Save information into a list
+        $teacherInfo = new stdClass();
+        $teacherInfo->es_teacherid = $me->id;
+        $teacherInfo->es_students = $studentList;
+        // Update the object into the article profile table.
+        $result = JFactory::getDbo()->updateObject('#__customtables_table_teacherstats', $teacherInfo, 'es_teacherid');
+        return "Saved!";
+    }
     /* Function: Get list of tags that are currently in used. */
     function getTagList(){
         //Gets Database

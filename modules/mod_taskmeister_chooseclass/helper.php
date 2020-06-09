@@ -65,7 +65,19 @@ class ModChooseClassHelper
         
         return $results[0] ;//Return the first index of the resulting array
     }
-    function saveLists($list){
+    function saveListOfStudents($list){
+        /*
+            Function: Save the user's student lists into the database
+            Parameter $list: List of students that the teacher has
+        */
+            //Call our recommender to invoke function saveOurTeachers(), requires a list of teachers
+            JPluginHelper::importPlugin('taskmeister','tm_recommender');
+            $dispatcher = JDispatcher::getInstance();
+            $results = $dispatcher->trigger('saveOurStudents', array($list));//Returns results in the form of an array
+            return $results[0];//Return first index of results, which is mostly a boolean to show if the func completes
+        
+    }
+    function saveListOfTeachers($list){
         /*
             Function: Save the user's teacher lists into the database
             Parameter $list: List of teachers that the user is under
@@ -92,6 +104,24 @@ class ModChooseClassHelper
                 }
             }
             return $yourTeachers;
+        }
+    }
+    function getYourStudents($userid, $db){
+        if ($userid != 0 ){//If user is not a guest
+            //Get external teacher table (custom table)
+            $query = $db->getQuery(true);
+            $query->select($db->quoteName(array('es_teacherid','es_students')))
+            ->from($db->quoteName('#__customtables_table_teacherstats'));
+            $db->setQuery($query);
+            $results_ext = $db->loadAssocList();
+            //Save information into a list
+            $yourStudents = array();
+            foreach ($results_ext as $row){
+                if ($row['es_teacherid']==$userid){//If teacher exists
+                    $yourStudents = json_decode($row['es_students']);
+                }
+            }
+            return $yourStudents;
         }
     }
 }

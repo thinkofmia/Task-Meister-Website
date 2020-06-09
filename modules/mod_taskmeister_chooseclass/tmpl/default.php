@@ -167,6 +167,10 @@ Display left hand side text
 <script>
 //Function to add current list to menu
 <?php foreach ($currentList as $row) : ?>
-    toggleTeacher(<?php echo $row; ?>);
+    <?php if ($isTeacher) : ?>
+        toggleStudent(<?php echo $row; ?>);
+    <?php else : ?>
+        toggleTeacher(<?php echo $row; ?>);
+    <?php endif; ?>
 <?php endforeach; ?>
 </script>
