@@ -25,13 +25,25 @@ $displayText = modYourClassesStats::getText($params);//invoke helper class metho
 use Joomla\CMS\Factory;
 //Set database variable
 $db = Factory::getDbo();
+$me = Factory::getUser();
+$userID = $me->id;
 
-//Querying for stats of the entire database of the external teacher stats
-$query = $db->getQuery(true);
-$query->select($db->quoteName(array('*')))//Get everything from
-    ->from($db->quoteName('#__customtables_table_teacherstats'));//From our external teacher stats table
-$db->setQuery($query);
-$results = $db->loadAssocList();//Save results as $results2
+if ($userID!=0){//if User id isnt a guest
+    //Querying for stats of the entire database of the external teacher stats
+    $query = $db->getQuery(true);
+    $query->select($db->quoteName(array('*')))//Get everything from
+        ->from($db->quoteName('#__customtables_table_teacherstats'))
+        ->where($db->quoteName('es_teacherid') . ' = ' . $userID);//From our external teacher stats table
+    $db->setQuery($query);
+    $results = $db->loadAssocList();//Save results as $results2
 
-
-require JModuleHelper::getLayoutPath('mod_taskmeister_yourclassstats');
+    if ($results){
+        require JModuleHelper::getLayoutPath('mod_taskmeister_yourclassstats');
+    }
+    else{
+        echo "<br><h3>You have to be a teacher to see this feature</h3>";
+    }   
+}
+else{
+    echo "<br><h3>You have to be a teacher to see this feature</h3>";
+}
