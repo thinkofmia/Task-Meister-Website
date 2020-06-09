@@ -21,7 +21,7 @@
   </install>
   <uninstall><!-- Runs on uninstall -->
     <sql>
-      <file driver="mysql" charset="utf8">sql/uninstall.mysql.ut8.sql</file>
+      <file driver="mysql" charset="utf8">sql/uninstall.mysql.utf8.sql</file>
     </sql>
   </uninstall>
 
