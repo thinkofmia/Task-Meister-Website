@@ -355,6 +355,16 @@ table th, table td {
   display: none;
 }
 
+#allClassStatsTable {
+  background: green;
+  border: 2px solid white;
+  border-collapse: collapse;
+  width: 70vw;
+}
+#allClassStatsTable tr, #allClassStatsTable th, #allClassStatsTable td {
+  border: 2px solid white;
+}
+
 @keyframes fadeIn {
   from {
     opacity: 0;

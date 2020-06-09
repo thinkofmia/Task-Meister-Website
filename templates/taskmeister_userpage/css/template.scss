@@ -385,6 +385,17 @@ table {
     left: -27vw;
 }
 
+//All Class Stats Mod
+#allClassStatsTable{
+    background: green;
+    border: 2px solid white;
+    border-collapse: collapse;
+    width: 70vw;
+    tr, th, td {
+        border: 2px solid white;
+    }
+}
+
 //Animations
 @keyframes fadeIn {
     from {
