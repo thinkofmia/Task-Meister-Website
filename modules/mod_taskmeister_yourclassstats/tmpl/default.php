@@ -57,12 +57,13 @@ function drawDislikedChart() {
 }
 </script>
 
-<?php if ($params->get('customtext')) : ?>
+<?php if ($showTable) : ?>
 <table class='yourClassStatsTable'>
     <tr>
         <th>Teacher</th>
         <th>Students</th>
-        <th>Analysis</th>
+        <th>Overall Preferences</th>
+        <th>Disliked Preferences</th>
     </tr>
 <!--Show the external teacher stats-->
     <!--Print out the data-->
@@ -90,6 +91,20 @@ function drawDislikedChart() {
             <?php foreach ($fullPreferencesScore as $key => $value) : ?>
                 <?php if (intval($value)>0) : ?>
                     <li><?php echo $key;?> - Total Students Score: <?php echo $value; ?></li>
+                <?php endif ?>
+            <?php endforeach ?>
+            </ul>
+        <?php else : ?>
+            No available data.    
+        <?php endif ?>
+        </td>
+        <td>
+        <?php if ($dislikedPreferencesScore) : ?>
+            <!--For each student in the list, get preferences-->    
+            <ul>
+            <?php foreach ($dislikedPreferencesScore as $key => $value) : ?>
+                <?php if (intval($value)>0) : ?>
+                    <li><?php echo $key;?> - Total Students: <?php echo $value; ?></li>
                 <?php endif ?>
             <?php endforeach ?>
             </ul>

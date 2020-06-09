@@ -34,7 +34,7 @@
 					rows="1"
 				/>
                 <field
-					name="wordstats"
+					name="tablestats"
 					type="list"
 					label="Display Table Stats?"
 					description="Display stats in table form as well. "

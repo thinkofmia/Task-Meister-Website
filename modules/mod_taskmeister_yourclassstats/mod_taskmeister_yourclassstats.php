@@ -20,6 +20,7 @@ require_once dirname(__FILE__) . '/helper.php';//used because our helper functio
 
 $displayHeader = modYourClassesStats::getHeader($params);//invoke helper class method
 $displayText = modYourClassesStats::getText($params);//invoke helper class method
+$showTable = modYourClassesStats::checkTable($params->get('tablestats'));
 
 //Database code
 use Joomla\CMS\Factory;

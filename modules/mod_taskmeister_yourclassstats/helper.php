@@ -28,4 +28,8 @@ class modYourClassesStats
     {
         return $params->get('customheader');
     }
+    function checkTable($choice){
+        if ($choice=="choice_yes") return true;
+        else return false;
+    }
 }
