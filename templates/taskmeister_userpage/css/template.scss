@@ -396,6 +396,12 @@ table {
     }
 }
 
+//Your Class Stats Mod
+.yourClassStatsTable{
+    @extend #allClassStatsTable;
+    background: blue;
+}
+
 //Animations
 @keyframes fadeIn {
     from {

@@ -355,14 +355,18 @@ table th, table td {
   display: none;
 }
 
-#allClassStatsTable {
+#allClassStatsTable, .yourClassStatsTable {
   background: green;
   border: 2px solid white;
   border-collapse: collapse;
   width: 70vw;
 }
-#allClassStatsTable tr, #allClassStatsTable th, #allClassStatsTable td {
+#allClassStatsTable tr, .yourClassStatsTable tr, #allClassStatsTable th, .yourClassStatsTable th, #allClassStatsTable td, .yourClassStatsTable td {
   border: 2px solid white;
+}
+
+.yourClassStatsTable {
+  background: blue;
 }
 
 @keyframes fadeIn {
