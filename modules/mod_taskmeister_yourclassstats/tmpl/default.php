@@ -29,7 +29,7 @@ function drawChart() {
 ]);
 
   // Optional; add a title and set the width and height of the chart
-  var options = {'title':'Your Class Recommended Preferences', is3D: true, 'width':400, 'height':400};
+  var options = {'title':'Your Class Recommended Preferences', is3D: true, 'width': '45vw', 'height':'45vw' };
 
   // Display the chart inside the <div> element with id="piechart"
   var chart = new google.visualization.PieChart(document.getElementById('piechart'));
@@ -49,7 +49,7 @@ function drawDislikedChart() {
   // Optional; add a title and set the width and height of the chart
   var options = {'title':'Your Class Disliked Preferences',
                 pieHole: 0.2,
-                'width':400, 'height':400};
+                'width': '45vw', 'height': '45vw'};
 
   // Display the chart inside the <div> element with id="piechart"
   var chart = new google.visualization.PieChart(document.getElementById('dislikedchart'));

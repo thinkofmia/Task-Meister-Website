@@ -387,6 +387,8 @@ table {
 
 //All Class Stats Mod
 #allClassStatsTable{
+    left: -20vw;
+    position: relative;
     background: green;
     border: 2px solid white;
     border-collapse: collapse;
@@ -399,6 +401,8 @@ table {
 //Your Class Stats Mod
 .charts{
     display: inline-flex;
+    position: relative;
+    left: -20vw;
 }
 
 .yourClassStatsTable{

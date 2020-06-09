@@ -356,6 +356,8 @@ table th, table td {
 }
 
 #allClassStatsTable, .yourClassStatsTable {
+  left: -20vw;
+  position: relative;
   background: green;
   border: 2px solid white;
   border-collapse: collapse;
@@ -367,6 +369,8 @@ table th, table td {
 
 .charts {
   display: inline-flex;
+  position: relative;
+  left: -20vw;
 }
 
 .yourClassStatsTable {
