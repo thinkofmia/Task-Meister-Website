@@ -162,9 +162,10 @@ class plgTaskMeisterTM_recommender extends JPlugin
         $results_teachers = $db->loadAssocList();
         //Create list
         $teacherList = array();
-        //For loop to populate tag list
+        //For loop to populate teacher list
         foreach($results_teachers as $row){
-            $teacherList[$row['es_teacherid']] = $row['es_code'];
+            $teacher = JFactory::getUser($row['es_teacherid']);
+            $teacherList[$row['es_teacherid']] = $teacher->name;
         }
         return $teacherList;
     }
