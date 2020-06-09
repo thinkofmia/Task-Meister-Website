@@ -37,9 +37,15 @@ $results = $db->loadAssocList();//Save results as $results2
 //Style for table
 echo "<style> 
     table, tr, th, td {
-    border: 2px solid black;
+    border: 2px solid white;
     }
 </style>";
+echo "<table style='background: green; border: 2px solid white; border-collapse: collapse;'>
+    <tr>
+        <th>Teacher</th>
+        <th>Students</th>
+        <th>Analysis</th>
+    </tr>";
 //Show the external teacher stats
 foreach ($results as $row) {//For loop for each item in $results
     //Set Teacher
@@ -48,13 +54,7 @@ foreach ($results as $row) {//For loop for each item in $results
     //Set the student list for each teacher
     $studentsList = json_decode($row['es_students']);
     //Print out the data
-    echo "<table style='border: 2px solid black; border-collapse: collapse;'>
-    <tr>
-        <th>Teacher</th>
-        <th>Students</th>
-        <th>Analysis</th>
-    </tr>
-    <tr>
+    echo "<tr>
         <td>" . $teacherName . "</td>";
     echo "<td>";
     if ($studentsList){
@@ -72,5 +72,5 @@ foreach ($results as $row) {//For loop for each item in $results
     echo "</td>
         <td>In Progress</td>
     </tr>"; 
-    echo "</table>";
 }
+echo "</table>";
