@@ -29,10 +29,34 @@ class ModChooseClassHelper
     {
         return $params->get('customheader');
     }
+    function findStudents($teacherList, $db){//Get list of available students
+        /*
+            Function: to get all the available students
+        */
+        //Get user table (custom table)
+        $query = $db->getQuery(true);
+        $query->select($db->quoteName(array('id','name')))
+            ->from($db->quoteName('#__users'));
+        $db->setQuery($query);
+        $results_ext = $db->loadAssocList();
+        //Create Student List
+        $studentList = array();
+        //Loop
+        foreach($results_ext as $row){
+            if (array_key_exists($row['id'], $teacherList)){
+                //Its a teacher, leave it out
+            }
+            else {//Add student to list
+                $studentList[$row['id']] = $row['name'];
+            }
+        }
+        return $studentList ;//Return the first index of the resulting array
+
+    }
     function findTeachers(){//Get list of available teachers
         /*
-            Function: to get all the available teachers being currently used 
-            Call our recommender plugin to invoke function getTagList()
+            Function: to get all the available teachers
+            Call our recommender plugin to invoke function
             Requires no parameters
         */
         JPluginHelper::importPlugin('taskmeister','tm_recommender');

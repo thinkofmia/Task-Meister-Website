@@ -28,8 +28,11 @@ if ($user->guest) {
     $displayHeader = ModChooseClassHelper::getHeader($params);//Get and save out custom header
     $displayText = ModChooseClassHelper::getText($params);//Get and save our custom text
     
-    $teacherList = ModChooseClassHelper::findTeachers();//Get our list of tags using helper method fingTags()
+    $teacherList = ModChooseClassHelper::findTeachers();//Get our list of teachers using helper method 
+    $studentList = ModChooseClassHelper::findStudents($teacherList, $db);//Get our list of students using helper method
     $currentList = ModChooseClassHelper::getYourTeachers($user->id, $db);
+    
+    $isTeacher = array_key_exists(intval($user->id), $teacherList);
     require JModuleHelper::getLayoutPath('mod_taskmeister_chooseclass');//Call out default.php display
     
     if (isset($_POST["submit"])){

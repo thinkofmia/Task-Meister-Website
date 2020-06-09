@@ -9,8 +9,9 @@ $userPreferenceList = array();//User Preferred List
 //Javascript to store JS functions and initialize array
     //List of your teacher list - default empty
     yourTeacherList = [];
+    yourStudentList = [];
     //Js function to load the list
-    updateLists = function(){
+    updateTeacherLists = function(){
         /*
             JavaScript function: Update all of the lists in html based on the lists
             Requires no parameters
@@ -19,6 +20,10 @@ $userPreferenceList = array();//User Preferred List
         //Set values of the input boxes to match the lists after converting them into a string
         document.getElementById("input_list1").value = JSON.stringify(yourTeacherList);
         document.getElementById("text_list1").innerHTML = JSON.stringify(yourTeacherList);
+    }
+    updateStudentLists = function(){
+        document.getElementById("input_list2").value = JSON.stringify(yourStudentList);
+        document.getElementById("text_list2").innerHTML = JSON.stringify(yourStudentList);
     }
 
     toggleTeacher = function(teacher_id){
@@ -49,7 +54,37 @@ $userPreferenceList = array();//User Preferred List
             //For debug purposes to show which list the teacher is added to
             console.log("Added "+teacher_id+" to list! "); 
         }
-        updateLists();//Update list display using the above js func
+        updateTeacherLists();//Update list display using the above js func
+    }
+    toggleStudent = function(student_id){
+    /*
+        JavaScript Function: To toggle preference by clicking on the boxes, also does the color change effect
+        Parameter tag: Refers to the particular tag id/name
+    */
+        var element = document.getElementById(student_id); //Get the tag html element
+        if (yourStudentList.includes(student_id)){
+            /*
+                If teacher exists already inside your list, remove them
+            */
+            //Removes tag from preferred list
+            yourStudentList = yourStudentList.filter(item => item !== student_id);
+            //Code to change tag element class for interface color change (CSS)
+            element.classList.remove("teacherSelected");
+            //For debug purposes to show which list the teacher is added to
+            console.log("Removed "+student_id+" from list! "); 
+        }
+        else {
+            /*
+                If teacher doesn't exist in list, add them.
+            */
+            //Adds tag to may try list
+            yourStudentList.push(student_id);
+            //Code to change tag element class for interface color change (CSS)
+            element.classList.add("teacherSelected");
+            //For debug purposes to show which list the teacher is added to
+            console.log("Added "+student_id+" to list! "); 
+        }
+        updateStudentLists();//Update list display using the above js func
     }
 </script>
 
@@ -67,37 +102,67 @@ Display left hand side text
         <?php echo $displayText; ?>
     <?php endif; ?>
     <br>
+    <?php if ($isTeacher) : ?>
+        You are a Teacher.<br>
+        <form id="preferenceForm" method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>" >
+            <br><span style="background-color: gold;">Your Students: </span><span id="text_list2">[]</span><input type="text" name="list2" id="input_list2" placeholder = "[]">
+            <br><input type="submit" name="submit2">
+        </form>
+    <?php else : ?>
+        You are a Student.<br>
+        <form id="preferenceForm" method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>" >
+            <br><span style="background-color: green;">Your Teachers: </span><span id="text_list1">[]</span><input type="text" name="list1" id="input_list1" placeholder = "[]">
+            <br><input type="submit" name="submit">
+        </form>
+    <?php endif; ?>
+    <br>
     <!--
         Create input boxes in a form (Method: POST)
             list1 refers to the Preferred List
     -->
-    <form id="preferenceForm" method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>" >
-        <br><span style="background-color: green;">Your Teachers: </span><span id="text_list1">[]</span><input type="text" name="list1" id="input_list1" placeholder = "[]">
-        <br><input type="submit" name="submit">
-    </form>
+    
 </div>
 
 <!--
-    Displays right hand side preference box
-        Requires css class preferenceList, preferenceBox and preferenceLabel
+    Display differently if teacher or students
 -->
-<div class="teachersList">
-    <!--For loop to display tag list-->
-    <?php foreach ($teacherList as $key => $value) : ?>
-        <!--Set the div id as the tag name and give it onclick toggleTeacher func-->
-        <div class="teacherBox" id="<?php echo $key;?>" onclick="toggleTeacher(<?php echo $key;?>)">
-            <!--
-                Displays image of based on the images folder and img name in the mod: Width and Height 100%
-                If no image is found, give it default image using onerror func
-            -->
-            <img src="/taskmeisterx/modules/mod_taskmeister_chooseclass/images/<?php echo $key;?>.jpg" width="100%" height="100%" onerror="this.src='/taskmeisterx/modules/mod_taskmeister_choosepreference/images/default.jpg';"/>
-            <!--Display label of tags, including tag name and number of uses-->
-            <p class = "teacherLabel"><?php echo $value; ?><br>
-            Code: <?php echo $key; ?></p>
-        </div>
-        </script>
-    <?php endforeach; ?>
-</div>
+<?php if ($isTeacher) : ?><!--For teachers to pick students-->
+    <div class="teachersList">
+        <!--For loop to display tag list-->
+        <?php foreach ($studentList as $key => $value) : ?>
+            <!--Set the div id as the tag name and give it onclick toggleTeacher func-->
+            <div class="teacherBox" id="<?php echo $key;?>" onclick="toggleStudent(<?php echo $key;?>)">
+                <!--
+                    Displays image of based on the images folder and img name in the mod: Width and Height 100%
+                    If no image is found, give it default image using onerror func
+                -->
+                <img src="/taskmeisterx/modules/mod_taskmeister_chooseclass/images/<?php echo $key;?>.jpg" width="100%" height="100%" onerror="this.src='/taskmeisterx/modules/mod_taskmeister_chooseclass/images/default_Student.jpg';"/>
+                <!--Display label of tags, including tag name and number of uses-->
+                <p class = "teacherLabel"><?php echo $value; ?><br>
+                Code: <?php echo $key; ?></p>
+            </div>
+            </script>
+        <?php endforeach; ?>
+    </div>
+<?php else : ?><!--For students to pick teachers-->
+    <div class="teachersList">
+        <!--For loop to display tag list-->
+        <?php foreach ($teacherList as $key => $value) : ?>
+            <!--Set the div id as the tag name and give it onclick toggleTeacher func-->
+            <div class="teacherBox" id="<?php echo $key;?>" onclick="toggleTeacher(<?php echo $key;?>)">
+                <!--
+                    Displays image of based on the images folder and img name in the mod: Width and Height 100%
+                    If no image is found, give it default image using onerror func
+                -->
+                <img src="/taskmeisterx/modules/mod_taskmeister_chooseclass/images/<?php echo $key;?>.jpg" width="100%" height="100%" onerror="this.src='/taskmeisterx/modules/mod_taskmeister_chooseclass/images/default_Teacher.jpg';"/>
+                <!--Display label of tags, including tag name and number of uses-->
+                <p class = "teacherLabel"><?php echo $value; ?><br>
+                Code: <?php echo $key; ?></p>
+            </div>
+            </script>
+        <?php endforeach; ?>
+    </div>
+<?php endif; ?>
 
 <script>
 //Function to add current list to menu
