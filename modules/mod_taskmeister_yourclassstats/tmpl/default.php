@@ -8,11 +8,15 @@ defined('_JEXEC') or die;
 
 <h3>Your Class Stats</h3>
 
-<div id="piechart"></div>
+<div class = "charts">
+    <div id="piechart"></div>
+    <div id="dislikedchart"></div>
+</div>
 <script type="text/javascript">
 // Load google charts
 google.charts.load('current', {'packages':['corechart']});
 google.charts.setOnLoadCallback(drawChart);
+google.charts.setOnLoadCallback(drawDislikedChart);
 
 // Draw the chart and set the chart values
 function drawChart() {
@@ -25,10 +29,28 @@ function drawChart() {
 ]);
 
   // Optional; add a title and set the width and height of the chart
-  var options = {'title':'Your Class Recommended Preference', 'width':550, 'height':400};
+  var options = {'title':'Your Class Recommended Preferences', 'width':400, 'height':400};
 
   // Display the chart inside the <div> element with id="piechart"
   var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+  chart.draw(data, options);
+}
+
+// Draw the chart and set the chart values
+function drawDislikedChart() {
+  var data = google.visualization.arrayToDataTable([
+  ['Preference', 'Total Students'],
+  <?php foreach ($dislikedPreferencesScore as $key => $value) : ?>
+    ['<?php echo $key; ?>', <?php echo $value; ?>],
+  <?php endforeach?>
+    ['Others', 0]
+]);
+
+  // Optional; add a title and set the width and height of the chart
+  var options = {'title':'Your Class Disliked Preferences', 'width':400, 'height':400};
+
+  // Display the chart inside the <div> element with id="piechart"
+  var chart = new google.visualization.PieChart(document.getElementById('dislikedchart'));
   chart.draw(data, options);
 }
 </script>

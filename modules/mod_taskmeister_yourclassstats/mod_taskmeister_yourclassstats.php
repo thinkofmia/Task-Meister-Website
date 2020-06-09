@@ -46,6 +46,7 @@ if ($userID!=0){//if User id isnt a guest
         }
         //Create Preferences Score Array
         $fullPreferencesScore = array();
+        $dislikedPreferencesScore = array();
         //Loop base on students list
         foreach ($studentsList as $row){
             $query = $db->getQuery(true);
@@ -59,6 +60,10 @@ if ($userID!=0){//if User id isnt a guest
                 foreach ($studentPreferences as $key => $value){
                     if (isset($fullPreferencesScore[$key])) $fullPreferencesScore[$key] += $value;
                     else $fullPreferencesScore[$key] = $value;
+                    if ($value == 0){//If user dislikes this
+                        if ($dislikedPreferencesScore[$key]) $dislikedPreferencesScore[$key] += 1;
+                        else $dislikedPreferencesScore[$key] = 1;
+                    }
                 }
             }
         }

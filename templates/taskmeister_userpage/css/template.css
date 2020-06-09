@@ -365,6 +365,10 @@ table th, table td {
   border: 2px solid white;
 }
 
+.charts {
+  display: inline-flex;
+}
+
 .yourClassStatsTable {
   background: blue;
 }

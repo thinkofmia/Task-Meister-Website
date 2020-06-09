@@ -397,6 +397,10 @@ table {
 }
 
 //Your Class Stats Mod
+.charts{
+    display: inline-flex;
+}
+
 .yourClassStatsTable{
     @extend #allClassStatsTable;
     background: blue;
