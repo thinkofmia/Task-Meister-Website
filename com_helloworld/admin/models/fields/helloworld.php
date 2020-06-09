@@ -38,8 +38,9 @@ class JFormFieldHelloWorld extends JFormFieldList
 
         // Create a new query object
         $query = $db->getQuery(true);
-        $query->select($db->quoteName(array('id','greeting')));
-        $query->from($db->quoteName('#__helloworld'));
+        $query
+            ->select($db->quoteName(array('id','greeting')))
+            ->from($db->quoteName('#__helloworld'));
         $db->setQuery((string) $query);
         $messages = $db->loadObjectList();
         $options = array();
