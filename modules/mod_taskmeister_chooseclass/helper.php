@@ -82,8 +82,8 @@ class ModChooseClassHelper
             //Save information into a list
             $yourTeachers = array();
             foreach ($results_ext as $row){
-                if (in_array($userid, $row['es_students'])){//If student exists in teacher's class
-                    $yourTeachers[] = $row['es_teacherid'];
+                if (in_array(intval($userid), json_decode($row['es_students']))){//If student exists in teacher's class
+                    array_push($yourTeachers, $row['es_teacherid']);
                 }
             }
             return $yourTeachers;

@@ -101,11 +101,7 @@ Display left hand side text
 
 <script>
 //Function to add current list to menu
-<?php foreach ($currentList as $key => $value) : ?>
-    <?php if ($key): ?>
-        <?php if ($value==0): ?>//If teacher exists, toggle
-            toggleTeacher('<?php echo $key; ?>');
-        <?php endif; ?>
-    <?php endif; ?>
+<?php foreach ($currentList as $row) : ?>
+    toggleTeacher(<?php echo $row; ?>);
 <?php endforeach; ?>
 </script>
