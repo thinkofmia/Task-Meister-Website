@@ -33,10 +33,13 @@ class JFormFieldHelloWorld extends JFormFieldList
      */
     protected function getOptions()
     {
+        // Get a db connection
         $db = JFactory::getDbo();
+
+        // Create a new query object
         $query = $db->getQuery(true);
-        $query->select('id,greeting');
-        $query->from('#__helloworld');
+        $query->select($db->quoteName(array('id','greeting')));
+        $query->from($db->quoteName('#__helloworld'));
         $db->setQuery((string) $query);
         $messages = $db->loadObjectList();
         $options = array();
