@@ -40,7 +40,7 @@ echo "<style>
     border: 2px solid white;
     }
 </style>";
-echo "<table style='background: green; border: 2px solid white; border-collapse: collapse;'>
+echo "<table style='background: green; border: 2px solid white; border-collapse: collapse; width: 70vw;'>
     <tr>
         <th>Teacher</th>
         <th>Students</th>
@@ -70,7 +70,36 @@ foreach ($results as $row) {//For loop for each item in $results
         echo "No Students in your class";
     }
     echo "</td>
-        <td>In Progress</td>
+        <td>";
+    if ($studentsList){
+        $fullPreferencesScore = array();
+        //For each student in the list, get preferences    
+        foreach ($studentsList as $row){
+            $query = $db->getQuery(true);
+            $query->select($db->quoteName(array('es_userid','es_userpreference')))//Get user id, user preference
+                ->from($db->quoteName('#__customtables_table_userstats'))//From our external user stats table
+                ->where($db->quoteName('es_userid') . ' = ' . $row);//Where it is the current user's userid
+            $db->setQuery($query);
+            $results2 = $db->loadAssocList();//Save results as $results2
+            foreach ($results2 as $row2){
+                $studentPreferences = json_decode($row2['es_userpreference']);
+                foreach ($studentPreferences as $key => $value){
+                    if (isset($fullPreferencesScore[$key])) $fullPreferencesScore[$key] += $value;
+                    else $fullPreferencesScore[$key] = $value;
+                }
+            }
+        }
+        arsort($fullPreferencesScore);
+        echo "<ul>";
+        foreach ($fullPreferencesScore as $key => $value){
+            if (intval($value)>0) echo "<li>".$key." - Total Students Score: ".$value."</li>";
+        }
+        echo "</ul>";
+    }
+    else {
+        echo "No available data. ";
+    }    
+    echo "</td>
     </tr>"; 
 }
 echo "</table>";
