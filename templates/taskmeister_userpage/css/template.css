@@ -212,21 +212,21 @@ table th, table td {
   text-align: left;
 }
 
-.preferenceOptions {
+.preferenceOptions, .teachersOptions {
   position: relative;
   z-index: 1;
   width: 100%;
 }
-.preferenceOptions h3, .preferenceOptions .featuredArticle .featuredArticleText h3, .featuredArticle .featuredArticleText .preferenceOptions h3 {
+.preferenceOptions h3, .preferenceOptions .featuredArticle .featuredArticleText h3, .featuredArticle .featuredArticleText .preferenceOptions h3, .teachersOptions h3, .teachersOptions .featuredArticle .featuredArticleText h3, .featuredArticle .featuredArticleText .teachersOptions h3 {
   text-align: center;
 }
-.preferenceOptions input {
+.preferenceOptions input, .teachersOptions input {
   display: inline-block;
   min-width: 20vw;
   font-size: 1.5vw;
 }
 
-.preferenceList {
+.preferenceList, .teachersList {
   width: 90vw;
   height: 100%;
   display: inline-block;
@@ -235,7 +235,7 @@ table th, table td {
   right: 90%;
 }
 
-.userPreferred {
+.userPreferred, .teacherSelected {
   background-color: green;
 }
 
@@ -247,7 +247,7 @@ table th, table td {
   background-color: goldenrod;
 }
 
-.preferenceBox, .userPreferred, .userNotPreferred, .userMayTry {
+.preferenceBox, .userPreferred, .teacherSelected, .userNotPreferred, .userMayTry, .teacherBox {
   height: 15vw;
   width: 15vw;
   position: relative;
@@ -255,7 +255,7 @@ table th, table td {
   padding: 1vw;
   cursor: pointer;
 }
-.preferenceBox p, .userPreferred p, .userNotPreferred p, .userMayTry p {
+.preferenceBox p, .userPreferred p, .teacherSelected p, .userNotPreferred p, .userMayTry p, .teacherBox p {
   position: absolute;
   z-index: 10;
   bottom: -0.5vw;

@@ -235,7 +235,7 @@ table {
 }
 
 //For the User Preference Mod
-.preferenceOptions {
+.preferenceOptions, .teachersOptions {
     position: relative;
     z-index: 1;
     width: 100%;
@@ -248,7 +248,7 @@ table {
         font-size: 1.5vw;
     }
 }
-.preferenceList {
+.preferenceList, .teachersList {
     width: 90vw;
     height: 100%;
     display: inline-block;
@@ -257,7 +257,7 @@ table {
     right: 90%;
 }
  
-.userPreferred {
+.userPreferred, .teacherSelected {
     @extend .preferenceBox; 
     background-color: green;
 }
@@ -272,7 +272,7 @@ table {
     background-color: goldenrod;       
 }
 
-.preferenceBox {
+.preferenceBox, .teacherBox {
     height: 15vw;
     width: 15vw;
     position: relative;

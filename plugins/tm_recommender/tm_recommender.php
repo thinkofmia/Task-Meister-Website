@@ -54,6 +54,50 @@ class plgTaskMeisterTM_recommender extends JPlugin
         $result = JFactory::getDbo()->updateObject('#__customtables_table_userstats', $userInfo, 'es_userid');
         return "Saved!";
     }
+    //Function: Save a particular user's teachers
+    function saveOurTeachers($teacherList_str){
+        //Set database and user
+        $db = Factory::getDbo();
+        $me = Factory::getUser();
+        $userID = $me->id;
+        $username = $me->username;
+        //Get teachers list
+        $teacherList = json_decode($teacherList_str);
+        //Query
+        $query = $db->getQuery(true);
+        $query->select($db->quoteName(array('es_teacherid','es_students')))
+        ->from($db->quoteName('#__customtables_table_teacherstats'));
+        $db->setQuery($query);
+        $results_ext = $db->loadAssocList();
+        //Save information into a list
+        foreach ($results_ext as $row){
+            $newStudentList = json_decode($row['es_students']); //Teacher's List that stores all the students inside
+            //Check if needs update
+            if (in_array($row['es_teacherid'], $teacherList)&& !in_array($userID, $newStudentList)){//If student exists in teacher's class but not in database
+                array_push($newStudentList, intval($userID));
+                // Create and populate an user table.
+                $teacherInfo = new stdClass();
+                $teacherInfo->es_teacherid = $row['es_teacherid'];
+                $teacherInfo->es_students = json_encode($newStudentList);
+                // Update the object into the article profile table.
+                $result = JFactory::getDbo()->updateObject('#__customtables_table_teacherstats', $teacherInfo, 'es_teacherid');
+            }
+            //If student is in database but not in teacher list
+            else if (!in_array($row['es_teacherid'], $teacherList) && in_array(intval($userID), $newStudentList)){
+                $key = array_search(intval($userID), $newStudentList);
+                if ($key !== false) {
+                    unset($newStudentList[$key]);
+                }
+                // Create and populate an user table.
+                $teacherInfo = new stdClass();
+                $teacherInfo->es_teacherid = $row['es_teacherid'];
+                $teacherInfo->es_students = json_encode($newStudentList);
+                // Update the object into the article profile table.
+                $result = JFactory::getDbo()->updateObject('#__customtables_table_teacherstats', $teacherInfo, 'es_teacherid');
+            }
+        }
+        return "Saved!";
+    }
     /* Function: Get list of tags that are currently in used. */
     function getTagList(){
         //Gets Database

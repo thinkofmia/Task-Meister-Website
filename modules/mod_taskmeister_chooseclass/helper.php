@@ -60,37 +60,33 @@ class ModChooseClassHelper
         }
         return true;
     }
-    function saveLists($list1,$list2,$list3){
+    function saveLists($list){
         /*
-            Function: Save the user's preference lists into the database
-            Parameter $list1: List of tags that the user preferred
-            Parameter $list2: List of tags that the user do not prefer
-            Parameter $list3: List of tags that the user may try
+            Function: Save the user's teacher lists into the database
+            Parameter $list: List of teachers that the user is under
         */
-        //Call our recommender to invoke function saveUserPreference(), requires all three parameters
+        //Call our recommender to invoke function saveOurTeachers(), requires a list of teachers
         JPluginHelper::importPlugin('taskmeister','tm_recommender');
         $dispatcher = JDispatcher::getInstance();
-        $results = $dispatcher->trigger('saveUserPreference', array($list1,$list2,$list3));//Returns results in the form of an array
-        
+        $results = $dispatcher->trigger('saveOurTeachers', array($list));//Returns results in the form of an array
         return $results[0];//Return first index of results, which is mostly a boolean to show if the func completes
     }
-    function getTeachers($userid, $db){
+    function getYourTeachers($userid, $db){
         if ($userid != 0 ){//If user is not a guest
-            //Get external user table (custom table) To find out list of liked, deployed and disliked articles
+            //Get external teacher table (custom table)
             $query = $db->getQuery(true);
-            $query->select($db->quoteName(array('es_userid','es_userpreference')))
-            ->from($db->quoteName('#__customtables_table_userstats'))
-            ->where($db->quoteName('es_userid') . ' = ' . $userid);
+            $query->select($db->quoteName(array('es_teacherid','es_students')))
+            ->from($db->quoteName('#__customtables_table_teacherstats'));
             $db->setQuery($query);
             $results_ext = $db->loadAssocList();
             //Save information into a list
+            $yourTeachers = array();
             foreach ($results_ext as $row){
-                if ($row['es_userid']==$userid){//Just to be sure if user id is same
-                    $preferencelist = json_decode($row['es_userpreference']);
+                if (in_array($userid, $row['es_students'])){//If student exists in teacher's class
+                    $yourTeachers[] = $row['es_teacherid'];
                 }
             }
-            return $preferencelist;
+            return $yourTeachers;
         }
-        
     }
 }
