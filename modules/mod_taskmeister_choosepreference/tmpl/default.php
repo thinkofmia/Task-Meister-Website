@@ -109,6 +109,7 @@ Display left hand side text
         <h3><?php echo $displayHeader; ?></h3>
     <?php endif; ?>
     <!--If text exists, display text-->
+    <?php echo "Welcome ".$user->name; ?><br>
     <?php if ($displayText) : ?>
         <?php echo $displayText; ?>
     <?php endif; ?>
