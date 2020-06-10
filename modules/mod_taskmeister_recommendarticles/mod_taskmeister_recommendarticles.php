@@ -20,8 +20,12 @@ require_once dirname(__FILE__) . '/helper.php';//used because our helper functio
 $displayHeader = ModRecommendArticlesHelper::getHeader($params);//invoke helper class method
 $displayText = ModRecommendArticlesHelper::getText($params);//invoke helper class method
 
+use Joomla\CMS\Factory;
+$me = Factory::getUser();//Gets user
+$userid = $me->id;
+
 //Call our recommender
-$resultsSelected= ModRecommendArticlesHelper::getArticleList($params->get('filter'),$params->get('noOfArticles'), $params->get('selectedtag'));
+$resultsSelected= ModRecommendArticlesHelper::getArticleList($params->get('filter'),$params->get('noOfArticles'), $userid, $params->get('selectedtag'));
 $recommendedContents = ModRecommendArticlesHelper::getArticles($resultsSelected);
 
 require JModuleHelper::getLayoutPath('mod_taskmeister_recommendarticles');//Calls out default.php

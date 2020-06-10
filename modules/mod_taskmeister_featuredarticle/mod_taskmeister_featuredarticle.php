@@ -17,6 +17,7 @@ defined('_JEXEC') or die; // ensures that this file is being invoked from the Jo
 // Include the syndicate functions only once
 require_once dirname(__FILE__) . '/helper.php';//used because our helper functions are defined within a class, and we only want the class defined once. 
 
+use Joomla\CMS\Factory;
 $displayHeader = ModFeaturedArticleHelper::getHeader($params);//Set variable of inputtable header
 $displayText = ModFeaturedArticleHelper::getText($params);//Set variable of inputtable text
 
@@ -24,7 +25,9 @@ if ($params->get('automated')=="choice_no"){
     $articleID = $params->get('articleID');
 }
 else {
-    $articleID = ModFeaturedArticleHelper::recommendArticle();
+    $me = Factory::getUser();//Gets user
+    $userid = $me->id;
+    $articleID = ModFeaturedArticleHelper::recommendArticle($userid);
 }
 
 $videoLink = ModFeaturedArticleHelper::getVideo($params, $params->get('automated'), $articleID);//Set variable of video link

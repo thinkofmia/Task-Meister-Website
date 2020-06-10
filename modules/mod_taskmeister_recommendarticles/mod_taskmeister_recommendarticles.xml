@@ -57,6 +57,7 @@
 					<option value="choice_myLikedList">What you have liked</option>
 					<option value="choice_myDeployedList">What you have deployed</option>
 					<option value="choice_selectedTag">Recommends only the Selected Tag</option>
+					<option value="choice_teacher">Recommends your teachers' preferences</option>
 					<option	value="choice_random">Random</option>
 				</field>
 				<field

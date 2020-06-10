@@ -271,10 +271,8 @@ class plgTaskMeisterTM_recommender extends JPlugin
     Used only for articles module
     Returns a string of recommended articles
      */
-    function recommendPersonalArticles($mode,$noOfArticles, $parameter1){
+    function recommendPersonalArticles($mode,$noOfArticles, $userid, $parameter1){
         $db = Factory::getDbo();//Gets database
-        $me = Factory::getUser();//Gets user
-        $userid = $me->id;
         //Get external user table (custom table) To find out list of liked, deployed and disliked articles
         $query = $db->getQuery(true);
         $query->select($db->quoteName(array('es_userid','es_pageliked','es_pagedisliked','es_pagedeployed','es_userpreference')))
