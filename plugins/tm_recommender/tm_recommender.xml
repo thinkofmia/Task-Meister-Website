@@ -16,11 +16,65 @@
 		<fields name="params">
 
 			<fieldset name="basic">
-				<field name="sometext" type="text"
-					default="50"
-					description="Some Text"
-					label="Some Text: "
-					size="50"
+				<field
+					name="preferredweightage"
+					type="integer"
+					default="100"
+					label="Preferred Weightage (%)"
+					description="Input the preferred weightage here. "
+					first="1"
+					step="1"
+                    last="100"
+				/>
+				<field
+					name="notpreferredweightage"
+					type="integer"
+					default="100"
+					label="Not Preferred Weightage (%)"
+					description="Input the not preferred weightage here. "
+					first="1"
+					step="1"
+                    last="100"
+				/>
+				<field
+					name="maytryweightage"
+					type="integer"
+					default="100"
+					label="May Try Weightage (%)"
+					description="Input the may try weightage here. "
+					first="1"
+					step="1"
+                    last="100"
+				/>
+				<field
+					name="likesweightage"
+					type="integer"
+					default="100"
+					label="Likes Weightage (%)"
+					description="Input the overall likes weightage here. "
+					first="1"
+					step="1"
+                    last="100"
+				/>
+				<field
+					name="deployedweightage"
+					type="integer"
+					default="100"
+					label="Deployed Weightage (%)"
+					description="Input the overall deployed weightage here. "
+					first="1"
+					step="1"
+                    last="100"
+				/>
+				<field
+					name="touchbeforeweightage"
+					type="integer"
+					default="100"
+					label="Touch Before Weightage (%)"
+					description="Input the overall touch before weightage here. "
+					first="1"
+					step="1"
+                    last="100"
 				/>
 			</fieldset>
 

@@ -327,13 +327,13 @@ class plgTaskMeisterTM_recommender extends JPlugin
                                 $weightage += 0;
                                 break;
                             case 0://If not preferred
-                                $weightage -= 100;
+                                $weightage -= 100*((($this->params)->get('notpreferredweightage'))/100);
                                 break;
                             case 1://May Try
-                                $weightage += 10;
+                                $weightage += 10*((($this->params)->get('maytryweightage'))/100);
                                 break;
                             case 2://Preferred
-                                $weightage += 20;
+                                $weightage += 20*((($this->params)->get('preferredweightage'))/100);
                                 break;
                         }
                     }
@@ -348,14 +348,14 @@ class plgTaskMeisterTM_recommender extends JPlugin
                             $touchBeforeModifier = 99999;
                         break;
                     case "Deployed":
-                        $deployedModifier = 21;
+                        $deployedModifier = $deployedModifier*21;
                         break; 
                     case "Likes":
-                        $likedModifier = 25; 
+                        $likedModifier = $likedModifier*21; 
                         break;
                     case "Personal":
-                        $likedModifier = 10; 
-                        $deployedModifier = 5;
+                        $likedModifier = $likedModifier*21; 
+                        $deployedModifier = $deployedModifier*13;
                         break;
                     default:
                         break; 
