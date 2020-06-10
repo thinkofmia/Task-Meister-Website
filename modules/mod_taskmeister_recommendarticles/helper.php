@@ -62,7 +62,7 @@ class ModRecommendArticlesHelper
             $yourTeachersContent = array();
             foreach($yourTeachers as $row){
                 //Get recommendation results of a particular teacher
-                $results = $dispatcher->trigger( 'getMyList', array("Teacher",$noOfArticles,$row));
+                $results = $dispatcher->trigger( 'recommendPersonalArticles', array("Personal",$noOfArticles,$row,""));
                 //Save result in a list
                 $teacherList = json_encode($results[0]);
                 //Get article contents
