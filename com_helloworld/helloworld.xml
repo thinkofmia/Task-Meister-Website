@@ -10,7 +10,7 @@
   <copyright>Copyright Info</copyright>
   <license>License info</license>
   <!-- The version string is recorded in the components table -->
-  <version>0.0.8</version>
+  <version>0.0.9</version>
   <!-- The description is optional and defaults to the name -->
   <description>COM_HELLOWORLD_DESCRIPTION</description>
 
@@ -67,6 +67,8 @@
       <folder>models</folder>
       <!-- views files section -->
       <folder>views</folder>
+      <!-- controllers files section -->
+      <folder>controllers</folder>
     </files>
     <languages folder="admin/language">
       <language tag="en-GB">en-GB/en-GB.com_helloworld.ini</language>
