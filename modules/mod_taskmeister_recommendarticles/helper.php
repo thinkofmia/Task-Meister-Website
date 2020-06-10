@@ -36,7 +36,45 @@ class ModRecommendArticlesHelper
         //Return string results of the article contents
         return json_encode($results[0]) ;
     }
+    function getTeachersRecommendations($filter,$noOfArticles, $userid){
+        //Call our recommender
+        JPluginHelper::importPlugin('taskmeister','tm_recommender');
+        $dispatcher = JDispatcher::getInstance();
+        //Initialize result
+        $results = array("Calculating... ");
+        //If never set no of articles
+        if (!$noOfArticles) $noOfArticles=10;
+        //Get all the teachers that the student is under
+        if ($userid != 0 ){//If user is not a guest
+            //Get external teacher table (custom table)
+            $query = $db->getQuery(true);
+            $query->select($db->quoteName(array('es_teacherid','es_students')))
+            ->from($db->quoteName('#__customtables_table_teacherstats'));
+            $db->setQuery($query);
+            $results_ext = $db->loadAssocList();
+            //Save information into a list
+            $yourTeachers = array();//Your teacher list
+            foreach ($results_ext as $row){//For loop
+                if (in_array(intval($userid), json_decode($row['es_students']))){//If student exists in teacher's class
+                    array_push($yourTeachers, $row['es_teacherid']);
+                }
+            }
+            $yourTeachersContent = array();
+            foreach($yourTeachers as $row){
+                //Get recommendation results of a particular teacher
+                $results = $dispatcher->trigger( 'getMyList', array("Liked",$noOfArticles,$row,""));
+                //Save result in a list
+                $teacherList = json_encode($results[0],JSON_FORCE_OBJECT);
+                $teacherContents = getArticles($teacherList);
+                $teacher = JFactory::getUser($row);//Get Teacher Profile
+                $teacherName = $teacher->name;//Get Teacher Name
+                //Add your teacher into the recommendations content
+                $yourTeachersContent[$teacherName] = $teacherContents;
+            }
+            return $yourTeachersContent;
+        }
 
+    }
     function getArticleList($params,$noOfArticles, $userid, $selectedTag){//Function to get selection from parameter fields
         //Call our recommender
         JPluginHelper::importPlugin('taskmeister','tm_recommender');

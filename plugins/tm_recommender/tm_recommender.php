@@ -267,7 +267,7 @@ class plgTaskMeisterTM_recommender extends JPlugin
         return $resultList;
     }
     /* Function: Personal Recommended Articles
-    Recommend personal articles that excludes what is already liked/disliked by the user
+    Recommend personal articles that excludes what is already liked/disliked by the targeted  user
     Used only for articles module
     Returns a string of recommended articles
      */
@@ -361,7 +361,7 @@ class plgTaskMeisterTM_recommender extends JPlugin
                 //Store weightage
                 $weighingValue = $weightage - $touchBeforeModifier + $likedModifier*($row['es_totallikes'] - $row['es_totaldislikes']) + $row['es_totaldeployed']*$deployedModifier;
                 //Only if weightage is higher or equal to 0
-                if ($weightage>=0) $weighArticlesList[$row['es_articleid']] = $weighingValue; 
+                if ($weighingValue>=0) $weighArticlesList[$row['es_articleid']] = $weighingValue; 
                 if ($highestWeighValue<$weighingValue) $highestWeighValue = $weighingValue;
             }
         }

@@ -25,8 +25,13 @@ $me = Factory::getUser();//Gets user
 $userid = $me->id;
 
 //Call our recommender
-$resultsSelected= ModRecommendArticlesHelper::getArticleList($params->get('filter'),$params->get('noOfArticles'), $userid, $params->get('selectedtag'));
-$recommendedContents = ModRecommendArticlesHelper::getArticles($resultsSelected);
+if (($params->get('filter'))=="choice_teacher"){//If choose to show teachers' preferences
+    $teachersRecommendationDict= ModRecommendArticlesHelper::getTeachersRecommendations($params->get('filter'),$params->get('noOfArticles'), $userid);
+}
+else{//If mode selected is others
+    $resultsSelected= ModRecommendArticlesHelper::getArticleList($params->get('filter'),$params->get('noOfArticles'), $userid, $params->get('selectedtag'));
+    $recommendedContents = ModRecommendArticlesHelper::getArticles($resultsSelected);
+}
 
 require JModuleHelper::getLayoutPath('mod_taskmeister_recommendarticles');//Calls out default.php
 
