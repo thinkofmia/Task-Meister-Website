@@ -10,7 +10,7 @@ $me = Factory::getUser();//Sets User variable
 $userID = 0;
 
 //Sets item id
-$itemID = JRequest::getVar('id');
+if (JRequest::getVar('view')=='article') $itemID = JRequest::getVar('id');
 
 //Check if its an article
 if ($itemID){
@@ -103,6 +103,7 @@ if(isset($_POST["tDown"])&&$userID!=0){
      * Parameter $userDislikedList: List of the user disliked pages (User-side)
     */
     setThumbsDown($userID,$articleID,$userchoice,$userLikedList,$userDislikedList);
+    header("refresh: 0;");
 }
 
 if(isset($_POST["tUp"])&&$userID!=0){
@@ -115,6 +116,8 @@ if(isset($_POST["tUp"])&&$userID!=0){
      * Parameter $userDislikedList: List of the user disliked pages (User-side)
     */
     setThumbsUp($userID,$articleID,$userchoice,$userLikedList,$userDislikedList);
+    header("refresh: 0;");
+
 }
 
 function disableSwitch($list,$articleID){

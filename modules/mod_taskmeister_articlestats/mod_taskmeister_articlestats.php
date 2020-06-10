@@ -26,7 +26,7 @@ require JModuleHelper::getLayoutPath('mod_taskmeister_articlestats');//call out 
 use Joomla\CMS\Factory;
 $db = Factory::getDbo();//Get database
 $me = Factory::getUser();//Ger User
-$articleID = JRequest::getVar('id');
+if (JRequest::getVar('view')=='article') $articleID = JRequest::getVar('id');
 
 if ($articleID){
 //Query database for articles based on current article id

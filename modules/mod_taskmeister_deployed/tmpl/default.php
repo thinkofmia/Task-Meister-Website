@@ -11,7 +11,7 @@ $me = Factory::getUser();
 $userID = 0; //By default
 
 //Sets item id
-$itemID = JRequest::getVar('id');
+if (JRequest::getVar('view')=='article') $itemID = JRequest::getVar('id');
 
 //Check if its an article
 if ($itemID){
@@ -91,6 +91,7 @@ if ($dataNotExist){
 if(isset($_POST["dButton"])){
     //Run setDeployed()
     setDeployed($userID,$articleID,$deployedList,$deployedList_user);
+    header("refresh: 0;");
 }
 
 function setDeployed($userID,$articleID,$list,$deployedList_user){
