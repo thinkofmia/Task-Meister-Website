@@ -338,10 +338,10 @@ class plgTaskMeisterTM_recommender extends JPlugin
                         }
                     }
                 }
-                //Modifiers
-                $deployedModifier = 1.1;
-                $likedModifier = 1.1;
-                $touchBeforeModifier = 0;
+                //Modifiers based on config
+                $deployedModifier = ((($this->params)->get('deployedweightage'))/100);
+                $likedModifier = ((($this->params)->get('likesweightage'))/100);
+                $touchBeforeModifier = ((($this->params)->get('touchbeforeweightage'))/100);
                 switch($mode){
                     case "Untouched":
                         if(in_array($row['es_articleid'],$likedlist)||in_array($row['es_articleid'],$deployedlist))
@@ -360,10 +360,6 @@ class plgTaskMeisterTM_recommender extends JPlugin
                     default:
                         break; 
                 }
-                //Update weightage based on config
-                $deployedModifier = $deployedModifier*((($this->params)->get('deployedweightage'))/100);
-                $likedModifier = $likedModifier*((($this->params)->get('likesweightage'))/100);
-                $touchBeforeModifier = $touchBeforeModifier*((($this->params)->get('touchbeforeweightage'))/100);
                 //Store weightage
                 $weighingValue = $weightage - $touchBeforeModifier + $likedModifier*($row['es_totallikes'] - $row['es_totaldislikes']) + $row['es_totaldeployed']*$deployedModifier;
                 //Only if weightage is higher or equal to 0

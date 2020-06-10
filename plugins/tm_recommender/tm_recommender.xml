@@ -24,7 +24,7 @@
 					description="Input the preferred weightage here. "
 					first="1"
 					step="1"
-                    last="100"
+                    last="200"
 				/>
 				<field
 					name="notpreferredweightage"
@@ -34,7 +34,7 @@
 					description="Input the not preferred weightage here. "
 					first="1"
 					step="1"
-                    last="100"
+                    last="200"
 				/>
 				<field
 					name="maytryweightage"
@@ -44,37 +44,37 @@
 					description="Input the may try weightage here. "
 					first="1"
 					step="1"
-                    last="100"
+                    last="200"
 				/>
 				<field
 					name="likesweightage"
 					type="integer"
-					default="100"
+					default="110"
 					label="Likes Weightage (%)"
 					description="Input the overall likes weightage here. "
 					first="1"
 					step="1"
-                    last="100"
+                    last="200"
 				/>
 				<field
 					name="deployedweightage"
 					type="integer"
-					default="100"
+					default="110"
 					label="Deployed Weightage (%)"
 					description="Input the overall deployed weightage here. "
 					first="1"
 					step="1"
-                    last="100"
+                    last="200"
 				/>
 				<field
 					name="touchbeforeweightage"
 					type="integer"
-					default="100"
+					default="1"
 					label="Touch Before Weightage (%)"
 					description="Input the overall touch before weightage here. "
 					first="1"
 					step="1"
-                    last="100"
+                    last="200"
 				/>
 			</fieldset>
 
