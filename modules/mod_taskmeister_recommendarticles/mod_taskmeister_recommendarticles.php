@@ -22,18 +22,20 @@ $displayText = ModRecommendArticlesHelper::getText($params);//invoke helper clas
 
 use Joomla\CMS\Factory;
 $me = Factory::getUser();//Gets user
+$db = Factory::getDbo();//Gets database
 $userid = $me->id;
 
 //Call our recommender
 if (($params->get('filter'))=="choice_teacher"){//If choose to show teachers' preferences
-    $teachersRecommendationDict= ModRecommendArticlesHelper::getTeachersRecommendations($params->get('filter'),$params->get('noOfArticles'), $userid);
+    $teachersRecommendationDict= ModRecommendArticlesHelper::getTeachersRecommendations($params->get('noOfArticles'), $userid, $db);
+    if ($userid!=0) require JModuleHelper::getLayoutPath('mod_taskmeister_recommendarticles');//Calls out default.php
+    else echo "You need to login to use this feature. ";
 }
 else{//If mode selected is others
     $resultsSelected= ModRecommendArticlesHelper::getArticleList($params->get('filter'),$params->get('noOfArticles'), $userid, $params->get('selectedtag'));
     $recommendedContents = ModRecommendArticlesHelper::getArticles($resultsSelected);
+    require JModuleHelper::getLayoutPath('mod_taskmeister_recommendarticles');//Calls out default.php
 }
-
-require JModuleHelper::getLayoutPath('mod_taskmeister_recommendarticles');//Calls out default.php
 
 //Debug purposes, display rest of the possible rows
 /*$selection_arr = array('choice_random','choice_liked','choice_personal','choice_untouched','choice_deployed');

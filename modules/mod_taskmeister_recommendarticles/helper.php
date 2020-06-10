@@ -36,7 +36,7 @@ class ModRecommendArticlesHelper
         //Return string results of the article contents
         return json_encode($results[0]) ;
     }
-    function getTeachersRecommendations($filter,$noOfArticles, $userid){
+    function getTeachersRecommendations($noOfArticles, $userid, $db){
         //Call our recommender
         JPluginHelper::importPlugin('taskmeister','tm_recommender');
         $dispatcher = JDispatcher::getInstance();
@@ -62,16 +62,19 @@ class ModRecommendArticlesHelper
             $yourTeachersContent = array();
             foreach($yourTeachers as $row){
                 //Get recommendation results of a particular teacher
-                $results = $dispatcher->trigger( 'getMyList', array("Liked",$noOfArticles,$row,""));
+                $results = $results = $dispatcher->trigger( 'recommendPersonalArticles', array("Personal",$noOfArticles,$row,""));
                 //Save result in a list
-                $teacherList = json_encode($results[0],JSON_FORCE_OBJECT);
-                $teacherContents = getArticles($teacherList);
+                $teacherList = json_encode($results[0]);
+                //Get article contents
+                $results2 = $dispatcher->trigger( 'getArticleContents', array($teacherList));
+                $teacherContents = json_encode($results2[0]);
                 $teacher = JFactory::getUser($row);//Get Teacher Profile
                 $teacherName = $teacher->name;//Get Teacher Name
                 //Add your teacher into the recommendations content
                 $yourTeachersContent[$teacherName] = $teacherContents;
             }
-            return $yourTeachersContent;
+            if ($yourTeachersContent) return $yourTeachersContent;
+            else return;
         }
 
     }
