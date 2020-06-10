@@ -16,7 +16,7 @@ defined('_JEXEC') or die;
 
 <?php 
 //Display selected mode for debug reasons
-echo "Selected - ". $params->get('filter').": ". json_encode($resultsSelected) ."<br>";
+echo "Selected - ". $params->get('filter').": ". $resultsSelected ."<br>";
 //Convert the string results of the recommended articles into an array
 $list2 = json_decode($recommendedContents);
 ?>

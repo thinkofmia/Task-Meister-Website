@@ -225,10 +225,8 @@ class plgTaskMeisterTM_recommender extends JPlugin
     /* Function: Get My List
     Get the list of user's deployed or liked articles into a string.
      */
-    function getMyList($mode, $noOfArticles){
+    function getMyList($mode, $noOfArticles, $userid){
         $db = Factory::getDbo();//Gets database
-        $me = Factory::getUser();//Gets user
-        $userid = $me->id;
         //Get external user table (custom table) To find out list of liked, deployed and disliked articles
         $query = $db->getQuery(true);
         $query->select($db->quoteName(array('es_userid','es_pageliked','es_pagedisliked','es_pagedeployed','es_userpreference')))
@@ -249,6 +247,20 @@ class plgTaskMeisterTM_recommender extends JPlugin
         $resultList = array();
         $count = 0;
         if ($mode == "Deployed"){
+            foreach ($deployedlist as $row){
+                if ($count<$noOfArticles){
+                    $resultList[$row] = 100;
+                    $count = $count + 1;
+                }
+            }
+        }
+        else if ($mode == "Teacher"){
+            foreach ($likedlist as $row){
+                if ($count<$noOfArticles){
+                    $resultList[$row] = 100;
+                    $count = $count + 1;
+                }
+            }
             foreach ($deployedlist as $row){
                 if ($count<$noOfArticles){
                     $resultList[$row] = 100;

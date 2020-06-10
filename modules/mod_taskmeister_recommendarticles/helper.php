@@ -62,7 +62,7 @@ class ModRecommendArticlesHelper
             $yourTeachersContent = array();
             foreach($yourTeachers as $row){
                 //Get recommendation results of a particular teacher
-                $results = $results = $dispatcher->trigger( 'recommendPersonalArticles', array("Personal",$noOfArticles,$row,""));
+                $results = $dispatcher->trigger( 'getMyList', array("Teacher",$noOfArticles,$row));
                 //Save result in a list
                 $teacherList = json_encode($results[0]);
                 //Get article contents
@@ -89,10 +89,10 @@ class ModRecommendArticlesHelper
         //Check parameters
         switch($params){//Based on parameters, call out the functions accordingly in the plugin
             case 'choice_myLikedList':
-                $results = $dispatcher->trigger( 'getMyList', array("Liked",$noOfArticles,$userid,""));
+                $results = $dispatcher->trigger( 'getMyList', array("Liked",$noOfArticles,$userid));
                 break;
             case 'choice_myDeployedList':
-                $results = $dispatcher->trigger( 'getMyList', array("Deployed",$noOfArticles,$userid,""));
+                $results = $dispatcher->trigger( 'getMyList', array("Deployed",$noOfArticles,$userid));
                 break;
             case 'choice_liked'://If mode selected to be by top likes
                 $results = $dispatcher->trigger( 'recommendPersonalArticles', array("Likes",$noOfArticles,$userid,""));
