@@ -136,7 +136,7 @@ Display left hand side text
                     Displays image of based on the images folder and img name in the mod: Width and Height 100%
                     If no image is found, give it default image using onerror func
                 -->
-                <img src="/taskmeisterx/modules/mod_taskmeister_chooseclass/images/<?php echo $key;?>.jpg" width="100%" height="100%" onerror="this.src='/taskmeisterx/modules/mod_taskmeister_chooseclass/images/default_Student.jpg';"/>
+                <img src="/taskmeisterx/modules/mod_taskmeister_chooseclass/images/<?php echo $key;?>.jpg" width="100%" height="100%" onerror="var randomImgName = ['1.jpg','2.jpg','3.jpg','4.jpg','2.jpg']; this.src='/taskmeisterx/modules/mod_taskmeister_chooseclass/images/'+Math.floor(1+Math.random() * 15)+'.jpg';"/>
                 <!--Display label of tags, including tag name and number of uses-->
                 <p class = "teacherLabel"><?php echo $value; ?><br>
                 Code: <?php echo $key; ?></p>
@@ -154,7 +154,7 @@ Display left hand side text
                     Displays image of based on the images folder and img name in the mod: Width and Height 100%
                     If no image is found, give it default image using onerror func
                 -->
-                <img src="/taskmeisterx/modules/mod_taskmeister_chooseclass/images/<?php echo $key;?>.jpg" width="100%" height="100%" onerror="this.src='/taskmeisterx/modules/mod_taskmeister_chooseclass/images/default_Teacher.jpg';"/>
+                <img src="/taskmeisterx/modules/mod_taskmeister_chooseclass/images/<?php echo $key;?>.jpg" width="100%" height="100%" onerror="var randomImgName = ['1.jpg','2.jpg','3.jpg','4.jpg','2.jpg']; this.src='/taskmeisterx/modules/mod_taskmeister_chooseclass/images/'+Math.floor(1+Math.random() * 15)+'.jpg';"/>
                 <!--Display label of tags, including tag name and number of uses-->
                 <p class = "teacherLabel"><?php echo $value; ?><br>
                 Code: <?php echo $key; ?></p>

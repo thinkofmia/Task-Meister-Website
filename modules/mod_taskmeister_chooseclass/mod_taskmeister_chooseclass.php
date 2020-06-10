@@ -39,6 +39,12 @@ if ($user->guest) {
     else{//If you are a student
         $currentList = ModChooseClassHelper::getYourTeachers($user->id, $db);
     }
+    function RandImg($dir){
+        $images = glob($dir . '*.{jpg,jpeg,png,gif}', GLOB_BRACE);
+
+        $randomImage = $images[array_rand($images)];
+        return $randomImage;
+    }
     require JModuleHelper::getLayoutPath('mod_taskmeister_chooseclass');//Call out default.php display
     
     if (isset($_POST["submit"])){
