@@ -211,7 +211,7 @@ class plgTaskMeisterTM_recommender extends JPlugin
         foreach ($results_art as $row){
             $key_str = "".$row['id'];
             if(array_key_exists($key_str,$list)){
-                $contentCollection[$row['id']] = array($row['title'],$row['images'],$list[$key_str]);
+                if ($row['title']) $contentCollection[$row['id']] = array($row['title'],$row['images'],$list[$key_str]);
             }
         
         }
