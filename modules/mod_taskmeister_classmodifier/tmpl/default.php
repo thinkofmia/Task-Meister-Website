@@ -21,6 +21,12 @@ defined('_JEXEC') or die;
 <span>May Try Weightage: </span><span id="mayTryValue">100</span>%
 <input oninput="slider_change(this, 'mayTryValue');" type="range" min="1" max="200" value="100" class="tm_slider" id="mayTryWeight">
 
+<span title="Toggling this will link your preferences to the class. ">Toggle Preference Linkage</span>
+<label class="switch">
+  <input class="tm_input" type="checkbox">
+  <span class="slider round"></span>
+</label>
+
 <script>
 var loop_list = ["likes","deployed","touched","preferred","unpreferred","mayTry"];
 function slider_change (slider, input) {
