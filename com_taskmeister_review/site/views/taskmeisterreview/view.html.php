@@ -26,7 +26,15 @@ class TaskmeisterReviewViewTaskmeisterReview extends JViewLegacy
     function display($tpl = null)
     {
         // Assign data to the view
-        $this->msg = 'Taskmeister review';
+        $this->msg = $this->get('Msg');
+
+        // Check for errors
+        if(count($errors = $this->get('Errorrs')))
+        {
+            JLog::add(implode('<br />', $errors), JLog::WARNING, 'jerror');
+
+            return false;
+        }
 
         // Display the view
         parent::display($tpl);
