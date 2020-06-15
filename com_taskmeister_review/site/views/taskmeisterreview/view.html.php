@@ -26,7 +26,7 @@ class TaskmeisterReviewViewTaskmeisterReview extends JViewLegacy
     function display($tpl = null)
     {
         // Assign data to the view
-        $this->smg = 'Taskmeister review';
+        $this->msg = 'Taskmeister review';
 
         // Display the view
         parent::display($tpl);
