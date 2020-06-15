@@ -12,7 +12,7 @@ defined('_JEXEC') or die('Restricted access');
 
 ?>
 <form action="<?php echo JRoute::_('index.php?option=com_helloworld&layout=edit&id=' . (int) $this->item->id); ?>"
-    method="post" name="adminForm" id="adminForm">
+    method="post" name="adminForm" id="adminForm" class="form-validate">
     <div class="form-horizontal">
         <fieldset class="adminform">
             <legend><?php echo JText::_('COM_HELLOWORLD_HELLOWORLD_DETAILS'); ?></legend>
