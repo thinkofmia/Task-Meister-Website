@@ -3,4 +3,17 @@
     <layout title="COM_TASKMEISTER_REVIEW_TASKMEISTERREVIEW_VIEW_DEFAULT_TITLE">
         <message>COM_TASKMEISTER_REVIEW_TASKMEISTERREVIEW_VIEW_DEFAULT_DESC</message>
     </layout>
+    <fields name="request">
+        <fieldset name="request">
+            <field
+                    name="id"
+                    type="list"
+                    label="COM_TASKMEISTER_REVIEW_TASKMEISTERREVIEW_FIELD_REVIEW_LABEL"
+                    description="COM_TASKMEISTER_REVIEW_TASKMEISTERREVIEW_FIELD_REVIEW_DESC"
+                    default="1">
+                <option value="1">Review 1 Good</option>
+                <option value="2">Review 2 Terrible</option>
+            </field>
+        </fieldset>
+    </fields>
 </metadata>
