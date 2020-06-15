@@ -59,6 +59,15 @@ class HelloWorldModelHelloWorld extends JModelAdmin
         return $form;
     }
     /**
+     * Method to get the script that has to be included in the form
+     * 
+     * @return  string  Script files
+     */
+    public function getScript()
+    {
+        return 'administrator/components/com_helloworld/models/forms/helloworld.js';
+    }
+    /**
      * Method to get the data that should be injected in the form
      * 
      * @return  mixed   The data for the form
