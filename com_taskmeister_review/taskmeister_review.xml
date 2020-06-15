@@ -38,7 +38,7 @@
         <folder>views</folder>
     </files>
 
-    <admininstration>
+    <administration>
         <!-- Administration Menu Section -->
         <menu link='index.php?com_taskmeister_review'>COM_TASKMEISTER_REVIEW</menu>
         <!-- Administration Main File Copy Section -->
@@ -52,6 +52,10 @@
             <!-- SQL files section -->
             <folder>sql</folder>
         </files>
-    </admininstration>
+        <languages folder="admin/language">
+            <language tag="en-GB">en-GB/en-GB.com_taskmeister_review.ini</language>
+            <language tag="en-GB">en-GB/en-GB.com_taskmeister_review.sys.ini</language>
+        </languages>
+    </administration>
 
 </extension>
