@@ -29,10 +29,19 @@ class TaskmeisterReviewModelTaskmeisterReview extends JModelItem
      */
     public function getMsg()
     {
-        if(!isset($this->message))
-        {
-            $this->message = 'Taskmeister Review';
-        }
+       $input = JFactory::getApplication()->input;
+       $id = $input->get('id', 1, 'int');
+
+       switch($id)
+       {
+           case 2:
+            $this->message = 'Review 1 Good';
+           break;
+           default:
+           case 1:
+            $this->message = 'Review 2 Terrible';
+           break;
+       }
 
         return $this->message;
     }
