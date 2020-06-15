@@ -32,4 +32,16 @@ class modClassModifier
         if ($choice=="choice_yes") return true;
         else return false;
     }
+    function saveSelection($data){
+        /*
+            Function: Save the teacher's selection into the database
+            Parameter $data: Data form from the post request 
+        */
+        //Call our recommender to invoke function saveOurTeachers(), requires a list of teachers
+        JPluginHelper::importPlugin('taskmeister','tm_recommender');
+        $dispatcher = JDispatcher::getInstance();
+        $results = $dispatcher->trigger('saveClassModifiers', array($data));//Returns results in the form of an array
+        return $results[0];//Return first index of results, which is mostly a boolean to show if the func completes
+
+    }
 }
