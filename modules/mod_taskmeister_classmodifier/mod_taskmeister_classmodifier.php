@@ -79,3 +79,12 @@ if ($userID!=0){//if User id isnt a guest
 else{
     echo "<br><h3>You have to be a teacher to see this feature</h3>";
 }
+
+if (isset($_POST["submit"])){
+    /*
+        If user clicks 'Save' button
+    */
+        //Save the list, call helper func here!
+        Header('Location: '.$_SERVER['PHP_SELF']);//Force Refreshes page - necessary to show the updated results
+        Exit();
+    }
