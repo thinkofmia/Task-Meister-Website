@@ -10,7 +10,7 @@
  // No direct access to this file
 defined('_JEXEC') or die('Restricted access');
 ?>
-<form action="index.php=com_review&view=reviews" method="post" id="adminForm" name="adminForm">
+<form action="index.php?option=com_review&view=reviews" method="post" id="adminForm" name="adminForm">
     <table class="table table-striped table-hover">
         <thead>
             <tr>
@@ -54,7 +54,7 @@ defined('_JEXEC') or die('Restricted access');
         <tbody>
             <?php if (!empty($this->items)) : ?>
                 <?php foreach ($this->items as $i => $row) :
-                    $link = JRoute::_('index.php?com_review&task=review.edit&id=' . $row->id);
+                    $link = JRoute::_('index.php?option=com_review&task=review.edit&id=' . $row->id);
                 ?>
                 
                     <tr>
