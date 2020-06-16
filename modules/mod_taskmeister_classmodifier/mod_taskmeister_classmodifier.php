@@ -80,12 +80,12 @@ else{
     echo "<br><h3>You have to be a teacher to see this feature</h3>";
 }
 
-if (isset($_POST["submit"])){
+if (isset($_POST["submitClassModifier"])){
     /*
         If user clicks 'Save' button
     */
         //Save the list, call helper func here!
         modClassModifier::saveSelection($_POST);
-        Header('Location: '.$_SERVER['PHP_SELF']);//Force Refreshes page - necessary to show the updated results
-        Exit();
+        //Header('Location: '.$_SERVER['PHP_SELF']);//Force Refreshes page - necessary to show the updated results
+        //Exit();
     }

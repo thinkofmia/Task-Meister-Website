@@ -63,17 +63,29 @@ class plgTaskMeisterTM_recommender extends JPlugin
         $username = $me->username;
         //Query
         $query = $db->getQuery(true);
-        $query->select($db->quoteName(array('es_teacherid','es_students')))
+        $query->select($db->quoteName(array('*')))
         ->from($db->quoteName('#__customtables_table_teacherstats'))
         ->where($db->quoteName('es_teacherid') . ' = ' . $userID);
         $db->setQuery($query);
         $results_ext = $db->loadAssocList();
         //Check if its really a teacher
         if ($results_ext){//It is a teacher
-
+            // Create and populate an user table.
+            $teacherInfo = new stdClass();
+            $teacherInfo->es_teacherid = $userID;
+            $teacherInfo->es_weightagelikes = $data['likesWeight'];
+            $teacherInfo->es_weightagedeployment = $data['deployedWeight'];
+            $teacherInfo->es_weightagetouched = $data['touchedWeight'];
+            $teacherInfo->es_weightagepreferred = $data['preferredWeight'];
+            $teacherInfo->es_weightagenotpreferred = $data['unpreferredWeight'];
+            $teacherInfo->es_weightagemaytry = $data['mayTryWeight'];
+            $teacherInfo->es_preferencelink = $data['togglePreferenceLinkage'];
+            // Update the object into the teacher stats table.
+            $result = JFactory::getDbo()->updateObject('#__customtables_table_teacherstats', $teacherInfo, 'es_teacherid');
+            return true;
         }
         else{//Else end program
-            return; 
+            return false; 
         }
     }
     //Function: Save a particular user's teachers
