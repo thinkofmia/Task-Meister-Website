@@ -53,7 +53,9 @@ defined('_JEXEC') or die('Restricted access');
         </tfoot>
         <tbody>
             <?php if (!empty($this->items)) : ?>
-                <?php foreach ($this->items as $i => $row) : ?>
+                <?php foreach ($this->items as $i => $row) :
+                    $link = JRoute::_('index.php?com_review&task=review.edit&id=' . $row->id);
+                ?>
                 
                     <tr>
                         <td>
@@ -63,22 +65,34 @@ defined('_JEXEC') or die('Restricted access');
 							<?php echo JHtml::_('grid.id', $i, $row->id); ?>
 						</td>
 						<td>
-							<?php $auid = explode(':', $row->auid); echo $auid[0]; ?>
+                            <a href="<?php echo $link; ?>" title="<?php echo JText::_('COM_REVIEW_EDIT_REVIEW'); ?>">
+                                <?php $auid = explode(':', $row->auid); echo $auid[0]; ?>
+                            </a>
 						</td>
 						<td>
-							<?php echo $auid[1]; ?>
+                            <a href="<?php echo $link; ?>" title="<?php echo JText::_('COM_REVIEW_EDIT_REVIEW'); ?>">
+                                <?php echo $auid[1]; ?>
+                            </a>
 						</td>
 						<td>
-							<?php echo $row->ease_rating; ?>
+                            <a href="<?php echo $link; ?>" title="<?php echo JText::_('COM_REVIEW_EDIT_REVIEW'); ?>">
+                                <?php echo $row->ease_rating; ?>
+                            </a>
 						</td>
 						<td>
-							<?php echo $row->ease; ?>
+                            <a href="<?php echo $link; ?>" title="<?php echo JText::_('COM_REVIEW_EDIT_REVIEW'); ?>">
+                                <?php echo $row->ease; ?>
+                            </a>
 						</td>
 						<td>
-							<?php echo $row->effectiveness_rating; ?>
+                            <a href="<?php echo $link; ?>" title="<?php echo JText::_('COM_REVIEW_EDIT_REVIEW'); ?>">
+                                <?php echo $row->effectiveness_rating; ?>
+                            </a>
 						</td>
 						<td>
-							<?php echo $row->effectiveness; ?>
+                            <a href="<?php echo $link; ?>" title="<?php echo JText::_('COM_REVIEW_EDIT_REVIEW'); ?>">
+                                <?php echo $row->effectiveness; ?>
+                            </a>
 						</td>
 						<td align="center">
 							<?php echo JHtml::_('jgrid.published', $row->published, $i, 'helloworlds.', true, 'cb'); ?>
