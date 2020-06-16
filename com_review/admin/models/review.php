@@ -54,10 +54,10 @@ class ReviewModelReview extends JModelAdmin
             )
         );
 
-        if(empty($form)
+        if(empty($form))
         {
             return false;
-        })
+        }
 
         return $form;
     }
