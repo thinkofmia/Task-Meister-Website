@@ -31,7 +31,7 @@ class ReviewViewReview extends JViewLegacy
      * 
      * @return  void
      */
-    public function display($tpl)
+    public function display($tpl = null)
     {
         // Get the data
         $this->form = $this->get('Form');
@@ -40,7 +40,7 @@ class ReviewViewReview extends JViewLegacy
         // Check for errors
         if(count($errors = $this->get('Errors')))
         {
-            JError::raiseError(500, implode('<br />', $errors))
+            JError::raiseError(500, implode('<br />', $errors));
 
             return false;
         }
@@ -59,9 +59,9 @@ class ReviewViewReview extends JViewLegacy
      * 
      * @since   1.6
      */
-    protected function AddToolBar()
+    protected function addToolBar()
     {
-        $input = JFactory::getApplication->input();
+        $input = JFactory::getApplication()->input;
 
         // Disable Joomla Administrator Main menu
         $input->set('hidemainmenu', true);
