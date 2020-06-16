@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form>
+    <fieldset>
+        <field
+            name="id"
+            type="hidden"
+        />
+        <field 
+            name="auid"
+            type="text"
+            label="COM_REVIEW_REVIEW_AUID_LABEL"
+            description="COM_REVIEW_REVIEW_AUID_DESCRIPTION"
+            hint="0:0"
+            size="15"
+            pattern="^[0-9]+:[0-9]+$"
+            required="true"
+        />
+        <field 
+            name="ease_rating"
+            type="range"
+            label="COM_REVIEW_REVIEW_EASE_RATING_LABEL"
+            description="COM_REVIEW_REVIEW_EASE_RATING_DESC"
+            min="0"
+            max="10"
+            step="1"
+            required="true"
+        />
+        <field 
+            name="ease"
+            type="textarea"
+            label="COM_REVIEW_REVIEW_EASE_LABEL"
+            description="COM_REVIEW_REVIEW_EASE_DESC"
+            hint="How easy was the item to use?"
+            required="true"
+        />
+        <field 
+            name="effectiveness_rating"
+            type="range"
+            label="COM_REVIEW_REVIEW_EFFECTIVENESS_RATING_LABEL"
+            description="COM_REVIEW_REVIEW_EFFECTIVENESS_RATING_DESC"
+            min="0"
+            max="10"
+            step="1"
+            required="true"
+        />
+        <field 
+            name="effectiveness"
+            type="textarea"
+            label="COM_REVIEW_REVIEW_EFFECTIVENESS_LABEL"
+            description="COM_REVIEW_REVIEW_EFFECTIVENESS_DESC"
+            hint="How effective was the item in progressing towards the learning outcomes?"
+            required="true"
+        />
+    </fieldset>
+</form>
