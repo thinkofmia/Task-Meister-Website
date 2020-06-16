@@ -17,7 +17,7 @@
         />
         <field 
             name="ease_rating"
-            type="range"
+            type="number"
             label="COM_REVIEW_REVIEW_EASE_RATING_LABEL"
             description="COM_REVIEW_REVIEW_EASE_RATING_DESC"
             min="0"
@@ -35,7 +35,7 @@
         />
         <field 
             name="effectiveness_rating"
-            type="range"
+            type="number"
             label="COM_REVIEW_REVIEW_EFFECTIVENESS_RATING_LABEL"
             description="COM_REVIEW_REVIEW_EFFECTIVENESS_RATING_DESC"
             min="0"
