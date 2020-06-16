@@ -54,6 +54,28 @@ class plgTaskMeisterTM_recommender extends JPlugin
         $result = JFactory::getDbo()->updateObject('#__customtables_table_userstats', $userInfo, 'es_userid');
         return "Saved!";
     }
+    //Function: Save a class's modifier
+    function saveClassModifiers($data){
+        //Set database and user
+        $db = Factory::getDbo();
+        $me = Factory::getUser();
+        $userID = $me->id;
+        $username = $me->username;
+        //Query
+        $query = $db->getQuery(true);
+        $query->select($db->quoteName(array('es_teacherid','es_students')))
+        ->from($db->quoteName('#__customtables_table_teacherstats'))
+        ->where($db->quoteName('es_teacherid') . ' = ' . $userID);
+        $db->setQuery($query);
+        $results_ext = $db->loadAssocList();
+        //Check if its really a teacher
+        if ($results_ext){//It is a teacher
+
+        }
+        else{//Else end program
+            return; 
+        }
+    }
     //Function: Save a particular user's teachers
     function saveOurTeachers($teacherList_str){
         //Set database and user
