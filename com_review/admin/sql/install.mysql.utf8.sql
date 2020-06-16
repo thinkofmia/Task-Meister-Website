@@ -5,10 +5,10 @@ CREATE TABLE `reviews` (
     `auid`          CHAR(15)    NOT NULL UNIQUE,
     `ease`          TEXT(255)   NOT NULL,
     `ease_rating`
-        ENUM('0', '1', '2', '3', '4', '5', '6', '7', '8', '9','A') NOT NULL,
+        ENUM('0', '1', '2', '3', '4', '5', '6', '7', '8', '9','10') NOT NULL,
     `effectiveness` TEXT(255)   NOT NULL,
     `effectiveness_rating`
-            ENUM('0', '1', '2', '3', '4', '5', '6', '7', '8', '9','A') NOT NULL,
+            ENUM('0', '1', '2', '3', '4', '5', '6', '7', '8', '9','10') NOT NULL,
     `published` tinyint(4)  NOT NULL DEFAULT '1',
     PRIMARY KEY (`id`)
 )
