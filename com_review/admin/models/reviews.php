@@ -30,7 +30,8 @@ class ReviewModelReviews extends JModelList
         {
             $config['filter_fields'] = array(
                 'id',
-                'auid',
+                'aid',
+                'uid',
                 'ease_rating',
                 'ease',
                 'effectiveness_rating',
@@ -66,13 +67,13 @@ class ReviewModelReviews extends JModelList
             // Check for specific article id search
             if(preg_match('/^aid:.*/', strtolower($search)))
             {
-                $like = $db->quote(substr($search, 4) . ':%');
-                $query->where('auid LIKE ' . $like);
+                $like = $db->quote(substr($search, 4));
+                $query->where('aid = ' . $like);
             } // Check for specific user id search
             else if(preg_match('/^uid:.*/', strtolower($search)))
             {
-                $like = $db->quote('%:' . substr($search, 4));
-                $query->where('auid LIKE ' . $like);
+                $like = $db->quote(substr($search, 4));
+                $query->where('uid = ' . $like);
             } // Check the text fields for ease and effectiveness
             else
             {
@@ -95,7 +96,7 @@ class ReviewModelReviews extends JModelList
         }
 
         // Add the list ordering clause
-        $orderCol   = $this->state->get('list.ordering', 'auid');
+        $orderCol   = $this->state->get('list.ordering', 'aid');
         $orderDirn  = $this->state->get('list.direction', 'asc');
 
         $query->order($db->escape($orderCol) . ' ' . $db->escape($orderDirn));

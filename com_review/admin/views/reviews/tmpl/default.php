@@ -34,10 +34,10 @@ $listDirn   = $this->escape($this->filter_order_Dir);
                     <?php echo JHtml::_('grid.checkall'); ?>
                 </th>
                 <th width="3%">
-                    <?php echo JHtml::_('grid.sort', 'COM_REVIEW_REVIEWS_AID', 'auid', $listDirn, $listOrder); ?>
+                    <?php echo JHtml::_('grid.sort', 'COM_REVIEW_REVIEWS_AID', 'aid', $listDirn, $listOrder); ?>
                 </th>
                 <th width="3%">
-                    <?php echo JText::_('COM_REVIEW_REVIEWS_UID') ?>
+                    <?php echo JHtml::_('grid.sort', 'COM_REVIEW_REVIEWS_UID', 'uid', $listDirn, $listOrder); ?>   
                 </th>
                 <th width="5%">
                     <?php echo JHtml::_('grid.sort', 'COM_REVIEW_REVIEWS_EASE_RATING', 'ease_rating', $listDirn, $listOrder); ?>
@@ -81,12 +81,12 @@ $listDirn   = $this->escape($this->filter_order_Dir);
 						</td>
 						<td>
                             <a href="<?php echo $link; ?>" title="<?php echo JText::_('COM_REVIEW_EDIT_REVIEW'); ?>">
-                                <?php $auid = explode(':', $row->auid); echo $auid[0]; ?>
+                                <?php echo $row->aid; ?>
                             </a>
 						</td>
 						<td>
                             <a href="<?php echo $link; ?>" title="<?php echo JText::_('COM_REVIEW_EDIT_REVIEW'); ?>">
-                                <?php echo $auid[1]; ?>
+                                <?php echo $row->uid; ?>
                             </a>
 						</td>
 						<td>

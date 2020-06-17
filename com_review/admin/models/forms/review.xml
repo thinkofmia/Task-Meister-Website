@@ -6,13 +6,21 @@
             type="hidden"
         />
         <field 
-            name="auid"
-            type="text"
-            label="COM_REVIEW_REVIEW_AUID_LABEL"
-            description="COM_REVIEW_REVIEW_AUID_DESCRIPTION"
-            hint="0:0"
-            size="15"
-            pattern="^[0-9]+:[0-9]+$"
+            name="aid"
+            type="number"
+            label="COM_REVIEW_REVIEW_AID_LABEL"
+            description="COM_REVIEW_REVIEW_AID_DESCRIPTION"
+            min="1"
+            step="1"
+            required="true"
+        />
+        <field 
+            name="uid"
+            type="number"
+            label="COM_REVIEW_REVIEW_UID_LABEL"
+            description="COM_REVIEW_REVIEW_UID_DESCRIPTION"
+            min="1"
+            step="1"
             required="true"
         />
         <field 
