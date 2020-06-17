@@ -418,14 +418,14 @@ class plgTaskMeisterTM_recommender extends JPlugin
                             $touchBeforeModifier = 99999;
                         break;
                     case "Deployed":
-                        $deployedModifier = $deployedModifier*21;
+                        $deployedModifier = $deployedModifier*100;
                         break; 
                     case "Likes":
-                        $likedModifier = $likedModifier*21; 
+                        $likedModifier = $likedModifier*100; 
                         break;
                     case "Personal":
-                        $likedModifier = $likedModifier*21; 
-                        $deployedModifier = $deployedModifier*13;
+                        $likedModifier = $likedModifier*15; 
+                        $deployedModifier = $deployedModifier*15;
                         break;
                     default:
                         break; 
