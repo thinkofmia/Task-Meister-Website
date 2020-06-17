@@ -341,6 +341,32 @@ class plgTaskMeisterTM_recommender extends JPlugin
             ->from($db->quoteName('#__customtables_table_articlestats'));
         $db->setQuery($query2);
         $results_art = $db->loadAssocList();
+        //Get teacher info database
+        $query = $db->getQuery(true);
+        $query->select($db->quoteName(array('es_teacherid','es_students')))
+        ->from($db->quoteName('#__customtables_table_teacherstats'));
+        $db->setQuery($query);
+        $results_teacher = $db->loadAssocList();
+        //Save information into a list
+        //Set default weightages value
+        $notPreferredModifier = 100*((($this->params)->get('notpreferredweightage'))/100);
+        $mayTryModifier = 10*((($this->params)->get('maytryweightage'))/100);
+        $preferredModifier = 20*((($this->params)->get('preferredweightage'))/100);
+        $likesBonus = 0;
+        $deployedBonus = 0;
+        $touchedBonus = 0;
+        //Update modifier based on teachers' influences
+        foreach ($results_teacher as $row5){
+            if (in_array(intval($userid), json_decode($row5['es_students']))){//If student exists in teacher's class
+                if ($row5['es_weightagenotpreferred']) $notPreferredModifier = $notPreferredModifier/100*intval($row5['es_weightagepreferred']);
+                if ($row5['es_weightagepreferred'])$preferredModifier = $preferredModifier/100*intval($row5['es_weightagenotpreferred']);
+                if ($row5['es_weightagemaytry'])$mayTryModifier = $mayTryModifier/100*intval($row5['es_weightagemaytry']);
+                if ($row5['es_weightagelikes'])$likesBonus = $likesBonus + (100-intval($row5['es_weightagelikes']))/100;
+                if ($row5['es_weightagedeployment'])$deployedBonus = $deployedBonus + (100-intval($row5['es_weightagedeployment']))/100;
+                if ($row5['es_weightagetouched'])$touchedBonus = $touchedBonus + (100 - intval($row5['es_weightagetouched']))/100;
+
+            }
+        }
         //Set up weightage list of articles
         $weighArticlesList = array();
         $highestWeighValue = 0;
@@ -371,21 +397,21 @@ class plgTaskMeisterTM_recommender extends JPlugin
                                 $weightage += 0;
                                 break;
                             case 0://If not preferred
-                                $weightage -= 100*((($this->params)->get('notpreferredweightage'))/100);
+                                $weightage -= $notPreferredModifier;
                                 break;
                             case 1://May Try
-                                $weightage += 10*((($this->params)->get('maytryweightage'))/100);
+                                $weightage += $mayTryModifier;
                                 break;
                             case 2://Preferred
-                                $weightage += 20*((($this->params)->get('preferredweightage'))/100);
+                                $weightage += $preferredModifier;
                                 break;
                         }
                     }
                 }
                 //Modifiers based on config
-                $deployedModifier = ((($this->params)->get('deployedweightage'))/100);
-                $likedModifier = ((($this->params)->get('likesweightage'))/100);
-                $touchBeforeModifier = ((($this->params)->get('touchbeforeweightage'))/100);
+                $deployedModifier = ((($this->params)->get('deployedweightage'))/100) + $deployedBonus;
+                $likedModifier = ((($this->params)->get('likesweightage'))/100) + $likesBonus;
+                $touchBeforeModifier = ((($this->params)->get('touchbeforeweightage'))/100) + $touchedBonus;
                 switch($mode){
                     case "Untouched":
                         if(in_array($row['es_articleid'],$likedlist)||in_array($row['es_articleid'],$deployedlist))
