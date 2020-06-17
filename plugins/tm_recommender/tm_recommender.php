@@ -73,13 +73,13 @@ class plgTaskMeisterTM_recommender extends JPlugin
             // Create and populate an user table.
             $teacherInfo = new stdClass();
             $teacherInfo->es_teacherid = $userID;
-            $teacherInfo->es_weightagelikes = $data['likesWeight'];
-            $teacherInfo->es_weightagedeployment = $data['deployedWeight'];
-            $teacherInfo->es_weightagetouched = $data['touchedWeight'];
-            $teacherInfo->es_weightagepreferred = $data['preferredWeight'];
-            $teacherInfo->es_weightagenotpreferred = $data['unpreferredWeight'];
-            $teacherInfo->es_weightagemaytry = $data['mayTryWeight'];
-            $teacherInfo->es_preferencelink = $data['togglePreferenceLinkage'];
+            if ($data['likesWeight']) $teacherInfo->es_weightagelikes = $data['likesWeight'];
+            if ($data['deployedWeight']) $teacherInfo->es_weightagedeployment = $data['deployedWeight'];
+            if ($data['touchedWeight']) $teacherInfo->es_weightagetouched = $data['touchedWeight'];
+            if ($data['preferredWeight']) $teacherInfo->es_weightagepreferred = $data['preferredWeight'];
+            if ($data['unpreferredWeight']) $teacherInfo->es_weightagenotpreferred = $data['unpreferredWeight'];
+            if ($data['mayTryWeight']) $teacherInfo->es_weightagemaytry = $data['mayTryWeight'];
+            if ($data['togglePreferenceLinkage']) $teacherInfo->es_preferencelink = $data['togglePreferenceLinkage'];
             // Update the object into the teacher stats table.
             $result = JFactory::getDbo()->updateObject('#__customtables_table_teacherstats', $teacherInfo, 'es_teacherid');
             return true;

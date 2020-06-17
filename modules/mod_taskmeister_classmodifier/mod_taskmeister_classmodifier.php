@@ -38,38 +38,28 @@ if ($userID!=0){//if User id isnt a guest
     $db->setQuery($query);
     $results = $db->loadAssocList();//Save results as $results2
 
+    //Set Defauly Values of Weightages
+    $likesWeightage = 100;
+    $deploymentWeightage = 100;
+    $touchedWeightage = 100;
+    $preferredWeightage = 100;
+    $notPreferredWeightage = 100;
+    $mayTryWeightage = 100;
+
     if ($results){//If teacher data exists
         foreach ($results as $row){//Extract teacher data
             $teacher = JFactory::getUser($row['es_teacherid']);//Get Teacher Profile
             $teacherName = $teacher->name;//Get Teacher Name
-            //Get the student list
-            $studentsList = json_decode($row['es_students']);
+            //Get the relevant saved data
+            if ($row['es_weightagelikes'])$likesWeightage = intval($row['es_weightagelikes']);
+            if ($row['es_weightagedeployment'])$deploymentWeightage = intval($row['es_weightagedeployment']);
+            if ($row['es_weightagetouched'])$touchedWeightage = intval($row['es_weightagetouched']);
+            if ($row['es_weightagepreferred'])$preferredWeightage = intval($row['es_weightagepreferred']);
+            if ($row['es_weightagenotpreferred'])$notPreferredWeightage = intval($row['es_weightagenotpreferred']);
+            if ($row['es_weightagemaytry'])$mayTryWeightage = intval($row['es_weightagemaytry']);
+            if ($row['es_preferencelink'])$preferenceLinked = intval($row['es_preferencelink']);
         }
-        //Create Preferences Score Array
-        $fullPreferencesScore = array();
-        $dislikedPreferencesScore = array();
-        //Loop base on students list
-        foreach ($studentsList as $row){
-            $query = $db->getQuery(true);
-            $query->select($db->quoteName(array('es_userid','es_userpreference')))//Get user id, user preference
-                ->from($db->quoteName('#__customtables_table_userstats'))//From our external user stats table
-                ->where($db->quoteName('es_userid') . ' = ' . $row);//Where it is the current user's userid
-            $db->setQuery($query);
-            $results2 = $db->loadAssocList();//Save results as $results2
-            foreach ($results2 as $row2){
-                $studentPreferences = json_decode($row2['es_userpreference']);
-                foreach ($studentPreferences as $key => $value){
-                    if (isset($fullPreferencesScore[$key])) $fullPreferencesScore[$key] += $value;
-                    else $fullPreferencesScore[$key] = $value;
-                    if ($value == 0){//If user dislikes this
-                        if ($dislikedPreferencesScore[$key]) $dislikedPreferencesScore[$key] += 1;
-                        else $dislikedPreferencesScore[$key] = 1;
-                    }
-                }
-            }
-        }
-        //Sort Preference Score by highest first
-        arsort($fullPreferencesScore);
+       
         require JModuleHelper::getLayoutPath('mod_taskmeister_classmodifier');
     }
     else{
@@ -86,6 +76,6 @@ if (isset($_POST["submitClassModifier"])){
     */
         //Save the list, call helper func here!
         modClassModifier::saveSelection($_POST);
-        //Header('Location: '.$_SERVER['PHP_SELF']);//Force Refreshes page - necessary to show the updated results
-        //Exit();
+        Header('Location: '.$_SERVER['PHP_SELF']);//Force Refreshes page - necessary to show the updated results
+        Exit();
     }
