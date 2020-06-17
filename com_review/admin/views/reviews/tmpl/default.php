@@ -9,8 +9,23 @@
 
  // No direct access to this file
 defined('_JEXEC') or die('Restricted access');
+
+JHtml::_('formbehavior.chosen', 'select');
+
+$listOrder  = $this->escape($this->filter_order);
+$listDirn   = $this->escape($this->filter_order_Dir);
 ?>
 <form action="index.php?option=com_review&view=reviews" method="post" id="adminForm" name="adminForm">
+    <div class="row-fluid">
+        <div class="span6">
+            <?php
+                echo JLayoutHelper::render(
+                    'joomla.searchtools.default',
+                    array('view' => $this)
+                );
+            ?>
+        </div>
+    </div>
     <table class="table table-striped table-hover">
         <thead>
             <tr>
@@ -19,28 +34,28 @@ defined('_JEXEC') or die('Restricted access');
                     <?php echo JHtml::_('grid.checkall'); ?>
                 </th>
                 <th width="3%">
-                    <?php echo JText::_('COM_REVIEW_REVIEWS_AID') ;?>
+                    <?php echo JHtml::_('grid.sort', 'COM_REVIEW_REVIEWS_AID', 'auid', $listDirn, $listOrder); ?>
                 </th>
                 <th width="3%">
-                    <?php echo JText::_('COM_REVIEW_REVIEWS_UID') ;?>
+                    <?php echo JText::_('COM_REVIEW_REVIEWS_UID') ?>
                 </th>
                 <th width="5%">
-                    <?php echo JText::_('COM_REVIEW_REVIEWS_EASE_RATING') ;?>
+                    <?php echo JHtml::_('grid.sort', 'COM_REVIEW_REVIEWS_EASE_RATING', 'ease_rating', $listDirn, $listOrder); ?>
                 </th>
                 <th width="37%">
-                    <?php echo JText::_('COM_REVIEW_REVIEWS_EASE') ;?>
+                    <?php echo JHtml::_('grid.sort', 'COM_REVIEW_REVIEWS_EASE', 'ease', $listDirn, $listOrder); ?>
                 </th>
                 <th width="5%">
-                    <?php echo JText::_('COM_REVIEW_REVIEWS_EFFECT_RATING') ;?>
+                    <?php echo JHtml::_('grid.sort', 'COM_REVIEW_REVIEWS_EFFECT_RATING', 'effectiveness_rating', $listDirn, $listOrder); ?>
                 </th>
                 <th width="37%">
-                    <?php echo JText::_('COM_REVIEW_REVIEWS_EFFECT') ;?>
+                    <?php echo JHtml::_('grid.sort', 'COM_REVIEW_REVIEWS_EFFECT', 'effectiveness', $listDirn, $listOrder); ?>
                 </th>
                 <th width="5%">
-                    <?php echo JText::_('COM_REVIEW_PUBLISHED'); ?>
+                    <?php echo JHtml::_('grid.sort', 'COM_REVIEW_REVIEWS_PUBLISHED', 'published', $listDirn, $listOrder); ?>
                 </th>
                 <th width="2%">
-                    <?php echo JText::_('COM_REVIEW_ID'); ?>
+                    <?php echo JHtml::_('grid.sort', 'COM_REVIEW_ID', 'id', $listDirn, $listOrder); ?>
                 </th>
             </tr>
         </thead>
@@ -95,7 +110,7 @@ defined('_JEXEC') or die('Restricted access');
                             </a>
 						</td>
 						<td align="center">
-							<?php echo JHtml::_('jgrid.published', $row->published, $i, 'helloworlds.', true, 'cb'); ?>
+							<?php echo JHtml::_('jgrid.published', $row->published, $i, 'reviews.', true, 'cb'); ?>
 						</td>
 						<td align="center">
 							<?php echo $row->id; ?>
