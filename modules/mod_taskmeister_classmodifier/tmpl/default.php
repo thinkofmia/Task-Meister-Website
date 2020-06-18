@@ -26,9 +26,9 @@ defined('_JEXEC') or die;
   <span title="Toggling this will link your preferences to the class. ">Toggle Preference Linkage</span>
   <label class="switch">
     <?php if ($preferenceLinked): ?>
-      <input class="tm_input" type="checkbox" name="togglePreferenceLinkage" checked=checked>
+      <input class="tm_input" type="checkbox" name="togglePreferenceLinkage" checked=checked value=1>
     <?php else: ?>
-      <input class="tm_input" type="checkbox" name="togglePreferenceLinkage">
+      <input class="tm_input" type="checkbox" name="togglePreferenceLinkage" value=1>
     <?php endif; ?>
     <span class="slider round"></span>
   </label>

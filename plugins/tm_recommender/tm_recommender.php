@@ -321,7 +321,7 @@ class plgTaskMeisterTM_recommender extends JPlugin
         $db = Factory::getDbo();//Gets database
         //Get external user table (custom table) To find out list of liked, deployed and disliked articles
         $query = $db->getQuery(true);
-        $query->select($db->quoteName(array('es_userid','es_pageliked','es_pagedisliked','es_pagedeployed','es_userpreference')))
+        $query->select($db->quoteName(array('*')))
             ->from($db->quoteName('#__customtables_table_userstats'))
             ->where($db->quoteName('es_userid') . ' = ' . $userid);
         $db->setQuery($query);
@@ -355,6 +355,7 @@ class plgTaskMeisterTM_recommender extends JPlugin
         $likesBonus = 1;
         $deployedBonus = 1;
         $touchedBonus = 1;
+        $bonusPreferences = array();//For additional tags influenced by teachers
         //Update modifier based on teachers' influences
         foreach ($results_teacher as $row5){
             if (in_array(intval($userid), json_decode($row5['es_students']))){//If student exists in teacher's class
@@ -364,7 +365,30 @@ class plgTaskMeisterTM_recommender extends JPlugin
                 if ($row5['es_weightagelikes'])$likesBonus = $likesBonus*(intval($row5['es_weightagelikes']))/100;
                 if ($row5['es_weightagedeployment'])$deployedBonus = $deployedBonus*(intval($row5['es_weightagedeployment']))/100;
                 if ($row5['es_weightagetouched'])$touchedBonus = $touchedBonus*(intval($row5['es_weightagetouched']))/100;
-
+                if ($row5['es_preferencelink']==1){//If teacher's preference linkage is toggled
+                $teacherid = intval($row5['es_teacherid']);
+                //Query for teacher's preference
+                    $query = $db->getQuery(true);
+                    $query->select($db->quoteName(array('*')))
+                        ->from($db->quoteName('#__customtables_table_userstats'))
+                        ->where($db->quoteName('es_userid') . ' = ' . $teacherid);
+                    $db->setQuery($query);
+                    $results_pref = $db->loadAssocList();
+                    //Save teacher preferences into a list
+                    $teacherPreferences = NULL;
+                    foreach ($results_pref as $row){
+                        if ($row['es_userid']==$teacherid){//Just to be sure if teacher id is same
+                            $teacherPreferences = json_decode($row['es_userpreference']);
+                        }
+                    }
+                    if ($teacherPreferences){//If teacher's preferences exists
+                        foreach ($teacherPreferences as $key=>$value){
+                            if ($value == 2){//If teachers prefers
+                                array_push($bonusPreferences,$key);
+                            }
+                        }
+                    }
+                }
             }
         }
         //Set up weightage list of articles
@@ -405,6 +429,14 @@ class plgTaskMeisterTM_recommender extends JPlugin
                             case 2://Preferred
                                 $weightage += $preferredModifier;
                                 break;
+                        }
+                    }
+                }
+                if ($bonusPreferences){
+                    foreach ($bonusPreferences as $row6){
+                        //Also check in bonus preferences if any
+                        if (in_array($row6,$articleTags)){//If exists inside bonus tag, add additional modifier
+                            $weightage += $preferredModifier;
                         }
                     }
                 }

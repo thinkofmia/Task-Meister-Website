@@ -74,6 +74,7 @@ if (isset($_POST["submitClassModifier"])){
     /*
         If user clicks 'Save' button
     */
+        if (intval($_POST['togglePreferenceLinkage'])!=1)$_POST['togglePreferenceLinkage']=0;
         //Save the list, call helper func here!
         modClassModifier::saveSelection($_POST);
         Header('Location: '.$_SERVER['PHP_SELF']);//Force Refreshes page - necessary to show the updated results
