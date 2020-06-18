@@ -17,7 +17,7 @@ defined('_JEXEC') or die;
 
 <div>
     <section style="background-color: black; margin-left: -2.2%; margin-right: -2.2%; padding: 100px;">
-        <h1 style="color: #ffc03a; text-align: center; text-transform: uppercase;">Testimonials</h1>
+        <h1 style="color: #ffc03a; text-align: center; text-transform: uppercase;"><?php echo JText::_('MOD_REVIEW_FORM_TESTIMONIAL_LABEL') ?></h1>
         <?php if(!empty($testimonials)): ?>
             <?php foreach($testimonials as $row): ?>
                 <table style="color: white;">
@@ -40,12 +40,14 @@ defined('_JEXEC') or die;
 </div>
 <div>
     <section style="background-color: #191919; margin-left: -2.2%; margin-right: -2.2%; padding: 100px;">
-        <h1 style="color: #ffc03a; text-align: center; text-transform: uppercase;">Reviews</h1>
+        <h1 style="color: #ffc03a; text-align: center; text-transform: uppercase;"><?php echo JText::_('MOD_REVIEW_FORM_REVIEW_LABEL'); ?></h1>
         <p style="text-align: center;"><a style="color: white;" href="#" target="_blank" rel="nofollow noopener noreferrer">Upload your video and photo</a></p>
         <div style="text-align: left;">
             <form style="color: white;">
-                <p><label for="ease">⭐⭐⭐⭐⭐Ease of Use</label><br />
-                <input id="ease" type="text" placeholder="What was your lesson task deployment experience like? What did you like about the learning tasks?" /></p>
+                <p><label for="ease"><?php echo JText::_('MOD_REVIEW_FORM_EASE_LABEL'); ?> ⭐⭐⭐⭐⭐</label><br />
+                <input id="ease" type="text" placeholder="<?php echo JText::_('MOD_REVIEW_FORM_EASE_PLACEHOLDER'); ?>"/></p>
+                <p><label for="effectiveness"><?php echo JText::_('MOD_REVIEW_FORM_EFFECTIVENESS_LABEL'); ?> ⭐⭐⭐⭐⭐</label><br />
+                <input id="ease" type="text" placeholder="<?php echo JText::_('MOD_REVIEW_FORM_EFFECTIVENESS_PLACEHOLDER'); ?>" /></p>
             </form>
         </div>
     </section>
