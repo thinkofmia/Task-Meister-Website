@@ -47,8 +47,26 @@ defined('_JEXEC') or die;
                 <p><label for="ease"><?php echo JText::_('MOD_REVIEW_FORM_EASE_LABEL'); ?> ⭐⭐⭐⭐⭐</label><br />
                 <input id="ease" type="text" placeholder="<?php echo JText::_('MOD_REVIEW_FORM_EASE_PLACEHOLDER'); ?>"/></p>
                 <p><label for="effectiveness"><?php echo JText::_('MOD_REVIEW_FORM_EFFECTIVENESS_LABEL'); ?> ⭐⭐⭐⭐⭐</label><br />
-                <input id="ease" type="text" placeholder="<?php echo JText::_('MOD_REVIEW_FORM_EFFECTIVENESS_PLACEHOLDER'); ?>" /></p>
+                <input id="effectiveness" type="text" placeholder="<?php echo JText::_('MOD_REVIEW_FORM_EFFECTIVENESS_PLACEHOLDER'); ?>" /></p>
             </form>
         </div>
     </section>
 </div>
+
+<?php $form = JForm::getInstance('add_review', __DIR__.'/../models/forms/add_review.xml'); ?>
+<form action="" method="POST" name="test_xml_form" id="test_xml_form">
+    <div class="form-horizontal">
+        <fieldset class="test_xml_form">
+            <legend><?php echo JText::_('MOD_REVIEW_FORM_DETAILS'); ?></legend>
+            <div class="row-fluid">
+                <div class="span9">
+                    <?php
+                        foreach($form->getFieldset() as $field) {
+                            echo $field->renderField();
+                        }
+                    ?>
+                </div>
+            </div>
+        </fieldset>
+    </div>
+</form>
