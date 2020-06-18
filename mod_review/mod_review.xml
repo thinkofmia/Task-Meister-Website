@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="module" version="3.9" client="site" method="upgrade">
+  <name>MOD_REVIEW</name>
+  <author>Tan Lim Chai Seng</author>
+  <creationDate>June 2020</creationDate>
+  <license>GNU General Public License version 2 or later; see LICENSE.txt</license>
+  <authorEmail>tanlimcs@gmail.com</authorEmail>
+  <version>1.0.0</version>
+  <description>MOD_REVIEW_DESCRIPTION</description>
+  
+  <files>
+    <filename module="mod_review">mod_review.php</filename>
+    <filename>helper.php</filename>
+    <filename>tmpl/default.php</filename>
+    <filename>tmpl/index.html</filename>
+		<folder>language</folder>
+  </files>
+  
+  <languages>
+    <language tag="en-GB">language/en-GB/en-GB.mod_review.ini</language>
+    <language tag="en-GB">language/en-GB/en-GB.mod_review.sys.ini</language>
+  </languages>
+  
+  <config>
+    <fields name="params">
+      <fieldset name="basic">
+      
+        <field name="sampleField" type="list" required="true" label="SAMPLE_FIELD_LABEL" description="SAMPLE_FIELD_DESCRIPTION">
+          <option value="0">SAMPLE_OPTION_1</option>
+          <option value="1">SAMPLE_OPTION_2</option>
+        </field>
+        
+      </fieldset>
+    </fields>
+    
+  </config>
+</extension>
