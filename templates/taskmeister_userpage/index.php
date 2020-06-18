@@ -1,5 +1,16 @@
 <!-- This prevents naughty peeps from looking at code  -->
-<?php defined( '_JEXEC' ) or die( 'Restricted access' );?>
+<?php defined( '_JEXEC' ) or die( 'Restricted access' );
+
+//Database code
+use Joomla\CMS\Factory;
+//Set database variable
+$db = Factory::getDbo();
+$me = Factory::getUser();
+$userID = $me->id;
+$user = JFactory::getUser($userID);
+if (isset($user->name))$username = $user->name;
+else $username = "Login";
+?>
 <!-- Tells the browser which flavor of HTML the page is using. In this case HTML5.-->
 <!DOCTYPE html>
 <!-- Begins HTML document and describes what language the website is in-->
@@ -30,6 +41,7 @@
         </div>
         <div id = "topRight">
             <a class= "right" href="<?php echo $this->baseurl; ?>/index.php/login"><!--User-->
+                <?php echo $username; ?>
                 <img src="<?php echo $this->baseurl; ?>/templates/<?php echo $this->template; ?>/images/accountIcon.jpg" class = "accountIcon" alt="User Page" title="Click here to go to your user page. "/>            
             </a>
             <jdoc:include type="modules" name="top-right"/><!-- Module Position: 'top-right'-->

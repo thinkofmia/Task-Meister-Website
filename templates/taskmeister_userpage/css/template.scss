@@ -86,6 +86,11 @@ table {
     position: absolute;
     left: 62%;
     text-align: right;
+    .right{
+        display: inline-flex;
+        padding: 3vw;
+        left: 60%;
+    }
 }
 
 #centerRow{//Sets CSS for center row
@@ -133,7 +138,7 @@ table {
     width: 4vw;
     height: 4vw;
     text-align: right;
-    padding: 3vw;
+    padding-left: 1vw;
 }
 
 .accountIcon:hover {//Hover state for the account icon
