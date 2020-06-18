@@ -84,7 +84,7 @@ table th, table td {
 }
 #topRight .right {
   display: inline-flex;
-  padding: 3vw;
+  margin-top: 3vw;
   left: 60%;
 }
 
