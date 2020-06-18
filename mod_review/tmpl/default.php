@@ -14,21 +14,39 @@ defined('_JEXEC') or die;
 
 // This file collects the data collected by mod_review.php and generates the HTML to be displayed
 ?>
-<?php if(!empty($testimonials)): ?>
-    <?php foreach($testimonials as $row): ?>
-        <table>
-            <tr>
-                <td>Ease rating: <?php echo $row->ease_rating; ?></td>
-            </tr>
-            <tr>
-                <td>Ease of use: <?php echo $row->ease; ?></td>
-            </tr>
-            <tr>
-                <td>Effectiveness rating: <?php echo $row->effectiveness_rating; ?></td>
-            </tr>
-            <tr>
-                <td>Effectiveness: <?php echo $row->effectiveness; ?></td>
-            </tr>
-        </table>
-    <?php endforeach; ?>
-<?php endif; ?>
+
+<div>
+    <section style="background-color: black; margin-left: -2.2%; margin-right: -2.2%; padding: 100px;">
+        <h1 style="color: #ffc03a; text-align: center; text-transform: uppercase;">Testimonials</h1>
+        <?php if(!empty($testimonials)): ?>
+            <?php foreach($testimonials as $row): ?>
+                <table style="color: white;">
+                    <tr>
+                        <td>Ease rating: <?php echo $row->ease_rating; ?></td>
+                    </tr>
+                    <tr>
+                        <td>Ease of use: <?php echo $row->ease; ?></td>
+                    </tr>
+                    <tr>
+                        <td>Effectiveness rating: <?php echo $row->effectiveness_rating; ?></td>
+                    </tr>
+                    <tr>
+                        <td>Effectiveness: <?php echo $row->effectiveness; ?></td>
+                    </tr>
+                </table>
+            <?php endforeach; ?>
+        <?php endif; ?>
+    </section>
+</div>
+<div>
+    <section style="background-color: #191919; margin-left: -2.2%; margin-right: -2.2%; padding: 100px;">
+        <h1 style="color: #ffc03a; text-align: center; text-transform: uppercase;">Reviews</h1>
+        <p style="text-align: center;"><a style="color: white;" href="#" target="_blank" rel="nofollow noopener noreferrer">Upload your video and photo</a></p>
+        <div style="text-align: left;">
+            <form style="color: white;">
+                <p><label for="ease">⭐⭐⭐⭐⭐Ease of Use</label><br />
+                <input id="ease" type="text" placeholder="What was your lesson task deployment experience like? What did you like about the learning tasks?" /></p>
+            </form>
+        </div>
+    </section>
+</div>
