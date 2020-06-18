@@ -16,7 +16,7 @@ defined('_JEXEC') or die;
 //  call helper routines to collect data, and include the template which will display the module output
 
 // include the syndicate functions only once
-require_once dirname(__FILE__).'/helper.php';
+require_once __DIR__.'/helper.php';
 
 // Get testimonials
 $testimonials = ModReviewHelper::getTestimonials();
