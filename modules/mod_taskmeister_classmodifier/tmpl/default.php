@@ -22,7 +22,11 @@ defined('_JEXEC') or die;
   <input oninput="slider_change(this, 'unpreferredValue');" type="range" min="1" max="200" value="<?php echo $notPreferredWeightage; ?>" class="tm_slider" id="unpreferredWeight" name="unpreferredWeight">
   <span>May Try Weightage: </span><span id="mayTryValue">100</span>%
   <input oninput="slider_change(this, 'mayTryValue');" type="range" min="1" max="200" value="<?php echo $mayTryWeightage; ?>" class="tm_slider" id="mayTryWeight" name="mayTryWeight">
-  <span>Bonus Tags: </span><input type="text" name="bonusTags" id="bonusTags" placeholder = "['Mask','Input Tag Name Here']"><br> 
+  <?php if ($bonusTags && $bonusTags!="[]"):?>
+    <span>Bonus Tags: </span><input type="text" name="bonusTags" id="bonusTags" value=<?php echo $bonusTags;?> placeholder = "['Mask','Input Tag Name Here']"><br> 
+  <?php else: ?>
+    <span>Bonus Tags: </span><input type="text" name="bonusTags" id="bonusTags" placeholder = "['Mask','Input Tag Name Here']"><br> 
+  <?php endif; ?>
   <!--<span title="Toggling this will link your preferences to the class. ">Toggle Preference Linkage</span>-->
   <label class="switch">
     <?php if ($preferenceLinked): ?>

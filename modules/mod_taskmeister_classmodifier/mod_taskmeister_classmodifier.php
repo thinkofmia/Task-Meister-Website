@@ -58,6 +58,7 @@ if ($userID!=0){//if User id isnt a guest
             if ($row['es_weightagenotpreferred'])$notPreferredWeightage = intval($row['es_weightagenotpreferred']);
             if ($row['es_weightagemaytry'])$mayTryWeightage = intval($row['es_weightagemaytry']);
             if ($row['es_preferencelink'])$preferenceLinked = intval($row['es_preferencelink']);
+            if ($row['es_bonustags']) $bonusTags = $row['es_bonustags'];
         }
        
         require JModuleHelper::getLayoutPath('mod_taskmeister_classmodifier');
