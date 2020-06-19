@@ -489,6 +489,11 @@ table th, table td {
   border-radius: 50%;
 }
 
+#bonusTags {
+  font-size: 1.3vw;
+  width: 100%;
+}
+
 @keyframes fadeIn {
   from {
     opacity: 0;

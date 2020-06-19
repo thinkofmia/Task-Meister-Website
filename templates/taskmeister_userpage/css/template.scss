@@ -533,6 +533,11 @@ table {
     border-radius: 50%;
   }
 
+  #bonusTags {//For the bonus tags input
+    font-size: 1.3vw;
+    width: 100%;
+  }
+
 //Animations for the main pages
 @keyframes fadeIn {//Fade In Effect
     from {
