@@ -1,23 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form addrulepath="rules">
-    <fieldset name="details" label="MOD_REVIEW_REVIEW_DETAILS">
-        <field 
-            name="id"
-            type="hidden"
-        />
-        <field 
-            name="aid"
-            type="hidden"
-        />
-        <field 
-            name="uid"
-            type="hidden"
-        />
+    <fieldset name="details" label="MOD_REVIEW_FORM_DETAILS">
         <field 
             name="ease_rating"
             type="number"
-            label="MOD_REVIEW_REVIEW_EASE_RATING_LABEL"
-            description="MOD_REVIEW_REVIEW_EASE_RATING_DESC"
+            label="MOD_REVIEW_FORM_EASE_RATING_LABEL"
+            description="MOD_REVIEW_FORM_EASE_RATING_DESC"
             min="0"
             max="10"
             step="1"
@@ -26,16 +14,16 @@
         <field 
             name="ease"
             type="textarea"
-            label="MOD_REVIEW_REVIEW_EASE_LABEL"
-            description="MOD_REVIEW_REVIEW_EASE_DESC"
+            label="MOD_REVIEW_FORM_EASE_LABEL"
+            description="MOD_REVIEW_FORM_EASE_DESC"
             hint="How easy was the item to use?"
             required="true"
         />
         <field 
             name="effectiveness_rating"
             type="number"
-            label="MOD_REVIEW_REVIEW_EFFECTIVENESS_RATING_LABEL"
-            description="MOD_REVIEW_REVIEW_EFFECTIVENESS_RATING_DESC"
+            label="MOD_REVIEW_FORM_EFFECTIVENESS_RATING_LABEL"
+            description="MOD_REVIEW_FORM_EFFECTIVENESS_RATING_DESC"
             min="0"
             max="10"
             step="1"
@@ -44,8 +32,8 @@
         <field 
             name="effectiveness"
             type="textarea"
-            label="MOD_REVIEW_REVIEW_EFFECTIVENESS_LABEL"
-            description="MOD_REVIEW_REVIEW_EFFECTIVENESS_DESC"
+            label="MOD_REVIEW_FORM_EFFECTIVENESS_LABEL"
+            description="MOD_REVIEW_FORM_EFFECTIVENESS_DESC"
             hint="How effective was the item in progressing towards the learning outcomes?"
             required="true"
         />
