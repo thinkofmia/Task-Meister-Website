@@ -80,6 +80,8 @@ class plgTaskMeisterTM_recommender extends JPlugin
             if ($data['unpreferredWeight']) $teacherInfo->es_weightagenotpreferred = $data['unpreferredWeight'];
             if ($data['mayTryWeight']) $teacherInfo->es_weightagemaytry = $data['mayTryWeight'];
             if ($data['togglePreferenceLinkage']) $teacherInfo->es_preferencelink = $data['togglePreferenceLinkage'];
+            if ($data['bonusTags']) $teacherInfo->es_bonustags = $data['bonusTags'];
+            else $teacherInfo->es_bonustags = "[]";
             // Update the object into the teacher stats table.
             $result = JFactory::getDbo()->updateObject('#__customtables_table_teacherstats', $teacherInfo, 'es_teacherid');
             return true;
