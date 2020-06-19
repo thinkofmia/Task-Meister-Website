@@ -22,6 +22,9 @@ defined('_JEXEC') or die;
             <?php foreach($testimonials as $row): ?>
                 <table style="color: white;">
                     <tr>
+                        <td>User: <?php echo ModReviewHelper::getName($row->uid);?></td>
+                    </tr>
+                    <tr>
                         <td>Ease rating: <?php echo $row->ease_rating; ?></td>
                     </tr>
                     <tr>
@@ -35,38 +38,46 @@ defined('_JEXEC') or die;
                     </tr>
                 </table>
             <?php endforeach; ?>
+        <?php else : ?>
+            <p style="text-align: center; color: white;"><?php echo JText::_('MOD_REVIEW_TESTIMONIALS_EMPTY'); ?><p>
         <?php endif; ?>
     </section>
 </div>
 <div>
     <section style="background-color: #191919; margin-left: -2.2%; margin-right: -2.2%; padding: 100px;">
-        <h1 style="color: #ffc03a; text-align: center; text-transform: uppercase;"><?php echo JText::_('MOD_REVIEW_FORM_REVIEW_LABEL'); ?></h1>
-        <p style="text-align: center;"><a style="color: white;" href="#" target="_blank" rel="nofollow noopener noreferrer">Upload your video and photo</a></p>
-        <div style="text-align: left;">
-            <form style="color: white;">
-                <p><label for="ease"><?php echo JText::_('MOD_REVIEW_FORM_EASE_LABEL'); ?> ⭐⭐⭐⭐⭐</label><br />
-                <input id="ease" type="text" placeholder="<?php echo JText::_('MOD_REVIEW_FORM_EASE_PLACEHOLDER'); ?>"/></p>
-                <p><label for="effectiveness"><?php echo JText::_('MOD_REVIEW_FORM_EFFECTIVENESS_LABEL'); ?> ⭐⭐⭐⭐⭐</label><br />
-                <input id="effectiveness" type="text" placeholder="<?php echo JText::_('MOD_REVIEW_FORM_EFFECTIVENESS_PLACEHOLDER'); ?>" /></p>
+        <?php $form = JForm::getInstance('add_review', __DIR__.'/../models/forms/add_review.xml'); ?>
+        <div class="text-center">
+            <form style="color: white; display: inline-block; margin: 0 auto;" action="" method="POST" name="submit_review" id="submit_review">
+                <div class="form-horizontal">
+                    <fieldset class="submit_review">
+                        <h1 style="color: #ffc03a; text-align: center; text-transform: uppercase;">
+                            <?php if(ModReviewHelper::setForm($form))
+                                {
+                                    echo JText::_('MOD_REVIEW_FORM_EDIT');
+                                }
+                                else
+                                {
+                                    echo JText::_('MOD_REVIEW_FORM_SUBMIT');   
+                                }
+                            ?>
+                        </h1>
+                        <?php echo JText::_($msg); ?>
+                        <?php if(ModReviewHelper::hasDeployed()) : ?>
+                            <div>
+                                <?php
+                                    foreach($form->getFieldset() as $field) {
+                                        echo $field->renderField();
+                                    }
+                                ?>
+                                <?php echo JHtml::_('form.token'); ?>
+                                <input type="submit" value=<?php echo JText::_('MOD_REVIEW_SUBMIT') ?>>
+                            </div>
+                        <?php else : ?>
+                            <p style="text-align: center;"><?php echo JText::_('MOD_REVIEW_FORM_NOT_ALLOWED'); ?></p>
+                        <?php endif; ?>
+                    </fieldset>
+                </div>
             </form>
         </div>
     </section>
 </div>
-
-<?php $form = JForm::getInstance('add_review', __DIR__.'/../models/forms/add_review.xml'); ?>
-<form action="" method="POST" name="test_xml_form" id="test_xml_form">
-    <div class="form-horizontal">
-        <fieldset class="test_xml_form">
-            <legend><?php echo JText::_('MOD_REVIEW_FORM_DETAILS'); ?></legend>
-            <div class="row-fluid">
-                <div class="span9">
-                    <?php
-                        foreach($form->getFieldset() as $field) {
-                            echo $field->renderField();
-                        }
-                    ?>
-                </div>
-            </div>
-        </fieldset>
-    </div>
-</form>
