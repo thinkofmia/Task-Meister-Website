@@ -18,12 +18,11 @@ defined('_JEXEC') or die;
 // include the syndicate functions only once
 require_once __DIR__.'/helper.php';
 
-// Get testimonials
+// Get existing testimonials from backend
 $testimonials = ModReviewHelper::getTestimonials();
 
-if(empty($testimonials))
-{
-    $testimonials = array();
-}
+ModReviewHelper::getConfig($params);
+
+ModReviewHelper::saveReview($msg);
 
 require JModuleHelper::getLayoutPath('mod_review');
