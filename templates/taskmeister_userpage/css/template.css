@@ -398,6 +398,10 @@ table th, table td {
   background: blue;
 }
 
+.classModifierForm .switch {
+  display: none;
+}
+
 .tm_slider {
   -webkit-appearance: none;
   width: 100%;

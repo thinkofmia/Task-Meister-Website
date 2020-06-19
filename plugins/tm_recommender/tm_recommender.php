@@ -367,27 +367,11 @@ class plgTaskMeisterTM_recommender extends JPlugin
                 if ($row5['es_weightagelikes'])$likesBonus = $likesBonus*(intval($row5['es_weightagelikes']))/100;
                 if ($row5['es_weightagedeployment'])$deployedBonus = $deployedBonus*(intval($row5['es_weightagedeployment']))/100;
                 if ($row5['es_weightagetouched'])$touchedBonus = $touchedBonus*(intval($row5['es_weightagetouched']))/100;
-                if ($row5['es_preferencelink']==1){//If teacher's preference linkage is toggled
-                $teacherid = intval($row5['es_teacherid']);
-                //Query for teacher's preference
-                    $query = $db->getQuery(true);
-                    $query->select($db->quoteName(array('*')))
-                        ->from($db->quoteName('#__customtables_table_userstats'))
-                        ->where($db->quoteName('es_userid') . ' = ' . $teacherid);
-                    $db->setQuery($query);
-                    $results_pref = $db->loadAssocList();
-                    //Save teacher preferences into a list
-                    $teacherPreferences = NULL;
-                    foreach ($results_pref as $row){
-                        if ($row['es_userid']==$teacherid){//Just to be sure if teacher id is same
-                            $teacherPreferences = json_decode($row['es_userpreference']);
-                        }
-                    }
-                    if ($teacherPreferences){//If teacher's preferences exists
-                        foreach ($teacherPreferences as $key=>$value){
-                            if ($value == 2){//If teachers prefers
-                                array_push($bonusPreferences,$key);
-                            }
+                if ($row5['es_bonustags'] && $row5['es_bonustags']!="[]"){
+                    $bonusTagsArray = json_decode($row5['es_bonustags']);
+                    if (is_array($bonusTagsArray)){
+                        foreach ($bonusTagsArray as $row){
+                            if(!in_array($row, $bonusPreferences)) array_push($bonusPreferences,$row);
                         }
                     }
                 }

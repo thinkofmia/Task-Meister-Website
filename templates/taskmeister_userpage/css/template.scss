@@ -442,6 +442,12 @@ table {
 }
 
 //Class Modifier Mod
+.classModifierForm{
+    .switch{//Hide the toggle preference linkage button
+        display: none;
+    }
+}
+
 .tm_slider {//CSS for the slider
     -webkit-appearance: none;
     width: 100%;
