@@ -32,10 +32,7 @@ class ModReviewHelper
         // Select all records from the 'reviews' table where article ID is the one of the article being viewed
         // Order it by ease_rating and then effectiveness_rating
         $query
-            ->select($db->quoteName(array(
-                'uid',
-                'ease_rating', 'ease',
-                'effectiveness_rating', 'effectiveness')))
+            ->select('*')
             ->from($db->quoteName('reviews'))
             ->where($db->quoteName('aid') . ' = ' . $db->quote(JRequest::getVar('id')))
             ->order($db->quoteName('ease_rating') . ' DESC', $db->quoteName('effectiveness_rating' . ' DESC'));
@@ -54,7 +51,7 @@ class ModReviewHelper
         // Reset the query using the newly populated query object
         $db->setQuery($query);
 
-        // Load the results as a list of stdClass objects
+        // Load the results as a list/array of stdClass objects
         $results = $db->loadObjectList();
 
         return $results;
@@ -98,15 +95,35 @@ class ModReviewHelper
             // Get a db connection
             $db = Factory::getDbo();
 
-            // Attempt to save review to database
-            if($db->insertObject('reviews', $review))
+            // Check if review by the user for the article does not exist, insert if so
+            if(is_null($prev = self::getTestimonials($review->uid)))
             {
-                $msg = 'MOD_REVIEW_SUBMIT_SUCCESS';
+                // Attempt to save review to database
+                if($db->insertObject('reviews', $review))
+                {
+                    $msg = 'MOD_REVIEW_SUBMIT_SUCCESS';
+                }
+                else
+                {
+                    $msg = 'MOD_REVIEW_SUBMIT_FAILURE';
+                }
             }
+            // Update db record otherwise
             else
             {
-                $msg = 'MOD_REVIEW_SUBMIT_FAILURE';
+                // get the first and only record's id for the updateObject method
+                $review->id = $prev[0]->id;
+                if($db->updateObject('reviews', $review, 'id'))
+                {
+                    $msg = 'MOD_REVIEW_EDIT_SUCCESS';
+                }
+                else
+                {
+                    $msg = 'MOD_REVIEW_EDIT_FAILURE';
+                }
             }
+
+            
         }
     }
 
@@ -178,7 +195,7 @@ class ModReviewHelper
         $review = self::getTestimonials($uid)[0];
 
         // Set the various field values 
-        if($review)
+        if(!is_null($review))
         {
             $form->setValue('ease_rating', null, $review->ease_rating);
             $form->setValue('ease', null, $review->ease);
