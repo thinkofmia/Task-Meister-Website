@@ -104,14 +104,7 @@ class ModFeaturedArticleHelper
         foreach ($results[0] as $key => $value){
             array_push($articleList, $key);
         }
-        switch(rand(0,2)){
-            case 2:
-                return $articleList[2];
-            case 1:
-                return $articleList[1];
-            default:
-                return $articleList[0];
-        }
+        return $articleList[rand(0,sizeof($articleList)-1)];
     }
     function getArticleExternalStats($articleId){
         /**
