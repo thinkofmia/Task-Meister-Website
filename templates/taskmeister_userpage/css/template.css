@@ -208,6 +208,7 @@ table th, table td {
   color: white;
   position: absolute;
   font-size: 1.3vw;
+  word-wrap: break-word;
 }
 
 .arrow:hover, .arrowRight:hover, .arrowLeft:hover {
