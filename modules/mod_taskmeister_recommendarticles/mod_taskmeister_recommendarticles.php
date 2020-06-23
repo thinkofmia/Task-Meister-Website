@@ -28,7 +28,7 @@ $userid = $me->id;
 $keyword = "";//By default
 if (isset($_REQUEST["keyword"])&& strlen($_REQUEST["keyword"])>0){
     //Echo message to show search result, for debug
-    echo "<h3>You have searched for ".$_REQUEST["keyword"]."...</h3>";
+    //echo "<h3>You have searched for ".$_REQUEST["keyword"]."...</h3>";
     //Set keyword
     $keyword = $_REQUEST["keyword"];
 } 

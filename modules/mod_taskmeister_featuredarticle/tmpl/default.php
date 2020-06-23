@@ -10,7 +10,7 @@ defined('_JEXEC') or die;
             <iframe src="<?php echo $videoLink; ?>">
             </iframe>
         <?php else : ?>
-            <img src="<?php echo $articleImage; ?>"></img>
+            <img src="<?php echo $articleImage; ?>" onerror="this.src='<?php echo $dummyArticleImg; ?>';"></img>
         <?php endif; ?>
         <div class="featuredArticleText">
             <!--Displays Custom Header if exists, else use article title-->
