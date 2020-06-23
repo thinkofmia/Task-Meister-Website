@@ -45,9 +45,9 @@ else $username = "Login";
                 <img src="<?php echo $this->baseurl; ?>/templates/<?php echo $this->template; ?>/images/accountIcon.jpg" class = "accountIcon" alt="User Page" title="Click here to go to your user page. "/>            
             </a>            
             <div class="search">
-                <form action="<?php echo $this->baseurl; ?>/index.php">
-                    <input type="text" placeholder="Search.." name="search">
-                    <button type="submit">🔍</button>
+                <form action="<?php echo $this->baseurl; ?>/index.php/search">
+                    <input type="text" placeholder="Search.." name="keyword" value = "<?php echo $_REQUEST["keyword"]; ?>">
+                    <button type="queryKeyword">🔍</button>
                 </form>
             </div>
             <jdoc:include type="modules" name="top-right"/><!-- Module Position: 'top-right'-->
