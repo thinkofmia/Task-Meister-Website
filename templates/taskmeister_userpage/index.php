@@ -43,7 +43,13 @@ else $username = "Login";
             <a class= "right" href="<?php echo $this->baseurl; ?>/index.php/login"><!--User-->
                 <?php echo $username; ?>
                 <img src="<?php echo $this->baseurl; ?>/templates/<?php echo $this->template; ?>/images/accountIcon.jpg" class = "accountIcon" alt="User Page" title="Click here to go to your user page. "/>            
-            </a>
+            </a>            
+            <div class="search">
+                <form action="<?php echo $this->baseurl; ?>/index.php">
+                    <input type="text" placeholder="Search.." name="search">
+                    <button type="submit">🔍</button>
+                </form>
+            </div>
             <jdoc:include type="modules" name="top-right"/><!-- Module Position: 'top-right'-->
         </div>
     </div>
