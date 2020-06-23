@@ -85,7 +85,7 @@ class ModFeaturedArticleHelper
             }
         }
     }
-    function recommendArticle($userid){
+    function recommendArticle($userid, $keyword){
         /**
          * Function Recommend Article: Recommend an article for the user
          * Parameter: None
@@ -98,7 +98,7 @@ class ModFeaturedArticleHelper
         //Set Number of articles to 1
         $noOfArticles=3;
         //Call recommender engine function
-        $results = $dispatcher->trigger( 'recommendPersonalArticles', array("Personal",$noOfArticles,$userid,""));
+        $results = $dispatcher->trigger( 'recommendPersonalArticles', array("Personal",$noOfArticles,$userid,$keyword));
         //Return string results of recommended articles
         $articleList = array();
         foreach ($results[0] as $key => $value){

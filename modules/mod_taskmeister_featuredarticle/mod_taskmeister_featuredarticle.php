@@ -20,14 +20,24 @@ require_once dirname(__FILE__) . '/helper.php';//used because our helper functio
 use Joomla\CMS\Factory;
 $displayHeader = ModFeaturedArticleHelper::getHeader($params);//Set variable of inputtable header
 $displayText = ModFeaturedArticleHelper::getText($params);//Set variable of inputtable text
+$keyword = "";//By default, set keyword as none
 
+//Code to check for keyword
+if (isset($_REQUEST["keyword"])&& strlen($_REQUEST["keyword"])>0){
+    //Echo message to show search result, for debug
+    echo "<h3>You have searched for ".$_REQUEST["keyword"]."...</h3>";
+    //Set keyword
+    $keyword = $_REQUEST["keyword"];
+} 
+
+//Check if its to be automated or manual
 if ($params->get('automated')=="choice_no"){
     $articleID = $params->get('articleID');
 }
 else {
     $me = Factory::getUser();//Gets user
     $userid = $me->id;
-    $articleID = ModFeaturedArticleHelper::recommendArticle($userid);
+    $articleID = ModFeaturedArticleHelper::recommendArticle($userid, $keyword);
 }
 
 $videoLink = ModFeaturedArticleHelper::getVideo($params, $params->get('automated'), $articleID);//Set variable of video link

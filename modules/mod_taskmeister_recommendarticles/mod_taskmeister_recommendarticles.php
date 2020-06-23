@@ -25,6 +25,14 @@ $me = Factory::getUser();//Gets user
 $db = Factory::getDbo();//Gets database
 $userid = $me->id;
 
+$keyword = "";//By default
+if (isset($_REQUEST["keyword"])&& strlen($_REQUEST["keyword"])>0){
+    //Echo message to show search result, for debug
+    echo "<h3>You have searched for ".$_REQUEST["keyword"]."...</h3>";
+    //Set keyword
+    $keyword = $_REQUEST["keyword"];
+} 
+
 //Call our recommender
 if (($params->get('filter'))=="choice_teacher"){//If choose to show teachers' preferences
     $teachersRecommendationDict= ModRecommendArticlesHelper::getTeachersRecommendations($params->get('noOfArticles'), $userid, $db);
@@ -32,7 +40,7 @@ if (($params->get('filter'))=="choice_teacher"){//If choose to show teachers' pr
     else echo "You need to login to use this feature. ";
 }
 else{//If mode selected is others
-    $resultsSelected= ModRecommendArticlesHelper::getArticleList($params->get('filter'),$params->get('noOfArticles'), $userid, $params->get('selectedtag'));
+    $resultsSelected= ModRecommendArticlesHelper::getArticleList($params->get('filter'),$params->get('noOfArticles'), $userid, $params->get('selectedtag'), $keyword);
     $recommendedContents = ModRecommendArticlesHelper::getArticles($resultsSelected);
     require JModuleHelper::getLayoutPath('mod_taskmeister_recommendarticles');//Calls out default.php
 }

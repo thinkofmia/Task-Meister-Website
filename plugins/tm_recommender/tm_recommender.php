@@ -321,6 +321,10 @@ class plgTaskMeisterTM_recommender extends JPlugin
      */
     function recommendPersonalArticles($mode,$noOfArticles, $userid, $parameter1){
         $db = Factory::getDbo();//Gets database
+        //Set Additional Filter Mode if has keyword
+        if ($mode!="Selected Tag" && strlen($parameter1)>0){
+                $searchMode = true;
+        }
         //Get external user table (custom table) To find out list of liked, deployed and disliked articles
         $query = $db->getQuery(true);
         $query->select($db->quoteName(array('*')))
@@ -339,7 +343,7 @@ class plgTaskMeisterTM_recommender extends JPlugin
         }
         //Get article info database
         $query2 = $db->getQuery(true);
-        $query2->select($db->quoteName(array('es_articleid','es_totallikes','es_totaldislikes','es_totaldeployed','es_tags')))
+        $query2->select($db->quoteName(array('*')))
             ->from($db->quoteName('#__customtables_table_articlestats'));
         $db->setQuery($query2);
         $results_art = $db->loadAssocList();
@@ -450,6 +454,21 @@ class plgTaskMeisterTM_recommender extends JPlugin
                 }
                 //Store weightage
                 $weighingValue = $weightage - $touchBeforeModifier + $likedModifier*($row['es_totallikes'] - $row['es_totaldislikes']) + $row['es_totaldeployed']*$deployedModifier;
+                //Bonus if search mode
+                if (isset($searchMode)){
+                    $counter = 0; //Counter to find str searches
+                    //Based on number of times searched, add to counter
+                    if (stristr($row['es_title'], $parameter1)) $counter = $counter + 1;
+                    foreach($articleTags as $row_tag){
+                        if (stristr($row_tag, $parameter1)) $counter = $counter + 1;
+                    }
+                    //Check counter
+                    if ($counter=0) $weighingValue = -1;//If not inside query, remove it
+                    elseif ($counter>0 && $weighingValue<0) $weighingValue = $counter;//If not recommended yet within query
+                    else{//If recommended and within query, add recommendation
+                        $weighingValue = $weighingValue + 20*$counter;
+                    }
+                }
                 //Only if weightage is higher or equal to 0
                 if ($weighingValue>=0) $weighArticlesList[$row['es_articleid']] = $weighingValue; 
                 if ($highestWeighValue<$weighingValue) $highestWeighValue = $weighingValue;

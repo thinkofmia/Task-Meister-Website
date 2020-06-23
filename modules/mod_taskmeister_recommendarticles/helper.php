@@ -78,7 +78,7 @@ class ModRecommendArticlesHelper
         }
 
     }
-    function getArticleList($params,$noOfArticles, $userid, $selectedTag){//Function to get selection from parameter fields
+    function getArticleList($params,$noOfArticles, $userid, $selectedTag, $keyword){//Function to get selection from parameter fields
         //Call our recommender
         JPluginHelper::importPlugin('taskmeister','tm_recommender');
         $dispatcher = JDispatcher::getInstance();
@@ -95,16 +95,16 @@ class ModRecommendArticlesHelper
                 $results = $dispatcher->trigger( 'getMyList', array("Deployed",$noOfArticles,$userid));
                 break;
             case 'choice_liked'://If mode selected to be by top likes
-                $results = $dispatcher->trigger( 'recommendPersonalArticles', array("Likes",$noOfArticles,$userid,""));
+                $results = $dispatcher->trigger( 'recommendPersonalArticles', array("Likes",$noOfArticles,$userid,$keyword));
                 break;
             case 'choice_personal'://If mode selected to be personal recommendation
-                $results = $dispatcher->trigger( 'recommendPersonalArticles', array("Personal",$noOfArticles,$userid,""));
+                $results = $dispatcher->trigger( 'recommendPersonalArticles', array("Personal",$noOfArticles,$userid,$keyword));
                 break;
             case 'choice_deployed'://If mode selected to be by most deployed
-                $results = $dispatcher->trigger( 'recommendPersonalArticles', array("Deployed",$noOfArticles,$userid,""));
+                $results = $dispatcher->trigger( 'recommendPersonalArticles', array("Deployed",$noOfArticles,$userid,$keyword));
                 break;
             case 'choice_untouched'://If mode selected to be articles that the user never touched before
-                $results = $dispatcher->trigger( 'recommendPersonalArticles', array("Untouched",$noOfArticles,$userid,""));
+                $results = $dispatcher->trigger( 'recommendPersonalArticles', array("Untouched",$noOfArticles,$userid,$keyword));
                 break;
             case 'choice_selectedTag'://If mode selected to be articles of a particular tag
                 $results = $dispatcher->trigger( 'recommendPersonalArticles', array("Selected Tag",$noOfArticles,$userid,$selectedTag));
