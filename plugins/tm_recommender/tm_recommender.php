@@ -464,7 +464,7 @@ class plgTaskMeisterTM_recommender extends JPlugin
                     }
                     //Check counter
                     if ($counter==0) $weighingValue = -1;//If not inside query, remove it
-                    elseif ($counter>0 && $weighingValue<0) $weighingValue = $counter;//If not recommended yet within query
+                    elseif ($counter>0 && $weighingValue<=0) $weighingValue = $counter;//If not recommended yet within query
                     else{//If recommended and within query, add recommendation
                         $weighingValue = $weighingValue + 20*$counter;
                     }
