@@ -26,9 +26,95 @@
     <fields name="params">
       <fieldset name="basic">
       
-        <field name="sampleField" type="list" required="true" label="SAMPLE_FIELD_LABEL" description="SAMPLE_FIELD_DESCRIPTION">
-          <option value="0">SAMPLE_OPTION_1</option>
-          <option value="1">SAMPLE_OPTION_2</option>
+        <field
+          name="manager"
+          type="list"
+          required="true"
+          label="PUBLISH_DEFAULT_MANAGER_LABEL"
+          description="PUBLISH_DEFAULT_MANAGER_DESC">
+          <option value="0">PUBLISH_DEFAULT_OFF</option>
+          <option value="1">PUBLISH_DEFAULT_ON</option>
+        </field>
+        <field
+          name="administrator"
+          type="list"
+          required="true"
+          label="PUBLISH_DEFAULT_ADMINISTRATOR_LABEL"
+          description="PUBLISH_DEFAULT_ADMINISTRATOR_DESC">
+          <option value="0">PUBLISH_DEFAULT_OFF</option>
+          <option value="1">PUBLISH_DEFAULT_ON</option>
+        </field>
+        <field
+          name="registered"
+          type="list"
+          required="true"
+          label="PUBLISH_DEFAULT_REGISTERED_LABEL"
+          description="PUBLISH_DEFAULT_REGISTERED_DESC">
+          <option value="0">PUBLISH_DEFAULT_OFF</option>
+          <option value="1">PUBLISH_DEFAULT_ON</option>
+        </field>
+        <field
+          name="author"
+          type="list"
+          required="true"
+          label="PUBLISH_DEFAULT_AUTHOR_LABEL"
+          description="PUBLISH_DEFAULT_AUTHOR_DESC">
+          <option value="0">PUBLISH_DEFAULT_OFF</option>
+          <option value="1">PUBLISH_DEFAULT_ON</option>
+        </field>
+        <field
+          name="editor"
+          type="list"
+          required="true"
+          label="PUBLISH_DEFAULT_EDITOR_LABEL"
+          description="PUBLISH_DEFAULT_EDITOR_DESC">
+          <option value="0">PUBLISH_DEFAULT_OFF</option>
+          <option value="1">PUBLISH_DEFAULT_ON</option>
+        </field>
+        <field
+          name="publisher"
+          type="list"
+          required="true"
+          label="PUBLISH_DEFAULT_PUBLISHER_LABEL"
+          description="PUBLISH_DEFAULT_PUBLISHER_DESC">
+          <option value="0">PUBLISH_DEFAULT_OFF</option>
+          <option value="1">PUBLISH_DEFAULT_ON</option>
+        </field>
+        <field
+          name="hod"
+          type="list"
+          required="true"
+          label="PUBLISH_DEFAULT_HOD_LABEL"
+          description="PUBLISH_DEFAULT_HOD_DESC">
+          <option value="0">PUBLISH_DEFAULT_OFF</option>
+          <option value="1">PUBLISH_DEFAULT_ON</option>
+        </field>
+        <field
+          name="new_user"
+          type="list"
+          required="true"
+          label="PUBLISH_DEFAULT_NEW_USER_LABEL"
+          description="PUBLISH_DEFAULT_NEW_USER_DESC">
+          <option value="0">PUBLISH_DEFAULT_OFF</option>
+          <option value="1">PUBLISH_DEFAULT_ON</option>
+        </field>
+        <field
+          name="teacher"
+          type="list"
+          required="true"
+          label="PUBLISH_DEFAULT_TEACHER_LABEL"
+          description="PUBLISH_DEFAULT_TEACHER_DESC">
+          <option value="0">PUBLISH_DEFAULT_OFF</option>
+          <option value="1">PUBLISH_DEFAULT_ON</option>
+        </field>
+        <field
+          name="super_user"
+          type="list"
+          required="true"
+          label="PUBLISH_DEFAULT_SUPER_USER_LABEL"
+          description="PUBLISH_DEFAULT_SUPER_USER_DESC">
+          <option value="0">PUBLISH_DEFAULT_OFF</option>
+          <option value="1">PUBLISH_DEFAULT_ON</option>
         </field>
         
       </fieldset>
