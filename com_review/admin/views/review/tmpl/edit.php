@@ -17,7 +17,7 @@ defined('_JEXEC') or die('Restricted access');
         <fieldset class="adminForm">
             <legend><?php echo JText::_('COM_REVIEW_REVIEW_DETAILS'); ?></legend>
             <div class="row-fluid">
-                <div class="span6">
+                <div class="span12">
                     <?php
                         foreach($this->form->getFieldset() as $field) {
                             echo $field->renderField();
