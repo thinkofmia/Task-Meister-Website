@@ -5,6 +5,10 @@
             name="id"
             type="hidden"
         />
+        <field
+            name="created"
+            type="hidden"
+        />
         <field 
             name="aid"
             type="number"
@@ -24,6 +28,14 @@
             required="true"
         />
         <field 
+            name="summary"
+            type="textarea"
+            label="COM_REVIEW_REVIEW_SUMMARY_LABEL"
+            description="COM_REVIEW_REVIEW_SUMMARY_DESC"
+            hint="COM_REVIEW_REVIEW_SUMMARY_HINT"
+            required="true"
+        />
+        <field 
             name="ease_rating"
             type="number"
             label="COM_REVIEW_REVIEW_EASE_RATING_LABEL"
@@ -38,7 +50,7 @@
             type="textarea"
             label="COM_REVIEW_REVIEW_EASE_LABEL"
             description="COM_REVIEW_REVIEW_EASE_DESC"
-            hint="How easy was the item to use?"
+            hint="COM_REVIEW_REVIEW_EASE_HINT"
             required="true"
         />
         <field 
@@ -56,7 +68,7 @@
             type="textarea"
             label="COM_REVIEW_REVIEW_EFFECTIVENESS_LABEL"
             description="COM_REVIEW_REVIEW_EFFECTIVENESS_DESC"
-            hint="How effective was the item in progressing towards the learning outcomes?"
+            hint="COM_REVIEW_REVIEW_EFFECTIVENESS_HINT"
             required="true"
         />
     </fieldset>
