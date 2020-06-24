@@ -40,7 +40,7 @@ $listDirn   = $this->escape($this->filter_order_Dir);
                     <?php echo JHtml::_('grid.sort', 'COM_REVIEW_REVIEWS_UID', 'uid', $listDirn, $listOrder); ?>   
                 </th>
                 <th width="5%">
-                    <?php echo JHtml::_('grid.sort', 'COM_REVIEW_REVIEWS_CREATED', 'created', $listDirn, $listOrder); ?>   
+                    <?php echo JHtml::_('grid.sort', 'COM_REVIEW_REVIEWS_UPDATED', 'updated', $listDirn, $listOrder); ?>   
                 </th>
                 <th width="11%">
                     <?php echo JHtml::_('grid.sort', 'COM_REVIEW_REVIEWS_SUMMARY', 'summary', $listDirn, $listOrder); ?>   
@@ -97,7 +97,7 @@ $listDirn   = $this->escape($this->filter_order_Dir);
 						</td>
 						<td>
                             <a href="<?php echo $link; ?>" title="<?php echo JText::_('COM_REVIEW_EDIT_REVIEW'); ?>">
-                                <?php echo $row->created; ?>
+                                <?php echo $row->updated; ?>
                             </a>
 						</td>
 						<td>
