@@ -21,8 +21,6 @@ require_once __DIR__.'/helper.php';
 // Get existing testimonials from backend
 $testimonials = ModReviewHelper::getTestimonials();
 
-ModReviewHelper::getConfig($params);
-
-ModReviewHelper::saveReview($msg);
+ModReviewHelper::saveReview($params);
 
 require JModuleHelper::getLayoutPath('mod_review');
