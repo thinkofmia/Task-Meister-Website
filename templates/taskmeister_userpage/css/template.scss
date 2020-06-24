@@ -1,6 +1,6 @@
 /*Variables*/
 $pageBackground: black; //For Background
-$headerBackground: darkgray; //For Header Background
+$headerBackground: rgba(169, 169, 169, 0.8); //For Header Background
 $mainFontColor: white; //Default Font Color
 $altFontColor: gold; //Alt Default Font Color
 
@@ -55,42 +55,91 @@ table {
     left: 80%;
 }
 
-#topRow{/*This is to position the top row*/
+#navbar{/*This is to position the top row*/
     position: relative;
     width: 100%;
     display: inline-block;
-    height: 10vw;
+    height: 5vw;
     background-color: $headerBackground;
     animation-name: fadeIn;
     animation-duration: 2s;
     animation-fill-mode: forwards;
-
-    /*CSS for internal link*/
-    a {
-        position: absolute;
-        font-size: x-large;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    position: -webkit-sticky; /* Safari */
+    position: sticky;
+    top: 0;
+    z-index: 9999;
+    .navitem{
         height: 100%;
+        p{
+            font-size: 2vw;
+            color: $altFontColor;
+        }
     }
-    .logo{/*Set css for logo*/
-        height:100%;
-        width: 30vw;
+    .navitem:hover{
+        background-color: $altFontColor;
+        p{
+            color: $mainFontColor;
+        }
     }
-    .logo:hover{//CSS for hover logo
-        animation: flashing 1s;
-        animation-iteration-count: infinite;
+    li{
+        float: left;
+        padding-left: 1vw;
+        padding-right: 1vw;
+        height: 100%;
+        a {
+            display: block;
+            color: $altFontColor;
+            text-align: center;
+            text-decoration: none;
+            font-size: x-large;
+          }
+    }
+    .logolink{
+        position: relative;
+        left: -1vw;
+        .logo{/*Set css for logo*/
+            height:5vw;
+            width: 5vw;
+        }
+        .logo:hover{//CSS for hover logo
+            animation: flashing 1s;
+            animation-iteration-count: infinite;
+        }
+    }
+    .loginIcon {
+        display: inline-flex;
+        right: 1%;
+        position: absolute;
+        p {
+            color: $altFontColor;
+            font-size: 2vw;
+        }
+        .accountIcon{//Sets CSS for the account icon/profile picture
+            width: 4vw;
+            height: 4vw;
+            text-align: right;
+            padding-left: 1vw;
+            padding-top: 0.5vw;
+        }
+        
+        .accountIcon:hover {//Hover state for the account icon
+            animation: flashing 1s;
+            animation-iteration-count: infinite;
+        }
     }
 
 }
 
 #topRight{//CSS for the top right area of the page
     position: absolute;
-    left: 62%;
+    right: 0%;
     text-align: right;
-    .right{ 
-        display: inline-flex;
-        margin-top: 4vw;
-        left: 60%;
-    }
+    display: inline-flex;
+    
 }
 
 #centerRow{//Sets CSS for center row
@@ -133,19 +182,6 @@ table {
 /*CSS for other objects*/
 
 //Login Module//
-
-.accountIcon{//Sets CSS for the account icon/profile picture
-    width: 4vw;
-    height: 4vw;
-    text-align: right;
-    padding-left: 1vw;
-}
-
-.accountIcon:hover {//Hover state for the account icon
-    animation: flashing 1s;
-    animation-iteration-count: infinite;
-}
-
 .login-button {//CSS for the login submit button
     background-color: $altFontColor;
     color: $mainFontColor;
@@ -407,10 +443,8 @@ table {
 
 //CSS for the search module
 .search {
-    padding-left: 5vw;
-    width: 30vw;
-    font-size: 1vw;
-    padding-top: 1vw;
+    font-size: 1.5vw;
+    padding-top: 2vw;
 }
 
 //CSS for the whos online module and latest news module

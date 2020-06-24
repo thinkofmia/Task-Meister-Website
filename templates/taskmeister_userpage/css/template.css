@@ -50,42 +50,91 @@ table th, table td {
   left: 80%;
 }
 
-#topRow {
+#navbar {
   /*This is to position the top row*/
   position: relative;
   width: 100%;
   display: inline-block;
-  height: 10vw;
-  background-color: darkgray;
+  height: 5vw;
+  background-color: rgba(169, 169, 169, 0.8);
   animation-name: fadeIn;
   animation-duration: 2s;
   animation-fill-mode: forwards;
-  /*CSS for internal link*/
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  position: -webkit-sticky;
+  /* Safari */
+  position: sticky;
+  top: 0;
+  z-index: 9999;
 }
-#topRow a {
-  position: absolute;
+#navbar .navitem {
+  height: 100%;
+}
+#navbar .navitem p {
+  font-size: 2vw;
+  color: gold;
+}
+#navbar .navitem:hover {
+  background-color: gold;
+}
+#navbar .navitem:hover p {
+  color: white;
+}
+#navbar li {
+  float: left;
+  padding-left: 1vw;
+  padding-right: 1vw;
+  height: 100%;
+}
+#navbar li a {
+  display: block;
+  color: gold;
+  text-align: center;
+  text-decoration: none;
   font-size: x-large;
-  height: 100%;
 }
-#topRow .logo {
+#navbar .logolink {
+  position: relative;
+  left: -1vw;
+}
+#navbar .logolink .logo {
   /*Set css for logo*/
-  height: 100%;
-  width: 30vw;
+  height: 5vw;
+  width: 5vw;
 }
-#topRow .logo:hover {
+#navbar .logolink .logo:hover {
+  animation: flashing 1s;
+  animation-iteration-count: infinite;
+}
+#navbar .loginIcon {
+  display: inline-flex;
+  right: 1%;
+  position: absolute;
+}
+#navbar .loginIcon p {
+  color: gold;
+  font-size: 2vw;
+}
+#navbar .loginIcon .accountIcon {
+  width: 4vw;
+  height: 4vw;
+  text-align: right;
+  padding-left: 1vw;
+  padding-top: 0.5vw;
+}
+#navbar .loginIcon .accountIcon:hover {
   animation: flashing 1s;
   animation-iteration-count: infinite;
 }
 
 #topRight {
   position: absolute;
-  left: 62%;
+  right: 0%;
   text-align: right;
-}
-#topRight .right {
   display: inline-flex;
-  margin-top: 4vw;
-  left: 60%;
 }
 
 #centerRow {
@@ -119,18 +168,6 @@ table th, table td {
 }
 
 /*CSS for other objects*/
-.accountIcon {
-  width: 4vw;
-  height: 4vw;
-  text-align: right;
-  padding-left: 1vw;
-}
-
-.accountIcon:hover {
-  animation: flashing 1s;
-  animation-iteration-count: infinite;
-}
-
 .login-button {
   background-color: gold;
   color: white;
@@ -368,10 +405,8 @@ table th, table td {
 }
 
 .search {
-  padding-left: 5vw;
-  width: 30vw;
-  font-size: 1vw;
-  padding-top: 1vw;
+  font-size: 1.5vw;
+  padding-top: 2vw;
 }
 
 .latestnews, .whosonline li {

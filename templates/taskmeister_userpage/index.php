@@ -30,26 +30,55 @@ else $username = "Login";
 
 <!-- Contain the website code which controls the layout-->
 <body>
-    <div id="topRow">
-        <a class = "left" href="<?php echo $this->baseurl; ?>/index.php/home"><!-- Set clickable logo-->
+    <ul id="navbar">
+        <li><a class = "logolink" href="<?php echo $this->baseurl; ?>/index.php/home"><!-- Set clickable logo-->
             <img class = "logo"  src="<?php echo $this->baseurl; ?>/templates/<?php echo $this->template; ?>/images/TaskMeisterLogo.JPG" alt="Task Meister Logo" class="logo" />
-            <jdoc:include type="modules" name="top-left"/><!-- Module Position: 'top-left'-->
-            
-        </a>
-        <div class = "columnCenter">
-            <jdoc:include type="modules" name="top"/><!-- Module Position: 'top'-->
-        </div>
-        <div id = "topRight">
-            <a class= "right" href="<?php echo $this->baseurl; ?>/index.php/login"><!--User-->
-                <?php echo $username; ?>
-                <img src="<?php echo $this->baseurl; ?>/templates/<?php echo $this->template; ?>/images/accountIcon.jpg" class = "accountIcon" alt="User Page" title="Click here to go to your user page. "/>            
-            </a>            
+        </a></li>
+        <li class="navitem"><a href="<?php echo $this->baseurl; ?>/index.php/choosepreference"><!--Choose Preference-->
+                <p>Preferences</p>            
+            </a>
+        </li>
+        <li class="navitem"><a href="<?php echo $this->baseurl; ?>/index.php/chooseclass"><!--Choose Class-->
+                <p>Class</p>            
+            </a>
+        </li>
+        <li class="navitem"><a href="<?php echo $this->baseurl; ?>/index.php/mylist"><!--My List-->
+                <p>My List</p>            
+            </a>
+        </li>
+        <li class="navitem"><a href="<?php echo $this->baseurl; ?>/index.php/resources"><!--Subjects-->
+                <p>Subjects</p>            
+            </a>
+        </li>
+        <li class="navitem"><a href="<?php echo $this->baseurl; ?>/index.php/schoollevels"><!--My List-->
+                <p>Levels</p>            
+            </a>
+        </li>
+        <li class="navitem"><a href="<?php echo $this->baseurl; ?>/index.php/interactive-resources"><!--My List-->
+                <p>Archives</p>            
+            </a>
+        </li>
+        <li>
             <div class="search">
                 <form action="<?php echo $this->baseurl; ?>/index.php/search">
                     <input type="text" placeholder="Search.." name="keyword" value = "<?php echo $_REQUEST["keyword"]; ?>">
                     <button type="queryKeyword">🔍</button>
                 </form>
             </div>
+        </li>
+        <li>
+            <a class= "loginIcon" href="<?php echo $this->baseurl; ?>/index.php/login"><!--User-->
+                <p><?php echo $username; ?></p>
+                <img src="<?php echo $this->baseurl; ?>/templates/<?php echo $this->template; ?>/images/accountIcon.jpg" class = "accountIcon" alt="User Page" title="Click here to go to your user page. "/>            
+            </a> 
+        </li>
+    </ul>
+    <div id="topRow">
+        <jdoc:include type="modules" name="top-left"/><!-- Module Position: 'top-left'-->
+        <div class = "columnCenter">
+            <jdoc:include type="modules" name="top"/><!-- Module Position: 'top'-->
+        </div>
+        <div id = "topRight">
             <jdoc:include type="modules" name="top-right"/><!-- Module Position: 'top-right'-->
         </div>
     </div>
