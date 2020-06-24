@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form addrulepath="rules">
     <fieldset name="details" label="MOD_REVIEW_FORM_DETAILS">
+        <field
+            name="summary"
+            type="textarea"
+            label="MOD_REVIEW_FORM_SUMMARY_LABEL"
+            description="MOD_REVIEW_FORM_SUMMARY_DESC"
+            hint="MOD_REVIEW_FORM_SUMMARY_HINT"
+            required="true"
+        />
         <field 
             name="ease_rating"
             type="number"
@@ -16,7 +24,7 @@
             type="textarea"
             label="MOD_REVIEW_FORM_EASE_LABEL"
             description="MOD_REVIEW_FORM_EASE_DESC"
-            hint="How easy was the item to use?"
+            hint="MOD_REVIEW_FORM_EASE_HINT"
             required="true"
         />
         <field 
@@ -34,7 +42,7 @@
             type="textarea"
             label="MOD_REVIEW_FORM_EFFECTIVENESS_LABEL"
             description="MOD_REVIEW_FORM_EFFECTIVENESS_DESC"
-            hint="How effective was the item in progressing towards the learning outcomes?"
+            hint="MOD_REVIEW_FORM_EFFECTIVENESS_HINT"
             required="true"
         />
     </fieldset>
