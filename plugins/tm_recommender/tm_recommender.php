@@ -458,10 +458,20 @@ class plgTaskMeisterTM_recommender extends JPlugin
                 if (isset($searchMode)){
                     $counter = 0; //Counter to find str searches
                     //Based on number of times searched, add to counter
-                    if (stristr($row['es_title'], $parameter1)) $counter = $counter + 1;
+                    if (stristr($row['es_title'], $parameter1)) $counter = $counter + 5;
                     foreach($articleTags as $row_tag){
-                        if (stristr($row_tag, $parameter1)) $counter = $counter + 1;
+                        if (stristr($row_tag, $parameter1)) $counter = $counter + 2;
                     }
+                    //Query for database article contents (to check within text)
+                    $query = $db->getQuery(true);
+                    $query->select($db->quoteName(array('*')))
+                        ->from($db->quoteName('#__content'))
+                        ->where($db->quoteName('id') . ' = ' . $row['es_articleid']);
+                    $db->setQuery($query);
+                    $articleContents = $db->loadAssoc();
+                    //Check inside texts
+                    if (stristr($articleContents['introtext'], $parameter1)) $counter = $counter + substr_count($articleContents['introtext'], $parameter1);
+                    if (stristr($articleContents['fulltext'], $parameter1)) $counter = $counter + substr_count($articleContents['fulltext'], $parameter1);
                     //Check counter
                     if ($counter==0) $weighingValue = -1;//If not inside query, remove it
                     elseif ($counter>0 && $weighingValue<=0) $weighingValue = $counter;//If not recommended yet within query
