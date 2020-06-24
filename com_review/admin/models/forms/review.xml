@@ -5,10 +5,6 @@
             name="id"
             type="hidden"
         />
-        <field
-            name="created"
-            type="hidden"
-        />
         <field 
             name="aid"
             type="number"
@@ -34,6 +30,8 @@
             description="COM_REVIEW_REVIEW_SUMMARY_DESC"
             hint="COM_REVIEW_REVIEW_SUMMARY_HINT"
             required="true"
+            cols="255"
+            rows="10"
         />
         <field 
             name="ease_rating"
@@ -52,6 +50,8 @@
             description="COM_REVIEW_REVIEW_EASE_DESC"
             hint="COM_REVIEW_REVIEW_EASE_HINT"
             required="true"
+            cols="255"
+            rows="10"
         />
         <field 
             name="effectiveness_rating"
@@ -70,6 +70,8 @@
             description="COM_REVIEW_REVIEW_EFFECTIVENESS_DESC"
             hint="COM_REVIEW_REVIEW_EFFECTIVENESS_HINT"
             required="true"
+            cols="255"
+            rows="10"
         />
     </fieldset>
 </form>
