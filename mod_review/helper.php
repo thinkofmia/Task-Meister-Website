@@ -86,7 +86,7 @@ class ModReviewHelper
             );
 
             $review->aid                    = $input->getInt('id');
-            $review->uid                    = Factory::getUser()->id;
+            $review->uid                    = (int) Factory::getUser()->id;
             $review->ease_rating            = $input->getInt('ease_rating');
             $review->ease                   = $input->getString('ease');
             $review->effectiveness_rating   = $input->getInt('effectiveness_rating'); 
@@ -96,7 +96,7 @@ class ModReviewHelper
             $db = Factory::getDbo();
 
             // Check if review by the user for the article does not exist, insert if so
-            if(is_null($prev = self::getTestimonials($review->uid)))
+            if(is_null($prev = self::getTestimonials($review->uid)[0]))
             {
                 // Attempt to save review to database
                 if($db->insertObject('reviews', $review))
@@ -112,7 +112,7 @@ class ModReviewHelper
             else
             {
                 // get the first and only record's id for the updateObject method
-                $review->id = $prev[0]->id;
+                $review->id = $prev->id;
                 if($db->updateObject('reviews', $review, 'id'))
                 {
                     $msg = 'MOD_REVIEW_EDIT_SUCCESS';
