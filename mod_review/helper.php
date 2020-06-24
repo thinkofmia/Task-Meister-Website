@@ -30,12 +30,13 @@ class ModReviewHelper
         $query = $db->getQuery(true);
 
         // Select all records from the 'reviews' table where article ID is the one of the article being viewed
-        // Order it by ease_rating and then effectiveness_rating
+        // Order it by column overall_rating (automatically generated column from db)
+        //   overall_rating: CEILING((`ease_rating` + `effectiveness_rating`)/2)
         $query
             ->select('*')
             ->from($db->quoteName('reviews'))
             ->where($db->quoteName('aid') . ' = ' . $db->quote(JRequest::getVar('id')))
-            ->order($db->quoteName('ease_rating') . ' DESC', $db->quoteName('effectiveness_rating' . ' DESC'));
+            ->order($db->quoteName('overall_rating') . ' DESC');
         
         // Additionally filter to get the specified testimonial if $uid is passed
         // Else only get published reviews for display
@@ -60,14 +61,16 @@ class ModReviewHelper
     /**
      * Method to save a user review of an article to the 'reviews' table
      * 
-     * @param   String  &$msg   A variable containing a string for the user, reflecting the success/failure of saving the review
+     * @param   Object  $params     An object containing the parameters set in the backend interface for the module
      */
-    public static function saveReview(&$msg)
+    public static function saveReview($params)
     {
         // Check if user is submitting a POST request for form submission
         //  process the POST request if so
         $app = Factory::getApplication();
         $input = $app->input;
+
+        $uri = JUri::getInstance();
 
         if(strtoupper($input->getMethod()) === 'POST')
         {
@@ -77,16 +80,19 @@ class ModReviewHelper
                 return;
             }
 
-            $review = (object) array('aid' => 0,
-            'uid' => 0,
-            'ease_rating' => '',
-            'ease' => '',
-            'effectiveness_rating' => '',
-            'effectiveness' => '',
+            $review = (object) array(
+                'aid' => 0,
+                'uid' => 0,
+                'summary' => '',
+                'ease_rating' => '',
+                'ease' => '',
+                'effectiveness_rating' => '',
+                'effectiveness' => '',
             );
 
             $review->aid                    = $input->getInt('id');
             $review->uid                    = (int) Factory::getUser()->id;
+            $review->summary                = $input->getString('summary');
             $review->ease_rating            = $input->getInt('ease_rating');
             $review->ease                   = $input->getString('ease');
             $review->effectiveness_rating   = $input->getInt('effectiveness_rating'); 
@@ -98,33 +104,73 @@ class ModReviewHelper
             // Check if review by the user for the article does not exist, insert if so
             if(is_null($prev = self::getTestimonials($review->uid)[0]))
             {
-                // Attempt to save review to database
+                $review->created = date('Y-m-d');
+                $review->updated = date('Y-m-d');
+
+                // Set the default publish value for a new review
+                $review->published = (int) self::publishDefault($params);
+
+                // Attempt to insert new review to database
                 if($db->insertObject('reviews', $review))
                 {
-                    $msg = 'MOD_REVIEW_SUBMIT_SUCCESS';
+                    $msg = 'submit_success';
                 }
                 else
                 {
-                    $msg = 'MOD_REVIEW_SUBMIT_FAILURE';
+                    $msg = 'submit_failure';
                 }
             }
             // Update db record otherwise
             else
             {
+                $review->updated = date('Y-m-d');
+                
                 // get the first and only record's id for the updateObject method
                 $review->id = $prev->id;
                 if($db->updateObject('reviews', $review, 'id'))
                 {
-                    $msg = 'MOD_REVIEW_EDIT_SUCCESS';
+                    $msg = 'edit_success';
                 }
                 else
                 {
-                    $msg = 'MOD_REVIEW_EDIT_FAILURE';
+                    $msg = 'edit_failure';
                 }
             }
-
             
+            // Perform a redirect to reload the page
+            $uri->setVar('submit_status', $msg);
+            $uri->setFragment('review-form');
+            $app->redirect($uri->render());
         }
+    }
+
+    /**
+     * Method to display a status message reflecting the success/failure of review submission
+     * 
+     * @return  String          A message reflecting the success/failure of the form submission
+     */
+    public static function displayStatus()
+    {
+        $uri = JUri::getInstance();
+        // get value of GET parameter 'submit_status'
+        $status = $uri->getVar('submit_status', '');
+
+        switch ($status) {
+            case 'submit_success':
+                $msg = 'MOD_REVIEW_SUBMIT_SUCCESS';
+                break;
+            case 'submit_failure':
+                $msg = 'MOD_REVIEW_SUBMIT_FAILURE';
+                break;
+            case 'edit_success':
+                $msg = 'MOD_REVIEW_EDIT_SUCCESS';
+                break;
+            case 'edit_failure':
+                $msg = 'MOD_REVIEW_EDIT_FAILURE';
+                break;
+        }
+
+        return JText::_($msg);
     }
 
     /**
@@ -197,6 +243,7 @@ class ModReviewHelper
         // Set the various field values 
         if(!is_null($review))
         {
+            $form->setValue('summary', null, $review->summary);
             $form->setValue('ease_rating', null, $review->ease_rating);
             $form->setValue('ease', null, $review->ease);
             $form->setValue('effectiveness_rating', null, $review->effectiveness_rating);
@@ -209,14 +256,60 @@ class ModReviewHelper
             return false;
         }
     }
+
+    /**
+     * Method to format date for printing, converts dates like "2020-05-03" to "03 May" including the year if it's earlier
+     * 
+     * @param   String  $date   date in a string with the format YYYY-MM-DD
+     * 
+     * @return  String  $r      date in a string with the format "DD Month" or "DD Month YYYY" if the year is earlier
+     */
+    public static function fmtDate($date)
+    {
+        $months = ['January', 'February', 'March', 'April', 'May', 'June', 'July',
+                   'August', 'September', 'October', 'November', 'December'];
+        $date = explode('-', $date);
+        $r = $date[2] . ' ' . $months[(int) $date[1] - 1];
+        
+        if($date[0] !== date('Y'))
+        {
+            $r .= ' ' . $date[0];
+        }
+        
+        return $r;
+    }
+
     /**
      * Method to get module configuration information from the backend to determine whether the user's review is published by default
+     * 
+     * @return  Boolean $publish    A boolean representing whether the review should be published by default
      */
-    public static function getConfig($params)
+    public static function publishDefault($params)
     {
-        //echo $params->get('sampleField');
-        //var_dump(JAccess::getUsersByGroup(8));
+        // An array of user group names mapped to their group id
+        $group_names = array(
+            2 => 'registered',
+            3 => 'author',
+            4 => 'editor',
+            5 => 'publisher',
+            6 => 'manager',
+            7 => 'administrator',
+            8 => 'super_user',
+            10 => 'new_user',
+            11 => 'teacher',
+            12 => 'hod'
+        );
 
-        // logical OR all permissions for the user's current groups to determine publishing default 
+        $group_ids = Factory::getUser()->groups;
+
+        $publish = false;
+
+        // Iterate through all groups the user belongs to and override to publish by default if any of the user's groups are set as such
+        foreach($group_ids as $group_id)
+        {
+            $publish = $publish || (int) $params->get($group_names[$group_id]);
+        }
+
+        return $publish;
     }
 }
