@@ -3,6 +3,7 @@ DROP TABLE IF EXISTS `reviews`;
 CREATE TABLE `reviews` (
     `id`            INT(11)     UNSIGNED NOT NULL AUTO_INCREMENT,
     `created`       DATE        NOT NULL DEFAULT '0000-00-00',
+    `updated`       DATE        NOT NULL DEFAULT '0000-00-00',
     `uid`           INT(11)     UNSIGNED NOT NULL,
     `aid`           INT(11)     UNSIGNED NOT NULL,
     `auid`          BINARY(23) AS (CONCAT(CAST(`aid` AS BINARY), ':', CAST(`uid` AS BINARY))) VIRTUAL UNIQUE,
