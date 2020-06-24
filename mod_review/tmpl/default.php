@@ -15,35 +15,46 @@ defined('_JEXEC') or die;
 // This file collects the data collected by mod_review.php and generates the HTML to be displayed
 ?>
 
-<div>
+<div id="testimonials">
     <section style="background-color: black; margin-left: -2.2%; margin-right: -2.2%; padding: 100px;">
         <h1 style="color: #ffc03a; text-align: center; text-transform: uppercase;"><?php echo JText::_('MOD_REVIEW_FORM_TESTIMONIAL_LABEL') ?></h1>
         <?php if(!empty($testimonials)): ?>
             <?php foreach($testimonials as $row): ?>
-                <table style="color: white;">
-                    <tr>
-                        <td>User: <?php echo ModReviewHelper::getName($row->uid);?></td>
-                    </tr>
-                    <tr>
-                        <td>Ease rating: <?php echo $row->ease_rating; ?></td>
-                    </tr>
-                    <tr>
-                        <td>Ease of use: <?php echo $row->ease; ?></td>
-                    </tr>
-                    <tr>
-                        <td>Effectiveness rating: <?php echo $row->effectiveness_rating; ?></td>
-                    </tr>
-                    <tr>
-                        <td>Effectiveness: <?php echo $row->effectiveness; ?></td>
-                    </tr>
-                </table>
+                <div class="text-center">
+                    <table class="table" style="color: white;">
+                        <tr>
+                            <td>Summary: <?php echo $row->summary; ?></td>
+                        </tr>
+                        <tr>
+                            <td>Rating: <?php echo $row->overall_rating; ?></td>
+                        </tr>
+                        <tr>
+                            <td>Posted by: <?php echo ModReviewHelper::getName($row->uid);?></td>
+                        </tr>
+                        <tr>
+                            <td>Last updated: <?php echo ModReviewHelper::fmtDate($row->updated); ?></td>
+                        </tr>
+                        <tr>
+                            <td>Ease rating: <?php echo $row->ease_rating; ?></td>
+                        </tr>
+                        <tr>
+                            <td>Ease of use: <?php echo $row->ease; ?></td>
+                        </tr>
+                        <tr>
+                            <td>Effectiveness rating: <?php echo $row->effectiveness_rating; ?></td>
+                        </tr>
+                        <tr>
+                            <td>Effectiveness: <?php echo $row->effectiveness; ?></td>
+                        </tr>
+                    </table>
+                </div>
             <?php endforeach; ?>
         <?php else : ?>
             <p style="text-align: center; color: white;"><?php echo JText::_('MOD_REVIEW_TESTIMONIALS_EMPTY'); ?><p>
         <?php endif; ?>
     </section>
 </div>
-<div>
+<div id="review-form">
     <section style="background-color: #191919; margin-left: -2.2%; margin-right: -2.2%; padding: 100px;">
         <?php $form = JForm::getInstance('add_review', __DIR__.'/../models/forms/add_review.xml'); ?>
         <div class="text-center">
@@ -61,7 +72,11 @@ defined('_JEXEC') or die;
                                 }
                             ?>
                         </h1>
-                        <?php echo JText::_($msg); ?>
+                        <?php if(JUri::getInstance()->hasVar('submit_status'))
+                        {
+                            echo '<p>' . ModReviewHelper::displayStatus() . '</p>';
+                        }
+                        ?>
                         <?php if(ModReviewHelper::hasDeployed()) : ?>
                             <div>
                                 <?php
