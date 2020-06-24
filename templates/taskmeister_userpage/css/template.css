@@ -76,6 +76,8 @@ table th, table td {
 #navbar .navitem p {
   font-size: 2vw;
   color: gold;
+  bottom: 0.5vw;
+  position: relative;
 }
 #navbar .navitem:hover {
   background-color: gold;
