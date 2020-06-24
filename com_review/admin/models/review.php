@@ -117,6 +117,7 @@ class ReviewModelReview extends JModelAdmin
 		// Allow an exception to be thrown.
 		try
 		{
+
 			// Load the row if saving an existing record.
 			if ($pk > 0)
 			{
@@ -127,6 +128,16 @@ class ReviewModelReview extends JModelAdmin
 				unset($table->auid);
 				unset($table->overall_rating);
 			}
+			// Create the value for the `created` column for a new record
+			else
+			{
+				$table->created = date('Y-m-d');
+			}
+			// Create the value for the `updated` column for the record
+			$table->updated = date('Y-m-d');
+
+			// debug
+			// $app->enqueueMessage(var_export($table, true));
 
 			// Bind the data.
 			if (!$table->bind($data))
