@@ -78,12 +78,6 @@ else $username = "Login";
         </div>
     </div>
     <div id="centerRow">
-        <div class="search">
-            <form action="<?php echo $this->baseurl; ?>/index.php/search">
-                <input type="text" placeholder="Search.." name="keyword" value = "<?php echo $_REQUEST["keyword"]; ?>">
-                <button type="queryKeyword">🔍</button>
-            </form>
-        </div><br>
         <div class="left">
             <jdoc:include type="modules" name="center-left"/><!-- Module Position: 'center-left'-->
         </div>
