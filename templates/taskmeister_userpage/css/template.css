@@ -9,6 +9,7 @@ body {
   position: relative;
   font-size: 1.5vw;
   height: 700vh;
+  margin-left: 1vw;
 }
 
 p {
@@ -50,111 +51,83 @@ table th, table td {
   left: 80%;
 }
 
+.topnav {
+  overflow: hidden;
+  background-color: rgba(169, 169, 169, 0.8);
+  animation-name: fadeIn;
+  animation-duration: 2s;
+  animation-fill-mode: forwards;
+}
+.topnav a {
+  float: left;
+  display: block;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  font-size: 2vw;
+  padding-right: 1vw;
+  padding-left: 1vw;
+  padding-top: 1vw;
+  height: 4vw;
+}
+.topnav a:hover {
+  background-color: gold;
+  color: black;
+}
+.topnav a.active {
+  background-color: gold;
+  color: white;
+}
+.topnav .icon {
+  display: none;
+}
+
 @media screen and (max-width: 600px) {
-  #navbar a:not(:first-child) {
+  .topnav a:not(:first-child) {
     display: none;
   }
 
-  #navbar a.icon {
+  .topnav a.icon {
     float: right;
     display: block;
   }
 }
 @media screen and (max-width: 600px) {
-  #navbar.responsive {
+  .topnav.responsive {
     position: relative;
   }
 
-  #navbar.responsive .icon {
+  .topnav.responsive .icon {
     position: absolute;
     right: 0;
     top: 0;
   }
 
-  #navbar.responsive a {
+  .topnav.responsive a {
     float: none;
     display: block;
     text-align: left;
   }
 }
-#navbar {
-  /*This is to position the top row*/
+#logolink {
   position: relative;
-  width: 100%;
-  display: inline-block;
+  padding-left: 0vw;
+  padding-right: 0vw;
+  padding-top: 0vw;
   height: 5vw;
-  background-color: rgba(169, 169, 169, 0.8);
-  animation-name: fadeIn;
-  animation-duration: 2s;
-  animation-fill-mode: forwards;
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-  position: -webkit-sticky;
-  /* Safari */
-  position: sticky;
-  top: 0;
-  z-index: 9999;
-}
-#navbar .navitem {
-  height: 100%;
-}
-#navbar .navitem p {
-  font-size: 2vw;
-  color: gold;
-  bottom: 0.5vw;
-  position: relative;
-}
-#navbar .navitem:hover {
-  background-color: gold;
-}
-#navbar .navitem:hover p {
-  color: white;
-}
-#navbar li {
   float: left;
-  padding-left: 1vw;
-  padding-right: 1vw;
-  height: 100%;
-}
-#navbar li a {
   display: block;
-  color: gold;
+  color: white;
   text-align: center;
   text-decoration: none;
-  font-size: x-large;
+  font-size: 2vw;
 }
-#navbar .logolink {
-  position: relative;
-  left: -1vw;
-}
-#navbar .logolink .logo {
+#logolink .logo {
   /*Set css for logo*/
   height: 5vw;
   width: 5vw;
 }
-#navbar .logolink .logo:hover {
-  animation: flashing 1s;
-  animation-iteration-count: infinite;
-}
-#navbar .loginIcon {
-  display: inline-flex;
-  right: 1%;
-  position: absolute;
-}
-#navbar .loginIcon p {
-  color: gold;
-  font-size: 2vw;
-}
-#navbar .loginIcon .accountIcon {
-  width: 4vw;
-  height: 4vw;
-  text-align: right;
-  padding-left: 1vw;
-  padding-top: 0.5vw;
-}
-#navbar .loginIcon .accountIcon:hover {
+#logolink .logo:hover {
   animation: flashing 1s;
   animation-iteration-count: infinite;
 }
@@ -168,7 +141,7 @@ table th, table td {
 
 #centerRow {
   display: inline-block;
-  margin: 10px;
+  margin-left: 2vw;
   overflow-x: hidden;
   scrollbar-color: gray black;
   animation-name: fromLeft;
@@ -409,7 +382,7 @@ table th, table td {
   text-align: center;
   position: relative;
   background-color: brown;
-  width: 90vw;
+  width: 100%;
 }
 .featuredArticle iframe, .featuredArticle img {
   width: 50vw;
@@ -433,6 +406,9 @@ table th, table td {
 .search {
   font-size: 2vw;
   padding-top: 2vw;
+  animation-name: fromLeft;
+  animation-duration: 2s;
+  animation-fill-mode: forwards;
 }
 .search input {
   width: 30vw;

@@ -14,6 +14,7 @@ body {//Body Tag
     position: relative;
     font-size: 1.5vw;
     height: 700vh;
+    margin-left: 1vw;
 }
 
 p {
@@ -55,107 +56,83 @@ table {
     left: 80%;
 }
 
-@media screen and (max-width: 600px) {
-    #navbar a:not(:first-child) {display: none;}
-    #navbar a.icon {
+.topnav {
+overflow: hidden;
+background-color: $headerBackground;
+//Animation
+animation-name: fadeIn;
+animation-duration: 2s;
+animation-fill-mode: forwards;
+
+    a {
+        float: left;
+        display: block;
+        color: $mainFontColor;
+        text-align: center;
+        text-decoration: none;
+        font-size: 2vw;
+        padding-right: 1vw;
+        padding-left: 1vw;
+        padding-top: 1vw;
+        height: 4vw;
+    }
+    a:hover {
+        background-color: $altFontColor;
+        color: $pageBackground;
+      }
+    
+    a.active {
+    background-color: $altFontColor;
+    color: $mainFontColor;
+    }
+    .icon {
+        display: none;
+      }
+}
+
+  @media screen and (max-width: 600px) {
+    .topnav a:not(:first-child) {display: none;}
+    .topnav a.icon {
       float: right;
       display: block;
     }
   }
   
   @media screen and (max-width: 600px) {
-    #navbar.responsive {position: relative;}
-    #navbar.responsive .icon {
+    .topnav.responsive {position: relative;}
+    .topnav.responsive .icon {
       position: absolute;
       right: 0;
       top: 0;
     }
-    #navbar.responsive a {
+    .topnav.responsive a {
       float: none;
       display: block;
       text-align: left;
     }
   }
 
-#navbar{/*This is to position the top row*/
+//CSS for logo
+#logolink{
     position: relative;
-    width: 100%;
-    display: inline-block;
+    padding-left: 0vw;
+    padding-right: 0vw;
+    padding-top: 0vw;
     height: 5vw;
-    background-color: $headerBackground;
-    animation-name: fadeIn;
-    animation-duration: 2s;
-    animation-fill-mode: forwards;
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    position: -webkit-sticky; /* Safari */
-    position: sticky;
-    top: 0;
-    z-index: 9999;
-    .navitem{
-        height: 100%;
-        p{
-            font-size: 2vw;
-            color: $altFontColor;
-            bottom: 0.5vw;
-            position: relative;
-        }
+    float: left;
+    display: block;
+    color: $mainFontColor;
+    text-align: center;
+    text-decoration: none;
+    font-size: 2vw;
+    .logo{/*Set css for logo*/
+        height:5vw;
+        width: 5vw;
     }
-    .navitem:hover{
-        background-color: $altFontColor;
-        p{
-            color: $mainFontColor;
-        }
+    .logo:hover{//CSS for hover logo
+        animation: flashing 1s;
+        animation-iteration-count: infinite;
     }
-    li{
-        float: left;
-        padding-left: 1vw;
-        padding-right: 1vw;
-        height: 100%;
-        a {
-            display: block;
-            color: $altFontColor;
-            text-align: center;
-            text-decoration: none;
-            font-size: x-large;
-          }
-    }
-    .logolink{
-        position: relative;
-        left: -1vw;
-        .logo{/*Set css for logo*/
-            height:5vw;
-            width: 5vw;
-        }
-        .logo:hover{//CSS for hover logo
-            animation: flashing 1s;
-            animation-iteration-count: infinite;
-        }
-    }
-    .loginIcon {
-        display: inline-flex;
-        right: 1%;
-        position: absolute;
-        p {
-            color: $altFontColor;
-            font-size: 2vw;
-        }
-        .accountIcon{//Sets CSS for the account icon/profile picture
-            width: 4vw;
-            height: 4vw;
-            text-align: right;
-            padding-left: 1vw;
-            padding-top: 0.5vw;
-        }
-        
-        .accountIcon:hover {//Hover state for the account icon
-            animation: flashing 1s;
-            animation-iteration-count: infinite;
-        }
-    }
-
 }
 
 #topRight{//CSS for the top right area of the page
@@ -168,7 +145,7 @@ table {
 
 #centerRow{//Sets CSS for center row
     display: inline-block;
-    margin: 10px;
+    margin-left: 2vw;
     overflow-x: hidden;
     scrollbar-color: gray black;
     //Animation
@@ -438,7 +415,7 @@ table {
     text-align: center;
     position: relative;
     background-color: brown;
-    width: 90vw;
+    width: 100%;
     //Style for the youtube video or display picture
     iframe, img {
         width: 50vw;
@@ -469,6 +446,10 @@ table {
     input {//Width of input bar
         width: 30vw;
     }
+    //Animation
+    animation-name: fromLeft;
+    animation-duration: 2s;
+    animation-fill-mode: forwards;
 }
 
 //CSS for the whos online module and latest news module

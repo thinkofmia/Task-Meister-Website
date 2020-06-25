@@ -30,44 +30,47 @@ else $username = "Login";
 
 <!-- Contain the website code which controls the layout-->
 <body>
-    <ul id="navbar">
-        <li><a class = "logolink" href="<?php echo $this->baseurl; ?>/index.php/home"><!-- Set clickable logo-->
-            <img class = "logo"  src="<?php echo $this->baseurl; ?>/templates/<?php echo $this->template; ?>/images/TaskMeisterLogo.JPG" alt="Task Meister Logo" class="logo" />
-        </a></li>
-        <li class="navitem"><a href="<?php echo $this->baseurl; ?>/index.php/choosepreference"><!--Choose Preference-->
-                <p>Preference</p>            
-            </a>
-        </li>
-        <li class="navitem"><a href="<?php echo $this->baseurl; ?>/index.php/chooseclass"><!--Choose Class-->
-                <p>Class</p>            
-            </a>
-        </li>
-        <li class="navitem"><a href="<?php echo $this->baseurl; ?>/index.php/mylist"><!--My List-->
-                <p>List</p>            
-            </a>
-        </li>
-        <li class="navitem"><a href="<?php echo $this->baseurl; ?>/index.php/resources"><!--Subjects-->
-                <p>Subjects</p>            
-            </a>
-        </li>
-        <li class="navitem"><a href="<?php echo $this->baseurl; ?>/index.php/schoollevels"><!--My List-->
-                <p>Levels</p>            
-            </a>
-        </li>
-        <li class="navitem"><a href="<?php echo $this->baseurl; ?>/index.php/interactive-resources"><!--My List-->
-                <p>Archives</p>            
-            </a>
-        </li>
-        <li>
-            
-        </li>
-        <li>
-            <a class= "loginIcon" href="<?php echo $this->baseurl; ?>/index.php/login"><!--User-->
-                <p><?php echo $username; ?></p>
-                <!--<img src="<?php echo $this->baseurl; ?>/templates/<?php echo $this->template; ?>/images/accountIcon.jpg" class = "accountIcon" alt="User Page" title="Click here to go to your user page. "/>-->            
-            </a> 
-        </li>
-    </ul>
+    <div class="topnav" id="myTopnav">
+    <a id = "logolink" href="<?php echo $this->baseurl; ?>/index.php/home"><!-- Set clickable logo-->
+        <img class = "logo"  src="<?php echo $this->baseurl; ?>/templates/<?php echo $this->template; ?>/images/TaskMeisterLogo.JPG" alt="Task Meister Logo" class="logo" />
+    </a>
+    <a href="<?php echo $this->baseurl; ?>/index.php/choosepreference"><!--Choose Preference-->
+        Preference          
+    </a>
+    <a href="<?php echo $this->baseurl; ?>/index.php/chooseclass"><!--Choose Class-->
+        Class            
+    </a>
+    <a href="<?php echo $this->baseurl; ?>/index.php/mylist"><!--My List-->
+        List          
+    </a>
+    <a href="<?php echo $this->baseurl; ?>/index.php/resources"><!--Subjects-->
+        Subjects         
+    </a>
+    <a href="<?php echo $this->baseurl; ?>/index.php/schoollevels"><!--My List-->
+        Levels        
+    </a>
+    <a href="<?php echo $this->baseurl; ?>/index.php/interactive-resources"><!--My List-->
+        Archives      
+    </a>
+    <a href="<?php echo $this->baseurl; ?>/index.php/login"><!--User-->
+        <?php echo $username; ?>
+        <!--<img src="<?php echo $this->baseurl; ?>/templates/<?php echo $this->template; ?>/images/accountIcon.jpg" class = "accountIcon" alt="User Page" title="Click here to go to your user page. "/>-->            
+    </a> 
+    <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+        🍔
+    </a>
+    </div>
+    <script>
+    function myFunction() {
+    var x = document.getElementById("myTopnav");
+    if (x.className === "topnav") {
+        x.className += " responsive";
+    } else {
+        x.className = "topnav";
+    }
+    }
+    </script>
+
     <div id="topRow">
         <jdoc:include type="modules" name="top-left"/><!-- Module Position: 'top-left'-->
         <div class = "columnCenter">
