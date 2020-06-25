@@ -35,7 +35,7 @@ else $username = "Login";
             <img class = "logo"  src="<?php echo $this->baseurl; ?>/templates/<?php echo $this->template; ?>/images/TaskMeisterLogo.JPG" alt="Task Meister Logo" class="logo" />
         </a></li>
         <li class="navitem"><a href="<?php echo $this->baseurl; ?>/index.php/choosepreference"><!--Choose Preference-->
-                <p>Preferences</p>            
+                <p>Preference</p>            
             </a>
         </li>
         <li class="navitem"><a href="<?php echo $this->baseurl; ?>/index.php/chooseclass"><!--Choose Class-->
@@ -43,7 +43,7 @@ else $username = "Login";
             </a>
         </li>
         <li class="navitem"><a href="<?php echo $this->baseurl; ?>/index.php/mylist"><!--My List-->
-                <p>My List</p>            
+                <p>List</p>            
             </a>
         </li>
         <li class="navitem"><a href="<?php echo $this->baseurl; ?>/index.php/resources"><!--Subjects-->
@@ -69,7 +69,7 @@ else $username = "Login";
         <li>
             <a class= "loginIcon" href="<?php echo $this->baseurl; ?>/index.php/login"><!--User-->
                 <p><?php echo $username; ?></p>
-                <img src="<?php echo $this->baseurl; ?>/templates/<?php echo $this->template; ?>/images/accountIcon.jpg" class = "accountIcon" alt="User Page" title="Click here to go to your user page. "/>            
+                <!--<img src="<?php echo $this->baseurl; ?>/templates/<?php echo $this->template; ?>/images/accountIcon.jpg" class = "accountIcon" alt="User Page" title="Click here to go to your user page. "/>-->            
             </a> 
         </li>
     </ul>

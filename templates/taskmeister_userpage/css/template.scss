@@ -447,6 +447,9 @@ table {
 .search {
     font-size: 1.5vw;
     padding-top: 2vw;
+    input {//Width of input bar
+        width: 10vw;
+    }
 }
 
 //CSS for the whos online module and latest news module
