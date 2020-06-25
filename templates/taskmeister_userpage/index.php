@@ -59,12 +59,7 @@ else $username = "Login";
             </a>
         </li>
         <li>
-            <div class="search">
-                <form action="<?php echo $this->baseurl; ?>/index.php/search">
-                    <input type="text" placeholder="Search.." name="keyword" value = "<?php echo $_REQUEST["keyword"]; ?>">
-                    <button type="queryKeyword">🔍</button>
-                </form>
-            </div>
+            
         </li>
         <li>
             <a class= "loginIcon" href="<?php echo $this->baseurl; ?>/index.php/login"><!--User-->
@@ -83,6 +78,12 @@ else $username = "Login";
         </div>
     </div>
     <div id="centerRow">
+        <div class="search">
+            <form action="<?php echo $this->baseurl; ?>/index.php/search">
+                <input type="text" placeholder="Search.." name="keyword" value = "<?php echo $_REQUEST["keyword"]; ?>">
+                <button type="queryKeyword">🔍</button>
+            </form>
+        </div><br>
         <div class="left">
             <jdoc:include type="modules" name="center-left"/><!-- Module Position: 'center-left'-->
         </div>
@@ -91,7 +92,7 @@ else $username = "Login";
         </div>
         <jdoc:include type="modules" name="center-right"/><!-- Module Position: 'center-right'-->
     </div>
-    <div id="bottomRow">
+    <div id="footer"><!--Unused-->
         <jdoc:include type="modules" name="bottom-left"/><!-- Module Position: 'bottom-left'-->
         <div class="center">
             <jdoc:include type="modules" name="bottom"/><!-- Module Position: 'bottom'-->

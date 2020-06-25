@@ -7,8 +7,8 @@ body {
   overflow-x: hidden;
   display: inline-block;
   position: relative;
-  height: auto;
   font-size: 1.5vw;
+  height: 700vh;
 }
 
 p {
@@ -37,7 +37,7 @@ table th, table td {
 */
 .columnCenter, #bottomRow .center, #centerRow .center {
   left: 30%;
-  position: absolute;
+  position: relative;
   width: 33%;
   text-align: center;
 }
@@ -50,6 +50,33 @@ table th, table td {
   left: 80%;
 }
 
+@media screen and (max-width: 600px) {
+  #navbar a:not(:first-child) {
+    display: none;
+  }
+
+  #navbar a.icon {
+    float: right;
+    display: block;
+  }
+}
+@media screen and (max-width: 600px) {
+  #navbar.responsive {
+    position: relative;
+  }
+
+  #navbar.responsive .icon {
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+
+  #navbar.responsive a {
+    float: none;
+    display: block;
+    text-align: left;
+  }
+}
 #navbar {
   /*This is to position the top row*/
   position: relative;
@@ -140,12 +167,9 @@ table th, table td {
 }
 
 #centerRow {
-  position: relative;
-  width: 95%;
   display: inline-block;
   margin: 10px;
   overflow-x: hidden;
-  height: 500vh;
   scrollbar-color: gray black;
   animation-name: fromLeft;
   animation-duration: 3s;
@@ -407,11 +431,11 @@ table th, table td {
 }
 
 .search {
-  font-size: 1.5vw;
+  font-size: 2vw;
   padding-top: 2vw;
 }
 .search input {
-  width: 10vw;
+  width: 30vw;
 }
 
 .latestnews, .whosonline li {
