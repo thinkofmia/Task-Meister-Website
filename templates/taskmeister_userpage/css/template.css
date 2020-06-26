@@ -434,7 +434,7 @@ table th, table td {
   font-size: 1vw;
 }
 
-#allClassStatsTable, .yourClassStatsTable {
+#allClassStatsTable, .yourClassStatsTable, .yellowtable {
   left: -20vw;
   position: relative;
   background: green;
@@ -442,8 +442,13 @@ table th, table td {
   border-collapse: collapse;
   width: 70vw;
 }
-#allClassStatsTable tr, .yourClassStatsTable tr, #allClassStatsTable th, .yourClassStatsTable th, #allClassStatsTable td, .yourClassStatsTable td {
+#allClassStatsTable tr, .yourClassStatsTable tr, .yellowtable tr, #allClassStatsTable th, .yourClassStatsTable th, .yellowtable th, #allClassStatsTable td, .yourClassStatsTable td, .yellowtable td {
   border: 2px solid white;
+}
+
+.yellowtable {
+  background: red;
+  left: 2vw;
 }
 
 .charts {

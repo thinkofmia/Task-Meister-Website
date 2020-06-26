@@ -479,6 +479,14 @@ z-index: 9999;
     }
 }
 
+//Recommendation Records Mod
+.yellowtable{
+    @extend #allClassStatsTable;
+    background: red;
+    left: 2vw;
+
+}
+
 //Your Class Stats Mod
 .charts{//CSS for the google chart display
     display: inline-block;
