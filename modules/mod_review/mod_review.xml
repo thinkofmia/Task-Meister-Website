@@ -3,9 +3,9 @@
   <name>MOD_REVIEW</name>
   <author>Tan Lim Chai Seng</author>
   <creationDate>June 2020</creationDate>
-  <license>GNU General Public License version 2 or later; see LICENSE.txt</license>
+  <license>GNU General Public License version 3 or later; see LICENSE.txt</license>
   <authorEmail>tanlimcs@gmail.com</authorEmail>
-  <version>1.0.0</version>
+  <version>1.0.1</version>
   <description>MOD_REVIEW_DESCRIPTION</description>
   
   <files>
@@ -13,6 +13,9 @@
     <filename>helper.php</filename>
     <filename>tmpl/default.php</filename>
     <filename>tmpl/index.html</filename>
+    <filename>js/star-rating.js</filename>
+    <filename>css/star-rating.css</filename>
+    <filename>models/fields/rating.php</filename>
     <filename>models/forms/add_review.xml</filename>
 		<folder>language</folder>
   </files>
