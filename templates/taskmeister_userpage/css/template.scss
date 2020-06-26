@@ -149,6 +149,7 @@ z-index: 9999;
 }
 #topRow{
     margin-top: 30px; /* Add a top margin to avoid content overlay */
+    margin-bottom: 30px; /*Add margin to avoid content overlay*/
 }
 #centerRow{//Sets CSS for center row
     display: inline-block;
@@ -450,6 +451,7 @@ z-index: 9999;
 .search {
     font-size: 2vw;
     padding-top: 2vw;
+    float: right;
     input {//Width of input bar
         width: 30vw;
     }

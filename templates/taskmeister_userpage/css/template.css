@@ -150,6 +150,8 @@ table th, table td {
 #topRow {
   margin-top: 30px;
   /* Add a top margin to avoid content overlay */
+  margin-bottom: 30px;
+  /*Add margin to avoid content overlay*/
 }
 
 #centerRow {
@@ -419,6 +421,7 @@ table th, table td {
 .search {
   font-size: 2vw;
   padding-top: 2vw;
+  float: right;
   animation-name: fromLeft;
   animation-duration: 2s;
   animation-fill-mode: forwards;
