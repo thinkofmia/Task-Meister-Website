@@ -60,8 +60,14 @@ foreach ($results as $row) {
         $row['es_aid'] refers to the article ID
         $row['es_action'] refers to the action done
 */
+    $user = JFactory::getUser(intval($row['es_uid']));
+    $username = $user->name;
+    $article =& JTable::getInstance("content");
+    $article->load(intval($row['es_aid']));
+    $articleTitle= $article->get("title");
+
     echo "<tr><td>" . $row['es_date'] . "</td>";
-    echo "<td>" . $row['es_uid']." does ". $row['es_action']. " on " .$row['es_aid']. "</td></tr>";
+    echo "<td> User " . $username ." ". $row['es_action']. " article " .$articleTitle. "</td></tr>";
     $counter = $counter + 1;
     }
 }

@@ -154,6 +154,23 @@ function updateUserDB($userID,$likedList,$dislikedList){
     $result = JFactory::getDbo()->updateObject('#__customtables_table_userstats', $userInfo, 'es_userid');
 }
 
+function updateRecommendationRecordsDB($userID,$articleID,$action){
+    /**
+     * Function: Update recommendation database with the user's action on an article
+     * Parameter $userID: Refers to the current user id
+     * Parameter $articleID: Refers to the current article id
+     * Parameter $action: Refers to the user's action
+     */
+    // Create and populate an object.
+    $record = new stdClass();
+    $record->es_uid = $userID;
+    $record->es_aid=$articleID;
+    $record->es_action=$action;
+    $record->es_date=date("Y-m-d");
+    // Insert the object into the user profile table.
+    $result = JFactory::getDbo()->insertObject('#__customtables_table_recommendationstats', $record);
+    }
+
 function setThumbsDown($userID,$articleID,$userchoice,$userLikedList,$userDislikedList){
     /**
      * Function: Gives thumbs down of an article
@@ -200,6 +217,7 @@ function setThumbsDown($userID,$articleID,$userchoice,$userLikedList,$userDislik
     if (empty($userDislikedList)){//If the user's dislike list is empty
         $userDislikedList = array($articleID);//Add the article into the user dislike list as a new array
         $userLikedList = disableSwitch($userLikedList,$articleID);//Update the liked list
+        updateRecommendationRecordsDB($userID,$articleID,"disliked");
     }
     else if (in_array($articleID,$userDislikedList)){//If user has already disliked the article
         $userDislikedList = disableSwitch($userDislikedList,$articleID);//Remove from disliked list
@@ -207,6 +225,7 @@ function setThumbsDown($userID,$articleID,$userchoice,$userLikedList,$userDislik
     else {
         $userDislikedList[] = $articleID;//Update disliked list
         $userLikedList = disableSwitch($userLikedList,$articleID);//Update liked list as well
+        updateRecommendationRecordsDB($userID,$articleID,"disliked");
     }
     updateUserDB($userID,$userLikedList,$userDislikedList);//Update the external user database
     }
@@ -258,6 +277,7 @@ function setThumbsUp($userID,$articleID,$userchoice,$userLikedList,$userDisliked
     if (empty($userLikedList)){//If the liked list is empty
         $userLikedList = array($articleID);//Create a new array with the article id inside
         $userDislikedList = disableSwitch($userDislikedList,$articleID);//Update disliked list as well
+        updateRecommendationRecordsDB($userID,$articleID,"liked");
     }
     else if (in_array($articleID,$userLikedList)){//If the article already exists in the liked list
         $userLikedList = disableSwitch($userLikedList,$articleID);//Remove from liked list
@@ -265,6 +285,7 @@ function setThumbsUp($userID,$articleID,$userchoice,$userLikedList,$userDisliked
     else {
         $userLikedList[] = $articleID;//Update liked list
         $userDislikedList = disableSwitch($userDislikedList,$articleID);//Update disliked list as well
+        updateRecommendationRecordsDB($userID,$articleID,"liked");
     }    
     updateUserDB($userID,$userLikedList,$userDislikedList);//Update to the database for the external user stats table
     }
