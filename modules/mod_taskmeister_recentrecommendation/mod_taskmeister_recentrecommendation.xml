@@ -33,6 +33,16 @@
 					cols="30"
 					rows="1"
 				/>
+                <field
+					name="size"
+					type="integer"
+					default="20"
+					label="Size of Records"
+					description="Set the size of records to display here. "
+					first="1"
+					step="1"
+                    last="100"
+				/>
             </fieldset>
         </fields>
     </config>

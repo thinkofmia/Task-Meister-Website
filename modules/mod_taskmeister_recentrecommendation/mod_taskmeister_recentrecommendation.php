@@ -20,6 +20,7 @@ require_once dirname(__FILE__) . '/helper.php';//used because our helper functio
 
 $displayHeader = modRecentRecommend::getHeader($params);//set variable of header using helper class
 $displayText = modRecentRecommend::getText($params);//set variable of text using helper class
+$size = $params->get('size');
 require JModuleHelper::getLayoutPath('mod_taskmeister_recentrecommendation');//call out default.php display
 
 //Database code
@@ -49,19 +50,22 @@ echo "
     <th>Action</th>
 </tr>";
 
+$counter = 0;//Initialize counter
 foreach ($results as $row) {
+    if ($counter<$size){
 /*
     Display rows based on main database result
-        $row['id'] refers to the recommendation id
-        $row['title'] refers to the article title
-        $row['catid'] refers to the article category
-        $row['hits'] refers to the article hits
-        $row['featured'] refers whether the article is featured or not
+        $row['date'] refers to the record date
+        $row['es_uid'] refers to the User ID
+        $row['es_aid'] refers to the article ID
+        $row['es_action'] refers to the action done
 */
-    echo "<tr><td>" . $row['es_date'] . "</td>" . 
-    "<td>" . $row['es_uid']." does ". $row['es_action']. " on " .$row['es_aid']. "</td></tr></table>";
+    echo "<tr><td>" . $row['es_date'] . "</td>";
+    echo "<td>" . $row['es_uid']." does ". $row['es_action']. " on " .$row['es_aid']. "</td></tr>";
+    $counter = $counter + 1;
+    }
 }
-
+echo "</table>";
 }
 
 else{//If no recent recommendationa actions
