@@ -12,6 +12,12 @@
 // no direct access
 defined('_JEXEC') or die;
 
+use Joomla\CMS\Factory;
+$document = Factory::getDocument();
+$document->addStyleSheet('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css');
+$document->addStyleSheet(JUri::base() . 'modules/mod_review/css/star-rating.css');
+$document->addScript(JUri::base() . 'modules/mod_review/js/star-rating.js');
+//JForm::addFieldPath(__DIR__.'/../models/fields');
 // This file collects the data collected by mod_review.php and generates the HTML to be displayed
 ?>
 
@@ -58,8 +64,8 @@ defined('_JEXEC') or die;
     <section style="background-color: #191919; margin-left: -2.2%; margin-right: -2.2%; padding: 100px;">
         <?php $form = JForm::getInstance('add_review', __DIR__.'/../models/forms/add_review.xml'); ?>
         <div class="text-center">
-            <form style="color: white; display: inline-block; margin: 0 auto;" action="" method="POST" name="submit_review" id="submit_review">
-                <div class="form-horizontal">
+            <form style="color: white; width:50vw; margin: 0 auto;" action="" method="POST" name="submit_review" id="submit_review">
+                <div class="form-vertical">
                     <fieldset class="submit_review">
                         <h1 style="color: #ffc03a; text-align: center; text-transform: uppercase;">
                             <?php if(ModReviewHelper::setForm($form))
