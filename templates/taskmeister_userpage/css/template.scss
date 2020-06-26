@@ -63,6 +63,15 @@ background-color: $headerBackground;
 animation-name: fadeIn;
 animation-duration: 2s;
 animation-fill-mode: forwards;
+//Sticky
+position: fixed; /* Set the navbar to fixed position */
+top: 0; /* Position the navbar at the top of the page */
+width: 100%; /* Full width */
+z-index: 9999;
+
+    #loginNav{
+        float: right;
+    }
 
     a {
         float: left;
@@ -70,7 +79,7 @@ animation-fill-mode: forwards;
         color: $mainFontColor;
         text-align: center;
         text-decoration: none;
-        font-size: 2vw;
+        font-size: 2.5vw;
         padding-right: 1vw;
         padding-left: 1vw;
         padding-top: 1vw;
@@ -142,7 +151,9 @@ animation-fill-mode: forwards;
     display: inline-flex;
     
 }
-
+#topRow{
+    margin-top: 30px; /* Add a top margin to avoid content overlay */
+}
 #centerRow{//Sets CSS for center row
     display: inline-block;
     margin-left: 2vw;

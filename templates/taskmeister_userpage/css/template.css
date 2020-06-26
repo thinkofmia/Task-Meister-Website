@@ -57,6 +57,16 @@ table th, table td {
   animation-name: fadeIn;
   animation-duration: 2s;
   animation-fill-mode: forwards;
+  position: fixed;
+  /* Set the navbar to fixed position */
+  top: 0;
+  /* Position the navbar at the top of the page */
+  width: 100%;
+  /* Full width */
+  z-index: 9999;
+}
+.topnav #loginNav {
+  float: right;
 }
 .topnav a {
   float: left;
@@ -64,7 +74,7 @@ table th, table td {
   color: white;
   text-align: center;
   text-decoration: none;
-  font-size: 2vw;
+  font-size: 2.5vw;
   padding-right: 1vw;
   padding-left: 1vw;
   padding-top: 1vw;
@@ -137,6 +147,11 @@ table th, table td {
   right: 0%;
   text-align: right;
   display: inline-flex;
+}
+
+#topRow {
+  margin-top: 30px;
+  /* Add a top margin to avoid content overlay */
 }
 
 #centerRow {

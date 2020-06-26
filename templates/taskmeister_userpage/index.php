@@ -27,6 +27,7 @@ else $username = "Login";
 
 <!-- Contain the information about the document-->
 <head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <!-- Puts the correct header information in (eg. page title, meta information, JavaScript)-->
 <jdoc:include type="head" />
 <!-- Creates links to two system style sheets and to our style sheet-->
@@ -41,6 +42,14 @@ else $username = "Login";
     <div class="topnav" id="myTopnav">
     <a id = "logolink" href="<?php echo $this->baseurl; ?>/index.php/home"><!-- Set clickable logo-->
         <img class = "logo"  src="<?php echo $this->baseurl; ?>/templates/<?php echo $this->template; ?>/images/TaskMeisterLogo.JPG" alt="Task Meister Logo" class="logo" />
+    </a>
+    <!--Home-->
+    <?php if($urlPath==$this->baseurl."/index.php/home") : ?>
+        <a class="active" href="<?php echo $this->baseurl; ?>/index.php/home">
+    <?php else: ?>
+        <a href="<?php echo $this->baseurl; ?>/index.php/home">
+    <?php endif; ?>
+        Home          
     </a>
     <!--Choose Preference-->
     <?php if($urlPath==$this->baseurl."/index.php/choosepreference") : ?>
@@ -92,9 +101,9 @@ else $username = "Login";
     </a>
     <!--User-->
     <?php if($urlPath==$this->baseurl."/index.php/login") : ?>
-        <a class="active" href="<?php echo $this->baseurl; ?>/index.php/login">
+        <a class="active" id="loginNav" href="<?php echo $this->baseurl; ?>/index.php/login">
     <?php else: ?>
-    <a href="<?php echo $this->baseurl; ?>/index.php/login">
+    <a id="loginNav" href="<?php echo $this->baseurl; ?>/index.php/login">
     <?php endif; ?>
         <?php echo $username; ?>  
     </a> 
