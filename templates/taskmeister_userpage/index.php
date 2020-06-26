@@ -3,9 +3,17 @@
 
 //Database code
 use Joomla\CMS\Factory;
+use Joomla\CMS\Uri\Uri;
+
 //Set database variable
 $db = Factory::getDbo();
 $me = Factory::getUser();
+
+//Set URL var
+$uri = Uri::getInstance();
+$urlPath = $uri->getPath();
+//$uri->getScheme() . ", Host: " . $uri->getHost() . " , Path: " . $uri->getPath() . "<br>";
+//Set Userid and username
 $userID = $me->id;
 $user = JFactory::getUser($userID);
 if (isset($user->name))$username = $user->name;
@@ -19,6 +27,7 @@ else $username = "Login";
 
 <!-- Contain the information about the document-->
 <head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <!-- Puts the correct header information in (eg. page title, meta information, JavaScript)-->
 <jdoc:include type="head" />
 <!-- Creates links to two system style sheets and to our style sheet-->
@@ -30,49 +39,90 @@ else $username = "Login";
 
 <!-- Contain the website code which controls the layout-->
 <body>
-    <ul id="navbar">
-        <li><a class = "logolink" href="<?php echo $this->baseurl; ?>/index.php/home"><!-- Set clickable logo-->
-            <img class = "logo"  src="<?php echo $this->baseurl; ?>/templates/<?php echo $this->template; ?>/images/TaskMeisterLogo.JPG" alt="Task Meister Logo" class="logo" />
-        </a></li>
-        <li class="navitem"><a href="<?php echo $this->baseurl; ?>/index.php/choosepreference"><!--Choose Preference-->
-                <p>Preferences</p>            
-            </a>
-        </li>
-        <li class="navitem"><a href="<?php echo $this->baseurl; ?>/index.php/chooseclass"><!--Choose Class-->
-                <p>Class</p>            
-            </a>
-        </li>
-        <li class="navitem"><a href="<?php echo $this->baseurl; ?>/index.php/mylist"><!--My List-->
-                <p>My List</p>            
-            </a>
-        </li>
-        <li class="navitem"><a href="<?php echo $this->baseurl; ?>/index.php/resources"><!--Subjects-->
-                <p>Subjects</p>            
-            </a>
-        </li>
-        <li class="navitem"><a href="<?php echo $this->baseurl; ?>/index.php/schoollevels"><!--My List-->
-                <p>Levels</p>            
-            </a>
-        </li>
-        <li class="navitem"><a href="<?php echo $this->baseurl; ?>/index.php/interactive-resources"><!--My List-->
-                <p>Archives</p>            
-            </a>
-        </li>
-        <li>
-            <div class="search">
-                <form action="<?php echo $this->baseurl; ?>/index.php/search">
-                    <input type="text" placeholder="Search.." name="keyword" value = "<?php echo $_REQUEST["keyword"]; ?>">
-                    <button type="queryKeyword">🔍</button>
-                </form>
-            </div>
-        </li>
-        <li>
-            <a class= "loginIcon" href="<?php echo $this->baseurl; ?>/index.php/login"><!--User-->
-                <p><?php echo $username; ?></p>
-                <img src="<?php echo $this->baseurl; ?>/templates/<?php echo $this->template; ?>/images/accountIcon.jpg" class = "accountIcon" alt="User Page" title="Click here to go to your user page. "/>            
-            </a> 
-        </li>
-    </ul>
+    <div class="topnav" id="myTopnav">
+    <a id = "logolink" href="<?php echo $this->baseurl; ?>/index.php/home"><!-- Set clickable logo-->
+        <img class = "logo"  src="<?php echo $this->baseurl; ?>/templates/<?php echo $this->template; ?>/images/TaskMeisterLogo.JPG" alt="Task Meister Logo" class="logo" />
+    </a>
+    <!--Home-->
+    <?php if($urlPath==$this->baseurl."/index.php/home") : ?>
+        <a class="active" href="<?php echo $this->baseurl; ?>/index.php/home">
+    <?php else: ?>
+        <a href="<?php echo $this->baseurl; ?>/index.php/home">
+    <?php endif; ?>
+        Home          
+    </a>
+    <!--Choose Preference-->
+    <?php if($urlPath==$this->baseurl."/index.php/choosepreference") : ?>
+        <a class="active" href="<?php echo $this->baseurl; ?>/index.php/choosepreference">
+    <?php else: ?>
+        <a href="<?php echo $this->baseurl; ?>/index.php/choosepreference">
+    <?php endif; ?>
+        Preference          
+    </a>
+    <!--Choose Class-->
+    <?php if($urlPath==$this->baseurl."/index.php/chooseclass") : ?>
+        <a class="active" href="<?php echo $this->baseurl; ?>/index.php/chooseclass">
+    <?php else: ?>
+    <a href="<?php echo $this->baseurl; ?>/index.php/chooseclass">
+    <?php endif; ?>
+        Class            
+    </a>
+    <!--My List-->
+    <?php if($urlPath==$this->baseurl."/index.php/mylist") : ?>
+        <a class="active" href="<?php echo $this->baseurl; ?>/index.php/mylist">
+    <?php else: ?>
+    <a href="<?php echo $this->baseurl; ?>/index.php/mylist">
+    <?php endif; ?>
+        List          
+    </a>
+    <!--Subjects-->
+    <?php if($urlPath==$this->baseurl."/index.php/resources") : ?>
+        <a class="active" href="<?php echo $this->baseurl; ?>/index.php/resources">
+    <?php else: ?>
+    <a href="<?php echo $this->baseurl; ?>/index.php/resources">
+    <?php endif; ?>
+        Subjects         
+    </a>
+    <!--My List-->
+    <?php if($urlPath==$this->baseurl."/index.php/schoollevels") : ?>
+        <a class="active" href="<?php echo $this->baseurl; ?>/index.php/schoollevels">
+    <?php else: ?>
+    <a href="<?php echo $this->baseurl; ?>/index.php/schoollevels">
+    <?php endif; ?>
+        Levels        
+    </a>
+    <!--Archives-->
+    <?php if($urlPath==$this->baseurl."/index.php/interactive-resources") : ?>
+        <a class="active" href="<?php echo $this->baseurl; ?>/index.php/interactive-resources">
+    <?php else: ?>
+    <a href="<?php echo $this->baseurl; ?>/index.php/interactive-resources">
+    <?php endif; ?>
+        Archives      
+    </a>
+    <!--User-->
+    <?php if($urlPath==$this->baseurl."/index.php/login") : ?>
+        <a class="active" id="loginNav" href="<?php echo $this->baseurl; ?>/index.php/login">
+    <?php else: ?>
+    <a id="loginNav" href="<?php echo $this->baseurl; ?>/index.php/login">
+    <?php endif; ?>
+        <?php echo $username; ?>  
+    </a> 
+    <a href="javascript:void(0);" class="icon" onclick="hamburgerMenu();">
+        🍔
+    </a>
+    </div>
+    <script>
+    //Script for hamburger
+    function hamburgerMenu() {
+    var x = document.getElementById("myTopnav");
+    if (x.className === "topnav") {
+        x.className += " responsive";
+    } else {
+        x.className = "topnav";
+    }
+    }
+    </script>
+
     <div id="topRow">
         <jdoc:include type="modules" name="top-left"/><!-- Module Position: 'top-left'-->
         <div class = "columnCenter">
@@ -91,7 +141,7 @@ else $username = "Login";
         </div>
         <jdoc:include type="modules" name="center-right"/><!-- Module Position: 'center-right'-->
     </div>
-    <div id="bottomRow">
+    <div id="footer"><!--Unused-->
         <jdoc:include type="modules" name="bottom-left"/><!-- Module Position: 'bottom-left'-->
         <div class="center">
             <jdoc:include type="modules" name="bottom"/><!-- Module Position: 'bottom'-->

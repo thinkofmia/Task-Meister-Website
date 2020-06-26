@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <extension version="2.5" type="template">
-	<name>Task Meister Template - User Page</name>
+	<name>Task Meister Template</name>
 	<creationDate>2020-03-20</creationDate>
 	<author>Fremont Teng</author>
 	<authorEmail>fremontteng@gmail.com</authorEmail>
 	<authorUrl>https://github.com/FremontTeng</authorUrl>
 	<copyright>Task Meister 2020</copyright>
 	<license>GNU/GPL</license>
-	<version>1.0.0</version>
-	<description>User page template for Task Meister. By Fremont Teng</description>
+	<version>1.1.0</version>
+	<description>Template for Task Meister. By Fremont Teng</description>
 	<files>
 		<filename>index.php</filename>
 		<filename>templateDetails.xml</filename>
