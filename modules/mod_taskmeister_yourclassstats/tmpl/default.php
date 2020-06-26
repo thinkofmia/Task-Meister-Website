@@ -49,7 +49,7 @@ function drawDislikedChart() {
   // Optional; add a title and set the width and height of the chart
   var options = {'title':'Your Class Disliked Preferences',
                 pieHole: 0.2,
-                'width': '45vw', 'height': '45vw'};
+                'width': '20vw', 'height': '20vh'};
 
   // Display the chart inside the <div> element with id="piechart"
   var chart = new google.visualization.PieChart(document.getElementById('dislikedchart'));

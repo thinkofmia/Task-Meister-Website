@@ -8,7 +8,7 @@ body {
   display: inline-block;
   position: relative;
   font-size: 1.5vw;
-  height: 700vh;
+  height: 100%;
   margin-left: 1vw;
 }
 
@@ -61,7 +61,7 @@ table th, table td {
   /* Set the navbar to fixed position */
   top: 0;
   /* Position the navbar at the top of the page */
-  width: 100%;
+  width: 100vw;
   /* Full width */
   z-index: 9999;
 }
@@ -447,9 +447,9 @@ table th, table td {
 }
 
 .charts {
-  display: inline-flex;
+  display: inline-block;
   position: relative;
-  left: -20vw;
+  left: -25vw;
 }
 
 .yourClassStatsTable {

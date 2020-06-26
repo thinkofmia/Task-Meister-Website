@@ -13,7 +13,7 @@ body {//Body Tag
     display: inline-block;
     position: relative;
     font-size: 1.5vw;
-    height: 700vh;
+    height: 100%;
     margin-left: 1vw;
 }
 
@@ -66,7 +66,7 @@ animation-fill-mode: forwards;
 //Sticky
 position: fixed; /* Set the navbar to fixed position */
 top: 0; /* Position the navbar at the top of the page */
-width: 100%; /* Full width */
+width: 100vw; /* Full width */
 z-index: 9999;
     a {
         float: left;
@@ -481,9 +481,9 @@ z-index: 9999;
 
 //Your Class Stats Mod
 .charts{//CSS for the google chart display
-    display: inline-flex;
+    display: inline-block;
     position: relative;
-    left: -20vw;
+    left: -25vw;
 }
 
 .yourClassStatsTable{//CSS for the table
