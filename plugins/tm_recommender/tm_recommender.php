@@ -459,7 +459,8 @@ class plgTaskMeisterTM_recommender extends JPlugin
                     $keyword = " ".$parameter1." ";
                     $counter = 0; //Counter to find str searches
                     //Based on number of times searched, add to counter
-                    if (stristr($row['es_title'], $keyword)) $counter = $counter + 40;
+                    if (stristr($row['es_title'], $keyword)) $counter = $counter + 40;//Exact Keyword
+                    if (stristr($row['es_title'], $parameter1)) $counter = $counter + 1;//Substring
                     foreach($articleTags as $row_tag){
                         if (stristr($row_tag, $keyword)) $counter = $counter + 2;
                     }
