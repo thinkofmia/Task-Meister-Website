@@ -85,14 +85,29 @@ if ($dataNotExist){
 
 }
 
-
-
 //If clicked on the deployment button
 if(isset($_POST["dButton"])){
     //Run setDeployed()
     setDeployed($userID,$articleID,$deployedList,$deployedList_user);
     header("refresh: 0;");
 }
+
+function updateDeployed($userID,$articleID){
+    /**
+     * Function: Update recommendation database with the user's action on an article
+     * Parameter $userID: Refers to the current user id
+     * Parameter $articleID: Refers to the current article id
+     * Parameter $action: Refers to the user's action
+     */
+    // Create and populate an object.
+    $record = new stdClass();
+    $record->es_uid = $userID;
+    $record->es_aid=$articleID;
+    $record->es_action="deployed";
+    $record->es_date=date("Y-m-d");
+    // Insert the object into the user profile table.
+    $result = JFactory::getDbo()->insertObject('#__customtables_table_recommendationstats', $record);
+    }
 
 function setDeployed($userID,$articleID,$list,$deployedList_user){
     /**
@@ -134,6 +149,7 @@ function setDeployed($userID,$articleID,$list,$deployedList_user){
         //Check if user's deployment list is empty
         if (empty($deployedList_user)){//If user's deployment list is really empty
             $deployedList_user = array($articleID);//Create a new array with the article id inside the user's deployment list
+            updateDeployed($userID,$articleID);
         }
         //Else if the article id already exists in the user's deployment list,
         else if (in_array($articleID,$deployedList_user)){
@@ -143,6 +159,7 @@ function setDeployed($userID,$articleID,$list,$deployedList_user){
         //Else just push the article id into the user's deployment list
         else {
             $deployedList_user[] = $articleID;
+            updateDeployed($userID,$articleID);
         }
         //Save the new user deployment list as a string
         $array_string2=json_encode($deployedList_user);
