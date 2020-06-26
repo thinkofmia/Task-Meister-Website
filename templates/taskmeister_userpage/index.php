@@ -3,9 +3,17 @@
 
 //Database code
 use Joomla\CMS\Factory;
+use Joomla\CMS\Uri\Uri;
+
 //Set database variable
 $db = Factory::getDbo();
 $me = Factory::getUser();
+
+//Set URL var
+$uri = Uri::getInstance();
+$urlPath = $uri->getPath();
+//$uri->getScheme() . ", Host: " . $uri->getHost() . " , Path: " . $uri->getPath() . "<br>";
+//Set Userid and username
 $userID = $me->id;
 $user = JFactory::getUser($userID);
 if (isset($user->name))$username = $user->name;
@@ -34,34 +42,69 @@ else $username = "Login";
     <a id = "logolink" href="<?php echo $this->baseurl; ?>/index.php/home"><!-- Set clickable logo-->
         <img class = "logo"  src="<?php echo $this->baseurl; ?>/templates/<?php echo $this->template; ?>/images/TaskMeisterLogo.JPG" alt="Task Meister Logo" class="logo" />
     </a>
-    <a href="<?php echo $this->baseurl; ?>/index.php/choosepreference"><!--Choose Preference-->
+    <!--Choose Preference-->
+    <?php if($urlPath==$this->baseurl."/index.php/choosepreference") : ?>
+        <a class="active" href="<?php echo $this->baseurl; ?>/index.php/choosepreference">
+    <?php else: ?>
+        <a href="<?php echo $this->baseurl; ?>/index.php/choosepreference">
+    <?php endif; ?>
         Preference          
     </a>
-    <a href="<?php echo $this->baseurl; ?>/index.php/chooseclass"><!--Choose Class-->
+    <!--Choose Class-->
+    <?php if($urlPath==$this->baseurl."/index.php/chooseclass") : ?>
+        <a class="active" href="<?php echo $this->baseurl; ?>/index.php/chooseclass">
+    <?php else: ?>
+    <a href="<?php echo $this->baseurl; ?>/index.php/chooseclass">
+    <?php endif; ?>
         Class            
     </a>
-    <a href="<?php echo $this->baseurl; ?>/index.php/mylist"><!--My List-->
+    <!--My List-->
+    <?php if($urlPath==$this->baseurl."/index.php/mylist") : ?>
+        <a class="active" href="<?php echo $this->baseurl; ?>/index.php/mylist">
+    <?php else: ?>
+    <a href="<?php echo $this->baseurl; ?>/index.php/mylist">
+    <?php endif; ?>
         List          
     </a>
-    <a href="<?php echo $this->baseurl; ?>/index.php/resources"><!--Subjects-->
+    <!--Subjects-->
+    <?php if($urlPath==$this->baseurl."/index.php/resources") : ?>
+        <a class="active" href="<?php echo $this->baseurl; ?>/index.php/resources">
+    <?php else: ?>
+    <a href="<?php echo $this->baseurl; ?>/index.php/resources">
+    <?php endif; ?>
         Subjects         
     </a>
-    <a href="<?php echo $this->baseurl; ?>/index.php/schoollevels"><!--My List-->
+    <!--My List-->
+    <?php if($urlPath==$this->baseurl."/index.php/schoollevels") : ?>
+        <a class="active" href="<?php echo $this->baseurl; ?>/index.php/schoollevels">
+    <?php else: ?>
+    <a href="<?php echo $this->baseurl; ?>/index.php/schoollevels">
+    <?php endif; ?>
         Levels        
     </a>
-    <a href="<?php echo $this->baseurl; ?>/index.php/interactive-resources"><!--My List-->
+    <!--Archives-->
+    <?php if($urlPath==$this->baseurl."/index.php/interactive-resources") : ?>
+        <a class="active" href="<?php echo $this->baseurl; ?>/index.php/interactive-resources">
+    <?php else: ?>
+    <a href="<?php echo $this->baseurl; ?>/index.php/interactive-resources">
+    <?php endif; ?>
         Archives      
     </a>
-    <a href="<?php echo $this->baseurl; ?>/index.php/login"><!--User-->
-        <?php echo $username; ?>
-        <!--<img src="<?php echo $this->baseurl; ?>/templates/<?php echo $this->template; ?>/images/accountIcon.jpg" class = "accountIcon" alt="User Page" title="Click here to go to your user page. "/>-->            
+    <!--User-->
+    <?php if($urlPath==$this->baseurl."/index.php/login") : ?>
+        <a class="active" href="<?php echo $this->baseurl; ?>/index.php/login">
+    <?php else: ?>
+    <a href="<?php echo $this->baseurl; ?>/index.php/login">
+    <?php endif; ?>
+        <?php echo $username; ?>  
     </a> 
-    <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+    <a href="javascript:void(0);" class="icon" onclick="hamburgerMenu();">
         🍔
     </a>
     </div>
     <script>
-    function myFunction() {
+    //Script for hamburger
+    function hamburgerMenu() {
     var x = document.getElementById("myTopnav");
     if (x.className === "topnav") {
         x.className += " responsive";
