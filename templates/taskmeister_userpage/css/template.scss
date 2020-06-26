@@ -68,11 +68,6 @@ position: fixed; /* Set the navbar to fixed position */
 top: 0; /* Position the navbar at the top of the page */
 width: 100%; /* Full width */
 z-index: 9999;
-
-    #loginNav{
-        float: right;
-    }
-
     a {
         float: left;
         display: block;
@@ -104,6 +99,7 @@ z-index: 9999;
     .topnav a.icon {
       float: right;
       display: block;
+      padding-right:3vw;
     }
   }
   
