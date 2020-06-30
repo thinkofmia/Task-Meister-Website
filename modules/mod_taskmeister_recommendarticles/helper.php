@@ -109,6 +109,9 @@ class ModRecommendArticlesHelper
             case 'choice_selectedTag'://If mode selected to be articles of a particular tag
                 $results = $dispatcher->trigger( 'recommendPersonalArticles', array("Selected Tag",$noOfArticles,$userid,$selectedTag));
                 break;
+            case 'choice_trending'://If mode selected to be the top trending articles
+                $results = $dispatcher->trigger( 'recommendTrendingArticles', array($noOfArticles,$userid,$keyword));
+                break;
             default:
                 $results = array("Not implemented yet. Please select another filter. ");
                 break;
