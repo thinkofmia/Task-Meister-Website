@@ -320,6 +320,11 @@ class plgTaskMeisterTM_recommender extends JPlugin
     */
     function recommendTrendingArticles($noOfArticles, $userid, $parameter1){
         $db = Factory::getDbo();//Gets database
+        //Set Additional Filter Mode if has keyword
+        if (strlen($parameter1)>0){
+            $searchMode = true;
+            $keyword = " ".$parameter1." ";
+        }
         //Get last month date
         $today = date("Y-m-d");
         date_sub($today,date_interval_create_from_date_string("30 days"));
@@ -352,6 +357,7 @@ class plgTaskMeisterTM_recommender extends JPlugin
                             $trendingArticles[$aid] += 1;
                             break;  
                     }
+                    
                 if ($highest < intval($trendingArticles[$aid])){
                         $highest = intval($trendingArticles[$aid]);
                     }
@@ -365,8 +371,30 @@ class plgTaskMeisterTM_recommender extends JPlugin
         $count = 0;
         foreach ($trendingArticles as $key => $val){
             if ($count<$noOfArticles){
-                $finalList[intval($key)] = floor($val/$highest*100);
-                $count+=1;
+                //If search mode is on
+                if (isset($searchMode)){
+                    $counter = 0;//Reset counter for search mode
+                    //Query for database article contents (to check within text)
+                    $query = $db->getQuery(true);
+                    $query->select($db->quoteName(array('*')))
+                        ->from($db->quoteName('#__content'))
+                        ->where($db->quoteName('id') . ' = ' . intval($key));
+                    $db->setQuery($query);
+                    $articleContents = $db->loadAssoc();
+                    //Check insider title
+                    if (stristr($articleContents['title'], $keyword)) $counter = $counter + 10;//Exact Keyword
+                    if (stristr($articleContents['title'], $parameter1)) $counter = $counter + 1;//Substring
+                    //Check inside texts
+                    if (stristr($articleContents['introtext'], $keyword)) $counter = $counter + substr_count($articleContents['introtext'], $parameter1);
+                    if (stristr($articleContents['fulltext'], $keyword)) $counter = $counter + substr_count($articleContents['fulltext'], $parameter1);
+                    //Check counter
+                    if ($counter==0) $val = -1;//If not inside query, remove it
+                }
+                //Add to final list
+                if ($val > 0){
+                    $finalList[intval($key)] = floor($val/$highest*100);
+                    $count+=1;
+                } 
             }
         }
         return $finalList;
