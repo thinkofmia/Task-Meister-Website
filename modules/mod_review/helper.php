@@ -312,4 +312,45 @@ class ModReviewHelper
 
         return $publish;
     }
+
+    /**
+     * Method returning the html for rendering a rating from 0-10 using stars given an integer
+     *  method relies on the css file in the same module
+     * 
+     * @param   Integer $rating     An integer representing the rating
+     * 
+     * @return  String              A html string for rendering the star
+     */
+    public static function renderStarRating($rating)
+    {
+        $filled = ' star-colour';
+        $html = '<div class="rating" data-vote="0">'.
+                    '<div class="star-static hidden">'.
+                        '<span class="full-static" data-value="0"></span>'.
+                        '<span class="half-static" data-value="0"></span>'.
+                    '</div>'.
+                    '<div class="star-static">'.
+                        '<span class="full-static' . ($rating >= 2 ? $filled : '') . '" data-value="2"></span>'.
+                        '<span class="half-static' . ($rating >= 1 ? $filled : '') . '" data-value="1"></span>'.
+                    '</div>'.
+                    '<div class="star-static">'.
+                        '<span class="full-static' . ($rating >= 4 ? $filled : '') . '" data-value="4"></span>'.
+                        '<span class="half-static' . ($rating >= 3 ? $filled : '') . '" data-value="3"></span>'.
+                    '</div>'.
+                    '<div class="star-static">'.
+                        '<span class="full-static' . ($rating >= 6 ? $filled : '') . '" data-value="6"></span>'.
+                        '<span class="half-static' . ($rating >= 5 ? $filled : '') . '" data-value="5"></span>'.
+                    '</div>'.
+                    '<div class="star-static">'.
+                        '<span class="full-static' . ($rating >= 8 ? $filled : '') . '" data-value="8"></span>'.
+                        '<span class="half-static' . ($rating >= 7 ? $filled : '') . '" data-value="7"></span>'.
+                    '</div>'.
+                    '<div class="star-static">'.
+                        '<span class="full-static' . ($rating >= 10 ? $filled : '') . '" data-value="10"></span>'.
+                        '<span class="half-static' . ($rating >= 9? $filled : '') . '" data-value="9"></span>'.
+                    '</div>'.
+                '</div>';
+                
+        return $html;
+    }
 }
