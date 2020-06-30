@@ -322,39 +322,40 @@ class plgTaskMeisterTM_recommender extends JPlugin
         $db = Factory::getDbo();//Gets database
         //Get last month date
         $today = date("Y-m-d");
+        date_sub($today,date_interval_create_from_date_string("30 days"));
+        $lastmonth = date_format($today,"Y-m-d");
         //Get external recommendation table (custom table) To find out latest actions on articles
         $query = $db->getQuery(true);
         $query->select($db->quoteName(array('*')))
             ->from($db->quoteName('#__customtables_table_recommendationstats'));
         $db->setQuery($query);
-        $results_recommend = $db->loadAssocList();
+        $results_recent = $db->loadAssocList();
         //Setup list of articles to consider
         $trendingArticles = array();
         //Highest weighing counter
         $highest = 0;
         //Loop results
-        foreach ($results_recommend as $row){
-            $action_date = $row['es_date'];
-            $diff = date_diff($action_date,$today);
-            //now convert the $diff object to type integer
-            $intDiff = $diff->format("%R%a");
-            $intDiff = intval($intDiff);
-            //Check if within 30 days
-            if ($intDiff <= 30){//If recent
+        foreach ($results_recent as $row){
+            if (strcmp($row['es_date'],$lastmonth)){
                 $aid = intval($row['es_aid']);
-                if (!isset($trendingArticles[$aid])) $trendingArticles[$aid] = 0;
+                if (!isset($trendingArticles[$aid])){
+                    $trendingArticles[$aid] = 0;
+                } 
                 switch ($row['es_action']){
-                    case "liked":
-                        $trendingArticles[$aid] += 10;
-                        break;
-                    case "deployed":
-                        $trendingArticles[$aid] += 10;
-                        break;
-                    case "disliked":
-                        $trendingArticles[$aid] += 1;
-                        break;  
-                }
-                if ($highest<$trendingArticles[$aid]) $highest = $trendingArticles;
+                        case "liked":
+                            $trendingArticles[$aid] += 10;
+                            break;
+                        case "deployed":
+                            $trendingArticles[$aid] += 10;
+                            break;
+                        case "disliked":
+                            $trendingArticles[$aid] += 1;
+                            break;  
+                    }
+                if ($highest < intval($trendingArticles[$aid])){
+                        $highest = intval($trendingArticles[$aid]);
+                    }
+                 
             }
         }
         //Sort articles in descending order
