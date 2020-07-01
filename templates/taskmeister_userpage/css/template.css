@@ -158,6 +158,7 @@ table th, table td {
   display: inline-block;
   margin-left: 2vw;
   overflow-x: hidden;
+  width: 100vw;
   scrollbar-color: gray black;
   animation-name: fromLeft;
   animation-duration: 3s;
@@ -448,7 +449,6 @@ table th, table td {
 
 .yellowtable {
   background: red;
-  left: 2vw;
 }
 
 .charts {

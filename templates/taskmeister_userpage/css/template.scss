@@ -155,6 +155,7 @@ z-index: 9999;
     display: inline-block;
     margin-left: 2vw;
     overflow-x: hidden;
+    width: 100vw;
     scrollbar-color: gray black;
     //Animation
     animation-name: fromLeft;
@@ -483,8 +484,6 @@ z-index: 9999;
 .yellowtable{
     @extend #allClassStatsTable;
     background: red;
-    left: 2vw;
-
 }
 
 //Your Class Stats Mod
