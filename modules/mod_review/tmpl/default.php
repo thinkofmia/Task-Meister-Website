@@ -25,11 +25,11 @@ $document->addScript(JUri::base() . 'modules/mod_review/js/review.js');
 
 <div id="testimonials">
     <section>
-        <h1><?php echo JText::_('MOD_REVIEW_FORM_TESTIMONIAL_LABEL') ?></h1>
+        <h1><?php echo JText::_('MOD_REVIEW_FORM_TESTIMONIAL_LABEL') . ' (' . count($testimonials) . ')'; ?></h1>
         <?php if(!empty($testimonials)): ?>
             <div class="reviews">
-                <?php $counter = 0; foreach($testimonials as $row): ?>
-                    <div class="review <?php echo ($counter >= 3 ? 'read-more' : '');?>">
+                <?php echo ModReviewHelper::generateReviewStatistics($testimonials); $counter = 0; foreach($testimonials as $row): ?>
+                    <div class="review<?php echo ($counter >= 3 ? ' read-all' . ' read-more-' . floor($counter / 3) : '');?>">
                         <div class="review-summary">
                             <?php echo ModReviewHelper::renderStarRating($row->overall_rating); ?><h2> Summary</h2>
                             <div>
