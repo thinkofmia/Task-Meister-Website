@@ -4,7 +4,7 @@ jQuery(document).ready(function($) {
     var scores = $(".score").map(function(){
         return this;
     }).get();
-    console.log(scores);
+    //console.log(scores);
 
     $(".star-animated").click(function () {
         $(this).children(".selected").addClass("is-animated");
@@ -32,7 +32,7 @@ jQuery(document).ready(function($) {
         $(this).closest(".rating").find(".score").val($(this).data("value"));
 
         $(this).closest(".rating").data("data-vote", $(this).data("value"));
-        console.log($(this).data("value"));
+        //console.log($(this).data("value"));
     });
 
     $(".full").click(function () {
@@ -53,7 +53,7 @@ jQuery(document).ready(function($) {
 
         $(this).closest(".rating").data("data-vote", $(this).data("value"));
 
-        console.log(parseInt($(this).data("value")));
+        //console.log(parseInt($(this).data("value")));
     });
 
     $(".half").hover(function () {

@@ -14,7 +14,9 @@
     <filename>tmpl/default.php</filename>
     <filename>tmpl/index.html</filename>
     <filename>js/star-rating.js</filename>
+    <filename>js/review.js</filename>
     <filename>css/star-rating.css</filename>
+    <filename>css/review.css</filename>
     <filename>models/fields/rating.php</filename>
     <filename>models/forms/add_review.xml</filename>
 		<folder>language</folder>
