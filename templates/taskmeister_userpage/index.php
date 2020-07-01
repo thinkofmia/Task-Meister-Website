@@ -105,7 +105,7 @@ else $username = "Login";
     <?php else: ?>
     <a id="loginNav" href="<?php echo $this->baseurl; ?>/index.php/login">
     <?php endif; ?>
-        <?php echo $username; ?>  
+        <?php echo substr($username,0,13); ?>  
     </a> 
     <a href="javascript:void(0);" class="icon" onclick="hamburgerMenu();">
         🍔
