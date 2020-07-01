@@ -353,4 +353,48 @@ class ModReviewHelper
                 
         return $html;
     }
+
+    /**
+     * Method to generate the statistics for an array of reviews, indicating the distribution of stars using a horizontal
+     *  bar chart and percentages (add buttons to filter reviews by a star count)
+     * 
+     * @param   Array   $testimonials   An array containing published reviews
+     * 
+     * @return  String                  html code representing the statistics
+     */
+    public static function generateReviewStatistics($testimonials)
+    {
+        $html = '<div><ul class="review-statistics" style="list-style: none; margin-bottom: 20px; width: 20vw;">';
+        $empty_bar = '<span class="horizontal-bar-chart horizontal-bar-chart-empty" style="height: 3px; width: 71%; margin-right: 10px; margin-top: 7px; background-color: #FFFFFF; float: left;">';
+        $filled_bar = '<b class="horizontal-bar-chart horizontal-bar-chart-filled" style="display: block; height: 3px; width: %d%%; background-color: #ffd700;">';
+        $bar_label = '<span class="horizontal-bar-chart-label" style="margin-right: 10px; text-align: left; width: auto; min-width: 65px; padding-right: 0; overflow: hidden; float: left;">%s</span>';
+
+        $stats = array(5 => 0,
+                       4 => 0,
+                       3 => 0,
+                       2 => 0,
+                       1 => 0,
+                       0 => 0,
+                    );
+        
+        foreach($testimonials as $testimonial)
+        {
+            $stats[floor($testimonial->overall_rating/2)]++;
+        }
+
+        $total = array_sum($stats);
+
+        foreach($stats as $stars => $present)
+        {
+            $percentage = floor($present/$total*100);
+            $result_bar = $empty_bar . sprintf($filled_bar, $percentage) . '</b></span>';
+            $html .= '<li style="padding-bottom: 10px; width: auto;">' . sprintf($bar_label, ($stars . ' Stars: ')) . $result_bar . $percentage . '%</li>';
+        }
+
+        $html .= '</ul></div>';
+
+        //$html .= '<div style="display: inline-block; vertical-align:center;">test div</div></div>';
+
+        return $html;
+    }
 }
