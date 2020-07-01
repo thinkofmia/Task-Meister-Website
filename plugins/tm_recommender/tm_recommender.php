@@ -314,6 +314,91 @@ class plgTaskMeisterTM_recommender extends JPlugin
         }
         return $resultList;
     }
+    /* Function: Recommend Trending Articles
+    Recommend articles that are trending in the past month.
+    It is regardless of the user's likes/dislikes and preferences
+    */
+    function recommendTrendingArticles($noOfArticles, $userid, $parameter1){
+        $db = Factory::getDbo();//Gets database
+        //Set Additional Filter Mode if has keyword
+        if (strlen($parameter1)>0){
+            $searchMode = true;
+            $keyword = " ".$parameter1." ";
+        }
+        //Get last month date
+        $today = date("Y-m-d");
+        date_sub($today,date_interval_create_from_date_string("30 days"));
+        $lastmonth = date_format($today,"Y-m-d");
+        //Get external recommendation table (custom table) To find out latest actions on articles
+        $query = $db->getQuery(true);
+        $query->select($db->quoteName(array('*')))
+            ->from($db->quoteName('#__customtables_table_recommendationstats'));
+        $db->setQuery($query);
+        $results_recent = $db->loadAssocList();
+        //Setup list of articles to consider
+        $trendingArticles = array();
+        //Highest weighing counter
+        $highest = 0;
+        //Loop results
+        foreach ($results_recent as $row){
+            if (strcmp($row['es_date'],$lastmonth)){
+                $aid = intval($row['es_aid']);
+                if (!isset($trendingArticles[$aid])){
+                    $trendingArticles[$aid] = 0;
+                } 
+                switch ($row['es_action']){
+                        case "liked":
+                            $trendingArticles[$aid] += 10;
+                            break;
+                        case "deployed":
+                            $trendingArticles[$aid] += 10;
+                            break;
+                        case "disliked":
+                            $trendingArticles[$aid] += 1;
+                            break;  
+                    }
+                    
+                if ($highest < intval($trendingArticles[$aid])){
+                        $highest = intval($trendingArticles[$aid]);
+                    }
+                 
+            }
+        }
+        //Sort articles in descending order
+        arsort($trendingArticles);
+        //Return articles after counting and setting similarity values
+        $finalList = array();
+        $count = 0;
+        foreach ($trendingArticles as $key => $val){
+            if ($count<$noOfArticles){
+                //If search mode is on
+                if (isset($searchMode)){
+                    $counter = 0;//Reset counter for search mode
+                    //Query for database article contents (to check within text)
+                    $query = $db->getQuery(true);
+                    $query->select($db->quoteName(array('*')))
+                        ->from($db->quoteName('#__content'))
+                        ->where($db->quoteName('id') . ' = ' . intval($key));
+                    $db->setQuery($query);
+                    $articleContents = $db->loadAssoc();
+                    //Check insider title
+                    if (stristr($articleContents['title'], $keyword)) $counter = $counter + 10;//Exact Keyword
+                    if (stristr($articleContents['title'], $parameter1)) $counter = $counter + 1;//Substring
+                    //Check inside texts
+                    if (stristr($articleContents['introtext'], $keyword)) $counter = $counter + substr_count($articleContents['introtext'], $parameter1);
+                    if (stristr($articleContents['fulltext'], $keyword)) $counter = $counter + substr_count($articleContents['fulltext'], $parameter1);
+                    //Check counter
+                    if ($counter==0) $val = -1;//If not inside query, remove it
+                }
+                //Add to final list
+                if ($val > 0){
+                    $finalList[intval($key)] = floor($val/$highest*100);
+                    $count+=1;
+                } 
+            }
+        }
+        return $finalList;
+    }
     /* Function: Personal Recommended Articles
     Recommend personal articles that excludes what is already liked/disliked by the targeted  user
     Used only for articles module
