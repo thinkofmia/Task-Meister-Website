@@ -15,6 +15,13 @@
   color: whitesmoke;
   position: relative;
 }
+.star-static {
+  display: inline-block;
+  width: 20%;
+  font-size: 29px;
+  color: whitesmoke;
+  position: relative;
+}
 .star-animated.animate {
   -webkit-animation: stretch-bounce 0.5s ease-in-out;
   animation: stretch-bounce 0.5s ease-in-out;
@@ -30,7 +37,22 @@
   float: right;
   z-index: 2;
 }
+.full-static::before {
+  font-family: fontAwesome;
+  display: inline-block;
+  content: "\f005";
+  position: relative;
+  float: right;
+  z-index: 2;
+}
 .half::before {
+  font-family: fontAwesome;
+  content: "\f089";
+  position: absolute;
+  float: left;
+  z-index: 3;
+}
+.half-static::before {
   font-family: fontAwesome;
   content: "\f089";
   position: absolute;

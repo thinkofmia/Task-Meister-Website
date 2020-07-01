@@ -16,58 +16,61 @@ use Joomla\CMS\Factory;
 $document = Factory::getDocument();
 $document->addStyleSheet('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css');
 $document->addStyleSheet(JUri::base() . 'modules/mod_review/css/star-rating.css');
+$document->addStyleSheet(JUri::base() . 'modules/mod_review/css/review.css');
 $document->addScript(JUri::base() . 'modules/mod_review/js/star-rating.js');
+$document->addScript(JUri::base() . 'modules/mod_review/js/review.js');
 //JForm::addFieldPath(__DIR__.'/../models/fields');
 // This file collects the data collected by mod_review.php and generates the HTML to be displayed
 ?>
 
 <div id="testimonials">
-    <section style="background-color: black; margin-left: -2.2%; margin-right: -2.2%; padding: 100px;">
-        <h1 style="color: #ffc03a; text-align: center; text-transform: uppercase;"><?php echo JText::_('MOD_REVIEW_FORM_TESTIMONIAL_LABEL') ?></h1>
+    <section>
+        <h1><?php echo JText::_('MOD_REVIEW_FORM_TESTIMONIAL_LABEL') ?></h1>
         <?php if(!empty($testimonials)): ?>
-            <?php foreach($testimonials as $row): ?>
-                <div class="text-center">
-                    <table class="table" style="color: white;">
-                        <tr>
-                            <td>Summary: <?php echo $row->summary; ?></td>
-                        </tr>
-                        <tr>
-                            <td>Rating: <?php echo $row->overall_rating; ?></td>
-                        </tr>
-                        <tr>
-                            <td>Posted by: <?php echo ModReviewHelper::getName($row->uid);?></td>
-                        </tr>
-                        <tr>
-                            <td>Last updated: <?php echo ModReviewHelper::fmtDate($row->updated); ?></td>
-                        </tr>
-                        <tr>
-                            <td>Ease rating: <?php echo $row->ease_rating; ?></td>
-                        </tr>
-                        <tr>
-                            <td>Ease of use: <?php echo $row->ease; ?></td>
-                        </tr>
-                        <tr>
-                            <td>Effectiveness rating: <?php echo $row->effectiveness_rating; ?></td>
-                        </tr>
-                        <tr>
-                            <td>Effectiveness: <?php echo $row->effectiveness; ?></td>
-                        </tr>
-                    </table>
-                </div>
-            <?php endforeach; ?>
+            <div class="reviews">
+                <?php $counter = 0; foreach($testimonials as $row): ?>
+                    <div class="review <?php echo ($counter >= 3 ? 'read-more' : '');?>">
+                        <div class="review-summary">
+                            <?php echo ModReviewHelper::renderStarRating($row->overall_rating); ?><h2> Summary</h2>
+                            <div>
+                                <p><?php echo $row->summary; ?></p>
+                            </div>
+                            <div>
+                                <span>Posted by: <?php echo ModReviewHelper::getName($row->uid);?> on <?php echo ModReviewHelper::fmtDate($row->created); ?></span><br/>
+                                <span>Last updated: <?php echo ModReviewHelper::fmtDate($row->updated); ?></span><br/>
+                            </div>
+                        </div>
+                        <div class="review-ease">
+                            <?php echo ModReviewHelper::renderStarRating($row->ease_rating); ?><h2> Ease of use</h2>
+                            <div>
+                                <p><?php echo $row->ease; ?></p>
+                            </div>
+                        </div>
+                        <div class="review-effectiveness">
+                            <?php echo ModReviewHelper::renderStarRating($row->effectiveness_rating); ?><h2> Effectiveness</h2>
+                            <div>
+                                <p><?php echo $row->effectiveness; ?></p>
+                            </div>
+                        </div>
+                    </div>
+                <?php $counter++; endforeach; ?>
+                <span>
+                    <button class="read-all">Read all</button>
+                </span>
+            </div>
         <?php else : ?>
-            <p style="text-align: center; color: white;"><?php echo JText::_('MOD_REVIEW_TESTIMONIALS_EMPTY'); ?><p>
+            <p class="review-status-msg"><?php echo JText::_('MOD_REVIEW_TESTIMONIALS_EMPTY'); ?><p>
         <?php endif; ?>
     </section>
 </div>
 <div id="review-form">
-    <section style="background-color: #191919; margin-left: -2.2%; margin-right: -2.2%; padding: 100px;">
+    <section>
         <?php $form = JForm::getInstance('add_review', __DIR__.'/../models/forms/add_review.xml'); ?>
         <div class="text-center">
-            <form style="color: white; width:50vw; margin: 0 auto;" action="" method="POST" name="submit_review" id="submit_review">
+            <form action="" method="POST" name="submit_review" id="submit_review">
                 <div class="form-vertical">
                     <fieldset class="submit_review">
-                        <h1 style="color: #ffc03a; text-align: center; text-transform: uppercase;">
+                        <h1>
                             <?php if(ModReviewHelper::setForm($form))
                                 {
                                     echo JText::_('MOD_REVIEW_FORM_EDIT');
@@ -94,7 +97,7 @@ $document->addScript(JUri::base() . 'modules/mod_review/js/star-rating.js');
                                 <input type="submit" value=<?php echo JText::_('MOD_REVIEW_SUBMIT') ?>>
                             </div>
                         <?php else : ?>
-                            <p style="text-align: center;"><?php echo JText::_('MOD_REVIEW_FORM_NOT_ALLOWED'); ?></p>
+                            <p class="review-status-msg"><?php echo JText::_('MOD_REVIEW_FORM_NOT_ALLOWED'); ?></p>
                         <?php endif; ?>
                     </fieldset>
                 </div>
