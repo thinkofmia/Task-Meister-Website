@@ -29,11 +29,11 @@ h3 {
 }
 
 table {
-    border: 1px solid white; 
+    position: relative;
+    border: 2px solid white;
     border-collapse: collapse;
-    font-size: 1.25vw;
-    th, td {
-        border: 1px solid white; 
+    tr, th, td {
+        border: 2px solid white;
     }
 }
 
@@ -469,20 +469,15 @@ z-index: 9999;
 
 //All Class Stats Mod
 #allClassStatsTable{//CSS for the table
+    @extend table;
     left: -20vw;
-    position: relative;
-    background: green;
-    border: 2px solid white;
-    border-collapse: collapse;
     width: 70vw;
-    tr, th, td {
-        border: 2px solid white;
-    }
+    background: green;
 }
 
 //Recommendation Records Mod
 .yellowtable{
-    @extend #allClassStatsTable;
+    @extend table;
     background: red;
 }
 

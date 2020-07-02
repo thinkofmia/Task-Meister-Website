@@ -144,7 +144,7 @@ Display left hand side text
             -->
             <img src="/taskmeisterx/modules/mod_taskmeister_choosepreference/images/<?php echo $key;?>.jpg" width="100%" height="100%" onerror="this.src='/taskmeisterx/modules/mod_taskmeister_choosepreference/images/default.jpg';"/>
             <!--Display label of tags, including tag name and number of uses-->
-            <p class = "preferenceLabel"><?php echo $key; ?>: <?php echo $value; ?> uses</p>
+            <p class = "preferenceLabel"><?php echo $key; ?>: <?php echo $value; ?> hits</p>
         </div>
         <?php $count = $count + 1; ?>
         <?php if ($count==25): ?>

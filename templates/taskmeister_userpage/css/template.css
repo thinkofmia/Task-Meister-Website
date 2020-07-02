@@ -23,13 +23,13 @@ h3, .featuredArticle .featuredArticleText h3 {
   font-size: 2vw;
 }
 
-table {
-  border: 1px solid white;
+table, .yellowtable, #allClassStatsTable, .yourClassStatsTable {
+  position: relative;
+  border: 2px solid white;
   border-collapse: collapse;
-  font-size: 1.25vw;
 }
-table th, table td {
-  border: 1px solid white;
+table tr, .yellowtable tr, #allClassStatsTable tr, .yourClassStatsTable tr, table th, .yellowtable th, #allClassStatsTable th, .yourClassStatsTable th, table td, .yellowtable td, #allClassStatsTable td, .yourClassStatsTable td {
+  border: 2px solid white;
 }
 
 /*Custom Tags*/
@@ -435,16 +435,10 @@ table th, table td {
   font-size: 1vw;
 }
 
-#allClassStatsTable, .yourClassStatsTable, .yellowtable {
+#allClassStatsTable, .yourClassStatsTable {
   left: -20vw;
-  position: relative;
-  background: green;
-  border: 2px solid white;
-  border-collapse: collapse;
   width: 70vw;
-}
-#allClassStatsTable tr, .yourClassStatsTable tr, .yellowtable tr, #allClassStatsTable th, .yourClassStatsTable th, .yellowtable th, #allClassStatsTable td, .yourClassStatsTable td, .yellowtable td {
-  border: 2px solid white;
+  background: green;
 }
 
 .yellowtable {
