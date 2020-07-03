@@ -46,8 +46,8 @@ $articleDeployedUsers = "None";
 $articleTotalLikes = 0;
 $dummyArticleImg = "/taskmeisterx/modules/mod_taskmeister_featuredarticle/images/noimagefound.png";
 //$dummyArticleImg = "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/a85c73f1-755b-411b-9495-fca9a1246038/d5zuto4-9d45d025-d4e5-4de1-9beb-c2e9ccabffb0.png/v1/fill/w_895,h_893,q_70,strp/eevee__by_ebaroo_d5zuto4-pre.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOiIsImlzcyI6InVybjphcHA6Iiwib2JqIjpbW3siaGVpZ2h0IjoiPD0xMDIxIiwicGF0aCI6IlwvZlwvYTg1YzczZjEtNzU1Yi00MTFiLTk0OTUtZmNhOWExMjQ2MDM4XC9kNXp1dG80LTlkNDVkMDI1LWQ0ZTUtNGRlMS05YmViLWMyZTljY2FiZmZiMC5wbmciLCJ3aWR0aCI6Ijw9MTAyNCJ9XV0sImF1ZCI6WyJ1cm46c2VydmljZTppbWFnZS5vcGVyYXRpb25zIl19.f30G9iVONRbFHKiwi7ajbGT4nECaKthXFLGka6hS-Es";
-if ($videoLink) echo "Crawling Video link... ".$videoLink;
-else echo "No video found. ";
+if ($videoLink) echo "<script>console.log('Crawling Video link: " . $videoLink . "' );</script>";
+else echo "<script>console.log('Debug Objects: No Video Found' );</script>";
 
 //Article Contents
 $articleContents = ModFeaturedArticleHelper::getArticle($articleID);
