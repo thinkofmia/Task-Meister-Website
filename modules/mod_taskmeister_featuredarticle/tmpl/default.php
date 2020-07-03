@@ -24,11 +24,13 @@ defined('_JEXEC') or die;
                 <p><?php echo $displayText; ?></p>
             <?php endif; ?>
             <!--Displays Number of likes-->
-            <p><b># of Likes: </b><?php echo $articleTotalLikes; ?><br>
+            <p><span name="Number of likes: <?php echo $articleTotalLikes; ?>"><?php echo $articleTotalLikes; ?>👍 </span> 
+            <!--Displays Number of Deployment-->
+            <span name="Number of deployment: <?php echo $articleTotalDeployed; ?>"><?php echo $articleTotalDeployed; ?>👨‍💻</span><br>
             <!--Displays who has liked it-->
-            <b>Users who like this: </b><?php echo $articleLikedUsers; ?><br>
+            <b>Liked by: </b><?php echo $articleLikedUsers; ?><br>
             <!--Displays those in your school that has deployed it-->
-            <b>Users who deploy this: </b><?php echo $articleDeployedUsers; ?></p>
+            <b>Deployed by: </b><?php echo $articleDeployedUsers; ?></p>
             <!--Displays play button-->
             <p>
                 <a href="?option=com_content&view=article&id=<?php echo $articleID; ?>" itemprop="url" title="Go to the article site">▶ Play</a>
