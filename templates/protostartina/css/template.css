@@ -192,7 +192,7 @@ body {
 	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 	font-size: 13px;
 	line-height: 18px;
-	color: #333;
+	color: #eeeeee;
 	background-color: #fff;
 }
 a {
@@ -6976,7 +6976,7 @@ body.site {
 	background-color: #f4f6f7;
 }
 body.site.fluid {
-	background-color: #ffffff;
+	background-color: #000000;
 }
 .thumbnail {
 	margin-bottom: 9px;
@@ -6990,14 +6990,14 @@ body.site.fluid {
 	font-weight: bold;
 }
 .brand {
-	color: #004466;
+	color: #08c;
 	-webkit-transition: color .5s linear;
 	-moz-transition: color .5s linear;
 	-o-transition: color .5s linear;
 	transition: color .5s linear;
 }
 .brand:hover {
-	color: #08c;
+	color: #09d;
 	text-decoration: none;
 }
 .header {
