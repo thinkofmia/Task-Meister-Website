@@ -357,6 +357,16 @@ z-index: 9999;
     left: -27vw;
 }
 
+.inputSavePreference {
+    font-size: 1.5vw;
+    text-align: center;
+    border-radius: 8px;
+    background-color: $altFontColor;
+    color: $mainFontColor;
+    margin-top: 0.5vw;
+    margin-bottom: 0.5vw;
+}
+
 .preferenceList, .teachersList {//Wrapper to contain all the preferences/users
     width: 90vw;
     height: 100%;
@@ -388,17 +398,22 @@ z-index: 9999;
     display: inline-flex;
     padding: 1vw;
     cursor: pointer;
-
-    p {//CSS for the captions below the boxes
+    .preferenceStats{//CSS for the preference stats
+        top: -0.5vw;
+        background-color: blue;
+    }
+    p {
         position: absolute;
         z-index: 10;
-        bottom: -0.5vw;
-        background-color: $altFontColor;
         opacity: 0.9;
         text-align: center;
         width: 15vw;
         word-wrap: anywhere;
         font-size: 1.5vw;
+    }
+    .preferenceLabel, .teacherLabel {//CSS for the captions below the boxes
+        bottom: -0.5vw;
+        background-color: $altFontColor;
     }
 }
 
