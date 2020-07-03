@@ -23,9 +23,9 @@ ID: <?php echo $userID; ?>
                             <?php if ($value == 2) : ?>
                                 <?php echo $key; ?> (<?php echo "Preferred"; ?>)
                             <?php elseif ($value == 0) : ?>
-                                <?php echo $key; ?> <?php echo "Not Preferred"; ?>
+                                <?php echo $key; ?> (<?php echo "Not Preferred"; ?>)
                             <?php elseif ($value == 1) : ?>
-                                <?php echo $key; ?> <?php echo "May Try"; ?>
+                                <?php echo $key; ?> (<?php echo "May Try"; ?>)
                             <?php endif; ?>
                         </li>
                     <?php endforeach; ?>
