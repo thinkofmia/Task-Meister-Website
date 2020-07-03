@@ -3685,7 +3685,7 @@ input[type="submit"].btn.btn-mini {
 	padding: 8px 15px;
 	margin: 0 0 18px;
 	list-style: none;
-	background-color: #f5f5f5;
+	background-color: #1d1f24;
 	-webkit-border-radius: 4px;
 	-moz-border-radius: 4px;
 	border-radius: 4px;
@@ -3694,7 +3694,6 @@ input[type="submit"].btn.btn-mini {
 	display: inline-block;
 	*display: inline;
 	*zoom: 1;
-	text-shadow: 0 1px 0 #fff;
 }
 .breadcrumb > li > .divider {
 	padding: 0 5px;
