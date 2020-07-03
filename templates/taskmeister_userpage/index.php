@@ -40,7 +40,10 @@ else $username = "Login";
 
 <!-- Contain the website code which controls the layout-->
 <body>
-    <div class="topnav" id="myTopnav">
+<!--Scripts-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"></script>
+<!--Navigation Bar-->
+<div class="topnav" id="myTopnav">
     <a id = "logolink" href="<?php echo $this->baseurl; ?>/index.php/home"><!-- Set clickable logo-->
         <img class = "logo"  src="<?php echo $this->baseurl; ?>/templates/<?php echo $this->template; ?>/images/TaskMeisterLogo.JPG" alt="Task Meister Logo" class="logo" />
     </a>
