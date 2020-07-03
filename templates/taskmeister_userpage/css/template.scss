@@ -379,16 +379,19 @@ z-index: 9999;
 .userPreferred, .teacherSelected {//Color the state if the tag is preferred or the teacher is selected
     @extend .preferenceBox; 
     background-color: green;
+    border-radius: 8px;
 }
  
 .userNotPreferred {//Color the state if the tag is not preferred
     @extend .preferenceBox;
-    background-color: red;       
+    background-color: red;
+    border-radius: 8px;       
 }
 
 .userMayTry {//Color the state if the tag is considered to be tried
     @extend .preferenceBox;
-    background-color: goldenrod;       
+    background-color: goldenrod;
+    border-radius: 8px;       
 }
 
 .preferenceBox, .teacherBox {//CSS for the individual boxes.

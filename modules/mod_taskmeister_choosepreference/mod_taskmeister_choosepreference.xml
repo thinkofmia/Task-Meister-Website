@@ -2,8 +2,8 @@
 <extension type="module" version="3.1.0" client="site" method="upgrade">
     <name>Choose Preference (Task Meister)</name>
     <author>Fremont Teng</author>
-    <version>1.0.1</version>
-    <description>A choose preference module for Task Meister. Allows users to select their preferences.</description>
+    <version>1.0.2</version>
+    <description>A choose preference module for Task Meister. Allows users to select their preferences. Also capable of displaying #of likes and deployed.</description>
     <files>
         <filename>mod_taskmeister_choosepreference.xml</filename>
         <filename module="mod_taskmeister_choosepreference">mod_taskmeister_choosepreference.php</filename>

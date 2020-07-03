@@ -158,50 +158,62 @@ class plgTaskMeisterTM_recommender extends JPlugin
         //Get tags info database
         $query = $db->getQuery(true);
         $query->select($db->quoteName(array('*')))
-            ->from($db->quoteName('#__tags'));
+            ->from($db->quoteName('#__tags'))
+            ->order($db->quoteName('title') . ' ASC');
         $db->setQuery($query);
         $results_tags = $db->loadAssocList();
+        //Get article info database
+        $query2 = $db->getQuery(true);
+        $query2->select($db->quoteName(array('*')))
+            ->from($db->quoteName('#__customtables_table_articlestats'));
+        $db->setQuery($query2);
+        $results_art = $db->loadAssocList();
         //Create list
         $tagList = array();
-        //For loop to populate tag list
+        //Add default tags here
+        $defaultTags = array(
+            "Board Games",
+            "Cosplay", "Current Affairs", 
+            "Dance", "Digital Manipulatives", "Drama",
+            "Escape Rooms",
+            "Fashion", "Food",
+            "Model Making", "Movies", "Music",
+            "Nature",
+            "Online Games", "Outdoor Tasks",
+            "Physical Manipulatives", "Poems", "Puzzles",
+            "Science", "Simulations", "Sports", "Statistics", "Stories",
+            "Travelling", "Treasure Hunts",
+            "VR");
+        //Add default tags array into tag list
+        foreach ($defaultTags as $row){
+            $tagList[$row] = array(
+                "likes" => 0,
+                "deployed" => 0,
+                "dislikes" => 0
+            );
+        }
+        //For loop to populate tag list with database
         foreach($results_tags as $row){
-            $tagList[$row['title']] = $row['hits'];
+            $tagList[$row['title']] = array(
+                "likes" => 0,
+                "deployed" => 0,
+                "dislikes" => 0
+            );
         }
-        arsort($tagList);
-        //Add default tag list based on pptx
-        $tagNames_pptx = array(
-            "Board Games"=> 0,
-            "Cosplay" => 0,
-            "Current Affairs" => 0,
-            "Dance" => 0,
-            "Digital Manipulatives" => 0,
-            "Drama" => 0,
-            "Escape Rooms" => 0,
-            "Fashion" => 0,
-            "Food" => 0,
-            "Model Making" => 0,
-            "Movies" => 0,
-            "Music" => 0,
-            "Nature" => 0,
-            "Online Games" => 0,
-            "Outdoor Tasks" => 0,
-            "Physical Manipulatives" => 0,
-            "Poems" => 0,
-            "Puzzles"=> 0,
-            "Science" => 0,
-            "Simulations" => 0,
-            "Sports" => 0,
-            "Statistics" => 0,
-            "Stories" => 0,
-            "Travelling" => 0,
-            "Treasure Hunts" => 0,
-            "VR" => 0
-        );
-        //Add old tag list into default list.
-        foreach ($tagList as $key => $value){
-            $tagNames_pptx[$key] = $value;
+        //Set value of each tags by looping through the articles
+        foreach ($results_art as $row){
+            //Get tags of each article
+            $articleTags = json_decode($row['es_tags']);
+            $noOfLikes = $row['es_totallikes'];
+            $noOfDislikes = $row['es_totaldislikes'];
+            $noOfDeployed = $row['es_totaldeployed'];
+            foreach ($articleTags as $row2){
+                $tagList[$row2]["likes"] += $noOfLikes;
+                $tagList[$row2]["dislikes"] += $noOfDislikes;
+                $tagList[$row2]["deployed"] += $noOfDeployed;
+            }
         }
-        return $tagNames_pptx;
+        return $tagList;
     }
     /* Function: Get list of teachers available. */
     function getTeachersList(){

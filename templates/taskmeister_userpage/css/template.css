@@ -360,14 +360,17 @@ table tr, .yellowtable tr, #allClassStatsTable tr, .yourClassStatsTable tr, tabl
 
 .userPreferred, .teacherSelected {
   background-color: green;
+  border-radius: 8px;
 }
 
 .userNotPreferred {
   background-color: red;
+  border-radius: 8px;
 }
 
 .userMayTry {
   background-color: goldenrod;
+  border-radius: 8px;
 }
 
 .preferenceBox, .userPreferred, .teacherSelected, .userNotPreferred, .userMayTry, .teacherBox {
