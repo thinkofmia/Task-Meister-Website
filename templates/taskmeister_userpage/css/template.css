@@ -31,6 +31,8 @@ table, .yellowtable, #allClassStatsTable, .yourClassStatsTable {
 }
 table tr, .yellowtable tr, #allClassStatsTable tr, .yourClassStatsTable tr, table th, .yellowtable th, #allClassStatsTable th, .yourClassStatsTable th, table td, .yellowtable td, #allClassStatsTable td, .yourClassStatsTable td {
   border: 2px solid white;
+  text-align: center;
+  font-size: 1.5vw;
 }
 
 /*Custom Tags*/
@@ -98,7 +100,7 @@ table tr, .yellowtable tr, #allClassStatsTable tr, .yourClassStatsTable tr, tabl
   .topnav a.icon {
     float: right;
     display: block;
-    padding-right: 3vw;
+    margin-right: 4vw;
   }
 }
 @media screen and (max-width: 600px) {
@@ -196,15 +198,16 @@ table tr, .yellowtable tr, #allClassStatsTable tr, .yourClassStatsTable tr, tabl
 #modlgn-passwd, #modlgn-username, .login-button {
   width: 80%;
   padding-top: 2%;
-  font-size: large;
+  font-size: 1.5vw;
   text-align: center;
   border-radius: 8px;
 }
 
 .articlesRow {
   display: inline-flex;
-  width: 80vw;
-  padding-left: 5px;
+  width: 100%;
+  left: -2vw;
+  position: relative;
 }
 
 .recommendedArticles:focus-within .article,
@@ -217,7 +220,7 @@ table tr, .yellowtable tr, #allClassStatsTable tr, .yourClassStatsTable tr, tabl
   overflow-x: hidden;
   height: 15vw;
   width: 100%;
-  padding-left: 3%;
+  margin-left: 1%;
   padding-top: 5vw;
   padding-bottom: 5vw;
   transition: transform 0.4s ease-in;
@@ -225,6 +228,8 @@ table tr, .yellowtable tr, #allClassStatsTable tr, .yourClassStatsTable tr, tabl
 .recommendedArticles .article:focus, .recommendedArticles .article:hover {
   transform: scale(1.5);
   z-index: 99;
+  overflow-x: visible;
+  overflow-y: visible;
 }
 .recommendedArticles a:focus ~ a .article,
 .recommendedArticles a:hover ~ a .article {
@@ -232,7 +237,8 @@ table tr, .yellowtable tr, #allClassStatsTable tr, .yourClassStatsTable tr, tabl
 }
 .recommendedArticles .article {
   position: relative;
-  padding-right: 5px;
+  padding-right: 0.5vw;
+  padding-left: 0.5vw;
   width: 15vw;
   height: 15vw;
   text-align: center;
@@ -244,23 +250,23 @@ table tr, .yellowtable tr, #allClassStatsTable tr, .yourClassStatsTable tr, tabl
 }
 .recommendedArticles .article .articleSimilarity {
   position: absolute;
-  bottom: 90%;
+  bottom: 80%;
   text-align: left;
   background-color: darkgreen;
   opacity: 0.8;
   color: white;
   position: absolute;
-  font-size: 1.3vw;
+  font-size: 1.25vw;
 }
 .recommendedArticles .article p {
   position: absolute;
   bottom: -10%;
-  width: 97%;
+  width: 15vw;
   background-color: darkorange;
   opacity: 0.8;
   color: white;
   position: absolute;
-  font-size: 1.3vw;
+  font-size: 1.25vw;
   word-wrap: break-word;
 }
 
@@ -277,7 +283,7 @@ table tr, .yellowtable tr, #allClassStatsTable tr, .yourClassStatsTable tr, tabl
   padding: 3px;
   width: 2vw;
   height: 2vw;
-  position: absolute;
+  position: relative;
   cursor: pointer;
   margin-top: 10vw;
 }
@@ -289,7 +295,8 @@ table tr, .yellowtable tr, #allClassStatsTable tr, .yourClassStatsTable tr, tabl
 
 .arrowRight {
   transform: rotate(-45deg);
-  left: 92%;
+  position: relative;
+  margin-left: 1%;
 }
 
 .customtopMsg {
@@ -369,7 +376,7 @@ table tr, .yellowtable tr, #allClassStatsTable tr, .yourClassStatsTable tr, tabl
   opacity: 0.9;
   text-align: center;
   width: 15vw;
-  word-wrap: wrap;
+  word-wrap: anywhere;
   font-size: 1.5vw;
 }
 
@@ -422,7 +429,7 @@ table tr, .yellowtable tr, #allClassStatsTable tr, .yourClassStatsTable tr, tabl
 }
 
 .search {
-  font-size: 2vw;
+  font-size: 1.5vw;
   padding-top: 2vw;
   float: right;
   animation-name: fromLeft;
@@ -430,7 +437,7 @@ table tr, .yellowtable tr, #allClassStatsTable tr, .yourClassStatsTable tr, tabl
   animation-fill-mode: forwards;
 }
 .search input {
-  width: 30vw;
+  width: 50vw;
 }
 
 .latestnews, .whosonline li {
@@ -438,8 +445,7 @@ table tr, .yellowtable tr, #allClassStatsTable tr, .yourClassStatsTable tr, tabl
 }
 
 #allClassStatsTable, .yourClassStatsTable {
-  left: -20vw;
-  width: 70vw;
+  width: 100%;
   background: green;
 }
 

@@ -24,9 +24,9 @@ defined('_JEXEC') or die;
                 <p><?php echo $displayText; ?></p>
             <?php endif; ?>
             <!--Displays Number of likes-->
-            <p><span name="Number of likes: <?php echo $articleTotalLikes; ?>"><?php echo $articleTotalLikes; ?>👍 </span> 
+            <p><span style="cursor: context-menu;" title="Number of likes: <?php echo $articleTotalLikes; ?>"><?php echo $articleTotalLikes; ?>👍 </span> 
             <!--Displays Number of Deployment-->
-            <span name="Number of deployment: <?php echo $articleTotalDeployed; ?>"><?php echo $articleTotalDeployed; ?>👨‍💻</span><br>
+            <span style="cursor: context-menu;" title="Number of deployment: <?php echo $articleTotalDeployed; ?>"><?php echo $articleTotalDeployed; ?>👨‍💻</span><br>
             <!--Displays who has liked it-->
             <b>Liked by: </b><?php echo $articleLikedUsers; ?><br>
             <!--Displays those in your school that has deployed it-->

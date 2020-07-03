@@ -35,6 +35,8 @@ table {
     border-collapse: collapse;
     tr, th, td {
         border: 2px solid white;
+        text-align: center;
+        font-size: 1.5vw;
     }
 }
 
@@ -100,7 +102,7 @@ z-index: 9999;
     .topnav a.icon {
       float: right;
       display: block;
-      padding-right:3vw;
+      margin-right:4vw;
     }
   }
   
@@ -202,7 +204,7 @@ z-index: 9999;
 #modlgn-passwd, #modlgn-username, .login-button {//CSS for the login inputs, e.g. username and password
     width: 80%;
     padding-top: 2%;
-    font-size: large;
+    font-size: 1.5vw;
     text-align: center;
     border-radius: 8px;
 }
@@ -211,8 +213,9 @@ z-index: 9999;
 
 .articlesRow {//Sets CSS for the wrapper for recommend article module
     display: inline-flex;
-    width: 80vw;
-    padding-left: 5px;
+    width: 100%;
+    left: -2vw;
+    position: relative;
 }
 
 .recommendedArticles:focus-within,
@@ -227,7 +230,7 @@ z-index: 9999;
     overflow-x: hidden;
     height: 15vw; 
     width: 100%;
-    padding-left: 3%;
+    margin-left: 1%;
     padding-top: 5vw;
     padding-bottom: 5vw;
     //animation
@@ -235,6 +238,8 @@ z-index: 9999;
     .article:focus, .article:hover {//When hover over, zoom/enlarge the article
         transform: scale(1.5);
         z-index: 99;
+        overflow-x: visible;
+        overflow-y: visible;
     }
     a:focus ~ a .article,
     a:hover ~ a .article {//Move all the adjacent articles to the right
@@ -242,7 +247,8 @@ z-index: 9999;
     }
     .article {//Sets CSS for individual articles
         position: relative;
-        padding-right: 5px; 
+        padding-right: 0.5vw;
+        padding-left: 0.5vw; 
         width: 15vw; 
         height: 15vw; 
         text-align: center;
@@ -254,23 +260,23 @@ z-index: 9999;
         }
         .articleSimilarity {//Sets CSS for the similarity tag above the article
             position: absolute;
-            bottom: 90%;
+            bottom: 80%;
             text-align: left;
             background-color: darkgreen;
             opacity: 0.8;
             color: $mainFontColor;
             position: absolute;
-            font-size: 1.3vw;
+            font-size: 1.25vw;
         }
         p {//Sets CSS for the caption below the article
             position: absolute;
             bottom: -10%;
-            width: 97%;
+            width: 15vw;
             background-color: $altFontColor;
             opacity: 0.8;
             color: $mainFontColor;
             position: absolute;
-            font-size: 1.3vw;
+            font-size: 1.25vw;
             word-wrap: break-word;
         }
     }
@@ -289,7 +295,7 @@ z-index: 9999;
     padding: 3px;
     width: 2vw;
     height: 2vw;
-    position: absolute;
+    position: relative;
     cursor: pointer;
     margin-top: 10vw;
   }
@@ -303,7 +309,8 @@ z-index: 9999;
 .arrowRight {//Sets CSS for the right arrow
     @extend .arrow;
     transform: rotate(-45deg);
-    left: 92%;
+    position: relative;
+    margin-left: 1%;
 }
 
 
@@ -390,7 +397,7 @@ z-index: 9999;
         opacity: 0.9;
         text-align: center;
         width: 15vw;
-        word-wrap: wrap;
+        word-wrap: anywhere;
         font-size: 1.5vw;
     }
 }
@@ -452,11 +459,11 @@ z-index: 9999;
 
 //CSS for the search module
 .search {
-    font-size: 2vw;
+    font-size: 1.5vw;
     padding-top: 2vw;
     float: right;
     input {//Width of input bar
-        width: 30vw;
+        width: 50vw;
     }
     //Animation
     animation-name: fromLeft;
@@ -472,8 +479,7 @@ z-index: 9999;
 //All Class Stats Mod
 #allClassStatsTable{//CSS for the table
     @extend table;
-    left: -20vw;
-    width: 70vw;
+    width: 100%;
     background: green;
 }
 
