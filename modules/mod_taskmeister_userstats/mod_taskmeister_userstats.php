@@ -42,6 +42,7 @@ $db = Factory::getDbo();
 $me = Factory::getUser();
 //Set user id and username
 $userID = $me->id;
+$name = $me->name;
 $username = $me->username;
 
 //Querying for stats of a particular user

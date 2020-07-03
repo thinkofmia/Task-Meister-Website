@@ -5,7 +5,8 @@ defined('_JEXEC') or die;
 ?>
  
 <h3>User Stats</h3>
-User: <?php echo $username; ?><br>
+Name: <?php echo $name; ?><br>
+Username: <?php echo $username; ?><br>
 ID: <?php echo $userID; ?>
 <table class = "yourClassStatsTable">
     <tr>
