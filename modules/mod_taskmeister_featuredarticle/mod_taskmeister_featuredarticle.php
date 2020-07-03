@@ -69,21 +69,22 @@ if ($externalContents != "Nothing is found. "){
     $usersPreferenceList = json_decode($externalContents['es_userchoice']);
     //For Loops
     if ($deployedUsersList){
-        $articleDeployedUsers = "";
-        foreach ($deployedUsersList as $row)
-        {
-            $user = JFactory::getUser(intval($row))->username;
-            $articleDeployedUsers = $user.", ".$articleDeployedUsers;
+        $newArray = array();
+        foreach($deployedUsersList as $row){
+            $user = JFactory::getUser(intval($row))->name;
+            array_push($newArray, $user);
         }
+        $articleDeployedUsers = implode(",", $newArray);
     } 
     if ($articleTotalLikes>0){
-        $articleLikedUsers = "";
+        $newArray = array();
         foreach($usersPreferenceList as $key => $value){
             if ($value=="Liked"){
-                $user = JFactory::getUser(intval($key))->username;
-                $articleLikedUsers = $user.", ".$articleLikedUsers;
+                $user = JFactory::getUser(intval($key))->name;
+                array_push($newArray, $user);
             }
         }
+        $articleLikedUsers = implode(",", $newArray);
     }
 
 }
