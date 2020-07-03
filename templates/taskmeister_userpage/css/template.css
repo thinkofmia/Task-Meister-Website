@@ -10,15 +10,16 @@ body {
   font-size: 1.5vw;
   height: 100%;
   margin-left: 1vw;
+  font-family: "BioRhyme", serif;
 }
 
 p {
   color: white;
-  font-size: 1vw;
+  font-size: 1.5vw;
 }
 
 h3, .featuredArticle .featuredArticleText h3 {
-  color: gold;
+  color: darkorange;
   text-align: left;
   font-size: 2vw;
 }
@@ -53,7 +54,7 @@ table tr, .yellowtable tr, #allClassStatsTable tr, .yourClassStatsTable tr, tabl
 
 .topnav {
   overflow: hidden;
-  background-color: rgba(169, 169, 169, 0.8);
+  background-color: rgba(105, 103, 103, 0.8);
   animation-name: fadeIn;
   animation-duration: 2s;
   animation-fill-mode: forwards;
@@ -78,11 +79,11 @@ table tr, .yellowtable tr, #allClassStatsTable tr, .yourClassStatsTable tr, tabl
   height: 4vw;
 }
 .topnav a:hover {
-  background-color: gold;
+  background-color: darkorange;
   color: black;
 }
 .topnav a.active {
-  background-color: gold;
+  background-color: darkorange;
   color: white;
 }
 .topnav .icon {
@@ -184,7 +185,7 @@ table tr, .yellowtable tr, #allClassStatsTable tr, .yourClassStatsTable tr, tabl
 
 /*CSS for other objects*/
 .login-button {
-  background-color: gold;
+  background-color: darkorange;
   color: white;
 }
 
@@ -255,7 +256,7 @@ table tr, .yellowtable tr, #allClassStatsTable tr, .yourClassStatsTable tr, tabl
   position: absolute;
   bottom: -10%;
   width: 97%;
-  background-color: #695f00;
+  background-color: darkorange;
   opacity: 0.8;
   color: white;
   position: absolute;
@@ -265,7 +266,7 @@ table tr, .yellowtable tr, #allClassStatsTable tr, .yourClassStatsTable tr, tabl
 
 .arrow:hover, .arrowRight:hover, .arrowLeft:hover {
   cursor: pointer;
-  border: solid gold;
+  border: solid darkorange;
   border-width: 0 5px 5px 0;
 }
 
@@ -303,7 +304,7 @@ table tr, .yellowtable tr, #allClassStatsTable tr, .yourClassStatsTable tr, tabl
   color: white;
 }
 .customtext h3, .customtext .featuredArticle .featuredArticleText h3, .featuredArticle .featuredArticleText .customtext h3 {
-  color: gold;
+  color: darkorange;
   text-align: left;
 }
 
@@ -364,7 +365,7 @@ table tr, .yellowtable tr, #allClassStatsTable tr, .yourClassStatsTable tr, tabl
   position: absolute;
   z-index: 10;
   bottom: -0.5vw;
-  background-color: gold;
+  background-color: darkorange;
   opacity: 0.9;
   text-align: center;
   width: 15vw;
@@ -381,13 +382,13 @@ table tr, .yellowtable tr, #allClassStatsTable tr, .yourClassStatsTable tr, tabl
 #customMenu a {
   position: relative;
   padding: 10px;
-  color: gold;
+  color: darkorange;
   text-decoration: none;
   font-size: 1.7vw;
 }
 #customMenu a:hover {
   color: white;
-  background-color: gold;
+  background-color: darkorange;
   text-decoration: none;
   animation: flashing 1s;
   animation-iteration-count: infinite;
@@ -397,7 +398,7 @@ table tr, .yellowtable tr, #allClassStatsTable tr, .yourClassStatsTable tr, tabl
   display: inline-flex;
   text-align: center;
   position: relative;
-  background-color: brown;
+  background-color: darkorange;
   width: 100%;
 }
 .featuredArticle iframe, .featuredArticle img {
@@ -414,6 +415,7 @@ table tr, .yellowtable tr, #allClassStatsTable tr, .yourClassStatsTable tr, tabl
 }
 .featuredArticle .featuredArticleText h3 {
   text-align: center;
+  color: white;
 }
 .featuredArticle .featuredArticleText p {
   font-size: 1.5vw;
@@ -479,14 +481,14 @@ table tr, .yellowtable tr, #allClassStatsTable tr, .yourClassStatsTable tr, tabl
   appearance: none;
   width: 25px;
   height: 25px;
-  background: gold;
+  background: darkorange;
   cursor: pointer;
 }
 
 .tm_slider::-moz-range-thumb {
   width: 25px;
   height: 25px;
-  background: gold;
+  background: darkorange;
   cursor: pointer;
 }
 
@@ -528,11 +530,11 @@ table tr, .yellowtable tr, #allClassStatsTable tr, .yourClassStatsTable tr, tabl
 }
 
 .tm_input:checked + .slider {
-  background-color: gold;
+  background-color: darkorange;
 }
 
 .tm_input:focus + .slider {
-  box-shadow: 0 0 1px gold;
+  box-shadow: 0 0 1px darkorange;
 }
 
 .tm_input:checked + .slider:before {

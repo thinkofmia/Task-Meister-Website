@@ -1,8 +1,8 @@
 /*Variables*/
 $pageBackground: black; //For Background
-$headerBackground: rgba(169, 169, 169, 0.8); //For Header Background
+$headerBackground: rgba(105, 103, 103, 0.8); //For Header Background
 $mainFontColor: white; //Default Font Color
-$altFontColor: gold; //Alt Default Font Color
+$altFontColor: darkorange; //Alt Default Font Color
 
 /*Default Tags*/
 body {//Body Tag
@@ -15,11 +15,12 @@ body {//Body Tag
     font-size: 1.5vw;
     height: 100%;
     margin-left: 1vw;
+    font-family: 'BioRhyme', serif;
 }
 
 p {
     color: $mainFontColor;
-    font-size: 1vw;
+    font-size: 1.5vw;
 }
 
 h3 {
@@ -265,7 +266,7 @@ z-index: 9999;
             position: absolute;
             bottom: -10%;
             width: 97%;
-            background-color: #695f00;
+            background-color: $altFontColor;
             opacity: 0.8;
             color: $mainFontColor;
             position: absolute;
@@ -423,7 +424,7 @@ z-index: 9999;
     display: inline-flex;
     text-align: center;
     position: relative;
-    background-color: brown;
+    background-color: $altFontColor;
     width: 100%;
     //Style for the youtube video or display picture
     iframe, img {
@@ -441,6 +442,7 @@ z-index: 9999;
         h3{//Style for the header
             @extend h3;
             text-align: center;
+            color: $mainFontColor;
         }
         p {
             font-size: 1.5vw;
