@@ -50,6 +50,10 @@ else $username = "Login";
     <!--Home-->
     <?php if($urlPath==$this->baseurl."/index.php/home") : ?>
         <a class="active" href="<?php echo $this->baseurl; ?>/index.php/home">
+    <?php elseif($urlPath==$this->baseurl."/index.php") : ?>
+        <a class="active" href="<?php echo $this->baseurl; ?>/index.php/home">
+    <?php elseif($urlPath==$this->baseurl."/") : ?>
+        <a class="active" href="<?php echo $this->baseurl; ?>/index.php/home">
     <?php else: ?>
         <a href="<?php echo $this->baseurl; ?>/index.php/home">
     <?php endif; ?>

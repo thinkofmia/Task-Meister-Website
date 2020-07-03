@@ -74,11 +74,11 @@ table tr, .yellowtable tr, #allClassStatsTable tr, .yourClassStatsTable tr, tabl
   color: white;
   text-align: center;
   text-decoration: none;
-  font-size: 2.5vw;
+  font-size: 1.5vw;
   padding-right: 1vw;
   padding-left: 1vw;
-  padding-top: 1vw;
-  height: 4vw;
+  height: 2vw;
+  padding-top: 0.5vw;
 }
 .topnav a:hover {
   background-color: darkorange;
@@ -125,7 +125,7 @@ table tr, .yellowtable tr, #allClassStatsTable tr, .yourClassStatsTable tr, tabl
   padding-left: 0vw;
   padding-right: 0vw;
   padding-top: 0vw;
-  height: 5vw;
+  height: 2vw;
   float: left;
   display: block;
   color: white;
@@ -135,8 +135,8 @@ table tr, .yellowtable tr, #allClassStatsTable tr, .yourClassStatsTable tr, tabl
 }
 #logolink .logo {
   /*Set css for logo*/
-  height: 5vw;
-  width: 5vw;
+  height: 3vw;
+  width: 3vw;
 }
 #logolink .logo:hover {
   animation: flashing 1s;
@@ -160,6 +160,7 @@ table tr, .yellowtable tr, #allClassStatsTable tr, .yourClassStatsTable tr, tabl
 #centerRow {
   display: inline-block;
   margin-left: 2vw;
+  margin-top: 5vw;
   overflow-x: hidden;
   width: 100vw;
   scrollbar-color: gray black;
@@ -250,7 +251,7 @@ table tr, .yellowtable tr, #allClassStatsTable tr, .yourClassStatsTable tr, tabl
 }
 .recommendedArticles .article .articleSimilarity {
   position: absolute;
-  bottom: 80%;
+  bottom: 82%;
   text-align: left;
   background-color: darkgreen;
   opacity: 0.8;
@@ -449,7 +450,7 @@ table tr, .yellowtable tr, #allClassStatsTable tr, .yourClassStatsTable tr, tabl
 
 .search {
   font-size: 1.5vw;
-  padding-top: 2vw;
+  padding-top: 3vw;
   float: right;
   animation-name: fromLeft;
   animation-duration: 2s;
@@ -457,6 +458,10 @@ table tr, .yellowtable tr, #allClassStatsTable tr, .yourClassStatsTable tr, tabl
 }
 .search input {
   width: 50vw;
+  font-size: 1.5vw;
+}
+.search button {
+  font-size: 1.5vw;
 }
 
 .latestnews, .whosonline li {
@@ -475,7 +480,6 @@ table tr, .yellowtable tr, #allClassStatsTable tr, .yourClassStatsTable tr, tabl
 .charts {
   display: inline-block;
   position: relative;
-  left: -25vw;
 }
 
 .yourClassStatsTable {

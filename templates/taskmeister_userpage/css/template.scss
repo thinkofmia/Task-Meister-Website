@@ -77,11 +77,11 @@ z-index: 9999;
         color: $mainFontColor;
         text-align: center;
         text-decoration: none;
-        font-size: 2.5vw;
+        font-size: 1.5vw;
         padding-right: 1vw;
         padding-left: 1vw;
-        padding-top: 1vw;
-        height: 4vw;
+        height: 2vw;
+        padding-top: 0.5vw;
     }
     a:hover {
         background-color: $altFontColor;
@@ -126,7 +126,7 @@ z-index: 9999;
     padding-left: 0vw;
     padding-right: 0vw;
     padding-top: 0vw;
-    height: 5vw;
+    height: 2vw;
     float: left;
     display: block;
     color: $mainFontColor;
@@ -134,8 +134,8 @@ z-index: 9999;
     text-decoration: none;
     font-size: 2vw;
     .logo{/*Set css for logo*/
-        height:5vw;
-        width: 5vw;
+        height:3vw;
+        width: 3vw;
     }
     .logo:hover{//CSS for hover logo
         animation: flashing 1s;
@@ -157,6 +157,7 @@ z-index: 9999;
 #centerRow{//Sets CSS for center row
     display: inline-block;
     margin-left: 2vw;
+    margin-top: 5vw;
     overflow-x: hidden;
     width: 100vw;
     scrollbar-color: gray black;
@@ -260,7 +261,7 @@ z-index: 9999;
         }
         .articleSimilarity {//Sets CSS for the similarity tag above the article
             position: absolute;
-            bottom: 80%;
+            bottom: 82%;
             text-align: left;
             background-color: darkgreen;
             opacity: 0.8;
@@ -478,11 +479,13 @@ z-index: 9999;
 //CSS for the search module
 .search {
     font-size: 1.5vw;
-    padding-top: 2vw;
+    padding-top: 3vw;
     float: right;
     input {//Width of input bar
         width: 50vw;
+        font-size: 1.5vw;
     }
+    button { font-size: 1.5vw; }
     //Animation
     animation-name: fromLeft;
     animation-duration: 2s;
@@ -511,7 +514,6 @@ z-index: 9999;
 .charts{//CSS for the google chart display
     display: inline-block;
     position: relative;
-    left: -25vw;
 }
 
 .yourClassStatsTable{//CSS for the table
