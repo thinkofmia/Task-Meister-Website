@@ -22,18 +22,18 @@ var ctx = document.getElementById('barChart').getContext('2d');
 var myChart = new Chart(ctx, {
     type: 'bar',
     data: {
-        labels: ['<?php echo implode("', '",array_keys($fullPreferencesScore)); ?>'],
+        labels: ['<?php echo implode("', '",array_keys($likePreferencesScore)); ?>'],
         datasets: [{
-            label: 'Preferences Score',
-            data: [<?php echo implode(', ',$fullPreferencesScore); ?>],
+            label: 'Recommended Preferences Score',
+            data: [<?php echo implode(', ',$likePreferencesScore); ?>],
             backgroundColor: [
-                <?php foreach ($fullPreferencesScore as $key => $value) : ?>
+                <?php foreach ($likePreferencesScore as $key => $value) : ?>
                     "<?php echo 'rgba('.rand(50, 255).', '.rand(50, 255).', '.rand(50, 255).', 0.2) '; ?>",
                 <?php endforeach; ?>
                 "<?php echo 'rgba('.rand(50, 255).', '.rand(50, 255).', '.rand(50, 255).', 0.2) '; ?>"
             ],
             borderColor: [
-                <?php foreach ($fullPreferencesScore as $key => $value) : ?>
+                <?php foreach ($likePreferencesScore as $key => $value) : ?>
                     "<?php echo 'rgba('.rand(50, 255).', '.rand(50, 255).', '.rand(50, 255).', 0.2)'; ?>",
                 <?php endforeach; ?>
                 "<?php echo 'rgba('.rand(50, 255).', '.rand(50, 255).', '.rand(50, 255).', 0.2) '; ?>"
