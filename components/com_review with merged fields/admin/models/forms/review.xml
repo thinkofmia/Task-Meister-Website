@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form>
+    <fieldset>
+        <field
+            name="id"
+            type="hidden"
+        />
+        <field 
+            name="aid"
+            type="number"
+            label="COM_REVIEW_REVIEW_AID_LABEL"
+            description="COM_REVIEW_REVIEW_AID_DESCRIPTION"
+            min="1"
+            step="1"
+            required="true"
+        />
+        <field 
+            name="uid"
+            type="number"
+            label="COM_REVIEW_REVIEW_UID_LABEL"
+            description="COM_REVIEW_REVIEW_UID_DESCRIPTION"
+            min="1"
+            step="1"
+            required="true"
+        />
+        <field 
+            name="rating"
+            type="number"
+            label="COM_REVIEW_REVIEW_RATING_LABEL"
+            description="COM_REVIEW_REVIEW_RATING_DESC"
+            min="0"
+            max="10"
+            step="1"
+            required="true"
+        />
+        <field 
+            name="review"
+            type="textarea"
+            label="COM_REVIEW_REVIEW_REVIEW_LABEL"
+            description="COM_REVIEW_REVIEW_REVIEW_DESC"
+            hint="COM_REVIEW_REVIEW_REVIEW_HINT"
+            required="true"
+            cols="255"
+            rows="10"
+        />
+    </fieldset>
+</form>
