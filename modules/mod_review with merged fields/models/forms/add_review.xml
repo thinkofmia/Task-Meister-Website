@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form>
+    <fieldset name="details" label="MOD_REVIEW_FORM_DETAILS"
+              addfieldpath="/modules/mod_review/models/fields">
+        <field
+            name="rating"
+            type="Rating"
+            label="MOD_REVIEW_FORM_REVIEW_RATING_LABEL"
+            required="true"
+        />
+        <field
+            name="review"
+            type="textarea"
+            label="MOD_REVIEW_FORM_REVIEW_LABEL"
+            hint="MOD_REVIEW_FORM_REVIEW_HINT"
+            required="true"
+            cols="120"
+            rows="10"
+        />
+    </fieldset>
+</form>

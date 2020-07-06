@@ -1,0 +1,70 @@
+.review.read-all {
+    display: none;
+}
+button {
+    color: white;
+}
+button.read-all {
+    background-color: Transparent;
+    background-repeat:no-repeat;
+    border: none;
+    cursor:pointer;
+    overflow: hidden;
+    outline:none;
+}
+#testimonials section{
+    background-color: black;
+    margin-left: -2.2%;
+    margin-right: -2.2%;
+    padding: 100px;
+}
+#testimonials h1{
+    color: #ffc03a;
+    text-align: center;
+    text-transform: uppercase;
+}
+.reviews {
+    color: white;
+    width: 50vw;
+    margin-left: auto;
+    margin-right:auto;
+}
+.review {
+    margin-bottom: 50px;
+}
+.review-summary,
+.review-ease,
+.review-effectiveness {
+    margin-bottom: 10px;
+}
+.review-summary p,
+.review-ease p,
+.review-effectiveness p {
+    padding-top: 2px;
+}
+.review-summary h2,
+.review-ease h2,
+.review-effectiveness h2 {
+    display: inline;
+}
+.review-status-msg {
+    text-align: center;
+    color: white;
+    text-transform: none;
+}
+#review-form section {
+    background-color: #191919;
+    margin-left: -2.2%;
+    margin-right: -2.2%;
+    padding: 100px;
+}
+#submit_review {
+    color: white;
+    width:50vw;
+    margin: 0 auto;
+}
+.submit_review h1 {
+    color: #ffc03a;
+    text-align: center;
+    text-transform: uppercase;
+}

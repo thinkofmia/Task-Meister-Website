@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="module" version="3.9" client="site" method="upgrade">
+  <name>MOD_REVIEW</name>
+  <author>Tan Lim Chai Seng</author>
+  <creationDate>June 2020</creationDate>
+  <license>GNU General Public License version 3 or later; see LICENSE.txt</license>
+  <authorEmail>tanlimcs@gmail.com</authorEmail>
+  <version>1.1.1</version>
+  <description>MOD_REVIEW_DESCRIPTION</description>
+  
+  <files>
+    <filename module="mod_review">mod_review.php</filename>
+    <filename>helper.php</filename>
+    <filename>tmpl/default.php</filename>
+    <filename>tmpl/index.html</filename>
+    <filename>js/star-rating.js</filename>
+    <filename>js/review.js</filename>
+    <filename>css/star-rating.css</filename>
+    <filename>css/review.css</filename>
+    <filename>models/fields/rating.php</filename>
+    <filename>models/forms/add_review.xml</filename>
+		<folder>language</folder>
+  </files>
+  
+  <languages>
+    <language tag="en-GB">language/en-GB/en-GB.mod_review.ini</language>
+    <language tag="en-GB">language/en-GB/en-GB.mod_review.sys.ini</language>
+  </languages>
+  
+  <config>
+    <fields name="params">
+      <fieldset name="basic">
+      
+        <field
+          name="manager"
+          type="list"
+          required="true"
+          label="PUBLISH_DEFAULT_MANAGER_LABEL"
+          description="PUBLISH_DEFAULT_MANAGER_DESC">
+          <option value="0">PUBLISH_DEFAULT_OFF</option>
+          <option value="1">PUBLISH_DEFAULT_ON</option>
+        </field>
+        <field
+          name="administrator"
+          type="list"
+          required="true"
+          label="PUBLISH_DEFAULT_ADMINISTRATOR_LABEL"
+          description="PUBLISH_DEFAULT_ADMINISTRATOR_DESC">
+          <option value="0">PUBLISH_DEFAULT_OFF</option>
+          <option value="1">PUBLISH_DEFAULT_ON</option>
+        </field>
+        <field
+          name="registered"
+          type="list"
+          required="true"
+          label="PUBLISH_DEFAULT_REGISTERED_LABEL"
+          description="PUBLISH_DEFAULT_REGISTERED_DESC">
+          <option value="0">PUBLISH_DEFAULT_OFF</option>
+          <option value="1">PUBLISH_DEFAULT_ON</option>
+        </field>
+        <field
+          name="author"
+          type="list"
+          required="true"
+          label="PUBLISH_DEFAULT_AUTHOR_LABEL"
+          description="PUBLISH_DEFAULT_AUTHOR_DESC">
+          <option value="0">PUBLISH_DEFAULT_OFF</option>
+          <option value="1">PUBLISH_DEFAULT_ON</option>
+        </field>
+        <field
+          name="editor"
+          type="list"
+          required="true"
+          label="PUBLISH_DEFAULT_EDITOR_LABEL"
+          description="PUBLISH_DEFAULT_EDITOR_DESC">
+          <option value="0">PUBLISH_DEFAULT_OFF</option>
+          <option value="1">PUBLISH_DEFAULT_ON</option>
+        </field>
+        <field
+          name="publisher"
+          type="list"
+          required="true"
+          label="PUBLISH_DEFAULT_PUBLISHER_LABEL"
+          description="PUBLISH_DEFAULT_PUBLISHER_DESC">
+          <option value="0">PUBLISH_DEFAULT_OFF</option>
+          <option value="1">PUBLISH_DEFAULT_ON</option>
+        </field>
+        <field
+          name="hod"
+          type="list"
+          required="true"
+          label="PUBLISH_DEFAULT_HOD_LABEL"
+          description="PUBLISH_DEFAULT_HOD_DESC">
+          <option value="0">PUBLISH_DEFAULT_OFF</option>
+          <option value="1">PUBLISH_DEFAULT_ON</option>
+        </field>
+        <field
+          name="new_user"
+          type="list"
+          required="true"
+          label="PUBLISH_DEFAULT_NEW_USER_LABEL"
+          description="PUBLISH_DEFAULT_NEW_USER_DESC">
+          <option value="0">PUBLISH_DEFAULT_OFF</option>
+          <option value="1">PUBLISH_DEFAULT_ON</option>
+        </field>
+        <field
+          name="teacher"
+          type="list"
+          required="true"
+          label="PUBLISH_DEFAULT_TEACHER_LABEL"
+          description="PUBLISH_DEFAULT_TEACHER_DESC">
+          <option value="0">PUBLISH_DEFAULT_OFF</option>
+          <option value="1">PUBLISH_DEFAULT_ON</option>
+        </field>
+        <field
+          name="super_user"
+          type="list"
+          required="true"
+          label="PUBLISH_DEFAULT_SUPER_USER_LABEL"
+          description="PUBLISH_DEFAULT_SUPER_USER_DESC">
+          <option value="0">PUBLISH_DEFAULT_OFF</option>
+          <option value="1">PUBLISH_DEFAULT_ON</option>
+        </field>
+        
+      </fieldset>
+    </fields>
+    
+  </config>
+</extension>
