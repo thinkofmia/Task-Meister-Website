@@ -4,10 +4,56 @@ defined('_JEXEC') or die;
 //Displays module output
 ?>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"></script>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script> 
 
 <h3>Your Class Stats</h3>
 
+<!--Code for Bar Chart-->
+<div class="chart-container" style="position: relative;">
+    <canvas id="barChart" width="400" height="400"></canvas>
+</div>
+<script>
+//Set Chart Size Responsively
+var chart = document.getElementById('barChart');
+chart.parentNode.style.width = '90vw';
+//Display chart
+var ctx = document.getElementById('barChart').getContext('2d');
+var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: ['<?php echo implode("', '",array_keys($likePreferencesScore)); ?>'],
+        datasets: [{
+            label: 'Recommended Preferences Score',
+            data: [<?php echo implode(', ',$likePreferencesScore); ?>],
+            backgroundColor: [
+                <?php foreach ($likePreferencesScore as $key => $value) : ?>
+                    "<?php echo 'rgba('.rand(50, 255).', '.rand(50, 255).', '.rand(50, 255).', 0.7) '; ?>",
+                <?php endforeach; ?>
+                "<?php echo 'rgba('.rand(50, 255).', '.rand(50, 255).', '.rand(50, 255).', 0.7) '; ?>"
+            ],
+            borderColor: [
+                <?php foreach ($likePreferencesScore as $key => $value) : ?>
+                    "<?php echo 'rgba('.rand(50, 255).', '.rand(50, 255).', '.rand(50, 255).', 0.7)'; ?>",
+                <?php endforeach; ?>
+                "<?php echo 'rgba('.rand(50, 255).', '.rand(50, 255).', '.rand(50, 255).', 0.7) '; ?>"
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true
+                }
+            }]
+        }
+    }
+});
+</script>
+
+<!--Pie Chart codes -->
 <div class = "charts">
     <div id="piechart"></div>
     <div id="dislikedchart"></div>

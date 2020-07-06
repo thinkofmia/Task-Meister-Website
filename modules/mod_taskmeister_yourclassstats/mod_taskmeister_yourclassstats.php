@@ -70,6 +70,11 @@ if ($userID!=0){//if User id isnt a guest
         }
         //Sort Preference Score by highest first
         arsort($fullPreferencesScore);
+        //Set up arrays
+        $likePreferencesScore = array();
+        foreach ($fullPreferencesScore as $key => $value){
+            if ($value>0) $likePreferencesScore[$key] = $value;
+        }
         require JModuleHelper::getLayoutPath('mod_taskmeister_yourclassstats');
     }
     else{

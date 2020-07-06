@@ -1,8 +1,8 @@
 /*Variables*/
 $pageBackground: black; //For Background
-$headerBackground: rgba(169, 169, 169, 0.8); //For Header Background
+$headerBackground: rgba(105, 103, 103, 0.8); //For Header Background
 $mainFontColor: white; //Default Font Color
-$altFontColor: gold; //Alt Default Font Color
+$altFontColor: darkorange; //Alt Default Font Color
 
 /*Default Tags*/
 body {//Body Tag
@@ -15,11 +15,12 @@ body {//Body Tag
     font-size: 1.5vw;
     height: 100%;
     margin-left: 1vw;
+    font-family: Arial, Helvetica, sans-serif, 'BioRhyme', serif;
 }
 
 p {
     color: $mainFontColor;
-    font-size: 1vw;
+    font-size: 1.5vw;
 }
 
 h3 {
@@ -29,11 +30,13 @@ h3 {
 }
 
 table {
-    border: 1px solid white; 
+    position: relative;
+    border: 2px solid white;
     border-collapse: collapse;
-    font-size: 1.25vw;
-    th, td {
-        border: 1px solid white; 
+    tr, th, td {
+        border: 2px solid white;
+        text-align: center;
+        font-size: 1.5vw;
     }
 }
 
@@ -74,11 +77,11 @@ z-index: 9999;
         color: $mainFontColor;
         text-align: center;
         text-decoration: none;
-        font-size: 2.5vw;
+        font-size: 1.5vw;
         padding-right: 1vw;
         padding-left: 1vw;
-        padding-top: 1vw;
-        height: 4vw;
+        height: 2vw;
+        padding-top: 0.5vw;
     }
     a:hover {
         background-color: $altFontColor;
@@ -99,7 +102,7 @@ z-index: 9999;
     .topnav a.icon {
       float: right;
       display: block;
-      padding-right:3vw;
+      margin-right:4vw;
     }
   }
   
@@ -123,7 +126,7 @@ z-index: 9999;
     padding-left: 0vw;
     padding-right: 0vw;
     padding-top: 0vw;
-    height: 5vw;
+    height: 2vw;
     float: left;
     display: block;
     color: $mainFontColor;
@@ -131,8 +134,8 @@ z-index: 9999;
     text-decoration: none;
     font-size: 2vw;
     .logo{/*Set css for logo*/
-        height:5vw;
-        width: 5vw;
+        height:3vw;
+        width: 3vw;
     }
     .logo:hover{//CSS for hover logo
         animation: flashing 1s;
@@ -154,7 +157,9 @@ z-index: 9999;
 #centerRow{//Sets CSS for center row
     display: inline-block;
     margin-left: 2vw;
+    margin-top: 5vw;
     overflow-x: hidden;
+    width: 100vw;
     scrollbar-color: gray black;
     //Animation
     animation-name: fromLeft;
@@ -200,7 +205,7 @@ z-index: 9999;
 #modlgn-passwd, #modlgn-username, .login-button {//CSS for the login inputs, e.g. username and password
     width: 80%;
     padding-top: 2%;
-    font-size: large;
+    font-size: 1.5vw;
     text-align: center;
     border-radius: 8px;
 }
@@ -209,8 +214,9 @@ z-index: 9999;
 
 .articlesRow {//Sets CSS for the wrapper for recommend article module
     display: inline-flex;
-    width: 80vw;
-    padding-left: 5px;
+    width: 100%;
+    left: -2vw;
+    position: relative;
 }
 
 .recommendedArticles:focus-within,
@@ -225,7 +231,7 @@ z-index: 9999;
     overflow-x: hidden;
     height: 15vw; 
     width: 100%;
-    padding-left: 3%;
+    margin-left: 1%;
     padding-top: 5vw;
     padding-bottom: 5vw;
     //animation
@@ -233,6 +239,8 @@ z-index: 9999;
     .article:focus, .article:hover {//When hover over, zoom/enlarge the article
         transform: scale(1.5);
         z-index: 99;
+        overflow-x: visible;
+        overflow-y: visible;
     }
     a:focus ~ a .article,
     a:hover ~ a .article {//Move all the adjacent articles to the right
@@ -240,7 +248,8 @@ z-index: 9999;
     }
     .article {//Sets CSS for individual articles
         position: relative;
-        padding-right: 5px; 
+        padding-right: 0.5vw;
+        padding-left: 0.5vw; 
         width: 15vw; 
         height: 15vw; 
         text-align: center;
@@ -252,23 +261,23 @@ z-index: 9999;
         }
         .articleSimilarity {//Sets CSS for the similarity tag above the article
             position: absolute;
-            bottom: 90%;
+            bottom: 82%;
             text-align: left;
             background-color: darkgreen;
             opacity: 0.8;
             color: $mainFontColor;
             position: absolute;
-            font-size: 1.3vw;
+            font-size: 1.25vw;
         }
         p {//Sets CSS for the caption below the article
             position: absolute;
             bottom: -10%;
-            width: 97%;
-            background-color: #695f00;
+            width: 15vw;
+            background-color: $altFontColor;
             opacity: 0.8;
             color: $mainFontColor;
             position: absolute;
-            font-size: 1.3vw;
+            font-size: 1.25vw;
             word-wrap: break-word;
         }
     }
@@ -287,7 +296,7 @@ z-index: 9999;
     padding: 3px;
     width: 2vw;
     height: 2vw;
-    position: absolute;
+    position: relative;
     cursor: pointer;
     margin-top: 10vw;
   }
@@ -301,7 +310,8 @@ z-index: 9999;
 .arrowRight {//Sets CSS for the right arrow
     @extend .arrow;
     transform: rotate(-45deg);
-    left: 92%;
+    position: relative;
+    margin-left: 1%;
 }
 
 
@@ -348,6 +358,16 @@ z-index: 9999;
     left: -27vw;
 }
 
+.inputSavePreference {
+    font-size: 1.5vw;
+    text-align: center;
+    border-radius: 8px;
+    background-color: $altFontColor;
+    color: $mainFontColor;
+    margin-top: 0.5vw;
+    margin-bottom: 0.5vw;
+}
+
 .preferenceList, .teachersList {//Wrapper to contain all the preferences/users
     width: 90vw;
     height: 100%;
@@ -360,16 +380,19 @@ z-index: 9999;
 .userPreferred, .teacherSelected {//Color the state if the tag is preferred or the teacher is selected
     @extend .preferenceBox; 
     background-color: green;
+    border-radius: 8px;
 }
  
 .userNotPreferred {//Color the state if the tag is not preferred
     @extend .preferenceBox;
-    background-color: red;       
+    background-color: red;
+    border-radius: 8px;       
 }
 
 .userMayTry {//Color the state if the tag is considered to be tried
     @extend .preferenceBox;
-    background-color: goldenrod;       
+    background-color: goldenrod;
+    border-radius: 8px;       
 }
 
 .preferenceBox, .teacherBox {//CSS for the individual boxes.
@@ -379,17 +402,22 @@ z-index: 9999;
     display: inline-flex;
     padding: 1vw;
     cursor: pointer;
-
-    p {//CSS for the captions below the boxes
+    .preferenceStats{//CSS for the preference stats
+        top: -0.5vw;
+        background-color: blue;
+    }
+    p {
         position: absolute;
         z-index: 10;
-        bottom: -0.5vw;
-        background-color: $altFontColor;
         opacity: 0.9;
         text-align: center;
         width: 15vw;
-        word-wrap: wrap;
+        word-wrap: anywhere;
         font-size: 1.5vw;
+    }
+    .preferenceLabel, .teacherLabel {//CSS for the captions below the boxes
+        bottom: -0.5vw;
+        background-color: $altFontColor;
     }
 }
 
@@ -422,7 +450,7 @@ z-index: 9999;
     display: inline-flex;
     text-align: center;
     position: relative;
-    background-color: brown;
+    background-color: $altFontColor;
     width: 100%;
     //Style for the youtube video or display picture
     iframe, img {
@@ -440,6 +468,7 @@ z-index: 9999;
         h3{//Style for the header
             @extend h3;
             text-align: center;
+            color: $mainFontColor;
         }
         p {
             font-size: 1.5vw;
@@ -449,12 +478,14 @@ z-index: 9999;
 
 //CSS for the search module
 .search {
-    font-size: 2vw;
-    padding-top: 2vw;
+    font-size: 1.5vw;
+    padding-top: 3vw;
     float: right;
     input {//Width of input bar
-        width: 30vw;
+        width: 50vw;
+        font-size: 1.5vw;
     }
+    button { font-size: 1.5vw; }
     //Animation
     animation-name: fromLeft;
     animation-duration: 2s;
@@ -468,30 +499,21 @@ z-index: 9999;
 
 //All Class Stats Mod
 #allClassStatsTable{//CSS for the table
-    left: -20vw;
-    position: relative;
+    @extend table;
+    width: 100%;
     background: green;
-    border: 2px solid white;
-    border-collapse: collapse;
-    width: 70vw;
-    tr, th, td {
-        border: 2px solid white;
-    }
 }
 
 //Recommendation Records Mod
 .yellowtable{
-    @extend #allClassStatsTable;
+    @extend table;
     background: red;
-    left: 2vw;
-
 }
 
 //Your Class Stats Mod
 .charts{//CSS for the google chart display
     display: inline-block;
     position: relative;
-    left: -25vw;
 }
 
 .yourClassStatsTable{//CSS for the table

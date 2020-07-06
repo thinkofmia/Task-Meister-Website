@@ -121,10 +121,10 @@ Display left hand side text
             list3 refers to the May Try List
     -->
     <form id="preferenceForm" method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>" >
-        <br><span style="background-color: green;">Preferred: </span><span id="text_list1">[]</span><input type="text" name="list1" id="input_list1" placeholder = "[]"> 
-        <br><span style="background-color: red;">Not Preferred: </span><span id="text_list2">[]</span><input type="text" name="list2" id="input_list2" placeholder = "[]"> 
-        <br><span style="background-color: goldenrod;">May Try: </span><span id="text_list3">[]</span><input type="text" name="list3" id="input_list3" placeholder = "[]"> 
-        <br><input type="submit" name="submit">
+        <br><span style="background-color: green;">Preferred</span>: <span id="text_list1">[]</span><input type="text" name="list1" id="input_list1" placeholder = "[]"> 
+        <br><span style="background-color: red;">Not Preferred</span>: <span id="text_list2">[]</span><input type="text" name="list2" id="input_list2" placeholder = "[]"> 
+        <br><span style="background-color: goldenrod;">May Try</span>: <span id="text_list3">[]</span><input type="text" name="list3" id="input_list3" placeholder = "[]"> 
+        <br><input class="inputSavePreference" type="submit" name="submit" value="Save Preferences">
     </form>
 </div>
 
@@ -144,11 +144,12 @@ Display left hand side text
             -->
             <img src="/taskmeisterx/modules/mod_taskmeister_choosepreference/images/<?php echo $key;?>.jpg" width="100%" height="100%" onerror="this.src='/taskmeisterx/modules/mod_taskmeister_choosepreference/images/default.jpg';"/>
             <!--Display label of tags, including tag name and number of uses-->
-            <p class = "preferenceLabel"><?php echo $key; ?>: <?php echo $value; ?> uses</p>
+            <p class = "preferenceLabel"><?php echo $key; ?></p>
+            <p class = "preferenceStats"><?php echo $value["likes"]; ?> 👍 <?php echo $value["deployed"]; ?> 👨‍💻</p>
         </div>
         <?php $count = $count + 1; ?>
         <?php if ($count==25): ?>
-            <button onclick="getAllTags();" id="getMoreBtn">Get All Tags</button><br>
+            <button onclick="getAllTags();" id="getMoreBtn" class="inputSavePreference" >Get All Tags</button><br>
             <?php echo "<span id='getMore'>"; ?>
         <?php endif; ?>
         </script>

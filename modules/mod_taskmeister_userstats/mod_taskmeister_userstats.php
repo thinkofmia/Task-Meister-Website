@@ -20,7 +20,6 @@ require_once dirname(__FILE__) . '/helper.php';//used because our helper functio
 
 $displayHeader = modUserStats::getHeader($params);//invoke helper class method
 $displayText = modUserStats::getText($params);//invoke helper class method
-require JModuleHelper::getLayoutPath('mod_taskmeister_userstats');
 
 function createList($array_str){
     /**
@@ -43,6 +42,7 @@ $db = Factory::getDbo();
 $me = Factory::getUser();
 //Set user id and username
 $userID = $me->id;
+$name = $me->name;
 $username = $me->username;
 
 //Querying for stats of a particular user
@@ -53,12 +53,6 @@ $query->select($db->quoteName(array('es_userid','es_userpreference','es_pagedepl
 $db->setQuery($query);
 $results2 = $db->loadAssocList();//Save results as $results2
 
-//Style for table
-echo "<style> 
-    table, tr, th, td {
-    border: 2px solid black;
-    }
-</style>";
 //If user is a guest, hide the table instead
 if ($userID==0){
     echo "You have to login first to see this stats. ";
@@ -67,32 +61,14 @@ else{//If user has already login, show the external user stats
     foreach ($results2 as $row) {//For loop for each item in $results2
         if ($userID==$row['es_userid']){//Double confirmation that $userID is equal to the current user's
             //Create a list for deployed pages
-            $deployedList = createList($row['es_pagedeployed']);
+            $deployedList = json_decode($row['es_pagedeployed']);
             //Create a list for liked pages
-            $likedList = createList($row['es_pageliked']);
+            $likedList = json_decode($row['es_pageliked']);
             //Create a list for disliked pages
-            $dislikedList = createList($row['es_pagedisliked']);
+            $dislikedList = json_decode($row['es_pagedisliked']);
             //Set the preference list as the one in the results
-            $preferenceList = $row['es_userpreference'];
-            //Print out the data
-            echo "<table>
-            <tr>
-                <th>Username</th>
-                <th>ID</th>
-                <th>Preference List</th>
-                <th>Deployed Pages</th>
-                <th>Liked Pages</th>
-                <th>Disliked Pages</th>
-            </tr>
-            <tr>
-                <td>" . $username . "</td>
-                <td>" . $userID . "</td>
-                <td>" . $preferenceList . "</td>
-                <td> ". $deployedList. " </td> 
-                <td>" . $likedList . "</td>
-                <td>" . $dislikedList . "</td>
-            </tr>"; 
-            echo "</table>";
-            }
+            $preferenceList = json_decode($row['es_userpreference']);
+        }
     }
+    require JModuleHelper::getLayoutPath('mod_taskmeister_userstats');
 }

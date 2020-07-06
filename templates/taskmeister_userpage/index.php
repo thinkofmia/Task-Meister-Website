@@ -34,17 +34,25 @@ else $username = "Login";
 <link rel="stylesheet" href="<?php echo $this->baseurl ?>/templates/system/css/system.css" type="text/css" />
 <link rel="stylesheet" href="<?php echo $this->baseurl ?>/templates/system/css/general.css" type="text/css" />
 <link rel="stylesheet" href="<?php echo $this->baseurl ?>/templates/<?php echo $this->template; ?>/css/template.css" type="text/css" />
+<link href="https://fonts.googleapis.com/css2?family=BioRhyme&display=swap" rel="stylesheet">
 <script src="https://www.google.com/jsapi"></script>
 </head>
 
 <!-- Contain the website code which controls the layout-->
 <body>
-    <div class="topnav" id="myTopnav">
+<!--Scripts-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"></script>
+<!--Navigation Bar-->
+<div class="topnav" id="myTopnav">
     <a id = "logolink" href="<?php echo $this->baseurl; ?>/index.php/home"><!-- Set clickable logo-->
         <img class = "logo"  src="<?php echo $this->baseurl; ?>/templates/<?php echo $this->template; ?>/images/TaskMeisterLogo.JPG" alt="Task Meister Logo" class="logo" />
     </a>
     <!--Home-->
     <?php if($urlPath==$this->baseurl."/index.php/home") : ?>
+        <a class="active" href="<?php echo $this->baseurl; ?>/index.php/home">
+    <?php elseif($urlPath==$this->baseurl."/index.php") : ?>
+        <a class="active" href="<?php echo $this->baseurl; ?>/index.php/home">
+    <?php elseif($urlPath==$this->baseurl."/") : ?>
         <a class="active" href="<?php echo $this->baseurl; ?>/index.php/home">
     <?php else: ?>
         <a href="<?php echo $this->baseurl; ?>/index.php/home">
@@ -105,7 +113,7 @@ else $username = "Login";
     <?php else: ?>
     <a id="loginNav" href="<?php echo $this->baseurl; ?>/index.php/login">
     <?php endif; ?>
-        <?php echo $username; ?>  
+        <?php echo substr($username,0,13); ?>  
     </a> 
     <a href="javascript:void(0);" class="icon" onclick="hamburgerMenu();">
         🍔

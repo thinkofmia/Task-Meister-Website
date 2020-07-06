@@ -25,7 +25,7 @@ $list2 = json_decode($recommendedContents);
 <?php if (($params->get('filter')) == "choice_teacher") : ?>
   <?php if ($teachersRecommendationDict) : ?>
       <?php foreach ($teachersRecommendationDict as $name => $contents) : ?>
-        <ul class="scrollbarnews<?php echo $moduleclass_sfx; ?> mod-list">
+        <ul>
         <h3><?php echo $name; ?>'s Recommendation</h3>
         <div class="articlesRow">
           <!-- Arrow button to scroll left-->
@@ -86,13 +86,15 @@ $list2 = json_decode($recommendedContents);
       <!--For loop for the items in the list-->
       <?php foreach ($list2 as $key => $value) : ?>
       <!--Url link to the article page-->
-      <a href="?option=com_content&view=article&id=<?php echo $key; ?>" itemprop="url">
+      <a title="<?echo $value[0]; ?>" href="?option=com_content&view=article&id=<?php echo $key; ?>" itemprop="url">
           <div class="article">
             <!--Image of the article-->
             <img onerror="this.src='/taskmeisterx/modules/mod_taskmeister_recommendarticles/img/default.jpg';" src="<?php echo json_decode($value[1])->image_intro; ?>" width="100%" height="100%" />
             <!--Text found on the article-->
             <p class="articleSimilarity">Similarity: <?php echo json_encode($value[2]); ?>%</p>
-            <p><?php echo json_encode($value[0]); ?></p>
+            <p>
+            <?php if (strlen($value[0])>50) echo substr($value[0], 0, 50)."...";
+              else echo $value[0]; ?></p>
           </div>
       </a>
       <?php endforeach; ?>
