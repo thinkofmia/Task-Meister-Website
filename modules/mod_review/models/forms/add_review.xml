@@ -3,45 +3,16 @@
     <fieldset name="details" label="MOD_REVIEW_FORM_DETAILS"
               addfieldpath="/modules/mod_review/models/fields">
         <field
-            name="summary"
-            type="textarea"
-            label="MOD_REVIEW_FORM_SUMMARY_LABEL"
-            description="MOD_REVIEW_FORM_SUMMARY_DESC"
-            hint="MOD_REVIEW_FORM_SUMMARY_HINT"
-            required="true"
-            cols="120"
-            rows="10"
-        />
-        <field 
-            name="ease_rating"
+            name="rating"
             type="Rating"
-            label="MOD_REVIEW_FORM_EASE_RATING_LABEL"
-            description="MOD_REVIEW_FORM_EASE_RATING_DESC"
+            label="MOD_REVIEW_FORM_REVIEW_RATING_LABEL"
             required="true"
         />
-        <field 
-            name="ease"
+        <field
+            name="review"
             type="textarea"
-            label="MOD_REVIEW_FORM_EASE_LABEL"
-            description="MOD_REVIEW_FORM_EASE_DESC"
-            hint="MOD_REVIEW_FORM_EASE_HINT"
-            required="true"
-            cols="120"
-            rows="10"
-        />
-        <field 
-            name="effectiveness_rating"
-            type="Rating"
-            label="MOD_REVIEW_FORM_EFFECTIVENESS_RATING_LABEL"
-            description="MOD_REVIEW_FORM_EFFECTIVENESS_RATING_DESC"
-            required="true"
-        />
-        <field 
-            name="effectiveness"
-            type="textarea"
-            label="MOD_REVIEW_FORM_EFFECTIVENESS_LABEL"
-            description="MOD_REVIEW_FORM_EFFECTIVENESS_DESC"
-            hint="MOD_REVIEW_FORM_EFFECTIVENESS_HINT"
+            label="MOD_REVIEW_FORM_REVIEW_LABEL"
+            hint="MOD_REVIEW_FORM_REVIEW_HINT"
             required="true"
             cols="120"
             rows="10"

@@ -58,7 +58,7 @@ class ReviewTableReview extends JTable
 
         // ignore generated columns
         unset($fields['auid']);
-        unset($fields['overall_rating']);
+        unset($fields['rating']);
 
         if ($fields)
         {

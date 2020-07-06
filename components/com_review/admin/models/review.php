@@ -126,7 +126,6 @@ class ReviewModelReview extends JModelAdmin
 
 				// ignore generated columns
 				unset($table->auid);
-				unset($table->overall_rating);
 			}
 			// Create the value for the `created` column for a new record
 			else

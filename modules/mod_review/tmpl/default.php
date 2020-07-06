@@ -31,27 +31,16 @@ $document->addScript(JUri::base() . 'modules/mod_review/js/review.js');
                 <?php echo ModReviewHelper::generateReviewStatistics($testimonials); $counter = 0; foreach($testimonials as $row): ?>
                     <div class="review<?php echo ($counter >= 3 ? ' read-all' . ' read-more-' . floor($counter / 3) : '');?>">
                         <div class="review-summary">
-                            <?php echo ModReviewHelper::renderStarRating($row->overall_rating); ?><h2> Summary</h2>
-                            <div>
-                                <p><?php echo $row->summary; ?></p>
+                            <?php echo ModReviewHelper::renderStarRating($row->rating); ?><?php echo ModReviewHelper::getName($row->uid) . " (" . ModReviewHelper::fmtDate($row->updated) . ")";?>
+                            <div style="padding-top: 30px;">
+                                <p><?php echo ModReviewHelper::replaceYTUrl($row->review); ?></p>
                             </div>
-                            <div>
+                            <!-- <div>
                                 <span>Posted by: <?php echo ModReviewHelper::getName($row->uid);?> on <?php echo ModReviewHelper::fmtDate($row->created); ?></span><br/>
                                 <span>Last updated: <?php echo ModReviewHelper::fmtDate($row->updated); ?></span><br/>
-                            </div>
+                            </div> -->
                         </div>
-                        <div class="review-ease">
-                            <?php echo ModReviewHelper::renderStarRating($row->ease_rating); ?><h2> Ease of use</h2>
-                            <div>
-                                <p><?php echo $row->ease; ?></p>
-                            </div>
-                        </div>
-                        <div class="review-effectiveness">
-                            <?php echo ModReviewHelper::renderStarRating($row->effectiveness_rating); ?><h2> Effectiveness</h2>
-                            <div>
-                                <p><?php echo $row->effectiveness; ?></p>
-                            </div>
-                        </div>
+                        <hr/>
                     </div>
                 <?php $counter++; endforeach; ?>
                 <span>
@@ -66,7 +55,7 @@ $document->addScript(JUri::base() . 'modules/mod_review/js/review.js');
 <div id="review-form">
     <section>
         <?php $form = JForm::getInstance('add_review', __DIR__.'/../models/forms/add_review.xml'); ?>
-        <div class="text-center">
+        <div class="no-text-center">
             <form action="" method="POST" name="submit_review" id="submit_review">
                 <div class="form-vertical">
                     <fieldset class="submit_review">

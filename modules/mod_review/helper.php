@@ -30,13 +30,12 @@ class ModReviewHelper
         $query = $db->getQuery(true);
 
         // Select all records from the 'reviews' table where article ID is the one of the article being viewed
-        // Order it by column overall_rating (automatically generated column from db)
-        //   overall_rating: CEILING((`ease_rating` + `effectiveness_rating`)/2)
+        // Order it by column rating
         $query
             ->select('*')
             ->from($db->quoteName('reviews'))
             ->where($db->quoteName('aid') . ' = ' . $db->quote(JRequest::getVar('id')))
-            ->order($db->quoteName('overall_rating') . ' DESC');
+            ->order($db->quoteName('rating') . ' DESC');
         
         // Additionally filter to get the specified testimonial if $uid is passed
         // Else only get published reviews for display
@@ -83,20 +82,14 @@ class ModReviewHelper
             $review = (object) array(
                 'aid' => 0,
                 'uid' => 0,
-                'summary' => '',
-                'ease_rating' => '',
-                'ease' => '',
-                'effectiveness_rating' => '',
-                'effectiveness' => '',
+                'rating' => '',
+                'review' => ''
             );
 
             $review->aid                    = $input->getInt('id');
             $review->uid                    = (int) Factory::getUser()->id;
-            $review->summary                = $input->getString('summary');
-            $review->ease_rating            = $input->getInt('ease_rating');
-            $review->ease                   = $input->getString('ease');
-            $review->effectiveness_rating   = $input->getInt('effectiveness_rating'); 
-            $review->effectiveness          = $input->getString('effectiveness');
+            $review->rating                 = $input->getInt('rating');
+            $review->review                 = $input->getString('review');
 
             // Get a db connection
             $db = Factory::getDbo();
@@ -119,6 +112,9 @@ class ModReviewHelper
                 {
                     $msg = 'submit_failure';
                 }
+                // notify admin after review is uploaded if it's not published by default
+                if(!$review->published)
+                    self::notifyAdmin($review);
             }
             // Update db record otherwise
             else
@@ -142,6 +138,86 @@ class ModReviewHelper
             $uri->setFragment('review-form');
             $app->redirect($uri->render());
         }
+    }
+
+    /**
+     * Method to send an email notifying the administrators of an unpublished review for approval
+     *  An array of user group names mapped to their group id
+     *   $group_names = array(
+     *       2 => 'registered',
+     *       3 => 'author',
+     *       4 => 'editor',
+     *       5 => 'publisher',
+     *       6 => 'manager',
+     *       7 => 'administrator',
+     *       8 => 'super_user',
+     *       10 => 'new_user',
+     *       11 => 'teacher',
+     *       12 => 'hod'
+     *   );
+     */
+    public static function notifyAdmin($review = array())
+    {
+        // get current user
+        $user = Factory::getUser();
+        
+        // get current article
+        $article_id = Factory::getApplication()->input->getInt('id');
+
+        // query db for article title
+        $db = Factory::getDbo();
+        $query = $db->getQuery(true)
+            ->select('title')
+            ->from('#__content')
+            ->where('id = ' . $article_id);
+        $db->setQuery($query);
+
+        $article_title = $db->loadObject()->title;
+
+        // get mailer object
+        $mailer = Factory::getMailer();
+
+        // set sender according to site email
+        $config = Factory::getConfig();
+        $sender = array( 
+            $config->get( 'mailfrom' ),
+            $config->get( 'fromname' ) 
+        );
+        $mailer->setSender($sender);
+
+        // set the recipient(s)
+        $access = new JAccess;
+        $list = array();
+        $admins = $access->getUsersByGroup(7);
+        foreach ($admins as $admin) {
+            array_push($list, Factory::getUser($admin)->email);
+        }
+        $mailer->addBcc($list);
+
+        // create mail
+        $subject = "New review by %s for %s at %s";
+        $subject = sprintf($subject, $user->name, $article_title, JUri::base());
+        $body = "Hello administrator,\n\nA student '%s', username '%s', user ID '%d', ";
+        $body .= "has submitted a new review for article %d: '%s'\n";
+        $body .= "You may publish/moderate/delete the review at " . JUri::base() . "administrator/index.php?option=com_review ";
+        $body .= "after logging in.\n\n";
+        $body = sprintf($body, $user->name, $user->username, $user->id, $article_id, $article_title);
+
+        if(empty($review))
+            $body .= "This is either a test or an empty review has been submitted somehow.";
+        else {
+            $body .= "Preview of review:\n";
+            $body .= "Review: " . $review->rating . "\n" . $review->review . "\n\n";
+        }
+        $mailer->setSubject($subject);
+        $mailer->setBody($body);
+
+        // send the mail
+        $sent = $mailer->Send();
+        if($sent === true)
+            echo("Mail sent!");
+        else
+            echo("Failed to send.");
     }
 
     /**
@@ -243,12 +319,8 @@ class ModReviewHelper
         // Set the various field values 
         if(!is_null($review))
         {
-            $form->setValue('summary', null, $review->summary);
-            $form->setValue('ease_rating', null, $review->ease_rating);
-            $form->setValue('ease', null, $review->ease);
-            $form->setValue('effectiveness_rating', null, $review->effectiveness_rating);
-            $form->setValue('effectiveness', null, $review->effectiveness);
-
+            $form->setValue('rating', null, $review->rating);
+            $form->setValue('review', null, $review->review);
             return true;
         }
         else 
@@ -321,10 +393,10 @@ class ModReviewHelper
      * 
      * @return  String              A html string for rendering the star
      */
-    public static function renderStarRating($rating)
+    public static function renderStarRating($rating, $css = '')
     {
         $filled = ' star-colour';
-        $html = '<div class="rating" data-vote="0">'.
+        $html = '<div class="rating" data-vote="0" style="%s">'.
                     '<div class="star-static hidden">'.
                         '<span class="full-static" data-value="0"></span>'.
                         '<span class="half-static" data-value="0"></span>'.
@@ -351,7 +423,7 @@ class ModReviewHelper
                     '</div>'.
                 '</div>';
                 
-        return $html;
+        return sprintf($html, $css);
     }
 
     /**
@@ -364,8 +436,8 @@ class ModReviewHelper
      */
     public static function generateReviewStatistics($testimonials)
     {
-        $html = '<div><ul class="review-statistics" style="list-style: none; margin-bottom: 20px; width: 20vw;">';
-        $empty_bar = '<span class="horizontal-bar-chart horizontal-bar-chart-empty" style="height: 3px; width: 71%; margin-right: 10px; margin-top: 7px; background-color: #FFFFFF; float: left;">';
+        $html = '<div><ul class="review-statistics" style="display: inline-block; list-style: none; margin-bottom: 20px; width: 20vw; min-width: 200px;">';
+        $empty_bar = '<span class="horizontal-bar-chart horizontal-bar-chart-empty" style="height: 3px; width: 50%; margin-right: 10px; margin-top: 7px; background-color: #FFFFFF; float: left;">';
         $filled_bar = '<b class="horizontal-bar-chart horizontal-bar-chart-filled" style="display: block; height: 3px; width: %d%%; background-color: #ffd700;">';
         $bar_label = '<span class="horizontal-bar-chart-label" style="margin-right: 10px; text-align: left; width: auto; min-width: 65px; padding-right: 0; overflow: hidden; float: left;">%s</span>';
 
@@ -379,22 +451,98 @@ class ModReviewHelper
         
         foreach($testimonials as $testimonial)
         {
-            $stats[floor($testimonial->overall_rating/2)]++;
+            $stats[floor($testimonial->rating/2)]++;
         }
 
+        // The number of reviews in total
         $total = array_sum($stats);
+        // Variable to hold the total stars received by the article
+        $sum = 0;
 
         foreach($stats as $stars => $present)
         {
+            $sum += $stars * $present;
             $percentage = floor($present/$total*100);
             $result_bar = $empty_bar . sprintf($filled_bar, $percentage) . '</b></span>';
-            $html .= '<li style="padding-bottom: 10px; width: auto;">' . sprintf($bar_label, ($stars . ' Stars: ')) . $result_bar . $percentage . '%</li>';
+            $html .= '<li style="padding-bottom: 10px; width: auto; white-space: nowrap;">' . sprintf($bar_label, ($stars . ' Stars: ')) . $result_bar . $percentage . '%</li>';
         }
 
-        $html .= '</ul></div>';
+        $html .= '</ul>';
 
-        //$html .= '<div style="display: inline-block; vertical-align:center;">test div</div></div>';
+        $average = $sum/$total;
+
+        $html .= sprintf('<div style="display: inline-block; height: 168px; line-height: 168px; vertical-align: top; width: 28vw; text-align:center; margin-bottom: 20px;"><b>%1.1f</b> / 5%s</div></div>', $average, self::renderStarRating($average * 2, 'display: inline-block; float: none; padding-left: 10px; height: 168px;'));
 
         return $html;
+    }
+
+    /**
+     * Method to parse a string for the ID of a video, creating a youtube embed with html
+     *  
+     * @param   String  $url    A url containing the ID of a youtube video
+     * @param   String  $width  The width of the resulting iframe
+     * @param   String  $height The height of the resulting iframe
+     * 
+     * @return  String          The html defining the iframe for the youtube video embed
+     */
+    public static function createYTEmbed($url, $width = '100%%', $height = '100%%')
+    {
+        // format string for container for iframe
+        $container = '<div style="overflow: hidden; padding-top: 56.25%%; position: relative;">%s</div>';
+        // format string defining the iframe for the embed link
+        $embed = '<iframe style="display: block; margin-top: 10px; margin-bottom: 10px; border: 0; left: 0; position: absolute; top: 0; width: ' . $width . '; height: ' . $height . ';" src="https://www.youtube.com/embed/%s"'.
+            ' allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
+        $html = '';
+        $query = array();
+
+        // Handle multiple url formats, storing matches in $query
+        // if the url has a 'v' parameter
+        if(preg_match('/\S+v=(\S+)/', $url, $query))
+        {
+        } // if the url is an embed link
+        else if(preg_match('/\S+\/embed\/(\S+)/', $url, $query))
+        {
+        } // url has the form youtu.be/<id>[?t=[[0-9]+]]
+        else
+        {
+            preg_match('/youtu\.be\/(\S+)/', $url, $query);
+        }
+
+        // Replace placeholder id with video ID
+        $html = sprintf($embed, $query[1]);
+        $html = sprintf($container, $html);
+
+        return $html;
+    }
+
+    /**
+     * A wrapper function for createYTEmbed(), calling the function on all matches for youtube video urls
+     *  and returning the embedding code for the same video
+     * Valid (recognised) youtube video url formats:
+     *  https://www.youtube.com/watch?v=0DyCnca5nBo
+     *  https://youtube.com/watch?v=0DyCnca5nBo
+     *  www.youtube.com/watch?v=0DyCnca5nBo
+     *  youtube.com/watch?v=0DyCnca5nBo
+     *  https://www.youtube.com/embed/0DyCnca5nBo
+     *  www.youtube.com/embed/0DyCnca5nBo
+     *  https://youtube.com/embed/0DyCnca5nBo
+     *  youtube.com/embed/0DyCnca5nBo
+     *  https://youtu.be/0DyCnca5nBo
+     *  youtu.be/0DyCnca5nBo
+     *  https://youtu.be/0DyCnca5nBo?t=6
+     * 
+     * @param   String  $text   Submitted text by the user
+     * 
+     * @return  String          The same text with the youtube video url replaced by the embedding code
+     */
+    public static function replaceYTUrl($text)
+    {
+        // regex for a valid youtube video url
+        $regex = '/(http(s)?:\/\/)?(www\.)?youtu(\.be|be\.com)\/(\S+)/';
+        return preg_replace_callback($regex,
+            function($matches) {
+                return self::createYTEmbed($matches[0]);
+            },
+            $text);
     }
 }

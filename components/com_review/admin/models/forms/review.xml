@@ -24,51 +24,21 @@
             required="true"
         />
         <field 
-            name="summary"
-            type="textarea"
-            label="COM_REVIEW_REVIEW_SUMMARY_LABEL"
-            description="COM_REVIEW_REVIEW_SUMMARY_DESC"
-            hint="COM_REVIEW_REVIEW_SUMMARY_HINT"
-            required="true"
-            cols="255"
-            rows="10"
-        />
-        <field 
-            name="ease_rating"
+            name="rating"
             type="number"
-            label="COM_REVIEW_REVIEW_EASE_RATING_LABEL"
-            description="COM_REVIEW_REVIEW_EASE_RATING_DESC"
+            label="COM_REVIEW_REVIEW_RATING_LABEL"
+            description="COM_REVIEW_REVIEW_RATING_DESC"
             min="0"
             max="10"
             step="1"
             required="true"
         />
         <field 
-            name="ease"
+            name="review"
             type="textarea"
-            label="COM_REVIEW_REVIEW_EASE_LABEL"
-            description="COM_REVIEW_REVIEW_EASE_DESC"
-            hint="COM_REVIEW_REVIEW_EASE_HINT"
-            required="true"
-            cols="255"
-            rows="10"
-        />
-        <field 
-            name="effectiveness_rating"
-            type="number"
-            label="COM_REVIEW_REVIEW_EFFECTIVENESS_RATING_LABEL"
-            description="COM_REVIEW_REVIEW_EFFECTIVENESS_RATING_DESC"
-            min="0"
-            max="10"
-            step="1"
-            required="true"
-        />
-        <field 
-            name="effectiveness"
-            type="textarea"
-            label="COM_REVIEW_REVIEW_EFFECTIVENESS_LABEL"
-            description="COM_REVIEW_REVIEW_EFFECTIVENESS_DESC"
-            hint="COM_REVIEW_REVIEW_EFFECTIVENESS_HINT"
+            label="COM_REVIEW_REVIEW_REVIEW_LABEL"
+            description="COM_REVIEW_REVIEW_REVIEW_DESC"
+            hint="COM_REVIEW_REVIEW_REVIEW_HINT"
             required="true"
             cols="255"
             rows="10"

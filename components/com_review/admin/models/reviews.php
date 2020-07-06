@@ -32,10 +32,8 @@ class ReviewModelReviews extends JModelList
                 'id',
                 'aid',
                 'uid',
-                'ease_rating',
-                'ease',
-                'effectiveness_rating',
-                'effectiveness',
+                'rating',
+                'review',
                 'published'
             );
         }
@@ -74,12 +72,11 @@ class ReviewModelReviews extends JModelList
             {
                 $like = $db->quote(substr($search, 4));
                 $query->where('uid = ' . $like);
-            } // Check the text fields for summary, ease and effectiveness
+            } // Check the text fields for review
             else
             {
                 $like = $db->quote('%' . $search . '%');
-                //$query->where(array('ease LIKE ' . $like, 'effectiveness LIKE ' . $like), 'OR');
-                $query->where('summary LIKE ' . $like . 'OR ease LIKE ' . $like . ' OR effectiveness LIKE ' . $like);
+                $query->where('review LIKE ' . $like);
             }
         }
 

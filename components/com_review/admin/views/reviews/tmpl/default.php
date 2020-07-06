@@ -42,20 +42,11 @@ $listDirn   = $this->escape($this->filter_order_Dir);
                 <th width="5%">
                     <?php echo JHtml::_('grid.sort', 'COM_REVIEW_REVIEWS_UPDATED', 'updated', $listDirn, $listOrder); ?>   
                 </th>
-                <th width="11%">
-                    <?php echo JHtml::_('grid.sort', 'COM_REVIEW_REVIEWS_SUMMARY', 'summary', $listDirn, $listOrder); ?>   
-                </th>
                 <th width="5%">
-                    <?php echo JHtml::_('grid.sort', 'COM_REVIEW_REVIEWS_EASE_RATING', 'ease_rating', $listDirn, $listOrder); ?>
+                    <?php echo JHtml::_('grid.sort', 'COM_REVIEW_REVIEWS_RATING', 'rating', $listDirn, $listOrder); ?>
                 </th>
-                <th width="29%">
-                    <?php echo JHtml::_('grid.sort', 'COM_REVIEW_REVIEWS_EASE', 'ease', $listDirn, $listOrder); ?>
-                </th>
-                <th width="5%">
-                    <?php echo JHtml::_('grid.sort', 'COM_REVIEW_REVIEWS_EFFECT_RATING', 'effectiveness_rating', $listDirn, $listOrder); ?>
-                </th>
-                <th width="29%">
-                    <?php echo JHtml::_('grid.sort', 'COM_REVIEW_REVIEWS_EFFECT', 'effectiveness', $listDirn, $listOrder); ?>
+                <th width="74%">
+                    <?php echo JHtml::_('grid.sort', 'COM_REVIEW_REVIEWS_REVIEW', 'review', $listDirn, $listOrder); ?>   
                 </th>
                 <th width="5%">
                     <?php echo JHtml::_('grid.sort', 'COM_REVIEW_REVIEWS_PUBLISHED', 'published', $listDirn, $listOrder); ?>
@@ -102,27 +93,12 @@ $listDirn   = $this->escape($this->filter_order_Dir);
 						</td>
 						<td>
                             <a href="<?php echo $link; ?>" title="<?php echo JText::_('COM_REVIEW_EDIT_REVIEW'); ?>">
-                                <?php echo $row->summary; ?>
+                                <?php echo $row->rating; ?>
                             </a>
 						</td>
 						<td>
                             <a href="<?php echo $link; ?>" title="<?php echo JText::_('COM_REVIEW_EDIT_REVIEW'); ?>">
-                                <?php echo $row->ease_rating; ?>
-                            </a>
-						</td>
-						<td>
-                            <a href="<?php echo $link; ?>" title="<?php echo JText::_('COM_REVIEW_EDIT_REVIEW'); ?>">
-                                <?php echo $row->ease; ?>
-                            </a>
-						</td>
-						<td>
-                            <a href="<?php echo $link; ?>" title="<?php echo JText::_('COM_REVIEW_EDIT_REVIEW'); ?>">
-                                <?php echo $row->effectiveness_rating; ?>
-                            </a>
-						</td>
-						<td>
-                            <a href="<?php echo $link; ?>" title="<?php echo JText::_('COM_REVIEW_EDIT_REVIEW'); ?>">
-                                <?php echo $row->effectiveness; ?>
+                                <?php echo $row->review; ?>
                             </a>
 						</td>
 						<td align="center">
