@@ -333,9 +333,9 @@ class plgTaskMeisterTM_recommender extends JPlugin
     function recommendTrendingArticles($noOfArticles, $userid, $parameter1){
         $db = Factory::getDbo();//Gets database
         //Set Additional Filter Mode if has keyword
-        if (strlen($parameter1)>0){
-            $searchMode = true;
-            $keyword = " ".$parameter1." ";
+        if (strlen($parameter1)>0){//Disable search mode for trending articles
+            //$searchMode = true; 
+            $keywords = explode(" ",$parameter1);//Divide up keywords
         }
         //Get last month date
         $today = date("Y-m-d");
@@ -385,7 +385,6 @@ class plgTaskMeisterTM_recommender extends JPlugin
             if ($count<$noOfArticles){
                 //If search mode is on
                 if (isset($searchMode)){
-                    $counter = 0;//Reset counter for search mode
                     //Query for database article contents (to check within text)
                     $query = $db->getQuery(true);
                     $query->select($db->quoteName(array('*')))
@@ -393,14 +392,48 @@ class plgTaskMeisterTM_recommender extends JPlugin
                         ->where($db->quoteName('id') . ' = ' . intval($key));
                     $db->setQuery($query);
                     $articleContents = $db->loadAssoc();
-                    //Check insider title
-                    if (stristr($articleContents['title'], $keyword)) $counter = $counter + 10;//Exact Keyword
-                    if (stristr($articleContents['title'], $parameter1)) $counter = $counter + 1;//Substring
-                    //Check inside texts
-                    if (stristr($articleContents['introtext'], $keyword)) $counter = $counter + substr_count($articleContents['introtext'], $parameter1);
-                    if (stristr($articleContents['fulltext'], $keyword)) $counter = $counter + substr_count($articleContents['fulltext'], $parameter1);
+                    //Get article info database (to check within tags)
+                    $query2 = $db->getQuery(true);
+                    $query2->select($db->quoteName(array('es_tags')))
+                        ->from($db->quoteName('#__customtables_table_articlestats'))
+                        ->where($db->quoteName('es_articleid') . ' = ' . intval($key));
+                    $db->setQuery($query2);
+                    $results_tag = $db->loadAssocList();
+                    //Set Variables
+                    $counter = 0; //Counter to find all str searches
+                    $totalSearchModifier = 0;
+                    //Loop for each keyword
+                    foreach ($keywords as $keyword){
+                        $needle = false;//Needle to find if keyword is found
+                        $searchModifier = 0;//Reset this word modifier
+                        //Check insider title
+                        if (stristr($articleContents['title'], $keyword)){
+                            $needle = true;
+                            $searchModifier += 10;
+                        }
+                        //Check inside texts
+                        if (stristr($articleContents['introtext'], $keyword)){
+                            $needle = true;
+                            $searchModifier += substr_count($articleContents['introtext'], $keyword);
+                        } 
+                        if (stristr($articleContents['fulltext'], $keyword)){
+                            $needle = true;
+                            $searchModifier += substr_count($articleContents['fulltext'], $keyword);
+                        } 
+                        foreach($results_tag as $row_tag){
+                            if (stristr($row_tag, $keyword)){
+                                $searchModifier +=2;
+                                $needle = true;
+                            }
+                        }
+                        //If needle exists add to counter
+                        if ($needle){
+                            $counter+=1;
+                            $totalSearchModifier += $searchModifier;
+                        } 
+                    }
                     //Check counter
-                    if ($counter==0) $val = -1;//If not inside query, remove it
+                    if ($counter<sizeof($keywords)) $val = -1;//If not inside query, remove it
                 }
                 //Add to final list
                 if ($val > 0){
@@ -420,7 +453,15 @@ class plgTaskMeisterTM_recommender extends JPlugin
         $db = Factory::getDbo();//Gets database
         //Set Additional Filter Mode if has keyword
         if ($mode!="Selected Tag" && strlen($parameter1)>0){
-                $searchMode = true;
+            //Activate search mode
+            $searchMode = true;
+            //Make keywords into an array
+            $keywords = explode(" ",$parameter1);//Divide up keywords
+            echo "<script>console.log('Getting keywords: ".json_encode($keywords)."')</script>";
+            //Debug counters
+            $allKeywordCounter = 0;
+            $anyKeywordCounter = 0;
+            echo "<script>console.log('Mode Selected: Only show results if all keywords exist. ')</script>";
         }
         //Get external user table (custom table) To find out list of liked, deployed and disliked articles
         $query = $db->getQuery(true);
@@ -553,14 +594,6 @@ class plgTaskMeisterTM_recommender extends JPlugin
                 $weighingValue = $weightage - $touchBeforeModifier + $likedModifier*($row['es_totallikes'] - $row['es_totaldislikes']) + $row['es_totaldeployed']*$deployedModifier;
                 //Bonus if search mode
                 if (isset($searchMode)){
-                    $keyword = " ".$parameter1." ";
-                    $counter = 0; //Counter to find str searches
-                    //Based on number of times searched, add to counter
-                    if (stristr($row['es_title'], $keyword)) $counter = $counter + 40;//Exact Keyword
-                    if (stristr($row['es_title'], $parameter1)) $counter = $counter + 1;//Substring
-                    foreach($articleTags as $row_tag){
-                        if (stristr($row_tag, $keyword)) $counter = $counter + 2;
-                    }
                     //Query for database article contents (to check within text)
                     $query = $db->getQuery(true);
                     $query->select($db->quoteName(array('*')))
@@ -568,20 +601,64 @@ class plgTaskMeisterTM_recommender extends JPlugin
                         ->where($db->quoteName('id') . ' = ' . $row['es_articleid']);
                     $db->setQuery($query);
                     $articleContents = $db->loadAssoc();
-                    //Check inside texts
-                    if (stristr($articleContents['introtext'], $keyword)) $counter = $counter + substr_count($articleContents['introtext'], $parameter1);
-                    if (stristr($articleContents['fulltext'], $keyword)) $counter = $counter + substr_count($articleContents['fulltext'], $parameter1);
-                    //Check counter
-                    if ($counter==0) $weighingValue = -1;//If not inside query, remove it
-                    elseif ($counter>0 && $weighingValue<=0) $weighingValue = $counter;//If not recommended yet within query
-                    else{//If recommended and within query, add recommendation
-                        $weighingValue = $weighingValue + 20*$counter;
+                    $counter = 0; //Counter to find all str searches
+                    $totalSearchModifier = 0;
+                    //Loop for each keyword
+                    foreach ($keywords as $keyword){
+                        $needle = false;//Needle to find if keyword is found
+                        $searchModifier = 0;//Reset this word modifier
+                        //Based on number of times searched, add to counter
+                        if (stristr($row['es_title'], $keyword)){
+                            $searchModifier +=40;
+                            $needle = true;
+                        }
+                        foreach($articleTags as $row_tag){
+                            if (stristr($row_tag, $keyword)){
+                                $searchModifier +=2;
+                                $needle = true;
+                            }
+                        }
+                        //Check inside texts
+                        if (stristr($articleContents['introtext'], $keyword)){
+                            $searchModifier += substr_count($articleContents['introtext'], $keyword);
+                            $needle = true;
+                        } 
+                        if (stristr($articleContents['fulltext'], $keyword)){
+                            $searchModifier += substr_count($articleContents['fulltext'], $keyword);
+                            $needle = true;
+                        } 
+                        //Check counter
+                        if ($needle){
+                            $counter += 1;
+                            $totalSearchModifier += $searchModifier;
+                        } 
+                    }
+                    //If the search matches all the keywords
+                    if ($counter>=sizeof($keywords)){
+                        //Debug
+                        
+                        $weighingValue += $totalSearchModifier*20*$counter;
+                        if ($weighingValue<1) $weighingValue = $totalSearchModifier;
+                        //Add to debug counter
+                        $allKeywordCounter +=1;
+                        $anyKeywordCounter +=1;
+                    }
+                    else if ($counter>0) {
+                        $anyKeywordCounter +=1;
+                    }
+                    else {
+                        $weighingValue = -1;
+                        //Add to debug counter
                     }
                 }
                 //Only if weightage is higher or equal to 0
                 if ($weighingValue>=0) $weighArticlesList[$row['es_articleid']] = $weighingValue; 
                 if ($highestWeighValue<$weighingValue) $highestWeighValue = $weighingValue;
             }
+        }
+        if (isset($searchMode)){//Display search counters
+            echo "<script>console.log('Total articles with any of the keywords: ".$anyKeywordCounter."')</script>";
+            echo "<script>console.log('Total articles with all the keywords: ".$allKeywordCounter."')</script>";
         }
         arsort($weighArticlesList);//Sort articles in descending order
         //Return articles
