@@ -28,15 +28,15 @@ var myChart = new Chart(ctx, {
             data: [<?php echo implode(', ',$likePreferencesScore); ?>],
             backgroundColor: [
                 <?php foreach ($likePreferencesScore as $key => $value) : ?>
-                    "<?php echo 'rgba('.rand(50, 255).', '.rand(50, 255).', '.rand(50, 255).', 0.2) '; ?>",
+                    "<?php echo 'rgba('.rand(50, 255).', '.rand(50, 255).', '.rand(50, 255).', 0.7) '; ?>",
                 <?php endforeach; ?>
-                "<?php echo 'rgba('.rand(50, 255).', '.rand(50, 255).', '.rand(50, 255).', 0.2) '; ?>"
+                "<?php echo 'rgba('.rand(50, 255).', '.rand(50, 255).', '.rand(50, 255).', 0.7) '; ?>"
             ],
             borderColor: [
                 <?php foreach ($likePreferencesScore as $key => $value) : ?>
-                    "<?php echo 'rgba('.rand(50, 255).', '.rand(50, 255).', '.rand(50, 255).', 0.2)'; ?>",
+                    "<?php echo 'rgba('.rand(50, 255).', '.rand(50, 255).', '.rand(50, 255).', 0.7)'; ?>",
                 <?php endforeach; ?>
-                "<?php echo 'rgba('.rand(50, 255).', '.rand(50, 255).', '.rand(50, 255).', 0.2) '; ?>"
+                "<?php echo 'rgba('.rand(50, 255).', '.rand(50, 255).', '.rand(50, 255).', 0.7) '; ?>"
             ],
             borderWidth: 1
         }]
