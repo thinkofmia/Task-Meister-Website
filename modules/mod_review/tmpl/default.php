@@ -30,17 +30,16 @@ $document->addScript(JUri::base() . 'modules/mod_review/js/review.js');
             <div class="reviews">
                 <?php echo ModReviewHelper::generateReviewStatistics($testimonials); $counter = 0; foreach($testimonials as $row): ?>
                     <div class="review<?php echo ($counter >= 3 ? ' read-all' . ' read-more-' . floor($counter / 3) : '');?>">
-                        <div class="review-summary">
-                            <?php echo ModReviewHelper::renderStarRating($row->rating); ?><?php echo ModReviewHelper::getName($row->uid) . " (" . ModReviewHelper::fmtDate($row->updated) . ")";?>
-                            <div style="padding-top: 30px;">
-                                <p><?php echo ModReviewHelper::replaceYTUrl($row->review); ?></p>
-                            </div>
-                            <!-- <div>
-                                <span>Posted by: <?php echo ModReviewHelper::getName($row->uid);?> on <?php echo ModReviewHelper::fmtDate($row->created); ?></span><br/>
-                                <span>Last updated: <?php echo ModReviewHelper::fmtDate($row->updated); ?></span><br/>
-                            </div> -->
+                        <div class="review-user-info">
+                            <span><?php echo ModReviewHelper::getName($row->uid);?></span>
+                            <div><?php echo ModReviewHelper::fmtDate($row->updated); ?></div>
                         </div>
-                        <hr/>
+                        <div class="review-summary">
+                            <?php echo ModReviewHelper::renderStarRating($row->rating); ?>
+                            <div style="padding-top: 30px;">
+                                <p><?php echo ModReviewHelper::replaceYTUrl($row->review, '<p>'); ?></p>
+                            </div>
+                        </div>
                     </div>
                 <?php $counter++; endforeach; ?>
                 <span>
