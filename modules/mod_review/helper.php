@@ -482,13 +482,14 @@ class ModReviewHelper
      * @param   String  $url    A url containing the ID of a youtube video
      * @param   String  $width  The width of the resulting iframe
      * @param   String  $height The height of the resulting iframe
+     * @param   String  $tag    Optional tag specified if iframe will break an enclosing tag
      * 
      * @return  String          The html defining the iframe for the youtube video embed
      */
-    public static function createYTEmbed($url, $width = '100%%', $height = '100%%')
+    public static function createYTEmbed($url, $tag = '', $width = '100%%', $height = '100%%')
     {
         // format string for container for iframe
-        $container = '<div style="overflow: hidden; padding-top: 56.25%%; position: relative;">%s</div>';
+        $container = '<div style="overflow: hidden; padding-top: 56.25%%; position: relative; margin-bottom: 5px;">%s</div>';
         // format string defining the iframe for the embed link
         $embed = '<iframe style="display: block; margin-top: 10px; margin-bottom: 10px; border: 0; left: 0; position: absolute; top: 0; width: ' . $width . '; height: ' . $height . ';" src="https://www.youtube.com/embed/%s"'.
             ' allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
@@ -511,6 +512,13 @@ class ModReviewHelper
         // Replace placeholder id with video ID
         $html = sprintf($embed, $query[1]);
         $html = sprintf($container, $html);
+
+        if(!empty($tag))
+        {
+            $matches = array();
+            preg_match('/[A-Za-z]+/', $tag, $matches);
+            $html =  '</' . $matches[0] . '>' . $html . '<' . $matches[0] . '>';
+        }
 
         return $html;
     }
@@ -535,13 +543,13 @@ class ModReviewHelper
      * 
      * @return  String          The same text with the youtube video url replaced by the embedding code
      */
-    public static function replaceYTUrl($text)
+    public static function replaceYTUrl($text, $tag = '')
     {
         // regex for a valid youtube video url
         $regex = '/(http(s)?:\/\/)?(www\.)?youtu(\.be|be\.com)\/(\S+)/';
         return preg_replace_callback($regex,
-            function($matches) {
-                return self::createYTEmbed($matches[0]);
+            function($matches) use ($tag) {
+                return self::createYTEmbed($matches[0], $tag);
             },
             $text);
     }
