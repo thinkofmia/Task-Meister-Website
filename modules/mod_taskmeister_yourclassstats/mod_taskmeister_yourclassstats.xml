@@ -2,7 +2,7 @@
 <extension type="module" version="3.1.0" client="site" method="upgrade">
     <name>Your Class Stats Module (Task Meister)</name>
     <author>Fremont Teng</author>
-    <version>1.0.1</version>
+    <version>1.0.3</version>
     <description>A module for Task Meister, to display various stats of the your class. Comes with pie charts, bar charts or table form. </description>
     <files>
         <filename>mod_taskmeister_yourclassstats.xml</filename>
@@ -34,14 +34,15 @@
 					rows="1"
 				/>
                 <field
-					name="tablestats"
+					name="display"
 					type="list"
-					label="Display Table Stats?"
-					description="Display stats in table form as well. "
-					default="choice_no"
+					label="Select mode of display"
+					description="Toggles display of your class's preferences "
+					default="choice_bar"
 					>
-                    <option value="choice_yes">Yes</option>
-					<option value="choice_no">No</option>
+                    <option value="choice_pie">Pie Charts</option>
+					<option value="choice_bar">Bar Charts</option>
+					<option value="choice_table">Table</option>
 				</field>
             </fieldset>
         </fields>

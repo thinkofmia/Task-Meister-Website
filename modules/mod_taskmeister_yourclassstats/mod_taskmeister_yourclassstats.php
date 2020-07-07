@@ -20,7 +20,7 @@ require_once dirname(__FILE__) . '/helper.php';//used because our helper functio
 
 $displayHeader = modYourClassesStats::getHeader($params);//invoke helper class method
 $displayText = modYourClassesStats::getText($params);//invoke helper class method
-$showTable = modYourClassesStats::checkTable($params->get('tablestats'));
+$displayMode = $params->get('display');
 
 //Database code
 use Joomla\CMS\Factory;
@@ -70,6 +70,7 @@ if ($userID!=0){//if User id isnt a guest
         }
         //Sort Preference Score by highest first
         arsort($fullPreferencesScore);
+        arsort($dislikedPreferencesScore);
         //Set up arrays
         $likePreferencesScore = array();
         foreach ($fullPreferencesScore as $key => $value){
