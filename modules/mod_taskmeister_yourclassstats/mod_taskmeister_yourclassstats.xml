@@ -44,6 +44,16 @@
 					<option value="choice_bar">Bar Charts</option>
 					<option value="choice_table">Table</option>
 				</field>
+				<field
+					name="maxTags"
+					type="integer"
+					default="0"
+					label="Maximum #of Tags"
+					description="Set the maximum number of tags to display. Put 0 to show all. "
+					first="0" 
+					last="25" 
+					step="1"
+				/>
             </fieldset>
         </fields>
     </config>

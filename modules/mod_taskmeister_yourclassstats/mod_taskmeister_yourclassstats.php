@@ -21,6 +21,7 @@ require_once dirname(__FILE__) . '/helper.php';//used because our helper functio
 $displayHeader = modYourClassesStats::getHeader($params);//invoke helper class method
 $displayText = modYourClassesStats::getText($params);//invoke helper class method
 $displayMode = $params->get('display');
+$maxTags = intval($params->get('maxTags'));
 
 //Database code
 use Joomla\CMS\Factory;
@@ -71,6 +72,28 @@ if ($userID!=0){//if User id isnt a guest
         //Sort Preference Score by highest first
         arsort($fullPreferencesScore);
         arsort($dislikedPreferencesScore);
+        //Limit scores based on max tags size
+        //Save old array
+        $oldFullPreferencesScore = $fullPreferencesScore;
+        $oldDislikedPreferencesScore = $dislikedPreferencesScore;
+        //Clear array
+        $fullPreferencesScore = array();
+        $dislikedPreferencesScore = array();
+        //Push array base on limited value
+        $count=0;//Initialize count
+        foreach($oldFullPreferencesScore as $key => $value){
+            if ($maxTags==0 || $count<$maxTags){
+                $fullPreferencesScore[$key] = $value;
+                $count+=1;
+            } 
+        }
+        $count=0; //Reset count
+        foreach($oldDislikedPreferencesScore as $key => $value){
+            if ($maxTags==0 || $count<$maxTags){
+                $dislikedPreferencesScore[$key] = $value;
+                $count+=1;
+            } 
+        }
         //Set up arrays
         $likePreferencesScore = array();
         foreach ($fullPreferencesScore as $key => $value){
