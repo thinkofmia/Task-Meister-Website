@@ -31,6 +31,20 @@ button.read-all {
 }
 .review {
     margin-bottom: 50px;
+    border-bottom: solid #eeeeee 1px;
+    float: left;
+    width: 100%;
+}
+.review-user-info {
+    float: left;
+    width: calc(20% - 11px);
+    border-right: #eeeeee solid 1px;
+    margin-right: 10px;
+    padding-bottom: 10px;
+}
+.review-summary {
+    float: right;
+    width: 80%;
 }
 .review-summary,
 .review-ease,
