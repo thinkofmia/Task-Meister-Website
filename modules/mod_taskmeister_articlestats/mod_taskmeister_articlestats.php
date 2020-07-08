@@ -20,7 +20,7 @@ require_once dirname(__FILE__) . '/helper.php';//used because our helper functio
 
 $displayHeader = modArticleStats::getHeader($params);//set variable of header using helper class
 $displayText = modArticleStats::getText($params);//set variable of text using helper class
-require JModuleHelper::getLayoutPath('mod_taskmeister_articlestats');//call out default.php display
+
 
 //Database code
 use Joomla\CMS\Factory;
@@ -48,38 +48,18 @@ $results2 = $db->loadAssocList();//Save results of external article database que
 
 if ($results){//If inside article table
 
-//Display table, table header and css style
-echo "
-<style>
-    table, tr, th, td {
-    border: 2px solid black;
-    }
-</style>
-<table style='border: 2px solid black; border-collapse: collapse;'>
-<tr>
-    <th>Id</th>
-    <th>Title</th>
-    <th>Category</th>
-    <th>Views</th>
-    <th>Featured</th>
-</tr>";
-
-
-foreach ($results as $row) {
-/*
+    foreach ($results as $row) {
+    /*
     Display rows based on main database result
         $row['id'] refers to the article id
         $row['title'] refers to the article title
         $row['catid'] refers to the article category
         $row['hits'] refers to the article hits
         $row['featured'] refers whether the article is featured or not
-*/
-    echo "<tr><td>" . $row['id'] . "</td>" . 
-    "<td>" . $row['title'] . "</td>" . 
-    "<td>" . $row['catid'] . "</td>" .
-    "<td>" . $row['hits'] . "</td>" . 
-    "<td>" . $row['featured'] . "</td></tr></table>";
+    */
     $articleID = $row['id'];
+    $articleTitle = $row['title'];
+    $articleCategory = $row['catid'];
 }
 
 function countPreference($userchoice,$preference){
@@ -113,31 +93,8 @@ foreach ($results2 as $row) {
         $NoOfLikes = $row['es_totallikes'];
         $NoOfDislikes = $row['es_totaldislikes'];
         $NoOfDeployment = sizeof($deploymentList);
-        $tags = $row['es_tags'];
-        //Display table with the above variables
-        echo "<table>
-        <tr>
-            <th>All Users' Choice</th>
-            <th>Who has deployed</th>
-            <th>Total # of Likes</th>
-            <th>Total # of Dislikes</th>
-            <th>Total # of Deployment</th>
-            <th>Tags</th>
-        </tr>
-        <tr>
-            <td>" . $row['es_userchoice'] . "</td>";
-        //Check if any deployment in the article, otherwise display msg.
-        if (isset($row['es_deployed'])&&$row['es_deployed']!="[]") $deployed = $row['es_deployed'];
-        else $deployed = "No one deployed this yet";
-        //Display the rest of the variables
-        echo "<td> ". $deployed. " </td> 
-            <td>" . $NoOfLikes . "</td>
-            <td>" . $NoOfDislikes . "</td>
-            <td>" . $NoOfDeployment . "</td>
-            <td>" . $tags . "</td>
-        </tr>"; 
-    echo "</table>";
+        $tags = json_decode($row['es_tags']);
+        }
     }
-
-}
+    require JModuleHelper::getLayoutPath('mod_taskmeister_articlestats');//call out default.php display
 }
