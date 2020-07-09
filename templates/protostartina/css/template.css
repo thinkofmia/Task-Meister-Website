@@ -3689,6 +3689,7 @@ input[type="submit"].btn.btn-mini {
 	-webkit-border-radius: 4px;
 	-moz-border-radius: 4px;
 	border-radius: 4px;
+  	border: 1px solid #e3e3e3;
 }
 .breadcrumb > li {
 	display: inline-block;
@@ -6989,14 +6990,14 @@ body.site.fluid {
 	font-weight: bold;
 }
 .brand {
-	color: #08c;
+	color: #09d;
 	-webkit-transition: color .5s linear;
 	-moz-transition: color .5s linear;
 	-o-transition: color .5s linear;
 	transition: color .5s linear;
 }
 .brand:hover {
-	color: #09d;
+	color: #0ae;
 	text-decoration: none;
 }
 .header {
@@ -7489,4 +7490,6 @@ body.modal-open {
   filter: alpha(opacity=40);
 }
 
-
+.login-night {
+  background-color: #1d1f24;
+}
