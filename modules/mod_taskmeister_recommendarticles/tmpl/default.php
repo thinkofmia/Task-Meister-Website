@@ -90,7 +90,7 @@ $list2 = json_decode($recommendedContents);
         <!--Url link to the article page-->
         <a title="<?echo $value[0]; ?>" href="?option=com_content&view=article&id=<?php echo $key; ?>" itemprop="url">
           <?php if ($displayMode=="display_ranking") : ?>
-            <div class="rankedArticle" title="Similarity: <?php echo json_encode($value[2]); ?>%">
+            <div class="rankedArticle" title="Match: <?php echo json_encode($value[2]); ?>%">
               <?php if ($count>9) : ?>
                 <h4><?php echo $count; ?></h4>
               <?php else : ?>
@@ -108,7 +108,7 @@ $list2 = json_decode($recommendedContents);
               <!--Image of the article-->
               <img onerror="this.src='/taskmeisterx/modules/mod_taskmeister_recommendarticles/img/default.jpg';" src="<?php echo json_decode($value[1])->image_intro; ?>" width="100%" height="100%" />
               <!--Text found on the article-->
-              <p class="articleSimilarity">Similarity: <?php echo json_encode($value[2]); ?>%</p>
+              <p class="articleSimilarity">Match: <?php echo json_encode($value[2]); ?>%</p>
               <p>
               <?php if (strlen($value[0])>50) echo substr($value[0], 0, 50)."...";
                 else echo $value[0]; ?></p>
