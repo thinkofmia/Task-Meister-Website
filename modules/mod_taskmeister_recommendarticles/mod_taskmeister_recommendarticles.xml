@@ -2,8 +2,8 @@
 <extension type="module" version="3.1.0" client="site" method="upgrade">
     <name>Recommend Articles (Task Meister)</name>
     <author>Fremont Teng</author>
-    <version>1.0.3</version>
-    <description>A recommend articles module for Task Meister. With lots of parameters.</description>
+    <version>1.0.5</version>
+    <description>A recommend articles module for Task Meister. With lots of parameters and varying displays.</description>
     <files>
         <filename>mod_taskmeister_recommendarticles.xml</filename>
         <filename module="mod_taskmeister_recommendarticles">mod_taskmeister_recommendarticles.php</filename>
@@ -60,6 +60,16 @@
 					<option value="choice_teacher">Recommends your teachers' preferences</option>
 					<option value="choice_trending">Top Trending Articles</option>
 					<option	value="choice_random">Random</option>
+				</field>
+				<field
+					name="display"
+					type="list"
+					label="Mode Display"
+					description="Set display for the recommendations"
+					default="display_normal"
+					>
+                    <option value="display_normal">Similarity</option>
+					<option value="display_ranking">Ranking</option>
 				</field>
 				<field
 					name="selectedtag"
