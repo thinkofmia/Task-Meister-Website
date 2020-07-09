@@ -473,6 +473,17 @@ z-index: 9999;
         p {
             font-size: 1.5vw;
         }
+        .button_tm {
+            font-size: 1.5vw;
+            text-align: center;
+            border-radius: 8px;
+            background-color: $mainFontColor;
+            color: $altFontColor;
+            margin-top: 0.5vw;
+            margin-bottom: 0.5vw;
+            padding: 1vw;
+            font-style: bold;
+        }
     }
 }
 
