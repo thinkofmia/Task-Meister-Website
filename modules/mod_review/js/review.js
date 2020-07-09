@@ -1,18 +1,113 @@
-jQuery(document).ready(function($) {
-    /* $("button.read-all").click(function() {
-        console.log($(".review.read-all"));
-        if($(".review-read-all").css("display") ==="none" ) {
-            $(".review.read-all").slideDown(1);
-        }
-    }); */
-    $("button.read-all").click(function() {
-        console.log($(".review.read-all"));
-        if($(".review.read-all").css("display") === "none") {
-            $("button.read-all").text("Close all");
-            $(".review.read-all").css("display", "block");
-        } else {
-            $(".review.read-all").css("display", "none");
-            $("button.read-all").text("Read all");
+jQuery(document).ready(function ($) {
+    jQuery.fn.extend({
+        mask : function() {
+            $(this).each(function(index, element) {
+                element.disabled = true;
+                element.style.backgroundColor = "transparent";
+                element.style.color = "transparent";
+                element.style.cursor = "default";
+                element.style.border = "none";
+            });
+            return $(this);
         }
     });
+
+    jQuery.fn.extend({
+        reveal : function() {
+            $(this).each(function(index, element) {
+                element.disabled = false;
+                element.style.backgroundColor = "#8a8a8a";
+                element.style.color = "black";
+                element.style.cursor = "pointer";
+                element.style.border = "solid white 1px";
+            });
+            return $(this);
+        }
+    });
+    
+    // check which review expansion/compression buttons should be shown
+    // no reviews to expand
+    if($(".reviews").children(".review.read-more").length === 0){
+        // hide all the buttons
+        $("button.read-all").mask();
+        $("button.read-more").mask();
+        $("button.read-less").mask();
+        $("button.close-all").mask();
+    }
+    // reviews to expand
+    else {
+        // show buttons for expansion, hide for closing
+        $("button.read-all").reveal();
+        $("button.read-more").reveal();
+        $("button.read-less").mask();
+        $("button.close-all").mask();
+    }
+
+    $("button.read-all").click(function () {
+        // show all reviews
+        $(".reviews").children(".review.read-more").show();
+
+        // hide read-all and read-more buttons since there are no more reviews to show
+        $("button.read-more").mask();
+        $("button.read-all").mask();
+
+        // show close-all and read-less buttons since there are now reviews to hide
+        $("button.close-all").reveal();
+        $("button.read-less").reveal();
+    });
+
+    $("button.close-all").click(function () {
+        // hide all reviews after 3rd review
+        $(".reviews").children(".review.read-more").hide();
+
+        // hide close-all and read-less buttons since there are no more reviews to hide
+        $("button.close-all").mask();
+        $("button.read-less").mask();
+
+        // show read-all and read-more buttons since there are now reviews to show
+        $("button.read-more").reveal();
+        $("button.read-all").reveal();
+    });
+
+    $("button.read-more").click(function () {
+        // show next 3 reviews
+        $(".reviews").children(".review.read-more").filter(function (index, element) {
+            return element.style.display === "none";
+        }).slice(0, 3).show();
+
+        // hide read-more and read-all buttons if there are no more reviews to display
+        hidden = $(".reviews").children(".review.read-more").filter(function (index, element) {
+            return element.style.display === "none";
+        });
+        if (hidden.length === 0) {
+            $("button.read-more").mask();
+            $("button.read-all").mask();
+        }
+
+        // show close-all and read-less buttons since there are now reviews to hide
+        $("button.read-less").reveal();
+        $("button.close-all").reveal();
+    });
+
+    $("button.read-less").click(function () {
+        // hide last 3 reviews
+        $(".reviews").children(".review.read-more").filter(function (index, element) {
+            return element.style.display !== "none";
+        }).slice(-3).hide();
+
+        // hide close-all and read-less buttons if there are no more reviews to hide
+        hidden = $(".reviews").children(".review.read-more").filter(function (index, element) {
+            return element.style.display === "none";
+        });
+        if (hidden.length === $(".reviews").children(".review.read-more").length) {
+            $("button.read-less").mask();
+            $("button.close-all").mask();
+        }
+
+        // show read-all and read-more buttons since there are now reviews to show
+        $("button.read-more").reveal();
+        $("button.read-all").reveal();
+    });
+    
+    $("button.close-all").trigger("click");
 });
