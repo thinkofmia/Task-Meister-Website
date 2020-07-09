@@ -1,16 +1,67 @@
-.review.read-all {
-    display: none;
-}
-button {
-    color: white;
-}
-button.read-all {
-    background-color: Transparent;
+button.read-all,
+button.read-more,
+button.read-less,
+button.close-all {
+    /* background-color: Transparent; */
+    background-color: #8a8a8a;
     background-repeat: no-repeat;
-    border: none;
+    /* border: solid white 1px; */
+    /* border-radius: 20px; */
+    padding: 10px;
     cursor: pointer;
     overflow: hidden;
     outline: none;
+    /* color: white; */
+    color: black;
+    transition-property: all;
+    transition-duration: 0.25s;
+    font-weight: bold;
+}
+input.review-submit {
+    /* background-color: Transparent; */
+    background-color: #00c000;
+    background-repeat: no-repeat;
+    /* border: solid #00c000 2px; */
+    /* border-radius: 20px; */
+    padding: 10px;
+    cursor: pointer;
+    overflow: hidden;
+    outline: none;
+    /* color: white; */
+    color: #191919;
+    transition-property: all;
+    transition-duration: 0.25s;
+    font-weight: bold;
+}
+button.read-all:hover:enabled,
+button.read-more:hover:enabled,
+button.read-less:hover:enabled,
+button.close-all:hover:enabled,
+input.review-submit:hover {
+    box-shadow: 6px 4px 10px 1px white;
+    transform: translate(-5px, -5px) scale(1.2);
+}
+button.read-all:active:enabled,
+button.read-more:active:enabled,
+button.read-less:active:enabled,
+button.close-all:active:enabled,
+input.review-submit:active {
+    transition-duration: 0.1s;
+    box-shadow: -1px -1px 5px 1px white;
+    transform: translate(2px, 2px) scale(0.9);
+}
+button.read-less,
+button.close-all {
+    float: right;
+}
+button.read-more {
+    margin-left: 10%;
+}
+button.read-less {
+    margin-right: 10%;
+}
+.review.read-more {
+    display: none;
 }
 #testimonials section{
     background-color: black;
