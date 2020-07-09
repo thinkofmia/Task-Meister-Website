@@ -91,7 +91,11 @@ $list2 = json_decode($recommendedContents);
         <a title="<?echo $value[0]; ?>" href="?option=com_content&view=article&id=<?php echo $key; ?>" itemprop="url">
           <?php if ($displayMode=="display_ranking") : ?>
             <div class="rankedArticle" title="Similarity: <?php echo json_encode($value[2]); ?>%">
-              <h2><?php echo $count;?></h2>
+              <?php if ($count>9) : ?>
+                <h4><?php echo $count; ?></h4>
+              <?php else : ?>
+                <h2><?php echo $count;?></h2>
+              <?php endif; ?>
               <!--Image of the article-->
               <img onerror="this.src='/taskmeisterx/modules/mod_taskmeister_recommendarticles/img/default.jpg';" src="<?php echo json_decode($value[1])->image_intro; ?>" width="100%" height="100%" />
               <!--Text found on the article-->

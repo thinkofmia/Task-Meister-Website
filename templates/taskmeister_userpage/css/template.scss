@@ -301,6 +301,19 @@ z-index: 9999;
             word-wrap: break-word;
             z-index: -1;
         }
+        h4 {//Sets CSS for ranking
+            position: absolute;
+            bottom: -120%;
+            left: -20%;
+            width: 100%;
+            opacity: 1;
+            color: darkgray;
+            text-shadow: 2px 2px #FF0000;
+            position: absolute;
+            font-size: 13vw;
+            word-wrap: break-word;
+            z-index: -1;
+        }
     }
 }
 

@@ -290,6 +290,19 @@ table tr, .yellowtable tr, #allClassStatsTable tr, .yourClassStatsTable tr, tabl
   word-wrap: break-word;
   z-index: -1;
 }
+.recommendedArticles .rankedArticle h4 {
+  position: absolute;
+  bottom: -120%;
+  left: -20%;
+  width: 100%;
+  opacity: 1;
+  color: darkgray;
+  text-shadow: 2px 2px #FF0000;
+  position: absolute;
+  font-size: 13vw;
+  word-wrap: break-word;
+  z-index: -1;
+}
 
 .arrow:hover, .arrowRight:hover, .arrowLeft:hover {
   cursor: pointer;
