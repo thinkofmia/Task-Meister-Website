@@ -107,6 +107,7 @@ class ModReviewHelper
                 if($db->insertObject('reviews', $review))
                 {
                     $msg = 'submit_success';
+                    self::updateRecommendationRecordsDB($review->uid, $review->aid, "submitted a review for");
                 }
                 else
                 {
@@ -126,6 +127,7 @@ class ModReviewHelper
                 if($db->updateObject('reviews', $review, 'id'))
                 {
                     $msg = 'edit_success';
+                    self::updateRecommendationRecordsDB($review->uid, $review->aid, "updated their review for");
                 }
                 else
                 {
@@ -207,7 +209,7 @@ class ModReviewHelper
             $body .= "This is either a test or an empty review has been submitted somehow.";
         else {
             $body .= "Preview of review:\n";
-            $body .= "Review: " . $review->rating . "\n" . $review->review . "\n\n";
+            $body .= "Rating: " . $review->rating . "\n" . $review->review . "\n\n";
         }
         $mailer->setSubject($subject);
         $mailer->setBody($body);
@@ -553,4 +555,22 @@ class ModReviewHelper
             },
             $text);
     }
+
+    public static function updateRecommendationRecordsDB($userID, $articleID, $action) {
+        /**
+         * Function: Update recommendation database with the user's action on an article
+         * @param   Integer $userID: Refers to the current user id
+         * @param   Integer $articleID: Refers to the current article id
+         * @param   String  $action: Refers to the user's action
+         */
+        // Create and populate an object.
+        $record = new stdClass();
+        $record->es_uid = $userID;
+        $record->es_aid = $articleID;
+        $record->es_action = $action;
+        $record->es_date = date("Y-m-d");
+        // Insert the object into the user profile table.
+        $result = Factory::getDbo()->insertObject('#__customtables_table_recommendationstats', $record);
+        }
+    
 }
