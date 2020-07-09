@@ -190,6 +190,7 @@ table tr, .yellowtable tr, #allClassStatsTable tr, .yourClassStatsTable tr, tabl
 .login-button {
   background-color: darkorange;
   color: white;
+  cursor: pointer;
 }
 
 .userdata, .input-prepend, #form-login-submit {

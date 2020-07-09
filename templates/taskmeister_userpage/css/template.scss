@@ -196,6 +196,7 @@ z-index: 9999;
 .login-button {//CSS for the login submit button
     background-color: $altFontColor;
     color: $mainFontColor;
+    cursor: pointer;
 }
 
 .userdata, .input-prepend, #form-login-submit {//Pad the login form

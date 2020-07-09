@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="module" version="3.1.0" client="site" method="upgrade">
+    <name>Profile (Task Meister)</name>
+    <author>Fremont Teng</author>
+    <version>1.0.1</version>
+    <description>A custom profile module for Task Meister. Allows link back to tm recommendation. Only works with the taskmeister template. </description>
+    <files>
+        <filename>mod_taskmeister_profile.xml</filename>
+        <filename module="mod_taskmeister_profile">mod_taskmeister_profile.php</filename>
+        <filename>index.html</filename>
+        <filename>helper.php</filename>
+        <filename>tmpl/default.php</filename>
+        <filename>tmpl/index.html</filename>
+    </files>
+    <config>
+        <fields name="params">
+            <fieldset name="basic">
+                <field
+					name="customtext"
+					type="textarea"
+					label="CustomText"
+					description="Input your custom text here"
+					filter="safehtml"
+					cols="30"
+					rows="1"
+				/>
+                <field
+					name="customheader"
+					type="textarea"
+					label="CustomHeader"
+					description="Input your custom header here"
+					filter="safehtml"
+					cols="30"
+					rows="1"
+				/>
+            </fieldset>
+        </fields>
+    </config>
+</extension>

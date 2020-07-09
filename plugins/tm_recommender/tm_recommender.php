@@ -367,7 +367,15 @@ class plgTaskMeisterTM_recommender extends JPlugin
                             break;
                         case "disliked":
                             $trendingArticles[$aid] += 1;
-                            break;  
+                            break;
+                        case "updated their review for":
+                            $trendingArticles[$aid] += 3;
+                            break;
+                        case "submitted a review for":
+                            $trendingArticles[$aid] += 5;
+                            break;
+                        default:
+                            break;
                     }
                     
                 if ($highest < intval($trendingArticles[$aid])){
