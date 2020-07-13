@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="module" version="3.9" client="administrator" method="upgrade">
+  <name>Search and replace</name>
+  <author>Tan Lim Chai Seng</author>
+  <creationDate>July 2020</creationDate>
+  <license>GNU General Public License version 3 or later; see LICENSE.txt</license>
+  <authorEmail>tanlimcs@gmail.com</authorEmail>
+  <version>1.0.0</version>
+  <description>Search and replace fulltext and introtext of articles</description>
+  
+  <files>
+    <filename module="mod_searchreplace">mod_searchreplace.php</filename>
+    <filename>helper.php</filename>
+    <filename>tmpl/default.php</filename>
+    <filename>tmpl/index.html</filename>
+  </files>
+</extension>
