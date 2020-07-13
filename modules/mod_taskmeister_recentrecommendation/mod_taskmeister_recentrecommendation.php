@@ -29,7 +29,7 @@ $db = Factory::getDbo();//Get database
 
 //Querying SQL database for recent recommendations
 $query = $db->getQuery(true);
-$query->select($db->quoteName(array('*')))//Sets which columns of database
+$query->select($db->quoteName(array('es_uid','es_aid','es_date','es_action')))//Sets which columns of database
     ->from($db->quoteName('#__customtables_table_recommendationstats'))
     ->order($db->quoteName('id') . ' DESC');//Sets which database
 $db->setQuery($query);
