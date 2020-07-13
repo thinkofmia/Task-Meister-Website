@@ -1,6 +1,6 @@
 <?php
 /**
- * Helper class for Your Class Stats module
+ * Helper class for TM Profile module
  * 
  * @package    Joomla.Tutorials
  * @subpackage Modules
@@ -11,7 +11,7 @@
  * is derivative of works licensed under the GNU General Public License or
  * other free or open source software licenses.
  */
-class modYourClassesStats
+class ModProfileHelper
 {
     /**
      * Retrieves the hello message
@@ -27,8 +27,5 @@ class modYourClassesStats
     public static function getHeader($params)
     {
         return $params->get('customheader');
-    }
-    function getMode($choice){
-        
     }
 }

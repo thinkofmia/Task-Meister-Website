@@ -19,6 +19,7 @@ require_once dirname(__FILE__) . '/helper.php';//used because our helper functio
 
 $displayHeader = ModRecommendArticlesHelper::getHeader($params);//invoke helper class method
 $displayText = ModRecommendArticlesHelper::getText($params);//invoke helper class method
+$displayMode = $params->get('display');
 
 use Joomla\CMS\Factory;
 $me = Factory::getUser();//Gets user

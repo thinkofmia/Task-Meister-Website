@@ -190,6 +190,7 @@ table tr, .yellowtable tr, #allClassStatsTable tr, .yourClassStatsTable tr, tabl
 .login-button {
   background-color: darkorange;
   color: white;
+  cursor: pointer;
 }
 
 .userdata, .input-prepend, #form-login-submit {
@@ -211,14 +212,16 @@ table tr, .yellowtable tr, #allClassStatsTable tr, .yourClassStatsTable tr, tabl
   position: relative;
 }
 
-.recommendedArticles:focus-within .article,
-.recommendedArticles:hover .article {
+.recommendedArticles:focus-within .article, .recommendedArticles:focus-within .rankedArticle,
+.recommendedArticles:hover .article,
+.recommendedArticles:hover .rankedArticle {
   transform: translateX(-25%);
 }
 
 .recommendedArticles {
   display: inline-flex;
   overflow-x: hidden;
+  overflow-y: hidden;
   height: 15vw;
   width: 100%;
   margin-left: 1%;
@@ -226,17 +229,18 @@ table tr, .yellowtable tr, #allClassStatsTable tr, .yourClassStatsTable tr, tabl
   padding-bottom: 5vw;
   transition: transform 0.4s ease-in;
 }
-.recommendedArticles .article:focus, .recommendedArticles .article:hover {
+.recommendedArticles .article:focus, .recommendedArticles .rankedArticle:focus, .recommendedArticles .article:hover, .recommendedArticles .rankedArticle:hover {
   transform: scale(1.5);
   z-index: 99;
   overflow-x: visible;
   overflow-y: visible;
 }
-.recommendedArticles a:focus ~ a .article,
-.recommendedArticles a:hover ~ a .article {
+.recommendedArticles a:focus ~ a .article, .recommendedArticles a:focus ~ a .rankedArticle,
+.recommendedArticles a:hover ~ a .article,
+.recommendedArticles a:hover ~ a .rankedArticle {
   transform: translateX(25%);
 }
-.recommendedArticles .article {
+.recommendedArticles .article, .recommendedArticles .rankedArticle {
   position: relative;
   padding-right: 0.5vw;
   padding-left: 0.5vw;
@@ -245,11 +249,11 @@ table tr, .yellowtable tr, #allClassStatsTable tr, .yourClassStatsTable tr, tabl
   text-align: center;
   transition: transform 500ms;
 }
-.recommendedArticles .article img {
+.recommendedArticles .article img, .recommendedArticles .rankedArticle img {
   width: 100%;
   height: 100%;
 }
-.recommendedArticles .article .articleSimilarity {
+.recommendedArticles .article .articleSimilarity, .recommendedArticles .rankedArticle .articleSimilarity {
   position: absolute;
   bottom: 82%;
   text-align: left;
@@ -259,7 +263,7 @@ table tr, .yellowtable tr, #allClassStatsTable tr, .yourClassStatsTable tr, tabl
   position: absolute;
   font-size: 1.25vw;
 }
-.recommendedArticles .article p {
+.recommendedArticles .article p, .recommendedArticles .rankedArticle p {
   position: absolute;
   bottom: -10%;
   width: 15vw;
@@ -269,6 +273,36 @@ table tr, .yellowtable tr, #allClassStatsTable tr, .yourClassStatsTable tr, tabl
   position: absolute;
   font-size: 1.25vw;
   word-wrap: break-word;
+}
+.recommendedArticles .rankedArticle img {
+  float: right;
+  width: 50%;
+}
+.recommendedArticles .rankedArticle h2 {
+  position: absolute;
+  bottom: -140%;
+  left: -20%;
+  width: 100%;
+  opacity: 1;
+  color: darkgray;
+  text-shadow: 2px 2px #FF0000;
+  position: absolute;
+  font-size: 20vw;
+  word-wrap: break-word;
+  z-index: -1;
+}
+.recommendedArticles .rankedArticle h4 {
+  position: absolute;
+  bottom: -120%;
+  left: -20%;
+  width: 100%;
+  opacity: 1;
+  color: darkgray;
+  text-shadow: 2px 2px #FF0000;
+  position: absolute;
+  font-size: 13vw;
+  word-wrap: break-word;
+  z-index: -1;
 }
 
 .arrow:hover, .arrowRight:hover, .arrowLeft:hover {
@@ -446,6 +480,17 @@ table tr, .yellowtable tr, #allClassStatsTable tr, .yourClassStatsTable tr, tabl
 }
 .featuredArticle .featuredArticleText p {
   font-size: 1.5vw;
+}
+.featuredArticle .featuredArticleText .button_tm {
+  font-size: 1.5vw;
+  text-align: center;
+  border-radius: 8px;
+  background-color: white;
+  color: darkorange;
+  margin-top: 0.5vw;
+  margin-bottom: 0.5vw;
+  padding: 1vw;
+  font-style: bold;
 }
 
 .search {

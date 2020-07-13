@@ -74,7 +74,7 @@ if ($externalContents != "Nothing is found. "){
             $user = JFactory::getUser(intval($row))->name;
             array_push($newArray, $user);
         }
-        $articleDeployedUsers = implode(",", $newArray);
+        $articleDeployedUsers = implode(", ", $newArray);
     } 
     if ($articleTotalLikes>0){
         $newArray = array();
@@ -84,7 +84,7 @@ if ($externalContents != "Nothing is found. "){
                 array_push($newArray, $user);
             }
         }
-        $articleLikedUsers = implode(",", $newArray);
+        $articleLikedUsers = implode(", ", $newArray);
     }
 
 }

@@ -115,7 +115,7 @@ class ModFeaturedArticleHelper
         $db =& JFactory::getDbo();
         //Query for SQL for external article states
         $query = $db->getQuery(true);
-        $query->select($db->quoteName(array('*')))// Get all of the contents
+        $query->select($db->quoteName(array('es_articleid','es_totallikes','es_deployed','es_userchoice')))// Get all of the contents
             ->from($db->quoteName('#__customtables_table_articlestats'))//From the external article stats table
             ->where($db->quoteName('es_articleid') . ' = ' . intval($articleId));//Where the article id is equal to the chosen article
         $db->setQuery($query);
@@ -133,7 +133,7 @@ class ModFeaturedArticleHelper
         $db =& JFactory::getDbo();
         //Query
         $query = $db->getQuery(true);
-        $query->select($db->quoteName(array('*')))
+        $query->select($db->quoteName(array('id','title','images')))
             ->from($db->quoteName('#__content'))
             ->where($db->quoteName('id') . ' = ' . intval($articleId));
         $db->setQuery($query);

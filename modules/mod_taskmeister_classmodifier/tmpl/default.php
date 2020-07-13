@@ -36,7 +36,7 @@ defined('_JEXEC') or die;
     <?php endif; ?>
     <span class="slider round"></span>
   </label>
-  <br><input type="submit" name="submitClassModifier" value="Save">
+  <br><input type="submit" class="btn btn-primary login-button" name="submitClassModifier" value="Save">
 </form>
 <script>
 var loop_list = ["likes","deployed","touched","preferred","unpreferred","mayTry"];

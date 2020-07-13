@@ -196,6 +196,7 @@ z-index: 9999;
 .login-button {//CSS for the login submit button
     background-color: $altFontColor;
     color: $mainFontColor;
+    cursor: pointer;
 }
 
 .userdata, .input-prepend, #form-login-submit {//Pad the login form
@@ -229,6 +230,7 @@ z-index: 9999;
 .recommendedArticles{//Sets CSS for row of articles in a line (for Recommend Articles Mod)
     display:inline-flex; 
     overflow-x: hidden;
+    overflow-y: hidden;
     height: 15vw; 
     width: 100%;
     margin-left: 1%;
@@ -279,6 +281,39 @@ z-index: 9999;
             position: absolute;
             font-size: 1.25vw;
             word-wrap: break-word;
+        }
+    }
+    .rankedArticle{
+        @extend .article;
+        img {
+            float: right;
+            width: 50%;
+        }
+        h2 {//Sets CSS for ranking
+            position: absolute;
+            bottom: -140%;
+            left: -20%;
+            width: 100%;
+            opacity: 1;
+            color: darkgray;
+            text-shadow: 2px 2px #FF0000;
+            position: absolute;
+            font-size: 20vw;
+            word-wrap: break-word;
+            z-index: -1;
+        }
+        h4 {//Sets CSS for ranking
+            position: absolute;
+            bottom: -120%;
+            left: -20%;
+            width: 100%;
+            opacity: 1;
+            color: darkgray;
+            text-shadow: 2px 2px #FF0000;
+            position: absolute;
+            font-size: 13vw;
+            word-wrap: break-word;
+            z-index: -1;
         }
     }
 }
@@ -472,6 +507,17 @@ z-index: 9999;
         }
         p {
             font-size: 1.5vw;
+        }
+        .button_tm {
+            font-size: 1.5vw;
+            text-align: center;
+            border-radius: 8px;
+            background-color: $mainFontColor;
+            color: $altFontColor;
+            margin-top: 0.5vw;
+            margin-bottom: 0.5vw;
+            padding: 1vw;
+            font-style: bold;
         }
     }
 }
