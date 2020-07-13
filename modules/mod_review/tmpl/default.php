@@ -29,7 +29,7 @@ $document->addScript(JUri::base() . 'modules/mod_review/js/review.js');
         <?php if(!empty($testimonials)): ?>
             <div class="reviews">
                 <?php echo ModReviewHelper::generateReviewStatistics($testimonials); $counter = 0; foreach($testimonials as $row): ?>
-                    <div class="review<?php echo ($counter >= 3 ? ' read-more' : '');?>">
+                    <div class="review<?php echo ($counter >= 3 ? ' read-more" style="display: none;' : '');?>">
                         <div class="review-user-info">
                             <span><?php echo ModReviewHelper::getName($row->uid);?></span>
                             <div><?php echo ModReviewHelper::fmtDate($row->updated); ?></div>
