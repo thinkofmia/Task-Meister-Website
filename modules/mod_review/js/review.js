@@ -27,16 +27,19 @@ jQuery(document).ready(function ($) {
     
     // check which review expansion/compression buttons should be shown
     // no reviews to expand
-    if($(".reviews").children(".review.read-more").length === 0){
+    if($(".reviews").children(".review.read-more").length == 0){
         // hide all the buttons
+        /* console.log("Length:", $(".reviews").children(".review.read-more").length);
+        console.log("Hiding all buttons"); */
         $("button.read-all").mask();
         $("button.read-more").mask();
         $("button.read-less").mask();
         $("button.close-all").mask();
     }
-    // reviews to expand
-    else {
+    else { // reviews to show
         // show buttons for expansion, hide for closing
+        /* console.log("Length:", $(".reviews").children(".review.read-more").length);
+        console.log("Hiding only right buttons"); */
         $("button.read-all").reveal();
         $("button.read-more").reveal();
         $("button.read-less").mask();
@@ -108,6 +111,4 @@ jQuery(document).ready(function ($) {
         $("button.read-more").reveal();
         $("button.read-all").reveal();
     });
-    
-    $("button.close-all").trigger("click");
 });
