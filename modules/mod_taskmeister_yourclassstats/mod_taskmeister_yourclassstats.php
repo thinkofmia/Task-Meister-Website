@@ -33,7 +33,7 @@ $userID = $me->id;
 if ($userID!=0){//if User id isnt a guest
     //Querying for stats of the entire database of the external teacher stats
     $query = $db->getQuery(true);
-    $query->select($db->quoteName(array('*')))//Get everything from
+    $query->select($db->quoteName(array('es_teacherid','es_students')))//Get everything from
         ->from($db->quoteName('#__customtables_table_teacherstats'))
         ->where($db->quoteName('es_teacherid') . ' = ' . $userID);//From our external teacher stats table
     $db->setQuery($query);

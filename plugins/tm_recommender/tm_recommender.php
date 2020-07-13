@@ -221,7 +221,7 @@ class plgTaskMeisterTM_recommender extends JPlugin
         $db = Factory::getDbo();
         //Get tags info database
         $query = $db->getQuery(true);
-        $query->select($db->quoteName(array('*')))
+        $query->select($db->quoteName(array('es_teacherid')))
             ->from($db->quoteName('#__customtables_table_teacherstats'));
         $db->setQuery($query);
         $results_teachers = $db->loadAssocList();
