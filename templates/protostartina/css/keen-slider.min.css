@@ -95,6 +95,9 @@
     -webkit-transform: translateY(-50%);
     fill: #fff;
     cursor: pointer;
+    stroke: #646464;
+    stroke-width: 1px;
+    stroke-linejoin: round;
 }
 
 .arrow--left {
