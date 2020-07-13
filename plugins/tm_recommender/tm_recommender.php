@@ -63,7 +63,7 @@ class plgTaskMeisterTM_recommender extends JPlugin
         $username = $me->username;
         //Query
         $query = $db->getQuery(true);
-        $query->select($db->quoteName(array('*')))
+        $query->select($db->quoteName(array('es_teacherid')))
         ->from($db->quoteName('#__customtables_table_teacherstats'))
         ->where($db->quoteName('es_teacherid') . ' = ' . $userID);
         $db->setQuery($query);
@@ -157,14 +157,14 @@ class plgTaskMeisterTM_recommender extends JPlugin
         $db = Factory::getDbo();
         //Get tags info database
         $query = $db->getQuery(true);
-        $query->select($db->quoteName(array('*')))
+        $query->select($db->quoteName(array('title')))
             ->from($db->quoteName('#__tags'))
             ->order($db->quoteName('title') . ' ASC');
         $db->setQuery($query);
         $results_tags = $db->loadAssocList();
         //Get article info database
         $query2 = $db->getQuery(true);
-        $query2->select($db->quoteName(array('*')))
+        $query2->select($db->quoteName(array('es_tags','es_totallikes','es_totaldislikes','es_totaldeployed')))
             ->from($db->quoteName('#__customtables_table_articlestats'));
         $db->setQuery($query2);
         $results_art = $db->loadAssocList();
@@ -343,7 +343,7 @@ class plgTaskMeisterTM_recommender extends JPlugin
         $lastmonth = date_format($today,"Y-m-d");
         //Get external recommendation table (custom table) To find out latest actions on articles
         $query = $db->getQuery(true);
-        $query->select($db->quoteName(array('*')))
+        $query->select($db->quoteName(array('es_date','es_aid','es_action')))
             ->from($db->quoteName('#__customtables_table_recommendationstats'));
         $db->setQuery($query);
         $results_recent = $db->loadAssocList();
@@ -395,7 +395,7 @@ class plgTaskMeisterTM_recommender extends JPlugin
                 if (isset($searchMode)){
                     //Query for database article contents (to check within text)
                     $query = $db->getQuery(true);
-                    $query->select($db->quoteName(array('*')))
+                    $query->select($db->quoteName(array('id','introtext','title','fulltext')))
                         ->from($db->quoteName('#__content'))
                         ->where($db->quoteName('id') . ' = ' . intval($key));
                     $db->setQuery($query);
@@ -473,7 +473,7 @@ class plgTaskMeisterTM_recommender extends JPlugin
         }
         //Get external user table (custom table) To find out list of liked, deployed and disliked articles
         $query = $db->getQuery(true);
-        $query->select($db->quoteName(array('*')))
+        $query->select($db->quoteName(array('es_userid','es_pageliked','es_pagedisliked','es_pagedeployed','es_userpreference')))
             ->from($db->quoteName('#__customtables_table_userstats'))
             ->where($db->quoteName('es_userid') . ' = ' . $userid);
         $db->setQuery($query);
@@ -489,7 +489,7 @@ class plgTaskMeisterTM_recommender extends JPlugin
         }
         //Get article info database
         $query2 = $db->getQuery(true);
-        $query2->select($db->quoteName(array('*')))
+        $query2->select($db->quoteName(array('es_articleid','es_title','es_tags','es_userchoice','es_deployed','es_totallikes','es_totaldislikes','es_totaldeployed')))
             ->from($db->quoteName('#__customtables_table_articlestats'));
         $db->setQuery($query2);
         $results_art = $db->loadAssocList();
@@ -604,7 +604,7 @@ class plgTaskMeisterTM_recommender extends JPlugin
                 if (isset($searchMode)){
                     //Query for database article contents (to check within text)
                     $query = $db->getQuery(true);
-                    $query->select($db->quoteName(array('*')))
+                    $query->select($db->quoteName(array('id','introtext','fulltext')))
                         ->from($db->quoteName('#__content'))
                         ->where($db->quoteName('id') . ' = ' . $row['es_articleid']);
                     $db->setQuery($query);
@@ -711,8 +711,8 @@ class plgTaskMeisterTM_recommender extends JPlugin
 
         //Get external article table (custom table)
         $query = $db->getQuery(true);
-        $query->select($db->quoteName(array('a.*')))
-            ->from($db->quoteName('#__customtables_table_articlestats','a'));
+        $query->select($db->quoteName(array('es_articleid','es_userchoice','es_deployed','es_totallikes','es_totaldislikes','es_tags','es_totaldeployed')))
+            ->from($db->quoteName('#__customtables_table_articlestats'));
         $db->setQuery($query);
         $results_ext = $db->loadAssocList();
 
@@ -728,7 +728,7 @@ class plgTaskMeisterTM_recommender extends JPlugin
             $totalDeployed = sizeof(json_decode($row2['es_deployed']));
             //Find tags map DB
             $query = $db->getQuery(true);
-            $query->select($db->quoteName(array('a.*')))
+            $query->select($db->quoteName(array('content_item_id','tag_id')))
                 ->from($db->quoteName('#__contentitem_tag_map','a'))
                 ->where($db->quoteName('content_item_id') . ' = ' . $row2['es_articleid']);
             $db->setQuery($query);
@@ -740,7 +740,7 @@ class plgTaskMeisterTM_recommender extends JPlugin
             }
             //Get tags info database
             $query = $db->getQuery(true);
-            $query->select($db->quoteName(array('*')))
+            $query->select($db->quoteName(array('id','title')))
                 ->from($db->quoteName('#__tags'));
             $db->setQuery($query);
             $results_tags = $db->loadAssocList();
@@ -807,8 +807,8 @@ class plgTaskMeisterTM_recommender extends JPlugin
         $results_bank = $db->loadAssocList();
         //Get external teacher table (custom table)
         $query = $db->getQuery(true);
-        $query->select($db->quoteName(array('a.*')))
-            ->from($db->quoteName('#__customtables_table_teacherstats','a'));
+        $query->select($db->quoteName(array('es_teacherid')))
+            ->from($db->quoteName('#__customtables_table_teacherstats'));
         $db->setQuery($query);
         $results_ext = $db->loadAssocList();
         //Store the current teachers in external table into an array
@@ -853,8 +853,8 @@ class plgTaskMeisterTM_recommender extends JPlugin
 
         //Get external user table (custom table)
         $query = $db->getQuery(true);
-        $query->select($db->quoteName(array('a.*')))
-            ->from($db->quoteName('#__customtables_table_userstats','a'));
+        $query->select($db->quoteName(array('es_userid','es_pagedeployed','es_pageliked','es_pagedisliked','es_userpreference')))
+            ->from($db->quoteName('#__customtables_table_userstats'));
         $db->setQuery($query);
         $results_ext = $db->loadAssocList();
 
