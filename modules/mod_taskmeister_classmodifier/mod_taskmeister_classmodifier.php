@@ -32,7 +32,7 @@ $userID = $me->id;
 if ($userID!=0){//if User id isnt a guest
     //Querying for stats of the entire database of the external teacher stats
     $query = $db->getQuery(true);
-    $query->select($db->quoteName(array('*')))//Get everything from
+    $query->select($db->quoteName(array('es_bonustags','es_preferencelink','es_weightagemaytry','es_weightagenotpreferred','es_teacherid','es_weightagelikes','es_weightagedeployment','es_weightagetouched','es_weightagepreferred')))//Get everything from
         ->from($db->quoteName('#__customtables_table_teacherstats'))
         ->where($db->quoteName('es_teacherid') . ' = ' . $userID);//From our external teacher stats table
     $db->setQuery($query);

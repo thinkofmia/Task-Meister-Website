@@ -456,7 +456,7 @@ class plgTaskMeisterTM_recommender extends JPlugin
     Recommend personal articles that excludes what is already liked/disliked by the targeted  user
     Used only for articles module
     Returns a string of recommended articles
-     */
+     */ 
     function recommendPersonalArticles($mode,$noOfArticles, $userid, $parameter1){
         $db = Factory::getDbo();//Gets database
         //Set Additional Filter Mode if has keyword

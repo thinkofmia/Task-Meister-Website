@@ -28,7 +28,7 @@ $db = Factory::getDbo();
 
 //Querying for stats of the entire database of the external teacher stats
 $query = $db->getQuery(true);
-$query->select($db->quoteName(array('*')))//Get everything from
+$query->select($db->quoteName(array('es_teacherid','es_students')))//Get everything from
     ->from($db->quoteName('#__customtables_table_teacherstats'));//From our external teacher stats table
 $db->setQuery($query);
 $results = $db->loadAssocList();//Save results as $results2
