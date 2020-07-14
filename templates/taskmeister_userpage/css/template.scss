@@ -593,7 +593,7 @@ animation-duration: 0.4s
 /* Modal Content */
 .modal-content {
 position: fixed;
-bottom: 0;
+bottom: 50%;
 background-color: #fefefe;
 width: 100%;
 -webkit-animation-name: slideIn;
