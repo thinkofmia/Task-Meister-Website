@@ -115,6 +115,12 @@ else $username = "Login";
     <?php endif; ?>
         <?php echo substr($username,0,13); ?>  
     </a> 
+    <a id="search">
+        <form action="<?php echo JUri::base(); ?>index.php/search">
+            <input type="text" placeholder="Search.." name="keyword" value = "<?php echo $_REQUEST["keyword"]; ?>">
+            <button type="submit">🔍</button>
+        </form>
+    </a>
     <a href="javascript:void(0);" class="icon" onclick="hamburgerMenu();">
         🍔
     </a>

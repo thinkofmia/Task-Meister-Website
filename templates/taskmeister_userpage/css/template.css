@@ -493,20 +493,25 @@ table tr, .yellowtable tr, #allClassStatsTable tr, .yourClassStatsTable tr, tabl
   font-style: bold;
 }
 
-.search {
+#search {
   font-size: 1.5vw;
-  padding-top: 3vw;
-  float: right;
-  animation-name: fromLeft;
-  animation-duration: 2s;
-  animation-fill-mode: forwards;
+  float: left;
+  padding-top: 0.1vw;
+  top: -20%;
+  position: relative;
 }
-.search input {
-  width: 50vw;
+#search input {
+  width: 30vw;
+  top: -20%;
+  position: relative;
   font-size: 1.5vw;
 }
-.search button {
+#search button {
   font-size: 1.5vw;
+}
+
+#search:hover {
+  background-color: rgba(105, 103, 103, 0.8);
 }
 
 .latestnews, .whosonline li {

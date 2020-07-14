@@ -523,19 +523,23 @@ z-index: 9999;
 }
 
 //CSS for the search module
-.search {
+#search {
     font-size: 1.5vw;
-    padding-top: 3vw;
-    float: right;
+    float: left;
+    padding-top: 0.1vw;
     input {//Width of input bar
-        width: 50vw;
+        width: 30vw;
+        top: -20%;
+        position: relative;
         font-size: 1.5vw;
     }
     button { font-size: 1.5vw; }
-    //Animation
-    animation-name: fromLeft;
-    animation-duration: 2s;
-    animation-fill-mode: forwards;
+    top: -20%;
+    position: relative;
+}
+
+#search:hover {
+    background-color: $headerBackground;
 }
 
 //CSS for the whos online module and latest news module
