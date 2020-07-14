@@ -183,7 +183,7 @@ class plgTaskMeisterTM_recommender extends JPlugin
             "Physical Manipulatives", "Poems", "Puzzles",
             "Science", "Simulations", "Sports", "Statistics", "Stories",
             "Travelling", "Treasure Hunts",
-            "VR");
+            "Virtual Reality");
         //Add default tags array into tag list
         foreach ($defaultTags as $row){
             $tagList[$row] = array(
