@@ -438,7 +438,7 @@ class ModReviewHelper
      */
     public static function generateReviewStatistics($testimonials)
     {
-        $html = '<div><ul class="review-statistics" style="display: inline-block; list-style: none; margin-bottom: 20px; width: 20vw; min-width: 200px;">';
+        $html = '<div style="width: 100%; height: 188px;"><ul class="review-statistics" style="display: inline-block; list-style: none; margin-bottom: 20px; width: 20vw; min-width: 200px; float: left;">';
         $empty_bar = '<span class="horizontal-bar-chart horizontal-bar-chart-empty" style="height: 3px; width: 50%; margin-right: 10px; margin-top: 7px; background-color: #FFFFFF; float: left;">';
         $filled_bar = '<b class="horizontal-bar-chart horizontal-bar-chart-filled" style="display: block; height: 3px; width: %d%%; background-color: #ffd700;">';
         $bar_label = '<span class="horizontal-bar-chart-label" style="margin-right: 10px; text-align: left; width: auto; min-width: 65px; padding-right: 0; overflow: hidden; float: left;">%s</span>';
@@ -473,7 +473,7 @@ class ModReviewHelper
 
         $average = $sum/$total;
 
-        $html .= sprintf('<div style="display: inline-block; height: 168px; line-height: 168px; vertical-align: top; width: 28vw; text-align:center; margin-bottom: 20px;"><b>%1.1f</b> / 5%s</div></div>', $average, self::renderStarRating($average * 2, 'display: inline-block; float: none; padding-left: 10px; height: 168px;'));
+        $html .= sprintf('<div style="display: inline-block; height: 168px; line-height: 168px; vertical-align: top; width: 200px; float: left; text-align: left; margin-bottom: 20px;"><b>%1.1f</b> / 5%s</div></div>', $average, self::renderStarRating($average * 2, 'display: inline-block; float: none; padding-left: 10px; height: 168px;'));
 
         return $html;
     }
