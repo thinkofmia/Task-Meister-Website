@@ -53,6 +53,16 @@
                     <option value="display_normal">Similarity</option>
 					<option value="display_ranking">Ranking</option>
 				</field>
+				<field
+					name="maytry"
+					type="list"
+					label="Include May Try?"
+					description="Include May Try Articles to the Home Page"
+					default="display_yes"
+					>
+                    <option value="display_yes">Yes</option>
+					<option value="display_no">No</option>
+				</field>
             </fieldset>
         </fields>
     </config>

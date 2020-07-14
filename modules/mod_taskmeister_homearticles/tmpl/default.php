@@ -14,14 +14,9 @@ defined('_JEXEC') or die;
     <?php endif; ?>
 </div>
 
-<?php 
-//Display selected mode for debug reasons
-//echo "Selected - ". $params->get('filter').": ". $resultsSelected ."<br>";
-//Convert the string results of the recommended articles into an array
-$list2 = json_decode($recommendedContents);
-?>
-
 <!--Display-->
+<?php foreach ($recommendedContents as $tag => $contents) : ?>
+  <h3>Our Recommendation on <?php echo $tag; ?>...</h3>
   <ul class="scrollbarnews<?php echo $moduleclass_sfx; ?> mod-list">
   <div class="articlesRow">
     <!-- Arrow button to scroll left-->
@@ -37,7 +32,7 @@ $list2 = json_decode($recommendedContents);
     <div class="recommendedArticles dragscroll" id= "recommendation">
       <!--For loop for the items in the list-->
       <?php $count = 0; //For counting the number of articles in list?>
-      <?php foreach ($list2 as $key => $value) : ?>
+      <?php foreach ($contents as $key => $value) : ?>
         <?php $count+=1; ?>
         <!--Url link to the article page-->
         <a title="<?echo $value[0]; ?>" href="?option=com_content&view=article&id=<?php echo $key; ?>" itemprop="url">
@@ -80,5 +75,6 @@ $list2 = json_decode($recommendedContents);
           });"></i>
   </div>
   </ul>
+  <?php endforeach; ?>
 
   <script type="text/javascript" src="https://cdn.rawgit.com/asvd/dragscroll/master/dragscroll.js"></script>

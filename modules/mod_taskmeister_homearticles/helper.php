@@ -28,15 +28,18 @@ class ModHomeArticlesHelper
     {
         return $params->get('customheader');
     }
+    function getUserPreference($userid){
+
+    }
     function getArticles($list){
         //Call our recommender
         JPluginHelper::importPlugin('taskmeister','tm_recommender');
         $dispatcher = JDispatcher::getInstance();
         $results = $dispatcher->trigger( 'getArticleContents', array($list));
         //Return string results of the article contents
-        return json_encode($results[0]) ;
+        return $results[0] ;
     }
-    function getArticleList($noOfArticles, $userid, $selectedTag){//Function to get selection from parameter fields
+    function getArticleList($noOfArticles, $userid, $tagList){//Function to get selection from parameter fields
         //Call our recommender
         JPluginHelper::importPlugin('taskmeister','tm_recommender');
         $dispatcher = JDispatcher::getInstance();
@@ -44,9 +47,14 @@ class ModHomeArticlesHelper
         $results = array("Calculating... ");
         //If never set no of articles
         if (!$noOfArticles) $noOfArticles=10;
-        //Get Selected Tag
-        $results = $dispatcher->trigger( 'recommendPersonalArticles', array("Selected Tag",$noOfArticles,$userid,$selectedTag));
+        //Set up Dictionary array
+        $dict = array();
+        foreach ($tagList as $tag){
+            //Get Selected Tag
+            $results = $dispatcher->trigger( 'recommendPersonalArticles', array("Selected Tag",$noOfArticles,$userid,$tag));
+            $dict[$tag] = json_encode($results[0],JSON_FORCE_OBJECT);
+        }
         //Return string results of recommended articles
-        return json_encode($results[0],JSON_FORCE_OBJECT) ;
+        return $dict;
     }
 }
