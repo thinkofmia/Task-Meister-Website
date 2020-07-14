@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="module" version="3.1.0" client="site" method="upgrade">
+    <name>Home Articles (Task Meister)</name>
+    <author>Fremont Teng</author>
+    <version>1.0.2</version>
+    <description>A recommend articles module for Task Meister's homepage. Shows all of the user's preferences in categories</description>
+    <files>
+        <filename>mod_taskmeister_homearticles.xml</filename>
+        <filename module="mod_taskmeister_homearticles">mod_taskmeister_homearticles.php</filename>
+        <filename>index.html</filename>
+        <filename>helper.php</filename>
+        <filename>tmpl/default.php</filename>
+        <filename>tmpl/index.html</filename>
+    </files>
+    <config>
+        <fields name="params">
+            <fieldset name="basic">
+                <field
+					name="customtext"
+					type="textarea"
+					label="Custom Text"
+					description="Input your custom text here"
+					filter="safehtml"
+					cols="30"
+					rows="1"
+				/>
+                <field
+					name="customheader"
+					type="textarea"
+					label="Custom Header"
+					description="Input your custom header here"
+					filter="safehtml"
+					cols="30"
+					rows="1"
+				/>
+				<field
+					name="noOfArticles"
+					type="integer"
+					default="10"
+					label="Number of Articles"
+					description="Input your the number of articles to display here"
+					first="1" 
+					last="50" 
+					step="1"
+				/>
+				<field
+					name="display"
+					type="list"
+					label="Mode Display"
+					description="Set display for the recommendations"
+					default="display_normal"
+					>
+                    <option value="display_normal">Similarity</option>
+					<option value="display_ranking">Ranking</option>
+				</field>
+            </fieldset>
+        </fields>
+    </config>
+</extension>
