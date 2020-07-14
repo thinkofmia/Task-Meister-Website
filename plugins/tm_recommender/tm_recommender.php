@@ -351,37 +351,44 @@ class plgTaskMeisterTM_recommender extends JPlugin
         $trendingArticles = array();
         //Highest weighing counter
         $highest = 0;
+        //DB to check if article is trashed/unpublished
+        $content_db =& JTable::getInstance("content");
         //Loop results
         foreach ($results_recent as $row){
             if (strcmp($row['es_date'],$lastmonth)){
+                //Set article id
                 $aid = intval($row['es_aid']);
-                if (!isset($trendingArticles[$aid])){
-                    $trendingArticles[$aid] = 0;
-                } 
-                switch ($row['es_action']){
-                        case "liked":
-                            $trendingArticles[$aid] += 10;
-                            break;
-                        case "deployed":
-                            $trendingArticles[$aid] += 10;
-                            break;
-                        case "disliked":
-                            $trendingArticles[$aid] += 1;
-                            break;
-                        case "updated their review for":
-                            $trendingArticles[$aid] += 3;
-                            break;
-                        case "submitted a review for":
-                            $trendingArticles[$aid] += 5;
-                            break;
-                        default:
-                            break;
-                    }
-                    
-                if ($highest < intval($trendingArticles[$aid])){
-                        $highest = intval($trendingArticles[$aid]);
-                    }
-                 
+                //Load article by id
+                $content_db->load($aid);
+                $article_state = $content_db->get("state");
+                if ($article_state==1){//Check if its published
+                    if (!isset($trendingArticles[$aid])){
+                        $trendingArticles[$aid] = 0;
+                    } 
+                    switch ($row['es_action']){
+                            case "liked":
+                                $trendingArticles[$aid] += 10;
+                                break;
+                            case "deployed":
+                                $trendingArticles[$aid] += 10;
+                                break;
+                            case "disliked":
+                                $trendingArticles[$aid] += 1;
+                                break;
+                            case "updated their review for":
+                                $trendingArticles[$aid] += 3;
+                                break;
+                            case "submitted a review for":
+                                $trendingArticles[$aid] += 5;
+                                break;
+                            default:
+                                break;
+                        }
+                        
+                    if ($highest < intval($trendingArticles[$aid])){
+                            $highest = intval($trendingArticles[$aid]);
+                        }
+                }
             }
         }
         //Sort articles in descending order
