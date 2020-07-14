@@ -314,6 +314,10 @@ class ModReviewHelper
     {
         // Get user id
         $uid = Factory::getUser()->id;
+        
+        // do not set form for guest id
+        if($uid == 0)
+            return false;
 
         // Get prior user submitted review 
         $review = self::getTestimonials($uid)[0];
@@ -438,8 +442,8 @@ class ModReviewHelper
      */
     public static function generateReviewStatistics($testimonials)
     {
-        $html = '<div style="width: 100%; height: 188px;"><ul class="review-statistics" style="display: inline-block; list-style: none; margin-bottom: 20px; width: 20vw; min-width: 200px; float: left;">';
-        $empty_bar = '<span class="horizontal-bar-chart horizontal-bar-chart-empty" style="height: 3px; width: 50%; margin-right: 10px; margin-top: 7px; background-color: #FFFFFF; float: left;">';
+        $html = '<div style="width: 100%; height: 188px; min-width: 660px;"><ul class="review-statistics" style="display: inline-block; list-style: none; margin-bottom: 20px; width: calc(50vw * 0.711); min-width: 200px; max-width: 384px; float: left; margin-right: 50px; height: 188px;">';
+        $empty_bar = '<span class="horizontal-bar-chart horizontal-bar-chart-empty" style="height: 3px; width: calc(100% - 75px - 43px - 10px); margin-right: 10px; margin-top: 7px; background-color: #FFFFFF; float: left;">';
         $filled_bar = '<b class="horizontal-bar-chart horizontal-bar-chart-filled" style="display: block; height: 3px; width: %d%%; background-color: #ffd700;">';
         $bar_label = '<span class="horizontal-bar-chart-label" style="margin-right: 10px; text-align: left; width: auto; min-width: 65px; padding-right: 0; overflow: hidden; float: left;">%s</span>';
 
