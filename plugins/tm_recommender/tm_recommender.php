@@ -534,9 +534,16 @@ class plgTaskMeisterTM_recommender extends JPlugin
         //Set up weightage list of articles
         $weighArticlesList = array();
         $highestWeighValue = 0;
+        //DB to check if article is trashed/unpublished
+        $content_db =& JTable::getInstance("content");
+        
         //Weigh articles
         foreach ($results_art as $row){
-            if (in_array($row['es_articleid'],$blacklist)){//If blacklisted or liked already
+            //Load article by id
+            $content_db->load(intval($row['es_articleid']));
+            $article_state = $content_db->get("state");
+            if (in_array($row['es_articleid'],$blacklist)||$article_state!=1){
+                //If blacklisted or unpublished or trashed
                 //Do nothing
             }
             else{//If articles collected is less than 10
