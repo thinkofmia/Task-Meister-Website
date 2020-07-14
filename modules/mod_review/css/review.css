@@ -73,10 +73,13 @@ button.read-less {
     color: #ffc03a;
     /* text-align: center; */
     text-transform: uppercase;
+    width: 16em;
 }
 .reviews {
     color: white;
     width: 50vw;
+    height: auto;
+    min-width: 500px;
     /* margin-left: auto;
     margin-right: auto; */
 }
