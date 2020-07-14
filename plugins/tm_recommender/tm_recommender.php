@@ -481,10 +481,14 @@ class plgTaskMeisterTM_recommender extends JPlugin
         //Save information into a list
         foreach ($results_ext as $row){
             if ($row['es_userid']==$userid){//Just to be sure if user id is same
-                $likedlist = json_decode($row['es_pageliked']);
-                $blacklist = json_decode($row['es_pagedisliked']);
-                $deployedlist = json_decode($row['es_pagedeployed']);
-                $preferencelist = json_decode($row['es_userpreference']);
+                if ($row['es_pageliked']) $likedlist = json_decode($row['es_pageliked']);
+                else $likedlist = [];
+                if ($row['es_pagedisliked']) $blacklist = json_decode($row['es_pagedisliked']);
+                else $blacklist = [];
+                if ($row['es_pagedeployed']) $deployedlist = json_decode($row['es_pagedeployed']);
+                else $deployedlist = [];
+                if ($row['es_userpreference']) $preferencelist = json_decode($row['es_userpreference']);
+                else $preferencelist = [];
             }
         }
         //Get article info database

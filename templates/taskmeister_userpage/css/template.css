@@ -74,7 +74,7 @@ table tr, .yellowtable tr, #allClassStatsTable tr, .yourClassStatsTable tr, tabl
   color: white;
   text-align: center;
   text-decoration: none;
-  font-size: 1.5vw;
+  font-size: 1.75vw;
   padding-right: 1vw;
   padding-left: 1vw;
   height: 2vw;
@@ -494,7 +494,7 @@ table tr, .yellowtable tr, #allClassStatsTable tr, .yourClassStatsTable tr, tabl
 }
 
 #search {
-  font-size: 1.5vw;
+  font-size: 1.75vw;
   float: left;
   padding-top: 0.1vw;
   top: -20%;
@@ -504,10 +504,10 @@ table tr, .yellowtable tr, #allClassStatsTable tr, .yourClassStatsTable tr, tabl
   width: 30vw;
   top: -20%;
   position: relative;
-  font-size: 1.5vw;
+  font-size: 1.75vw;
 }
 #search button {
-  font-size: 1.5vw;
+  font-size: 1.75vw;
 }
 
 #search:hover {

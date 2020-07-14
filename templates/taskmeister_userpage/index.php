@@ -83,14 +83,6 @@ else $username = "Login";
     <?php endif; ?>
         List          
     </a>
-    <!--Subjects-->
-    <?php if($urlPath==$this->baseurl."/index.php/resources") : ?>
-        <a class="active" href="<?php echo $this->baseurl; ?>/index.php/resources">
-    <?php else: ?>
-    <a href="<?php echo $this->baseurl; ?>/index.php/resources">
-    <?php endif; ?>
-        Subjects         
-    </a>
     <!--My List-->
     <?php if($urlPath==$this->baseurl."/index.php/schoollevels") : ?>
         <a class="active" href="<?php echo $this->baseurl; ?>/index.php/schoollevels">
