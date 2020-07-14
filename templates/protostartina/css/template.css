@@ -853,7 +853,7 @@ legend {
 	margin-bottom: 18px;
 	font-size: 19.5px;
 	line-height: 36px;
-	color: #333;
+	color: #979797;
 	border: 0;
 	border-bottom: 1px solid #e5e5e5;
 }
@@ -2121,7 +2121,7 @@ table th[class*="span"],
 	min-height: 20px;
 	padding: 19px;
 	margin-bottom: 20px;
-	background-color: #f5f5f5;
+	background-color: #1d1f24;
 	border: 1px solid #e3e3e3;
 	-webkit-border-radius: 4px;
 	-moz-border-radius: 4px;
