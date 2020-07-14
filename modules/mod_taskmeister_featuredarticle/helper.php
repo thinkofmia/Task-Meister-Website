@@ -49,7 +49,7 @@ class ModFeaturedArticleHelper
             $db =& JFactory::getDbo();
             //Query for SQL for external article states
             $query = $db->getQuery(true);
-            $query->select($db->quoteName(array('id','fulltext')))// Get all of the contents
+            $query->select($db->quoteName(array('id','fulltext','introtext')))// Get all of the contents
                 ->from($db->quoteName('#__content'))//From the external article stats table
                 ->where($db->quoteName('id') . ' = ' . intval($articleId));//Where the article id is equal to the chosen article
             $db->setQuery($query);
@@ -57,9 +57,36 @@ class ModFeaturedArticleHelper
             //if(!strlen(trim($results))) return null;
             //For each item in the restuls
             foreach($results as $row){
-                if ($row['id']==$articleId) $fullText = ($row['fulltext']);//Save the full text
+                if ($row['id']==$articleId){
+                    $fullText = ($row['fulltext']);//Save the full text
+                    $introText = $row['introtext'];//Save the intro text
+                } 
             }
-            //return $fullText;
+            //Check within intro text
+            if ($introText){
+                //$crawledLink = "GC_9w9IV3CI"; Test value
+                if(strstr($introText,"youtube.com/watch?v=")){//If default link
+                    $crawledLink = strstr($introText,"youtube.com/watch?v=");
+                    $crawledLink = str_replace("watch?v=","embed/",$crawledLink);
+                    $crawledLink = strstr($crawledLink,">", true);
+                    $crawledLink = strstr($crawledLink,"\"", true);
+                    return "https://www.".$crawledLink;
+                }
+                if (strstr($introText,"youtu.be/")){//If sharing link
+                    $crawledLink = strstr($introText,"youtu.be/");
+                    $crawledLink = str_replace("youtu.be/","youtube.com/embed/",$crawledLink);
+                    $crawledLink = strstr($crawledLink,">", true);
+                    $crawledLink = strstr($crawledLink,"\"", true);
+                    return "https://www.".$crawledLink;
+                }
+                if (strstr($introText,"youtube.com/embed/")){//If embeded link
+                    $crawledLink = strstr($introText,"youtube.com/embed/");
+                    $crawledLink = strstr($crawledLink,">", true);
+                    $crawledLink = strstr($crawledLink,"\"", true);
+                    return "https://www.".$crawledLink;
+                }
+            }
+            //Check within full text
             if ($fullText){
                 //$crawledLink = "GC_9w9IV3CI"; Test value
                 if(strstr($fullText,"youtube.com/watch?v=")){//If default link
