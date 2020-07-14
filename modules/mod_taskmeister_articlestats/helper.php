@@ -11,6 +11,8 @@
  * is derivative of works licensed under the GNU General Public License or
  * other free or open source software licenses.
  */
+use Joomla\CMS\Factory;
+
 class modArticleStats
 {
     /**
@@ -27,5 +29,10 @@ class modArticleStats
     public static function getHeader($params)//Get header input from the Joomla's interface
     {
         return $params->get('customheader');
+    }
+    function getName($id)
+    {
+        $user = Factory::getUser($id);
+        return $user->name;
     }
 }

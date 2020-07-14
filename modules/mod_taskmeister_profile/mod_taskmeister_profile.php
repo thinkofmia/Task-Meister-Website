@@ -1,6 +1,6 @@
 <?php
 /**
- * All Class Stats Module Entry Point
+ * Profile Module Entry Point
  * 
  * @package    Joomla.Tutorials
  * @subpackage Modules
@@ -17,21 +17,16 @@ defined('_JEXEC') or die; // ensures that this file is being invoked from the Jo
 // Include the syndicate functions only once
 require_once dirname(__FILE__) . '/helper.php';//used because our helper functions are defined within a class, and we only want the class defined once. 
 
-
-$displayHeader = modAllClassesStats::getHeader($params);//invoke helper class method
-$displayText = modAllClassesStats::getText($params);//invoke helper class method
+$displayHeader = ModProfileHelper::getHeader($params);//Set variable of inputtable header
+$displayText = ModProfileHelper::getText($params);//Set variable of inputtable text
 
 //Database code
 use Joomla\CMS\Factory;
 //Set database variable
 $db = Factory::getDbo();
+$me = Factory::getUser();
+$userID = $me->id;
 
-//Querying for stats of the entire database of the external teacher stats
-$query = $db->getQuery(true);
-$query->select($db->quoteName(array('es_teacherid','es_students')))//Get everything from
-    ->from($db->quoteName('#__customtables_table_teacherstats'));//From our external teacher stats table
-$db->setQuery($query);
-$results = $db->loadAssocList();//Save results as $results2
-
-
-require JModuleHelper::getLayoutPath('mod_taskmeister_allclassstats');
+if ($userID!=0){//if User id isnt a guest
+    require JModuleHelper::getLayoutPath('mod_taskmeister_profile');//Opens up default.php
+}

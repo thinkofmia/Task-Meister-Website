@@ -33,7 +33,7 @@ defined('_JEXEC') or die;
             <b>Deployed by: </b><?php echo $articleDeployedUsers; ?></p>
             <!--Displays play button-->
             <p>
-                <a href="?option=com_content&view=article&id=<?php echo $articleID; ?>" itemprop="url" title="Go to the article site">▶ Play</a>
+                <a class="button_tm" href="?option=com_content&view=article&id=<?php echo $articleID; ?>" itemprop="url" title="Go to the article site">▶ Play</a>
             </p>
         </div>
     </div>

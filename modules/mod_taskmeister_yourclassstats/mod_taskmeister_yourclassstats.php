@@ -20,7 +20,8 @@ require_once dirname(__FILE__) . '/helper.php';//used because our helper functio
 
 $displayHeader = modYourClassesStats::getHeader($params);//invoke helper class method
 $displayText = modYourClassesStats::getText($params);//invoke helper class method
-$showTable = modYourClassesStats::checkTable($params->get('tablestats'));
+$displayMode = $params->get('display');
+$maxTags = intval($params->get('maxTags'));
 
 //Database code
 use Joomla\CMS\Factory;
@@ -32,7 +33,7 @@ $userID = $me->id;
 if ($userID!=0){//if User id isnt a guest
     //Querying for stats of the entire database of the external teacher stats
     $query = $db->getQuery(true);
-    $query->select($db->quoteName(array('*')))//Get everything from
+    $query->select($db->quoteName(array('es_teacherid','es_students')))//Get everything from
         ->from($db->quoteName('#__customtables_table_teacherstats'))
         ->where($db->quoteName('es_teacherid') . ' = ' . $userID);//From our external teacher stats table
     $db->setQuery($query);
@@ -70,6 +71,29 @@ if ($userID!=0){//if User id isnt a guest
         }
         //Sort Preference Score by highest first
         arsort($fullPreferencesScore);
+        arsort($dislikedPreferencesScore);
+        //Limit scores based on max tags size
+        //Save old array
+        $oldFullPreferencesScore = $fullPreferencesScore;
+        $oldDislikedPreferencesScore = $dislikedPreferencesScore;
+        //Clear array
+        $fullPreferencesScore = array();
+        $dislikedPreferencesScore = array();
+        //Push array base on limited value
+        $count=0;//Initialize count
+        foreach($oldFullPreferencesScore as $key => $value){
+            if ($maxTags==0 || $count<$maxTags){
+                $fullPreferencesScore[$key] = $value;
+                $count+=1;
+            } 
+        }
+        $count=0; //Reset count
+        foreach($oldDislikedPreferencesScore as $key => $value){
+            if ($maxTags==0 || $count<$maxTags){
+                $dislikedPreferencesScore[$key] = $value;
+                $count+=1;
+            } 
+        }
         //Set up arrays
         $likePreferencesScore = array();
         foreach ($fullPreferencesScore as $key => $value){
