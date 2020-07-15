@@ -693,6 +693,7 @@ class plgTaskMeisterTM_recommender extends JPlugin
         foreach ($weighArticlesList as $key => $val){
             if ($count<$noOfArticles){
                 $finalList[intval($key)] = floor($val/$highestWeighValue*100);
+                if ($finalList[intval($key)]==0) $finalList[intval($key)] = 1;
                 //array_push($finalList, $key);
                 $count+=1;
             }
