@@ -501,7 +501,7 @@ table tr, .yellowtable tr, #allClassStatsTable tr, .yourClassStatsTable tr, tabl
   position: relative;
 }
 #search input {
-  width: 30vw;
+  width: 25vw;
   top: -20%;
   position: relative;
   font-size: 1.75vw;

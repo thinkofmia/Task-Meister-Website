@@ -37,6 +37,7 @@ var span = document.getElementsByClassName("close")[0];
 // When the user clicks on <span> (x), close the modal
 span.onclick = function() {
   modal.style.display = "none";
+  setCookie("<?php echo $displayHeader; ?>","123",1);
 }
 
 // When the user clicks anywhere outside of the modal, close it
@@ -46,4 +47,34 @@ span.onclick = function() {
 //    modal.style.display = "none";
 //  }
 //}
+
+function setCookie(cname, cvalue, exdays) {
+  var d = new Date();
+  d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+  var expires = "expires="+d.toUTCString();
+  document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+}
+
+function getCookie(cname) {
+  var name = cname + "=";
+  var ca = document.cookie.split(';');
+  for(var i = 0; i < ca.length; i++) {
+    var c = ca[i];
+    while (c.charAt(0) == ' ') {
+      c = c.substring(1);
+    }
+    if (c.indexOf(name) == 0) {
+      return c.substring(name.length, c.length);
+    }
+  }
+  return "";
+}
+
+document.addEventListener('DOMContentLoaded', function(){
+  var isshow = getCookie("<?php echo $displayHeader; ?>");
+    if (isshow == null || isshow == "") {
+        modal.style.display = "block";
+    }
+    else modal.style.display = "none";
+});
 </script>
