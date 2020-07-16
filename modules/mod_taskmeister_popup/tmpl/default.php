@@ -4,7 +4,7 @@ defined('_JEXEC') or die;
 //Displays module output
 ?>
 
-<div id="myModal" class="modal">
+<div id="myModal" class="modal" style="display:none;">
   <!-- Modal content -->
   <div class="modal-content">
     <div class="modal-header">
