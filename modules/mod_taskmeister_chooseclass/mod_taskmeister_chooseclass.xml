@@ -2,7 +2,7 @@
 <extension type="module" version="3.1.0" client="site" method="upgrade">
     <name>Choose Class (Task Meister)</name>
     <author>Fremont Teng</author>
-    <version>1.0.0</version>
+    <version>1.0.1</version>
     <description>A choose class module for Task Meister. Does the association of teachers and class.</description>
     <files>
         <filename>mod_taskmeister_chooseclass.xml</filename>

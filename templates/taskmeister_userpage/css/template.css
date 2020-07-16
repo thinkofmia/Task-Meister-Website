@@ -36,6 +36,14 @@ table tr, .yellowtable tr, #allClassStatsTable tr, .yourClassStatsTable tr, tabl
 }
 
 /*Custom Tags*/
+.flex {
+  display: inline-flex;
+}
+
+.stretch {
+  width: 90vw;
+}
+
 /*
 * CSS For Positioning Modules
 */

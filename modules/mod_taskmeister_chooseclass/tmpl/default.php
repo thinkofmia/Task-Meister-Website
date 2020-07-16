@@ -86,6 +86,29 @@ $userPreferenceList = array();//User Preferred List
         }
         updateStudentLists();//Update list display using the above js func
     }
+
+function editClass() {
+    //Set Vars
+    var classInput = document.getElementById("preferenceForm");
+    var editBtn = document.getElementById("editClassBtn");
+    var classList = document.querySelector(".teachersList");
+
+    //Hide Button
+    editBtn.style.display = "none";
+    //Show
+    classInput.style.display = "inline-block";
+    classList.style.display = "inline-block";
+}
+
+document.addEventListener('DOMContentLoaded', function(){
+    //Set Vars
+    var classInput = document.getElementById("preferenceForm");
+    var classList = document.querySelector(".teachersList");
+
+    //Hide Button
+    classInput.style.display = "none";
+    classList.style.display = "none";
+});
 </script>
 
 <!-- 
@@ -103,18 +126,21 @@ Display left hand side text
     <?php endif; ?>
     <br>
     <?php if ($isTeacher) : ?>
-        You are a Teacher.<br>
-        <form id="preferenceForm" method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>" >
-            <br><span style="background-color: gold;">Your Students: </span><span id="text_list2">[]</span><input type="text" name="list2" id="input_list2" placeholder = "[]">
-            <br><input type="submit" name="submit2">
+        Account Type: Teacher.<br>
+        <div class="flex stretch"><span style="background-color: orange;">Your Students: </span><span id="text_list2">[]</span></div>
+        <form id="preferenceForm" style="display:none;" method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>" >
+            <input type="text" name="list2" id="input_list2" placeholder = "[]">
+            <br><input type="submit" class="inputSavePreference" name="submit2" value="Save Selection">
         </form>
     <?php else : ?>
-        You are a Student.<br>
-        <form id="preferenceForm" method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>" >
-            <br><span style="background-color: green;">Your Teachers: </span><span id="text_list1">[]</span><input type="text" name="list1" id="input_list1" placeholder = "[]">
-            <br><input type="submit" name="submit">
+        Account Type: Student.<br>
+        <div class="flex stretch"><span style="background-color: orange;">Your Teachers: </span><span id="text_list1">[]</span></div>
+        <form id="preferenceForm" style="display:none;" method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>" >
+            <input type="text" name="list1" id="input_list1" placeholder = "[]">
+            <br><input type="submit" class="inputSavePreference" name="submit" value="Save Selection">
         </form>
     <?php endif; ?>
+    <br><button onclick="editClass();" id="editClassBtn" class="inputSavePreference" >Edit Class</button>
     <br>
     <!--
         Create input boxes in a form (Method: POST)
@@ -127,7 +153,7 @@ Display left hand side text
     Display differently if teacher or students
 -->
 <?php if ($isTeacher) : ?><!--For teachers to pick students-->
-    <div class="teachersList">
+    <div class="teachersList" style="display:none;">
         <!--For loop to display tag list-->
         <?php foreach ($studentList as $key => $value) : ?>
             <!--Set the div id as the tag name and give it onclick toggleTeacher func-->
@@ -145,7 +171,7 @@ Display left hand side text
         <?php endforeach; ?>
     </div>
 <?php else : ?><!--For students to pick teachers-->
-    <div class="teachersList">
+    <div class="teachersList" style="display:none;">
         <!--For loop to display tag list-->
         <?php foreach ($teacherList as $key => $value) : ?>
             <!--Set the div id as the tag name and give it onclick toggleTeacher func-->
