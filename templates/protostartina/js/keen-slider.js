@@ -13,8 +13,25 @@
 
 // code for taskmeister slider/carousel
 function createSlide(url) {
-    expr = /youtube\.com\/embed\/\S+/;
+    expr = /(http(s)?:\/\/)?(www\.)?youtu(\.be|be\.com)\/(\S+)/;
     if (expr.test(url)) {
+        url = expr.exec(url).slice(-1)[0];
+        // check for url parameter structure
+        if(/\?v=\S+/.test(url)) {
+            //console.log('parameter v found');
+            id = /\?v=(\S+)/.exec(url).slice(-1)[0];
+        }
+        // check for embed url structure
+        else if(/embed\/\S+/.test(url)) {
+            //console.log('embed link found');
+            id = /embed\/(\S+)/.exec(url).slice(-1)[0];
+        }
+        else {
+            //console.log('link shortened');
+            id = /([^\s?]+)/.exec(url).slice(-1)[0];
+        }
+        url = "https://youtube.com/embed/" + id;
+
         var media = document.createElement("iframe");
         media.frameBorder = 0;
         media.allowFullscreen = true;
@@ -28,6 +45,7 @@ function createSlide(url) {
     media.src = url;
     div.appendChild(media);
     document.querySelector("#my-keen-slider").appendChild(div);
+    // console.log(url);
 };
 
 function updateClasses(instance) {
