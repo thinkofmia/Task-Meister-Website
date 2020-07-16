@@ -514,7 +514,7 @@ class plgTaskMeisterTM_recommender extends JPlugin
         //Set default weightages value
         $notPreferredModifier = 100*((($this->params)->get('notpreferredweightage'))/100);
         $mayTryModifier = 100*((($this->params)->get('maytryweightage'))/100);
-        $preferredModifier = 500*((($this->params)->get('preferredweightage'))/100);
+        $preferredModifier = 200*((($this->params)->get('preferredweightage'))/100);
         $likesBonus = 1;
         $deployedBonus = 1;
         $touchedBonus = 1;
