@@ -7493,3 +7493,54 @@ body.modal-open {
 .login-night {
   background-color: #1d1f24;
 }
+
+.action-button-unset:enabled {
+    /* background-color: Transparent; */
+    background-color: #8a8a8a;
+    background-repeat: no-repeat;
+    /* border: solid white 1px; */
+    /* border-radius: 20px; */
+    padding: 10px;
+    cursor: pointer;
+    overflow: hidden;
+    outline: none;
+    /* color: white; */
+    color: black;
+    transition-property: all;
+    transition-duration: 0.25s;
+    font-weight: bold;
+}
+
+.action-button-unset:hover:enabled {
+    box-shadow: 6px 4px 10px 1px white;
+    transform: translate(-5px, -5px) scale(1.2);
+}
+
+.action-button-unset:active:enabled {
+    transition-duration: 0.1s;
+    box-shadow: -1px -1px 5px 1px white;
+    transform: translate(2px, 2px) scale(0.9);
+}
+
+.action-button-set {
+    background-repeat: no-repeat;
+    background-color: #515151;
+    border-style: inset;
+    padding: 10px;
+    cursor: pointer;
+    overflow: hidden;
+    outline: none;
+    color: black;
+    font-weight: bold;
+    transform: scale(0.9);
+    box-shadow: 0px 0px 5px 3px #0af;
+    border-color: black;
+}
+
+.action-button-set:hover {
+  	transition: none;
+}
+
+.action-button-set:active {
+	transition: none;
+}
