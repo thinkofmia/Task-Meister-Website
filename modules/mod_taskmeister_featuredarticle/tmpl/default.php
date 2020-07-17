@@ -43,6 +43,12 @@ defined('_JEXEC') or die;
         </div>
         </li>
     <?php endforeach; ?>
+    <? for ($x = $counter_dict; $x < 4; $x++) : ?>
+        <li id="carousel__slide<?php echo $x; ?>"
+        tabindex="0"
+        class="carousel__slide">
+        </li>
+    <?php endfor; ?>
   </ol>
   <aside class="carousel__navigation">
     <ol class="carousel__navigation-list">
