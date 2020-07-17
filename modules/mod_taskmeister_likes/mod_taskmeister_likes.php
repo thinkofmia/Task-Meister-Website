@@ -317,4 +317,12 @@ function setThumbsUp($userID,$articleID,$userchoice,$userLikedList,$userDisliked
     }
 }
 
+//Check if already liked
+if (in_array(intval($articleID),$userLikedList)) $hasLiked = true;
+else $hasLiked = false;
+
+//Check if already disliked
+if (in_array(intval($articleID),$userDislikedList)) $hasDisliked = true;
+else $hasDisliked = false;
+
 require JModuleHelper::getLayoutPath('mod_taskmeister_likes');//Get default.php layout
