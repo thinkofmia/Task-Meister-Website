@@ -7,7 +7,11 @@ defined('_JEXEC') or die;
     <div class="featuredArticle">
         <!--If exists video, play video. Else show image of article.-->
         <?php if ($videoLink) : ?>
-            <iframe src="<?php echo $videoLink; ?>">
+            <iframe src="<?php echo $videoLink; ?>" 
+            allowfullscreen="allowfullscreen"
+            mozallowfullscreen="mozallowfullscreen" 
+            msallowfullscreen="msallowfullscreen" 
+            oallowfullscreen="oallowfullscreen">
             </iframe>
         <?php else : ?>
             <img src="<?php echo $articleImage; ?>" onerror="this.src='<?php echo $dummyArticleImg; ?>';"></img>
