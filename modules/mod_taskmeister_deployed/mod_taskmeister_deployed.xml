@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <extension type="module" version="3.1.0" client="site" method="upgrade">
-    <name>Deployed Module (Task Meister)</name>
+    <name>Deployment Button Module (Task Meister)</name>
     <author>Fremont Teng</author>
-    <version>1.0.0</version>
-    <description>A Deployed module for Task Meister, allows user to bookmark/deploy a certain article.</description>
+    <version>1.0.1</version>
+    <description>A button module for Task Meister, allows user to bookmark/deploy a certain article.</description>
     <files>
         <filename>mod_taskmeister_deployed.xml</filename>
         <filename module="mod_taskmeister_deployed">mod_taskmeister_deployed.php</filename>
