@@ -16,7 +16,7 @@ defined('_JEXEC') or die;
 
 <!--Display-->
 <?php foreach ($recommendedContents as $tag => $contents) : ?>
-  <h3>Our Recommendation on <?php echo $tag; ?>...</h3>
+  <h3>Because you liked <?php echo $tag; ?>...</h3>
   <ul class="scrollbarnews<?php echo $moduleclass_sfx; ?> mod-list">
   <div class="articlesRow">
     <!-- Arrow button to scroll left-->
