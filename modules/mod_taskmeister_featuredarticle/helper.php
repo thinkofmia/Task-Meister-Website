@@ -62,55 +62,100 @@ class ModFeaturedArticleHelper
                     $introText = $row['introtext'];//Save the intro text
                 } 
             }
-            //Set preg match
-            $url = '/(http|https|ftp|ftps)\:\/\/[a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,3}(\/\S*)?/';
             //Check within intro text
             if ($introText){
                 //$crawledLink = "GC_9w9IV3CI"; Test value
-                if(strstr($introText,"youtube.com/watch?v=")){//If default link
-                    $crawledLink = strstr($introText,"youtube.com/watch?v=");
+                $vartext = $introText;
+                while (($vartext=strstr($vartext,"youtube.com/watch?v="))!= NULL ){//If default link
+                    $crawledLink = strstr($vartext,"youtube.com/watch?v=");
                     $crawledLink = str_replace("watch?v=","embed/",$crawledLink);
-                    $crawledLink = strstr($crawledLink,">", true);
-                    $crawledLink = strstr($crawledLink,"\"", true);
-                    return "https://www.".$crawledLink;
+                    if (strstr($crawledLink,">", true)) $crawledLink = strstr($crawledLink,">", true);
+                    if (strstr($crawledLink,"\"", true)) $crawledLink = strstr($crawledLink,"\"", true);
+                    if (strstr($crawledLink,";", true)) $crawledLink = strstr($crawledLink,";", true);
+                    $url = "https://www.".$crawledLink;
+                    if (!filter_var($url, FILTER_VALIDATE_URL) === false) {
+                        return $url;
+                    }
+                    else {//For debugging
+                        echo "<script>console.log('Picked up invalid url: ".$url."')</script>";
+                    }
                 }
-                if (strstr($introText,"youtu.be/")){//If sharing link
-                    $crawledLink = strstr($introText,"youtu.be/");
+                $vartext = $introText;
+                while (($vartext=strstr($vartext,"youtu.be/")) != NULL ){//If sharing link
+                    $crawledLink = strstr($vartext,"youtu.be/");
                     $crawledLink = str_replace("youtu.be/","youtube.com/embed/",$crawledLink);
-                    $crawledLink = strstr($crawledLink,">", true);
-                    $crawledLink = strstr($crawledLink,"\"", true);
-                    return "https://www.".$crawledLink;
+                    if (strstr($crawledLink,">", true)) $crawledLink = strstr($crawledLink,">", true);
+                    if (strstr($crawledLink,"\"", true)) $crawledLink = strstr($crawledLink,"\"", true);
+                    if (strstr($crawledLink,";", true)) $crawledLink = strstr($crawledLink,";", true);
+                    $url = "https://www.".$crawledLink;
+                    if (!filter_var($url, FILTER_VALIDATE_URL) === false) {
+                        return $url;
+                    }
+                    else {//For debugging
+                        echo "<script>console.log('Picked up invalid url: ".$url."')</script>";
+                    }
                 }
-                if (strstr($introText,"youtube.com/embed/")){//If embeded link
-                    $crawledLink = strstr($introText,"youtube.com/embed/");
-                    $crawledLink = strstr($crawledLink,">", true);
-                    $crawledLink = strstr($crawledLink,"\"", true);
-                    return "https://www.".$crawledLink;
+                $vartext = $introText;
+                while (($vartext=strstr($vartext,"youtube.com/embed/")) != NULL ){//If embeded link
+                    $crawledLink = strstr($vartext,"youtube.com/embed/");
+                    if (strstr($crawledLink,">", true)) $crawledLink = strstr($crawledLink,">", true);
+                    if (strstr($crawledLink,"\"", true)) $crawledLink = strstr($crawledLink,"\"", true);
+                    if (strstr($crawledLink,";", true)) $crawledLink = strstr($crawledLink,";", true);
+                    $url = "https://www.".$crawledLink;
+                    if (!filter_var($url, FILTER_VALIDATE_URL) === false) {
+                        return $url;
+                    }
+                    else {//For debugging
+                        echo "<script>console.log('Picked up invalid url: ".$url."')</script>";
+                    }
                 }
             }
             //Check within full text
             if ($fullText){
                 //$crawledLink = "GC_9w9IV3CI"; Test value
-                if(strstr($fullText,"youtube.com/watch?v=")){//If default link
+                $vartext = $fullText;
+                while (($vartext=strstr($vartext,"youtube.com/watch?v="))!= NULL){//If default link
                     $crawledLink = strstr($fullText,"youtube.com/watch?v=");
                     $crawledLink = str_replace("watch?v=","embed/",$crawledLink);
-                    $crawledLink = strstr($crawledLink,">", true);
-                    $crawledLink = strstr($crawledLink,"\"", true);
-                    $crawledLink = strstr($crawledLink,",", true);
-                    return "https://www.".$crawledLink;
+                    if (strstr($crawledLink,">", true)) $crawledLink = strstr($crawledLink,">", true);
+                    if (strstr($crawledLink,"\"", true)) $crawledLink = strstr($crawledLink,"\"", true);
+                    if (strstr($crawledLink,";", true)) $crawledLink = strstr($crawledLink,";", true);
+                    $url = "https://www.".$crawledLink;
+                    if (!filter_var($url, FILTER_VALIDATE_URL) === false) {
+                        return $url;
+                    }
+                    else {//For debugging
+                        echo "<script>console.log('Picked up invalid url: ".$url."')</script>";
+                    }
                 }
-                if (strstr($fullText,"youtu.be/")){//If sharing link
+                $vartext = $fullText;
+                while (($vartext=strstr($vartext,"youtu.be/"))!=NULL){//If sharing link
                     $crawledLink = strstr($fullText,"youtu.be/");
                     $crawledLink = str_replace("youtu.be/","youtube.com/embed/",$crawledLink);
-                    $crawledLink = strstr($crawledLink,">", true);
-                    $crawledLink = strstr($crawledLink,"\"", true);
-                    return "https://www.".$crawledLink;
+                    if (strstr($crawledLink,">", true)) $crawledLink = strstr($crawledLink,">", true);
+                    if (strstr($crawledLink,"\"", true)) $crawledLink = strstr($crawledLink,"\"", true);
+                    if (strstr($crawledLink,";", true)) $crawledLink = strstr($crawledLink,";", true);
+                    $url = "https://www.".$crawledLink;
+                    if (!filter_var($url, FILTER_VALIDATE_URL) === false) {
+                        return $url;
+                    }
+                    else {//For debugging
+                        echo "<script>console.log('Picked up invalid url: ".$url."')</script>";
+                    }
                 }
-                if (strstr($fullText,"youtube.com/embed/")){//If embeded link
+                $vartext = $fullText;
+                while (($vartext=strstr($vartext,"youtube.com/embed/"))!=NULL){//If embeded link
                     $crawledLink = strstr($fullText,"youtube.com/embed/");
-                    $crawledLink = strstr($crawledLink,">", true);
-                    $crawledLink = strstr($crawledLink,"\"", true);
-                    return "https://www.".$crawledLink;
+                    if (strstr($crawledLink,">", true)) $crawledLink = strstr($crawledLink,">", true);
+                    if (strstr($crawledLink,"\"", true)) $crawledLink = strstr($crawledLink,"\"", true);
+                    if (strstr($crawledLink,";", true)) $crawledLink = strstr($crawledLink,";", true);
+                    $url = "https://www.".$crawledLink;
+                    if (!filter_var($url, FILTER_VALIDATE_URL) === false) {
+                        return $url;
+                    }
+                    else {//For debugging
+                        echo "<script>console.log('Picked up invalid url: ".$url."')</script>";
+                    }
                 }
             }
         }

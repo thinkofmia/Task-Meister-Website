@@ -533,6 +533,7 @@ table tr, .yellowtable tr, #allClassStatsTable tr, .yourClassStatsTable tr, tabl
   padding-top: 35%;
   filter: drop-shadow(0 0 10px #0003);
   perspective: 100px;
+  left: -2vw;
 }
 
 .carousel__viewport {
@@ -546,7 +547,7 @@ table tr, .yellowtable tr, #allClassStatsTable tr, .yourClassStatsTable tr, tabl
   counter-reset: item;
   scroll-behavior: smooth;
   scroll-snap-type: x mandatory;
-  width: 90vw;
+  width: 100vw;
   height: 40vw;
 }
 

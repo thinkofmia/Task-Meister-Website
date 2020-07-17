@@ -560,6 +560,7 @@ left: 0;
     padding-top: 35%;
     filter: drop-shadow(0 0 10px #0003);
     perspective: 100px;
+    left: -2vw;
 }
 
 .carousel__viewport {
@@ -574,7 +575,7 @@ left: 0;
     counter-reset: item;
     scroll-behavior: smooth;
     scroll-snap-type: x mandatory;
-    width: 90vw;
+    width: 100vw;
     height: 40vw;
 }
 

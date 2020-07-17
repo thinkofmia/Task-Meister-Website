@@ -14,7 +14,7 @@ defined('_JEXEC') or die;
     <div class="featuredArticle">
         <!--If exists video, play video. Else show image of article.-->
         <?php if ($value["videoLink"]) : ?>
-            <iframe src="<?php echo $value["videoLink"]; ?>" 
+            <iframe title="Crawled link = <?php echo $value["videoLink"]; ?>" src="<?php echo $value["videoLink"]; ?>" 
             allowfullscreen="allowfullscreen"
             mozallowfullscreen="mozallowfullscreen" 
             msallowfullscreen="msallowfullscreen" 

@@ -51,6 +51,7 @@ foreach ($articleList as $articleID){
     $counter_dict += 1;
     $articlesDict[$counter_dict] = array();
     //Set variables
+    echo "<script>console.log('Getting video for article #".$counter_dict."')</script>";
     $videoLink = ModFeaturedArticleHelper::getVideo($params, $params->get('automated'), $articleID);//Set variable of video link
     $articleLikedUsers = "None";
     $articleDeployedUsers = "None";
