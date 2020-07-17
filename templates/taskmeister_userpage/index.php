@@ -45,7 +45,7 @@ else $username = "Login";
 <!--Navigation Bar-->
 <div class="topnav" id="myTopnav">
     <a id = "logolink" href="<?php echo $this->baseurl; ?>/index.php/home"><!-- Set clickable logo-->
-        <img class = "logo"  src="<?php echo $this->baseurl; ?>/templates/<?php echo $this->template; ?>/images/TaskMeisterLogo.JPG" alt="Task Meister Logo" class="logo" />
+        <img id="logo" class = "logo"  src="<?php echo $this->baseurl; ?>/templates/<?php echo $this->template; ?>/images/TaskMeisterLogo.JPG" alt="Task Meister Logo" class="logo" />
     </a>
     <!--Home-->
     <?php if($urlPath==$this->baseurl."/index.php/home") : ?>
