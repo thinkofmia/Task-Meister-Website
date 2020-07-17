@@ -29,9 +29,12 @@ if ($itemID){
 if ($articleID){
     //Sets user id from User var
     $userID = $me->id;
+    //Initialize variables
+    $noOfLikes = 0;
+    $noOfDislikes = 0;
     //Querying for article stats table based on article id
     $query = $db->getQuery(true);
-    $query->select($db->quoteName(array('es_articleid','es_userchoice')))//Get the article id and the user choice list
+    $query->select($db->quoteName(array('es_articleid','es_userchoice','es_totallikes','es_totaldislikes')))//Get the article id and the user choice list
         ->from($db->quoteName('#__customtables_table_articlestats'))//From the Article Stats Database
         ->where($db->quoteName('es_articleid') . ' = ' . $articleID);//Where it is this article id
     $db->setQuery($query);
@@ -47,6 +50,10 @@ foreach ($results as $row) {
         $userchoice=json_decode($row['es_userchoice'],true);
         //Toggle boolean that record do exist
         $dataNotExist = false;
+        //Set No of likes and dislikes
+        if ($row['es_totallikes']) $noOfLikes = $row['es_totallikes'];
+        if ($row['es_totaldislikes']) $noOfDislikes = $row['es_totaldislikes'];
+        
     } 
 }
 //If record doesn't exists in the database
@@ -306,13 +313,13 @@ function setThumbsUp($userID,$articleID,$userchoice,$userLikedList,$userDisliked
     <div id="thumbsBox">
         <!--If user is a guest, create fake buttons with alert messages-->
         <?php if ($userID==0) : ?>
-            <button name= "fakeButton1" id= "thumbsUp" onclick="alert('Login First!!')" title ="Like Button">👍</button>
-            <button name= "fakeButton2" id = "thumbsDown" onclick="alert('Login First!!')" title ="Dislike Button">👎</button>  
+            <button name= "fakeButton1" id= "thumbsUp" onclick="alert('Login First!!')" title ="Like Button - Login First!" disabled=true>👍 <?php echo $noOfLikes; ?></button>
+            <button name= "fakeButton2" id = "thumbsDown" onclick="alert('Login First!!')" title ="Dislike Button - Login First!" disabled=true>👎 <?php echo $noOfDislikes; ?></button>  
         <!--If user has logined, create buttons with actual functions-->
         <?php else : ?>
             <form method="post">
-                <button name= "tUp" id= "thumbsUp" title ="Like Button">👍</button>
-                <button name= "tDown" id = "thumbsDown" title ="Dislike Button">👎</button>  
+                <button name= "tUp" id= "thumbsUp" title ="Like Button">👍 <?php echo $noOfLikes; ?></button>
+                <button name= "tDown" id = "thumbsDown" title ="Dislike Button">👎 <?php echo $noOfDislikes; ?></button>  
             </form>
         <?php endif; ?>
     </div>
