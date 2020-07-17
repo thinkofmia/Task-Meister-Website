@@ -9,9 +9,6 @@ defined('_JEXEC') or die;
     <?php if ($displayHeader) : ?>
         <h3><?php echo $displayHeader; ?></h3>
     <?php endif; ?>
-    <?php if ($displayText) : ?>
-        <?php echo $displayText; ?>
-    <?php endif; ?>
 </div>
 
 <?php 
@@ -129,6 +126,9 @@ $list2 = json_decode($recommendedContents);
           });"></i>
   </div>
   </ul>
+  <?php if ($displayText) : ?>
+        <?php echo $displayText; ?>
+  <?php endif; ?>
   <?php else :?>
       Cannot find relevant articles
   <?php endif; ?>

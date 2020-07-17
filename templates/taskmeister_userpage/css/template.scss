@@ -592,7 +592,7 @@ left: 0;
 }
 
 .carousel__slide:before {
-    content: counter(item);
+    content: "No Article Found";//Edit this to change the blank article message
     position: absolute;
     top: 50%;
     left: 50%;

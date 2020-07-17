@@ -564,7 +564,7 @@ table tr, .yellowtable tr, #allClassStatsTable tr, .yourClassStatsTable tr, tabl
 }
 
 .carousel__slide:before {
-  content: counter(item);
+  content: "No Article Found";
   position: absolute;
   top: 50%;
   left: 50%;

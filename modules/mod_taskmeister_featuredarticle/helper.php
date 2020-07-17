@@ -62,6 +62,8 @@ class ModFeaturedArticleHelper
                     $introText = $row['introtext'];//Save the intro text
                 } 
             }
+            //Set preg match
+            $url = '/(http|https|ftp|ftps)\:\/\/[a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,3}(\/\S*)?/';
             //Check within intro text
             if ($introText){
                 //$crawledLink = "GC_9w9IV3CI"; Test value
@@ -94,6 +96,7 @@ class ModFeaturedArticleHelper
                     $crawledLink = str_replace("watch?v=","embed/",$crawledLink);
                     $crawledLink = strstr($crawledLink,">", true);
                     $crawledLink = strstr($crawledLink,"\"", true);
+                    $crawledLink = strstr($crawledLink,",", true);
                     return "https://www.".$crawledLink;
                 }
                 if (strstr($fullText,"youtu.be/")){//If sharing link
@@ -112,7 +115,7 @@ class ModFeaturedArticleHelper
             }
         }
     }
-    function recommendArticle($userid, $keyword){
+    function recommendArticles($userid, $keyword){
         /**
          * Function Recommend Article: Recommend an article for the user
          * Parameter: None
@@ -122,8 +125,8 @@ class ModFeaturedArticleHelper
         $dispatcher = JDispatcher::getInstance();
         //Initialize result
         $results = array("Calculating... ");
-        //Set Number of articles to 1
-        $noOfArticles=3;
+        //Set Number of articles to 4
+        $noOfArticles=4;
         //Call recommender engine function
         $results = $dispatcher->trigger( 'recommendPersonalArticles', array("Personal",$noOfArticles,$userid,$keyword));
         //Return string results of recommended articles
@@ -131,7 +134,7 @@ class ModFeaturedArticleHelper
         foreach ($results[0] as $key => $value){
             array_push($articleList, $key);
         }
-        return $articleList[rand(0,sizeof($articleList)-1)];
+        return $articleList;
     }
     function getArticleExternalStats($articleId){
         /**

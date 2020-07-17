@@ -37,30 +37,40 @@ if ($params->get('automated')=="choice_no"){
 else {
     $me = Factory::getUser();//Gets user
     $userid = $me->id;
-    $articleID = ModFeaturedArticleHelper::recommendArticle($userid, $keyword);
+    //Get the top articles
+    $articleList = ModFeaturedArticleHelper::recommendArticles($userid, $keyword);
 }
 
-$videoLink = ModFeaturedArticleHelper::getVideo($params, $params->get('automated'), $articleID);//Set variable of video link
-$articleLikedUsers = "None";
-$articleDeployedUsers = "None";
-$articleTotalLikes = 0;
+//Set global dummy image
 $dummyArticleImg = "/taskmeisterx/modules/mod_taskmeister_featuredarticle/images/noimagefound.png";
-//$dummyArticleImg = "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/a85c73f1-755b-411b-9495-fca9a1246038/d5zuto4-9d45d025-d4e5-4de1-9beb-c2e9ccabffb0.png/v1/fill/w_895,h_893,q_70,strp/eevee__by_ebaroo_d5zuto4-pre.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOiIsImlzcyI6InVybjphcHA6Iiwib2JqIjpbW3siaGVpZ2h0IjoiPD0xMDIxIiwicGF0aCI6IlwvZlwvYTg1YzczZjEtNzU1Yi00MTFiLTk0OTUtZmNhOWExMjQ2MDM4XC9kNXp1dG80LTlkNDVkMDI1LWQ0ZTUtNGRlMS05YmViLWMyZTljY2FiZmZiMC5wbmciLCJ3aWR0aCI6Ijw9MTAyNCJ9XV0sImF1ZCI6WyJ1cm46c2VydmljZTppbWFnZS5vcGVyYXRpb25zIl19.f30G9iVONRbFHKiwi7ajbGT4nECaKthXFLGka6hS-Es";
-if ($videoLink) echo "<script>console.log('Crawling Video link: " . $videoLink . "' );</script>";
-else echo "<script>console.log('Debug Objects: No Video Found' );</script>";
-
-//Article Contents
-$articleContents = ModFeaturedArticleHelper::getArticle($articleID);
-if ($articleContents == "No article found. "){
-    $articleTitle = "No article found. ";
-    $articleImage = "No article found. ";
-}
-else{
-    $articleTitle = $articleContents['title'];
-    $articleImage = json_decode($articleContents['images'])->image_intro;
-}
-
-//External contents
+//Set up dictionary
+$articlesDict = array();
+$counter_dict = 0;
+//Loop the list
+foreach ($articleList as $articleID){
+    $counter_dict += 1;
+    $articlesDict[$counter_dict] = array();
+    //Set variables
+    $videoLink = ModFeaturedArticleHelper::getVideo($params, $params->get('automated'), $articleID);//Set variable of video link
+    $articleLikedUsers = "None";
+    $articleDeployedUsers = "None";
+    $articleTotalLikes = 0;
+    
+    //Check if video exists
+    if ($videoLink) echo "<script>console.log('Crawling Video link: " . $videoLink . "' );</script>";
+    else echo "<script>console.log('Debug Objects: No Video Found' );</script>";
+    
+    //Article Contents
+    $articleContents = ModFeaturedArticleHelper::getArticle($articleID);
+    if ($articleContents == "No article found. "){
+        $articleTitle = "No article found. ";
+        $articleImage = "No article found. ";
+    }
+    else{
+        $articleTitle = $articleContents['title'];
+        $articleImage = json_decode($articleContents['images'])->image_intro;
+    }
+    //External contents
 $externalContents = ModFeaturedArticleHelper::getArticleExternalStats($articleID);
 if ($externalContents != "Nothing is found. "){
     if ($externalContents['es_totallikes']) $articleTotalLikes = $externalContents['es_totallikes'];
@@ -85,9 +95,17 @@ if ($externalContents != "Nothing is found. "){
             }
         }
         $articleLikedUsers = implode(", ", $newArray);
+        }
     }
-
+    //Save variables
+    $articlesDict[$counter_dict]["videoLink"] = $videoLink;
+    $articlesDict[$counter_dict]["likedUsers"] = $articleLikedUsers;
+    $articlesDict[$counter_dict]["deployedUsers"] = $articleDeployedUsers;
+    $articlesDict[$counter_dict]["noOfLikes"] =  $articleTotalLikes;
+    $articlesDict[$counter_dict]["noOfDeployed"] =  $articleTotalDeployed;
+    $articlesDict[$counter_dict]["title"] =  $articleTitle;
+    $articlesDict[$counter_dict]["image"] =  $articleImage;
+    $articlesDict[$counter_dict]["id"] = $articleID;
 }
-
 
 require JModuleHelper::getLayoutPath('mod_taskmeister_featuredarticle');//Opens up default.php

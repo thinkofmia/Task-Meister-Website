@@ -2,8 +2,8 @@
 <extension type="module" version="3.1.0" client="site" method="upgrade">
     <name>Featured Article (Task Meister)</name>
     <author>Fremont Teng</author>
-    <version>1.0.0</version>
-    <description>A featured article module for Task Meister. Able to set video or image of an article. </description>
+    <version>1.0.2</version>
+    <description>A featured article module for Task Meister. It also works as a carousel. </description>
     <files>
         <filename>mod_taskmeister_featuredarticle.xml</filename>
         <filename module="mod_taskmeister_featuredarticle">mod_taskmeister_featuredarticle.php</filename>
