@@ -94,6 +94,7 @@ foreach ($results as $row) {//For loop to find the record
     if ($userID==$row['es_userid']){//If user id matches the one of the records
         $deployedList_user=json_decode($row['es_pagedeployed'],true);//Save the deployment list of user as an array
         $dataNotExist = false;//Set boolean to be false since the data do exists!
+        
     } 
 }
 //If no record of the user stats for the particular user exists
@@ -193,5 +194,9 @@ function setDeployed($userID,$articleID,$list,$deployedList_user){
         $result = JFactory::getDbo()->updateObject('#__customtables_table_userstats', $userInfo, 'es_userid');
     }
 }
+
+//Check if this article is currently deployed by user
+if (in_array (intval($articleID), $deployedList_user)) $hasDeployed = true;
+else $hasDeployed = false;
 
 require JModuleHelper::getLayoutPath('mod_taskmeister_deployed');//Display default.php layout

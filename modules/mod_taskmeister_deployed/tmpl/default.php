@@ -20,11 +20,15 @@ defined('_JEXEC') or die;
     <div id="deployedBox">
         <!--If the user is a guest, set the onclick button to login first -->
         <?php if ($userID==0) : ?>
-            <button name= "fakeButton" id= "deployedButton" onclick="alert('Login First!!')" title="Requires login to click">👨‍💻 <?php echo $deployedSize; ?></button> 
+            <button name= "fakeButton" class="action-button-unset" id= "deployedButton" onclick="alert('Login First!!')" title="Requires login to click">👨‍💻 <?php echo $deployedSize; ?></button> 
         <!--Else if already logined, set post button for the deployment -->
         <?php else : ?>
             <form method="post">
-                <button name= "dButton" id= "deployedButton" title="Total # of Deployment: <?php echo $deployedSize; ?>">👨‍💻 <?php echo $deployedSize; ?></button> 
+                <?php if ($hasDeployed) : ?>
+                    <button name= "dButton" class="action-button-set" id= "deployedButton" title="Total # of Deployment: <?php echo $deployedSize; ?>">👨‍💻 <?php echo $deployedSize; ?></button> 
+                <?php else : ?>
+                    <button name= "dButton" class="action-button-unset" id= "deployedButton" title="Total # of Deployment: <?php echo $deployedSize; ?>">👨‍💻 <?php echo $deployedSize; ?></button> 
+                <?php endif; ?>
             </form>
         <?php endif; ?>
     </div>
