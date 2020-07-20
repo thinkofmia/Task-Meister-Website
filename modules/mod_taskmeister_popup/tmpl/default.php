@@ -4,39 +4,49 @@ defined('_JEXEC') or die;
 //Displays module output
 ?>
 
-<div id="myModal" class="modal" style="display:none;">
-  <!-- Modal content -->
-  <div class="modal-content">
-    <div class="modal-header">
-      <span class="close">&times;</span>
-      <!--Displays Header if exists-->
-        <?php if ($displayHeader) : ?>  
-            <h2 class="popup-title"><?php echo $displayHeader; ?></h2>
-        <?php endif; ?>
-    </div>
-    <div class="modal-body">
-      <!--Displays Text if exists-->
-      <?php if ($displayText) : ?>
+  <!-- The Modal -->
+  <div class="modal" id="myModal">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content bg-dark">
+      
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">
+            <!--Displays Header if exists-->
+            <?php if ($displayHeader) : ?>  
+                <h2 class="popup-title"><?php echo $displayHeader; ?></h2>
+            <?php endif; ?>
+          </h4>
+          <button id="closePopup" type="button" class="close textAlt" data-dismiss="modal">&times;</button>
+        </div>
+        
+        <!-- Modal body -->
+        <div class="modal-body">
+          <!--Displays Text if exists-->
+          <?php if ($displayText) : ?>
             <p><?php echo $displayText; ?></p>
-        <?php endif; ?>
+          <?php endif; ?>
+        </div>
+        
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <!--<button type="button" class="btn bgAlt" data-dismiss="modal">Okay</button>-->
+        </div>
+        
+      </div>
     </div>
-    <!--<div class="modal-footer">
-      <h3>Modal Footer</h3>
-    </div>-->
   </div>
-
-</div>
 
 <script>
 // Get the modal
-var modal = document.getElementById("myModal");
+var myModal = document.getElementById("myModal");
 
 // Get the <span> element that closes the modal
-var span = document.getElementsByClassName("close")[0];
+var x = document.querySelector('#closePopup');
 
 // When the user clicks on <span> (x), close the modal
-span.onclick = function() {
-  modal.style.display = "none";
+x.onclick = function() {
+  myModal.style.display = 'none';
   setCookie("<?php echo $displayHeader; ?>","123",1);
 }
 
@@ -73,8 +83,8 @@ function getCookie(cname) {
 document.addEventListener('DOMContentLoaded', function(){
   var isshow = getCookie("<?php echo $displayHeader; ?>");
     if (isshow == null || isshow == "") {
-        modal.style.display = "block";
+      myModal.style.display = 'block';
     }
-    else modal.style.display = "none";
+    else myModal.style.display = 'none';
 });
 </script>

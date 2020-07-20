@@ -381,4 +381,11 @@ table tr, table th, table td {
   display: none;
 }
 
+/**
+    CSS for popup module
+*/
+.modal {
+  display: block;
+}
+
 /*# sourceMappingURL=template.css.map */

@@ -2,8 +2,8 @@
 <extension type="module" version="3.1.0" client="site" method="upgrade">
     <name>Popup (Task Meister)</name>
     <author>Fremont Teng</author>
-    <version>1.0.0</version>
-    <description>A custom popup module for Task Meister. Only works with the taskmeister template. </description>
+    <version>1.0.3</version>
+    <description>A custom popup module for Task Meister. Only works with the taskmeister template and requires Bootstrap 4. </description>
     <files>
         <filename>mod_taskmeister_popup.xml</filename>
         <filename module="mod_taskmeister_popup">mod_taskmeister_popup.php</filename>
