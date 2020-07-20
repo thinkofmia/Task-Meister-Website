@@ -40,6 +40,10 @@ table tr, table th, table td {
 }
 
 /*Custom Classes*/
+.flex {
+  display: inline-flex;
+}
+
 .bgMain {
   background-color: black;
   color: white;

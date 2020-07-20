@@ -44,6 +44,10 @@ table {
 }
 
 /*Custom Classes*/
+.flex {
+    display: inline-flex;
+}
+
 .bgMain{//To fit any class with the page bg
     background-color: $pageBackground;
     color: $mainFontColor;

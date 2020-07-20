@@ -37,9 +37,15 @@ JHtml::_('behavior.formvalidator');
 	<form action="<?php echo JRoute::_('index.php?option=com_users&task=user.login'); ?>" method="post" class="form-validate form-horizontal well">
 		<fieldset>
 			<?php echo $this->form->renderFieldset('credentials'); ?>
-			
+			<div class="control-group">
+				<div class="controls">
+					<button type="submit" class="btn bgAlt login-button">
+						<?php echo JText::_('JLOGIN'); ?>
+					</button>
+				</div>
+			</div>
 			<?php if (JPluginHelper::isEnabled('system', 'remember')) : ?>
-				<div class="control-group">
+				<div class="control-group flex">
 					<div class="control-label">
 						<label for="remember">
 							<?php echo JText::_('COM_USERS_LOGIN_REMEMBER_ME'); ?>
@@ -50,13 +56,6 @@ JHtml::_('behavior.formvalidator');
 					</div>
 				</div>
 			<?php endif; ?>
-			<div class="control-group">
-				<div class="controls">
-					<button type="submit" class="btn bgAlt">
-						<?php echo JText::_('JLOGIN'); ?>
-					</button>
-				</div>
-			</div>
 			<?php $return = $this->form->getValue('return', '', $this->params->get('login_redirect_url', $this->params->get('login_redirect_menuitem'))); ?>
 			<input type="hidden" name="return" value="<?php echo base64_encode($return); ?>" />
 			<?php echo JHtml::_('form.token'); ?>
@@ -67,19 +66,19 @@ JHtml::_('behavior.formvalidator');
 	<ul class="nav nav-tabs nav-stacked">
 		<li>
 			<a href="<?php echo JRoute::_('index.php?option=com_users&view=reset'); ?>">
-				<?php echo JText::_('COM_USERS_LOGIN_RESET'); ?>
+				<span class="badge bgAlt p-1"><?php echo JText::_('COM_USERS_LOGIN_RESET'); ?></span>
 			</a>
 		</li>
 		<li>
 			<a href="<?php echo JRoute::_('index.php?option=com_users&view=remind'); ?>">
-				<?php echo JText::_('COM_USERS_LOGIN_REMIND'); ?>
+				<span class="badge bgAlt p-1"><?php echo JText::_('COM_USERS_LOGIN_REMIND'); ?></span>
 			</a>
 		</li>
 		<?php $usersConfig = JComponentHelper::getParams('com_users'); ?>
 		<?php if ($usersConfig->get('allowUserRegistration')) : ?>
 			<li>
 				<a href="<?php echo JRoute::_('index.php?option=com_users&view=registration'); ?>">
-					<?php echo JText::_('COM_USERS_LOGIN_REGISTER'); ?>
+					<span class="badge bgAlt p-1"><?php echo JText::_('COM_USERS_LOGIN_REGISTER'); ?></span>
 				</a>
 			</li>
 		<?php endif; ?>
