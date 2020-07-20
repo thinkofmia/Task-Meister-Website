@@ -113,8 +113,8 @@ else $username = "Login";
         </div>
       </li>
     </ul>
-    <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+    <form class="form-inline my-2 my-lg-0" action="<?php echo JUri::base(); ?>index.php/search">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" value = "<?php echo $_REQUEST["keyword"]; ?>" name="keyword">
       <button class="btn bgAlt my-2 my-sm-0" type="submit">🔍</button>
     </form>
   </div>
