@@ -107,7 +107,7 @@ else $username = "Login";
         </a>
         <!--Dropdown tab for account-->
         <div class="dropdown-menu bg-dark" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item text-light" href="#"><?php echo $username; ?></a>
+          <a class="dropdown-item text-light bg-dark" href="<?php echo $this->baseurl."/index.php/login"?>"><?php echo $username; ?></a>
           <div class="dropdown-divider"></div>
           <!--If Guest, disable the below-->
           <?php if ($userID==0) : ?>
@@ -115,9 +115,9 @@ else $username = "Login";
             <a class="dropdown-item disabled" href="#">My Preferences</a>
             <a class="dropdown-item disabled" href="#">My Class</a>
           <?php else: ?>
-            <a class="dropdown-item text-light" href="#">My List</a>
-            <a class="dropdown-item text-light" href="#">My Preferences</a>
-            <a class="dropdown-item text-light" href="#">My Class</a>
+            <a class="dropdown-item text-light bg-dark" href="<?php echo $this->baseurl."/index.php/mylist"?>">My List</a>
+            <a class="dropdown-item text-light bg-dark" href="<?php echo $this->baseurl."/index.php/choosepreference"?>">My Preferences</a>
+            <a class="dropdown-item text-light bg-dark" href="<?php echo $this->baseurl."/index.php/chooseclass"?>">My Class</a>
           <?php endif; ?>  
         </div>
       </li>
