@@ -50,8 +50,8 @@ function createSlide(url) {
 
 function updateClasses(instance) {
     var slide = instance.details().relativeSlide;
-    var arrowLeft = document.getElementById("arrow-left");
-    var arrowRight = document.getElementById("arrow-right");
+    var arrowLeft = document.getElementById("carousel-arrow-left");
+    var arrowRight = document.getElementById("carousel-arrow-right");
     /*slide === 0
     ? arrowLeft.classList.add("arrow--disabled")
     : arrowLeft.classList.remove("arrow--disabled");
@@ -83,8 +83,8 @@ function createKeenSlider(urls)
     svg = "http://www.w3.org/2000/svg";
     // create arrow left
     arrow_left = document.createElementNS(svg, "svg");
-    arrow_left.setAttributeNS(null, "id", "arrow-left");
-    arrow_left.setAttributeNS(null, "class", "arrow arrow--left");
+    arrow_left.setAttributeNS(null, "id", "carousel-arrow-left");
+    arrow_left.setAttributeNS(null, "class", "carousel-arrow carousel-arrow--left");
     arrow_left.setAttributeNS(null, "viewBox", "0 0 24 24");
     // create path for arrow
     path_left = document.createElementNS(svg, "path");
@@ -93,8 +93,8 @@ function createKeenSlider(urls)
 
     // create arrow right
     arrow_right = document.createElementNS(svg, "svg");
-    arrow_right.setAttributeNS(null, "id", "arrow-right");
-    arrow_right.setAttributeNS(null, "class", "arrow arrow--right");
+    arrow_right.setAttributeNS(null, "id", "carousel-arrow-right");
+    arrow_right.setAttributeNS(null, "class", "carousel-arrow carousel-arrow--right");
     arrow_right.setAttributeNS(null, "viewBox", "0 0 24 24");
     //create path for arrow
     path_right = document.createElementNS(svg, "path");
@@ -123,13 +123,13 @@ function newSlider(slider)
         loop: true,
         created: function (instance) {
             document
-                .getElementById("arrow-left")
+                .getElementById("carousel-arrow-left")
                 .addEventListener("click", function () {
                     instance.prev();
                 });
 
             document
-                .getElementById("arrow-right")
+                .getElementById("carousel-arrow-right")
                 .addEventListener("click", function () {
                     instance.next();
                 });
