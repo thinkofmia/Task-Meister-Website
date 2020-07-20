@@ -50,6 +50,41 @@ table tr, table th, table td {
   color: black;
 }
 
+.btn-circle {
+  width: 45px;
+  height: 45px;
+  line-height: 45px;
+  text-align: center;
+  padding: 0;
+  border-radius: 50%;
+}
+
+.btn-circle i {
+  position: relative;
+  top: -1px;
+}
+
+.btn-circle-sm {
+  width: 35px;
+  height: 35px;
+  line-height: 35px;
+  font-size: 0.9rem;
+}
+
+.btn-circle-lg {
+  width: 55px;
+  height: 55px;
+  line-height: 55px;
+  font-size: 1.1rem;
+}
+
+.btn-circle-xl {
+  width: 70px;
+  height: 70px;
+  line-height: 70px;
+  font-size: 1.3rem;
+}
+
 /*Custom Ids */
 #navLogo {
   width: 40px;
@@ -60,6 +95,14 @@ table tr, table th, table td {
  * --Modules
  * This contains the CSS for the Taskmeister Modules
  */
+/**
+    Featured Article Module
+    - Module used to showcase top articles in a carousel
+*/
+.carousel-item img {
+  height: 30vw;
+}
+
 /**
     Recommend Article Module
     - Module used to showcase articles in a net-flix style
