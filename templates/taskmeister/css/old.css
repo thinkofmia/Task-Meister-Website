@@ -1,4 +1,9 @@
-legend {
+/* This file indicates the changes made to template.css of protostartina
+ * with the changes indicated with "added" and the original css for the selectors copied over if
+ * any css was added/changed
+*/
+
+legend { /* no conflict */
 	display: block;
 	width: 100%;
 	padding: 0;
@@ -10,7 +15,7 @@ legend {
 	border-bottom: 1px solid #e5e5e5;
 }
 
-.well {
+.well { /* no conflict */
 	min-height: 20px;
 	padding: 19px;
 	margin-bottom: 20px;
@@ -23,8 +28,8 @@ legend {
 	-moz-box-shadow: inset 0 1px 1px rgba(0,0,0,0.05);
 	box-shadow: inset 0 1px 1px rgba(0,0,0,0.05);
 }
-
-.breadcrumb {
+ 
+.breadcrumb { /* no conflict */
 	padding: 8px 15px;
 	margin: 0 0 18px;
 	list-style: none;
@@ -35,7 +40,7 @@ legend {
   	border: 1px solid #e3e3e3; /* added */
 }
 
-.brand {
+.brand { /* no conflict */
 	color: #09d; /* added */
 	-webkit-transition: color .5s linear;
 	-moz-transition: color .5s linear;
@@ -43,15 +48,17 @@ legend {
 	transition: color .5s linear;
 }
 
-.brand:hover {
+.brand:hover { /* no conflict */
 	color: #0ae; /* added */
 	text-decoration: none;
 }
 
-.login-night { /* added */
+.login-night { /* no conflict, added */
   background-color: #1d1f24;
 }
 
+/* no conflict from here onwards */
+/* the following is css for action-button's */
 .action-button-unset:enabled {
     /* background-color: Transparent; */
     background-color: #8a8a8a;
