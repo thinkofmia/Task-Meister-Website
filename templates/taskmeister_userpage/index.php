@@ -57,6 +57,7 @@ else $username = "Login";
       <!--Logo Image-->
       <img id="navLogo" src="<?php echo $this->baseurl; ?>/templates/<?php echo $this->template; ?>/images/TaskMeisterLogo.JPG" alt="Logo">
   </a>
+  <!--Hamburger toggler-->
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -64,34 +65,57 @@ else $username = "Login";
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <!--Check if current directory is on home page-->
-      <?php if($urlPath==$this->baseurl."/index.php/home") : ?>
-        <li class="nav-item active">
+      <?php if(($urlPath==$this->baseurl."/index.php/home/")||($urlPath==$this->baseurl."/index.php/home")||($urlPath==$this->baseurl."/index.php/")||($urlPath==$this->baseurl."/index.php")||($urlPath==$this->baseurl."/")) : ?>
+        <li class="nav-item bgAlt">
+            <a class="nav-link text-dark" href="<?php echo $urlPath==$this->baseurl; ?>">Home</a>
       <?php else : ?>  
-        <li class="nav-item">
+        <li class="nav-item text-light">
+            <a class="nav-link text-light" href="<?php echo $urlPath==$this->baseurl; ?>">Home</a>
       <?php endif; ?>
-        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Link</a>
-      </li>
+        </li>
+      <!--Check if current directory is on school levels page-->
+      <?php if(($urlPath==$this->baseurl."/index.php/schoollevels/")||($urlPath==$this->baseurl."/index.php/schoollevels")) : ?>
+        <li class="nav-item bgAlt">
+            <a class="nav-link text-dark" href="<?php echo $this->baseurl."/index.php/schoollevels/"; ?>">School Levels</a>
+      <?php else : ?>  
+        <li class="nav-item text-light">
+            <a class="nav-link text-light" href="<?php echo $this->baseurl."/index.php/schoollevels/"; ?>">School Levels</a>
+      <?php endif; ?>
+        </li>
+      <!--Check if current directory is on archives page-->
+      <?php if(($urlPath==$this->baseurl."/index.php/interactive-resources/")||($urlPath==$this->baseurl."/index.php/interactive-resources")) : ?>
+        <li class="nav-item bgAlt">
+            <a class="nav-link text-dark" href="<?php echo $this->baseurl."/index.php/interactive-resources/"; ?>">Archives</a>
+      <?php else : ?>  
+        <li class="nav-item text-light">
+            <a class="nav-link text-light" href="<?php echo $this->baseurl."/index.php/interactive-resources/"; ?>">Archives</a>
+      <?php endif; ?>
+        </li>
+      <!--Dropdown menu for account-->  
       <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Dropdown
+        <a class="nav-link dropdown-toggle text-light" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Account
         </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
+        <!--Dropdown tab for account-->
+        <div class="dropdown-menu bg-dark" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item text-light" href="#"><?php echo $username; ?></a>
           <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Something else here</a>
+          <!--If Guest, disable the below-->
+          <?php if ($userID==0) : ?>
+            <a class="dropdown-item disabled" href="#">My List</a>
+            <a class="dropdown-item disabled" href="#">My Preferences</a>
+            <a class="dropdown-item disabled" href="#">My Class</a>
+          <?php else: ?>
+            <a class="dropdown-item text-light" href="#">My List</a>
+            <a class="dropdown-item text-light" href="#">My Preferences</a>
+            <a class="dropdown-item text-light" href="#">My Class</a>
+          <?php endif; ?>  
         </div>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link disabled" href="#">Disabled</a>
       </li>
     </ul>
     <form class="form-inline my-2 my-lg-0">
       <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+      <button class="btn bgAlt my-2 my-sm-0" type="submit">🔍</button>
     </form>
   </div>
 </nav>

@@ -1,6 +1,5 @@
 /*Variables*/
 $pageBackground: black; //For Background
-$headerBackground: rgba(105, 103, 103, 0.8); //For Header Background
 $mainFontColor: white; //Default Font Color
 $altFontColor: darkorange; //Alt Default Font Color
 
@@ -36,8 +35,22 @@ table {
     }
 }
 
+/*Custom Classes*/
+.bgMain{
+    background-color: $pageBackground;
+    color: $mainFontColor;
+}
 
-/*Custom Tags (New)*/
+.bgAlt{
+    background-color: $altFontColor;
+    color: $pageBackground;
+    #activeTab { //For Nav Bar: Active selection
+        background-color: $altFontColor;
+        color: $pageBackground;
+    }
+}
+
+/*Custom Ids */
 #navLogo {
     width: 40px;
     height: 40px;

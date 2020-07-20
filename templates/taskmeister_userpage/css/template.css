@@ -31,7 +31,22 @@ table tr, table th, table td {
   text-align: center;
 }
 
-/*Custom Tags (New)*/
+/*Custom Classes*/
+.bgMain {
+  background-color: black;
+  color: white;
+}
+
+.bgAlt {
+  background-color: darkorange;
+  color: black;
+}
+.bgAlt #activeTab {
+  background-color: darkorange;
+  color: black;
+}
+
+/*Custom Ids */
 #navLogo {
   width: 40px;
   height: 40px;
