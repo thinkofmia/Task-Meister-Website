@@ -53,7 +53,7 @@ else $username = "Login";
 <!--Bootstrap Nav Bar-->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
   <!--Logo-->
-  <a class="navbar-brand" href="#">
+  <a class="navbar-brand" href="<?php echo $this->baseurl; ?>">
       <!--Logo Image-->
       <img id="navLogo" src="<?php echo $this->baseurl; ?>/templates/<?php echo $this->template; ?>/images/TaskMeisterLogo.JPG" alt="Logo">
   </a>
@@ -63,7 +63,12 @@ else $username = "Login";
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
+      <!--Check if current directory is on home page-->
+      <?php if($urlPath==$this->baseurl."/index.php/home") : ?>
+        <li class="nav-item active">
+      <?php else : ?>  
+        <li class="nav-item">
+      <?php endif; ?>
         <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
