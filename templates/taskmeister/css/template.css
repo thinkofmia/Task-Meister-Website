@@ -100,7 +100,7 @@ table tr, table th, table td {
     - Module used to showcase top articles in a carousel
 */
 .carousel-item img {
-  height: 30vw;
+  height: 40vw;
 }
 
 /**

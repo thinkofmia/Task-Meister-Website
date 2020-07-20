@@ -132,9 +132,10 @@ else $username = "Login";
 <!--Banner-->
 <jdoc:include type="modules" name="banner"/><!-- Module Position: 'banner'-->
 <!--Top-->
-<jdoc:include type="modules" name="top"/><!-- Module Position: 'top'-->
+<div class="container-fluid">
+  <jdoc:include type="modules" name="top"/><!-- Module Position: 'top'-->
+
 <!--Component-->
-<div class="container">
   <div class="row">
     <div class="col-sm-8">
       <jdoc:include type="component" /><!--Components are generated here-->
@@ -144,11 +145,11 @@ else $username = "Login";
       <jdoc:include type="modules" name="right"/><!--Module Position: 'right'-->
     </div>
   </div>
-</div>
 
 <!--Rest of the contents-->
-<jdoc:include type="modules" name="center"/><!-- Module Position: 'center'-->
-<jdoc:include type="modules" name="bottom"/><!-- Module Position: 'bottom'-->
+  <jdoc:include type="modules" name="center"/><!-- Module Position: 'center'-->
+  <jdoc:include type="modules" name="bottom"/><!-- Module Position: 'bottom'-->
+</div>
 
 <!-- Module Position: 'footer'-->
 <jdoc:include type="modules" name="footer" /><!-- Module Position: 'footer'-->
