@@ -35,7 +35,13 @@ table tr, .yellowtable tr, #allClassStatsTable tr, .yourClassStatsTable tr, tabl
   font-size: 1.5vw;
 }
 
-/*Custom Tags*/
+/*Custom Tags (New)*/
+#navLogo {
+  width: 3vw;
+  height: 3vw;
+}
+
+/*Custom Tags (Old)*/
 .flex {
   display: inline-flex;
 }

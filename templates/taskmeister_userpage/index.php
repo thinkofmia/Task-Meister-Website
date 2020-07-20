@@ -30,6 +30,13 @@ else $username = "Login";
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <!-- Puts the correct header information in (eg. page title, meta information, JavaScript)-->
 <jdoc:include type="head" />
+<!--Bootstrap 4-->
+<!-- CSS only -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+<!-- JS, Popper.js, and jQuery -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
 <!-- Creates links to two system style sheets and to our style sheet-->
 <link rel="stylesheet" href="<?php echo $this->baseurl ?>/templates/system/css/system.css" type="text/css" />
 <link rel="stylesheet" href="<?php echo $this->baseurl ?>/templates/system/css/general.css" type="text/css" />
@@ -42,119 +49,58 @@ else $username = "Login";
 <body>
 <!--Scripts-->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"></script>
-<!--Navigation Bar-->
-<div class="topnav" id="myTopnav">
-    <a id = "logolink" href="<?php echo $this->baseurl; ?>/index.php/home"><!-- Set clickable logo-->
-        <img id="logo" class = "logo"  src="<?php echo $this->baseurl; ?>/templates/<?php echo $this->template; ?>/images/TaskMeisterLogo.JPG" alt="Task Meister Logo" class="logo" />
-    </a>
-    <!--Home-->
-    <?php if($urlPath==$this->baseurl."/index.php/home") : ?>
-        <a class="active" href="<?php echo $this->baseurl; ?>/index.php/home">
-    <?php elseif($urlPath==$this->baseurl."/index.php") : ?>
-        <a class="active" href="<?php echo $this->baseurl; ?>/index.php/home">
-    <?php elseif($urlPath==$this->baseurl."/") : ?>
-        <a class="active" href="<?php echo $this->baseurl; ?>/index.php/home">
-    <?php else: ?>
-        <a href="<?php echo $this->baseurl; ?>/index.php/home">
-    <?php endif; ?>
-        Home          
-    </a>
-    <!--Choose Preference-->
-    <?php if($urlPath==$this->baseurl."/index.php/choosepreference") : ?>
-        <a class="active" href="<?php echo $this->baseurl; ?>/index.php/choosepreference">
-    <?php else: ?>
-        <a href="<?php echo $this->baseurl; ?>/index.php/choosepreference">
-    <?php endif; ?>
-        Preference          
-    </a>
-    <!--Choose Class-->
-    <?php if($urlPath==$this->baseurl."/index.php/chooseclass") : ?>
-        <a class="active" href="<?php echo $this->baseurl; ?>/index.php/chooseclass">
-    <?php else: ?>
-    <a href="<?php echo $this->baseurl; ?>/index.php/chooseclass">
-    <?php endif; ?>
-        Class            
-    </a>
-    <!--My List-->
-    <?php if($urlPath==$this->baseurl."/index.php/mylist") : ?>
-        <a class="active" href="<?php echo $this->baseurl; ?>/index.php/mylist">
-    <?php else: ?>
-    <a href="<?php echo $this->baseurl; ?>/index.php/mylist">
-    <?php endif; ?>
-        List          
-    </a>
-    <!--My List-->
-    <?php if($urlPath==$this->baseurl."/index.php/schoollevels") : ?>
-        <a class="active" href="<?php echo $this->baseurl; ?>/index.php/schoollevels">
-    <?php else: ?>
-    <a href="<?php echo $this->baseurl; ?>/index.php/schoollevels">
-    <?php endif; ?>
-        Levels        
-    </a>
-    <!--Archives-->
-    <?php if($urlPath==$this->baseurl."/index.php/interactive-resources") : ?>
-        <a class="active" href="<?php echo $this->baseurl; ?>/index.php/interactive-resources">
-    <?php else: ?>
-    <a href="<?php echo $this->baseurl; ?>/index.php/interactive-resources">
-    <?php endif; ?>
-        Archives      
-    </a>
-    <!--User-->
-    <?php if($urlPath==$this->baseurl."/index.php/login") : ?>
-        <a class="active" id="loginNav" href="<?php echo $this->baseurl; ?>/index.php/login">
-    <?php else: ?>
-    <a id="loginNav" href="<?php echo $this->baseurl; ?>/index.php/login">
-    <?php endif; ?>
-        <?php echo substr($username,0,13); ?>  
-    </a> 
-    <a id="search">
-        <form action="<?php echo JUri::base(); ?>index.php/search">
-            <input type="text" placeholder="Search.." name="keyword" value = "<?php echo $_REQUEST["keyword"]; ?>">
-            <button type="submit">🔍</button>
-        </form>
-    </a>
-    <a href="javascript:void(0);" class="icon" onclick="hamburgerMenu();">
-        🍔
-    </a>
-    </div>
-    <script>
-    //Script for hamburger
-    function hamburgerMenu() {
-    var x = document.getElementById("myTopnav");
-    if (x.className === "topnav") {
-        x.className += " responsive";
-    } else {
-        x.className = "topnav";
-    }
-    }
-    </script>
 
-    <div id="topRow">
-        <jdoc:include type="modules" name="top-left"/><!-- Module Position: 'top-left'-->
-        <div class = "columnCenter">
-            <jdoc:include type="modules" name="top"/><!-- Module Position: 'top'-->
+<!--Bootstrap Nav Bar-->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+  <!--Logo-->
+  <a class="navbar-brand" href="#">
+      <!--Logo Image-->
+      <img id="navLogo" src="<?php echo $this->baseurl; ?>/templates/<?php echo $this->template; ?>/images/TaskMeisterLogo.JPG" alt="Logo">
+  </a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Link</a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Dropdown
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="#">Action</a>
+          <a class="dropdown-item" href="#">Another action</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="#">Something else here</a>
         </div>
-        <div id = "topRight">
-            <jdoc:include type="modules" name="top-right"/><!-- Module Position: 'top-right'-->
-        </div>
-    </div>
-    <div id="centerRow">
-        <div class="left">
-            <jdoc:include type="modules" name="center-left"/><!-- Module Position: 'center-left'-->
-        </div>
-        <div class="center">
-            <jdoc:include type="modules" name="center"/><!-- Module Position: 'center'-->
-        </div>
-        <jdoc:include type="modules" name="center-right"/><!-- Module Position: 'center-right'-->
-    </div>
-    <div id="footer"><!--Unused-->
-        <jdoc:include type="modules" name="bottom-left"/><!-- Module Position: 'bottom-left'-->
-        <div class="center">
-            <jdoc:include type="modules" name="bottom"/><!-- Module Position: 'bottom'-->
-        </div>
-        <jdoc:include type="modules" name="bottom-right"/><!-- Module Position: 'bottom-right'-->
-        <jdoc:include type="modules" name="footer" /><!-- Module Position: 'footer'-->
-    </div>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link disabled" href="#">Disabled</a>
+      </li>
+    </ul>
+    <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+  </div>
+</nav>
+
+<!--Banner-->
+<jdoc:include type="modules" name="banner"/><!-- Module Position: 'banner'-->
+<!--Body-->
+<jdoc:include type="modules" name="top"/><!-- Module Position: 'top'-->
+<jdoc:include type="modules" name="center"/><!-- Module Position: 'center'-->
+<jdoc:include type="modules" name="bottom"/><!-- Module Position: 'bottom'-->
+<!--Right-->
+<jdoc:include type="modules" name="right"/><!--Module Position: 'right'-->
+<!-- Module Position: 'footer'-->
+<jdoc:include type="modules" name="footer" /><!-- Module Position: 'footer'-->
 </body>
 
 <!-- End-->
