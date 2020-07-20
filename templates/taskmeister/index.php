@@ -43,8 +43,8 @@ else $username = "Login";
 <link rel="stylesheet" href="<?php echo $this->baseurl ?>/templates/<?php echo $this->template; ?>/css/template.css" type="text/css" />
 <link href="https://fonts.googleapis.com/css2?family=BioRhyme&display=swap" rel="stylesheet">
 <script src="https://www.google.com/jsapi"></script>
-<!--Importing Chai Seng's CSS-->
-<link rel="stylesheet" href="<?php echo $this->baseurl ?>/templates/<?php echo $this->template; ?>/css/chaiseng.css" type="text/css" />
+<!--Importing CSS changes from old protostartina template-->
+<link rel="stylesheet" href="<?php echo $this->baseurl ?>/templates/<?php echo $this->template; ?>/css/old.css" type="text/css" />
 <link rel="stylesheet" href="<?php echo $this->baseurl ?>/templates/<?php echo $this->template; ?>/css/keen-slider.min.css" type="text/css" />
 </head>
 
