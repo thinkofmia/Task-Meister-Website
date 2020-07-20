@@ -272,3 +272,93 @@ table {
     position: relative;
     margin-left: 1%;
 }
+
+/**
+    Choose Preference/Class Module
+    - Module used to allow users pick their preferences and classes
+*/
+
+.preferenceOptions, .teachersOptions {//CSS for Wrapper for the options/input boxes
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    text-align: center;
+    h3 {//CSS for the header's inputs
+        text-align: center;
+    }
+    input {//CSS for the inputs
+        display: inline-block;
+        min-width: 20vw; 
+        font-size: 1.5vw;
+    }
+}
+
+#preferenceForm {//CSS for the hidden input boxes 
+    #input_list1, #input_list2, #input_list3 {//Hidden so that it can be submitted to the php database without any injections
+        display: none;
+    }
+    text-align: center;
+    width: 90vw;
+    position: relative;
+}
+
+.inputSavePreference {
+    font-size: 1.5vw;
+    text-align: center;
+    border-radius: 8px;
+    background-color: $altFontColor;
+    color: $mainFontColor;
+    margin-top: 0.5vw;
+    margin-bottom: 0.5vw;
+}
+
+.preferenceList, .teachersList {//Wrapper to contain all the preferences/users
+    width: 90vw;
+    height: 100%;
+    display: inline-block;
+    text-align: center;
+    position: relative;
+}
+ 
+.userPreferred, .teacherSelected {//Color the state if the tag is preferred or the teacher is selected
+    @extend .preferenceBox; 
+    background-color: green;
+    border-radius: 8px;
+}
+ 
+.userNotPreferred {//Color the state if the tag is not preferred
+    @extend .preferenceBox;
+    background-color: red;
+    border-radius: 8px;       
+}
+
+.userMayTry {//Color the state if the tag is considered to be tried
+    @extend .preferenceBox;
+    background-color: goldenrod;
+    border-radius: 8px;       
+}
+
+.preferenceBox, .teacherBox {//CSS for the individual boxes.
+    height: 15vw;
+    width: 15vw;
+    position: relative;
+    display: inline-flex;
+    padding: 1vw;
+    cursor: pointer;
+    .preferenceStats{//CSS for the preference stats
+        background-color: blue;
+    }
+    p {
+        position: absolute;
+        z-index: 10;
+        opacity: 0.9;
+        text-align: center;
+        width: 13vw;
+        word-wrap: anywhere;
+        font-size: 1.5vw;
+    }
+    .preferenceLabel, .teacherLabel {//CSS for the captions below the boxes
+        bottom: -0.5vw;
+        background-color: $altFontColor;
+    }
+}

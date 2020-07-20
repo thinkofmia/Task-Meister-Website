@@ -116,7 +116,7 @@ else $username = "Login";
             <a class="dropdown-item disabled" href="#">My Class</a>
           <?php else: ?>
             <a class="dropdown-item text-light bg-dark" href="<?php echo $this->baseurl."/index.php/mylist"?>">My List</a>
-            <a class="dropdown-item text-light bg-dark" href="<?php echo $this->baseurl."/index.php/choosepreference"?>">My Preferences</a>
+            <a class="dropdown-item text-light bg-dark" href="<?php echo $this->baseurl."/index.php/preferences"?>">My Preferences</a>
             <a class="dropdown-item text-light bg-dark" href="<?php echo $this->baseurl."/index.php/chooseclass"?>">My Class</a>
           <?php endif; ?>  
         </div>
