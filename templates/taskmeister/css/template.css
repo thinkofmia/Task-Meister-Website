@@ -16,6 +16,10 @@ p {
   color: white;
 }
 
+a {
+  color: darkorange;
+}
+
 h3 {
   color: darkorange;
 }
@@ -340,6 +344,38 @@ table tr, table th, table td {
 .preferenceBox .preferenceLabel, .userPreferred .preferenceLabel, .teacherSelected .preferenceLabel, .userNotPreferred .preferenceLabel, .userMayTry .preferenceLabel, .preferenceBox .teacherLabel, .userPreferred .teacherLabel, .teacherSelected .teacherLabel, .userNotPreferred .teacherLabel, .userMayTry .teacherLabel, .teacherBox .preferenceLabel, .teacherBox .teacherLabel {
   bottom: -0.5vw;
   background-color: darkorange;
+}
+
+/**
+* CSS for login component/Module
+*/
+.login-button {
+  background-color: darkorange;
+  color: white;
+  cursor: pointer;
+}
+
+.userdata, .input-prepend, #form-login-submit {
+  padding: 2%;
+}
+
+#modlgn-passwd, #modlgn-username, .login-button {
+  width: 80%;
+  padding-top: 2%;
+  font-size: 1.5vw;
+  text-align: center;
+  border-radius: 8px;
+}
+
+.login #username, .login #password {
+  width: 80%;
+  padding-top: 2%;
+  font-size: 1.5vw;
+  text-align: center;
+  border-radius: 8px;
+}
+.login #username-lbl, .login #password-lbl {
+  display: none;
 }
 
 /*# sourceMappingURL=template.css.map */

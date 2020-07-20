@@ -20,6 +20,10 @@ p {
     color: $mainFontColor;
 }
 
+a{
+    color: $altFontColor;
+}
+
 h3 {
     color: $altFontColor;
 }
@@ -360,5 +364,40 @@ table {
     .preferenceLabel, .teacherLabel {//CSS for the captions below the boxes
         bottom: -0.5vw;
         background-color: $altFontColor;
+    }
+}
+
+/**
+* CSS for login component/Module
+*/
+
+.login-button {//CSS for the login submit button
+    background-color: $altFontColor;
+    color: $mainFontColor;
+    cursor: pointer;
+}
+
+.userdata, .input-prepend, #form-login-submit {//Pad the login form
+    padding: 2%;
+}
+
+#modlgn-passwd, #modlgn-username, .login-button {//CSS for the login inputs, e.g. username and password
+    width: 80%;
+    padding-top: 2%;
+    font-size: 1.5vw;
+    text-align: center;
+    border-radius: 8px;
+}
+
+.login {
+    #username, #password {//Set input view
+        width: 80%;
+        padding-top: 2%;
+        font-size: 1.5vw;
+        text-align: center;
+        border-radius: 8px;
+    }
+    #username-lbl, #password-lbl {//Hide labels
+        display: none;
     }
 }

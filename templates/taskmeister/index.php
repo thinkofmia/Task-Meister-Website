@@ -8,6 +8,7 @@ use Joomla\CMS\Uri\Uri;
 //Set database variable
 $db = Factory::getDbo();
 $me = Factory::getUser();
+$doc = JFactory::getDocument();
 
 //Set URL var
 $uri = Uri::getInstance();
@@ -18,6 +19,12 @@ $userID = $me->id;
 $user = JFactory::getUser($userID);
 if (isset($user->name))$username = $user->name;
 else $username = "Login";
+
+// Add JavaScript Frameworks
+JHtml::_('bootstrap.framework');
+$doc->addScript($this->baseurl . '/templates/' . $this->template . '/js/template.js');
+$doc->addScript($this->baseurl . '/templates/' . $this->template . '/js/keen-slider.js');
+
 ?>
 <!-- Tells the browser which flavor of HTML the page is using. In this case HTML5.-->
 <!DOCTYPE html>
