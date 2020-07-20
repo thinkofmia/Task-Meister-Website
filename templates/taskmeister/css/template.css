@@ -50,6 +50,10 @@ table tr, table th, table td {
   color: black;
 }
 
+.textAlt {
+  color: darkorange;
+}
+
 .btn-circle {
   width: 45px;
   height: 45px;
@@ -91,6 +95,13 @@ table tr, table th, table td {
   height: 40px;
 }
 
+#tm_contents {
+  width: 100%;
+}
+#tm_contents .col-sm-8 {
+  width: 100%;
+}
+
 /*
  * --Modules
  * This contains the CSS for the Taskmeister Modules
@@ -101,6 +112,15 @@ table tr, table th, table td {
 */
 .carousel-item img {
   height: 40vw;
+}
+
+.featuredArticleVideo {
+  width: 40vw;
+  height: 30vw;
+}
+.featuredArticleVideo iframe {
+  width: 100%;
+  height: 100%;
 }
 
 /**

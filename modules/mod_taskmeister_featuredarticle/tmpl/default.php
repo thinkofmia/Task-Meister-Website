@@ -37,7 +37,7 @@ defined('_JEXEC') or die;
                 <!-- Card-->
                 <div class="card" style="width: 18rem; height:100%;">
                   <div class="card-body bg-dark">
-                    <h5 class="card-title"><?php echo $value["title"]; ?></h5>
+                    <h5 class="card-title textAlt"><?php echo $value["title"]; ?></h5>
                     <p class="card-text">
                       <!--Displays Number of likes-->
                       <span style="cursor: context-menu;" title="Number of likes: <?php echo $value["noOfLikes"]; ?>"><?php echo $value["noOfLikes"]; ?>👍 </span> 
@@ -48,15 +48,27 @@ defined('_JEXEC') or die;
                       <!--Displays those in your school that has deployed it-->
                       <b>Deployed by: </b><?php echo $value["deployedUsers"]; ?>
                     </p>
-                    <a href="#" class="card-link">Card link</a>
-                    <a href="#" class="card-link">Another link</a>
+                    <a class="card-link" href="?option=com_content&view=article&id=<?php echo $value["id"]; ?>" itemprop="url" title="Go to the article site">
+                      <button type="button" class="btn bgAlt btn-lg">▶ Play</button>
+                    </a>
                   </div>
                 </div>
               </div>
             </div>
             <div class="col-sm-6">
-              <div class="carousel-caption d-none d-md-block">
-                <h5>Video</h5>
+              <!--Video-->
+              <div class="carousel-caption d-none d-md-block mb-5 featuredArticleVideo pr-1">
+                <!--If exists video, show video.\-->
+                <?php if ($value["videoLink"]) : ?>
+                  <iframe title="Crawled link = <?php echo $value["videoLink"]; ?>" src="<?php echo $value["videoLink"]; ?>" 
+                  allowfullscreen="allowfullscreen"
+                  mozallowfullscreen="mozallowfullscreen" 
+                  msallowfullscreen="msallowfullscreen" 
+                  oallowfullscreen="oallowfullscreen">
+                  </iframe>
+                <?php else: ?>
+                  <p>No Video is available</p>
+                <?php endif; ?>
               </div>
             </div>
           </div>
