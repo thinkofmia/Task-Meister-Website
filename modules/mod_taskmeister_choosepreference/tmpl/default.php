@@ -97,6 +97,25 @@ $userPreferenceList = array();//User Preferred List
         }
         updateLists();//Update list display using the above js func
     }
+
+function filterName(keyword){
+    //Set Vars
+    var classGroup = document.querySelectorAll(".preferenceBox");
+    console.log("Changing");
+    //Check if keyword is empty
+    if (keyword.length<1){
+        for (var i=0;i<classGroup.length;i++){
+            classGroup[i].style.display = "inline-flex";
+        }
+    }
+    else{//If keyword exists
+        for (var i=0;i<classGroup.length;i++){//Loop class group
+            var user_name = classGroup[i].querySelector(".preferenceLabel").innerHTML;
+            if (user_name.toLowerCase().includes(keyword.toLowerCase())) classGroup[i].style.display = "inline-flex";
+            else classGroup[i].style.display = "none";
+        }
+    }
+}
 </script>
 
 <!-- 
@@ -122,10 +141,11 @@ Display left hand side text
     -->
     <form id="preferenceForm" method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>" >
         <br><span style="background-color: green;">Preferred</span>: <span id="text_list1">[]</span><input type="text" name="list1" id="input_list1" placeholder = "[]"> 
-        <br><span style="background-color: red;">Not Preferred</span>: <span id="text_list2">[]</span><input type="text" name="list2" id="input_list2" placeholder = "[]"> 
+        <br><span style="background-color: red;">Against</span>: <span id="text_list2">[]</span><input type="text" name="list2" id="input_list2" placeholder = "[]"> 
         <br><span style="background-color: goldenrod;">May Try</span>: <span id="text_list3">[]</span><input type="text" name="list3" id="input_list3" placeholder = "[]"> 
         <br><input class="inputSavePreference" type="submit" name="submit" value="Save Preferences">
     </form>
+    <input onkeyup="filterName(this.value);" onchange="filterName(this.value);" type="text" name="filter" id="name_filter" placeholder = "filter by name">
 </div>
 
 <!--
@@ -149,7 +169,7 @@ Display left hand side text
         </div>
         <?php $count = $count + 1; ?>
         <?php if ($count==25): ?>
-            <button onclick="getAllTags();" id="getMoreBtn" class="inputSavePreference" >Get All Tags</button><br>
+            <!--<button onclick="//getAllTags();" id="getMoreBtn" class="inputSavePreference" >Get All Tags</button><br>-->
             <?php echo "<span id='getMore'>"; ?>
         <?php endif; ?>
         </script>
@@ -162,7 +182,7 @@ Display left hand side text
 
 <script>
 var moreText = document.getElementById("getMore");
-moreText.style.display = "none";
+//moreText.style.display = "none";
 
 function getAllTags() {
   var moreText = document.getElementById("getMore");

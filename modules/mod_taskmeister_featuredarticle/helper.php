@@ -49,7 +49,7 @@ class ModFeaturedArticleHelper
             $db =& JFactory::getDbo();
             //Query for SQL for external article states
             $query = $db->getQuery(true);
-            $query->select($db->quoteName(array('id','fulltext')))// Get all of the contents
+            $query->select($db->quoteName(array('id','fulltext','introtext')))// Get all of the contents
                 ->from($db->quoteName('#__content'))//From the external article stats table
                 ->where($db->quoteName('id') . ' = ' . intval($articleId));//Where the article id is equal to the chosen article
             $db->setQuery($query);
@@ -57,35 +57,110 @@ class ModFeaturedArticleHelper
             //if(!strlen(trim($results))) return null;
             //For each item in the restuls
             foreach($results as $row){
-                if ($row['id']==$articleId) $fullText = ($row['fulltext']);//Save the full text
+                if ($row['id']==$articleId){
+                    $fullText = ($row['fulltext']);//Save the full text
+                    $introText = $row['introtext'];//Save the intro text
+                } 
             }
-            //return $fullText;
+            //Check within intro text
+            if ($introText){
+                //$crawledLink = "GC_9w9IV3CI"; Test value
+                $vartext = $introText;
+                while (($vartext=strstr($vartext,"youtube.com/watch?v="))!= NULL ){//If default link
+                    $crawledLink = strstr($vartext,"youtube.com/watch?v=");
+                    $crawledLink = str_replace("watch?v=","embed/",$crawledLink);
+                    if (strstr($crawledLink,">", true)) $crawledLink = strstr($crawledLink,">", true);
+                    if (strstr($crawledLink,"\"", true)) $crawledLink = strstr($crawledLink,"\"", true);
+                    if (strstr($crawledLink,";", true)) $crawledLink = strstr($crawledLink,";", true);
+                    $url = "https://www.".$crawledLink;
+                    if (!filter_var($url, FILTER_VALIDATE_URL) === false) {
+                        return $url;
+                    }
+                    else {//For debugging
+                        echo "<script>console.log('Picked up invalid url: ".$url."')</script>";
+                    }
+                }
+                $vartext = $introText;
+                while (($vartext=strstr($vartext,"youtu.be/")) != NULL ){//If sharing link
+                    $crawledLink = strstr($vartext,"youtu.be/");
+                    $crawledLink = str_replace("youtu.be/","youtube.com/embed/",$crawledLink);
+                    if (strstr($crawledLink,">", true)) $crawledLink = strstr($crawledLink,">", true);
+                    if (strstr($crawledLink,"\"", true)) $crawledLink = strstr($crawledLink,"\"", true);
+                    if (strstr($crawledLink,";", true)) $crawledLink = strstr($crawledLink,";", true);
+                    $url = "https://www.".$crawledLink;
+                    if (!filter_var($url, FILTER_VALIDATE_URL) === false) {
+                        return $url;
+                    }
+                    else {//For debugging
+                        echo "<script>console.log('Picked up invalid url: ".$url."')</script>";
+                    }
+                }
+                $vartext = $introText;
+                while (($vartext=strstr($vartext,"youtube.com/embed/")) != NULL ){//If embeded link
+                    $crawledLink = strstr($vartext,"youtube.com/embed/");
+                    if (strstr($crawledLink,">", true)) $crawledLink = strstr($crawledLink,">", true);
+                    if (strstr($crawledLink,"\"", true)) $crawledLink = strstr($crawledLink,"\"", true);
+                    if (strstr($crawledLink,";", true)) $crawledLink = strstr($crawledLink,";", true);
+                    $url = "https://www.".$crawledLink;
+                    if (!filter_var($url, FILTER_VALIDATE_URL) === false) {
+                        return $url;
+                    }
+                    else {//For debugging
+                        echo "<script>console.log('Picked up invalid url: ".$url."')</script>";
+                    }
+                }
+            }
+            //Check within full text
             if ($fullText){
                 //$crawledLink = "GC_9w9IV3CI"; Test value
-                if(strstr($fullText,"youtube.com/watch?v=")){//If default link
+                $vartext = $fullText;
+                while (($vartext=strstr($vartext,"youtube.com/watch?v="))!= NULL){//If default link
                     $crawledLink = strstr($fullText,"youtube.com/watch?v=");
                     $crawledLink = str_replace("watch?v=","embed/",$crawledLink);
-                    $crawledLink = strstr($crawledLink,">", true);
-                    $crawledLink = strstr($crawledLink,"\"", true);
-                    return "https://www.".$crawledLink;
+                    if (strstr($crawledLink,">", true)) $crawledLink = strstr($crawledLink,">", true);
+                    if (strstr($crawledLink,"\"", true)) $crawledLink = strstr($crawledLink,"\"", true);
+                    if (strstr($crawledLink,";", true)) $crawledLink = strstr($crawledLink,";", true);
+                    $url = "https://www.".$crawledLink;
+                    if (!filter_var($url, FILTER_VALIDATE_URL) === false) {
+                        return $url;
+                    }
+                    else {//For debugging
+                        echo "<script>console.log('Picked up invalid url: ".$url."')</script>";
+                    }
                 }
-                if (strstr($fullText,"youtu.be/")){//If sharing link
+                $vartext = $fullText;
+                while (($vartext=strstr($vartext,"youtu.be/"))!=NULL){//If sharing link
                     $crawledLink = strstr($fullText,"youtu.be/");
                     $crawledLink = str_replace("youtu.be/","youtube.com/embed/",$crawledLink);
-                    $crawledLink = strstr($crawledLink,">", true);
-                    $crawledLink = strstr($crawledLink,"\"", true);
-                    return "https://www.".$crawledLink;
+                    if (strstr($crawledLink,">", true)) $crawledLink = strstr($crawledLink,">", true);
+                    if (strstr($crawledLink,"\"", true)) $crawledLink = strstr($crawledLink,"\"", true);
+                    if (strstr($crawledLink,";", true)) $crawledLink = strstr($crawledLink,";", true);
+                    $url = "https://www.".$crawledLink;
+                    if (!filter_var($url, FILTER_VALIDATE_URL) === false) {
+                        return $url;
+                    }
+                    else {//For debugging
+                        echo "<script>console.log('Picked up invalid url: ".$url."')</script>";
+                    }
                 }
-                if (strstr($fullText,"youtube.com/embed/")){//If embeded link
+                $vartext = $fullText;
+                while (($vartext=strstr($vartext,"youtube.com/embed/"))!=NULL){//If embeded link
                     $crawledLink = strstr($fullText,"youtube.com/embed/");
-                    $crawledLink = strstr($crawledLink,">", true);
-                    $crawledLink = strstr($crawledLink,"\"", true);
-                    return "https://www.".$crawledLink;
+                    if (strstr($crawledLink,">", true)) $crawledLink = strstr($crawledLink,">", true);
+                    if (strstr($crawledLink,"\"", true)) $crawledLink = strstr($crawledLink,"\"", true);
+                    if (strstr($crawledLink,";", true)) $crawledLink = strstr($crawledLink,";", true);
+                    $url = "https://www.".$crawledLink;
+                    if (!filter_var($url, FILTER_VALIDATE_URL) === false) {
+                        return $url;
+                    }
+                    else {//For debugging
+                        echo "<script>console.log('Picked up invalid url: ".$url."')</script>";
+                    }
                 }
             }
         }
     }
-    function recommendArticle($userid, $keyword){
+    function recommendArticles($userid, $keyword){
         /**
          * Function Recommend Article: Recommend an article for the user
          * Parameter: None
@@ -95,8 +170,8 @@ class ModFeaturedArticleHelper
         $dispatcher = JDispatcher::getInstance();
         //Initialize result
         $results = array("Calculating... ");
-        //Set Number of articles to 1
-        $noOfArticles=3;
+        //Set Number of articles to 4
+        $noOfArticles=4;
         //Call recommender engine function
         $results = $dispatcher->trigger( 'recommendPersonalArticles', array("Personal",$noOfArticles,$userid,$keyword));
         //Return string results of recommended articles
@@ -104,7 +179,7 @@ class ModFeaturedArticleHelper
         foreach ($results[0] as $key => $value){
             array_push($articleList, $key);
         }
-        return $articleList[rand(0,sizeof($articleList)-1)];
+        return $articleList;
     }
     function getArticleExternalStats($articleId){
         /**

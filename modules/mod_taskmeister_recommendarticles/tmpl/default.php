@@ -9,9 +9,6 @@ defined('_JEXEC') or die;
     <?php if ($displayHeader) : ?>
         <h3><?php echo $displayHeader; ?></h3>
     <?php endif; ?>
-    <?php if ($displayText) : ?>
-        <?php echo $displayText; ?>
-    <?php endif; ?>
 </div>
 
 <?php 
@@ -70,6 +67,7 @@ $list2 = json_decode($recommendedContents);
   <?php endif; ?>
 <!--Default display if not choice_teacher-->
 <?php else : ?>
+  <?php if ($list2) :?>
   <ul class="scrollbarnews<?php echo $moduleclass_sfx; ?> mod-list">
   <div class="articlesRow">
     <!-- Arrow button to scroll left-->
@@ -128,5 +126,11 @@ $list2 = json_decode($recommendedContents);
           });"></i>
   </div>
   </ul>
+  <?php if ($displayText) : ?>
+        <?php echo $displayText; ?>
+  <?php endif; ?>
+  <?php else :?>
+      Cannot find relevant articles
+  <?php endif; ?>
 <?php endif; ?>
   <script type="text/javascript" src="https://cdn.rawgit.com/asvd/dragscroll/master/dragscroll.js"></script>

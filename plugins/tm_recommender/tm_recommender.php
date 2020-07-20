@@ -183,7 +183,7 @@ class plgTaskMeisterTM_recommender extends JPlugin
             "Physical Manipulatives", "Poems", "Puzzles",
             "Science", "Simulations", "Sports", "Statistics", "Stories",
             "Travelling", "Treasure Hunts",
-            "VR");
+            "Virtual Reality");
         //Add default tags array into tag list
         foreach ($defaultTags as $row){
             $tagList[$row] = array(
@@ -351,37 +351,44 @@ class plgTaskMeisterTM_recommender extends JPlugin
         $trendingArticles = array();
         //Highest weighing counter
         $highest = 0;
+        //DB to check if article is trashed/unpublished
+        $content_db =& JTable::getInstance("content");
         //Loop results
         foreach ($results_recent as $row){
             if (strcmp($row['es_date'],$lastmonth)){
+                //Set article id
                 $aid = intval($row['es_aid']);
-                if (!isset($trendingArticles[$aid])){
-                    $trendingArticles[$aid] = 0;
-                } 
-                switch ($row['es_action']){
-                        case "liked":
-                            $trendingArticles[$aid] += 10;
-                            break;
-                        case "deployed":
-                            $trendingArticles[$aid] += 10;
-                            break;
-                        case "disliked":
-                            $trendingArticles[$aid] += 1;
-                            break;
-                        case "updated their review for":
-                            $trendingArticles[$aid] += 3;
-                            break;
-                        case "submitted a review for":
-                            $trendingArticles[$aid] += 5;
-                            break;
-                        default:
-                            break;
-                    }
-                    
-                if ($highest < intval($trendingArticles[$aid])){
-                        $highest = intval($trendingArticles[$aid]);
-                    }
-                 
+                //Load article by id
+                $content_db->load($aid);
+                $article_state = $content_db->get("state");
+                if ($article_state==1){//Check if its published
+                    if (!isset($trendingArticles[$aid])){
+                        $trendingArticles[$aid] = 0;
+                    } 
+                    switch ($row['es_action']){
+                            case "liked":
+                                $trendingArticles[$aid] += 10;
+                                break;
+                            case "deployed":
+                                $trendingArticles[$aid] += 10;
+                                break;
+                            case "disliked":
+                                $trendingArticles[$aid] += 1;
+                                break;
+                            case "updated their review for":
+                                $trendingArticles[$aid] += 3;
+                                break;
+                            case "submitted a review for":
+                                $trendingArticles[$aid] += 5;
+                                break;
+                            default:
+                                break;
+                        }
+                        
+                    if ($highest < intval($trendingArticles[$aid])){
+                            $highest = intval($trendingArticles[$aid]);
+                        }
+                }
             }
         }
         //Sort articles in descending order
@@ -481,10 +488,14 @@ class plgTaskMeisterTM_recommender extends JPlugin
         //Save information into a list
         foreach ($results_ext as $row){
             if ($row['es_userid']==$userid){//Just to be sure if user id is same
-                $likedlist = json_decode($row['es_pageliked']);
-                $blacklist = json_decode($row['es_pagedisliked']);
-                $deployedlist = json_decode($row['es_pagedeployed']);
-                $preferencelist = json_decode($row['es_userpreference']);
+                if ($row['es_pageliked']) $likedlist = json_decode($row['es_pageliked']);
+                else $likedlist = [];
+                if ($row['es_pagedisliked']) $blacklist = json_decode($row['es_pagedisliked']);
+                else $blacklist = [];
+                if ($row['es_pagedeployed']) $deployedlist = json_decode($row['es_pagedeployed']);
+                else $deployedlist = [];
+                if ($row['es_userpreference']) $preferencelist = json_decode($row['es_userpreference']);
+                else $preferencelist = [];
             }
         }
         //Get article info database
@@ -502,8 +513,8 @@ class plgTaskMeisterTM_recommender extends JPlugin
         //Save information into a list
         //Set default weightages value
         $notPreferredModifier = 100*((($this->params)->get('notpreferredweightage'))/100);
-        $mayTryModifier = 10*((($this->params)->get('maytryweightage'))/100);
-        $preferredModifier = 20*((($this->params)->get('preferredweightage'))/100);
+        $mayTryModifier = 100*((($this->params)->get('maytryweightage'))/100);
+        $preferredModifier = 200*((($this->params)->get('preferredweightage'))/100);
         $likesBonus = 1;
         $deployedBonus = 1;
         $touchedBonus = 1;
@@ -530,9 +541,16 @@ class plgTaskMeisterTM_recommender extends JPlugin
         //Set up weightage list of articles
         $weighArticlesList = array();
         $highestWeighValue = 0;
+        //DB to check if article is trashed/unpublished
+        $content_db =& JTable::getInstance("content");
+        
         //Weigh articles
         foreach ($results_art as $row){
-            if (in_array($row['es_articleid'],$blacklist)){//If blacklisted or liked already
+            //Load article by id
+            $content_db->load(intval($row['es_articleid']));
+            $article_state = $content_db->get("state");
+            if (in_array($row['es_articleid'],$blacklist)||$article_state!=1){
+                //If blacklisted or unpublished or trashed
                 //Do nothing
             }
             else{//If articles collected is less than 10
@@ -675,6 +693,7 @@ class plgTaskMeisterTM_recommender extends JPlugin
         foreach ($weighArticlesList as $key => $val){
             if ($count<$noOfArticles){
                 $finalList[intval($key)] = floor($val/$highestWeighValue*100);
+                if ($finalList[intval($key)]==0) $finalList[intval($key)] = 1;
                 //array_push($finalList, $key);
                 $count+=1;
             }

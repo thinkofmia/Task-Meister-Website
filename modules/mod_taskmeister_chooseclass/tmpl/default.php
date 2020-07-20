@@ -18,12 +18,27 @@ $userPreferenceList = array();//User Preferred List
             Condition: userPreferredList, userNotPreferredList and userMayTryList have to be already defined
         */
         //Set values of the input boxes to match the lists after converting them into a string
+        //Save to input
         document.getElementById("input_list1").value = JSON.stringify(yourTeacherList);
-        document.getElementById("text_list1").innerHTML = JSON.stringify(yourTeacherList);
+        //Find names
+        var teacherNames = [];
+        for (var i=0;i<yourTeacherList.length;i++){
+            var user = document.getElementById(yourTeacherList[i]);
+            var name = user.querySelector(".boxName").innerHTML;
+            teacherNames.push(name);
+        }
+        document.getElementById("text_list1").innerHTML = teacherNames.join(", ");
     }
     updateStudentLists = function(){
         document.getElementById("input_list2").value = JSON.stringify(yourStudentList);
-        document.getElementById("text_list2").innerHTML = JSON.stringify(yourStudentList);
+        //Find names
+        var studentNames = [];
+        for (var i=0;i<yourStudentList.length;i++){
+            var user = document.getElementById(yourStudentList[i]);
+            var name = user.querySelector(".boxName").innerHTML;
+            studentNames.push(name);
+        }
+        document.getElementById("text_list2").innerHTML = studentNames.join(", ");
     }
 
     toggleTeacher = function(teacher_id){
@@ -86,6 +101,60 @@ $userPreferenceList = array();//User Preferred List
         }
         updateStudentLists();//Update list display using the above js func
     }
+
+function editClass() {
+    //Set Vars
+    var classInput = document.getElementById("preferenceForm");
+    var editBtn = document.getElementById("editClassBtn");
+    var classList = document.querySelector(".teachersList");
+
+    if (editBtn.innerHTML=="Edit Class"){
+        //Change inner html
+        editBtn.innerHTML="Cancel Edit";
+        //Show
+        classInput.style.display = "inline-block";
+        classList.style.display = "inline-block";
+    }
+    else {
+        //Change inner html
+        editBtn.innerHTML="Edit Class";
+        //Show
+        classInput.style.display = "none";
+        classList.style.display = "none";
+    }
+    
+}
+
+function filterName(keyword){
+    //Set Vars
+    var classGroup = document.querySelectorAll(".teacherBox");
+    console.log("Changing");
+    //Check if keyword is empty
+    if (keyword.length<1){
+        for (var i=0;i<classGroup.length;i++){
+            classGroup[i].style.display = "inline-flex";
+        }
+    }
+    else{//If keyword exists
+        for (var i=0;i<classGroup.length;i++){//Loop class group
+            var user_name = classGroup[i].querySelector(".boxName").innerHTML; //Get name of target
+            var user_id = classGroup[i].querySelector(".boxId").innerHTML; //Get id of target
+            //Check if search matches name or id
+            if (user_name.toLowerCase().includes(keyword.toLowerCase())||user_id.toLowerCase().includes(keyword.toLowerCase())) classGroup[i].style.display = "inline-flex";
+            else classGroup[i].style.display = "none";
+        }
+    }
+}
+
+document.addEventListener('DOMContentLoaded', function(){
+    //Set Vars
+    var classInput = document.getElementById("preferenceForm");
+    var classList = document.querySelector(".teachersList");
+
+    //Hide Button
+    classInput.style.display = "none";
+    classList.style.display = "none";
+});
 </script>
 
 <!-- 
@@ -103,18 +172,23 @@ Display left hand side text
     <?php endif; ?>
     <br>
     <?php if ($isTeacher) : ?>
-        You are a Teacher.<br>
-        <form id="preferenceForm" method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>" >
-            <br><span style="background-color: gold;">Your Students: </span><span id="text_list2">[]</span><input type="text" name="list2" id="input_list2" placeholder = "[]">
-            <br><input type="submit" name="submit2">
+        Account Type: Teacher.<br>
+        <div class="flex stretch"><span style="background-color: orange;">Your Students: </span><span id="text_list2">[]</span></div>
+        <form id="preferenceForm" style="display:none;" method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>" >
+            <input type="text" name="list2" id="input_list2" placeholder = "[]">
+            <br><input type="submit" class="inputSavePreference" name="submit2" value="Save Selection">
+            <br><input onkeyup="filterName(this.value);" onchange="filterName(this.value);" type="text" name="filter" id="name_filter" placeholder = "filter by name or id">
         </form>
     <?php else : ?>
-        You are a Student.<br>
-        <form id="preferenceForm" method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>" >
-            <br><span style="background-color: green;">Your Teachers: </span><span id="text_list1">[]</span><input type="text" name="list1" id="input_list1" placeholder = "[]">
-            <br><input type="submit" name="submit">
+        Account Type: Student.<br>
+        <div class="flex stretch"><span style="background-color: orange;">Your Teachers: </span><span id="text_list1">[]</span></div>
+        <form id="preferenceForm" style="display:none;" method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>" >
+            <input type="text" name="list1" id="input_list1" placeholder = "[]">
+            <br><input type="submit" class="inputSavePreference" name="submit" value="Save Selection">
+            <br><input onkeyup="filterName(this.value);" onchange="filterName(this.value);" type="text" name="filter" id="name_filter" placeholder = "filter by name or id">
         </form>
     <?php endif; ?>
+    <br><button onclick="editClass();" id="editClassBtn" class="inputSavePreference" >Edit Class</button>
     <br>
     <!--
         Create input boxes in a form (Method: POST)
@@ -127,7 +201,7 @@ Display left hand side text
     Display differently if teacher or students
 -->
 <?php if ($isTeacher) : ?><!--For teachers to pick students-->
-    <div class="teachersList">
+    <div class="teachersList" style="display:none;">
         <!--For loop to display tag list-->
         <?php foreach ($studentList as $key => $value) : ?>
             <!--Set the div id as the tag name and give it onclick toggleTeacher func-->
@@ -138,14 +212,14 @@ Display left hand side text
                 -->
                 <img src="/taskmeisterx/modules/mod_taskmeister_chooseclass/images/<?php echo $key;?>.jpg" width="100%" height="100%" onerror="var randomImgName = ['1.jpg','2.jpg','3.jpg','4.jpg','2.jpg']; this.src='/taskmeisterx/modules/mod_taskmeister_chooseclass/images/'+Math.floor(1+Math.random() * 15)+'.jpg';"/>
                 <!--Display label of tags, including tag name and number of uses-->
-                <p class = "teacherLabel"><?php echo $value; ?><br>
-                Code: <?php echo $key; ?></p>
+                <p class = "teacherLabel"><span class="boxName"><?php echo $value; ?></span><br>
+                Code: <span class="boxId"><?php echo $key; ?></span></p>
             </div>
             </script>
         <?php endforeach; ?>
     </div>
 <?php else : ?><!--For students to pick teachers-->
-    <div class="teachersList">
+    <div class="teachersList" style="display:none;">
         <!--For loop to display tag list-->
         <?php foreach ($teacherList as $key => $value) : ?>
             <!--Set the div id as the tag name and give it onclick toggleTeacher func-->
@@ -156,8 +230,8 @@ Display left hand side text
                 -->
                 <img src="/taskmeisterx/modules/mod_taskmeister_chooseclass/images/<?php echo $key;?>.jpg" width="100%" height="100%" onerror="var randomImgName = ['1.jpg','2.jpg','3.jpg','4.jpg','2.jpg']; this.src='/taskmeisterx/modules/mod_taskmeister_chooseclass/images/'+Math.floor(1+Math.random() * 15)+'.jpg';"/>
                 <!--Display label of tags, including tag name and number of uses-->
-                <p class = "teacherLabel"><?php echo $value; ?><br>
-                Code: <?php echo $key; ?></p>
+                <p class = "teacherLabel"><span class="boxName"><?php echo $value; ?></span><br>
+                Code: <span class="boxId"><?php echo $key; ?></span></p>
             </div>
             </script>
         <?php endforeach; ?>

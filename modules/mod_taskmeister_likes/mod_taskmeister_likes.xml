@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <extension type="module" version="3.1.0" client="site" method="upgrade">
-    <name>Likes Module (Task Meister)</name>
+    <name>Likes Button Module (Task Meister)</name>
     <author>Fremont Teng</author>
-    <version>1.0.0</version>
-    <description>A Likes module for Task Meister, to give a thumbs up or down to a certain article.</description>
+    <version>1.0.2</version>
+    <description>A button module for Task Meister, to give a thumbs up or down to a certain article.</description>
     <files>
         <filename>mod_taskmeister_likes.xml</filename>
         <filename module="mod_taskmeister_likes">mod_taskmeister_likes.php</filename>

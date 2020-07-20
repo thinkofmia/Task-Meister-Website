@@ -1,6 +1,6 @@
 <?php
 /**
- * Hello World! Module Entry Point
+ * Test Mod Module Entry Point
  * 
  * @package    Joomla.Tutorials
  * @subpackage Modules

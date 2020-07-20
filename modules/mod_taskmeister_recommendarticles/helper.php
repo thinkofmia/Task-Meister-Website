@@ -62,9 +62,24 @@ class ModRecommendArticlesHelper
             $yourTeachersContent = array();
             foreach($yourTeachers as $row){
                 //Get recommendation results of a particular teacher
-                $results = $dispatcher->trigger( 'recommendPersonalArticles', array("Personal",$noOfArticles,$row,""));
-                //Save result in a list
-                $teacherList = json_encode($results[0]);
+                //Get external user table (custom table) To find out list of liked, deployed and disliked articles
+                $query = $db->getQuery(true);
+                $query->select($db->quoteName(array('es_userid','es_pageliked','es_pagedisliked','es_pagedeployed','es_userpreference')))
+                    ->from($db->quoteName('#__customtables_table_userstats'))
+                    ->where($db->quoteName('es_userid') . ' = ' . intval($row));
+                $db->setQuery($query);
+                $results_ext = $db->loadAssocList();
+                //Get teacher's liked pages
+                foreach ($results_ext as $row_user){
+                    if (intval($row_user['es_userid'])==intval($row)){
+                        $likedPages = json_decode($row_user['es_pageliked']);
+                    }
+                }
+                $temp_list = array(); //To store the array
+                foreach ($likedPages as $row_temp){
+                    $temp_list[$row_temp] = 100;//Set weightage to 100
+                }
+                $teacherList = json_encode($temp_list);//Save as a string
                 //Get article contents
                 $results2 = $dispatcher->trigger( 'getArticleContents', array($teacherList));
                 $teacherContents = json_encode($results2[0]);
