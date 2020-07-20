@@ -380,6 +380,9 @@ table tr, table th, table td {
 .login #username-lbl, .login #password-lbl {
   display: none;
 }
+.login .control-group {
+  margin-bottom: 1vw;
+}
 
 /**
     CSS for popup module
