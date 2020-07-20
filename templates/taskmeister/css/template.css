@@ -144,7 +144,7 @@ table tr, table th, table td {
   display: inline-flex;
   overflow-x: hidden;
   overflow-y: hidden;
-  height: 20vw;
+  height: 100%;
   width: 100%;
   margin-left: 1%;
   padding-top: 5vw;
@@ -202,7 +202,7 @@ table tr, table th, table td {
 }
 .recommendedArticles .rankedArticle h2 {
   position: absolute;
-  bottom: -140%;
+  bottom: -40%;
   left: -20%;
   width: 100%;
   opacity: 1;
@@ -215,7 +215,7 @@ table tr, table th, table td {
 }
 .recommendedArticles .rankedArticle h4 {
   position: absolute;
-  bottom: -120%;
+  bottom: -10%;
   left: -20%;
   width: 100%;
   opacity: 1;
