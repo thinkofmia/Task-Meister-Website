@@ -29,22 +29,21 @@ $document->addScript(JUri::base() . 'modules/mod_review/js/review.js');
         <?php if(!empty($testimonials)): ?>
             <div class="reviews">
                 <?php echo ModReviewHelper::generateReviewStatistics($testimonials); $counter = 0; foreach($testimonials as $row): ?>
-                    <div class="review<?php echo ($counter >= 3 ? ' read-all' . ' read-more-' . floor($counter / 3) : '');?>">
-                        <div class="review-summary">
-                            <?php echo ModReviewHelper::renderStarRating($row->rating); ?><?php echo ModReviewHelper::getName($row->uid) . " (" . ModReviewHelper::fmtDate($row->updated) . ")";?>
-                            <div style="padding-top: 30px;">
-                                <p><?php echo ModReviewHelper::replaceYTUrl($row->review); ?></p>
-                            </div>
-                            <!-- <div>
-                                <span>Posted by: <?php echo ModReviewHelper::getName($row->uid);?> on <?php echo ModReviewHelper::fmtDate($row->created); ?></span><br/>
-                                <span>Last updated: <?php echo ModReviewHelper::fmtDate($row->updated); ?></span><br/>
-                            </div> -->
+                    <div class="review<?php echo ($counter >= 3 ? ' read-more" style="display: none;' : '');?>">
+                        <div class="review-user-info">
+                            <span><?php echo ModReviewHelper::getName($row->uid);?></span>
+                            <div><?php echo ModReviewHelper::fmtDate($row->updated); ?></div>
                         </div>
-                        <hr/>
+                        <div class="review-summary">
+                            <?php echo ModReviewHelper::renderStarRating($row->rating); ?>
+                            <div style="padding-top: 30px;">
+                                <p><?php echo ModReviewHelper::replaceYTUrl($row->review, '<p>'); ?></p>
+                            </div>
+                        </div>
                     </div>
                 <?php $counter++; endforeach; ?>
                 <span>
-                    <button class="read-all">Read all</button>
+                    <button class="read-all">Read all</button><button class="read-more">Read more</button><button class="close-all">Close all</button><button class="read-less">Read less</button>
                 </span>
             </div>
         <?php else : ?>
@@ -83,7 +82,7 @@ $document->addScript(JUri::base() . 'modules/mod_review/js/review.js');
                                     }
                                 ?>
                                 <?php echo JHtml::_('form.token'); ?>
-                                <input type="submit" value=<?php echo JText::_('MOD_REVIEW_SUBMIT') ?>>
+                                <input class="review-submit" type="submit" value=<?php echo JText::_('MOD_REVIEW_SUBMIT') ?>>
                             </div>
                         <?php else : ?>
                             <p class="review-status-msg"><?php echo JText::_('MOD_REVIEW_FORM_NOT_ALLOWED'); ?></p>
