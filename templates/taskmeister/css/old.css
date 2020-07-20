@@ -52,20 +52,6 @@ legend {
   background-color: #1d1f24;
 }
 
-body {
-	margin: 0;
-	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-	font-size: 13px;
-	line-height: 18px;
-	color: #eeeeee; /* added */
-	background-color: #fff;
-}
-
-
-body.site.fluid {
-	background-color: #000000; /* added */
-}
-
 .action-button-unset:enabled {
     /* background-color: Transparent; */
     background-color: #8a8a8a;
