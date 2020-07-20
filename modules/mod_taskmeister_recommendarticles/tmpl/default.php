@@ -7,7 +7,7 @@ defined('_JEXEC') or die;
 <!-- Display out custom header/text-->
 <div class="customtext">
     <?php if ($displayHeader) : ?>
-        <h3><?php echo $displayHeader; ?></h3>
+        <h5><?php echo $displayHeader; ?></h5>
     <?php endif; ?>
 </div>
 

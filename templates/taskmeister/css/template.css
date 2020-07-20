@@ -138,7 +138,6 @@ table tr, table th, table td {
 .articlesRow {
   display: inline-flex;
   width: 100%;
-  left: -2vw;
   position: relative;
 }
 
