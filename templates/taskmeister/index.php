@@ -74,30 +74,21 @@ else $username = "Login";
       <?php endif; ?>
         </li>
       <!--Check if current directory is on school levels page-->
-      <?php if(($urlPath==$this->baseurl."/index.php/schoollevels/")||($urlPath==$this->baseurl."/index.php/schoollevels")) : ?>
+      <?php if(($urlPath==$this->baseurl."/index.php/school/")||($urlPath==$this->baseurl."/index.php/school")) : ?>
         <li class="nav-item bgAlt">
-            <a class="nav-link text-dark" href="<?php echo $this->baseurl."/index.php/schoollevels/"; ?>">By School Levels</a>
+            <a class="nav-link text-dark" href="<?php echo $this->baseurl."/index.php/school/"; ?>">By School</a>
       <?php else : ?>  
         <li class="nav-item text-light">
-            <a class="nav-link text-light" href="<?php echo $this->baseurl."/index.php/schoollevels/"; ?>">By School Levels</a>
+            <a class="nav-link text-light" href="<?php echo $this->baseurl."/index.php/school/"; ?>">By School</a>
       <?php endif; ?>
         </li>
       <!--Check if current directory is on subjects page-->
-      <?php if(($urlPath==$this->baseurl."/index.php/resources/")||($urlPath==$this->baseurl."/index.php/resources")) : ?>
-        <li class="nav-item bgAlt">
-            <a class="nav-link text-dark" href="<?php echo $this->baseurl."/index.php/resources/"; ?>">By Subjects</a>
-      <?php else : ?>  
-        <li class="nav-item text-light">
-            <a class="nav-link text-light" href="<?php echo $this->baseurl."/index.php/resources/"; ?>">By Subjects</a>
-      <?php endif; ?>
-        </li>
-      <!--Check if current directory is on archives page-->
       <?php if(($urlPath==$this->baseurl."/index.php/interactive-resources/")||($urlPath==$this->baseurl."/index.php/interactive-resources")) : ?>
         <li class="nav-item bgAlt">
-            <a class="nav-link text-dark" href="<?php echo $this->baseurl."/index.php/interactive-resources/"; ?>">Archives</a>
+            <a class="nav-link text-dark" href="<?php echo $this->baseurl."/index.php/interactive-resources/"; ?>">By Subjects</a>
       <?php else : ?>  
         <li class="nav-item text-light">
-            <a class="nav-link text-light" href="<?php echo $this->baseurl."/index.php/interactive-resources/"; ?>">Archives</a>
+            <a class="nav-link text-light" href="<?php echo $this->baseurl."/index.php/interactive-resources/"; ?>">By Subjects</a>
       <?php endif; ?>
         </li>
       <!--Dropdown menu for account-->  
