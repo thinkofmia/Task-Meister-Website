@@ -76,10 +76,19 @@ else $username = "Login";
       <!--Check if current directory is on school levels page-->
       <?php if(($urlPath==$this->baseurl."/index.php/schoollevels/")||($urlPath==$this->baseurl."/index.php/schoollevels")) : ?>
         <li class="nav-item bgAlt">
-            <a class="nav-link text-dark" href="<?php echo $this->baseurl."/index.php/schoollevels/"; ?>">School Levels</a>
+            <a class="nav-link text-dark" href="<?php echo $this->baseurl."/index.php/schoollevels/"; ?>">By School Levels</a>
       <?php else : ?>  
         <li class="nav-item text-light">
-            <a class="nav-link text-light" href="<?php echo $this->baseurl."/index.php/schoollevels/"; ?>">School Levels</a>
+            <a class="nav-link text-light" href="<?php echo $this->baseurl."/index.php/schoollevels/"; ?>">By School Levels</a>
+      <?php endif; ?>
+        </li>
+      <!--Check if current directory is on subjects page-->
+      <?php if(($urlPath==$this->baseurl."/index.php/resources/")||($urlPath==$this->baseurl."/index.php/resources")) : ?>
+        <li class="nav-item bgAlt">
+            <a class="nav-link text-dark" href="<?php echo $this->baseurl."/index.php/resources/"; ?>">By Subjects</a>
+      <?php else : ?>  
+        <li class="nav-item text-light">
+            <a class="nav-link text-light" href="<?php echo $this->baseurl."/index.php/resources/"; ?>">By Subjects</a>
       <?php endif; ?>
         </li>
       <!--Check if current directory is on archives page-->
