@@ -16,7 +16,7 @@ defined('_JEXEC') or die;
 
 <!--Display-->
 <?php foreach ($recommendedContents as $tag => $contents) : ?>
-  <h3>Because you liked <?php echo $tag; ?>...</h3>
+  <h5>Because you liked <?php echo $tag; ?>...</h5>
   <?php if ($contents || sizeof($contents)>0) : ?>
   <ul class="scrollbarnews<?php echo $moduleclass_sfx; ?> mod-list">
   <div class="articlesRow">

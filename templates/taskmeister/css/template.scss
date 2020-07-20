@@ -13,7 +13,7 @@ body {//Body Tag
     position: relative;
     height: 100%;
     margin-left: 1vw;
-    font-family: Arial, Helvetica, sans-serif, 'BioRhyme', serif;
+    font-family: 'Netflix Sans','Helvetica Neue',Helvetica,Arial,sans-serif, Arial, Helvetica, sans-serif, 'BioRhyme', serif;
 }
 
 p {
@@ -22,7 +22,11 @@ p {
 
 h3 {
     color: $altFontColor;
-    text-align: left;
+}
+
+h5 {//Follow Netflix style
+    color: $mainFontColor;
+    font-weight: 700;
 }
 
 table {
@@ -36,12 +40,12 @@ table {
 }
 
 /*Custom Classes*/
-.bgMain{
+.bgMain{//To fit any class with the page bg
     background-color: $pageBackground;
     color: $mainFontColor;
 }
 
-.bgAlt{
+.bgAlt{//To fit any class with the alt bg
     background-color: $altFontColor;
     color: $pageBackground;
     #activeTab { //For Nav Bar: Active selection
@@ -51,7 +55,155 @@ table {
 }
 
 /*Custom Ids */
-#navLogo {
+#navLogo {//Sets the nav logo size
     width: 40px;
     height: 40px;
+}
+
+
+/*
+ * --Modules
+ * This contains the CSS for the Taskmeister Modules
+ */
+
+/**
+    Recommend Article Module
+    - Module used to showcase articles in a net-flix style
+*/
+//Recommend Articles Module//
+
+.articlesRow {//Sets CSS for the wrapper for recommend article module
+    display: inline-flex;
+    width: 100%;
+    left: -2vw;
+    position: relative;
+}
+
+.recommendedArticles:focus-within,
+.recommendedArticles:hover{//When hover over, translate the article to the left- used in conjuction with the zoom effect
+  .article {
+    transform: translateX(-25%);
+  }
+}
+
+.recommendedArticles{//Sets CSS for row of articles in a line (for Recommend Articles Mod)
+    display:inline-flex; 
+    overflow-x: hidden;
+    overflow-y: hidden;
+    height: 20vw; 
+    width: 100%;
+    margin-left: 1%;
+    padding-top: 5vw;
+    padding-bottom: 5vw;
+    //animation
+    transition: transform .4s ease-in;
+    .article:focus, .article:hover {//When hover over, zoom/enlarge the article
+        transform: scale(1.5);
+        z-index: 99;
+        overflow-x: visible;
+        overflow-y: visible;
+    }
+    a:focus ~ a .article,
+    a:hover ~ a .article {//Move all the adjacent articles to the right
+        transform: translateX(25%);
+    }
+    .article {//Sets CSS for individual articles
+        position: relative;
+        padding-right: 0.5vw;
+        padding-left: 0.5vw; 
+        width: 15vw; 
+        height: 15vw; 
+        text-align: center;
+        transition: transform 500ms;
+
+        img {//Sets CSS for the image within the article
+            width: 100%;
+            height: 100%;
+        }
+        .articleSimilarity {//Sets CSS for the similarity tag above the article
+            position: absolute;
+            bottom: 82%;
+            text-align: left;
+            background-color: darkgreen;
+            opacity: 0.8;
+            color: $mainFontColor;
+            position: absolute;
+            font-size: 1.25vw;
+        }
+        p {//Sets CSS for the caption below the article
+            position: absolute;
+            bottom: -10%;
+            width: 14vw;
+            background-color: $altFontColor;
+            opacity: 0.8;
+            color: $mainFontColor;
+            position: absolute;
+            font-size: 1.25vw;
+            word-wrap: break-word;
+        }
+    }
+    .rankedArticle{
+        @extend .article;
+        img {
+            float: right;
+            width: 50%;
+        }
+        h2 {//Sets CSS for ranking
+            position: absolute;
+            bottom: -140%;
+            left: -20%;
+            width: 100%;
+            opacity: 1;
+            color: darkgray;
+            text-shadow: 2px 2px #FF0000;
+            position: absolute;
+            font-size: 20vw;
+            word-wrap: break-word;
+            z-index: -1;
+        }
+        h4 {//Sets CSS for ranking
+            position: absolute;
+            bottom: -120%;
+            left: -20%;
+            width: 100%;
+            opacity: 1;
+            color: darkgray;
+            text-shadow: 2px 2px #FF0000;
+            position: absolute;
+            font-size: 13vw;
+            word-wrap: break-word;
+            z-index: -1;
+        }
+    }
+}
+
+.arrow:hover {//Changes color when hover over the recommended articles arrows
+    cursor: pointer;
+    border: solid $altFontColor;
+    border-width: 0 5px 5px 0;
+}
+
+.arrow {//CSS for Recommend Articles Arrows (Left/Right)
+    border: solid $mainFontColor;
+    border-width: 0 5px 5px 0;
+    display: inline-block;
+    padding: 3px;
+    width: 2vw;
+    height: 2vw;
+    position: relative;
+    cursor: pointer;
+    margin-top: 10vw;
+  }
+
+.arrowLeft {//Sets CSS for the left arrow 
+    @extend .arrow;
+    left: 1%;
+    transform: rotate(135deg);
+}
+
+.arrowRight {//Sets CSS for the right arrow
+    @extend .arrow;
+    transform: rotate(-45deg);
+    position: relative;
+    margin-left: 1%;
 }
