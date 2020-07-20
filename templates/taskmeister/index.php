@@ -46,8 +46,6 @@ else $username = "Login";
 <!--Importing Chai Seng's CSS-->
 <link rel="stylesheet" href="<?php echo $this->baseurl ?>/templates/<?php echo $this->template; ?>/css/chaiseng.css" type="text/css" />
 <link rel="stylesheet" href="<?php echo $this->baseurl ?>/templates/<?php echo $this->template; ?>/css/keen-slider.min.css" type="text/css" />
-<link rel="stylesheet" href="<?php echo $this->baseurl ?>/templates/<?php echo $this->template; ?>/css/slick.css" type="text/css" />
-<link rel="stylesheet" href="<?php echo $this->baseurl ?>/templates/<?php echo $this->template; ?>/css/slick-theme.css" type="text/css" />
 </head>
 
 <!-- Contain the website code which controls the layout-->
