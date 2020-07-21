@@ -19,7 +19,7 @@ class ModSearchReplaceHelper
     /**
      * Method to get the matches of $pattern
      */
-    public static function getMatches($pattern)
+    public static function getMatches($pattern, $replacement)
     {
         $app = Factory::getApplication();
         $app->enqueueMessage('Debugging search and replace');
@@ -35,16 +35,8 @@ class ModSearchReplaceHelper
         $results = $db->loadObjectList();
 
         foreach ($results as $result) {
-            $result->fulltext = preg_replace_callback($pattern,
-                function($matches) {
-                    return $matches[1];
-                },
-                $result->fulltext);
-            $result->introtext = preg_replace_callback($pattern,
-                function($matches) {
-                    return $matches[1];
-                },
-                $result->introtext);
+            $result->fulltext = preg_replace($pattern, $replacement, $result->fulltext);
+            $result->introtext = preg_replace($pattern, $replacement, $result->introtext);
         }
         //var_dump($results);
         foreach($results as $result)
