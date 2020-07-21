@@ -14,9 +14,9 @@ defined('_JEXEC') or die;
 Article ID: <?php echo $articleID; ?><br>
 Article Category ID: <?php echo $articleCategory; ?><br>
 <!--Display Table-->
-<table style='border: 2px solid white; border-collapse: collapse;'>
+<table class="table table-hover table-dark">
     <tr>
-        <th>All Users' Preferences</th>
+        <th scope="col">All Users' Preferences</th>
         <td>
             <ul>
                 <?php foreach ($preferenceList as $key => $value) : ?>
@@ -26,7 +26,7 @@ Article Category ID: <?php echo $articleCategory; ?><br>
         </td>
     </tr>
     <tr>
-        <th>Who has deployed</th>
+        <th scope="col">Who has deployed</th>
         <td>
             <ul>
                 <?php foreach ($deploymentList as $row) : ?>
@@ -36,19 +36,19 @@ Article Category ID: <?php echo $articleCategory; ?><br>
         </td>
     </tr>
     <tr>
-        <th>Total # of Likes</th>
+        <th scope="col">Total # of Likes</th>
         <td><?php echo $NoOfLikes; ?></td>
     </tr>
     <tr>
-        <th>Total # of Dislikes</th>
+        <th scope="col" >Total # of Dislikes</th>
         <td><?php echo $NoOfDislikes; ?></td>
     </tr>
     <tr>
-        <th>Total # of Deployment</th>
+        <th scope="col">Total # of Deployment</th>
         <td><?php echo $NoOfDeployment; ?></td>
     </tr>
     <tr>
-        <th>Tags</th>
+        <th scope="col">Tags</th>
         <td>
             <ul>
                 <?php foreach ($tags as $row) : ?>
