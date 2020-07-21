@@ -53,11 +53,11 @@ function updateClasses(instance) {
     var arrowLeft = document.getElementById("carousel-arrow-left");
     var arrowRight = document.getElementById("carousel-arrow-right");
     /*slide === 0
-    ? arrowLeft.classList.add("arrow--disabled")
-    : arrowLeft.classList.remove("arrow--disabled");
+    ? arrowLeft.classList.add("carousel-arrow--disabled")
+    : arrowLeft.classList.remove("carousel-arrow--disabled");
     slide === instance.details().size - 1
-    ? arrowRight.classList.add("arrow--disabled")
-    : arrowRight.classList.remove("arrow--disabled");*/
+    ? arrowRight.classList.add("carousel-arrow--disabled")
+    : arrowRight.classList.remove("carousel-arrow--disabled");*/
 
     var dots = document.querySelectorAll(".dot");
     dots.forEach(function (dot, idx) {
