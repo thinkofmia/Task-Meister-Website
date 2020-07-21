@@ -6,14 +6,14 @@ defined('_JEXEC') or die;
 
 <head>
 
-<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+<div id="featuredArticlesWrapper" class="carousel slide" data-ride="carousel">
   <ol class="carousel-indicators bgAlt">
     <?php $counter = 0; //Counter to count number of stuffs in dict ?>
     <?php foreach ($articlesDict as $key => $value) : ?>
       <?php if ($counter==0) : ?>
-        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+        <li data-target="#featuredArticlesWrapper" data-slide-to="0" class="active"></li>
       <?php else : ?>
-        <li data-target="#carouselExampleIndicators" data-slide-to="<?php echo $counter; ?>"></li>
+        <li data-target="#featuredArticlesWrapper" data-slide-to="<?php echo $counter; ?>"></li>
       <?php endif; ?>
       <?php $counter+=1; //Increase counter by 1 ?>
     <?php endforeach; ?>

@@ -131,6 +131,10 @@ table tr, table th, table td {
   height: 100%;
 }
 
+#featuredArticlesWrapper .card button:hover {
+  scale: 1.25;
+}
+
 /**
     Recommend Article Module
     - Module used to showcase articles in a net-flix style

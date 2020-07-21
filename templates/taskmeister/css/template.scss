@@ -141,6 +141,14 @@ table {
     }
 }
 
+#featuredArticlesWrapper {
+    .card {
+        button:hover {
+            scale: 1.25;
+        }
+    }
+}
+
 /**
     Recommend Article Module
     - Module used to showcase articles in a net-flix style
