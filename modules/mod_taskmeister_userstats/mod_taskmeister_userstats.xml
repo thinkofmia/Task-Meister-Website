@@ -2,8 +2,8 @@
 <extension type="module" version="3.1.0" client="site" method="upgrade">
     <name>User Stats Module (Task Meister)</name>
     <author>Fremont Teng</author>
-    <version>1.0.2</version>
-    <description>A module for Task Meister, to display the external stats of the user.</description>
+    <version>1.1.0</version>
+    <description>A module for Task Meister, to display the external stats of the user. Uses Bootstrap 4</description>
     <files>
         <filename>mod_taskmeister_userstats.xml</filename>
         <filename module="mod_taskmeister_userstats">mod_taskmeister_userstats.php</filename>

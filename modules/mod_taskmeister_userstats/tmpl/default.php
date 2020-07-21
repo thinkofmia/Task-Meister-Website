@@ -8,7 +8,7 @@ defined('_JEXEC') or die;
 Name: <?php echo $name; ?><br>
 Username: <?php echo $username; ?><br>
 ID: <?php echo $userID; ?>
-<table class = "yourClassStatsTable">
+<table class = "table table-hover table-info">
     <tr>
         <th>Preference List</th>
         <th>Deployed Pages</th>
