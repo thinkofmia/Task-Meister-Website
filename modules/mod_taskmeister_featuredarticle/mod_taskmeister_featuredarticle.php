@@ -69,7 +69,11 @@ foreach ($articleList as $articleID){
     }
     else{
         $articleTitle = $articleContents['title'];
-        $articleImage = json_decode($articleContents['images'])->image_intro;
+        if (json_decode($articleContents['images'])->image_intro) $articleImage = json_decode($articleContents['images'])->image_intro;
+        elseif (json_decode($articleContents['images'])->image_fulltext) $articleImage = json_decode($articleContents['images'])->image_fulltext;
+        elseif (json_decode($articleContents['images'])->image_intro_alt) $articleImage = json_decode($articleContents['images'])->image_intro_alt;
+        elseif (json_decode($articleContents['images'])->image_fulltext_alt) $articleImage = json_decode($articleContents['images'])->image_fulltext_alt;
+        else $articleImage = $dummyArticleImg;
     }
     //External contents
 $externalContents = ModFeaturedArticleHelper::getArticleExternalStats($articleID);
