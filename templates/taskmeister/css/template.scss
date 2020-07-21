@@ -346,8 +346,8 @@ table {
 }
 
 .preferenceBox, .teacherBox {//CSS for the individual boxes.
-    height: 15vw;
-    width: 15vw;
+    height: 20vw;
+    width: 20vw;
     position: relative;
     display: inline-flex;
     padding: 1vw;
@@ -360,7 +360,7 @@ table {
         z-index: 10;
         opacity: 0.9;
         text-align: center;
-        width: 13vw;
+        width: 18vw;
         word-wrap: anywhere;
         font-size: 1.5vw;
     }

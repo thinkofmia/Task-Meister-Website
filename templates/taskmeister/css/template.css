@@ -325,8 +325,8 @@ table tr, table th, table td {
 }
 
 .preferenceBox, .userPreferred, .teacherSelected, .userNotPreferred, .userMayTry, .teacherBox {
-  height: 15vw;
-  width: 15vw;
+  height: 20vw;
+  width: 20vw;
   position: relative;
   display: inline-flex;
   padding: 1vw;
@@ -340,7 +340,7 @@ table tr, table th, table td {
   z-index: 10;
   opacity: 0.9;
   text-align: center;
-  width: 13vw;
+  width: 18vw;
   word-wrap: anywhere;
   font-size: 1.5vw;
 }
