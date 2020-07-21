@@ -25,6 +25,8 @@ jQuery(document).ready(function ($) {
         }
     });
     
+    console.log($.fn.jquery);
+
     // check which review expansion/compression buttons should be shown
     // no reviews to expand
     if($(".reviews").children(".review.read-more").length == 0){
