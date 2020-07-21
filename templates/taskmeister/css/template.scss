@@ -103,6 +103,7 @@ table {
   }
 
 .navbar {
+    opacity: 0.9;
     .nav-item:hover{
         @extend .bgAlt;
     }

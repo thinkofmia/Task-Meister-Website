@@ -97,6 +97,9 @@ table tr, table th, table td {
   font-size: 1.3rem;
 }
 
+.navbar {
+  opacity: 0.9;
+}
 /*Custom Ids */
 #navLogo {
   width: 40px;
