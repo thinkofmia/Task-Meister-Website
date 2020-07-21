@@ -24,6 +24,8 @@ $list2 = json_decode($recommendedContents);
       <?php foreach ($teachersRecommendationDict as $name => $contents) : ?>
         <ul>
         <h3><?php echo $name; ?>'s Recommendation</h3>
+        <?php $contentList = json_decode($contents); ?>
+        <?php if ($contentList) : ?>
         <div class="articlesRow">
           <!-- Arrow button to scroll left-->
           <i class="arrowLeft" onmouseover="var left = this.closest('div').querySelector('.recommendedArticles').scrollLeft; this.closest('div').querySelector('.recommendedArticles').scrollTo({
@@ -37,7 +39,6 @@ $list2 = json_decode($recommendedContents);
           <!--Displays list of recommended articles based on the article contents-->
           <div class="recommendedArticles dragscroll" id= "recommendation">
             <!--For loop for the items in the list-->
-            <?php $contentList = json_decode($contents); ?>
             <?php foreach ($contentList as $key => $value) : ?>
             <!--Url link to the article page-->
             <a href="?option=com_content&view=article&id=<?php echo $key; ?>" itemprop="url">
@@ -60,6 +61,9 @@ $list2 = json_decode($recommendedContents);
                   behavior: 'smooth',
                 });"></i>
         </div>
+        <?php else : ?>
+          Your teacher has yet to recommend anything.
+        <?php endif; ?>
         </ul>
       <?php endforeach; ?>
   <?php else : ?>
