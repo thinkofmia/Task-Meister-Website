@@ -108,17 +108,21 @@ $doc->addScript($this->baseurl . '/templates/' . $this->template . '/js/keen-sli
         </a>
         <!--Dropdown tab for account-->
         <div class="dropdown-menu bg-dark" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item text-light bg-dark" href="<?php echo $this->baseurl."/index.php/login"?>"><?php echo $username; ?></a>
-          <div class="dropdown-divider"></div>
           <!--If Guest, disable the below-->
           <?php if ($userID==0) : ?>
+            <a class="dropdown-item text-light bg-dark" href="<?php echo $this->baseurl."/index.php/login"?>">Login</a>
+            <div class="dropdown-divider"></div>
             <a class="dropdown-item disabled" href="#">My List</a>
             <a class="dropdown-item disabled" href="#">My Preferences</a>
             <a class="dropdown-item disabled" href="#">My Class</a>
+            <a class="dropdown-item disabled" href="#">Logout</a>
           <?php else: ?>
+            <a class="dropdown-item text-light bg-dark" href="<?php echo $this->baseurl."/index.php/user"?>"><?php echo $username; ?></a>
+            <div class="dropdown-divider"></div>
             <a class="dropdown-item text-light bg-dark" href="<?php echo $this->baseurl."/index.php/mylist"?>">My List</a>
             <a class="dropdown-item text-light bg-dark" href="<?php echo $this->baseurl."/index.php/preferences"?>">My Preferences</a>
             <a class="dropdown-item text-light bg-dark" href="<?php echo $this->baseurl."/index.php/class"?>">My Class</a>
+            <a class="dropdown-item text-light bg-dark" href="<?php echo $this->baseurl."/index.php/logout"?>">Logout</a>
           <?php endif; ?>  
         </div>
       </li>

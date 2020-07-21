@@ -49,11 +49,11 @@ table tr, table th, table td {
   color: white;
 }
 
-.bgAlt {
+.bgAlt, .navbar .nav-item:hover {
   background-color: darkorange;
   color: black;
 }
-.bgAlt #activeTab {
+.bgAlt #activeTab, .navbar .nav-item:hover #activeTab {
   background-color: darkorange;
   color: black;
 }
@@ -177,7 +177,7 @@ table tr, table th, table td {
   position: relative;
   padding-right: 0.5vw;
   padding-left: 0.5vw;
-  width: 15vw;
+  width: 20vw;
   height: 15vw;
   text-align: center;
   transition: transform 500ms;
@@ -199,7 +199,7 @@ table tr, table th, table td {
 .recommendedArticles .article p, .recommendedArticles .rankedArticle p {
   position: absolute;
   bottom: -10%;
-  width: 14vw;
+  width: 19vw;
   background-color: darkorange;
   opacity: 0.8;
   color: white;
@@ -393,6 +393,13 @@ table tr, table th, table td {
 */
 .modal {
   display: block;
+}
+
+/**
+    CSS for Chai Seng's Reviews
+*/
+#review-form #review {
+  width: 100%;
 }
 
 /*# sourceMappingURL=template.css.map */

@@ -102,6 +102,12 @@ table {
     font-size: 1.3rem;
   }
 
+.navbar {
+    .nav-item:hover{
+        @extend .bgAlt;
+    }
+}
+
 /*Custom Ids */
 #navLogo {//Sets the nav logo size
     width: 40px;
@@ -191,7 +197,7 @@ table {
         position: relative;
         padding-right: 0.5vw;
         padding-left: 0.5vw; 
-        width: 15vw; 
+        width: 20vw; 
         height: 15vw; 
         text-align: center;
         transition: transform 500ms;
@@ -213,7 +219,7 @@ table {
         p {//Sets CSS for the caption below the article
             position: absolute;
             bottom: -10%;
-            width: 14vw;
+            width: 19vw;
             background-color: $altFontColor;
             opacity: 0.8;
             color: $mainFontColor;
@@ -422,3 +428,12 @@ table {
 .modal {
     display:block;
   }
+
+/**
+    CSS for Chai Seng's Reviews
+*/
+#review-form{
+    #review {
+    width: 100%;
+    }
+}
