@@ -12,6 +12,8 @@
 	<files>
 		<filename>index.php</filename>
 		<filename>templateDetails.xml</filename>
+		<filename>template_preview.png</filename>
+		<filename>template_thumbnail.png</filename>
 		<folder>images</folder>
 		<folder>css</folder>
 	</files>
