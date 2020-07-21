@@ -36,7 +36,7 @@ $document->addScript(JUri::base() . 'modules/mod_review/js/review.js');
                         </div>
                         <div class="review-summary">
                             <?php echo ModReviewHelper::renderStarRating($row->rating); ?>
-                            <div style="padding-top: 30px;">
+                            <div style="padding-top: 53px;">
                                 <p><?php echo ModReviewHelper::replaceYTUrl($row->review, '<p>'); ?></p>
                             </div>
                         </div>
