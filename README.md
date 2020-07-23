@@ -3,7 +3,7 @@ Work involving Joomla-cms.
 
 Check our website at: https://iwant2study.org/taskmeisterx/index.php/
 
-## Important Links by users/editors
+## Important Links for users/editors
 SCSS file to edit the CSS of the taskmeister template:
 https://github.com/FremontTeng/Task-Meister/blob/master/templates/taskmeister/css/template.scss
 
