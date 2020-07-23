@@ -18,7 +18,7 @@ defined('_JEXEC') or die;
 	<?php endif; ?>
 	<div class="alert alert-warning" role="alert">
 		Awesome mate! You have successfully registered with us.<br>
-		Now we would like to invite you to activate your account by the email you have provided to us. <br>
+		Now we would like to invite you to activate your account with the email you have provided to us. <br>
 		We can't wait to have you on our team.
 	</div>
 </div>
