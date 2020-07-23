@@ -94,12 +94,12 @@ $doc->addScript($this->baseurl . '/templates/' . $this->template . '/js/keen-sli
       <?php endif; ?>
         </li>
       <!--Check if current directory is on subjects page-->
-      <?php if(($urlPath==$this->baseurl."/index.php/interactive-resources/")||($urlPath==$this->baseurl."/index.php/interactive-resources")) : ?>
+      <?php if(($urlPath==$this->baseurl."/index.php/subjects/")||($urlPath==$this->baseurl."/index.php/subjects")) : ?>
         <li class="nav-item bgAlt">
-            <a class="nav-link text-dark" href="<?php echo $this->baseurl."/index.php/interactive-resources/"; ?>">By Subjects</a>
+            <a class="nav-link text-dark" href="<?php echo $this->baseurl."/index.php/subjects/"; ?>">By Subjects</a>
       <?php else : ?>  
         <li class="nav-item text-light">
-            <a class="nav-link text-light" href="<?php echo $this->baseurl."/index.php/interactive-resources/"; ?>">By Subjects</a>
+            <a class="nav-link text-light" href="<?php echo $this->baseurl."/index.php/subjects/"; ?>">By Subjects</a>
       <?php endif; ?>
         </li>
       <!--Dropdown menu for account-->  
