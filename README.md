@@ -4,8 +4,11 @@ Work involving Joomla-cms.
 Check our website at: https://iwant2study.org/taskmeisterx/index.php/
 
 ## Important Links by users/editors
-SCSS file to edit the CSS of the template:
+SCSS file to edit the CSS of the taskmeister template:
 https://github.com/FremontTeng/Task-Meister/blob/master/templates/taskmeister/css/template.scss
+
+Chai Seng's CSS:
+https://github.com/FremontTeng/Task-Meister/blob/master/templates/taskmeister/css/old.css
 
 ## Installing a template/module/plugin
 ### Install Templates via FTP
