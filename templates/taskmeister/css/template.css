@@ -405,4 +405,12 @@ table tr, table th, table td {
   width: 100%;
 }
 
+/**
+    CSS for articles
+*/
+.item-page .img-container a {
+  opacity: 0.4;
+  position: absolute;
+}
+
 /*# sourceMappingURL=template.css.map */

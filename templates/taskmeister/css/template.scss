@@ -438,3 +438,16 @@ table {
     width: 100%;
     }
 }
+
+/**
+    CSS for articles
+*/
+.item-page {
+    .img-container{
+        a{
+            //Create overlay effect for the thumbnail in article
+            opacity: 0.4;
+            position: absolute;
+        }
+    }
+}

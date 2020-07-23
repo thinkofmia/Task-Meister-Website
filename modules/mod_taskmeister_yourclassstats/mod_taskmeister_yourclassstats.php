@@ -102,9 +102,9 @@ if ($userID!=0){//if User id isnt a guest
         require JModuleHelper::getLayoutPath('mod_taskmeister_yourclassstats');
     }
     else{
-        echo "<br><h3>You have to be a teacher to see this feature</h3>";
+        //echo "<br><h3>You have to be a teacher to see this feature</h3>";
     }   
 }
 else{
-    echo "<br><h3>You have to be a teacher to see this feature</h3>";
+    //echo "<br><h3>You have to be a teacher to see this feature</h3>";
 }
