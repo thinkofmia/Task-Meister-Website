@@ -36,7 +36,7 @@ defined('_JEXEC') or die;
               <div class="carousel-caption d-none d-md-block mb-5">
                 <!-- Card-->
                 <div class="card" style="width: 18rem; height:100%;">
-                  <div class="card-body bg-dark">
+                  <div class="card-body">
                     <h5 class="card-title textAlt"><?php echo $value["title"]; ?></h5>
                     <p class="card-text">
                       <!--Displays Number of likes-->

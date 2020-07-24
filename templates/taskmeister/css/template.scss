@@ -1,12 +1,17 @@
 /*Variables*/
 $pageBackground: black; //For Background
+$navBg: #343a40;//For navigation bg
 $mainFontColor: white; //Default Font Color
 $altFontColor: darkorange; //Alt Default Font Color
 
+//For other themes
+$skyBg: lightblue;
+$skyNavBg: darkgray;
+$skyMainFont: gray;
+$skyAltFont: skyblue;
+
 /*Default Tags*/
 body {//Body Tag
-    background-color: $pageBackground;
-    color: $mainFontColor;
     width: 97vw;
     overflow-x: hidden;
     display: inline-block;
@@ -28,8 +33,7 @@ h3 {
     color: $altFontColor;
 }
 
-h5 {//Follow Netflix style
-    color: $mainFontColor;
+h5 {
     font-weight: 700;
 }
 
@@ -46,24 +50,6 @@ table {
 /*Custom Classes*/
 .flex {
     display: inline-flex;
-}
-
-.bgMain{//To fit any class with the page bg
-    background-color: $pageBackground;
-    color: $mainFontColor;
-}
-
-.bgAlt{//To fit any class with the alt bg
-    background-color: $altFontColor;
-    color: $pageBackground;
-    #activeTab { //For Nav Bar: Active selection
-        background-color: $altFontColor;
-        color: $pageBackground;
-    }
-}
-
-.textAlt{
-    color: $altFontColor;
 }
 
 //Buttons
@@ -211,9 +197,7 @@ table {
             position: absolute;
             bottom: 82%;
             text-align: left;
-            background-color: darkgreen;
             opacity: 0.8;
-            color: $mainFontColor;
             position: absolute;
             font-size: 1.25vw;
         }
@@ -221,9 +205,7 @@ table {
             position: absolute;
             bottom: -10%;
             width: 19vw;
-            background-color: $altFontColor;
             opacity: 0.8;
-            color: $mainFontColor;
             position: absolute;
             font-size: 1.25vw;
             word-wrap: break-word;
@@ -271,8 +253,6 @@ table {
 }
 
 .arrow {//CSS for Recommend Articles Arrows (Left/Right)
-    border: solid $mainFontColor;
-    border-width: 0 5px 5px 0;
     display: inline-block;
     padding: 3px;
     width: 2vw;
@@ -448,6 +428,140 @@ table {
             //Create overlay effect for the thumbnail in article
             opacity: 0.4;
             position: absolute;
+        }
+    }
+}
+
+/**
+    CSS THEMES
+*/
+//Default theme
+body.default {
+    background-color: $pageBackground;
+    color: $mainFontColor;
+    h5 {//Follow Netflix style
+        color: $mainFontColor;
+    }
+
+    .bgMain{//To fit any class with the page bg
+        background-color: $pageBackground;
+        color: $mainFontColor;
+    }
+    
+    .bgAlt{//To fit any class with the alt bg
+        background-color: $altFontColor;
+        color: $pageBackground;
+        #activeTab { //For Nav Bar: Active selection
+            background-color: $altFontColor;
+            color: $pageBackground;
+        }
+    }
+    
+    .textAlt{
+        color: $altFontColor;
+    }
+    .arrow {//Set color for arrows for recommended articles mod
+        border: solid $mainFontColor;
+        border-width: 0 0.75vw 0.75vw 0;
+    }
+    .navbar {//For navigation bar
+        background-color: $navBg;
+        .nav-link{
+            color: $mainFontColor;
+        }
+        .dropdown-menu {
+            background-color: $navBg;
+            .dropdown-item {
+                color: $mainFontColor;
+            }
+            .dropdown-item:hover{
+                color: $pageBackground;
+            }
+        }
+    }
+    .article{//For article box
+        .articleSimilarity{
+            background-color: darkgreen;
+            color: $mainFontColor;
+        }
+        p {
+            background-color: $altFontColor;
+            color: $mainFontColor
+        }
+    }
+    .rankedArticle{//For ranked article shadowing/3D effect
+        h2{
+            text-shadow: 2px 2px red;
+        }
+    }
+    #featuredArticlesWrapper {//For featured article mod
+        .card-body{
+            background-color: #343a40;
+        }
+    }
+}
+
+
+
+//Day theme
+body.day {
+    background-color: $skyBg;
+    color: $skyMainFont;
+    h5 {//Set Blue
+        color: $skyMainFont;
+    }
+
+    .bgMain{//To fit any class with the page bg
+        background-color: $skyBg;
+        color: $skyMainFont;
+    }
+    
+    .bgAlt{//To fit any class with the alt bg
+        background-color: $skyAltFont;
+        color: $skyNavBg;
+        #activeTab { //For Nav Bar: Active selection
+            background-color: $skyAltFont;
+            color: $pageBackground;
+        }
+    }
+    
+    .textAlt{
+        color: $skyAltFont;
+    }
+    .arrow {//Set color for arrows for recommended articles mod
+        border: solid $skyMainFont;
+        border-width: 0 0.75vw 0.75vw 0;
+    }
+    .navbar{
+        background-color: $skyNavBg;
+        .nav-link{
+            color: $pageBackground;
+        }
+        .dropdown-menu {
+            background-color: $skyNavBg;
+            .dropdown-item:hover{
+                background-color: $skyAltFont;
+            }
+        }
+    }
+    .article{//For css in article box
+        .articleSimilarity{
+            background-color: darkgreen;
+            color: $mainFontColor;
+        }
+        p {
+            background-color: $skyNavBg;
+            color: $mainFontColor;
+        }
+    }
+    .rankedArticle{//For ranked article shadowing/3D effect
+        h2{
+            text-shadow: 2px 2px blue;
+        }
+    }
+    #featuredArticlesWrapper {//For featured article mod
+        .card-body{
+            background-color: $skyMainFont;
         }
     }
 }

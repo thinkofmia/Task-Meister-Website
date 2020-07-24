@@ -62,7 +62,7 @@ $doc->addScript($this->baseurl . '/templates/' . $this->template . '/js/keen-sli
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"></script>
 
 <!--Bootstrap Nav Bar-->
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+<nav class="navbar navbar-expand-lg navbar-dark sticky-top">
   <!--Logo-->
   <a class="navbar-brand" href="<?php echo $this->baseurl; ?>">
       <!--Logo Image-->
@@ -78,52 +78,52 @@ $doc->addScript($this->baseurl . '/templates/' . $this->template . '/js/keen-sli
       <!--Check if current directory is on home page-->
       <?php if(($urlPath==$this->baseurl."/index.php/home/")||($urlPath==$this->baseurl."/index.php/home")||($urlPath==$this->baseurl."/index.php/")||($urlPath==$this->baseurl."/index.php")||($urlPath==$this->baseurl."/")) : ?>
         <li class="nav-item bgAlt">
-            <a class="nav-link text-dark" href="<?php echo $urlPath==$this->baseurl; ?>">Home</a>
+            <a class="nav-link" href="<?php echo $urlPath==$this->baseurl; ?>">Home</a>
       <?php else : ?>  
-        <li class="nav-item text-light">
-            <a class="nav-link text-light" href="<?php echo $urlPath==$this->baseurl; ?>">Home</a>
+        <li class="nav-item">
+            <a class="nav-link" href="<?php echo $urlPath==$this->baseurl; ?>">Home</a>
       <?php endif; ?>
         </li>
       <!--Check if current directory is on school levels page-->
       <?php if(($urlPath==$this->baseurl."/index.php/school/")||($urlPath==$this->baseurl."/index.php/school")) : ?>
         <li class="nav-item bgAlt">
-            <a class="nav-link text-dark" href="<?php echo $this->baseurl."/index.php/school/"; ?>">By School</a>
+            <a class="nav-link" href="<?php echo $this->baseurl."/index.php/school/"; ?>">By School</a>
       <?php else : ?>  
-        <li class="nav-item text-light">
-            <a class="nav-link text-light" href="<?php echo $this->baseurl."/index.php/school/"; ?>">By School</a>
+        <li class="nav-item">
+            <a class="nav-link" href="<?php echo $this->baseurl."/index.php/school/"; ?>">By School</a>
       <?php endif; ?>
         </li>
       <!--Check if current directory is on subjects page-->
       <?php if(($urlPath==$this->baseurl."/index.php/subjects/")||($urlPath==$this->baseurl."/index.php/subjects")) : ?>
         <li class="nav-item bgAlt">
-            <a class="nav-link text-dark" href="<?php echo $this->baseurl."/index.php/subjects/"; ?>">By Subjects</a>
+            <a class="nav-link" href="<?php echo $this->baseurl."/index.php/subjects/"; ?>">By Subjects</a>
       <?php else : ?>  
-        <li class="nav-item text-light">
-            <a class="nav-link text-light" href="<?php echo $this->baseurl."/index.php/subjects/"; ?>">By Subjects</a>
+        <li class="nav-item">
+            <a class="nav-link" href="<?php echo $this->baseurl."/index.php/subjects/"; ?>">By Subjects</a>
       <?php endif; ?>
         </li>
       <!--Dropdown menu for account-->  
       <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle text-light" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Account
         </a>
         <!--Dropdown tab for account-->
-        <div class="dropdown-menu bg-dark" aria-labelledby="navbarDropdown">
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
           <!--If Guest, disable the below-->
           <?php if ($userID==0) : ?>
-            <a class="dropdown-item text-light bg-dark" href="<?php echo $this->baseurl."/index.php/login"?>">Login</a>
+            <a class="dropdown-item" href="<?php echo $this->baseurl."/index.php/login"?>">Login</a>
             <div class="dropdown-divider"></div>
             <a class="dropdown-item disabled" href="#">My List</a>
             <a class="dropdown-item disabled" href="#">My Preferences</a>
             <a class="dropdown-item disabled" href="#">My Class</a>
             <a class="dropdown-item disabled" href="#">Logout</a>
           <?php else: ?>
-            <a class="dropdown-item text-light bg-dark" href="<?php echo $this->baseurl."/index.php/user"?>"><?php echo $username; ?></a>
+            <a class="dropdown-item" href="<?php echo $this->baseurl."/index.php/user"?>"><?php echo $username; ?></a>
             <div class="dropdown-divider"></div>
-            <a class="dropdown-item text-light bg-dark" href="<?php echo $this->baseurl."/index.php/mylist"?>">My List</a>
-            <a class="dropdown-item text-light bg-dark" href="<?php echo $this->baseurl."/index.php/preferences"?>">My Preferences</a>
-            <a class="dropdown-item text-light bg-dark" href="<?php echo $this->baseurl."/index.php/class"?>">My Class</a>
-            <a class="dropdown-item text-light bg-dark" href="<?php echo $this->baseurl."/index.php/logout"?>">Logout</a>
+            <a class="dropdown-item" href="<?php echo $this->baseurl."/index.php/mylist"?>">My List</a>
+            <a class="dropdown-item" href="<?php echo $this->baseurl."/index.php/preferences"?>">My Preferences</a>
+            <a class="dropdown-item" href="<?php echo $this->baseurl."/index.php/class"?>">My Class</a>
+            <a class="dropdown-item" href="<?php echo $this->baseurl."/index.php/logout"?>">Logout</a>
           <?php endif; ?>  
         </div>
       </li>
@@ -163,6 +163,43 @@ $doc->addScript($this->baseurl . '/templates/' . $this->template . '/js/keen-sli
 
 <!-- Module Position: 'footer'-->
 <jdoc:include type="modules" name="footer" /><!-- Module Position: 'footer'-->
+
+<!--Script to set theme of page-->
+<script>
+  function setTheme(theme) {
+  var d = new Date();
+  d.setTime(d.getTime() + (365 * 24 * 60 * 60 * 1000));
+  var expires = "expires="+d.toUTCString();
+  document.cookie = "theme=" + theme + ";" + expires + ";path=/";
+}
+
+function getTheme() {
+  var name = "theme=";
+  var ca = document.cookie.split(';');
+  for(var i = 0; i < ca.length; i++) {
+    var c = ca[i];
+    while (c.charAt(0) == ' ') {
+      c = c.substring(1);
+    }
+    if (c.indexOf(name) == 0) {
+      return c.substring(name.length, c.length);
+    }
+  }
+  return "";
+}
+
+function checkTheme() {
+  var theme = getTheme();
+  if (theme == "day") {
+    document.body.classList.add("day");
+  } else {//Give Default theme
+    document.body.classList.add("default");
+  }
+} 
+//Run script
+checkTheme();
+</script>
+
 </body>
 
 <!-- End-->

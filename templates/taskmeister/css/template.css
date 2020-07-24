@@ -1,8 +1,6 @@
 /*Variables*/
 /*Default Tags*/
 body {
-  background-color: black;
-  color: white;
   width: 97vw;
   overflow-x: hidden;
   display: inline-block;
@@ -25,7 +23,6 @@ h3 {
 }
 
 h5 {
-  color: white;
   font-weight: 700;
 }
 
@@ -42,24 +39,6 @@ table tr, table th, table td {
 /*Custom Classes*/
 .flex {
   display: inline-flex;
-}
-
-.bgMain {
-  background-color: black;
-  color: white;
-}
-
-.bgAlt, .navbar .nav-item:hover {
-  background-color: darkorange;
-  color: black;
-}
-.bgAlt #activeTab, .navbar .nav-item:hover #activeTab {
-  background-color: darkorange;
-  color: black;
-}
-
-.textAlt {
-  color: darkorange;
 }
 
 .btn-circle {
@@ -193,9 +172,7 @@ table tr, table th, table td {
   position: absolute;
   bottom: 82%;
   text-align: left;
-  background-color: darkgreen;
   opacity: 0.8;
-  color: white;
   position: absolute;
   font-size: 1.25vw;
 }
@@ -203,9 +180,7 @@ table tr, table th, table td {
   position: absolute;
   bottom: -10%;
   width: 19vw;
-  background-color: darkorange;
   opacity: 0.8;
-  color: white;
   position: absolute;
   font-size: 1.25vw;
   word-wrap: break-word;
@@ -248,8 +223,6 @@ table tr, table th, table td {
 }
 
 .arrow, .arrowRight, .arrowLeft {
-  border: solid white;
-  border-width: 0 5px 5px 0;
   display: inline-block;
   padding: 3px;
   width: 2vw;
@@ -411,6 +384,118 @@ table tr, table th, table td {
 .item-page .img-container a {
   opacity: 0.4;
   position: absolute;
+}
+
+/**
+    CSS THEMES
+*/
+body.default {
+  background-color: black;
+  color: white;
+}
+body.default h5 {
+  color: white;
+}
+body.default .bgMain {
+  background-color: black;
+  color: white;
+}
+body.default .bgAlt, body.default .navbar .nav-item:hover, .navbar body.default .nav-item:hover {
+  background-color: darkorange;
+  color: black;
+}
+body.default .bgAlt #activeTab, body.default .navbar .nav-item:hover #activeTab, .navbar body.default .nav-item:hover #activeTab {
+  background-color: darkorange;
+  color: black;
+}
+body.default .textAlt {
+  color: darkorange;
+}
+body.default .arrow, body.default .arrowLeft, body.default .arrowRight {
+  border: solid white;
+  border-width: 0 0.75vw 0.75vw 0;
+}
+body.default .navbar {
+  background-color: #343a40;
+}
+body.default .navbar .nav-link {
+  color: white;
+}
+body.default .navbar .dropdown-menu {
+  background-color: #343a40;
+}
+body.default .navbar .dropdown-menu .dropdown-item {
+  color: white;
+}
+body.default .navbar .dropdown-menu .dropdown-item:hover {
+  color: black;
+}
+body.default .article .articleSimilarity, body.default .recommendedArticles .rankedArticle .articleSimilarity, .recommendedArticles body.default .rankedArticle .articleSimilarity {
+  background-color: darkgreen;
+  color: white;
+}
+body.default .article p, body.default .recommendedArticles .rankedArticle p, .recommendedArticles body.default .rankedArticle p {
+  background-color: darkorange;
+  color: white;
+}
+body.default .rankedArticle h2 {
+  text-shadow: 2px 2px red;
+}
+body.default #featuredArticlesWrapper .card-body {
+  background-color: #343a40;
+}
+
+body.day {
+  background-color: lightblue;
+  color: gray;
+}
+body.day h5 {
+  color: gray;
+}
+body.day .bgMain {
+  background-color: lightblue;
+  color: gray;
+}
+body.day .bgAlt, body.day .navbar .nav-item:hover, .navbar body.day .nav-item:hover {
+  background-color: skyblue;
+  color: darkgray;
+}
+body.day .bgAlt #activeTab, body.day .navbar .nav-item:hover #activeTab, .navbar body.day .nav-item:hover #activeTab {
+  background-color: skyblue;
+  color: black;
+}
+body.day .textAlt {
+  color: skyblue;
+}
+body.day .arrow, body.day .arrowLeft, body.day .arrowRight {
+  border: solid gray;
+  border-width: 0 0.75vw 0.75vw 0;
+}
+body.day .navbar {
+  background-color: darkgray;
+}
+body.day .navbar .nav-link {
+  color: black;
+}
+body.day .navbar .dropdown-menu {
+  background-color: darkgray;
+}
+body.day .navbar .dropdown-menu .dropdown-item:hover {
+  background-color: skyblue;
+}
+body.day .article .articleSimilarity, body.day .recommendedArticles .rankedArticle .articleSimilarity, .recommendedArticles body.day .rankedArticle .articleSimilarity {
+  background-color: darkgreen;
+  color: white;
+}
+body.day .article p, body.day .recommendedArticles .rankedArticle p, .recommendedArticles body.day .rankedArticle p {
+  background-color: darkgray;
+  color: white;
+}
+body.day .rankedArticle h2 {
+  text-shadow: 2px 2px blue;
+}
+body.day #featuredArticlesWrapper .card-body {
+  background-color: gray;
 }
 
 /*# sourceMappingURL=template.css.map */
