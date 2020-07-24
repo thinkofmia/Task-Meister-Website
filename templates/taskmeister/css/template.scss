@@ -1,14 +1,25 @@
 /*Variables*/
+//Taskmeister theme
 $pageBackground: black; //For Background
 $navBg: #343a40;//For navigation bg
 $mainFontColor: white; //Default Font Color
 $altFontColor: darkorange; //Alt Default Font Color
 
 //For other themes
+//Sky theme
 $skyBg: lightblue;
 $skyNavBg: darkgray;
 $skyMainFont: gray;
 $skyAltFont: skyblue;
+
+//Red theme
+$redFontColor: crimson;
+
+//Tree theme
+$treeBg: wheat;
+$treeNavBg: darkgreen;
+$treeMainFont: brown;
+$treeAltFont: green;
 
 /*Default Tags*/
 body {//Body Tag
@@ -19,18 +30,6 @@ body {//Body Tag
     height: 100%;
     margin-left: 1vw;
     font-family: 'Netflix Sans','Helvetica Neue',Helvetica,Arial,sans-serif, Arial, Helvetica, sans-serif, 'BioRhyme', serif;
-}
-
-p {
-    color: $mainFontColor;
-}
-
-a{
-    color: $altFontColor;
-}
-
-h3 {
-    color: $altFontColor;
 }
 
 h5 {
@@ -92,6 +91,9 @@ table {
     opacity: 0.9;
     .nav-item:hover{
         @extend .bgAlt;
+    }
+    .dropdown-item{
+        cursor: pointer;
     }
 }
 
@@ -370,8 +372,6 @@ table {
 */
 
 .login-button {//CSS for the login submit button
-    background-color: $altFontColor;
-    color: $mainFontColor;
     cursor: pointer;
 }
 
@@ -443,6 +443,15 @@ body.default {
         color: $mainFontColor;
     }
 
+    h3 {
+        color: $altFontColor;
+    }
+    p {
+        color: $mainFontColor;
+    }
+    a{
+        color: $altFontColor;
+    }
     .bgMain{//To fit any class with the page bg
         background-color: $pageBackground;
         color: $mainFontColor;
@@ -491,17 +500,146 @@ body.default {
     }
     .rankedArticle{//For ranked article shadowing/3D effect
         h2{
-            text-shadow: 2px 2px red;
+            text-shadow: 2px 2px $altFontColor;
         }
     }
     #featuredArticlesWrapper {//For featured article mod
         .card-body{
             background-color: #343a40;
+            .card-text {
+                color: $mainFontColor;
+            }
+        }
+    }
+    .preferenceBox, .teacherBox {//For preferences
+        .preferenceLabel, .teacherLabel{
+            background-color: $altFontColor;
+            color: $mainFontColor;
+        }
+    }
+    .inputSavePreference {//Input buttons
+        background-color: $altFontColor;
+        color: $mainFontColor;
+    }
+    #tm_contents{//Contents for articles in taskmeister
+        .col-sm-4 {//For right column of article stats
+            background-color: #343a40;
+        }
+    }
+    .login-button{//Set login button
+        background-color: $altFontColor;
+        color: $mainFontColor;
+    }
+    .well {//Set wells color
+        background-color: #1d1f24;
+        label {
+            color: gray;
         }
     }
 }
 
+//Red theme
+body.red {
+    background-color: $pageBackground;
+    color: $mainFontColor;
+    h5 {//Follow Netflix style
+        color: $mainFontColor;
+    }
 
+    h3 {
+        color: $redFontColor;
+    }
+    p {
+        color: $mainFontColor;
+    }
+    a{
+        color: $redFontColor;
+    }
+    .bgMain{//To fit any class with the page bg
+        background-color: $pageBackground;
+        color: $mainFontColor;
+    }
+    
+    .bgAlt{//To fit any class with the alt bg
+        background-color: $redFontColor;
+        color: $mainFontColor;
+        #activeTab { //For Nav Bar: Active selection
+            background-color: $redFontColor;
+            color: $mainFontColor;
+        }
+    }
+    
+    .textAlt{
+        color: $redFontColor;
+    }
+    .arrow {//Set color for arrows for recommended articles mod
+        border: solid $mainFontColor;
+        border-width: 0 0.75vw 0.75vw 0;
+    }
+    .navbar {//For navigation bar
+        background-color: $navBg;
+        .nav-link{
+            color: $mainFontColor;
+        }
+        .dropdown-menu {
+            background-color: $navBg;
+            .dropdown-item {
+                color: $mainFontColor;
+            }
+            .dropdown-item:hover{
+                color: $pageBackground;
+            }
+        }
+    }
+    .article{//For article box
+        .articleSimilarity{
+            background-color: darkgreen;
+            color: $mainFontColor;
+        }
+        p {
+            background-color: $redFontColor;
+            color: $mainFontColor
+        }
+    }
+    .rankedArticle{//For ranked article shadowing/3D effect
+        h2{
+            text-shadow: 2px 2px $redFontColor;
+        }
+    }
+    #featuredArticlesWrapper {//For featured article mod
+        .card-body{
+            background-color: #343a40;
+            .card-text {
+                color: $mainFontColor;
+            }
+        }
+    }
+    .preferenceBox, .teacherBox {//For preferences
+        .preferenceLabel, .teacherLabel{
+            background-color: $redFontColor;
+            color: $mainFontColor;
+        }
+    }
+    .inputSavePreference {//Input buttons
+        background-color: $redFontColor;
+        color: $mainFontColor;
+    }
+    #tm_contents{//Contents for articles in taskmeister
+        .col-sm-4 {//For right column of article stats
+            background-color: #343a40;
+        }
+    }
+    .login-button{//Set login button
+        background-color: $redFontColor;
+        color: $mainFontColor;
+    }
+    .well {//Set wells color
+        background-color: #1d1f24;
+        label {
+            color: gray;
+        }
+    }
+}
 
 //Day theme
 body.day {
@@ -511,6 +649,15 @@ body.day {
         color: $skyMainFont;
     }
 
+    h3 {
+        color: $skyMainFont;
+    }
+    p {
+        color: $skyMainFont;
+    }
+    a{
+        color: blue;
+    }
     .bgMain{//To fit any class with the page bg
         background-color: $skyBg;
         color: $skyMainFont;
@@ -518,7 +665,7 @@ body.day {
     
     .bgAlt{//To fit any class with the alt bg
         background-color: $skyAltFont;
-        color: $skyNavBg;
+        color: $mainFontColor;
         #activeTab { //For Nav Bar: Active selection
             background-color: $skyAltFont;
             color: $pageBackground;
@@ -562,6 +709,242 @@ body.day {
     #featuredArticlesWrapper {//For featured article mod
         .card-body{
             background-color: $skyMainFont;
+            .card-text {
+                color: $mainFontColor;
+            }
+        }
+    }
+    .preferenceBox, .teacherBox {//Boxes for preferences
+        .preferenceLabel, .teacherLabel{
+            background-color: $skyNavBg;
+            color: $mainFontColor;
+        }
+    }
+    .inputSavePreference {//Input buttons
+        background-color: $skyNavBg;
+        color: $mainFontColor;
+    }
+    a{
+        color: blue;
+    }
+    #tm_contents{//Contents for articles in taskmeister
+        .col-sm-4 {//For right column of article stats
+            background-color: lightgray;
+        }
+    }
+    .login-button{//Set login button
+        background-color: $skyAltFont;
+        color: $mainFontColor;
+    }
+    .well {//Set well color
+        background-color: $skyMainFont;
+        label {
+            color: white;
+        }
+    }
+}
+
+//Red theme
+body.red {
+    background-color: $pageBackground;
+    color: $mainFontColor;
+    h5 {//Follow Netflix style
+        color: $mainFontColor;
+    }
+
+    h3 {
+        color: $redFontColor;
+    }
+    p {
+        color: $mainFontColor;
+    }
+    a{
+        color: $redFontColor;
+    }
+    .bgMain{//To fit any class with the page bg
+        background-color: $pageBackground;
+        color: $mainFontColor;
+    }
+    
+    .bgAlt{//To fit any class with the alt bg
+        background-color: $redFontColor;
+        color: $mainFontColor;
+        #activeTab { //For Nav Bar: Active selection
+            background-color: $redFontColor;
+            color: $mainFontColor;
+        }
+    }
+    
+    .textAlt{
+        color: $redFontColor;
+    }
+    .arrow {//Set color for arrows for recommended articles mod
+        border: solid $mainFontColor;
+        border-width: 0 0.75vw 0.75vw 0;
+    }
+    .navbar {//For navigation bar
+        background-color: $navBg;
+        .nav-link{
+            color: $mainFontColor;
+        }
+        .dropdown-menu {
+            background-color: $navBg;
+            .dropdown-item {
+                color: $mainFontColor;
+            }
+            .dropdown-item:hover{
+                color: $pageBackground;
+            }
+        }
+    }
+    .article{//For article box
+        .articleSimilarity{
+            background-color: darkgreen;
+            color: $mainFontColor;
+        }
+        p {
+            background-color: $redFontColor;
+            color: $mainFontColor
+        }
+    }
+    .rankedArticle{//For ranked article shadowing/3D effect
+        h2{
+            text-shadow: 2px 2px $redFontColor;
+        }
+    }
+    #featuredArticlesWrapper {//For featured article mod
+        .card-body{
+            background-color: #343a40;
+            .card-text {
+                color: $mainFontColor;
+            }
+        }
+    }
+    .preferenceBox, .teacherBox {//For preferences
+        .preferenceLabel, .teacherLabel{
+            background-color: $redFontColor;
+            color: $mainFontColor;
+        }
+    }
+    .inputSavePreference {//Input buttons
+        background-color: $redFontColor;
+        color: $mainFontColor;
+    }
+    #tm_contents{//Contents for articles in taskmeister
+        .col-sm-4 {//For right column of article stats
+            background-color: #343a40;
+        }
+    }
+    .login-button{//Set login button
+        background-color: $redFontColor;
+        color: $mainFontColor;
+    }
+    .well {//Set wells color
+        background-color: #1d1f24;
+        label {
+            color: gray;
+        }
+    }
+}
+
+//Tree theme
+body.tree {
+    background-color: $treeBg;
+    color: $treeMainFont;
+    h5, h3, p {
+        color: $treeMainFont;
+    }
+    a{
+        color: $treeAltFont;
+    }
+    .bgMain{//To fit any class with the page bg
+        background-color: $treeBg;
+        color: $treeMainFont;
+    }
+    
+    .bgAlt{//To fit any class with the alt bg
+        background-color: $treeMainFont;
+        color: $mainFontColor;
+        #activeTab { //For Nav Bar: Active selection
+            background-color: $treeMainFont;
+            color: $mainFontColor;
+        }
+    }
+    
+    .textAlt{
+        color: $treeAltFont;
+    }
+    .arrow {//Set color for arrows for recommended articles mod
+        border: solid $treeMainFont;
+        border-width: 0 0.75vw 0.75vw 0;
+    }
+    .navbar{
+        background-color: $treeNavBg;
+        .nav-link{
+            color: white;
+        }
+        .nav-link:hover{
+            background-color: $treeMainFont;
+        }
+        .dropdown-menu {
+            background-color: $treeNavBg;
+            .dropdown-item{
+                color: white;
+            }
+            .dropdown-item:hover{
+                background-color: $treeMainFont;
+            }
+        }
+    }
+    .article{//For css in article box
+        .articleSimilarity{
+            background-color: darkgreen;
+            color: $mainFontColor;
+        }
+        p {
+            background-color: $treeMainFont;
+            color: $mainFontColor;
+        }
+    }
+    .rankedArticle{//For ranked article shadowing/3D effect
+        h2{
+            text-shadow: 2px 2px $treeAltFont;
+        }
+    }
+    #featuredArticlesWrapper {//For featured article mod
+        .card-body{
+            background-color: $treeBg;
+            .card-text {
+                color: $treeMainFont;
+            }
+        }
+    }
+    .preferenceBox, .teacherBox {//Boxes for preferences
+        .preferenceLabel, .teacherLabel{
+            background-color: $treeNavBg;
+            color: $mainFontColor;
+        }
+    }
+    .inputSavePreference {//Input buttons
+        background-color: $treeNavBg;
+        color: $mainFontColor;
+    }
+    a{
+        color: $treeAltFont;
+    }
+    #tm_contents{//Contents for articles in taskmeister
+        .col-sm-4 {//For right column of article stats
+            background-color: lightgreen;
+        }
+    }
+    .login-button{//Set login button
+        background-color: $treeAltFont;
+        color: $mainFontColor;
+    }
+    .well {//Set well color
+        background-color: $treeMainFont;
+        label {
+            color: white;
         }
     }
 }

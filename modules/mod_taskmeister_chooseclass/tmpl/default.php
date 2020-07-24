@@ -173,7 +173,7 @@ Display left hand side text
     <br>
     <?php if ($isTeacher) : ?>
         Account Type: Teacher.<br>
-        <div class="flex stretch"><span style="background-color: orange;">Your Students: </span><span id="text_list2">[]</span></div>
+        <div class="flex stretch"><span style="background-color: orange; color: white;">Your Students: </span><span id="text_list2">[]</span></div>
         <form id="preferenceForm" style="display:none;" method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>" >
             <input type="text" name="list2" id="input_list2" placeholder = "[]">
             <br><input type="submit" class="inputSavePreference" name="submit2" value="Save Selection">

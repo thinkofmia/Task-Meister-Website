@@ -127,6 +127,21 @@ $doc->addScript($this->baseurl . '/templates/' . $this->template . '/js/keen-sli
           <?php endif; ?>  
         </div>
       </li>
+      <!--Dropdown menu for themes-->  
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="themeDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Themes
+        </a>
+         <!--Dropdown tab for account-->
+         <div class="dropdown-menu" aria-labelledby="themeDropdown">
+        <!--Dropdown tab for themes-->
+            <a class="dropdown-item" onclick="setTheme('Default'); checkTheme();">Default</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" onclick="setTheme('sky'); checkTheme();">Sky</a>
+            <a class="dropdown-item" onclick="setTheme('flix'); checkTheme();">Netflix</a>
+            <a class="dropdown-item" onclick="setTheme('tree'); checkTheme();">Tree</a>
+        </div>
+      </li>
     </ul>
     <form class="form-inline my-2 my-lg-0" action="<?php echo JUri::base(); ?>index.php/search">
       <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" value = "<?php echo $_REQUEST["keyword"]; ?>" name="keyword">
@@ -150,7 +165,7 @@ $doc->addScript($this->baseurl . '/templates/' . $this->template . '/js/keen-sli
     </div>
     <div class="col-sm-4">
       <!--Right-->
-      <div class="container-sm bg-dark">
+      <div class="container-sm">
         <jdoc:include type="modules" name="right"/><!--Module Position: 'right'-->
       </div>
     </div>
@@ -189,10 +204,23 @@ function getTheme() {
 }
 
 function checkTheme() {
+  //Initialize
+  document.body.classList.remove("default");
+  document.body.classList.remove("day");
+  document.body.classList.remove("red");
+  document.body.classList.remove("tree");
+  //Get theme
   var theme = getTheme();
-  if (theme == "day") {
+  if (theme == "sky") {
     document.body.classList.add("day");
-  } else {//Give Default theme
+  }
+  else if (theme=="flix") {
+    document.body.classList.add("red");
+  }
+  else if (theme=="tree") {
+    document.body.classList.add("tree");
+  }
+  else {//Give Default theme
     document.body.classList.add("default");
   }
 } 

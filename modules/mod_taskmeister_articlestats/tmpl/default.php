@@ -14,7 +14,7 @@ defined('_JEXEC') or die;
 Article ID: <?php echo $articleID; ?><br>
 Article Category ID: <?php echo $articleCategory; ?><br>
 <!--Display Table-->
-<table class="table table-hover table-dark">
+<table class="table table-hover bgAlt">
     <tr>
         <th scope="col">All Users' Preferences</th>
         <td>

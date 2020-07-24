@@ -10,18 +10,6 @@ body {
   font-family: "Netflix Sans", "Helvetica Neue", Helvetica, Arial, sans-serif, Arial, Helvetica, sans-serif, "BioRhyme", serif;
 }
 
-p {
-  color: white;
-}
-
-a {
-  color: darkorange;
-}
-
-h3 {
-  color: darkorange;
-}
-
 h5 {
   font-weight: 700;
 }
@@ -79,6 +67,10 @@ table tr, table th, table td {
 .navbar {
   opacity: 0.9;
 }
+.navbar .dropdown-item {
+  cursor: pointer;
+}
+
 /*Custom Ids */
 #navLogo {
   width: 40px;
@@ -333,8 +325,6 @@ table tr, table th, table td {
 * CSS for login component/Module
 */
 .login-button {
-  background-color: darkorange;
-  color: white;
   cursor: pointer;
 }
 
@@ -396,6 +386,15 @@ body.default {
 body.default h5 {
   color: white;
 }
+body.default h3 {
+  color: darkorange;
+}
+body.default p {
+  color: white;
+}
+body.default a {
+  color: darkorange;
+}
 body.default .bgMain {
   background-color: black;
   color: white;
@@ -439,10 +438,123 @@ body.default .article p, body.default .recommendedArticles .rankedArticle p, .re
   color: white;
 }
 body.default .rankedArticle h2 {
-  text-shadow: 2px 2px red;
+  text-shadow: 2px 2px darkorange;
 }
 body.default #featuredArticlesWrapper .card-body {
   background-color: #343a40;
+}
+body.default #featuredArticlesWrapper .card-body .card-text {
+  color: white;
+}
+body.default .preferenceBox .preferenceLabel, body.default .userPreferred .preferenceLabel, body.default .teacherSelected .preferenceLabel, body.default .userNotPreferred .preferenceLabel, body.default .userMayTry .preferenceLabel, body.default .preferenceBox .teacherLabel, body.default .userPreferred .teacherLabel, body.default .teacherSelected .teacherLabel, body.default .userNotPreferred .teacherLabel, body.default .userMayTry .teacherLabel, body.default .teacherBox .preferenceLabel, body.default .teacherBox .teacherLabel {
+  background-color: darkorange;
+  color: white;
+}
+body.default .inputSavePreference {
+  background-color: darkorange;
+  color: white;
+}
+body.default #tm_contents .col-sm-4 {
+  background-color: #343a40;
+}
+body.default .login-button {
+  background-color: darkorange;
+  color: white;
+}
+body.default .well {
+  background-color: #1d1f24;
+}
+body.default .well label {
+  color: gray;
+}
+
+body.red {
+  background-color: black;
+  color: white;
+}
+body.red h5 {
+  color: white;
+}
+body.red h3 {
+  color: crimson;
+}
+body.red p {
+  color: white;
+}
+body.red a {
+  color: crimson;
+}
+body.red .bgMain {
+  background-color: black;
+  color: white;
+}
+body.red .bgAlt, body.red .navbar .nav-item:hover, .navbar body.red .nav-item:hover {
+  background-color: crimson;
+  color: white;
+}
+body.red .bgAlt #activeTab, body.red .navbar .nav-item:hover #activeTab, .navbar body.red .nav-item:hover #activeTab {
+  background-color: crimson;
+  color: white;
+}
+body.red .textAlt {
+  color: crimson;
+}
+body.red .arrow, body.red .arrowLeft, body.red .arrowRight {
+  border: solid white;
+  border-width: 0 0.75vw 0.75vw 0;
+}
+body.red .navbar {
+  background-color: #343a40;
+}
+body.red .navbar .nav-link {
+  color: white;
+}
+body.red .navbar .dropdown-menu {
+  background-color: #343a40;
+}
+body.red .navbar .dropdown-menu .dropdown-item {
+  color: white;
+}
+body.red .navbar .dropdown-menu .dropdown-item:hover {
+  color: black;
+}
+body.red .article .articleSimilarity, body.red .recommendedArticles .rankedArticle .articleSimilarity, .recommendedArticles body.red .rankedArticle .articleSimilarity {
+  background-color: darkgreen;
+  color: white;
+}
+body.red .article p, body.red .recommendedArticles .rankedArticle p, .recommendedArticles body.red .rankedArticle p {
+  background-color: crimson;
+  color: white;
+}
+body.red .rankedArticle h2 {
+  text-shadow: 2px 2px crimson;
+}
+body.red #featuredArticlesWrapper .card-body {
+  background-color: #343a40;
+}
+body.red #featuredArticlesWrapper .card-body .card-text {
+  color: white;
+}
+body.red .preferenceBox .preferenceLabel, body.red .userPreferred .preferenceLabel, body.red .teacherSelected .preferenceLabel, body.red .userNotPreferred .preferenceLabel, body.red .userMayTry .preferenceLabel, body.red .preferenceBox .teacherLabel, body.red .userPreferred .teacherLabel, body.red .teacherSelected .teacherLabel, body.red .userNotPreferred .teacherLabel, body.red .userMayTry .teacherLabel, body.red .teacherBox .preferenceLabel, body.red .teacherBox .teacherLabel {
+  background-color: crimson;
+  color: white;
+}
+body.red .inputSavePreference {
+  background-color: crimson;
+  color: white;
+}
+body.red #tm_contents .col-sm-4 {
+  background-color: #343a40;
+}
+body.red .login-button {
+  background-color: crimson;
+  color: white;
+}
+body.red .well {
+  background-color: #1d1f24;
+}
+body.red .well label {
+  color: gray;
 }
 
 body.day {
@@ -452,13 +564,22 @@ body.day {
 body.day h5 {
   color: gray;
 }
+body.day h3 {
+  color: gray;
+}
+body.day p {
+  color: gray;
+}
+body.day a {
+  color: blue;
+}
 body.day .bgMain {
   background-color: lightblue;
   color: gray;
 }
 body.day .bgAlt, body.day .navbar .nav-item:hover, .navbar body.day .nav-item:hover {
   background-color: skyblue;
-  color: darkgray;
+  color: white;
 }
 body.day .bgAlt #activeTab, body.day .navbar .nav-item:hover #activeTab, .navbar body.day .nav-item:hover #activeTab {
   background-color: skyblue;
@@ -496,6 +617,211 @@ body.day .rankedArticle h2 {
 }
 body.day #featuredArticlesWrapper .card-body {
   background-color: gray;
+}
+body.day #featuredArticlesWrapper .card-body .card-text {
+  color: white;
+}
+body.day .preferenceBox .preferenceLabel, body.day .userPreferred .preferenceLabel, body.day .teacherSelected .preferenceLabel, body.day .userNotPreferred .preferenceLabel, body.day .userMayTry .preferenceLabel, body.day .preferenceBox .teacherLabel, body.day .userPreferred .teacherLabel, body.day .teacherSelected .teacherLabel, body.day .userNotPreferred .teacherLabel, body.day .userMayTry .teacherLabel, body.day .teacherBox .preferenceLabel, body.day .teacherBox .teacherLabel {
+  background-color: darkgray;
+  color: white;
+}
+body.day .inputSavePreference {
+  background-color: darkgray;
+  color: white;
+}
+body.day a {
+  color: blue;
+}
+body.day #tm_contents .col-sm-4 {
+  background-color: lightgray;
+}
+body.day .login-button {
+  background-color: skyblue;
+  color: white;
+}
+body.day .well {
+  background-color: gray;
+}
+body.day .well label {
+  color: white;
+}
+
+body.red {
+  background-color: black;
+  color: white;
+}
+body.red h5 {
+  color: white;
+}
+body.red h3 {
+  color: crimson;
+}
+body.red p {
+  color: white;
+}
+body.red a {
+  color: crimson;
+}
+body.red .bgMain {
+  background-color: black;
+  color: white;
+}
+body.red .bgAlt, body.red .navbar .nav-item:hover, .navbar body.red .nav-item:hover {
+  background-color: crimson;
+  color: white;
+}
+body.red .bgAlt #activeTab, body.red .navbar .nav-item:hover #activeTab, .navbar body.red .nav-item:hover #activeTab {
+  background-color: crimson;
+  color: white;
+}
+body.red .textAlt {
+  color: crimson;
+}
+body.red .arrow, body.red .arrowLeft, body.red .arrowRight {
+  border: solid white;
+  border-width: 0 0.75vw 0.75vw 0;
+}
+body.red .navbar {
+  background-color: #343a40;
+}
+body.red .navbar .nav-link {
+  color: white;
+}
+body.red .navbar .dropdown-menu {
+  background-color: #343a40;
+}
+body.red .navbar .dropdown-menu .dropdown-item {
+  color: white;
+}
+body.red .navbar .dropdown-menu .dropdown-item:hover {
+  color: black;
+}
+body.red .article .articleSimilarity, body.red .recommendedArticles .rankedArticle .articleSimilarity, .recommendedArticles body.red .rankedArticle .articleSimilarity {
+  background-color: darkgreen;
+  color: white;
+}
+body.red .article p, body.red .recommendedArticles .rankedArticle p, .recommendedArticles body.red .rankedArticle p {
+  background-color: crimson;
+  color: white;
+}
+body.red .rankedArticle h2 {
+  text-shadow: 2px 2px crimson;
+}
+body.red #featuredArticlesWrapper .card-body {
+  background-color: #343a40;
+}
+body.red #featuredArticlesWrapper .card-body .card-text {
+  color: white;
+}
+body.red .preferenceBox .preferenceLabel, body.red .userPreferred .preferenceLabel, body.red .teacherSelected .preferenceLabel, body.red .userNotPreferred .preferenceLabel, body.red .userMayTry .preferenceLabel, body.red .preferenceBox .teacherLabel, body.red .userPreferred .teacherLabel, body.red .teacherSelected .teacherLabel, body.red .userNotPreferred .teacherLabel, body.red .userMayTry .teacherLabel, body.red .teacherBox .preferenceLabel, body.red .teacherBox .teacherLabel {
+  background-color: crimson;
+  color: white;
+}
+body.red .inputSavePreference {
+  background-color: crimson;
+  color: white;
+}
+body.red #tm_contents .col-sm-4 {
+  background-color: #343a40;
+}
+body.red .login-button {
+  background-color: crimson;
+  color: white;
+}
+body.red .well {
+  background-color: #1d1f24;
+}
+body.red .well label {
+  color: gray;
+}
+
+body.tree {
+  background-color: wheat;
+  color: brown;
+}
+body.tree h5, body.tree h3, body.tree p {
+  color: brown;
+}
+body.tree a {
+  color: green;
+}
+body.tree .bgMain {
+  background-color: wheat;
+  color: brown;
+}
+body.tree .bgAlt, body.tree .navbar .nav-item:hover, .navbar body.tree .nav-item:hover {
+  background-color: brown;
+  color: white;
+}
+body.tree .bgAlt #activeTab, body.tree .navbar .nav-item:hover #activeTab, .navbar body.tree .nav-item:hover #activeTab {
+  background-color: brown;
+  color: white;
+}
+body.tree .textAlt {
+  color: green;
+}
+body.tree .arrow, body.tree .arrowLeft, body.tree .arrowRight {
+  border: solid brown;
+  border-width: 0 0.75vw 0.75vw 0;
+}
+body.tree .navbar {
+  background-color: darkgreen;
+}
+body.tree .navbar .nav-link {
+  color: white;
+}
+body.tree .navbar .nav-link:hover {
+  background-color: brown;
+}
+body.tree .navbar .dropdown-menu {
+  background-color: darkgreen;
+}
+body.tree .navbar .dropdown-menu .dropdown-item {
+  color: white;
+}
+body.tree .navbar .dropdown-menu .dropdown-item:hover {
+  background-color: brown;
+}
+body.tree .article .articleSimilarity, body.tree .recommendedArticles .rankedArticle .articleSimilarity, .recommendedArticles body.tree .rankedArticle .articleSimilarity {
+  background-color: darkgreen;
+  color: white;
+}
+body.tree .article p, body.tree .recommendedArticles .rankedArticle p, .recommendedArticles body.tree .rankedArticle p {
+  background-color: brown;
+  color: white;
+}
+body.tree .rankedArticle h2 {
+  text-shadow: 2px 2px green;
+}
+body.tree #featuredArticlesWrapper .card-body {
+  background-color: wheat;
+}
+body.tree #featuredArticlesWrapper .card-body .card-text {
+  color: brown;
+}
+body.tree .preferenceBox .preferenceLabel, body.tree .userPreferred .preferenceLabel, body.tree .teacherSelected .preferenceLabel, body.tree .userNotPreferred .preferenceLabel, body.tree .userMayTry .preferenceLabel, body.tree .preferenceBox .teacherLabel, body.tree .userPreferred .teacherLabel, body.tree .teacherSelected .teacherLabel, body.tree .userNotPreferred .teacherLabel, body.tree .userMayTry .teacherLabel, body.tree .teacherBox .preferenceLabel, body.tree .teacherBox .teacherLabel {
+  background-color: darkgreen;
+  color: white;
+}
+body.tree .inputSavePreference {
+  background-color: darkgreen;
+  color: white;
+}
+body.tree a {
+  color: green;
+}
+body.tree #tm_contents .col-sm-4 {
+  background-color: lightgreen;
+}
+body.tree .login-button {
+  background-color: green;
+  color: white;
+}
+body.tree .well {
+  background-color: brown;
+}
+body.tree .well label {
+  color: white;
 }
 
 /*# sourceMappingURL=template.css.map */
