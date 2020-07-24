@@ -70,6 +70,9 @@ table tr, table th, table td {
 .navbar .dropdown-item {
   cursor: pointer;
 }
+.navbar .dropdown-item.disabled {
+  color: gray;
+}
 
 /*Custom Ids */
 #navLogo {
@@ -351,7 +354,7 @@ table tr, table th, table td {
   display: none;
 }
 .login .control-group {
-  margin-bottom: 1vw;
+  margin-bottom: 0.5vw;
 }
 
 /**
@@ -428,6 +431,9 @@ body.default .navbar .dropdown-menu .dropdown-item {
 }
 body.default .navbar .dropdown-menu .dropdown-item:hover {
   color: black;
+}
+body.default .navbar .dropdown-menu .dropdown-item.disabled {
+  color: gray;
 }
 body.default .article .articleSimilarity, body.default .recommendedArticles .rankedArticle .articleSimilarity, .recommendedArticles body.default .rankedArticle .articleSimilarity {
   background-color: darkgreen;
@@ -604,6 +610,9 @@ body.day .navbar .dropdown-menu {
 body.day .navbar .dropdown-menu .dropdown-item:hover {
   background-color: skyblue;
 }
+body.day .navbar .dropdown-menu .dropdown-item.disabled {
+  color: gray;
+}
 body.day .article .articleSimilarity, body.day .recommendedArticles .rankedArticle .articleSimilarity, .recommendedArticles body.day .rankedArticle .articleSimilarity {
   background-color: darkgreen;
   color: white;
@@ -692,6 +701,9 @@ body.red .navbar .dropdown-menu {
 }
 body.red .navbar .dropdown-menu .dropdown-item {
   color: white;
+}
+body.red .navbar .dropdown-menu .dropdown-item.disabled {
+  color: gray;
 }
 body.red .navbar .dropdown-menu .dropdown-item:hover {
   color: black;
@@ -782,6 +794,9 @@ body.tree .navbar .dropdown-menu .dropdown-item {
 body.tree .navbar .dropdown-menu .dropdown-item:hover {
   background-color: brown;
 }
+body.tree .navbar .dropdown-menu .dropdown-item.disabled {
+  color: gray;
+}
 body.tree .article .articleSimilarity, body.tree .recommendedArticles .rankedArticle .articleSimilarity, .recommendedArticles body.tree .rankedArticle .articleSimilarity {
   background-color: darkgreen;
   color: white;
@@ -822,6 +837,10 @@ body.tree .well {
 }
 body.tree .well label {
   color: white;
+}
+body.tree .badge {
+  background-color: darkgreen;
+  color: wheat;
 }
 
 /*# sourceMappingURL=template.css.map */

@@ -4,6 +4,7 @@ $pageBackground: black; //For Background
 $navBg: #343a40;//For navigation bg
 $mainFontColor: white; //Default Font Color
 $altFontColor: darkorange; //Alt Default Font Color
+$disabled: gray;
 
 //For other themes
 //Sky theme
@@ -94,6 +95,9 @@ table {
     }
     .dropdown-item{
         cursor: pointer;
+    }
+    .dropdown-item.disabled{
+        color: gray;
     }
 }
 
@@ -399,7 +403,7 @@ table {
         display: none;
     }
     .control-group {
-        margin-bottom: 1vw;
+        margin-bottom: 0.5vw;
     }
 }
 
@@ -485,6 +489,9 @@ body.default {
             }
             .dropdown-item:hover{
                 color: $pageBackground;
+            }
+            .dropdown-item.disabled {
+                color: $disabled;
             }
         }
     }
@@ -689,6 +696,9 @@ body.day {
             .dropdown-item:hover{
                 background-color: $skyAltFont;
             }
+            .dropdown-item.disabled {
+                color: $disabled;
+            }
         }
     }
     .article{//For css in article box
@@ -792,6 +802,9 @@ body.red {
             .dropdown-item {
                 color: $mainFontColor;
             }
+            .dropdown-item.disabled {
+                color: $disabled;
+            }
             .dropdown-item:hover{
                 color: $pageBackground;
             }
@@ -894,6 +907,9 @@ body.tree {
             .dropdown-item:hover{
                 background-color: $treeMainFont;
             }
+            .dropdown-item.disabled {
+                color: $disabled;
+            }
         }
     }
     .article{//For css in article box
@@ -946,5 +962,9 @@ body.tree {
         label {
             color: white;
         }
+    }
+    .badge{
+        background-color: $treeNavBg;
+        color: $treeBg;
     }
 }

@@ -60,27 +60,28 @@ JHtml::_('behavior.formvalidator');
 			<input type="hidden" name="return" value="<?php echo base64_encode($return); ?>" />
 			<?php echo JHtml::_('form.token'); ?>
 		</fieldset>
+		<div>
+			<ul class="nav nav-tabs nav-stacked">
+				<?php $usersConfig = JComponentHelper::getParams('com_users'); ?>
+				<?php if ($usersConfig->get('allowUserRegistration')) : ?>
+					<li>
+						<a class="m-2" href="<?php echo JRoute::_('index.php?option=com_users&view=registration'); ?>">
+							<span class="badge bgAlt p-1">Create an Account</span>
+						</a>
+					</li>
+				<?php endif; ?>
+				<li>
+					<a class="m-2" href="<?php echo JRoute::_('index.php?option=com_users&view=reset'); ?>">
+						<span class="badge bgAlt p-1"><?php echo JText::_('COM_USERS_LOGIN_RESET'); ?></span>
+					</a>
+				</li>
+				<li>
+					<a class="m-2" href="<?php echo JRoute::_('index.php?option=com_users&view=remind'); ?>">
+						<span class="badge bgAlt p-1"><?php echo JText::_('COM_USERS_LOGIN_REMIND'); ?></span>
+					</a>
+				</li>
+			</ul>
+		</div>
 	</form>
 </div>
-<div>
-	<ul class="nav nav-tabs nav-stacked">
-		<?php $usersConfig = JComponentHelper::getParams('com_users'); ?>
-		<?php if ($usersConfig->get('allowUserRegistration')) : ?>
-			<li>
-				<a class="m-2" href="<?php echo JRoute::_('index.php?option=com_users&view=registration'); ?>">
-					<span class="badge bgAlt p-1">Create an Account</span>
-				</a>
-			</li>
-		<?php endif; ?>
-		<li>
-			<a class="m-2" href="<?php echo JRoute::_('index.php?option=com_users&view=reset'); ?>">
-				<span class="badge bgAlt p-1"><?php echo JText::_('COM_USERS_LOGIN_RESET'); ?></span>
-			</a>
-		</li>
-		<li>
-			<a class="m-2" href="<?php echo JRoute::_('index.php?option=com_users&view=remind'); ?>">
-				<span class="badge bgAlt p-1"><?php echo JText::_('COM_USERS_LOGIN_REMIND'); ?></span>
-			</a>
-		</li>
-	</ul>
-</div>
+

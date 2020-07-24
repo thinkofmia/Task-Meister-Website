@@ -137,7 +137,7 @@ $doc->addScript($this->baseurl . '/templates/' . $this->template . '/js/keen-sli
         <!--Dropdown tab for themes-->
             <a class="dropdown-item" onclick="setTheme('Default'); checkTheme();">Default</a>
             <div class="dropdown-divider"></div>
-            <a class="dropdown-item" onclick="setTheme('sky'); checkTheme();">Sky</a>
+            <a class="dropdown-item" onclick="setTheme('sky'); checkTheme();">Ice</a>
             <a class="dropdown-item" onclick="setTheme('flix'); checkTheme();">Netflix</a>
             <a class="dropdown-item" onclick="setTheme('tree'); checkTheme();">Tree</a>
         </div>
