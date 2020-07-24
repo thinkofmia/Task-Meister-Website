@@ -12,9 +12,9 @@ defined('_JEXEC') or die('Restricted access');
 
 ?>
 <form action="<?php echo JRoute::_('index.php?option=com_review&layout=edit&id=' . (int) $this->item->id); ?>"
-    method="POST" name="adminForm" id="adminForm">
+    method="POST" name="adminForm" id="adminForm" class="form-validate">
     <div class="form-horizontal">
-        <fieldset class="adminForm">
+        <fieldset class ="adminForm">
             <legend><?php echo JText::_('COM_REVIEW_REVIEW_DETAILS'); ?></legend>
             <div class="row-fluid">
                 <div class="span12">

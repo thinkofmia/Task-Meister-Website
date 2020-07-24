@@ -278,4 +278,14 @@ class ReviewModelReview extends JModelAdmin
 
 		return true;
 	}
+
+	/**
+	 * Method to get the script to be included in the form
+	 *
+	 * @return string	Script files
+	 */
+	public function getScript() 
+	{
+		return 'administrator/components/com_review/models/forms/rating.js';
+	}
 }
