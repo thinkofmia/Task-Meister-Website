@@ -136,6 +136,9 @@ button.read-less {
     /* text-align: center; */
     text-transform: uppercase;
 }
+.invalid {
+    border-color: red !important;
+}
 /* button.set {
     transform: scale(0.9);
     background-color: #515151;

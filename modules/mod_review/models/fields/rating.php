@@ -30,7 +30,7 @@ class JFormFieldRating extends JFormField {
         $value = $this->__get('value');
         $filled = ' star-colour';
         $name = $this->getAttribute('name');
-        $html = '<div class="rating" data-vote="0">'.
+        $html = '<div class="rating" data-vote="0" onclick="removeWarningMsg()">'.
                     /* '<div class="star-animated hidden">'.
                         '<span class="full" data-value="0"></span>'.
                         '<span class="half" data-value="0"></span>'.
