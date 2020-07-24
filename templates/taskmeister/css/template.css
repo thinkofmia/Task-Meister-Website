@@ -363,6 +363,9 @@ table tr, table th, table td {
 .modal {
   display: block;
 }
+.modal #closePopup {
+  font-size: 5vw;
+}
 
 /**
     CSS for Chai Seng's Reviews
