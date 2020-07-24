@@ -658,6 +658,10 @@ body.day .well {
 body.day .well label {
   color: white;
 }
+body.day .accordionfaqheader.accordion3, body.day .accordionfaqheader.accordion4 {
+  background: gray;
+  background-color: gray;
+}
 
 body.red {
   background-color: black;
