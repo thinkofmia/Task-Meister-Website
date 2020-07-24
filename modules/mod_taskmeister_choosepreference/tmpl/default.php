@@ -162,10 +162,10 @@ Display left hand side text
                 Displays image of based on the images folder and img name in the mod: Width and Height 100%
                 If no image is found, give it default image using onerror func
             -->
-            <img src="/taskmeisterx/modules/mod_taskmeister_choosepreference/images/<?php echo $key;?>.jpg" width="100%" height="100%" onerror="this.src='/taskmeisterx/modules/mod_taskmeister_choosepreference/images/default.jpg';"/>
+            <img title="<?php echo $key; ?>" src="/taskmeisterx/modules/mod_taskmeister_choosepreference/images/<?php echo $key;?>.jpg" width="100%" height="100%" onerror="this.src='/taskmeisterx/modules/mod_taskmeister_choosepreference/images/default.jpg';"/>
             <!--Display label of tags, including tag name and number of uses-->
             <p class = "preferenceLabel"><?php echo $key; ?></p>
-            <p class = "preferenceStats"><?php echo $value["likes"]; ?> 👍 <?php echo $value["deployed"]; ?> 👨‍💻</p>
+            <p class = "preferenceStats" title="Total # of Likes: <?php echo $value["likes"]; ?>, Total # of Deployment: <?php echo $value["deployed"]; ?>"><?php echo $value["likes"]; ?> 👍 <?php echo $value["deployed"]; ?> 👨‍💻</p>
         </div>
         <?php $count = $count + 1; ?>
         <?php if ($count==25): ?>

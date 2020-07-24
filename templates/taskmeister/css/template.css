@@ -309,6 +309,7 @@ table tr, table th, table td {
 }
 .preferenceBox .preferenceStats, .userPreferred .preferenceStats, .teacherSelected .preferenceStats, .userNotPreferred .preferenceStats, .userMayTry .preferenceStats, .teacherBox .preferenceStats {
   background-color: blue;
+  color: white;
 }
 .preferenceBox p, .userPreferred p, .teacherSelected p, .userNotPreferred p, .userMayTry p, .teacherBox p {
   position: absolute;
