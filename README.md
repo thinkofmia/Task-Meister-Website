@@ -1,5 +1,5 @@
 # Task-Meister
-Work involving Joomla-cms.
+Work involving Joomla-cms. It comes with 4 themes and a custom-made recommender engine.
 
 Check our website at: https://iwant2study.org/taskmeisterx/index.php/
 
@@ -67,6 +67,22 @@ Shown above are the following fields for the User Stats Table.
 - pageliked (Refers to the list of pages that the user likes)
 - pagedisliked (Refers to the list of pages that the user dislikes)
 - pagedeployed (Refers to the list of pages that the user deployed)
+
+![Image of the Teacher Stats Table](images/TeacherStatsFields.png)
+Shown above are the following fields for the Teacher Stats Table.
+- teacherid (Refers to the id of the teacher)
+- code (Refers to the teacher's unique code/id)
+- students (Refers to the list of students that the teacher has)
+- weightagelikes (Refers to the teacher's modifier for their class's likes)
+- weightagedeployment (Refers to the teacher's modifier for their class's deployed articles)
+- weightagetouched (Refers to the teacher's modifier for their class's touched articles)
+- weightagepreferred (Refers to the teacher's modifier for their class's preferred tags)
+- weightagenotpreferred (Refers to the teacher's modifier for their class's against tags)
+- weightagemaytry (Refers to the teacher's modifier for their class's may try tags)
+- preferencelink (Unused)
+- bonustags (Refers to the teacher's modifier for their class to include additional tag search)
+
+
 
 ## End Note
 To see more information about the individual parts of the repository, please read the readmes in their respective folders.
