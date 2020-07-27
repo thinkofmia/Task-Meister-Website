@@ -1,6 +1,18 @@
 # Task-Meister
 Work involving Joomla-cms. It comes with a template (has 4 themes) and a custom-made recommender engine.
 
+Default Theme
+![Screenshot of Default Theme](images/DefaultTheme.PNG)
+
+Ice Theme
+![Screenshot of Ice Theme](images/IceTheme.PNG)
+
+Red Theme
+![Screenshot of Red Theme](images/RedTheme.PNG)
+
+Tree Theme
+![Screenshot of Tree Theme](images/TreeTheme.PNG)
+
 Check our website at: https://iwant2study.org/taskmeisterx/index.php/
 
 ## Types of files inside the Repository
