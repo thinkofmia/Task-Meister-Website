@@ -8,7 +8,7 @@
 	<copyright>Task Meister 2020</copyright>
 	<license>GNU/GPL</license>
 	<version>1.2.1</version>
-	<description>Template for Task Meister. Includes different themes. By Fremont Teng</description>
+	<description>Template for Task Meister. Includes 4 themes. By Fremont Teng</description>
 	<files>
 		<filename>index.php</filename>
 		<filename>templateDetails.xml</filename>

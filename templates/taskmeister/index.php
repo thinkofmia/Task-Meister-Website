@@ -14,18 +14,19 @@ $doc = JFactory::getDocument();
 $uri = Uri::getInstance();
 $urlPath = $uri->getPath();
 //$uri->getScheme() . ", Host: " . $uri->getHost() . " , Path: " . $uri->getPath() . "<br>";
-//Set Userid and username
-$userID = $me->id;
-$user = JFactory::getUser($userID);
-if (isset($user->name))$username = $user->name;
-else $username = "Login";
+
+$userID = $me->id;//Get user id
+$user = JFactory::getUser($userID);//Get user
+if (isset($user->name))$username = $user->name; //Get user's name
+else $username = "Login/Sign Up";//Replace user's name with login
 
 // Add JavaScript Frameworks
 JHtml::_('bootstrap.framework');
+//Add Chai Seng's JavaScripts File
 $doc->addScript($this->baseurl . '/templates/' . $this->template . '/js/template.js');
 $doc->addScript($this->baseurl . '/templates/' . $this->template . '/js/keen-slider.js');
-
 ?>
+
 <!-- Tells the browser which flavor of HTML the page is using. In this case HTML5.-->
 <!DOCTYPE html>
 <!-- Begins HTML document and describes what language the website is in-->
@@ -47,12 +48,14 @@ $doc->addScript($this->baseurl . '/templates/' . $this->template . '/js/keen-sli
 <link rel="stylesheet" href="<?php echo $this->baseurl ?>/templates/system/css/system.css" type="text/css" />
 <link rel="stylesheet" href="<?php echo $this->baseurl ?>/templates/system/css/general.css" type="text/css" />
 <link rel="stylesheet" href="<?php echo $this->baseurl ?>/templates/<?php echo $this->template; ?>/css/template.css" type="text/css" />
+
+<!--For Google Chart.js-->
 <link href="https://fonts.googleapis.com/css2?family=BioRhyme&display=swap" rel="stylesheet">
 <script src="https://www.google.com/jsapi"></script>
 
 <!-- Puts the correct header information in (eg. page title, meta information, JavaScript)-->
 <jdoc:include type="head" />
-<!--Importing CSS changes from old protostartina template-->
+<!--Importing Chai Seng's CSS files-->
 <link rel="stylesheet" href="<?php echo $this->baseurl ?>/templates/<?php echo $this->template; ?>/css/old.css" type="text/css" />
 <link rel="stylesheet" href="<?php echo $this->baseurl ?>/templates/<?php echo $this->template; ?>/css/keen-slider.min.css" type="text/css" />
 </head>
@@ -62,14 +65,14 @@ $doc->addScript($this->baseurl . '/templates/' . $this->template . '/js/keen-sli
 <!--Scripts-->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"></script>
 
-<!--Bootstrap Nav Bar-->
+<!--Bootstrap 4 Navigation Bar-->
 <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
-  <!--Logo-->
+  <!--Taskmeister Logo Link-->
   <a class="navbar-brand" href="<?php echo $this->baseurl; ?>">
-      <!--Logo Image-->
+      <!--Taskmeister Logo Image-->
       <img id="navLogo" src="<?php echo $this->baseurl; ?>/templates/<?php echo $this->template; ?>/images/TaskMeisterLogo.JPG" alt="Logo">
   </a>
-  <!--Hamburger toggler-->
+  <!--Hamburger Menu Toggle-->
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -78,39 +81,45 @@ $doc->addScript($this->baseurl . '/templates/' . $this->template . '/js/keen-sli
     <ul class="navbar-nav mr-auto">
       <!--Check if current directory is on home page-->
       <?php if(($urlPath==$this->baseurl."/index.php/home/")||($urlPath==$this->baseurl."/index.php/home")||($urlPath==$this->baseurl."/index.php/")||($urlPath==$this->baseurl."/index.php")||($urlPath==$this->baseurl."/")) : ?>
+        <!--If so, highlight the nav-item-->
         <li class="nav-item bgAlt">
             <a class="nav-link" href="<?php echo $urlPath==$this->baseurl; ?>">Home</a>
       <?php else : ?>  
+        <!--Else, leave it as a default nav-item-->
         <li class="nav-item">
             <a class="nav-link" href="<?php echo $urlPath==$this->baseurl; ?>">Home</a>
       <?php endif; ?>
         </li>
       <!--Check if current directory is on school levels page-->
       <?php if(($urlPath==$this->baseurl."/index.php/school/")||($urlPath==$this->baseurl."/index.php/school")) : ?>
+        <!--If so, highlight the nav-item-->
         <li class="nav-item bgAlt">
             <a class="nav-link" href="<?php echo $this->baseurl."/index.php/school/"; ?>">By School</a>
       <?php else : ?>  
+        <!--Else, leave it as a default nav-item-->
         <li class="nav-item">
             <a class="nav-link" href="<?php echo $this->baseurl."/index.php/school/"; ?>">By School</a>
       <?php endif; ?>
         </li>
       <!--Check if current directory is on subjects page-->
       <?php if(($urlPath==$this->baseurl."/index.php/subjects/")||($urlPath==$this->baseurl."/index.php/subjects")) : ?>
+        <!--If so, highlight the nav-item-->
         <li class="nav-item bgAlt">
             <a class="nav-link" href="<?php echo $this->baseurl."/index.php/subjects/"; ?>">By Subjects</a>
       <?php else : ?>  
+        <!--Else, leave it as a default nav-item-->
         <li class="nav-item">
             <a class="nav-link" href="<?php echo $this->baseurl."/index.php/subjects/"; ?>">By Subjects</a>
       <?php endif; ?>
         </li>
-      <!--Dropdown menu for account-->  
+      <!--Dropdown menu for account tabs-->  
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Account
         </a>
         <!--Dropdown tab for account-->
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <!--If Guest, disable the below-->
+          <!--If Guest, disable the remaining tabs-->
           <?php if ($userID==0) : ?>
             <a class="dropdown-item" href="<?php echo $this->baseurl."/index.php/login"?>">Login</a>
             <div class="dropdown-divider"></div>
@@ -119,6 +128,7 @@ $doc->addScript($this->baseurl . '/templates/' . $this->template . '/js/keen-sli
             <a class="dropdown-item disabled" href="#">My Class</a>
             <a class="dropdown-item disabled" href="#">Logout</a>
           <?php else: ?>
+            <!--Else if logined, enable the remaining tabs-->
             <a class="dropdown-item" href="<?php echo $this->baseurl."/index.php/user"?>"><?php echo $username; ?></a>
             <div class="dropdown-divider"></div>
             <a class="dropdown-item" href="<?php echo $this->baseurl."/index.php/mylist"?>">My List</a>
@@ -136,6 +146,7 @@ $doc->addScript($this->baseurl . '/templates/' . $this->template . '/js/keen-sli
          <!--Dropdown tab for account-->
          <div class="dropdown-menu" aria-labelledby="themeDropdown">
         <!--Dropdown tab for themes-->
+            <!--Choosing one of the options below will set the theme. JavaScript has to be enabled for it to work.-->
             <a class="dropdown-item" onclick="setTheme('Default'); checkTheme();">Default</a>
             <div class="dropdown-divider"></div>
             <a class="dropdown-item" onclick="setTheme('sky'); checkTheme();">Ice</a>
@@ -144,6 +155,7 @@ $doc->addScript($this->baseurl . '/templates/' . $this->template . '/js/keen-sli
         </div>
       </li>
     </ul>
+    <!--Navigation bar's search bar-->
     <form class="form-inline my-2 my-lg-0" action="<?php echo JUri::base(); ?>index.php/search">
       <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" value = "<?php echo $_REQUEST["keyword"]; ?>" name="keyword">
       <button class="btn bgAlt my-2 my-sm-0" type="submit">🔍</button>
@@ -151,84 +163,119 @@ $doc->addScript($this->baseurl . '/templates/' . $this->template . '/js/keen-sli
   </div>
 </nav>
 
-<!--Banner-->
-<jdoc:include type="modules" name="banner"/><!-- Module Position: 'banner'-->
-<!--Top-->
-<div id="tm_contents" class="container-fluid">
-  <jdoc:include type="modules" name="top"/><!-- Module Position: 'top'-->
+<!--Modules that would be place in the 'Banner' position-->
+<jdoc:include type="modules" name="banner"/>
 
-<!--Component-->
+<!--Container for the Taskmeister Contents-->
+<div id="tm_contents" class="container-fluid">
+  <!--Top of the container-->
+  <!--Modules that would be place in the 'Top' position-->
+  <jdoc:include type="modules" name="top"/>
+
+  <!--Center of the container-->
+  <!--Splitting into left-right row-->
   <div class="row">
+    <!--Left column in the row, occupies 8/12 space-->
     <div class="col-sm-8">
       <div class="container pr-1">
-        <jdoc:include type="component" /><!--Components are generated here-->
+        <!--Components are placed here. Examples of components are Articles and Review-->
+        <jdoc:include type="component" />
       </div>
     </div>
+    <!--Right column in the row, occupies 4/12 space-->
     <div class="col-sm-4">
-      <!--Right-->
       <div class="container-sm">
-        <jdoc:include type="modules" name="right"/><!--Module Position: 'right'-->
+        <!--Modules that would be place in the 'Right' position-->
+        <jdoc:include type="modules" name="right"/>
       </div>
     </div>
   </div>
 
-<!--Rest of the contents-->
-  <jdoc:include type="modules" name="center"/><!-- Module Position: 'center'-->
-  <jdoc:include type="modules" name="bottom"/><!-- Module Position: 'bottom'-->
+  <!--Bottom of the Container-->
+  <!--Modules that would be place in the 'Center' position-->
+  <jdoc:include type="modules" name="center"/>
+  <!--Modules that would be place in the 'Bottom' position-->
+  <jdoc:include type="modules" name="bottom"/>
 </div>
 
-<!-- Module Position: 'footer'-->
-<jdoc:include type="modules" name="footer" /><!-- Module Position: 'footer'-->
+<!--Modules that would be place in the 'Footer' position-->
+<jdoc:include type="modules" name="footer" />
 
 <!--Script to set theme of page-->
 <script>
+  /**
+   * setTheme(theme)
+   * JavaScript function to set the theme of the webpage using cookies. 
+   * Expiry: One year
+  */
   function setTheme(theme) {
+  //Get current date
   var d = new Date();
+  //Set date to be one year later
   d.setTime(d.getTime() + (365 * 24 * 60 * 60 * 1000));
+  //Set expiry date
   var expires = "expires="+d.toUTCString();
+  //Save the selected theme as a cookie with a year expiry
   document.cookie = "theme=" + theme + ";" + expires + ";path=/";
 }
 
-function getTheme() {
-  var name = "theme=";
-  var ca = document.cookie.split(';');
-  for(var i = 0; i < ca.length; i++) {
-    var c = ca[i];
-    while (c.charAt(0) == ' ') {
-      c = c.substring(1);
+  /**
+   * getTheme()
+   * JavaScript function to get the theme of the webpage using cookies.
+   * If not found, return default theme.
+  */
+  function getTheme() {
+    //Set target of cookie to be theme
+    var name = "theme=";
+    //Split the cookie documents
+    var ca = document.cookie.split(';');
+    //Loop through the contents by ';'
+    for(var i = 0; i < ca.length; i++) {
+      var c = ca[i];
+      while (c.charAt(0) == ' ') {
+        c = c.substring(1);
+      }
+      if (c.indexOf(name) == 0) {
+        //If found, return the theme
+        return c.substring(name.length, c.length);
+      }
     }
-    if (c.indexOf(name) == 0) {
-      return c.substring(name.length, c.length);
-    }
+    //Else return nothing
+    return "";
   }
-  return "";
-}
 
-function checkTheme() {
-  //Initialize
-  document.body.classList.remove("default");
-  document.body.classList.remove("day");
-  document.body.classList.remove("red");
-  document.body.classList.remove("tree");
-  //Get theme
-  var theme = getTheme();
-  if (theme == "sky") {
-    document.body.classList.add("day");
-  }
-  else if (theme=="flix") {
-    document.body.classList.add("red");
-  }
-  else if (theme=="tree") {
-    document.body.classList.add("tree");
-  }
-  else {//Give Default theme
-    document.body.classList.add("default");
-  }
-} 
+  /**
+   * checkTheme()
+   * JavaScript Function to check the theme of the page
+   */
+  function checkTheme() {
+    //Remove all the theme classes
+    document.body.classList.remove("default");
+    document.body.classList.remove("day");
+    document.body.classList.remove("red");
+    document.body.classList.remove("tree");
+    //Get theme based on the cookie stored
+    var theme = getTheme();
+    //Set the theme by adding the CSS class
+    if (theme == "sky") {//Set Sky theme
+      document.body.classList.add("day");
+    }
+    else if (theme=="flix") {//Set Netflix theme
+      document.body.classList.add("red");
+    }
+    else if (theme=="tree") {//Set Tree Theme
+      document.body.classList.add("tree");
+    }
+    else {//Set Default theme
+      document.body.classList.add("default");
+    }
+  } 
+
 //Run script
 checkTheme();
 </script>
 
+<!--End of Body-->
 </body>
 
 <!-- End-->
