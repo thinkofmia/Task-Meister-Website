@@ -82,7 +82,12 @@ Shown above are the following fields for the Teacher Stats Table.
 - preferencelink (Unused)
 - bonustags (Refers to the teacher's modifier for their class to include additional tag search)
 
-
+![Image of the Recommendation Stats Table](images/RecommendationStatsFields.png)
+Shown above are the following fields for the Recommendation Stats Table.
+- date (Refers to the date of the action)
+- aid (Refers to the article id)
+- uid (Refers to the user id)
+- action (Refers to the user's action on the particular article)
 
 ## End Note
 To see more information about the individual parts of the repository, please read the readmes in their respective folders.
