@@ -36,13 +36,13 @@ Chai Seng's CSS:
 
 ![Screenshot of Extensions: Install](images/ExtensionsInstall.PNG)
 
+### Other ways of installation
+See the website: https://docs.joomla.org/J3.x:Installing_a_template
+
 ## Additional Installation/Set Up
 Custom Tables: (Required for most modules)
 - https://joomlaboat.com/custom-tables 
 - Version used 1.9.4
-
-### Other ways of installation
-See the website: https://docs.joomla.org/J3.x:Installing_a_template
 
 For the Recommender Engine to work, please set up the four custom tables with the following fields as shown in the bottom screenshots. It is recommended to use the exact table and field names (so that you won't need to modify the ones in the modules).
 
