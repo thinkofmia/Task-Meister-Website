@@ -18,10 +18,10 @@ Templates
 
 ## Important Links for users/editors
 SCSS file to edit the CSS of the taskmeister template:
-https://github.com/FremontTeng/Task-Meister/blob/master/templates/taskmeister/css/template.scss
+- https://github.com/FremontTeng/Task-Meister/blob/master/templates/taskmeister/css/template.scss
 
 Chai Seng's CSS:
-https://github.com/FremontTeng/Task-Meister/blob/master/templates/taskmeister/css/old.css
+- https://github.com/FremontTeng/Task-Meister/blob/master/templates/taskmeister/css/old.css
 
 ## Installing a template/module/plugin
 ### Install Templates via FTP
@@ -30,8 +30,11 @@ https://github.com/FremontTeng/Task-Meister/blob/master/templates/taskmeister/cs
 3. Click the checkbox to the left of your template and click on the button 'Install'.
 
 ### Install by package
-1. Zip the relevant module/plugin/template
-2. Drag into the upload package tab
+1. Zip the relevant module/plugin/template folder
+2. Drag the zipped folder into the upload package tab
+3. Ensure installation success message is shown
+
+![Screenshot of Extensions: Install](images/ExtensionsInstall.PNG)
 
 ## Additional Installation/Set Up
 Custom Tables: (Required for most modules)
