@@ -33,7 +33,7 @@ https://github.com/FremontTeng/Task-Meister/blob/master/templates/taskmeister/cs
 1. Zip the relevant module/plugin/template
 2. Drag into the upload package tab
 
-## Additional Installation
+## Additional Installation/Set Up
 Extensions:
 - For custom tables: https://joomlaboat.com/custom-tables (Required for most modules)
 
