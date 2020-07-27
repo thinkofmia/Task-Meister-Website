@@ -1,5 +1,5 @@
 # Task-Meister
-Work involving Joomla-cms. It comes with 4 themes and a custom-made recommender engine.
+Work involving Joomla-cms. It comes with a template (has 4 themes) and a custom-made recommender engine.
 
 Check our website at: https://iwant2study.org/taskmeisterx/index.php/
 
