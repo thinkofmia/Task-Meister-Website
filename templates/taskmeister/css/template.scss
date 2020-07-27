@@ -1,93 +1,125 @@
-/*Variables*/
-//Taskmeister theme
-$pageBackground: black; //For Background
-$navBg: #343a40;//For navigation bg
-$mainFontColor: white; //Default Font Color
-$altFontColor: darkorange; //Alt Default Font Color
+/**
+* SCSS made by Fremont Teng for the Taskmeister Template
+* Last update: 27/07/2020
+*/
+
+/*
+* Template Variables
+* To make a custom variable, add '$' to the front of the variable name.
+*/
+//Universal
 $disabled: gray;
 
-//For other themes
-//Sky theme
-$skyBg: lightblue;
-$skyNavBg: darkgray;
-$skyMainFont: gray;
-$skyAltFont: skyblue;
+//Taskmeister/Default Theme
+$pageBackground: black;//Page Background
+$navBg: #343a40;//Navigation Bar Background
+$mainFontColor: white; //Font Color 1
+$altFontColor: darkorange; //Font Color 2
 
-//Red theme
-$redFontColor: crimson;
+//Sky Theme
+$skyBg: lightblue;//Page Background
+$skyNavBg: darkgray;//Navigation Bar Background
+$skyMainFont: gray;//Font Color 1
+$skyAltFont: skyblue;//Font Color 2
+
+//Red theme (Mainly shares the same variables as the default template except for font color 1)
+$redFontColor: crimson;//Font Color 1
 
 //Tree theme
-$treeBg: wheat;
-$treeNavBg: darkgreen;
-$treeMainFont: brown;
-$treeAltFont: green;
+$treeBg: wheat;//Page Background
+$treeNavBg: darkgreen;//Navigation Bar Background
+$treeMainFont: brown;//Font Color 1
+$treeAltFont: green;//Font Color 2
 
-/*Default Tags*/
-body {//Body Tag
+/*
+*   Default Tags
+*   Tags that use the default names such as body, h2, etc.
+*/
+
+//Sets the CSS for Body Tag
+body {
+    //Set the Height and Width of the whole body
     width: 97vw;
-    overflow-x: hidden;
-    display: inline-block;
-    position: relative;
     height: 100%;
-    margin-left: 1vw;
+    overflow-x: hidden;//Prevent Horizontal Scrolling
+    display: inline-block;//Set items in the body to be inline-block
+    position: relative;//Set position to be relative
+    margin-left: 1vw;//Set the whole body to be pushed to the right by 1vw
+    //Sets all the possible fonts of the webpage. Starts from left to right by default
     font-family: 'Netflix Sans','Helvetica Neue',Helvetica,Arial,sans-serif, Arial, Helvetica, sans-serif, 'BioRhyme', serif;
 }
 
+//Sets the CSS for h5 tags
 h5 {
-    font-weight: 700;
+    font-weight: 700;//Bold the h5 tag
 }
 
+//Sets the CSS for all tables
 table {
-    position: relative;
-    border: 2px solid white;
-    border-collapse: collapse;
+    position: relative;//Set to relative
+    border: 2px solid white;//Create a 2px white border around the table
+    border-collapse: collapse;//Collapse the borders 
     tr, th, td {
-        border: 2px solid white;
-        text-align: center;
+        border: 2px solid white;//Create a 2px white border around the data
+        text-align: center;//Align contents to the center
     }
 }
 
-/*Custom Classes*/
+/*
+* Custom Classes
+* Here is where you can put all your custom-made classes and their CSS properties
+*/
+
+//CSS Class for flexing an element/div
 .flex {
-    display: inline-flex;
+    display: inline-flex;//Set display to be inline-flex
 }
 
-//Buttons
+//CSS Class to create a circular button
 .btn-circle {
+    //Sets Default Width and Height to be equally 45px 
     width: 45px;
     height: 45px;
     line-height: 45px;
-    text-align: center;
-    padding: 0;
-    border-radius: 50%;
+    text-align: center;//Align button contents to center
+    padding: 0;//Remove padding
+    border-radius: 50%;//Create circular surface
   }
   
+  //Set CSS for the icons in the button
   .btn-circle i {
-    position: relative;
-    top: -1px;
+    position: relative;//Set position to be relative
+    top: -1px;//Sets the position of the icon
   }
   
+  //Sets CSS for a small circular button
   .btn-circle-sm {
+    //Sets width and height of the small circular button to be 35px
     width: 35px;
     height: 35px;
     line-height: 35px;
-    font-size: 0.9rem;
+    font-size: 0.9rem;//Sets font-size
   }
-  
+
+  //Sets CSS for a large circular button
   .btn-circle-lg {
+    //Sets width and height of the large circular button to be 55px
     width: 55px;
     height: 55px;
     line-height: 55px;
-    font-size: 1.1rem;
+    font-size: 1.1rem;//Sets font-size
   }
-  
+
+  //Sets CSS for the extra-large circular button
   .btn-circle-xl {
+    //Sets width and height of the extra-large circular button to be 70px
     width: 70px;
     height: 70px;
     line-height: 70px;
-    font-size: 1.3rem;
+    font-size: 1.3rem;//Sets font-size
   }
 
+//Sets the CSS for the Top Navigation bar
 .navbar {
     opacity: 0.9;
     .nav-item:hover{
