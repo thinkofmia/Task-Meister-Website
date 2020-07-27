@@ -45,10 +45,10 @@ For the Recommender Engine to work, please set up the four custom tables with th
 
 ### Screenshots
 ![Image of the 4 Custom Tables](images/CustomTables.png)
-Here are the four custom tables used for the whole recommendation engine.
+Shown above are the four custom tables used for the whole recommendation engine.
 
 ![Image of the Article Stats Table](images/ArticleStatsFields.png)
-This is the following fields for the Article Stats Table.
+Shown above are the following fields for the Article Stats Table.
 - articleid (Refers to the id of the article)
 - title (Refers to the title of the article)
 - tags (Refers to the tags of the article)
@@ -57,6 +57,16 @@ This is the following fields for the Article Stats Table.
 - totallikes (Refers to the total likes of the article)
 - totaldislikes (Refers to the total dislikes of the article)
 - totaldeployed (Refers to the total number of users that deployed the article)
+
+![Image of the User Stats Table](images/UserStatsFields.png)
+Shown above are the following fields for the User Stats Table.
+- userid (Refers to the id of the user)
+- name (Refers to the name of the user)
+- email (Refers to the email of the user)
+- userpreference (Refers to the list of tags that the user prefer, against or may try)
+- pageliked (Refers to the list of pages that the user likes)
+- pagedisliked (Refers to the list of pages that the user dislikes)
+- pagedeployed (Refers to the list of pages that the user deployed)
 
 ## End Note
 To see more information about the individual parts of the repository, please read the readmes in their respective folders.
