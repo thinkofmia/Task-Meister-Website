@@ -38,7 +38,8 @@ Custom Tables: (Required for most modules)
 - https://joomlaboat.com/custom-tables 
 
 For the Recommender Engine to work, please set up the four custom tables with the following fields. It is recommended to use the exact table and field names (so that you won't need to modify the ones in the modules.).
-![Image of the 4 Custom Tables](images/Custom Tables.PNG?raw=true "Title")
+
+![Image of the 4 Custom Tables](images/Custom Tables.PNG)
 
 ### Other ways of installation
 See the website: https://docs.joomla.org/J3.x:Installing_a_template
