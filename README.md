@@ -36,12 +36,27 @@ https://github.com/FremontTeng/Task-Meister/blob/master/templates/taskmeister/cs
 ## Additional Installation/Set Up
 Custom Tables: (Required for most modules)
 - https://joomlaboat.com/custom-tables 
-
-For the Recommender Engine to work, please set up the four custom tables with the following fields. It is recommended to use the exact table and field names (so that you won't need to modify the ones in the modules).
-
-![Image of the 4 Custom Tables](images/CustomTables.png)
+- Version used 1.9.4
 
 ### Other ways of installation
 See the website: https://docs.joomla.org/J3.x:Installing_a_template
 
+For the Recommender Engine to work, please set up the four custom tables with the following fields as shown in the bottom screenshots. It is recommended to use the exact table and field names (so that you won't need to modify the ones in the modules).
+
+### Screenshots
+![Image of the 4 Custom Tables](images/CustomTables.png)
+Here are the four custom tables used for the whole recommendation engine.
+
+![Image of the Article Stats Table](images/ArticleStatsFields.png)
+This is the following fields for the Article Stats Table.
+- articleid (Refers to the id of the article)
+- title (Refers to the title of the article)
+- tags (Refers to the tags of the article)
+- userchoice (Refers to the users' opinions of the article)
+- deployed (Refers to the list of users that deployed the article)
+- totallikes (Refers to the total likes of the article)
+- totaldislikes (Refers to the total dislikes of the article)
+- totaldeployed (Refers to the total number of users that deployed the article)
+
+## End Note
 To see more information about the individual parts of the repository, please read the readmes in their respective folders.
