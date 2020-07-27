@@ -22,7 +22,7 @@ https://github.com/FremontTeng/Task-Meister/blob/master/templates/taskmeister/cs
 
 ## Additional Installation
 Extensions:
-- For custom tables: https://joomlaboat.com/custom-tables
+- For custom tables: https://joomlaboat.com/custom-tables (Required for most modules)
 
 ### Other ways of installation
 See the website: https://docs.joomla.org/J3.x:Installing_a_template
