@@ -447,7 +447,7 @@ body.default .article p, body.default .recommendedArticles .rankedArticle p, .re
   background-color: darkorange;
   color: white;
 }
-body.default .rankedArticle h2 {
+body.default .rankedArticle h2, body.default .rankedArticle h4 {
   text-shadow: 2px 2px darkorange;
 }
 body.default #featuredArticlesWrapper .card-body {
@@ -536,7 +536,7 @@ body.red .article p, body.red .recommendedArticles .rankedArticle p, .recommende
   background-color: crimson;
   color: white;
 }
-body.red .rankedArticle h2 {
+body.red .rankedArticle h2, body.red .rankedArticle h4 {
   text-shadow: 2px 2px crimson;
 }
 body.red #featuredArticlesWrapper .card-body {
@@ -625,7 +625,7 @@ body.day .article p, body.day .recommendedArticles .rankedArticle p, .recommende
   background-color: darkgray;
   color: white;
 }
-body.day .rankedArticle h2 {
+body.day .rankedArticle h2, body.day .rankedArticle h4 {
   text-shadow: 2px 2px blue;
 }
 body.day #featuredArticlesWrapper .card-body {
@@ -724,7 +724,7 @@ body.red .article p, body.red .recommendedArticles .rankedArticle p, .recommende
   background-color: crimson;
   color: white;
 }
-body.red .rankedArticle h2 {
+body.red .rankedArticle h2, body.red .rankedArticle h4 {
   text-shadow: 2px 2px crimson;
 }
 body.red #featuredArticlesWrapper .card-body {
@@ -813,7 +813,7 @@ body.tree .article p, body.tree .recommendedArticles .rankedArticle p, .recommen
   background-color: brown;
   color: white;
 }
-body.tree .rankedArticle h2 {
+body.tree .rankedArticle h2, body.tree .rankedArticle h4 {
   text-shadow: 2px 2px green;
 }
 body.tree #featuredArticlesWrapper .card-body {

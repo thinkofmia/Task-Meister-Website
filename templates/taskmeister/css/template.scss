@@ -510,7 +510,7 @@ body.default {
         }
     }
     .rankedArticle{//For ranked article shadowing/3D effect
-        h2{
+        h2,h4{
             text-shadow: 2px 2px $altFontColor;
         }
     }
@@ -613,7 +613,7 @@ body.red {
         }
     }
     .rankedArticle{//For ranked article shadowing/3D effect
-        h2{
+        h2, h4{
             text-shadow: 2px 2px $redFontColor;
         }
     }
@@ -716,7 +716,7 @@ body.day {
         }
     }
     .rankedArticle{//For ranked article shadowing/3D effect
-        h2{
+        h2, h4{
             text-shadow: 2px 2px blue;
         }
     }
@@ -830,7 +830,7 @@ body.red {
         }
     }
     .rankedArticle{//For ranked article shadowing/3D effect
-        h2{
+        h2, h4{
             text-shadow: 2px 2px $redFontColor;
         }
     }
@@ -932,7 +932,7 @@ body.tree {
         }
     }
     .rankedArticle{//For ranked article shadowing/3D effect
-        h2{
+        h2,h4{
             text-shadow: 2px 2px $treeAltFont;
         }
     }
