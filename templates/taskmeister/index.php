@@ -56,7 +56,6 @@ $doc->addScript($this->baseurl . '/templates/' . $this->template . '/js/keen-sli
 <!-- Puts the correct header information in (eg. page title, meta information, JavaScript)-->
 <jdoc:include type="head" />
 <!--Importing Chai Seng's CSS files-->
-<link rel="stylesheet" href="<?php echo $this->baseurl ?>/templates/<?php echo $this->template; ?>/css/old.css" type="text/css" />
 <link rel="stylesheet" href="<?php echo $this->baseurl ?>/templates/<?php echo $this->template; ?>/css/keen-slider.min.css" type="text/css" />
 </head>
 

@@ -1,6 +1,7 @@
 /**
 * SCSS made by Fremont Teng for the Taskmeister Template
 * Last update: 28/07/2020
+* (Fused with Chai Seng CSS)
 */
 
 /*
@@ -460,14 +461,121 @@ table {
   }
 
 /**
-    CSS for Chai Seng's Reviews
-    - Reviews/Testimonial module for individual articles
+    CSS for Chai Seng's Articles
 */
-#review-form{//Sets the CSS of the review form
+#review-form{//Sets the CSS of the review form (Review Mod)
     #review {//Sets the CSS of the div of the review
         width: 100%;//Stretch the review div to fit the contents containers
     }
 }
+
+legend { /* To be filled by Chai Seng */
+	display: block;
+	width: 100%;
+	padding: 0;
+	margin-bottom: 18px;
+	font-size: 19.5px;
+	line-height: 36px;
+	color: #979797; /* added */
+	border: 0;
+	border-bottom: 1px solid #e5e5e5;
+}
+
+.well { /* To be filled by Chai Seng */
+	min-height: 20px;
+	padding: 19px;
+	margin-bottom: 20px;
+	background-color: #1d1f24; /* added */
+	border: 1px solid #e3e3e3;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+	-webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,0.05);
+	-moz-box-shadow: inset 0 1px 1px rgba(0,0,0,0.05);
+	box-shadow: inset 0 1px 1px rgba(0,0,0,0.05);
+}
+
+.breadcrumb { /* To be filled by Chai Seng */
+	padding: 8px 15px;
+	margin: 0 0 18px;
+	list-style: none;
+	background-color: #1d1f24; /* added */
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+  	border: 1px solid #e3e3e3; /* added */
+}
+
+.brand { /* To be filled by Chai Seng */
+	color: #09d; /* added */
+	-webkit-transition: color .5s linear;
+	-moz-transition: color .5s linear;
+	-o-transition: color .5s linear;
+	transition: color .5s linear;
+}
+
+.brand:hover { /* To be filled by Chai Seng */
+	color: #0ae; /* added */
+	text-decoration: none;
+}
+
+.login-night { /* To be filled by Chai Seng */
+  background-color: #1d1f24;
+}
+
+/* To be filled by Chai Seng */
+/* the following is css for action-button's */
+.action-button-unset:enabled {/* To be filled by Chai Seng */
+    /* background-color: Transparent; */
+    background-color: #8a8a8a;
+    background-repeat: no-repeat;
+    /* border: solid white 1px; */
+    /* border-radius: 20px; */
+    padding: 10px;
+    cursor: pointer;
+    overflow: hidden;
+    outline: none;
+    /* color: white; */
+    color: black;
+    transition-property: all;
+    transition-duration: 0.25s;
+    font-weight: bold;
+}
+
+.action-button-unset:hover:enabled {/* To be filled by Chai Seng */
+    box-shadow: 6px 4px 10px 1px white;
+    transform: translate(-5px, -5px) scale(1.2);
+}
+
+.action-button-unset:active:enabled {/* To be filled by Chai Seng */
+    transition-duration: 0.1s;
+    box-shadow: -1px -1px 5px 1px white;
+    transform: translate(2px, 2px) scale(0.9);
+}
+
+.action-button-set {/* To be filled by Chai Seng */
+    background-repeat: no-repeat;
+    background-color: #515151;
+    border-style: inset;
+    padding: 10px;
+    cursor: pointer;
+    overflow: hidden;
+    outline: none;
+    color: black;
+    font-weight: bold;
+    transform: scale(0.9);
+    box-shadow: 0px 0px 5px 3px #0af;
+    border-color: black;
+}
+
+.action-button-set:hover {/* To be filled by Chai Seng */
+  	transition: none;
+}
+
+.action-button-set:active {/* To be filled by Chai Seng */
+	transition: none;
+}
+
 
 /**
     CSS for Articles
