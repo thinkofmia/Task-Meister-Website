@@ -287,10 +287,10 @@ table {
     }
 }
 
-.arrow:hover {//Changes color when hover over the recommended articles arrows
+.arrowLeft:hover, .arrowRight:hover {//Changes color when hover over the recommended articles arrows
     cursor: pointer;//Set cursor to pointer
     border: solid $altFontColor;//Changes to the alt font color
-    border-width: 0 5px 5px 0;//Sets the size of the arrows
+    border-width: 0 7px 7px 0;//Sets the size of the arrows
 }
 
 .arrow {//Set the CSS for Recommend Articles Arrows (Left & Right)
@@ -345,7 +345,7 @@ table {
     position: relative;//Set its position to relative
 }
 
-.inputSavePreference {//Set the save button of the preference form
+.inputSavePreference {//Set CSS of the save button of the preference form
     font-size: 1.5vw;//Sets the font-size to fit viewport
     text-align: center;//Align the button's contents to the centre
     border-radius: 8px;//Create the circular radius
@@ -355,120 +355,126 @@ table {
     margin-bottom: 0.5vw;//Create some space at the bottom
 }
 
-.preferenceList, .teachersList {//Wrapper to contain all the preferences/users
-    width: 90vw;
-    height: 100%;
-    display: inline-block;
-    text-align: center;
-    position: relative;
+.preferenceList, .teachersList {//Sets the CSS for the list of the preferences/users
+    width: 90vw;//Stretches the width to fit the view screen
+    height: 100%;//Expand height to the max
+    display: inline-block;//Makes the items in the list to inline by block
+    text-align: center;//Align the contents to the center
+    position: relative;//Sets position to relative
 }
  
-.userPreferred, .teacherSelected {//Color the state if the tag is preferred or the teacher is selected
-    @extend .preferenceBox; 
-    background-color: green;
-    border-radius: 8px;
+.userPreferred, .teacherSelected {//Sets the CSS of a preferred tag/selected user
+    @extend .preferenceBox; //Inherits the CSS from the preferenceBox Class
+    background-color: green;//Highlights the background green
+    border-radius: 8px;//Sets the circular shape of the highlight
 }
  
-.userNotPreferred {//Color the state if the tag is not preferred
-    @extend .preferenceBox;
-    background-color: red;
-    border-radius: 8px;       
+.userNotPreferred {//Sets the CSS of an against tag
+    @extend .preferenceBox;//Inherits the CSS from the preferenceBox Class
+    background-color: red;//Highlights the background red
+    border-radius: 8px;//Sets the circular shape of the highlight      
 }
 
-.userMayTry {//Color the state if the tag is considered to be tried
-    @extend .preferenceBox;
-    background-color: goldenrod;
-    border-radius: 8px;       
+.userMayTry {//Sets the CSS of a may try tag
+    @extend .preferenceBox;//Inherits the CSS from the preferenceBox Class
+    background-color: goldenrod;//Highlights the background gold
+    border-radius: 8px; //Sets the circular shape of the highlight
 }
 
-.preferenceBox, .teacherBox {//CSS for the individual boxes.
-    height: 20vw;
-    width: 20vw;
-    position: relative;
-    display: inline-flex;
-    padding: 1vw;
-    cursor: pointer;
-    .preferenceStats{//CSS for the preference stats
-        background-color: blue;
-        color: white;
+.preferenceBox, .teacherBox {//Sets the CSS for the individual boxes
+    height: 20vw;//Sets the height of the box
+    width: 20vw;//Sets the width of the box
+    position: relative;//Sets the position of the boxes to be relative
+    display: inline-flex;//Lines the contents of the box in the same row
+    padding: 1vw;//Pad the box by viewport
+    cursor: pointer;//Set cursor to be pointer when hover over
+
+    .preferenceStats{//Sets the CSS for the statistics of the particular tag
+        //The statistics refers to the number of thumbs up and deployed labelled in the box
+        background-color: blue;//Sets the blue background
+        color: white;//Sets the font color to be white
     }
-    p {
-        position: absolute;
-        z-index: 10;
-        opacity: 0.9;
-        text-align: center;
-        width: 18vw;
-        word-wrap: anywhere;
-        font-size: 1.5vw;
+
+    p {//Sets the CSS for the label of the particular tag/user
+        position: absolute;//Sets position to be absolute
+        z-index: 10;//Overlay the labels to be above the image
+        opacity: 0.9;//Makes it slightly translucent
+        text-align: center;//Align the text contents to the center
+        width: 18vw;//Stretch the width of the labels to fit the width of the image
+        word-wrap: anywhere;//Allows breaking of words into lines
+        font-size: 1.5vw;//Sets the label's font-size to fit viewport
     }
-    .preferenceLabel, .teacherLabel {//CSS for the captions below the boxes
-        bottom: -0.5vw;
-        background-color: $altFontColor;
+    .preferenceLabel, .teacherLabel {//Sets the CSS for the label of the particular tag/user
+        bottom: -0.5vw;//Sets the label to be at the bottom
+        background-color: $altFontColor;//Sets the background of the label to fit the theme
     }
 }
 
 /**
-* CSS for login component/Module
+    Login Component/Module
+    - Affects the default login component/module
 */
 
-.login-button {//CSS for the login submit button
-    cursor: pointer;
+.login-button {//Sets the CSS for the login button
+    cursor: pointer;//Set the cursor as Pointer when hovered over
 }
 
-.userdata, .input-prepend, #form-login-submit {//Pad the login form
-    padding: 2%;
+.userdata, .input-prepend, #form-login-submit {//Sets the CSS for the inputs
+    padding: 2%;//Pad the inputs
 }
 
-#modlgn-passwd, #modlgn-username, .login-button {//CSS for the login inputs, e.g. username and password
-    width: 80%;
-    padding-top: 2%;
-    font-size: 1.5vw;
-    text-align: center;
-    border-radius: 8px;
+#modlgn-passwd, #modlgn-username, .login-button {//Sets the CSS for the login inputs, e.g. username and password
+    width: 80%;//Expands the input to resemble the pptx prototype
+    padding-top: 2%;//Pad the top of the inputs
+    font-size: 1.5vw;//Sets the font-size to fit the viewports
+    text-align: center;//Align the inside's contents to the center
+    border-radius: 8px;//Create the circular border for the inputs
 }
 
-.login {
-    #username, #password {//Set input view
-        width: 80%;
-        padding-top: 2%;
-        font-size: 1.5vw;
-        text-align: center;
-        border-radius: 8px;
+.login {//Sets the CSS for the login class
+    #username, #password {//Gets the Username and Password input fields
+        width: 80%;//Stretches the width of the input field to fit the pptx prototype
+        padding-top: 2%;//Pads the top of the inputs
+        font-size: 1.5vw;//Sets the font-size to fit the viewports
+        text-align: center;//Align the inside's contents to the center
+        border-radius: 8px;//Create the circular border for the inputs
     }
-    #username-lbl, #password-lbl {//Hide labels
-        display: none;
+    #username-lbl, #password-lbl {//Sets the CSS for the inputs' headers
+        display: none;//Hide labels
     }
-    .control-group {
-        margin-bottom: 0.5vw;
+    .control-group {//Sets the CSS for individual input groups
+        margin-bottom: 0.5vw;//Create some space at the bottom so the inputs are not clustered
     }
 }
 
 /**
-    CSS for popup module
+    Popup/Modal Module
+    - The Module is used to create one-time popups on specific pages
+    - Uses cookies to store information if it has been read or not
 */
-.modal {
-    display:block;
-    #closePopup {
-        font-size: 5vw;
+.modal {//Sets the CSS of the popup module
+    display: block;//Sets the contents display to be block
+    #closePopup {//Sets the CSS for the 'x'/close button of the pop up
+        font-size: 5vw;//Enlarge the size based on request to fit font-size
     }
   }
 
 /**
     CSS for Chai Seng's Reviews
+    - Reviews/Testimonial module for individual articles
 */
-#review-form{
-    #review {
-    width: 100%;
+#review-form{//Sets the CSS of the review form
+    #review {//Sets the CSS of the div of the review
+        width: 100%;//Stretch the review div to fit the contents containers
     }
 }
 
 /**
-    CSS for articles
+    CSS for Articles
 */
-.item-page {
-    .img-container{
-        a{
-            //Create overlay effect for the thumbnail in article
+.item-page {//Get the page's items
+    .img-container{//Get the image container
+        a{//Create overlay effect for the thumbnail in article
             opacity: 0.4;
             position: absolute;
         }
@@ -477,538 +483,433 @@ table {
 
 /**
     CSS THEMES
+    - Comes with 4 themes:
+        - Default (Black/Orange)
+        - Ice (Gray/Skyblue)
+        - Red (Black/Red)
+        - Tree (Wheat/Green/Red)
+    - Allows users to customize the display and color of their website
+    - Uses cookies to save choices of themes
 */
-//Default theme
-body.default {
-    background-color: $pageBackground;
-    color: $mainFontColor;
-    h5 {//Follow Netflix style
-        color: $mainFontColor;
-    }
 
-    h3 {
-        color: $altFontColor;
+/**
+*   Default Theme
+*   - Main colors (Black/Orange)
+*   - Original Taskmeister Color Scheme, slightly based on Netflix to create dark environment
+*/
+body.default {//Sets the CSS of the body with the default theme
+    background-color: $pageBackground;//Sets the background with the default theme
+    color: $mainFontColor;//Sets the font color with the default theme
+    h5, p {//Follow Netflix style
+        color: $mainFontColor;//Sets the font color with the main color
     }
-    p {
-        color: $mainFontColor;
-    }
-    a{
-        color: $altFontColor;
+    h3, a {
+        color: $altFontColor;//Sets the font color with the alt color
     }
     .bgMain{//To fit any class with the page bg
-        background-color: $pageBackground;
-        color: $mainFontColor;
+        background-color: $pageBackground;//Sets background with the theme bg
+        color: $mainFontColor;//Sets font color with the main color
     }
     
     .bgAlt{//To fit any class with the alt bg
-        background-color: $altFontColor;
-        color: $pageBackground;
-        #activeTab { //For Nav Bar: Active selection
-            background-color: $altFontColor;
-            color: $pageBackground;
+        background-color: $altFontColor;//Sets the background with the alt color
+        color: $pageBackground;//Sets the font color with the theme bg
+
+        #activeTab { //Sets the CSS for an active Nav-item 
+            background-color: $altFontColor;//Highlights the background with the alt color
+            color: $pageBackground;//Sets the font color with the theme bg
         }
     }
-    
-    .textAlt{
-        color: $altFontColor;
+    .textAlt{//Sets the CSS of the alt text
+        color: $altFontColor;//Sets the font color with the alt color
     }
-    .arrow {//Set color for arrows for recommended articles mod
-        border: solid $mainFontColor;
-        border-width: 0 0.75vw 0.75vw 0;
+    .arrow {//Set the CSS for the arrows in the recommended articles mod
+        border: solid $mainFontColor;//Sets the color of the arrow
+        border-width: 0 0.75vw 0.75vw 0;//Sets the size of the arrow
     }
-    .navbar {//For navigation bar
-        background-color: $navBg;
-        .nav-link{
-            color: $mainFontColor;
+    .navbar {//Sets the CSS for the navigation bar
+        background-color: $navBg;//Sets the bg color to the theme
+        .nav-link{//Sets the CSS of the nav links
+            color: $mainFontColor;//Sets the font color to the theme
         }
-        .dropdown-menu {
-            background-color: $navBg;
-            .dropdown-item {
-                color: $mainFontColor;
+        .dropdown-menu {//Sets the CSS of the dropdown menu
+            background-color: $navBg;//Sets the background of the dropdown
+            .dropdown-item {//Sets the CSS of the dropdown item
+                color: $mainFontColor;//Sets the font color to the theme
             }
-            .dropdown-item:hover{
-                color: $pageBackground;
+            .dropdown-item:hover{//Sets the CSS of the dropdown item when hovered over
+                color: $pageBackground;//Sets the font color to the theme
             }
-            .dropdown-item.disabled {
-                color: $disabled;
-            }
-        }
-    }
-    .article{//For article box
-        .articleSimilarity{
-            background-color: darkgreen;
-            color: $mainFontColor;
-        }
-        p {
-            background-color: $altFontColor;
-            color: $mainFontColor
-        }
-    }
-    .rankedArticle{//For ranked article shadowing/3D effect
-        h2,h4{
-            text-shadow: 2px 2px $altFontColor;
-        }
-    }
-    #featuredArticlesWrapper {//For featured article mod
-        .card-body{
-            background-color: #343a40;
-            .card-text {
-                color: $mainFontColor;
+            .dropdown-item.disabled {//Sets the CSS of an disabled dropdown item
+                color: $disabled;//Sets the font color to be disabled
             }
         }
     }
-    .preferenceBox, .teacherBox {//For preferences
-        .preferenceLabel, .teacherLabel{
-            background-color: $altFontColor;
-            color: $mainFontColor;
+    .article{//Sets the CSS of the article box (Recommend Article Mod)
+        .articleSimilarity{//Sets the CSS of the article similarity label
+            background-color: darkgreen;//Sets background as green
+            color: $mainFontColor;//Sets font color as to the theme
+        }
+        p {//Sets the CSS of the article labels
+            background-color: $altFontColor;//Sets background to the theme
+            color: $mainFontColor;//Sets the font color as to the theme
         }
     }
-    .inputSavePreference {//Input buttons
-        background-color: $altFontColor;
-        color: $mainFontColor;
-    }
-    #tm_contents{//Contents for articles in taskmeister
-        .col-sm-4 {//For right column of article stats
-            background-color: #343a40;
+    .rankedArticle{//Sets the CSS of the Ranked Article View (Recommend Articles Mod)
+        h2,h4{//The numbered labels of the ranked articles
+            //h2 refers to the single digit numbers
+            //h4 refers to the double digit numbers
+            text-shadow: 2px 2px $altFontColor;//Creates shadow/3D effect
         }
     }
-    .login-button{//Set login button
-        background-color: $altFontColor;
-        color: $mainFontColor;
+    #featuredArticlesWrapper {//Sets the CSS for the featured articles wrapper (Featured Articles Mod)
+        .card-body{//Sets the CSS for the left-side card
+            background-color: #343a40;//Sets the bg to be dark gray
+            .card-text {//Sets the CSS for the text of the card
+                color: $mainFontColor;//Sets the font color to be as to the theme
+            }
+        }
     }
-    .well {//Set wells color
-        background-color: #1d1f24;
-        label {
-            color: gray;
+    .preferenceBox, .teacherBox {//Sets the CSS for the preference/user box (Choose Class/Choose Preferences Mod)
+        .preferenceLabel, .teacherLabel{//Sets the CSS for the box labels
+            background-color: $altFontColor;//Sets the bg color to the theme
+            color: $mainFontColor;//Sets the font color to the theme
+        }
+    }
+    .inputSavePreference {//Sets the CSS for the submit/save button (Choose Class/Choose Preference Mod)
+        background-color: $altFontColor;//Sets the bg color to the theme
+        color: $mainFontColor;//Sets the font color to the theme
+    }
+    #tm_contents{//Sets the CSS for the main contents div
+        .col-sm-4 {//Sets the CSS of the right-hand side container (Position: Right)
+            background-color: #343a40;//Sets bg color to the theme
+        }
+    }
+    .login-button{//Set the CSS for the login button
+        background-color: $altFontColor;//Sets the bg color to the theme
+        color: $mainFontColor;//Sets the font color to the theme
+    }
+    .well {//Set the CSS for the wells
+        background-color: #1d1f24;//Sets the bg color to the theme
+        label {//Sets the CSS for the labels in the wells
+            color: gray;//Sets the font color to the theme
         }
     }
 }
 
-//Red theme
-body.red {
-    background-color: $pageBackground;
-    color: $mainFontColor;
-    h5 {//Follow Netflix style
-        color: $mainFontColor;
+/**
+*   Red Theme
+*   - Main colors (Black/Red)
+*   - Color Scheme to resemble Netflix, similar to the default TM theme
+*/
+body.red {//Sets the CSS of the Red Theme to the entire body
+    background-color: $pageBackground;//Sets the bg to the theme
+    color: $mainFontColor;//Sets the default font-color to the theme
+    //Default contents
+    h5, p {//Follow Netflix style
+        color: $mainFontColor;//Sets the font-color to the theme
     }
-
-    h3 {
-        color: $redFontColor;
+    h3, a {
+        color: $redFontColor;//Sets the font-color to the theme
     }
-    p {
-        color: $mainFontColor;
+    //Classes
+    .bgMain{//Sets the CSS class of a bgMain (Can be used anywhere)
+        background-color: $pageBackground;//Sets the bg to the theme
+        color: $mainFontColor;//Sets the font-color to the theme
     }
-    a{
-        color: $redFontColor;
-    }
-    .bgMain{//To fit any class with the page bg
-        background-color: $pageBackground;
-        color: $mainFontColor;
-    }
-    
-    .bgAlt{//To fit any class with the alt bg
-        background-color: $redFontColor;
-        color: $mainFontColor;
-        #activeTab { //For Nav Bar: Active selection
-            background-color: $redFontColor;
-            color: $mainFontColor;
+    .bgAlt{//Sets the CSS class of a bgAlt (Can be used anywhere)
+        background-color: $redFontColor;//Sets the bg to the theme
+        color: $mainFontColor;//Sets the font-color to the theme
+        #activeTab {//Sets the CSS of an active nav-item (Navigation bar)
+            background-color: $redFontColor;//Sets the bg to the theme
+            color: $mainFontColor;//Sets the font-color to the theme
         }
     }
-    
-    .textAlt{
-        color: $redFontColor;
+    .textAlt{//Sets the CSS class of a textAlt (Can be used anywhere)
+        color: $redFontColor;//Sets the font-color to the theme
     }
-    .arrow {//Set color for arrows for recommended articles mod
-        border: solid $mainFontColor;
-        border-width: 0 0.75vw 0.75vw 0;
+    .arrow {//Sets the CSS of the arrows (Recommend Articles Mod)
+        border: solid $mainFontColor;//Sets the color of the arrow to the theme
+        border-width: 0 0.75vw 0.75vw 0;//Sets the size/shape of the arrow to viewport
     }
-    .navbar {//For navigation bar
-        background-color: $navBg;
-        .nav-link{
-            color: $mainFontColor;
+    .navbar {//Sets the CSS of the navigation bar (Navigation Bar)
+        background-color: $navBg;//Sets the bg color of the Nav bar to the theme
+        .nav-link{//Sets the CSS of the nav items
+            color: $mainFontColor;//Sets the font color of the nav items to the theme
         }
-        .dropdown-menu {
-            background-color: $navBg;
-            .dropdown-item {
-                color: $mainFontColor;
+        .dropdown-menu {//Sets the CSS of the dropdown menu
+            background-color: $navBg;//Sets the bg color of the dropdown to the theme
+            .dropdown-item {//Sets the CSS of the dropdown item
+                color: $mainFontColor;//Sets the font color of the dropdown item to the theme
             }
-            .dropdown-item:hover{
-                color: $pageBackground;
+            .dropdown-item:hover{//Sets the CSS of the dropdown item when hovered over
+                color: $pageBackground;//Changes the font color when hovered over (to the theme)
             }
         }
     }
-    .article{//For article box
-        .articleSimilarity{
-            background-color: darkgreen;
-            color: $mainFontColor;
+    .article{//Sets the CSS of the article box (Recommend Articles Mod)
+        .articleSimilarity{//Sets the CSS of the similarity label 
+            background-color: darkgreen;//Sets the bg to green
+            color: $mainFontColor;//Sets the font color to the theme
         }
-        p {
-            background-color: $redFontColor;
-            color: $mainFontColor
-        }
-    }
-    .rankedArticle{//For ranked article shadowing/3D effect
-        h2, h4{
-            text-shadow: 2px 2px $redFontColor;
+        p {//Sets the CSS of the labels in the box
+            background-color: $redFontColor;//Sets the bg to the theme
+            color: $mainFontColor;//Sets the font color to the theme
         }
     }
-    #featuredArticlesWrapper {//For featured article mod
-        .card-body{
-            background-color: #343a40;
-            .card-text {
-                color: $mainFontColor;
+    .rankedArticle{//Sets the CSS of the ranked article box (Recommend Articles Mod)
+        h2, h4{//Sets the CSS of the numbered labels on the left
+            text-shadow: 2px 2px $redFontColor;//Creates the shadow/3D effect
+        }
+    }
+    #featuredArticlesWrapper {//Sets the CSS of the featured article wrapper (Featured Articles Mod)
+        .card-body{//Sets the CSS of the card body
+            background-color: #343a40;//Sets the bg of the card to the theme
+            .card-text {//Sets the CSS of the card contents
+                color: $mainFontColor;//Sets the font color to the theme
             }
         }
     }
-    .preferenceBox, .teacherBox {//For preferences
-        .preferenceLabel, .teacherLabel{
-            background-color: $redFontColor;
-            color: $mainFontColor;
+    .preferenceBox, .teacherBox {//Sets the CSS for the preference/user box (Choose Class/Choose Preferences Mod)
+        .preferenceLabel, .teacherLabel{//Sets the CSS for the box labels
+            background-color: $redFontColor;//Sets the bg color to the theme
+            color: $mainFontColor;//Sets the font color to the theme
         }
     }
-    .inputSavePreference {//Input buttons
-        background-color: $redFontColor;
-        color: $mainFontColor;
+    .inputSavePreference {//Sets the CSS for the submit/save button (Choose Class/Choose Preference Mod)
+        background-color: $redFontColor;//Sets the bg color to the theme
+        color: $mainFontColor;//Sets the font color to the theme
     }
-    #tm_contents{//Contents for articles in taskmeister
-        .col-sm-4 {//For right column of article stats
-            background-color: #343a40;
+    #tm_contents{//Sets the CSS for the main contents div
+        .col-sm-4 {//Sets the CSS of the right-hand side container (Position: Right)
+            background-color: #343a40;//Sets bg color to the theme
         }
     }
-    .login-button{//Set login button
-        background-color: $redFontColor;
-        color: $mainFontColor;
+    .login-button{//Set the CSS for the login button
+        background-color: $redFontColor;//Sets the bg color to the theme
+        color: $mainFontColor;//Sets the font color to the theme
     }
-    .well {//Set wells color
-        background-color: #1d1f24;
-        label {
-            color: gray;
+    .well {//Set the CSS for the wells
+        background-color: #1d1f24;//Sets the bg color to the theme
+        label {//Sets the CSS for the labels in the wells
+            color: gray;//Sets the font color to the theme
         }
     }
 }
 
-//Day theme
-body.day {
-    background-color: $skyBg;
-    color: $skyMainFont;
-    h5 {//Set Blue
-        color: $skyMainFont;
+/**
+*   Ice Theme
+*   - Main colors (Gray/Lightblue)
+*   - A custom light theme
+*/
+body.day {//Sets the CSS of the Ice Theme to the entire body
+    background-color: $skyBg;//Sets the bg to the theme
+    color: $skyMainFont;//Sets the default font-color to the theme
+    //Default contents
+    h5, h3, p {
+        color: $skyMainFont;//Sets the font-color to the theme
     }
-
-    h3 {
-        color: $skyMainFont;
+    a{//Sets the CSS of the links
+        color: blue;//Sets the font-color to the theme
     }
-    p {
-        color: $skyMainFont;
-    }
-    a{
-        color: blue;
-    }
-    .bgMain{//To fit any class with the page bg
-        background-color: $skyBg;
-        color: $skyMainFont;
+    .bgMain{//Sets the CSS class of a bgMain (Can be used anywhere)
+        background-color: $skyBg;//Sets the bg to the theme
+        color: $skyMainFont;//Sets the font-color to the theme
     }
     
-    .bgAlt{//To fit any class with the alt bg
-        background-color: $skyAltFont;
-        color: $mainFontColor;
-        #activeTab { //For Nav Bar: Active selection
-            background-color: $skyAltFont;
-            color: $pageBackground;
+    .bgAlt{//Sets the CSS class of a bgAlt (Can be used anywhere)
+        background-color: $skyAltFont;//Sets the bg to the theme
+        color: $mainFontColor;//Sets the font-color to the theme
+        #activeTab { //Sets the CSS of an active nav-item (Navigation bar)
+            background-color: $skyAltFont;//Sets the bg to the theme
+            color: $pageBackground;//Sets the font-color to the theme
         }
     }
     
-    .textAlt{
-        color: $skyAltFont;
+    .textAlt{//Sets the CSS class of a textAlt (Can be used anywhere)
+        color: $skyAltFont;//Sets the font-color to the theme
     }
-    .arrow {//Set color for arrows for recommended articles mod
-        border: solid $skyMainFont;
-        border-width: 0 0.75vw 0.75vw 0;
+    .arrow {//Sets the CSS of the arrows (Recommend Articles Mod)
+        border: solid $skyMainFont;//Sets the color of the arrow to the theme
+        border-width: 0 0.75vw 0.75vw 0;//Sets the size/shape of the arrow to viewport
     }
-    .navbar{
-        background-color: $skyNavBg;
-        .nav-link{
-            color: $pageBackground;
+    .navbar{//Sets the CSS of the navigation bar (Navigation Bar)
+        background-color: $skyNavBg;//Sets the bg color of the Nav bar to the theme
+        .nav-link{//Sets the CSS of the nav items
+            color: $pageBackground;//Sets the font color of the nav items to the theme
         }
-        .dropdown-menu {
-            background-color: $skyNavBg;
-            .dropdown-item:hover{
-                background-color: $skyAltFont;
+        .dropdown-menu {//Sets the CSS of the dropdown menu
+            background-color: $skyNavBg;//Sets the bg color of the dropdown to the theme
+            .dropdown-item:hover{//Sets the CSS of the dropdown item when hovered over
+                background-color: $skyAltFont;//Changes the font color when hovered over (to the theme)
             }
-            .dropdown-item.disabled {
-                color: $disabled;
-            }
-        }
-    }
-    .article{//For css in article box
-        .articleSimilarity{
-            background-color: darkgreen;
-            color: $mainFontColor;
-        }
-        p {
-            background-color: $skyNavBg;
-            color: $mainFontColor;
-        }
-    }
-    .rankedArticle{//For ranked article shadowing/3D effect
-        h2, h4{
-            text-shadow: 2px 2px blue;
-        }
-    }
-    #featuredArticlesWrapper {//For featured article mod
-        .card-body{
-            background-color: $skyMainFont;
-            .card-text {
-                color: $mainFontColor;
+            .dropdown-item.disabled {//Sets the CSS of a disabled dropdown item
+                color: $disabled;//Sets the font-color to the disabled var
             }
         }
     }
-    .preferenceBox, .teacherBox {//Boxes for preferences
-        .preferenceLabel, .teacherLabel{
-            background-color: $skyNavBg;
-            color: $mainFontColor;
+    .article{//Sets the CSS of the article box (Recommend Articles Mod)
+        .articleSimilarity{//Sets the CSS of the similarity label 
+            background-color: darkgreen;//Sets the bg to green
+            color: $mainFontColor;//Sets the font color to the theme
+        }
+        p {//Sets the CSS of the labels in the box
+            background-color: $skyNavBg;//Sets the bg to the theme
+            color: $mainFontColor;//Sets the font color to the theme
         }
     }
-    .inputSavePreference {//Input buttons
-        background-color: $skyNavBg;
-        color: $mainFontColor;
-    }
-    a{
-        color: blue;
-    }
-    #tm_contents{//Contents for articles in taskmeister
-        .col-sm-4 {//For right column of article stats
-            background-color: lightgray;
+    .rankedArticle{//Sets the CSS of the ranked article box (Recommend Articles Mod)
+        h2, h4{//Sets the CSS of the numbered labels on the left
+            text-shadow: 2px 2px blue;//Creates the shadow/3D effect
         }
     }
-    .login-button{//Set login button
-        background-color: $skyAltFont;
-        color: $mainFontColor;
-    }
-    .well {//Set well color
-        background-color: $skyMainFont;
-        label {
-            color: white;
+    #featuredArticlesWrapper {//Sets the CSS of the featured article wrapper (Featured Articles Mod)
+        .card-body{//Sets the CSS of the card body
+            background-color: $skyMainFont;//Sets the bg of the card to the theme
+            .card-text {//Sets the CSS of the card contents
+                color: $mainFontColor;//Sets the font color to the theme
+            }
         }
     }
-    .accordionfaqheader.accordion3, .accordionfaqheader.accordion4{//For the accordionfaq
+    .preferenceBox, .teacherBox {//Sets the CSS for the preference/user box (Choose Class/Choose Preferences Mod)
+        .preferenceLabel, .teacherLabel{//Sets the CSS for the box labels
+            background-color: $skyNavBg;//Sets the bg color to the theme
+            color: $mainFontColor;//Sets the font color to the theme
+        }
+    }
+    .inputSavePreference {//Sets the CSS for the submit/save button (Choose Class/Choose Preference Mod)
+        background-color: $skyNavBg;//Sets the bg color to the theme
+        color: $mainFontColor;//Sets the font color to the theme
+    }
+    #tm_contents{//Sets the CSS for the main contents div
+        .col-sm-4 {//Sets the CSS of the right-hand side container (Position: Right)
+            background-color: lightgray;//Sets bg color to the theme
+        }
+    }
+    .login-button{//Set the CSS for the login button
+        background-color: $skyAltFont;//Sets the bg color to the theme
+        color: $mainFontColor;//Sets the font color to the theme
+    }
+    .well {//Set the CSS for the wells
+        background-color: $skyMainFont;//Sets the bg color to the theme
+        label {//Sets the CSS for the labels in the wells
+            color: white;//Sets the font color to the theme
+        }
+    }
+    .accordionfaqheader.accordion3, .accordionfaqheader.accordion4{//Attempt to change the CSS of the accordionfaq (Not working)
             background: $skyMainFont;
             background-color: $skyMainFont;
     }
     
 }
 
-//Red theme
-body.red {
-    background-color: $pageBackground;
-    color: $mainFontColor;
-    h5 {//Follow Netflix style
-        color: $mainFontColor;
-    }
-
-    h3 {
-        color: $redFontColor;
-    }
-    p {
-        color: $mainFontColor;
-    }
-    a{
-        color: $redFontColor;
-    }
-    .bgMain{//To fit any class with the page bg
-        background-color: $pageBackground;
-        color: $mainFontColor;
-    }
-    
-    .bgAlt{//To fit any class with the alt bg
-        background-color: $redFontColor;
-        color: $mainFontColor;
-        #activeTab { //For Nav Bar: Active selection
-            background-color: $redFontColor;
-            color: $mainFontColor;
-        }
-    }
-    
-    .textAlt{
-        color: $redFontColor;
-    }
-    .arrow {//Set color for arrows for recommended articles mod
-        border: solid $mainFontColor;
-        border-width: 0 0.75vw 0.75vw 0;
-    }
-    .navbar {//For navigation bar
-        background-color: $navBg;
-        .nav-link{
-            color: $mainFontColor;
-        }
-        .dropdown-menu {
-            background-color: $navBg;
-            .dropdown-item {
-                color: $mainFontColor;
-            }
-            .dropdown-item.disabled {
-                color: $disabled;
-            }
-            .dropdown-item:hover{
-                color: $pageBackground;
-            }
-        }
-    }
-    .article{//For article box
-        .articleSimilarity{
-            background-color: darkgreen;
-            color: $mainFontColor;
-        }
-        p {
-            background-color: $redFontColor;
-            color: $mainFontColor
-        }
-    }
-    .rankedArticle{//For ranked article shadowing/3D effect
-        h2, h4{
-            text-shadow: 2px 2px $redFontColor;
-        }
-    }
-    #featuredArticlesWrapper {//For featured article mod
-        .card-body{
-            background-color: #343a40;
-            .card-text {
-                color: $mainFontColor;
-            }
-        }
-    }
-    .preferenceBox, .teacherBox {//For preferences
-        .preferenceLabel, .teacherLabel{
-            background-color: $redFontColor;
-            color: $mainFontColor;
-        }
-    }
-    .inputSavePreference {//Input buttons
-        background-color: $redFontColor;
-        color: $mainFontColor;
-    }
-    #tm_contents{//Contents for articles in taskmeister
-        .col-sm-4 {//For right column of article stats
-            background-color: #343a40;
-        }
-    }
-    .login-button{//Set login button
-        background-color: $redFontColor;
-        color: $mainFontColor;
-    }
-    .well {//Set wells color
-        background-color: #1d1f24;
-        label {
-            color: gray;
-        }
-    }
-}
-
-//Tree theme
-body.tree {
-    background-color: $treeBg;
-    color: $treeMainFont;
+/**
+*   Tree Theme
+*   - Main colors (Wheat, Green & Red)
+*   - Another custom light theme
+*/
+body.tree {//Sets the CSS of the Tree Theme to the entire body
+    background-color: $treeBg;//Sets the bg to the theme
+    color: $treeMainFont;//Sets the default font-color to the theme
+    //Default contents
     h5, h3, p {
-        color: $treeMainFont;
+        color: $treeMainFont;//Sets the font-color to the theme
     }
-    a{
-        color: $treeAltFont;
+    a{//Sets the CSS of the links
+        color: $treeAltFont;//Sets the font-color to the theme
     }
-    .bgMain{//To fit any class with the page bg
-        background-color: $treeBg;
-        color: $treeMainFont;
-    }
-    
-    .bgAlt{//To fit any class with the alt bg
-        background-color: $treeMainFont;
-        color: $mainFontColor;
-        #activeTab { //For Nav Bar: Active selection
-            background-color: $treeMainFont;
-            color: $mainFontColor;
-        }
+    .bgMain{//Sets the CSS class of a bgMain (Can be used anywhere)
+        background-color: $treeBg;//Sets the bg to the theme
+        color: $treeMainFont;//Sets the font-color to the theme
     }
     
-    .textAlt{
-        color: $treeAltFont;
-    }
-    .arrow {//Set color for arrows for recommended articles mod
-        border: solid $treeMainFont;
-        border-width: 0 0.75vw 0.75vw 0;
-    }
-    .navbar{
-        background-color: $treeNavBg;
-        .nav-link{
-            color: white;
+    .bgAlt{//Sets the CSS class of a bgAlt (Can be used anywhere)
+        background-color: $treeMainFont;//Sets the bg to the theme
+        color: $mainFontColor;//Sets the font-color to the theme
+        #activeTab { //Sets the CSS of an active nav-item (Navigation bar)
+            background-color: $treeMainFont;//Sets the bg to the theme
+            color: $mainFontColor;//Sets the font-color to the theme
         }
-        .nav-link:hover{
-            background-color: $treeMainFont;
+    }
+    
+    .textAlt{//Sets the CSS class of a textAlt (Can be used anywhere)
+        color: $treeAltFont;//Sets the font-color to the theme
+    }
+    .arrow {//Sets the CSS of the arrows (Recommend Articles Mod)
+        border: solid $treeMainFont;//Sets the color of the arrow to the theme
+        border-width: 0 0.75vw 0.75vw 0;//Sets the size/shape of the arrow to viewport
+    }
+    .navbar{//Sets the CSS of the navigation bar (Navigation Bar)
+        background-color: $treeNavBg;//Sets the bg color of the Nav bar to the theme
+        .nav-link{//Sets the CSS of the nav items
+            color: white;//Sets the font color of the nav items to the theme
         }
-        .dropdown-menu {
-            background-color: $treeNavBg;
-            .dropdown-item{
-                color: white;
+        .nav-link:hover{//Sets the CSS when the nav-link is hovered
+            background-color: $treeMainFont;//Changes the bg color to the theme
+        }
+        .dropdown-menu {//Sets the CSS of the dropdown menu
+            background-color: $treeNavBg;//Sets the bg color of the dropdown to the theme
+            .dropdown-item{//Sets the CSS of the dropdown item
+                color: white;//Sets the font color to the theme
             }
-            .dropdown-item:hover{
-                background-color: $treeMainFont;
+            .dropdown-item:hover{//Sets the CSS of the dropdown item when hovered over
+                background-color: $treeMainFont;//Changes the font color when hovered over (to the theme)
             }
-            .dropdown-item.disabled {
-                color: $disabled;
-            }
-        }
-    }
-    .article{//For css in article box
-        .articleSimilarity{
-            background-color: darkgreen;
-            color: $mainFontColor;
-        }
-        p {
-            background-color: $treeMainFont;
-            color: $mainFontColor;
-        }
-    }
-    .rankedArticle{//For ranked article shadowing/3D effect
-        h2,h4{
-            text-shadow: 2px 2px $treeAltFont;
-        }
-    }
-    #featuredArticlesWrapper {//For featured article mod
-        .card-body{
-            background-color: $treeBg;
-            .card-text {
-                color: $treeMainFont;
+            .dropdown-item.disabled {//Sets the CSS of a disabled dropdown item
+                color: $disabled;//Sets the font-color to the disabled var
             }
         }
     }
-    .preferenceBox, .teacherBox {//Boxes for preferences
-        .preferenceLabel, .teacherLabel{
-            background-color: $treeNavBg;
-            color: $mainFontColor;
+    .article{//Sets the CSS of the article box (Recommend Articles Mod)
+        .articleSimilarity{//Sets the CSS of the similarity label 
+            background-color: darkgreen;//Sets the bg to green
+            color: $mainFontColor;//Sets the font color to the theme
+        }
+        p {//Sets the CSS of the labels in the box
+            background-color: $treeMainFont;//Sets the bg to the theme
+            color: $mainFontColor;//Sets the font color to the theme
         }
     }
-    .inputSavePreference {//Input buttons
-        background-color: $treeNavBg;
-        color: $mainFontColor;
-    }
-    a{
-        color: $treeAltFont;
-    }
-    #tm_contents{//Contents for articles in taskmeister
-        .col-sm-4 {//For right column of article stats
-            background-color: lightgreen;
+    .rankedArticle{//Sets the CSS of the ranked article box (Recommend Articles Mod)
+        h2,h4{//Sets the CSS of the numbered labels on the left
+            text-shadow: 2px 2px $treeAltFont;//Creates the shadow/3D effect
         }
     }
-    .login-button{//Set login button
-        background-color: $treeAltFont;
-        color: $mainFontColor;
-    }
-    .well {//Set well color
-        background-color: $treeMainFont;
-        label {
-            color: white;
+    #featuredArticlesWrapper {//Sets the CSS of the featured article wrapper (Featured Articles Mod)
+        .card-body{//Sets the CSS of the card body
+            background-color: $treeBg;//Sets the bg of the card to the theme
+            .card-text {//Sets the CSS of the card contents
+                color: $treeMainFont;//Sets the font color to the theme
+            }
         }
     }
-    .badge{
-        background-color: $treeNavBg;
-        color: $treeBg;
+    .preferenceBox, .teacherBox {//Sets the CSS for the preference/user box (Choose Class/Choose Preferences Mod)
+        .preferenceLabel, .teacherLabel{//Sets the CSS for the box labels
+            background-color: $treeNavBg;//Sets the bg color to the theme
+            color: $mainFontColor;//Sets the font color to the theme
+        }
+    }
+    .inputSavePreference {//Sets the CSS for the submit/save button (Choose Class/Choose Preference Mod)
+        background-color: $treeNavBg;//Sets the bg color to the theme
+        color: $mainFontColor;//Sets the font color to the theme
+    }
+    #tm_contents{//Sets the CSS for the main contents div
+        .col-sm-4 {//Sets the CSS of the right-hand side container (Position: Right)
+            background-color: lightgreen;//Sets bg color to the theme
+        }
+    }
+    .login-button{//Set the CSS for the login button
+        background-color: $treeAltFont;//Sets the bg color to the theme
+        color: $mainFontColor;//Sets the font color to the theme
+    }
+    .well {//Set the CSS for the wells
+        background-color: $treeMainFont;//Sets the bg color to the theme
+        label {//Sets the CSS for the labels in the wells
+            color: white;//Sets the font color to the theme
+        }
+    }
+    .badge{//Sets the CSS for the badges
+        background-color: $treeNavBg;//Sets the bg color to the theme
+        color: $treeBg;//Sets the font color to the theme
     }
 }

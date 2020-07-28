@@ -1,11 +1,21 @@
-/*Variables*/
-/*Default Tags*/
+/**
+* SCSS made by Fremont Teng for the Taskmeister Template
+* Last update: 28/07/2020
+*/
+/*
+* Template Variables
+* To make a custom variable, add '$' to the front of the variable name.
+*/
+/*
+*   Default Tags
+*   Tags that use the default names such as body, h2, etc.
+*/
 body {
   width: 97vw;
+  height: 100%;
   overflow-x: hidden;
   display: inline-block;
   position: relative;
-  height: 100%;
   margin-left: 1vw;
   font-family: "Netflix Sans", "Helvetica Neue", Helvetica, Arial, sans-serif, Arial, Helvetica, sans-serif, "BioRhyme", serif;
 }
@@ -24,7 +34,10 @@ table tr, table th, table td {
   text-align: center;
 }
 
-/*Custom Classes*/
+/*
+* Custom Classes
+* Here is where you can put all your custom-made classes and their CSS properties
+*/
 .flex {
   display: inline-flex;
 }
@@ -74,7 +87,10 @@ table tr, table th, table td {
   color: gray;
 }
 
-/*Custom Ids */
+/*
+* Custom Elements
+* Here is where you can put all your custom-made identified elements and their CSS properties
+*/
 #navLogo {
   width: 40px;
   height: 40px;
@@ -88,12 +104,12 @@ table tr, table th, table td {
 }
 
 /*
- * --Modules
+ * CSS for individual Modules
  * This contains the CSS for the Taskmeister Modules
  */
 /**
     Featured Article Module
-    - Module used to showcase top articles in a carousel
+    - Module used to showcase top articles in a carousel format
 */
 .carousel-item img {
   height: 40vw;
@@ -109,7 +125,7 @@ table tr, table th, table td {
 }
 
 #featuredArticlesWrapper .card button:hover {
-  scale: 1.25;
+  scale: 1.5;
 }
 
 /**
@@ -168,7 +184,6 @@ table tr, table th, table td {
   bottom: 82%;
   text-align: left;
   opacity: 0.8;
-  position: absolute;
   font-size: 1.25vw;
 }
 .recommendedArticles .article p, .recommendedArticles .rankedArticle p {
@@ -176,7 +191,6 @@ table tr, table th, table td {
   bottom: -10%;
   width: 19vw;
   opacity: 0.8;
-  position: absolute;
   font-size: 1.25vw;
   word-wrap: break-word;
 }
@@ -192,7 +206,6 @@ table tr, table th, table td {
   opacity: 1;
   color: darkgray;
   text-shadow: 2px 2px #FF0000;
-  position: absolute;
   font-size: 20vw;
   word-wrap: break-word;
   z-index: -1;
@@ -205,26 +218,25 @@ table tr, table th, table td {
   opacity: 1;
   color: darkgray;
   text-shadow: 2px 2px #FF0000;
-  position: absolute;
   font-size: 13vw;
   word-wrap: break-word;
   z-index: -1;
 }
 
-.arrow:hover, .arrowRight:hover, .arrowLeft:hover {
+.arrowLeft:hover, .arrowRight:hover {
   cursor: pointer;
   border: solid darkorange;
-  border-width: 0 5px 5px 0;
+  border-width: 0 7px 7px 0;
 }
 
 .arrow, .arrowRight, .arrowLeft {
   display: inline-block;
+  position: relative;
   padding: 3px;
+  margin-top: 10vw;
   width: 2vw;
   height: 2vw;
-  position: relative;
   cursor: pointer;
-  margin-top: 10vw;
 }
 
 .arrowLeft {
@@ -326,7 +338,8 @@ table tr, table th, table td {
 }
 
 /**
-* CSS for login component/Module
+    Login Component/Module
+    - Affects the default login component/module
 */
 .login-button {
   cursor: pointer;
@@ -359,7 +372,9 @@ table tr, table th, table td {
 }
 
 /**
-    CSS for popup module
+    Popup/Modal Module
+    - The Module is used to create one-time popups on specific pages
+    - Uses cookies to store information if it has been read or not
 */
 .modal {
   display: block;
@@ -370,13 +385,14 @@ table tr, table th, table td {
 
 /**
     CSS for Chai Seng's Reviews
+    - Reviews/Testimonial module for individual articles
 */
 #review-form #review {
   width: 100%;
 }
 
 /**
-    CSS for articles
+    CSS for Articles
 */
 .item-page .img-container a {
   opacity: 0.4;
@@ -385,21 +401,27 @@ table tr, table th, table td {
 
 /**
     CSS THEMES
+    - Comes with 4 themes:
+        - Default (Black/Orange)
+        - Ice (Gray/Skyblue)
+        - Red (Black/Red)
+        - Tree (Wheat/Green/Red)
+    - Allows users to customize the display and color of their website
+    - Uses cookies to save choices of themes
+*/
+/**
+*   Default Theme
+*   - Main colors (Black/Orange)
+*   - Original Taskmeister Color Scheme, slightly based on Netflix to create dark environment
 */
 body.default {
   background-color: black;
   color: white;
 }
-body.default h5 {
+body.default h5, body.default p {
   color: white;
 }
-body.default h3 {
-  color: darkorange;
-}
-body.default p {
-  color: white;
-}
-body.default a {
+body.default h3, body.default a {
   color: darkorange;
 }
 body.default .bgMain {
@@ -478,20 +500,19 @@ body.default .well label {
   color: gray;
 }
 
+/**
+*   Red Theme
+*   - Main colors (Black/Red)
+*   - Color Scheme to resemble Netflix, similar to the default TM theme
+*/
 body.red {
   background-color: black;
   color: white;
 }
-body.red h5 {
+body.red h5, body.red p {
   color: white;
 }
-body.red h3 {
-  color: crimson;
-}
-body.red p {
-  color: white;
-}
-body.red a {
+body.red h3, body.red a {
   color: crimson;
 }
 body.red .bgMain {
@@ -567,17 +588,16 @@ body.red .well label {
   color: gray;
 }
 
+/**
+*   Ice Theme
+*   - Main colors (Gray/Lightblue)
+*   - A custom light theme
+*/
 body.day {
   background-color: lightblue;
   color: gray;
 }
-body.day h5 {
-  color: gray;
-}
-body.day h3 {
-  color: gray;
-}
-body.day p {
+body.day h5, body.day h3, body.day p {
   color: gray;
 }
 body.day a {
@@ -642,9 +662,6 @@ body.day .inputSavePreference {
   background-color: darkgray;
   color: white;
 }
-body.day a {
-  color: blue;
-}
 body.day #tm_contents .col-sm-4 {
   background-color: lightgray;
 }
@@ -663,98 +680,11 @@ body.day .accordionfaqheader.accordion3, body.day .accordionfaqheader.accordion4
   background-color: gray;
 }
 
-body.red {
-  background-color: black;
-  color: white;
-}
-body.red h5 {
-  color: white;
-}
-body.red h3 {
-  color: crimson;
-}
-body.red p {
-  color: white;
-}
-body.red a {
-  color: crimson;
-}
-body.red .bgMain {
-  background-color: black;
-  color: white;
-}
-body.red .bgAlt, body.red .navbar .nav-item:hover, .navbar body.red .nav-item:hover {
-  background-color: crimson;
-  color: white;
-}
-body.red .bgAlt #activeTab, body.red .navbar .nav-item:hover #activeTab, .navbar body.red .nav-item:hover #activeTab {
-  background-color: crimson;
-  color: white;
-}
-body.red .textAlt {
-  color: crimson;
-}
-body.red .arrow, body.red .arrowLeft, body.red .arrowRight {
-  border: solid white;
-  border-width: 0 0.75vw 0.75vw 0;
-}
-body.red .navbar {
-  background-color: #343a40;
-}
-body.red .navbar .nav-link {
-  color: white;
-}
-body.red .navbar .dropdown-menu {
-  background-color: #343a40;
-}
-body.red .navbar .dropdown-menu .dropdown-item {
-  color: white;
-}
-body.red .navbar .dropdown-menu .dropdown-item.disabled {
-  color: gray;
-}
-body.red .navbar .dropdown-menu .dropdown-item:hover {
-  color: black;
-}
-body.red .article .articleSimilarity, body.red .recommendedArticles .rankedArticle .articleSimilarity, .recommendedArticles body.red .rankedArticle .articleSimilarity {
-  background-color: darkgreen;
-  color: white;
-}
-body.red .article p, body.red .recommendedArticles .rankedArticle p, .recommendedArticles body.red .rankedArticle p {
-  background-color: crimson;
-  color: white;
-}
-body.red .rankedArticle h2, body.red .rankedArticle h4 {
-  text-shadow: 2px 2px crimson;
-}
-body.red #featuredArticlesWrapper .card-body {
-  background-color: #343a40;
-}
-body.red #featuredArticlesWrapper .card-body .card-text {
-  color: white;
-}
-body.red .preferenceBox .preferenceLabel, body.red .userPreferred .preferenceLabel, body.red .teacherSelected .preferenceLabel, body.red .userNotPreferred .preferenceLabel, body.red .userMayTry .preferenceLabel, body.red .preferenceBox .teacherLabel, body.red .userPreferred .teacherLabel, body.red .teacherSelected .teacherLabel, body.red .userNotPreferred .teacherLabel, body.red .userMayTry .teacherLabel, body.red .teacherBox .preferenceLabel, body.red .teacherBox .teacherLabel {
-  background-color: crimson;
-  color: white;
-}
-body.red .inputSavePreference {
-  background-color: crimson;
-  color: white;
-}
-body.red #tm_contents .col-sm-4 {
-  background-color: #343a40;
-}
-body.red .login-button {
-  background-color: crimson;
-  color: white;
-}
-body.red .well {
-  background-color: #1d1f24;
-}
-body.red .well label {
-  color: gray;
-}
-
+/**
+*   Tree Theme
+*   - Main colors (Wheat, Green & Red)
+*   - Another custom light theme
+*/
 body.tree {
   background-color: wheat;
   color: brown;
@@ -829,9 +759,6 @@ body.tree .preferenceBox .preferenceLabel, body.tree .userPreferred .preferenceL
 body.tree .inputSavePreference {
   background-color: darkgreen;
   color: white;
-}
-body.tree a {
-  color: green;
 }
 body.tree #tm_contents .col-sm-4 {
   background-color: lightgreen;
