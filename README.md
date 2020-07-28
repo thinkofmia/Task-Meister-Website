@@ -32,9 +32,6 @@ Templates
 SCSS file to edit the CSS of the taskmeister template:
 - https://github.com/FremontTeng/Task-Meister/blob/master/templates/taskmeister/css/template.scss
 
-Chai Seng's CSS:
-- https://github.com/FremontTeng/Task-Meister/blob/master/templates/taskmeister/css/old.css
-
 ## Installing a template/module/plugin
 ### Install Templates via FTP
 1. Simply upload the template folder here to the directory: /path_to_joomla/templates/ - where /path_to_joomla/ is the location of your Joomla! installation on the server. (Using any FTP software)
