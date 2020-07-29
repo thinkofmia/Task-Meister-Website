@@ -401,67 +401,78 @@ class plgTaskMeisterTM_recommender extends JPlugin
         }
         return $resultList;//Return the resulting list
     }
-    /* Function: Recommend Trending Articles
-    Recommend articles that are trending in the past month.
-    It is regardless of the user's likes/dislikes and preferences
-    */
+    /***
+     * recommendTrendingArticles()
+     * Last Updated: 29/07/2020
+     * Created by: Fremont Teng
+     * Function: 
+     *  - Recommend the user the current trending articles,
+     *  - Takes only in account of articles that are active in the last month
+     *  - Regardless of the user preferences
+     * Parameter:
+     *  - $noOfArticles: check the maximum number of articles to get
+     *  - $userid: Set the target user to take from
+     *  - $parameter1: Additional parameter if any
+     */
     function recommendTrendingArticles($noOfArticles, $userid, $parameter1){
-        $db = Factory::getDbo();//Gets database
-        //Set Additional Filter Mode if has keyword
-        if (strlen($parameter1)>0){//Disable search mode for trending articles
-            //$searchMode = true; 
-            $keywords = explode(" ",$parameter1);//Divide up keywords
-        }
-        //Get last month date
-        $today = date("Y-m-d");
-        date_sub($today,date_interval_create_from_date_string("30 days"));
-        $lastmonth = date_format($today,"Y-m-d");
-        //Get external recommendation table (custom table) To find out latest actions on articles
+        //Sets the database variable
+        $db = Factory::getDbo();
+        //Set Additional Filter Mode if has keyword (Currently not in use)
+        //if (strlen($parameter1)>0){//Check if additional parameter exists
+            //$searchMode = true; //If so, set search mode to be true
+        //    $keywords = explode(" ",$parameter1);//Divide up the strings into individual keywords
+        //}
+
+        $today = date("Y-m-d");//Get today's date
+        date_sub($today,date_interval_create_from_date_string("30 days"));//Get last month's date
+        $lastmonth = date_format($today,"Y-m-d");//Set last month's date to year-month-day format
+        //Query the database
         $query = $db->getQuery(true);
-        $query->select($db->quoteName(array('es_date','es_aid','es_action')))
-            ->from($db->quoteName('#__customtables_table_recommendationstats'));
+        $query->select($db->quoteName(array('es_date','es_aid','es_action')))//Get the date of action, the target article and corresponding action
+            ->from($db->quoteName('#__customtables_table_recommendationstats'));//From the custom recommendation statistics table
         $db->setQuery($query);
-        $results_recent = $db->loadAssocList();
-        //Setup list of articles to consider
+        $results_recent = $db->loadAssocList();//Save results into $results_recent
+        //Initialize array of the trending articles
         $trendingArticles = array();
-        //Highest weighing counter
+        //Initialize the highest weighing counter
         $highest = 0;
-        //DB to check if article is trashed/unpublished
+        //Set up additional database variable (to check if article is trashed/unpublished)
         $content_db =& JTable::getInstance("content");
-        //Loop results
+        //Loop for each action found in the results
         foreach ($results_recent as $row){
-            if (strcmp($row['es_date'],$lastmonth)){
-                //Set article id
-                $aid = intval($row['es_aid']);
-                //Load article by id
+            //Check if the date of action was within last month
+            if (strcmp($row['es_date'],$lastmonth)){//If so
+                $aid = intval($row['es_aid']);//Get the article id
+                //Load the article from the database by id
                 $content_db->load($aid);
-                $article_state = $content_db->get("state");
-                if ($article_state==1){//Check if its published
-                    if (!isset($trendingArticles[$aid])){
-                        $trendingArticles[$aid] = 0;
+                $article_state = $content_db->get("state");//Get the state of the target article
+                if ($article_state==1){//If it is published
+                    if (!isset($trendingArticles[$aid])){//If the article doesn't exist inside the array
+                        $trendingArticles[$aid] = 0;//Initialize the article data in it
                     } 
-                    switch ($row['es_action']){
-                            case "liked":
-                                $trendingArticles[$aid] += 10;
+                    switch ($row['es_action']){//Check the different cases of the action
+                            case "liked"://If the user liked the article
+                                $trendingArticles[$aid] += 20;//Increase the value of the article by 10
                                 break;
-                            case "deployed":
-                                $trendingArticles[$aid] += 10;
+                            case "deployed"://If the user deployed the article
+                                $trendingArticles[$aid] += 10;//Increase the value of the article by 10
                                 break;
-                            case "disliked":
-                                $trendingArticles[$aid] += 1;
+                            case "disliked"://If the user disliked the article
+                                $trendingArticles[$aid] += 1;//Increase the value of the article by 1
                                 break;
-                            case "updated their review for":
-                                $trendingArticles[$aid] += 3;
+                            case "updated their review for"://If the user updated the review for the article
+                                $trendingArticles[$aid] += 3;//Increase the value of the article by 3
                                 break;
-                            case "submitted a review for":
-                                $trendingArticles[$aid] += 5;
+                            case "submitted a review for"://If the user submitted a review for the article
+                                $trendingArticles[$aid] += 5;//Increase the value of the article by 5
                                 break;
-                            default:
+                            default://If any other actions
+                                $trendingArticles[$aid] += 1;//Increment value by 1
                                 break;
                         }
-                        
+                    //If the highest counter is lesser than the value of the target article    
                     if ($highest < intval($trendingArticles[$aid])){
-                            $highest = intval($trendingArticles[$aid]);
+                            $highest = intval($trendingArticles[$aid]);//Set the new highest
                         }
                 }
             }
@@ -469,12 +480,12 @@ class plgTaskMeisterTM_recommender extends JPlugin
         //Sort articles in descending order
         arsort($trendingArticles);
         //Return articles after counting and setting similarity values
-        $finalList = array();
-        $count = 0;
-        foreach ($trendingArticles as $key => $val){
-            if ($count<$noOfArticles){
-                //If search mode is on
-                if (isset($searchMode)){
+        $finalList = array();//Initialize the resultant array
+        $count = 0;//Initialize the counter
+        foreach ($trendingArticles as $key => $val){//Loop for each article saved in the previous steps
+            if ($count<$noOfArticles){//If the counter is lesser than the maximum number of articles
+                /*//Check search mode (Disabled)
+                if (isset($searchMode)){//If Search Mode is on
                     //Query for database article contents (to check within text)
                     $query = $db->getQuery(true);
                     $query->select($db->quoteName(array('id','introtext','title','fulltext')))
@@ -524,15 +535,15 @@ class plgTaskMeisterTM_recommender extends JPlugin
                     }
                     //Check counter
                     if ($counter<sizeof($keywords)) $val = -1;//If not inside query, remove it
-                }
-                //Add to final list
-                if ($val > 0){
-                    $finalList[intval($key)] = floor($val/$highest*100);
-                    $count+=1;
+                }*/
+                
+                if ($val > 0){//If the value of the article is larger than 0
+                    $finalList[intval($key)] = floor($val/$highest*100);//Store the percentage similarity match into the resultant list
+                    $count+=1;//Increment the number of articles in the resulting list by 1
                 } 
             }
         }
-        return $finalList;
+        return $finalList;//Return the final list
     }
     /* Function: Personal Recommended Articles
     Recommend personal articles that excludes what is already liked/disliked by the targeted  user
