@@ -174,22 +174,28 @@ class plgTaskMeisterTM_recommender extends JPlugin
         }
         return "Saved!";//Return confirmation result
     }
-    //Function: Save a particular user's students
+    /***
+     * saveOurStudents()
+     * Last Updated: 29/07/2020
+     * Created by: Fremont Teng
+     * Function: Saves the teacher's new clas into the database
+     * Parameters: $studentList_str refers to the string version of the list of students the teacher has selected
+     */
     function saveOurStudents($studentList_str){
-        //Set database and user
+        //Set variable database and user
         $db = Factory::getDbo();
         $me = Factory::getUser();
-        $userID = $me->id;
-        $username = $me->username;
-        $studentList = "[]";
-        if ($studentList_str) $studentList = $studentList_str;
-        //Save information into a list
+        $userID = $me->id;//Gets the user id
+        $username = $me->username;//Gets the user name
+        $studentList = "[]";//Sets the class to be an empty stringified array
+        if ($studentList_str) $studentList = $studentList_str;//If there exists a new list (from the parameter), replace it instead
+        //Setup the new teacher class
         $teacherInfo = new stdClass();
-        $teacherInfo->es_teacherid = $me->id;
-        $teacherInfo->es_students = $studentList;
-        // Update the object into the article profile table.
+        $teacherInfo->es_teacherid = $userID;//Set the teacher id to user id
+        $teacherInfo->es_students = $studentList;//Save the new class into the selection
+        // Update the row in the teacher statistics table by the teacher id
         $result = JFactory::getDbo()->updateObject('#__customtables_table_teacherstats', $teacherInfo, 'es_teacherid');
-        return "Saved!";
+        return "Saved!";//Return confirmation message
     }
     /* Function: Get list of tags that are currently in used. */
     function getTagList(){
