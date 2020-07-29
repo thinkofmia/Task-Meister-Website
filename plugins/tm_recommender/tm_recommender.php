@@ -111,49 +111,68 @@ class plgTaskMeisterTM_recommender extends JPlugin
             return false; //Return failed
         }
     }
-    //Function: Save a particular user's teachers
+    /***
+     * saveOurTeachers()
+     * Last Updated: 29/07/2020
+     * Created by: Fremont Teng
+     * Function: Saves the student's teachers into the database
+     * Parameters: $teacherList_str refers to the string version of the list of teachers the student has selected
+     */
     function saveOurTeachers($teacherList_str){
-        //Set database and user
+        //Set the variables of the database and user
         $db = Factory::getDbo();
         $me = Factory::getUser();
+        //Gets the user id
         $userID = $me->id;
+        //Gets the user name
         $username = $me->username;
-        //Get teachers list
+        //Convert the list of teachers from a string to an array
         $teacherList = json_decode($teacherList_str);
-        //Query
+        //Query from the database
         $query = $db->getQuery(true);
-        $query->select($db->quoteName(array('es_teacherid','es_students')))
-        ->from($db->quoteName('#__customtables_table_teacherstats'));
+        $query->select($db->quoteName(array('es_teacherid','es_students')))//Get the teacher id and their list of students
+        ->from($db->quoteName('#__customtables_table_teacherstats'));//From the teacher statistics table
         $db->setQuery($query);
-        $results_ext = $db->loadAssocList();
-        //Save information into a list
+        $results_ext = $db->loadAssocList();//Save results as $results_ext
+        //For each teacher found in the results, loop
         foreach ($results_ext as $row){
-            $newStudentList = json_decode($row['es_students']); //Teacher's List that stores all the students inside
-            //Check if needs update
-            if (in_array($row['es_teacherid'], $teacherList)&& !in_array($userID, $newStudentList)){//If student exists in teacher's class but not in database
+            $newStudentList = json_decode($row['es_students']); //Gets the list of students the teacher has
+            /*
+            * Check if needs any update: 
+                - If the teacher is one of the teachers in the user's selection, and
+                - If the user is not in the teacher's class in the database
+            */
+            if (in_array($row['es_teacherid'], $teacherList)&& !in_array($userID, $newStudentList)){
+                //Push the user into the teacher's list of students
                 array_push($newStudentList, intval($userID));
-                // Create and populate an user table.
+                // Create a class to store into the database
                 $teacherInfo = new stdClass();
-                $teacherInfo->es_teacherid = $row['es_teacherid'];
-                $teacherInfo->es_students = json_encode($newStudentList);
-                // Update the object into the article profile table.
+                $teacherInfo->es_teacherid = $row['es_teacherid'];//Set the teacher id to be that of the current teacher
+                $teacherInfo->es_students = json_encode($newStudentList);//Save the new list of students into a string
+                // Update the object into the teacher statistics table.
                 $result = JFactory::getDbo()->updateObject('#__customtables_table_teacherstats', $teacherInfo, 'es_teacherid');
             }
-            //If student is in database but not in teacher list
+            /**
+             * Else check if need remove the student from the teacher's list of students
+             *  - If the teacher is no longer within the student's selection of teachers, and
+             *  - If the student is in the teacher's class in the current database
+             */
             else if (!in_array($row['es_teacherid'], $teacherList) && in_array(intval($userID), $newStudentList)){
+                //Find the position of the student in the class array
                 $key = array_search(intval($userID), $newStudentList);
+                //If position is found
                 if ($key !== false) {
-                    unset($newStudentList[$key]);
+                    unset($newStudentList[$key]);//Removes the student from the class
                 }
-                // Create and populate an user table.
-                $teacherInfo = new stdClass();
-                $teacherInfo->es_teacherid = $row['es_teacherid'];
-                $teacherInfo->es_students = json_encode($newStudentList);
-                // Update the object into the article profile table.
+                // Create and populate the table.
+                $teacherInfo = new stdClass();//Set up the teacher's class
+                $teacherInfo->es_teacherid = $row['es_teacherid'];//Set the teacher id 
+                $teacherInfo->es_students = json_encode($newStudentList);//Save the new list of students in their class
+                // Update the object into the teacher statistics table.
                 $result = JFactory::getDbo()->updateObject('#__customtables_table_teacherstats', $teacherInfo, 'es_teacherid');
             }
         }
-        return "Saved!";
+        return "Saved!";//Return confirmation result
     }
     //Function: Save a particular user's students
     function saveOurStudents($studentList_str){
