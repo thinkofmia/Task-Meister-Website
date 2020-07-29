@@ -294,41 +294,45 @@ class plgTaskMeisterTM_recommender extends JPlugin
         }
         return $teacherList;//Returns list of teachers
     }
-    /* Function: Get Article Contents
-    Gets all the selected articles to display from a list
-    Can be used after having a list of recommended article
-    */
-    function getArticleContents($list_str){//Parameter is a string ver of the list
-        //Convert the string to a list
+    /***
+     * getArticleContents()
+     * Last Updated: 29/07/2020
+     * Created by: Fremont Teng
+     * Function: Gets all the relevant data of the selected articles to display
+     * Parameter: $list_str refers to the stringified list of article ids to get the data of
+     */
+    function getArticleContents($list_str){
+        //Convert the string to an array
         $list = json_decode($list_str,true);
-        //Gets Database
+        //Sets the database variable
         $db = Factory::getDbo();
-        //Get article info database
+        //Query the database
         $query = $db->getQuery(true);
-        $query->select($db->quoteName(array('id','title','images')))
-            ->from($db->quoteName('#__content'));
+        $query->select($db->quoteName(array('id','title','images')))//Get the article id, title and images
+            ->from($db->quoteName('#__content'));//From the content table
         $db->setQuery($query);
-        $results_art = $db->loadAssocList();
-        //For loop
+        $results_art = $db->loadAssocList();//Save results as $results_art
+        //Initialize a new array to store the contents
         $contentCollection = array();
-        //array
-        $result_array = array();
-        //foreach ($list as $key => $val){
-          //  $result_array[$key] = $val;
-        //}
+        //Loop for each article found
         foreach ($results_art as $row){
-            $key_str = "".$row['id'];
-            if(array_key_exists($key_str,$list)){
+            $key_str = "".$row['id'];//Convert the id to a string
+            if(array_key_exists($key_str,$list)){//If the string/id exists in the list
+                //If there is a title found, save the article's title, image and the similarity percentage
                 if ($row['title']) $contentCollection[$row['id']] = array($row['title'],$row['images'],$list[$key_str]);
             }
         
         }
-        //Set up an array to store all the information into a collection
+        //Initialize a new array to store all the information into a collection
         $displayCollection = array();
+        //This array is just an addition precaution if we want to add additional things to play around
+        //Sadly never got the time to do so
+        //Loop for each value in the list 
         foreach ($list as $key => $val){
+            //Save the content collections into the display collections
             $displayCollection[intval($key)] = $contentCollection[intval($key)];
         }
-        return $displayCollection;
+        return $displayCollection;//Return the list of article contents
     }
     /* Function: Get My List
     Get the list of user's deployed or liked articles into a string.
