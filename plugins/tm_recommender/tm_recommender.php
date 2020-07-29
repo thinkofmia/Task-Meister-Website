@@ -67,40 +67,48 @@ class plgTaskMeisterTM_recommender extends JPlugin
         $result = JFactory::getDbo()->updateObject('#__customtables_table_userstats', $userInfo, 'es_userid');
         return "Saved!";//Return success message
     }
-    //Function: Save a class's modifier
+    /***
+     * saveClassModifiers()
+     * Last Updated: 29/07/2020
+     * Created by: Fremont Teng
+     * Function: Saves the teacher's class modifiers into the database
+     * Parameters: $data refers to the array of weightages the teacher has set for the class 
+     */
     function saveClassModifiers($data){
-        //Set database and user
+        //Set the variables of the database and user
         $db = Factory::getDbo();
         $me = Factory::getUser();
+        //Get the user id
         $userID = $me->id;
+        //Get the user name
         $username = $me->username;
-        //Query
+        //Search the database for the particular teacher
         $query = $db->getQuery(true);
-        $query->select($db->quoteName(array('es_teacherid')))
-        ->from($db->quoteName('#__customtables_table_teacherstats'))
-        ->where($db->quoteName('es_teacherid') . ' = ' . $userID);
+        $query->select($db->quoteName(array('es_teacherid')))//Select the teacher's id
+        ->from($db->quoteName('#__customtables_table_teacherstats'))//From the teacher statistics table
+        ->where($db->quoteName('es_teacherid') . ' = ' . $userID);//Where the teacher id is equal to the target user id
         $db->setQuery($query);
-        $results_ext = $db->loadAssocList();
-        //Check if its really a teacher
-        if ($results_ext){//It is a teacher
-            // Create and populate an user table.
-            $teacherInfo = new stdClass();
-            $teacherInfo->es_teacherid = $userID;
-            if ($data['likesWeight']) $teacherInfo->es_weightagelikes = $data['likesWeight'];
-            if ($data['deployedWeight']) $teacherInfo->es_weightagedeployment = $data['deployedWeight'];
-            if ($data['touchedWeight']) $teacherInfo->es_weightagetouched = $data['touchedWeight'];
-            if ($data['preferredWeight']) $teacherInfo->es_weightagepreferred = $data['preferredWeight'];
-            if ($data['unpreferredWeight']) $teacherInfo->es_weightagenotpreferred = $data['unpreferredWeight'];
-            if ($data['mayTryWeight']) $teacherInfo->es_weightagemaytry = $data['mayTryWeight'];
-            if ($data['togglePreferenceLinkage']) $teacherInfo->es_preferencelink = $data['togglePreferenceLinkage'];
-            if ($data['bonusTags']) $teacherInfo->es_bonustags = $data['bonusTags'];
-            else $teacherInfo->es_bonustags = "[]";
-            // Update the object into the teacher stats table.
+        $results_ext = $db->loadAssocList();//Save the results as $results_ext
+        //Check if the user is indeed a teacher
+        if ($results_ext){//If the user is a teacher
+            // Create and populate the teacher's info.
+            $teacherInfo = new stdClass();//Create a new class called $teacherInfo
+            $teacherInfo->es_teacherid = $userID;//Set the teacher id as the current user id
+            if ($data['likesWeight']) $teacherInfo->es_weightagelikes = $data['likesWeight'];//Save the likes weightage
+            if ($data['deployedWeight']) $teacherInfo->es_weightagedeployment = $data['deployedWeight'];//Save the deployed weightage
+            if ($data['touchedWeight']) $teacherInfo->es_weightagetouched = $data['touchedWeight'];//Save the touched before weightage
+            if ($data['preferredWeight']) $teacherInfo->es_weightagepreferred = $data['preferredWeight'];//Save the preferred tag weightage
+            if ($data['unpreferredWeight']) $teacherInfo->es_weightagenotpreferred = $data['unpreferredWeight'];//Save the against tag weightage
+            if ($data['mayTryWeight']) $teacherInfo->es_weightagemaytry = $data['mayTryWeight'];//Save the may try tag weightage
+            if ($data['togglePreferenceLinkage']) $teacherInfo->es_preferencelink = $data['togglePreferenceLinkage'];//Save the toggle preference link (Unused)
+            if ($data['bonusTags']) $teacherInfo->es_bonustags = $data['bonusTags'];//Save the bonus tags weightage
+            else $teacherInfo->es_bonustags = "[]";//If there is no bonus tags, save it as an empty array instead
+            // Update the object into the teacher stats table by the teacher's id
             $result = JFactory::getDbo()->updateObject('#__customtables_table_teacherstats', $teacherInfo, 'es_teacherid');
-            return true;
+            return true;//Return success
         }
-        else{//Else end program
-            return false; 
+        else{//Else if the user is not a teacher
+            return false; //Return failed
         }
     }
     //Function: Save a particular user's teachers
