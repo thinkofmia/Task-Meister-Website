@@ -545,75 +545,93 @@ class plgTaskMeisterTM_recommender extends JPlugin
         }
         return $finalList;//Return the final list
     }
-    /* Function: Personal Recommended Articles
-    Recommend personal articles that excludes what is already liked/disliked by the targeted  user
-    Used only for articles module
-    Returns a string of recommended articles
-     */ 
+    /***
+     * recommendPersonalArticles()
+     * Last Updated: 29/07/2020
+     * Created by: Fremont Teng
+     * Function: 
+     *  - Recommend the user the articles
+     *  - Matches to the user's preferences and their blacklist
+     * Parameter:
+     *  - $mode: checks which mode to sort the articles by
+     *  - $noOfArticles: check the maximum number of articles to get
+     *  - $userid: Set the target user to take from
+     *  - $parameter1: Additional parameter if any
+     * Returns a stringified array of article ids
+     */
     function recommendPersonalArticles($mode,$noOfArticles, $userid, $parameter1){
-        $db = Factory::getDbo();//Gets database
+        $db = Factory::getDbo();//Sets the database variable
         //Set Additional Filter Mode if has keyword
-        if ($mode!="Selected Tag" && strlen($parameter1)>0){
+        if ($mode!="Selected Tag" && strlen($parameter1)>0){//If the mode is not for a specific tag and the additional parameter exists
             //Activate search mode
             $searchMode = true;
-            //Make keywords into an array
-            $keywords = explode(" ",$parameter1);//Divide up keywords
+            //Split the additional parameters into individual keywords
+            $keywords = explode(" ",$parameter1);
+            //Debug message to show in the inspector what are the keywords found
             echo "<script>console.log('Getting keywords: ".json_encode($keywords)."')</script>";
-            //Debug counters
-            $allKeywordCounter = 0;
-            $anyKeywordCounter = 0;
+            //Initialize the Debug counters
+            $allKeywordCounter = 0;//This counter is to check the number of articles with all the keywords
+            $anyKeywordCounter = 0;//This counter is to check the number of articles with any of the keywords
+            //Print out debug message: Current set it to search results only with all keywords that exists
             echo "<script>console.log('Mode Selected: Only show results if all keywords exist. ')</script>";
         }
-        //Get external user table (custom table) To find out list of liked, deployed and disliked articles
+        //Query the database for the user info
         $query = $db->getQuery(true);
+        //Gets the user id, their liked pages, their disliked pages, their deployed pages and their preferences
         $query->select($db->quoteName(array('es_userid','es_pageliked','es_pagedisliked','es_pagedeployed','es_userpreference')))
-            ->from($db->quoteName('#__customtables_table_userstats'))
-            ->where($db->quoteName('es_userid') . ' = ' . $userid);
+            ->from($db->quoteName('#__customtables_table_userstats'))//From the custom user statistics table
+            ->where($db->quoteName('es_userid') . ' = ' . $userid);//Where the user id is the same as indicated in the parameters
         $db->setQuery($query);
-        $results_ext = $db->loadAssocList();
-        //Save information into a list
+        $results_ext = $db->loadAssocList();//Save results into $results_ext
+        //Loop for each user id found
         foreach ($results_ext as $row){
-            if ($row['es_userid']==$userid){//Just to be sure if user id is same
-                if ($row['es_pageliked']) $likedlist = json_decode($row['es_pageliked']);
-                else $likedlist = [];
-                if ($row['es_pagedisliked']) $blacklist = json_decode($row['es_pagedisliked']);
-                else $blacklist = [];
-                if ($row['es_pagedeployed']) $deployedlist = json_decode($row['es_pagedeployed']);
-                else $deployedlist = [];
-                if ($row['es_userpreference']) $preferencelist = json_decode($row['es_userpreference']);
-                else $preferencelist = [];
+            if ($row['es_userid']==$userid){//Just double confirm if it is the target user
+                //If there exists a list of liked pages
+                if ($row['es_pageliked']) $likedlist = json_decode($row['es_pageliked']);//Save the converted string as an array of liked pages
+                else $likedlist = [];//Else initialize the array as empty
+                //If there exists a list of disliked pages
+                if ($row['es_pagedisliked']) $blacklist = json_decode($row['es_pagedisliked']);//Save the converted string as an array of disliked pages
+                else $blacklist = [];//Else initialize the array as empty
+                //If there exists a list of deployed pages
+                if ($row['es_pagedeployed']) $deployedlist = json_decode($row['es_pagedeployed']);//Save the converted string as an array of deployed pages
+                else $deployedlist = [];//Else initialize the array as empty
+                //If there exists a list of preferences
+                if ($row['es_userpreference']) $preferencelist = json_decode($row['es_userpreference']);//Save the converted string as an array of preferences
+                else $preferencelist = [];//Else initialize the array as empty
             }
         }
-        //Get article info database
+        //Query the database to get the article information
         $query2 = $db->getQuery(true);
+        //Gets the article id, title, its tags, all the users' opinions of it, list of users that deployed it, total number of likes, dislikes and deployment
         $query2->select($db->quoteName(array('es_articleid','es_title','es_tags','es_userchoice','es_deployed','es_totallikes','es_totaldislikes','es_totaldeployed')))
-            ->from($db->quoteName('#__customtables_table_articlestats'));
+            ->from($db->quoteName('#__customtables_table_articlestats'));//From the custom article statistics table
         $db->setQuery($query2);
-        $results_art = $db->loadAssocList();
-        //Get teacher info database
+        $results_art = $db->loadAssocList();//Save the results into $results_art
+        //Query the database for the teachers' information (This is used to allow the teachers to influence the students' searches)
         $query = $db->getQuery(true);
-        $query->select($db->quoteName(array('es_teacherid','es_students')))
-        ->from($db->quoteName('#__customtables_table_teacherstats'));
+        $query->select($db->quoteName(array('es_teacherid','es_students')))//Gets the teacher id and their class
+        ->from($db->quoteName('#__customtables_table_teacherstats'));//From the custom teacher statistics table
         $db->setQuery($query);
-        $results_teacher = $db->loadAssocList();
-        //Save information into a list
-        //Set default weightages value
-        $notPreferredModifier = 100*((($this->params)->get('notpreferredweightage'))/100);
-        $mayTryModifier = 100*((($this->params)->get('maytryweightage'))/100);
-        $preferredModifier = 200*((($this->params)->get('preferredweightage'))/100);
-        $likesBonus = 1;
-        $deployedBonus = 1;
-        $touchedBonus = 1;
-        $bonusPreferences = array();//For additional tags influenced by teachers
+        $results_teacher = $db->loadAssocList();//Save results into $results_teacher
+        //Get and Set default weightages value (See the readME for the recommended weightage values)
+        $notPreferredModifier = 100*((($this->params)->get('notpreferredweightage'))/100);//Sets the Against Modifier with the plugin's weightage
+        $mayTryModifier = 100*((($this->params)->get('maytryweightage'))/100);//Sets the May Try Modifier with the plugin's weightage
+        $preferredModifier = 200*((($this->params)->get('preferredweightage'))/100);//Sets the Preferred Modifier with the plugin's weightage
+        $likesBonus = 1;//Set the liked bonus to be a default 1
+        $deployedBonus = 1;//Set the deployed bonus to be a default 1
+        $touchedBonus = 1;//Set the touched before bonus to be a default 1
+        $bonusPreferences = array();//Initialize an array For additional tags influenced by teachers
         //Update modifier based on teachers' influences
-        foreach ($results_teacher as $row5){
+        foreach ($results_teacher as $row5){//Loop for each teacher
             if (in_array(intval($userid), json_decode($row5['es_students']))){//If student exists in teacher's class
+                //Update all the modifiers accordingly
                 if ($row5['es_weightagenotpreferred']) $notPreferredModifier = $notPreferredModifier/100*intval($row5['es_weightagepreferred']);
                 if ($row5['es_weightagepreferred'])$preferredModifier = $preferredModifier/100*intval($row5['es_weightagenotpreferred']);
                 if ($row5['es_weightagemaytry'])$mayTryModifier = $mayTryModifier/100*intval($row5['es_weightagemaytry']);
                 if ($row5['es_weightagelikes'])$likesBonus = $likesBonus*(intval($row5['es_weightagelikes']))/100;
                 if ($row5['es_weightagedeployment'])$deployedBonus = $deployedBonus*(intval($row5['es_weightagedeployment']))/100;
                 if ($row5['es_weightagetouched'])$touchedBonus = $touchedBonus*(intval($row5['es_weightagetouched']))/100;
+                //Add in the bonus tags into the bonus tag array
                 if ($row5['es_bonustags'] && $row5['es_bonustags']!="[]"){
                     $bonusTagsArray = json_decode($row5['es_bonustags']);
                     if (is_array($bonusTagsArray)){
@@ -624,168 +642,166 @@ class plgTaskMeisterTM_recommender extends JPlugin
                 }
             }
         }
-        //Set up weightage list of articles
+        //Initializes the weighed list of articles
         $weighArticlesList = array();
-        $highestWeighValue = 0;
-        //DB to check if article is trashed/unpublished
+        $highestWeighValue = 0;//Initializes the highest weighed value of the articles
+        //Sets the variable for the content table (to check if the article is published or not)
         $content_db =& JTable::getInstance("content");
-        
-        //Weigh articles
+        //Loop through the list of article in the database
         foreach ($results_art as $row){
-            //Load article by id
-            $content_db->load(intval($row['es_articleid']));
-            $article_state = $content_db->get("state");
+            //Load the article by id
+            $content_db->load(intval($row['es_articleid']));//Gets the content of the article
+            $article_state = $content_db->get("state");//Gets the state of the article
             if (in_array($row['es_articleid'],$blacklist)||$article_state!=1){
-                //If blacklisted or unpublished or trashed
+                //If blacklisted, unpublished or trashed
                 //Do nothing
             }
-            else{//If articles collected is less than 10
-                //Initializes vars
-                $weightage = 0; //Weightage Value
-                $checkIfSelectedTag = false; //Only for selected tag mode
-                //Weightage for tags
+            else{//If article is published
+                $weightage = 0; //Initialize the Weighed Value
+                $checkIfSelectedTag = false; //Initialize the boolean for selected tag
+                //Gets the tags of the article
                 $articleTags = json_decode($row['es_tags']);
-                if ($mode == "Selected Tag"){//If its just for one tag
-                    if (in_array($parameter1,$articleTags)){
-                        $weightage = 90;
+                if ($mode == "Selected Tag"){//If the mode selected is for a specific tag
+                    if (in_array($parameter1,$articleTags)){//If the tag (additional parameter) exists in the article
+                        $weightage = 90;//Give it a high weightage
                     }
-                    else{
-                        $weightage = -999999;
+                    else{//If it doesn't exists in the article
+                        $weightage = -999999;//Remove it from the weighing scale
                     }
                 }
+                //Loop through for each tag indicated in the user's preferences
                 foreach ($preferencelist as $key => $value){
-                    //Else check if within array of user's favourited tags
+                    //If the tag exists inside the article
                     if (in_array($key,$articleTags)){
                         switch($value){
-                            default://generic
-                                $weightage += 0;
+                            default://If some strange value
+                                $weightage += 0;//Do nothing
                                 break;
-                            case 0://If not preferred
-                                $weightage -= $notPreferredModifier;
+                            case 0://If Against - Represented as a 0
+                                $weightage -= $notPreferredModifier;//Lowers the weightage by the above modifier
                                 break;
-                            case 1://May Try
-                                $weightage += $mayTryModifier;
+                            case 1://If May Try - Represented as a 1
+                                $weightage += $mayTryModifier;//Increases the weightage by the above modifier
                                 break;
-                            case 2://Preferred
-                                $weightage += $preferredModifier;
+                            case 2://If Preferred - Represented as a 2
+                                $weightage += $preferredModifier;//Increases the weightage by the above modifier
                                 break;
                         }
                     }
                 }
+                //If bonus preferences exists (This is from the teacher's influence on the students)
                 if ($bonusPreferences){
                     foreach ($bonusPreferences as $row6){
-                        //Also check in bonus preferences if any
-                        if (in_array($row6,$articleTags)){//If exists inside bonus tag, add additional modifier
-                            $weightage += $preferredModifier;
+                        //Loop through the bonus preferences
+                        if (in_array($row6,$articleTags)){//If also exists inside bonus tag
+                            $weightage += $preferredModifier;//increment the weightage by the modifier
                         }
                     }
                 }
-                //Modifiers based on config
-                $deployedModifier = ((($this->params)->get('deployedweightage'))/100)*$deployedBonus;
-                $likedModifier = ((($this->params)->get('likesweightage'))/100)*$likesBonus;
-                $touchBeforeModifier = ((($this->params)->get('touchbeforeweightage'))/100)*$touchedBonus;
+                //Deployed, Liked and Touched Before Modifiers based on configurations (See readME for recommended values)
+                $deployedModifier = ((($this->params)->get('deployedweightage'))/100)*$deployedBonus;//Sets the modifier based on plugin settings
+                $likedModifier = ((($this->params)->get('likesweightage'))/100)*$likesBonus;//Sets the modifier based on plugin settings
+                $touchBeforeModifier = ((($this->params)->get('touchbeforeweightage'))/100)*$touchedBonus;//Sets the modifier based on plugin settings
+                //Check what is the mode for the recommendation
                 switch($mode){
-                    case "Untouched":
+                    case "Untouched"://If the mode is based on articles that are never liked, disliked or deployed before
                         if(in_array($row['es_articleid'],$likedlist)||in_array($row['es_articleid'],$deployedlist))
-                            $touchBeforeModifier = 99999;
+                            $touchBeforeModifier = 99999;//Fix the touched before modifier to a high value
                         break;
-                    case "Deployed":
-                        $deployedModifier = $deployedModifier*100;
+                    case "Deployed"://Else if the mode is based on how often the articles are deployed
+                        $deployedModifier = $deployedModifier*100;//Multiply its modifier
                         break; 
-                    case "Likes":
-                        $likedModifier = $likedModifier*100; 
+                    case "Likes"://Else if the mode is based on how much likes the articles have
+                        $likedModifier = $likedModifier*100; //Multiply its modifier
                         break;
-                    case "Personal":
-                        $likedModifier = $likedModifier*15; 
-                        $deployedModifier = $deployedModifier*15;
+                    case "Personal"://Else if the mode is based on our personal recommendation
+                        $likedModifier = $likedModifier*15; //Personalized multiplier to modifier
+                        $deployedModifier = $deployedModifier*15;//Personalized multipler to modifier
                         break;
-                    default:
-                        break; 
+                    default://Else if nothing
+                        break; //Do nothing
                 }
-                //Store weightage
+                //Sets the weightage of the article: based on all of the other modifiers (The algorithm of the whole recommendation)
                 $weighingValue = $weightage - $touchBeforeModifier + $likedModifier*($row['es_totallikes'] - $row['es_totaldislikes']) + $row['es_totaldeployed']*$deployedModifier;
-                //Bonus if search mode
+                //If search mode is activated 
                 if (isset($searchMode)){
                     //Query for database article contents (to check within text)
                     $query = $db->getQuery(true);
-                    $query->select($db->quoteName(array('id','introtext','fulltext')))
-                        ->from($db->quoteName('#__content'))
-                        ->where($db->quoteName('id') . ' = ' . $row['es_articleid']);
+                    $query->select($db->quoteName(array('id','introtext','fulltext')))//Gets the article id, intro text and full text
+                        ->from($db->quoteName('#__content'))//From the content table
+                        ->where($db->quoteName('id') . ' = ' . $row['es_articleid']);//Where the id is equal to the article id
                     $db->setQuery($query);
-                    $articleContents = $db->loadAssoc();
-                    $counter = 0; //Counter to find all str searches
-                    $totalSearchModifier = 0;
+                    $articleContents = $db->loadAssoc();//Saves the result into $articleContents
+                    $counter = 0; //Initialize counter for the number of searches found
+                    $totalSearchModifier = 0;//Initializes the modifier for the searched results
                     //Loop for each keyword
                     foreach ($keywords as $keyword){
                         $needle = false;//Needle to find if keyword is found
                         $searchModifier = 0;//Reset this word modifier
                         //Based on number of times searched, add to counter
-                        if (stristr($row['es_title'], $keyword)){
-                            $searchModifier +=40;
-                            $needle = true;
+                        if (stristr($row['es_title'], $keyword)){//If found inside the title
+                            $searchModifier +=40;//Increment the search modifier
+                            $needle = true;//Keyword is found!
                         }
-                        foreach($articleTags as $row_tag){
-                            if (stristr($row_tag, $keyword)){
-                                $searchModifier +=2;
-                                $needle = true;
+                        foreach($articleTags as $row_tag){//Loop for each tag in the article
+                            if (stristr($row_tag, $keyword)){//If the keyword exists in the tag
+                                $searchModifier +=2;//Increment the search modifier
+                                $needle = true;//Keyword is found!
                             }
                         }
                         //Check inside texts
-                        if (stristr($articleContents['introtext'], $keyword)){
-                            $searchModifier += substr_count($articleContents['introtext'], $keyword);
-                            $needle = true;
+                        if (stristr($articleContents['introtext'], $keyword)){//If keyword exists inside the intro text
+                            $searchModifier += substr_count($articleContents['introtext'], $keyword);//Increment based on the number of times the keyword appears in the intro text
+                            $needle = true;//Keyword is found!
                         } 
-                        if (stristr($articleContents['fulltext'], $keyword)){
-                            $searchModifier += substr_count($articleContents['fulltext'], $keyword);
-                            $needle = true;
+                        if (stristr($articleContents['fulltext'], $keyword)){//If keyword exists in the full text
+                            $searchModifier += substr_count($articleContents['fulltext'], $keyword);//Increment based on the number of times the keyword is found in the full text
+                            $needle = true;//Keyword is found!
                         } 
-                        //Check counter
-                        if ($needle){
-                            $counter += 1;
-                            $totalSearchModifier += $searchModifier;
+                        //Check counters
+                        if ($needle){//If keyword is indeed found
+                            $counter += 1;//Increment the counter by 1
+                            $totalSearchModifier += $searchModifier;//Update the overall search modifier
                         } 
                     }
-                    //If the search matches all the keywords
-                    if ($counter>=sizeof($keywords)){
-                        //Debug
-                        
-                        $weighingValue += $totalSearchModifier*20*$counter;
-                        if ($weighingValue<1) $weighingValue = $totalSearchModifier;
-                        //Add to debug counter
-                        $allKeywordCounter +=1;
-                        $anyKeywordCounter +=1;
+                    
+                    if ($counter>=sizeof($keywords)){//If the search matches all the keywords
+                        $weighingValue += $totalSearchModifier*20*$counter;//Update the weightage value with the overal search modifier
+                        if ($weighingValue<1) $weighingValue = $totalSearchModifier;//If the weighing value however is still less than 1, set it as the same number as the modifier
+                        //Debug counters
+                        $allKeywordCounter +=1;//Increment the debug counter
+                        $anyKeywordCounter +=1;//Increment the debug counter
                     }
-                    else if ($counter>0) {
-                        $anyKeywordCounter +=1;
+                    else if ($counter>0) {//Else if it doesnt match ALL of the keywords
+                        $anyKeywordCounter +=1;//Increment the debug counter
                     }
-                    else {
+                    else {//Else exclude it out of the weighed list
                         $weighingValue = -1;
-                        //Add to debug counter
                     }
                 }
-                //Only if weightage is higher or equal to 0
+                //Save the article only if its weighed value is larger or equal to 0
                 if ($weighingValue>=0) $weighArticlesList[$row['es_articleid']] = $weighingValue; 
+                //If this weighed value is higher than the highest weiged counter, update
                 if ($highestWeighValue<$weighingValue) $highestWeighValue = $weighingValue;
             }
         }
-        if (isset($searchMode)){//Display search counters
+        if (isset($searchMode)){//If search mode is active
+            //Display the below debug messages
             echo "<script>console.log('Total articles with any of the keywords: ".$anyKeywordCounter."')</script>";
             echo "<script>console.log('Total articles with all the keywords: ".$allKeywordCounter."')</script>";
         }
-        arsort($weighArticlesList);//Sort articles in descending order
-        //Return articles
-        $finalList = array();
-        $count = 0;
-        foreach ($weighArticlesList as $key => $val){
-            if ($count<$noOfArticles){
-                $finalList[intval($key)] = floor($val/$highestWeighValue*100);
-                if ($finalList[intval($key)]==0) $finalList[intval($key)] = 1;
-                //array_push($finalList, $key);
-                $count+=1;
+        //Sort the resulting list in descending order (based on their weighed value)
+        arsort($weighArticlesList);
+        $finalList = array();//Initialize the list of articles as an array
+        $count = 0;//Initailize the counter of number of articles stored
+        foreach ($weighArticlesList as $key => $val){//Loop for each article in the list
+            if ($count<$noOfArticles){//If the counter is lesser than the maximum number of articles to get
+                $finalList[intval($key)] = floor($val/$highestWeighValue*100);//Save the article with the similarity percentage
+                if ($finalList[intval($key)]==0) $finalList[intval($key)] = 1;//If the weighed value however is 0, put it as 1 instead
+                $count+=1;//Increment the counter
             }
         }
-        $weighArticlesList_str = json_encode($finalList);
-        return $finalList;
+        return $finalList;//Return the resultant list of articles
     }
 
     
