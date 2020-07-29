@@ -18,41 +18,54 @@ class plgTaskMeisterTM_recommender extends JPlugin
 	/**
 	 * Plugin method with the same name as the event will be called automatically.
 	 */
-    //Test Function (Unused)
-	 function calculateMetrics($number)
+    /**
+     * Test Function (Unused)
+     * */
+	 function functionName($functionParameters)
 	 {
 		/*
 		 * Plugin code goes here.
 		 * You can access database and application objects and parameters via $this->db,
 		 * $this->app and $this->params respectively
 		 */
-        return "Wonderful ".($number*2);
+        return "Function works: ".$functionParameters;
     }
-    //Function: Save User Preference
+    /***
+     * saveUserPreference()
+     * Last Updated: 29/07/2020
+     * Created by: Fremont Teng
+     * Function: Saves the user's preference list into the database
+     * Parameters: List of Preferred Tags, List of Against Tags, List of May Try Tags 
+     */
     function saveUserPreference($preferredList, $notPreferredList, $mayTryList){
-        //Set database and user
+        //Set the variables for database and user
         $db = Factory::getDbo();
         $me = Factory::getUser();
+        //Set the user id
         $userID = $me->id;
+        //Sets the username
         $username = $me->username;
+        //Create a new array for the latest preference list
         $newPreferenceList = array();
-        //Loop items in preferred list
-        foreach (json_decode($preferredList) as $row){//2 means preferred
-            $newPreferenceList[$row] = 2;
+        //Loop all the items in the list of Preferred Tags
+        foreach (json_decode($preferredList) as $row){//Json Decode to convert string to array
+            $newPreferenceList[$row] = 2;//Save the Preferred Tags with the value 2 into the new array
         }
-        foreach (json_decode($notPreferredList) as $row){//0 means preferred
-            $newPreferenceList[$row] = 0;
+        //Loop all the items in the list of Against Tags
+        foreach (json_decode($notPreferredList) as $row){//Json Decode to convert string to array
+            $newPreferenceList[$row] = 0;//Save the Against Tags with the value 0 into the new array
         }
-        foreach (json_decode($mayTryList) as $row){//1 means preferred
-            $newPreferenceList[$row] = 1;
+        //Loop all the items in the list of May Try Tags
+        foreach (json_decode($mayTryList) as $row){//Json Decode to convert string to array
+            $newPreferenceList[$row] = 1;//Save the May Try Tags with the value 1 into the new array
         }
-        // Create and populate an user table.
-        $userInfo = new stdClass();
-        $userInfo->es_userid = $userID;
-        $userInfo->es_userpreference = json_encode($newPreferenceList);
-        // Update the object into the article profile table.
+        //Save the data into a Class
+        $userInfo = new stdClass();//Create a new class as userInfo
+        $userInfo->es_userid = $userID;//Set the user id of the class to be the target user id
+        $userInfo->es_userpreference = json_encode($newPreferenceList);//Save the new preference list as a string version
+        // Update the object into the user statistics table by their user id
         $result = JFactory::getDbo()->updateObject('#__customtables_table_userstats', $userInfo, 'es_userid');
-        return "Saved!";
+        return "Saved!";//Return success message
     }
     //Function: Save a class's modifier
     function saveClassModifiers($data){
