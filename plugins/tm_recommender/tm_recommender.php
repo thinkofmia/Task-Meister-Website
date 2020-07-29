@@ -334,61 +334,72 @@ class plgTaskMeisterTM_recommender extends JPlugin
         }
         return $displayCollection;//Return the list of article contents
     }
-    /* Function: Get My List
-    Get the list of user's deployed or liked articles into a string.
+    /***
+     * getMyList()
+     * Last Updated: 29/07/2020
+     * Created by: Fremont Teng
+     * Function: Get the user's list of liked/deployed articles
+     * Parameter:
+     *  - $mode: check if get liked or deployed articles
+     *  - $noOfArticles: check the maximum number of articles to get
+     *  - $userid: Set the target user to take from
      */
     function getMyList($mode, $noOfArticles, $userid){
-        $db = Factory::getDbo();//Gets database
-        //Get external user table (custom table) To find out list of liked, deployed and disliked articles
+        //Sets the database variable
+        $db = Factory::getDbo();
+        //Query the database
         $query = $db->getQuery(true);
+        //Get the user id, list of liked pages, list of disliked pages, list of deployed pages and their preferences
         $query->select($db->quoteName(array('es_userid','es_pageliked','es_pagedisliked','es_pagedeployed','es_userpreference')))
-            ->from($db->quoteName('#__customtables_table_userstats'))
-            ->where($db->quoteName('es_userid') . ' = ' . $userid);
+            ->from($db->quoteName('#__customtables_table_userstats'))//From the custom user statistics table
+            ->where($db->quoteName('es_userid') . ' = ' . $userid);//Where the user id is equal to the one in the parameter
         $db->setQuery($query);
-        $results_ext = $db->loadAssocList();
-        //Save information into a list
+        $results_ext = $db->loadAssocList();//Save results in $results_ext
+        //Loop for each user found in results (should be just one)
         foreach ($results_ext as $row){
-            if ($row['es_userid']==$userid){//Just to be sure if user id is same and below number of indicated articles
-                $likedlist = json_decode($row['es_pageliked']);
-                $blacklist = json_decode($row['es_pagedisliked']);
-                $deployedlist = json_decode($row['es_pagedeployed']);
-                $preferencelist = json_decode($row['es_userpreference']);
+            if ($row['es_userid']==$userid){//Just to double confirm that the user is the same user as in the parameters
+                $likedlist = json_decode($row['es_pageliked']);//Convert and save the liked pages to an array
+                $blacklist = json_decode($row['es_pagedisliked']);//Convert and save the disliked pages to an array
+                $deployedlist = json_decode($row['es_pagedeployed']);//Convert and save the deployed pages to an array
+                $preferencelist = json_decode($row['es_userpreference']);//Convert and save the user preference to an array
             }
         }
-        //Initialization
+        //Initialize the results as an array
         $resultList = array();
-        $count = 0;
-        if ($mode == "Deployed"){
-            foreach ($deployedlist as $row){
-                if ($count<$noOfArticles){
-                    $resultList[$row] = 100;
-                    $count = $count + 1;
+        $count = 0;//Initialize counter
+        //Check which mode it is to get the list of
+        if ($mode == "Deployed"){//If mode is deployed
+            foreach ($deployedlist as $row){//Loop through the list of deployed pages
+                if ($count<$noOfArticles){//If the count is lesser than the max number of articles
+                    $resultList[$row] = 100;//Save the article into resulting list
+                    $count = $count + 1;//Increment the counter by 1
                 }
             }
         }
-        else if ($mode == "Teacher"){
-            foreach ($likedlist as $row){
-                if ($count<$noOfArticles){
-                    $resultList[$row] = 100;
-                    $count = $count + 1;
+        else if ($mode == "Teacher"){//If mode is teacher: Getting what the teacher recommends
+            //Liked pages take priority over deployed pages
+            foreach ($likedlist as $row){//Loop through the list of liked pages
+                if ($count<$noOfArticles){//If the count is lesser than the max number of articles
+                    $resultList[$row] = 100;//Save the article into the resulting list
+                    $count = $count + 1;//Increment the counter by 1
                 }
             }
-            foreach ($deployedlist as $row){
-                if ($count<$noOfArticles){
-                    $resultList[$row] = 100;
-                    $count = $count + 1;
-                }
-            }
-        }
-        else {
-            foreach ($likedlist as $row){
-                if ($count<$noOfArticles){
-                    $resultList[$row] = 100;
-                    $count = $count + 1;
+            foreach ($deployedlist as $row){//Loop through the list of deployed pages
+                if ($count<$noOfArticles){//If the count is lesser than the max number of articles
+                    $resultList[$row] = 100;//Save the article into the resulting list, also accounts if the article already exists in the list
+                    $count = $count + 1;//Increment the counter by 1
                 }
             }
         }
-        return $resultList;
+        else {//If mode is likes
+            foreach ($likedlist as $row){//Loop through the list of liked pages
+                if ($count<$noOfArticles){//If the count is lesser than the max number of articles
+                    $resultList[$row] = 100;//Save the article into the resulting list
+                    $count = $count + 1;//Increment the counter by 1
+                }
+            }
+        }
+        return $resultList;//Return the resulting list
     }
     /* Function: Recommend Trending Articles
     Recommend articles that are trending in the past month.
