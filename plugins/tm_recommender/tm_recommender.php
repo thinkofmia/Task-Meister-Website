@@ -267,24 +267,32 @@ class plgTaskMeisterTM_recommender extends JPlugin
         }
         return $tagList;//Returns the tag list found
     }
-    /* Function: Get list of teachers available. */
+    /***
+     * getTeachersList()
+     * Last Updated: 29/07/2020
+     * Created by: Fremont Teng
+     * Function: Gets the list of teachers set in the database
+     * Parameter: None
+     */
     function getTeachersList(){
-        //Gets Database
+        //Sets database variable
         $db = Factory::getDbo();
-        //Get tags info database
+        //Query the database
         $query = $db->getQuery(true);
-        $query->select($db->quoteName(array('es_teacherid')))
-            ->from($db->quoteName('#__customtables_table_teacherstats'));
+        $query->select($db->quoteName(array('es_teacherid')))//Get the teacher id
+            ->from($db->quoteName('#__customtables_table_teacherstats'));//From the custom teacher statistics stable
         $db->setQuery($query);
-        $results_teachers = $db->loadAssocList();
-        //Create list
+        $results_teachers = $db->loadAssocList();//Save the results as $results_teachers
+        //Initialize the list of teachers as a new array
         $teacherList = array();
-        //For loop to populate teacher list
+        //Loop each teacher found in the database query
         foreach($results_teachers as $row){
+            //Get the user by the teacher's id
             $teacher = JFactory::getUser($row['es_teacherid']);
+            //Save the teacher into the array along with their id and name
             $teacherList[$row['es_teacherid']] = $teacher->name;
         }
-        return $teacherList;
+        return $teacherList;//Returns list of teachers
     }
     /* Function: Get Article Contents
     Gets all the selected articles to display from a list
