@@ -805,9 +805,10 @@ class plgTaskMeisterTM_recommender extends JPlugin
     }
 
     
-    /* Function: Create List
-    This function creates an unordered array from an existing one.
-    Can be used anywhere
+    /***
+     * createList()
+     * Old function to check if the list is empty or not
+     * If so, update as a stringified empty array
      */
     function createList($array_str){//Parameters used must be an array string
         $array = json_decode($array_str,true);//Decodes string into array
@@ -816,102 +817,110 @@ class plgTaskMeisterTM_recommender extends JPlugin
         if (!isset($list_str)) $list_str = '[]';//If null, set as empty instead
         return $list_str;//Return new unordered array
     }
-    
-    /* Function: Fix Article Statistics
-    This function automatically updates/refreshes the article statistics.
-     It should be used when adding new articles
+    /***
+     * fixArticleStats()
+     * Last Updated: 29/07/2020
+     * Created by: Fremont Teng
+     * Function: 
+     *  - Automatic fixes/refreshes the statistics of the custom article database
+     * Parameter: None
+     * Notes: Should be run only on specific pages to reduce lagging
      */
     function fixArticleStats(){
-        $db = Factory::getDbo();//Gets database
-        //Get article bank from database query
+        $db = Factory::getDbo();//Sets the database variable
+        //Query the database
         $query2 = $db->getQuery(true);
-        $query2->select($db->quoteName(array('id','title','state')))
-            ->from($db->quoteName('#__content'));
+        $query2->select($db->quoteName(array('id','title','state')))//Gets the artice id, title and state
+            ->from($db->quoteName('#__content'));//From the content table
         $db->setQuery($query2);
-        $results_bank = $db->loadAssocList();
+        $results_bank = $db->loadAssocList();//Saves the results into $results_bank
 
-        //Get external article table (custom table)
+        //Query the database
         $query = $db->getQuery(true);
+        //Gets the article id, users' opinions of the article, the list of users that deployed it, the total number of likes, dislikes and deployed, and the article tags
         $query->select($db->quoteName(array('es_articleid','es_userchoice','es_deployed','es_totallikes','es_totaldislikes','es_tags','es_totaldeployed')))
-            ->from($db->quoteName('#__customtables_table_articlestats'));
+            ->from($db->quoteName('#__customtables_table_articlestats'));//From the custom article statistics table
         $db->setQuery($query);
-        $results_ext = $db->loadAssocList();
+        $results_ext = $db->loadAssocList();//Saves the results into $results_ext
 
-        //Store the current articles in external table into an array
+        //Initializes the current articles into an array
         $curr_articles =array();
-        foreach ($results_ext as $row2) { 
-            //Add to store
-            array_push($curr_articles, $row2['es_articleid']);
+        foreach ($results_ext as $row2) { //Loop for each article in the custom article statistics table
+            array_push($curr_articles, $row2['es_articleid']);//Update the current articles array with the article id
             //Count total likes/dislikes
-            $results = $this->countArticleLikes($row2['es_userchoice']);
-            $totalLikes = $results[0][0];
-            $totalDislikes = $results[0][1];
-            $totalDeployed = sizeof(json_decode($row2['es_deployed']));
-            //Find tags map DB
+            $results = $this->countArticleLikes($row2['es_userchoice']);//Runs internal function to count number of likes
+            $totalLikes = $results[0][0];//Sets the total likes based on the users' opinions
+            $totalDislikes = $results[0][1];//Sets the total dislikes based on the users' opinions
+            $totalDeployed = sizeof(json_decode($row2['es_deployed']));//Sets the total deployed based on the size of the deployed users list
+            //Query the database for the article tags
             $query = $db->getQuery(true);
-            $query->select($db->quoteName(array('content_item_id','tag_id')))
-                ->from($db->quoteName('#__contentitem_tag_map','a'))
-                ->where($db->quoteName('content_item_id') . ' = ' . $row2['es_articleid']);
+            $query->select($db->quoteName(array('content_item_id','tag_id')))//Get the article id and tag id
+                ->from($db->quoteName('#__contentitem_tag_map','a'))//From the article-tag map table
+                ->where($db->quoteName('content_item_id') . ' = ' . $row2['es_articleid']);//Where article id is equal to the target article
             $db->setQuery($query);
-            $results_tagsID = $db->loadAssocList();
-            //Store tags id in array
+            $results_tagsID = $db->loadAssocList();//Saves results into $results_tagsID
+            //Initializes the array (to store all the tag ids)
             $tagsID_arr = array();
-            foreach ($results_tagsID as $row){
-                array_push($tagsID_arr, intval($row['tag_id']));
+            foreach ($results_tagsID as $row){//Loop for each tag id found
+                array_push($tagsID_arr, intval($row['tag_id']));//Push into the array
             }
-            //Get tags info database
+            //Query the database for all the tags
             $query = $db->getQuery(true);
-            $query->select($db->quoteName(array('id','title')))
-                ->from($db->quoteName('#__tags'));
+            $query->select($db->quoteName(array('id','title')))//Gets the tag id and title
+                ->from($db->quoteName('#__tags'));//From the tags table
             $db->setQuery($query);
-            $results_tags = $db->loadAssocList();
-            //Create list
+            $results_tags = $db->loadAssocList();//Save the results into $results_tags
+            //Initialize array of the tag list
             $tagList = array();
-            //For loop to populate tag list
-            foreach($results_tags as $row){
-                if (in_array(intval($row['id']), $tagsID_arr))
-                array_push($tagList, $row['title']);
+            foreach($results_tags as $row){//Loop for each tag found
+                if (in_array(intval($row['id']), $tagsID_arr))//If tag id is in array
+                array_push($tagList, $row['title']);//Push the tag name into the new tag list
             }
-            $tagList_json = json_encode($tagList);
+            $tagList_json = json_encode($tagList);//Convert the tag list to a string
+            //If the taglist/total likes/total dislikes/total deployed is different
             if ($tagList_json != $row2['es_tags'] ||$totalLikes!=$row2['es_totallikes']||$totalDislikes!=$row2['es_totaldislikes']||$totalDeployed!=$row2['es_totaldeployed']){
-                // Create and populate an object.
-                $articleInfo = new stdClass();
-                $articleInfo->es_articleid = $row2['es_articleid'];
-                $articleInfo->es_totallikes = $totalLikes;
-                $articleInfo->es_totaldislikes = $totalDislikes;
-                $articleInfo->es_totaldeployed = $totalDeployed;
-                $articleInfo->es_tags = $tagList_json;
+                //Update the database
+                $articleInfo = new stdClass();//Set up the article class
+                $articleInfo->es_articleid = $row2['es_articleid'];//Sets the article id
+                $articleInfo->es_totallikes = $totalLikes;//Saves the new total likes
+                $articleInfo->es_totaldislikes = $totalDislikes;//Saves the new total dislikes
+                $articleInfo->es_totaldeployed = $totalDeployed;//Saves the new total deployment
+                $articleInfo->es_tags = $tagList_json;//Saves the new list of tags
                     
-                // Update the object into the article profile table.
+                // Update the object into the custom article statistics table.
                 $result = JFactory::getDbo()->updateObject('#__customtables_table_articlestats', $articleInfo, 'es_articleid');
             }
         }
 
-        //Add in new articles if any
+        //Loop for each article found in the database
         foreach ($results_bank as $row){
             //Update article class
-            $articleInfo = new stdClass();
-            $articleInfo->es_articleid = $row['id'];
-            $articleInfo->es_title = $row['title'];
-            if (($row['state']!=1)){// delete if article is unpublished
+            $articleInfo = new stdClass();//Sets up the article class
+            $articleInfo->es_articleid = $row['id'];//Sets the article id
+            $articleInfo->es_title = $row['title'];//Sets the article title
+            if (($row['state']!=1)){//If the article is not published (aka Deleted/Trashed/Unpublished)
+                //Query the database
                 $query3 = $db->getQuery(true);
                 $conditions = array(
                     $db->quoteName('es_articleid') . ' = ' . $row['id']
-                );
-                $query3->delete($db->quoteName('#__customtables_table_articlestats'));
-                $query3->where($conditions);
+                );//Sets the condition as the target article
+                $query3->delete($db->quoteName('#__customtables_table_articlestats'));//Removes the article from the custom article stats table
+                $query3->where($conditions);//Following the above conditions
                 $db->setQuery($query3);
-                $result = $db->execute();
+                $result = $db->execute();//Execute the sql code
             }
+            //Else if the article exists in the database and is published
             else if (in_array($row['id'], $curr_articles)&& ($row['state']==1)){
-                // Update article info if exists.
+                // Update article info
                 $result = JFactory::getDbo()->updateObject('#__customtables_table_articlestats', $articleInfo, 'es_articleid');
             }
-            else if ($row['state']==1){//Insert article info if doesn't exists
+            //Else if the article doesn't exists in the database but is published
+            else if ($row['state']==1){
+                //Insert the article info instead
                 $result = JFactory::getDbo()->insertObject('#__customtables_table_articlestats', $articleInfo, 'es_articleid');
             }
         }   
-        return false;
+        return false;//Return a false message
     }
     /* Function: Fix Teacher Statistics
     This function automatically updates/refreshes the teacher statistics.
