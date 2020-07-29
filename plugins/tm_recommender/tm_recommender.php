@@ -197,27 +197,32 @@ class plgTaskMeisterTM_recommender extends JPlugin
         $result = JFactory::getDbo()->updateObject('#__customtables_table_teacherstats', $teacherInfo, 'es_teacherid');
         return "Saved!";//Return confirmation message
     }
-    /* Function: Get list of tags that are currently in used. */
+    /***
+     * getTagList()
+     * Last Updated: 29/07/2020
+     * Created by: Fremont Teng
+     * Function: Gets all the tags that are currently in used
+     */
     function getTagList(){
-        //Gets Database
+        //Sets the variable of the database
         $db = Factory::getDbo();
-        //Get tags info database
+        //Query the database (For the tag names)
         $query = $db->getQuery(true);
-        $query->select($db->quoteName(array('title')))
-            ->from($db->quoteName('#__tags'))
-            ->order($db->quoteName('title') . ' ASC');
+        $query->select($db->quoteName(array('title')))//Get the name of the tag
+            ->from($db->quoteName('#__tags'))//From the tags table
+            ->order($db->quoteName('title') . ' ASC');//By ordering it in ascending order
         $db->setQuery($query);
-        $results_tags = $db->loadAssocList();
-        //Get article info database
+        $results_tags = $db->loadAssocList();//Save results into $results_tags
+        //Query the database again (For the tag statistics)
         $query2 = $db->getQuery(true);
-        $query2->select($db->quoteName(array('es_tags','es_totallikes','es_totaldislikes','es_totaldeployed')))
-            ->from($db->quoteName('#__customtables_table_articlestats'));
+        $query2->select($db->quoteName(array('es_tags','es_totallikes','es_totaldislikes','es_totaldeployed')))//Get the tags of the article, total likes, dislikes and deployments
+            ->from($db->quoteName('#__customtables_table_articlestats'));//From the custom article statistics table
         $db->setQuery($query2);
-        $results_art = $db->loadAssocList();
-        //Create list
+        $results_art = $db->loadAssocList();//Save results as $results_art
+        //Initialize new tag list
         $tagList = array();
-        //Add default tags here
-        $defaultTags = array(
+        //Add the default tags here
+        $defaultTags = array(//As requested from the taskmeister prototype in the pptx
             "Board Games",
             "Cosplay", "Current Affairs", 
             "Dance", "Digital Manipulatives", "Drama",
@@ -230,36 +235,37 @@ class plgTaskMeisterTM_recommender extends JPlugin
             "Science", "Simulations", "Sports", "Statistics", "Stories",
             "Travelling", "Treasure Hunts",
             "Virtual Reality");
-        //Add default tags array into tag list
-        foreach ($defaultTags as $row){
-            $tagList[$row] = array(
-                "likes" => 0,
-                "deployed" => 0,
-                "dislikes" => 0
+        //Add default tags array into tag list, places the tags at the start of the array (as requested)
+        foreach ($defaultTags as $row){//Loop for each default tag
+            $tagList[$row] = array(//Save initialized stats of likes, deployed and dislikes
+                "likes" => 0,//Total number of likes
+                "deployed" => 0,//Total number of deployments
+                "dislikes" => 0 //Total number of dislikes
             );
         }
-        //For loop to populate tag list with database
-        foreach($results_tags as $row){
-            $tagList[$row['title']] = array(
-                "likes" => 0,
-                "deployed" => 0,
-                "dislikes" => 0
+        //Populate the rest of the tag list with those found in the database
+        foreach($results_tags as $row){//Loop for each tag found in the database
+            $tagList[$row['title']] = array(//Save initialized stats of likes, deployed and dislikes
+                "likes" => 0,//Total number of likes
+                "deployed" => 0,//Total number of deployments
+                "dislikes" => 0 //Total number of dislikes
             );
         }
-        //Set value of each tags by looping through the articles
-        foreach ($results_art as $row){
+        //Append the statistics (likes/deployed/dislikes) to each tag based on the article statistices
+        foreach ($results_art as $row){//Loop for each article
             //Get tags of each article
-            $articleTags = json_decode($row['es_tags']);
-            $noOfLikes = $row['es_totallikes'];
-            $noOfDislikes = $row['es_totaldislikes'];
-            $noOfDeployed = $row['es_totaldeployed'];
-            foreach ($articleTags as $row2){
-                $tagList[$row2]["likes"] += $noOfLikes;
-                $tagList[$row2]["dislikes"] += $noOfDislikes;
-                $tagList[$row2]["deployed"] += $noOfDeployed;
+            $articleTags = json_decode($row['es_tags']);//Convert it from a string to an array
+            $noOfLikes = $row['es_totallikes'];//Get the article's total likes
+            $noOfDislikes = $row['es_totaldislikes'];//Gets the article's total dislikes
+            $noOfDeployed = $row['es_totaldeployed'];//Gets the article's total deployment
+            //Update the tag with the article statistics
+            foreach ($articleTags as $row2){//Loop for each tag in the article
+                $tagList[$row2]["likes"] += $noOfLikes;//Add to the number of likes for the tag
+                $tagList[$row2]["dislikes"] += $noOfDislikes;//Add to the number of dislikes for the tag
+                $tagList[$row2]["deployed"] += $noOfDeployed;//Add to the number of deployment for the tag
             }
         }
-        return $tagList;
+        return $tagList;//Returns the tag list found
     }
     /* Function: Get list of teachers available. */
     function getTeachersList(){
