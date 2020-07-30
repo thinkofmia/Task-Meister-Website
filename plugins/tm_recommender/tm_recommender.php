@@ -922,44 +922,51 @@ class plgTaskMeisterTM_recommender extends JPlugin
         }   
         return false;//Return a false message
     }
-    /* Function: Fix Teacher Statistics
-    This function automatically updates/refreshes the teacher statistics.
-     It should be used when adding a new teacher/updating teacher profiles
+    /***
+     * fixTeacherStats()
+     * Last Updated: 30/07/2020
+     * Created by: Fremont Teng
+     * Function: 
+     *  - Automatic fixes/refreshes the statistics of the custom teachers database
+     * Parameter: None
+     * Notes: Should be run only on specific pages to reduce lagging
      */
     function fixTeacherStats(){
-        $db = Factory::getDbo();//Gets database
-        $me = Factory::getUser();//Gets user 
-        //Get user bank from database query
+        //Sets the database and user variables
+        $db = Factory::getDbo();
+        $me = Factory::getUser();
+        //Query from the database for the user group mapping
         $query2 = $db->getQuery(true);
-        $query2->select($db->quoteName(array('user_id','group_id')))
-            ->from($db->quoteName('#__user_usergroup_map'));
+        $query2->select($db->quoteName(array('user_id','group_id')))//Gets the user id and their respective groups
+            ->from($db->quoteName('#__user_usergroup_map'));//from the user group map table
         $db->setQuery($query2);
-        $results_bank = $db->loadAssocList();
-        //Get external teacher table (custom table)
+        $results_bank = $db->loadAssocList();//Save the results into $results_bank
+        //Query the database for the teacher statistics
         $query = $db->getQuery(true);
-        $query->select($db->quoteName(array('es_teacherid')))
-            ->from($db->quoteName('#__customtables_table_teacherstats'));
+        $query->select($db->quoteName(array('es_teacherid')))//Gets the teacher id
+            ->from($db->quoteName('#__customtables_table_teacherstats'));//from the teacher statistics table
         $db->setQuery($query);
-        $results_ext = $db->loadAssocList();
-        //Store the current teachers in external table into an array
+        $results_ext = $db->loadAssocList();//Saves the results as $results_ext
+        //Initialize the array of teachers
         $teachers = array();
-        foreach ($results_ext as $row) {
-            array_push($teachers, $row['es_teacherid']);//Change group id based on the one that fits the teacher. In our case, its 11.
+        foreach ($results_ext as $row) {//Loop for each teacher found in the table
+            array_push($teachers, $row['es_teacherid']);//Push into the teacher array
         }
-        //Add in new teachers if any
+        //Loop for each user found in the usergroup match
         foreach ($results_bank as $row2){
-            if ($row2['group_id']==11){
-                //Update teacher class
+            if ($row2['group_id']==11){//If user's group belongs to teacher: Note that the id of the teacher group can differ. In our case, is 11
+                //Creates a teacher class
                 $teacherInfo = new stdClass();
-                $teacherInfo->es_teacherid = $row2['user_id'];
-                //Check in already exists
+                $teacherInfo->es_teacherid = $row2['user_id'];//Sets the user id of the teacher
+                //Check if already exists in the list of current teachers
                 if (in_array($row2['user_id'], $teachers)){
-                    // Update teacher info if exists.
+                    // Update teacher info if exists
                     $result = JFactory::getDbo()->updateObject('#__customtables_table_teacherstats', $teacherInfo, 'es_teacherid');
                 }
-                else{//Insert teacher info if doesn't exists
-                    $teacherInfo->es_code = $row2['user_id'];
-                    $teacherInfo->es_students = "[]";
+                else{//Else: Insert teacher info if doesn't exists
+                    $teacherInfo->es_code = $row2['user_id'];//Sets code to be the same as user id
+                    $teacherInfo->es_students = "[]";//Sets the teacher's class to be empty
+                    //Insert teacher info
                     $result = JFactory::getDbo()->insertObject('#__customtables_table_teacherstats', $teacherInfo, 'es_teacherid');
                 }
             }
