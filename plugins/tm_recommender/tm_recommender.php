@@ -1047,31 +1047,40 @@ class plgTaskMeisterTM_recommender extends JPlugin
         }
         return true;//Return success message
     }
-    /* Function: Count Article Likes
-    This function calculates the total likes and dislikes of an article.
-    Can be used anywhere.
+    /***
+     * countArticleLikes()
+     * Last Updated: 30/07/2020
+     * Created by: Fremont Teng
+     * Function: 
+     *  - Counters the number of likes and dislikes in an article
+     * Parameter: $list: Refers to the users' opinions of an article
      */
-    function countArticleLikes($list){//Parameters: Requires Article's user choice list
-        //Initialize variables
+    function countArticleLikes($list){
+        //Initialize counters for total number of likes and dislikes
         $NoLikes = 0;
         $NoDislikes = 0;
-        //For loop counting
+        //Loop for each opinion in the list
         foreach ($list as $row){
-            if ($row == "Liked") $NoLikes +=1;
-            else if ($row == "Disliked") $NoDislikes +=1;
+            if ($row == "Liked") $NoLikes +=1;//If the user likes it, increment total counter by 1
+            else if ($row == "Disliked") $NoDislikes +=1;//If the user dislikes it, increment that counter by 1
         }
         //Return an array of numbers. To access it, its something like $result[0][0] or $result[0][1]
         return array($NoLikes,$NoDislikes);
     }
-    /* Function: Welcome Text
-    Welcome message of the plugin.
-    Can be used anywhere.
+    /***
+     * welcomeText()
+     * Last Updated: 30/07/2020
+     * Created by: Fremont Teng
+     * Function: 
+     *  - Test Function
+     *  - Creates a welcome message to the target user
      */
     function welcomeText(){
+        //Sets database and user variables
         $db = Factory::getDbo();
         $me = Factory::getUser();
-        $username = $me->username;
-        return "Welcome ".$username."!";
+        $username = $me->username;//Gets user name
+        return "Welcome ".$username."!";//Returns welcome message
     }
 }
 ?>
