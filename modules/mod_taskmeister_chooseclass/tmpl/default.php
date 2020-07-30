@@ -2,75 +2,82 @@
 // No direct access
 defined('_JEXEC') or die; 
 //Displays module output
-$userPreferenceList = array();//User Preferred List
 ?>
-<?php //echo json_encode($currentList); ?>
+<?php //echo json_encode($currentList); //For debugging ?>
 <script type="text/javascript">
-//Javascript to store JS functions and initialize array
-    //List of your teacher list - default empty
+    //Javascript to store JS functions and initialize array
+    //List of your students/teachers - initializes to be empty
     yourTeacherList = [];
     yourStudentList = [];
-    //Js function to load the list
+    /**
+    *   updateTeacherLists()
+    *   Function (JavaScript): Update the lists of teachers in the frontend based on the ones selected
+    *   Parameter: None
+     */
     updateTeacherLists = function(){
-        /*
-            JavaScript function: Update all of the lists in html based on the lists
-            Requires no parameters
-            Condition: userPreferredList, userNotPreferredList and userMayTryList have to be already defined
-        */
-        //Set values of the input boxes to match the lists after converting them into a string
-        //Save to input
+        //Save the stringified teacher list as the input value (to be translated to php)
         document.getElementById("input_list1").value = JSON.stringify(yourTeacherList);
-        //Find names
-        var teacherNames = [];
-        for (var i=0;i<yourTeacherList.length;i++){
-            var user = document.getElementById(yourTeacherList[i]);
-            var name = user.querySelector(".boxName").innerHTML;
-            teacherNames.push(name);
+        //Find the names of the teacher
+        var teacherNames = [];//Initialize the teachers' names array
+        for (var i=0;i<yourTeacherList.length;i++){//For each teacher found in your selection
+            var user = document.getElementById(yourTeacherList[i]);//Get target teacher
+            var name = user.querySelector(".boxName").innerHTML;//Get the name of the teacher
+            teacherNames.push(name);//Push the name of the teacher into the teachers' names array
         }
+        //Join the array together with ',' and display as HTML text
         document.getElementById("text_list1").innerHTML = teacherNames.join(", ");
     }
+    /**
+    *   updateStudentsLists()
+    *   Function (JavaScript): Update the lists of students in the frontend based on the ones selected
+    *   Parameter: None
+     */
     updateStudentLists = function(){
+        //Save the stringified student list as the input value (to be translated to php)
         document.getElementById("input_list2").value = JSON.stringify(yourStudentList);
-        //Find names
+        //Find names of the students
         var studentNames = [];
-        for (var i=0;i<yourStudentList.length;i++){
-            var user = document.getElementById(yourStudentList[i]);
-            var name = user.querySelector(".boxName").innerHTML;
-            studentNames.push(name);
+        for (var i=0;i<yourStudentList.length;i++){//For each student found in your selection
+            var user = document.getElementById(yourStudentList[i]);//Get target student
+            var name = user.querySelector(".boxName").innerHTML;//Get the name of the student
+            studentNames.push(name);//Push the name of the student into the students' names array
         }
+        //Join the array together with ',' and display as HTML text
         document.getElementById("text_list2").innerHTML = studentNames.join(", ");
     }
-
+    /**
+    *   toggleTeacher()
+    *   Function (JavaScript): Toggles the selection of a teacher by clicking on the boxes, 
+    *   also does the color change effect
+    *   Parameter: teacher_id refers to the selected teacher
+     */
     toggleTeacher = function(teacher_id){
-    /*
-        JavaScript Function: To toggle preference by clicking on the boxes, also does the color change effect
-        Parameter tag: Refers to the particular tag id/name
-    */
-        var element = document.getElementById(teacher_id); //Get the tag html element
-        if (yourTeacherList.includes(teacher_id)){
-            /*
-                If teacher exists already inside your list, remove them
-            */
-            //Removes tag from preferred list
+        //When a teacher box is clicked, do the following below
+        var element = document.getElementById(teacher_id); //Gets the particular teacher box
+        if (yourTeacherList.includes(teacher_id)){//If your teacher list already has that teacher
+            //Removes the teacher from the list
             yourTeacherList = yourTeacherList.filter(item => item !== teacher_id);
-            //Code to change tag element class for interface color change (CSS)
+            //Code to change the class for of the teacher box (To create the color change effect)
             element.classList.remove("teacherSelected");
-            //For debug purposes to show which list the teacher is added to
+            //For debug purposes to show that the teacher is removed from the list
             console.log("Removed "+teacher_id+" from list! "); 
         }
-        else {
-            /*
-                If teacher doesn't exist in list, add them.
-            */
-            //Adds tag to may try list
+        else {//Else if the teacher list doesn't have that teacher
+            //Add the teacher id into the list
             yourTeacherList.push(teacher_id);
-            //Code to change tag element class for interface color change (CSS)
+            //Code to change the class for of the teacher box (To create the color change effect)
             element.classList.add("teacherSelected");
-            //For debug purposes to show which list the teacher is added to
+            //For debug purposes to show which teacher is added to the list
             console.log("Added "+teacher_id+" to list! "); 
         }
-        updateTeacherLists();//Update list display using the above js func
+        updateTeacherLists();//Update teacher list
     }
+    /**
+    *   toggleStudent()
+    *   Function (JavaScript): Toggles the selection of a teacher by clicking on the boxes, 
+    *   also does the color change effect
+    *   Parameter: teacher_id refers to the selected teacher
+     */
     toggleStudent = function(student_id){
     /*
         JavaScript Function: To toggle preference by clicking on the boxes, also does the color change effect

@@ -24,5 +24,6 @@
 		<position>bottom</position>
 		<position>footer</position>
 		<position>right</position>
+		<position>advertisement</position>
 	</positions>
 </extension>

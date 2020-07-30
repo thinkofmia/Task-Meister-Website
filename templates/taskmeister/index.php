@@ -165,6 +165,8 @@ $doc->addScript($this->baseurl . '/templates/' . $this->template . '/js/keen-sli
 <!--Modules that would be place in the 'Banner' position-->
 <jdoc:include type="modules" name="banner"/>
 
+<jdoc:include type="modules" name="advertisement"/>
+
 <!--Container for the Taskmeister Contents-->
 <div id="tm_contents" class="container-fluid">
   <!--Top of the container-->
