@@ -79,67 +79,66 @@ defined('_JEXEC') or die;
     *   Parameter: teacher_id refers to the selected teacher
      */
     toggleStudent = function(student_id){
-    /*
-        JavaScript Function: To toggle preference by clicking on the boxes, also does the color change effect
-        Parameter tag: Refers to the particular tag id/name
-    */
-        var element = document.getElementById(student_id); //Get the tag html element
-        if (yourStudentList.includes(student_id)){
-            /*
-                If teacher exists already inside your list, remove them
-            */
-            //Removes tag from preferred list
+        var element = document.getElementById(student_id); //Get the student box
+        if (yourStudentList.includes(student_id)){//If student already exists in your list
+            //Removes student from your list
             yourStudentList = yourStudentList.filter(item => item !== student_id);
-            //Code to change tag element class for interface color change (CSS)
+            //Code to change the class for of the student box (To create the color change effect)
             element.classList.remove("teacherSelected");
-            //For debug purposes to show which list the teacher is added to
+            //For debug purposes to show that the student is removed from the list
             console.log("Removed "+student_id+" from list! "); 
         }
-        else {
-            /*
-                If teacher doesn't exist in list, add them.
-            */
-            //Adds tag to may try list
+        else {//Else if student isn't in the list
+            //Add the student to your class
             yourStudentList.push(student_id);
-            //Code to change tag element class for interface color change (CSS)
+            //Code to change the class for of the student box (To create the color change effect)
             element.classList.add("teacherSelected");
-            //For debug purposes to show which list the teacher is added to
+            //For debug purposes to show which that the student is added
             console.log("Added "+student_id+" to list! "); 
         }
-        updateStudentLists();//Update list display using the above js func
+        updateStudentLists();//Update student list
     }
 
-function editClass() {
-    //Set Vars
+    /**
+    *   editClass()
+    *   Function (JavaScript): Hides or show the edit class selection options 
+    *   Parameter: None
+     */
+    function editClass() {
+    //Set the variables for the edit button, input and list
     var classInput = document.getElementById("preferenceForm");
     var editBtn = document.getElementById("editClassBtn");
     var classList = document.querySelector(".teachersList");
-
+    //If the button text contains "Edit Class"
     if (editBtn.innerHTML=="Edit Class"){
-        //Change inner html
+        //Change inner html = "Cancel Edit", change mode to edit class
         editBtn.innerHTML="Cancel Edit";
-        //Show
+        //Show the class selections
         classInput.style.display = "inline-block";
         classList.style.display = "inline-block";
     }
-    else {
-        //Change inner html
+    else {//Else if Cancel Edit is pressed
+        //Change mode back to normal
         editBtn.innerHTML="Edit Class";
-        //Show
+        //Hide the edit class selection
         classInput.style.display = "none";
         classList.style.display = "none";
     }
-    
 }
 
+    /**
+    *   filterName()
+    *   Function (JavaScript): Hides or show the filtered selection 
+    *   Parameter: keyword refers to specific keyword to filter for the names/id
+     */
 function filterName(keyword){
-    //Set Vars
+    //Get all the boxes
     var classGroup = document.querySelectorAll(".teacherBox");
-    console.log("Changing");
+    console.log("Filtering out by keyword: "+keyword);//Debug msg
     //Check if keyword is empty
-    if (keyword.length<1){
+    if (keyword.length<1){//If so
         for (var i=0;i<classGroup.length;i++){
-            classGroup[i].style.display = "inline-flex";
+            classGroup[i].style.display = "inline-flex";//Show all of the boxes
         }
     }
     else{//If keyword exists
@@ -148,26 +147,24 @@ function filterName(keyword){
             var user_id = classGroup[i].querySelector(".boxId").innerHTML; //Get id of target
             //Check if search matches name or id
             if (user_name.toLowerCase().includes(keyword.toLowerCase())||user_id.toLowerCase().includes(keyword.toLowerCase())) classGroup[i].style.display = "inline-flex";
-            else classGroup[i].style.display = "none";
+            else classGroup[i].style.display = "none";//if matches, show. Else hide
         }
     }
 }
 
+//Runs when the page is loaded
 document.addEventListener('DOMContentLoaded', function(){
-    //Set Vars
+    //Initialize the variable elements
     var classInput = document.getElementById("preferenceForm");
     var classList = document.querySelector(".teachersList");
 
-    //Hide Button
+    //Hide Class Selection
     classInput.style.display = "none";
     classList.style.display = "none";
 });
 </script>
 
-<!-- 
-Display left hand side text
-    Requires preferenceOptions class to make it stay left
--->
+<!--Display of the module-->
 <div class="customtext teachersOptions">
     <!--If header exists, display header-->
     <?php if ($displayHeader) : ?>
@@ -178,16 +175,19 @@ Display left hand side text
         <?php echo $displayText; ?>
     <?php endif; ?>
     <br>
-    <?php if ($isTeacher) : ?>
-        Account Type: Teacher.<br>
+    <!--Check account type-->
+    <?php if ($isTeacher) : ?><!--If the account belongs to a teacher-->
+        Account Type: Teacher<br>
+        <!--Display the string version of the class-->
         <div class="flex stretch"><span style="background-color: orange; color: white;">Your Students: </span><span id="text_list2">[]</span></div>
         <form id="preferenceForm" style="display:none;" method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>" >
             <input type="text" name="list2" id="input_list2" placeholder = "[]">
             <br><input type="submit" class="inputSavePreference" name="submit2" value="Save Selection">
             <br><input onkeyup="filterName(this.value);" onchange="filterName(this.value);" type="text" name="filter" id="name_filter" placeholder = "filter by name or id">
         </form>
-    <?php else : ?>
-        Account Type: Student.<br>
+    <?php else : ?><!--If the account belongs to a student-->
+        Account Type: Student<br>
+        <!--Display the string version of the class-->
         <div class="flex stretch"><span style="background-color: orange;">Your Teachers: </span><span id="text_list1">[]</span></div>
         <form id="preferenceForm" style="display:none;" method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>" >
             <input type="text" name="list1" id="input_list1" placeholder = "[]">
@@ -195,13 +195,14 @@ Display left hand side text
             <br><input onkeyup="filterName(this.value);" onchange="filterName(this.value);" type="text" name="filter" id="name_filter" placeholder = "filter by name or id">
         </form>
     <?php endif; ?>
+    <!--Put the edit class button here-->
     <br><button onclick="editClass();" id="editClassBtn" class="inputSavePreference" >Edit Class</button>
     <br>
     <!--
         Create input boxes in a form (Method: POST)
-            list1 refers to the Preferred List
+            list1 refers to the list of teachers
+            list2 refers to the list of students
     -->
-    
 </div>
 
 <!--
@@ -209,7 +210,7 @@ Display left hand side text
 -->
 <?php if ($isTeacher) : ?><!--For teachers to pick students-->
     <div class="teachersList" style="display:none;">
-        <!--For loop to display tag list-->
+        <!--Loop for each student found in database-->
         <?php foreach ($studentList as $key => $value) : ?>
             <!--Set the div id as the tag name and give it onclick toggleTeacher func-->
             <div class="teacherBox" id="<?php echo $key;?>" onclick="toggleStudent(<?php echo $key;?>)">
@@ -218,7 +219,7 @@ Display left hand side text
                     If no image is found, give it default image using onerror func
                 -->
                 <img src="/taskmeisterx/modules/mod_taskmeister_chooseclass/images/<?php echo $key;?>.jpg" width="100%" height="100%" onerror="var randomImgName = ['1.jpg','2.jpg','3.jpg','4.jpg','2.jpg']; this.src='/taskmeisterx/modules/mod_taskmeister_chooseclass/images/'+Math.floor(1+Math.random() * 15)+'.jpg';"/>
-                <!--Display label of tags, including tag name and number of uses-->
+                <!--Display name of teacher and their id-->
                 <p class = "teacherLabel"><span class="boxName"><?php echo $value; ?></span><br>
                 Code: <span class="boxId"><?php echo $key; ?></span></p>
             </div>
@@ -227,7 +228,7 @@ Display left hand side text
     </div>
 <?php else : ?><!--For students to pick teachers-->
     <div class="teachersList" style="display:none;">
-        <!--For loop to display tag list-->
+        <!--For loop for each teacher found-->
         <?php foreach ($teacherList as $key => $value) : ?>
             <!--Set the div id as the tag name and give it onclick toggleTeacher func-->
             <div class="teacherBox" id="<?php echo $key;?>" onclick="toggleTeacher(<?php echo $key;?>)">
@@ -236,7 +237,7 @@ Display left hand side text
                     If no image is found, give it default image using onerror func
                 -->
                 <img src="/taskmeisterx/modules/mod_taskmeister_chooseclass/images/<?php echo $key;?>.jpg" width="100%" height="100%" onerror="var randomImgName = ['1.jpg','2.jpg','3.jpg','4.jpg','2.jpg']; this.src='/taskmeisterx/modules/mod_taskmeister_chooseclass/images/'+Math.floor(1+Math.random() * 15)+'.jpg';"/>
-                <!--Display label of tags, including tag name and number of uses-->
+                <!--Display the teacher's name and id-->
                 <p class = "teacherLabel"><span class="boxName"><?php echo $value; ?></span><br>
                 Code: <span class="boxId"><?php echo $key; ?></span></p>
             </div>
@@ -247,10 +248,13 @@ Display left hand side text
 
 <script>
 //Function to add current list to menu
+//Loop for each student/teacher in current list
 <?php foreach ($currentList as $row) : ?>
     <?php if ($isTeacher) : ?>
+        //If account is a teacher, toggle the target student 
         toggleStudent(<?php echo $row; ?>);
     <?php else : ?>
+        //Else if account is a student, toggle the target teacher
         toggleTeacher(<?php echo $row; ?>);
     <?php endif; ?>
 <?php endforeach; ?>
