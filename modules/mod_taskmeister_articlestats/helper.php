@@ -1,6 +1,6 @@
 <?php
 /**
- * Helper class for Hello World! module
+ * Helper class for the Article Statistics module
  * 
  * @package    Joomla.Tutorials
  * @subpackage Modules
@@ -30,6 +30,11 @@ class modArticleStats
     {
         return $params->get('customheader');
     }
+    /**
+     * getName()
+     * Function: Get the user's name from the factory
+     * Parameter: $id refers to the target user id
+     */
     function getName($id)
     {
         $user = Factory::getUser($id);
