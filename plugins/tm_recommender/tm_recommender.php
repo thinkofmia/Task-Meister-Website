@@ -970,77 +970,82 @@ class plgTaskMeisterTM_recommender extends JPlugin
                     $result = JFactory::getDbo()->insertObject('#__customtables_table_teacherstats', $teacherInfo, 'es_teacherid');
                 }
             }
-            
         }   
-
     }
-    /* Function: Fix User Statistics
-    This function automatically updates/refreshes the user statistics.
-     It should be used when adding a new user/updating user profiles
+    /***
+     * fixUserStats()
+     * Last Updated: 30/07/2020
+     * Created by: Fremont Teng
+     * Function: 
+     *  - Automatic fixes/refreshes the statistics of the custom users database
+     * Parameter: None
+     * Notes: Should be run only on specific pages to reduce lagging
      */
     function fixUserStats(){
-        $db = Factory::getDbo();//Gets database
-        $me = Factory::getUser();//Gets user 
-        //Get user bank from database query
+        //Sets the variables for the database and user
+        $db = Factory::getDbo();
+        $me = Factory::getUser();
+        //Query the database for the users
         $query2 = $db->getQuery(true);
-        $query2->select($db->quoteName(array('id','name','email')))
-            ->from($db->quoteName('#__users'));
+        $query2->select($db->quoteName(array('id','name','email')))//Gets the user id, name and email
+            ->from($db->quoteName('#__users'));//From the users table
         $db->setQuery($query2);
-        $results_bank = $db->loadAssocList();
+        $results_bank = $db->loadAssocList();//Save results as $results_bank
 
-        //Get external user table (custom table)
+        //Query the database for the custom user statistics
         $query = $db->getQuery(true);
+        //Get the user id, the pages they deployed, liked and disliked, and their preferences
         $query->select($db->quoteName(array('es_userid','es_pagedeployed','es_pageliked','es_pagedisliked','es_userpreference')))
-            ->from($db->quoteName('#__customtables_table_userstats'));
+            ->from($db->quoteName('#__customtables_table_userstats'));//From the custom user statistics table
         $db->setQuery($query);
-        $results_ext = $db->loadAssocList();
+        $results_ext = $db->loadAssocList();//Save results as $results_ext
 
-        //Store the current users in external table into an array
-        $ext_users =array();
-        foreach ($results_ext as $row2) { 
-            array_push($ext_users, $row2['es_userid']);
+        //Initialize the users into an array
+        $ext_users =array();//Counter to keep track of existing users
+        foreach ($results_ext as $row2) { //Loop for each user statistics found
+            array_push($ext_users, $row2['es_userid']);//Save the user id in counter array
         }
         //Add in new users if any
-        foreach ($results_bank as $row){
-            //Update user class
-            $userInfo = new stdClass();
-            $userInfo->es_userid = $row['id'];
-            $userInfo->es_name = $row['name'];
-            $userInfo->es_email = $row['email'];
-            if (in_array($row['id'], $ext_users)){
-                // Update user info if exists.
+        foreach ($results_bank as $row){//Loop for each user found in the database
+            //Setup the user class
+            $userInfo = new stdClass();//Create a class
+            $userInfo->es_userid = $row['id'];//Sets the user id
+            $userInfo->es_name = $row['name'];//Sets the user name 
+            $userInfo->es_email = $row['email'];//Sets the user email
+            if (in_array($row['id'], $ext_users)){//If the user already exists in the statistics table
+                // Update the user info.
                 $result = JFactory::getDbo()->updateObject('#__customtables_table_userstats', $userInfo, 'es_userid');
             }
-            else{//Insert user info if doesn't exists
+            else{//Else: Insert user info if doesn't exists
                 $result = JFactory::getDbo()->insertObject('#__customtables_table_userstats', $userInfo, 'es_userid');
             }
         }   
 
         //Update more statistics elements
-            foreach ($results_ext as $row) { 
-                //For deployment list
+            foreach ($results_ext as $row) {//Loop for each user in the custom user statistics 
+                //For deployment list, save new deployment list if exists
                 if (isset($row['es_pagedeployed'])) $deployedList = $this->createList($row['es_pagedeployed']);
-                else $deployedList = "[]";
-                //For Liked pages
+                else $deployedList = "[]";//Initialize to empty array if none exists
+                //For Liked pages, save new liked pages list if exists
                 if (isset($row['es_pageliked'])) $likedList = $this->createList($row['es_pageliked']);
-                else $likedList = "[]";
-                //For Disliked pages
+                else $likedList = "[]";//Initialize to empty array if none exists
+                //For Disliked pages, save new disliked pages list if exists
                 if (isset($row['es_pagedisliked'])) $dislikedList = $this->createList($row['es_pagedisliked']);
-                else $dislikedList = "[]";
-                //For user preference
+                else $dislikedList = "[]";//Initialize to empty array if none exists
+                //For user preference, save new user's preferences if exists
                 if (isset($row['es_userpreference'])) $preferenceList = $row['es_userpreference'];
-                else $preferenceList = "[]";
-                //Create user class
+                else $preferenceList = "[]";//Initialize to empty array if none exists
+                //Set up new user class
                 $userInfo = new stdClass();
-                $userInfo->es_userid = $row['es_userid'];
-                $userInfo->es_pageliked =  $likedList;
-                $userInfo->es_pagedisliked =  $dislikedList;
-                $userInfo->es_pagedeployed =  $deployedList;
-                $userInfo->es_userpreference =  $preferenceList;
+                $userInfo->es_userid = $row['es_userid'];//Set user id
+                $userInfo->es_pageliked =  $likedList;//Save the new liked list
+                $userInfo->es_pagedisliked =  $dislikedList;//Save the new disliked list
+                $userInfo->es_pagedeployed =  $deployedList;//Save the new deployed list
+                $userInfo->es_userpreference =  $preferenceList;//Save the new preference list
                 // Update the object into the custom user table.
                 $result = JFactory::getDbo()->updateObject('#__customtables_table_userstats', $userInfo, 'es_userid');
         }
-        return true;//Can return anything. Used true to see if succeeded.
+        return true;//Return success message
     }
     /* Function: Count Article Likes
     This function calculates the total likes and dislikes of an article.
