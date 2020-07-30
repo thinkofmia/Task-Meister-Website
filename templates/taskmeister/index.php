@@ -120,7 +120,7 @@ $doc->addScript($this->baseurl . '/templates/' . $this->template . '/js/keen-sli
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
           <!--If Guest, disable the remaining tabs-->
           <?php if ($userID==0) : ?>
-            <a class="dropdown-item" href="<?php echo $this->baseurl."/index.php/login"?>">Login</a>
+            <a class="dropdown-item" href="<?php echo $this->baseurl."/index.php/login"?>">Login/Sign Up</a>
             <div class="dropdown-divider"></div>
             <a class="dropdown-item disabled" href="#">My List</a>
             <a class="dropdown-item disabled" href="#">My Preferences</a>
