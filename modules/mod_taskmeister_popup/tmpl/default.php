@@ -38,6 +38,8 @@ defined('_JEXEC') or die;
   </div>
 
 <script>
+//Note that the popup/modal uses cookie to remember the user's visit
+
 // Get the modal
 var myModal = document.getElementById("myModal");
 
@@ -58,6 +60,7 @@ x.onclick = function() {
 //  }
 //}
 
+//Set Cookie func (From w3Schools)
 function setCookie(cname, cvalue, exdays) {
   var d = new Date();
   d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
@@ -65,6 +68,7 @@ function setCookie(cname, cvalue, exdays) {
   document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
 }
 
+//Get Cookie func (From w3Schools)
 function getCookie(cname) {
   var name = cname + "=";
   var ca = document.cookie.split(';');
@@ -80,11 +84,12 @@ function getCookie(cname) {
   return "";
 }
 
+//When on load, check cookie
 document.addEventListener('DOMContentLoaded', function(){
   var isshow = getCookie("<?php echo $displayHeader; ?>");
-    if (isshow == null || isshow == "") {
+    if (isshow == null || isshow == "") {//If first time/no cookie found, display pop up
       myModal.style.display = 'block';
     }
-    else myModal.style.display = 'none';
+    else myModal.style.display = 'none';//Else if found, hide pop up
 });
 </script>
