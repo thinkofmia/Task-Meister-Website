@@ -2,7 +2,7 @@
 <extension type="module" version="3.1.0" client="site" method="upgrade">
     <name>Your Class Stats Module (Task Meister)</name>
     <author>Fremont Teng</author>
-    <version>1.0.3</version>
+    <version>1.0.4</version>
     <description>A module for Task Meister, to display various stats of the your class. Comes with pie charts, bar charts or table form. </description>
     <files>
         <filename>mod_taskmeister_yourclassstats.xml</filename>
