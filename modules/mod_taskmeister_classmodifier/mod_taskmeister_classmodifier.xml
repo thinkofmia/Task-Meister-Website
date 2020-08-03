@@ -2,7 +2,7 @@
 <extension type="module" version="3.1.0" client="site" method="upgrade">
     <name>Class Modifier Module (Task Meister)</name>
     <author>Fremont Teng</author>
-    <version>1.0.0</version>
+    <version>1.0.3</version>
     <description>A module for Task Meister, to modify the weightage of recommendation for your class.</description>
     <files>
         <filename>mod_taskmeister_classmodifier.xml</filename>
