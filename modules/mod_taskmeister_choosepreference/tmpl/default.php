@@ -174,7 +174,7 @@ Display left hand side text
         <?php endif; ?>
         </script>
     <?php endforeach; ?>
-    <!--Make a get more button-->
+    <!--Make a get more button, currently not in used-->
     <?php if ($count>=25): ?>
             <?php echo "</span>"; ?>
     <?php endif; ?>
@@ -182,33 +182,43 @@ Display left hand side text
 
 <script>
 var moreText = document.getElementById("getMore");
-//moreText.style.display = "none";
 
+/**
+*   JavaScript function to get all tags in the list
+*   Currently not in use since we have the search filter
+ */
 function getAllTags() {
+  //Set up the necessary elements as variables
   var moreText = document.getElementById("getMore");
   var btnText = document.getElementById("getMoreBtn");
-
+  
+  //If clicked on "Hide Rest" Button
   if (moreText.style.display == "inline") {
-    btnText.innerHTML = "Get All"; 
-    moreText.style.display = "none";
+    btnText.innerHTML = "Get All";//Change the button text to "Get All" 
+    moreText.style.display = "none";//Hide the rest of the tags
   } 
-  else {
-    btnText.innerHTML = "Hide Rest"; 
-    moreText.style.display = "inline";
+  else {//Else if clicked on "Get All"
+    btnText.innerHTML = "Hide Rest"; //Change the button text to "Hide Rest"
+    moreText.style.display = "inline";//Show the rest of the tag
   }
 }
-//Function to add current list to menu
+
+/**
+*   JavaScript function to add current list to front end
+ */
+//Loop for each preference in the current list
 <?php foreach ($currentList as $key => $value) : ?>
     <?php if ($key): ?>
-        <?php if ($value==0): ?>//No way
+        //If preference exists
+        <?php if ($value==0): ?>//If the user is against the preference
+            togglePreference('<?php echo $key; ?>');//Toggle it twice (to get red)
             togglePreference('<?php echo $key; ?>');
+        <?php elseif ($value==1) : ?>//If the user is considering/may try the preference
+            togglePreference('<?php echo $key; ?>');//Toggle it thrice
+            togglePreference('<?php echo $key; ?>');//To get yellow
             togglePreference('<?php echo $key; ?>');
-        <?php elseif ($value==1) : ?>
-            togglePreference('<?php echo $key; ?>');
-            togglePreference('<?php echo $key; ?>');
-            togglePreference('<?php echo $key; ?>');
-        <?php elseif ($value==2) : ?>//$value ==2
-            togglePreference('<?php echo $key; ?>');
+        <?php elseif ($value==2) : ?>//If the user prefers this
+            togglePreference('<?php echo $key; ?>');//Toggle it once to get green
         <?php endif; ?>
     <?php endif; ?>
 <?php endforeach; ?>

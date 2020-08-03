@@ -76,20 +76,19 @@ class ModChoosePreferenceHelper
     }
     function getPreferenceLists($userid, $db){
         if ($userid != 0 ){//If user is not a guest
-            //Get external user table (custom table) To find out list of liked, deployed and disliked articles
+            //Query from the custom user statistics table
             $query = $db->getQuery(true);
-            $query->select($db->quoteName(array('es_userid','es_userpreference')))
-            ->from($db->quoteName('#__customtables_table_userstats'))
-            ->where($db->quoteName('es_userid') . ' = ' . $userid);
+            $query->select($db->quoteName(array('es_userid','es_userpreference')))//Gets the user id and their preferences
+            ->from($db->quoteName('#__customtables_table_userstats'))//From the custom user statistics table
+            ->where($db->quoteName('es_userid') . ' = ' . $userid);//Where the user id matches the one in the parameter
             $db->setQuery($query);
-            $results_ext = $db->loadAssocList();
-            //Save information into a list
-            foreach ($results_ext as $row){
+            $results_ext = $db->loadAssocList();//Save information into $results_ext
+            foreach ($results_ext as $row){//Loop for the result
                 if ($row['es_userid']==$userid){//Just to be sure if user id is same
-                    $preferencelist = json_decode($row['es_userpreference']);
+                    $preferencelist = json_decode($row['es_userpreference']);//Convert the preferences to an array
                 }
             }
-            return $preferencelist;
+            return $preferencelist;//Return the preference list
         }
         
     }
