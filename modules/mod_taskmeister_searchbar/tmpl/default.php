@@ -14,6 +14,7 @@ defined('_JEXEC') or die;
         <?php echo $displayText; ?>
     <?php endif; ?>
 </div>
+<!--Search box-->
 <div class="search">
     <form action="<?php echo JUri::base(); ?>index.php/search">
         <input type="text" placeholder="Search.." name="keyword" value = "<?php echo $_REQUEST["keyword"]; ?>">

@@ -2,8 +2,8 @@
 <extension type="module" version="3.1.0" client="site" method="upgrade">
     <name>Search Bar (Task Meister)</name>
     <author>Fremont Teng</author>
-    <version>1.0.0</version>
-    <description>A custom search bar module for Task Meister. Allows link back to tm recommendation. Only works with the taskmeister template. </description>
+    <version>1.0.3</version>
+    <description>A custom search bar module for Task Meister. Allows link back to tm recommendation. This is only assuming that you are not using the taskmeister template by any chance. </description>
     <files>
         <filename>mod_taskmeister_searchbar.xml</filename>
         <filename module="mod_taskmeister_searchbar">mod_taskmeister_searchbar.php</filename>
