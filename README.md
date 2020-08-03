@@ -28,7 +28,7 @@ In our engine, we take into account of the user's preferences. This includes the
 ### Collaborative Filtering
 Collaborative filtering is based on the assumption that people who agreed in the past will agree in the future, and that they will like similar kinds of items as they liked in the past.
 
-Our recommender takes into account of the overall likes and dislikes of an article, the activites made on each article and how recent the activities are, to further weigh the recommendation of the article. 
+Our recommender takes into account of the overall likes and dislikes of an article, the activites made on each article and how recent the activities are, to further weigh the recommendation of the article. It also takes into account for what your class's may prefer: for example a student can also see articles that their teacher recommends/likes as well
 
 ## Types of files inside the Repository
 Components 
