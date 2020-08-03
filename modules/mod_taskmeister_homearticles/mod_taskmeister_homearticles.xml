@@ -2,7 +2,7 @@
 <extension type="module" version="3.1.0" client="site" method="upgrade">
     <name>Home Articles (Task Meister)</name>
     <author>Fremont Teng</author>
-    <version>1.0.2</version>
+    <version>1.0.3</version>
     <description>A recommend articles module for Task Meister's homepage. Shows all of the user's preferences in categories</description>
     <files>
         <filename>mod_taskmeister_homearticles.xml</filename>
