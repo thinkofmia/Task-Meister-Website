@@ -36,126 +36,157 @@ class ModFeaturedArticleHelper
          */
         return $params->get('customheader');
     }
-    function getVideo($params, $mode, $articleId)
+    function getVideo($params, $articleId)
     {
         /**
-         * Function Get Video Link: Get video link input from Joomla Interface
+         * Function Get Video Link: Crawl video link from article
          * Parameter: $params
          */
-        if ($mode == "choice_no") return $params->get('videolink');//Gives back set video link
-        //Else crawl for the video link
-        else {
-            //Set up Database Variable
-            $db =& JFactory::getDbo();
-            //Query for SQL for external article states
-            $query = $db->getQuery(true);
-            $query->select($db->quoteName(array('id','fulltext','introtext')))// Get all of the contents
-                ->from($db->quoteName('#__content'))//From the external article stats table
-                ->where($db->quoteName('id') . ' = ' . intval($articleId));//Where the article id is equal to the chosen article
-            $db->setQuery($query);
-            $results = $db->loadAssocList(); //Save results as a list
-            //if(!strlen(trim($results))) return null;
-            //For each item in the restuls
-            foreach($results as $row){
-                if ($row['id']==$articleId){
-                    $fullText = ($row['fulltext']);//Save the full text
-                    $introText = $row['introtext'];//Save the intro text
-                } 
-            }
-            //Check within intro text
-            if ($introText){
-                //$crawledLink = "GC_9w9IV3CI"; Test value
-                $vartext = $introText;
-                while (($vartext=strstr($vartext,"youtube.com/watch?v="))!= NULL ){//If default link
-                    $crawledLink = strstr($vartext,"youtube.com/watch?v=");
-                    $crawledLink = str_replace("watch?v=","embed/",$crawledLink);
-                    if (strstr($crawledLink,">", true)) $crawledLink = strstr($crawledLink,">", true);
-                    if (strstr($crawledLink,"\"", true)) $crawledLink = strstr($crawledLink,"\"", true);
-                    if (strstr($crawledLink,";", true)) $crawledLink = strstr($crawledLink,";", true);
-                    $url = "https://www.".$crawledLink;
-                    if (!filter_var($url, FILTER_VALIDATE_URL) === false) {
-                        return $url;
-                    }
-                    else {//For debugging
-                        echo "<script>console.log('Picked up invalid url: ".$url."')</script>";
-                    }
+        
+        //Set up Database Variable
+        $db =& JFactory::getDbo();
+        //Query for SQL for external article states
+        $query = $db->getQuery(true);
+        $query->select($db->quoteName(array('id','fulltext','introtext')))// Get all of the contents
+            ->from($db->quoteName('#__content'))//From the external article stats table
+            ->where($db->quoteName('id') . ' = ' . intval($articleId));//Where the article id is equal to the chosen article
+        $db->setQuery($query);
+        $results = $db->loadAssocList(); //Save results as a list
+        //if(!strlen(trim($results))) return null;
+        //For each item in the restuls
+        foreach($results as $row){
+            if ($row['id']==$articleId){
+                $fullText = ($row['fulltext']);//Save the full text
+                $introText = $row['introtext'];//Save the intro text
+            } 
+        }
+        //Check/Crawl within intro text
+        if ($introText){
+            //$crawledLink = "GC_9w9IV3CI"; Test value
+            $vartext = $introText;
+            //Keep crawling until no text is left
+            while (($vartext=strstr($vartext,"youtube.com/watch?v="))!= NULL ){//If default link
+                //Find the below substring
+                $crawledLink = strstr($vartext,"youtube.com/watch?v=");
+                //Replace it with embed
+                $crawledLink = str_replace("watch?v=","embed/",$crawledLink);
+                //Filter out the back of the links
+                if (strstr($crawledLink,">", true)) $crawledLink = strstr($crawledLink,">", true);
+                if (strstr($crawledLink,"\"", true)) $crawledLink = strstr($crawledLink,"\"", true);
+                if (strstr($crawledLink,";", true)) $crawledLink = strstr($crawledLink,";", true);
+                //Append the front of the link
+                $url = "https://www.".$crawledLink;
+                //If not invalid, return the url
+                if (!filter_var($url, FILTER_VALIDATE_URL) === false) {
+                    return $url;
                 }
-                $vartext = $introText;
-                while (($vartext=strstr($vartext,"youtu.be/")) != NULL ){//If sharing link
-                    $crawledLink = strstr($vartext,"youtu.be/");
-                    $crawledLink = str_replace("youtu.be/","youtube.com/embed/",$crawledLink);
-                    if (strstr($crawledLink,">", true)) $crawledLink = strstr($crawledLink,">", true);
-                    if (strstr($crawledLink,"\"", true)) $crawledLink = strstr($crawledLink,"\"", true);
-                    if (strstr($crawledLink,";", true)) $crawledLink = strstr($crawledLink,";", true);
-                    $url = "https://www.".$crawledLink;
-                    if (!filter_var($url, FILTER_VALIDATE_URL) === false) {
-                        return $url;
-                    }
-                    else {//For debugging
-                        echo "<script>console.log('Picked up invalid url: ".$url."')</script>";
-                    }
-                }
-                $vartext = $introText;
-                while (($vartext=strstr($vartext,"youtube.com/embed/")) != NULL ){//If embeded link
-                    $crawledLink = strstr($vartext,"youtube.com/embed/");
-                    if (strstr($crawledLink,">", true)) $crawledLink = strstr($crawledLink,">", true);
-                    if (strstr($crawledLink,"\"", true)) $crawledLink = strstr($crawledLink,"\"", true);
-                    if (strstr($crawledLink,";", true)) $crawledLink = strstr($crawledLink,";", true);
-                    $url = "https://www.".$crawledLink;
-                    if (!filter_var($url, FILTER_VALIDATE_URL) === false) {
-                        return $url;
-                    }
-                    else {//For debugging
-                        echo "<script>console.log('Picked up invalid url: ".$url."')</script>";
-                    }
+                else {//Display invalid url msg
+                    echo "<script>console.log('Picked up invalid url: ".$url."')</script>";
                 }
             }
-            //Check within full text
-            if ($fullText){
-                //$crawledLink = "GC_9w9IV3CI"; Test value
-                $vartext = $fullText;
-                while (($vartext=strstr($vartext,"youtube.com/watch?v="))!= NULL){//If default link
-                    $crawledLink = strstr($fullText,"youtube.com/watch?v=");
-                    $crawledLink = str_replace("watch?v=","embed/",$crawledLink);
-                    if (strstr($crawledLink,">", true)) $crawledLink = strstr($crawledLink,">", true);
-                    if (strstr($crawledLink,"\"", true)) $crawledLink = strstr($crawledLink,"\"", true);
-                    if (strstr($crawledLink,";", true)) $crawledLink = strstr($crawledLink,";", true);
-                    $url = "https://www.".$crawledLink;
-                    if (!filter_var($url, FILTER_VALIDATE_URL) === false) {
-                        return $url;
-                    }
-                    else {//For debugging
-                        echo "<script>console.log('Picked up invalid url: ".$url."')</script>";
-                    }
+            $vartext = $introText;
+            //Keep crawling until no text is left
+            while (($vartext=strstr($vartext,"youtu.be/")) != NULL ){//If sharing link
+                //Search for the below substring
+                $crawledLink = strstr($vartext,"youtu.be/");
+                //Replace the substring with embed
+                $crawledLink = str_replace("youtu.be/","youtube.com/embed/",$crawledLink);
+                //Filter out the back of the youtube link
+                if (strstr($crawledLink,">", true)) $crawledLink = strstr($crawledLink,">", true);
+                if (strstr($crawledLink,"\"", true)) $crawledLink = strstr($crawledLink,"\"", true);
+                if (strstr($crawledLink,";", true)) $crawledLink = strstr($crawledLink,";", true);
+                //Append the front of the youtube link
+                $url = "https://www.".$crawledLink;
+                //If the link is a valid url
+                if (!filter_var($url, FILTER_VALIDATE_URL) === false) {
+                    return $url;//Return it
                 }
-                $vartext = $fullText;
-                while (($vartext=strstr($vartext,"youtu.be/"))!=NULL){//If sharing link
-                    $crawledLink = strstr($fullText,"youtu.be/");
-                    $crawledLink = str_replace("youtu.be/","youtube.com/embed/",$crawledLink);
-                    if (strstr($crawledLink,">", true)) $crawledLink = strstr($crawledLink,">", true);
-                    if (strstr($crawledLink,"\"", true)) $crawledLink = strstr($crawledLink,"\"", true);
-                    if (strstr($crawledLink,";", true)) $crawledLink = strstr($crawledLink,";", true);
-                    $url = "https://www.".$crawledLink;
-                    if (!filter_var($url, FILTER_VALIDATE_URL) === false) {
-                        return $url;
-                    }
-                    else {//For debugging
-                        echo "<script>console.log('Picked up invalid url: ".$url."')</script>";
-                    }
+                else {//Else display invalid url msg
+                    echo "<script>console.log('Picked up invalid url: ".$url."')</script>";
                 }
-                $vartext = $fullText;
-                while (($vartext=strstr($vartext,"youtube.com/embed/"))!=NULL){//If embeded link
-                    $crawledLink = strstr($fullText,"youtube.com/embed/");
-                    if (strstr($crawledLink,">", true)) $crawledLink = strstr($crawledLink,">", true);
-                    if (strstr($crawledLink,"\"", true)) $crawledLink = strstr($crawledLink,"\"", true);
-                    if (strstr($crawledLink,";", true)) $crawledLink = strstr($crawledLink,";", true);
-                    $url = "https://www.".$crawledLink;
-                    if (!filter_var($url, FILTER_VALIDATE_URL) === false) {
-                        return $url;
-                    }
-                    else {//For debugging
-                        echo "<script>console.log('Picked up invalid url: ".$url."')</script>";
-                    }
+            }
+            $vartext = $introText;
+            //Keep crawling until no text is left
+            while (($vartext=strstr($vartext,"youtube.com/embed/")) != NULL ){//If embeded link
+                //Search for the substring below
+                $crawledLink = strstr($vartext,"youtube.com/embed/");
+                //Filter the back of the link
+                if (strstr($crawledLink,">", true)) $crawledLink = strstr($crawledLink,">", true);
+                if (strstr($crawledLink,"\"", true)) $crawledLink = strstr($crawledLink,"\"", true);
+                if (strstr($crawledLink,";", true)) $crawledLink = strstr($crawledLink,";", true);
+                //Append to the front of the link
+                $url = "https://www.".$crawledLink;
+                //Check if the link is valid
+                if (!filter_var($url, FILTER_VALIDATE_URL) === false) {
+                    return $url;//If so, return it
+                }
+                else {//Display invalid url msg
+                    echo "<script>console.log('Picked up invalid url: ".$url."')</script>";
+                }
+            }
+        }
+        //Check within full text
+        if ($fullText){
+            //$crawledLink = "GC_9w9IV3CI"; Test value
+            $vartext = $fullText;
+            //Keep crawling until no text is left
+            while (($vartext=strstr($vartext,"youtube.com/watch?v="))!= NULL){//If default link
+                //Search through the substrings of the link
+                $crawledLink = strstr($fullText,"youtube.com/watch?v=");
+                //Replace the string with embed
+                $crawledLink = str_replace("watch?v=","embed/",$crawledLink);
+                //Filter out the back of the links
+                if (strstr($crawledLink,">", true)) $crawledLink = strstr($crawledLink,">", true);
+                if (strstr($crawledLink,"\"", true)) $crawledLink = strstr($crawledLink,"\"", true);
+                if (strstr($crawledLink,";", true)) $crawledLink = strstr($crawledLink,";", true);
+                //Append to the front of the links
+                $url = "https://www.".$crawledLink;
+                //If the url is valid
+                if (!filter_var($url, FILTER_VALIDATE_URL) === false) {
+                    return $url;//Then return it
+                }
+                else {//Else display invalid url msg
+                    echo "<script>console.log('Picked up invalid url: ".$url."')</script>";
+                }
+            }
+            $vartext = $fullText;
+            //Keep crawling until no text is left
+            while (($vartext=strstr($vartext,"youtu.be/"))!=NULL){//If sharing link
+                //Search for the substring
+                $crawledLink = strstr($fullText,"youtu.be/");
+                //Replace the substring
+                $crawledLink = str_replace("youtu.be/","youtube.com/embed/",$crawledLink);
+                //Filter out the back of the link
+                if (strstr($crawledLink,">", true)) $crawledLink = strstr($crawledLink,">", true);
+                if (strstr($crawledLink,"\"", true)) $crawledLink = strstr($crawledLink,"\"", true);
+                if (strstr($crawledLink,";", true)) $crawledLink = strstr($crawledLink,";", true);
+                //Append to the front of the link
+                $url = "https://www.".$crawledLink;
+                //If the link is valid
+                if (!filter_var($url, FILTER_VALIDATE_URL) === false) {
+                    return $url;//Return the link
+                }
+                else {//Else display invalid url msg
+                    echo "<script>console.log('Picked up invalid url: ".$url."')</script>";
+                }
+            }
+            $vartext = $fullText;
+            //Keep crawling until no text is left
+            while (($vartext=strstr($vartext,"youtube.com/embed/"))!=NULL){//If embeded link
+                //Search for the below substring
+                $crawledLink = strstr($fullText,"youtube.com/embed/");
+                //Filter out the back of the link
+                if (strstr($crawledLink,">", true)) $crawledLink = strstr($crawledLink,">", true);
+                if (strstr($crawledLink,"\"", true)) $crawledLink = strstr($crawledLink,"\"", true);
+                if (strstr($crawledLink,";", true)) $crawledLink = strstr($crawledLink,";", true);
+                //Append to the front of the link
+                $url = "https://www.".$crawledLink;
+                //If the link is valid
+                if (!filter_var($url, FILTER_VALIDATE_URL) === false) {
+                    return $url;//Return the link
+                }
+                else {//Else display invalid url msg
+                    echo "<script>console.log('Picked up invalid url: ".$url."')</script>";
                 }
             }
         }
@@ -205,18 +236,22 @@ class ModFeaturedArticleHelper
         return $contents;
     }
     function getArticle($articleId){
+        /**
+         * Function Get Article: Get article contents from the database
+         * Parameter $articleId: Refers to the id of the chosen article
+         */
         $db =& JFactory::getDbo();
-        //Query
+        //Query the database
         $query = $db->getQuery(true);
-        $query->select($db->quoteName(array('id','title','images')))
-            ->from($db->quoteName('#__content'))
-            ->where($db->quoteName('id') . ' = ' . intval($articleId));
+        $query->select($db->quoteName(array('id','title','images')))//Get the article id, title and images
+            ->from($db->quoteName('#__content'))//From the contents table
+            ->where($db->quoteName('id') . ' = ' . intval($articleId));//Where id matches the article id
         $db->setQuery($query);
-        $results = $db->loadAssocList();
-        foreach($results as $row){
-            $fullArticle = $row;
+        $results = $db->loadAssocList();//Save the results in $results
+        foreach($results as $row){//Loop for each row in the $result
+            $fullArticle = $row;//Save the full article as the row
         }
-        if (!$fullArticle) $fullArticle = "No article found. ";
-        return $fullArticle;
+        if (!$fullArticle) $fullArticle = "No article found. ";//If nothing is found, set default msg
+        return $fullArticle;//Return the full article
     }
 }
