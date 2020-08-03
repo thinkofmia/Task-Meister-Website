@@ -15,6 +15,21 @@ Tree Theme
 
 Check our website at: https://iwant2study.org/taskmeisterx/index.php/
 
+## Recommender Engine (Plugin)
+Our Recommender Engine uses both Content-Based Filtering and Collaborative Filtering. With a plugin settings field, the scale/effectiveness of the filtering can also be adjusted to your joomla's liking.
+
+![Recommended Weightage](images/RecommendedWeightages.PNG)
+
+### Content-Based Filtering
+Content-based filtering methods are based on a description of the item and a profile of the user's preferences.
+
+In our engine, we take into account of the user's preferences. This includes their liked/disliked/deployed pages and their preferences on individal tags. This helps to better filter out the type of similar/related articles that they may like to better to cater to individual user. Our search engine also further cater to particular keywords to narrow down the filtering.
+
+### Collaborative Filtering
+Collaborative filtering is based on the assumption that people who agreed in the past will agree in the future, and that they will like similar kinds of items as they liked in the past.
+
+Our recommender takes into account of the overall likes and dislikes of an article, the activites made on each article and how recent the activities are, to further weigh the recommendation of the article. 
+
 ## Types of files inside the Repository
 Components 
 - Components are the largest and most complex extensions of them all; they can be seen as mini-applications. Our Review Component is located here.
