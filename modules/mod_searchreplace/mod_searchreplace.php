@@ -18,8 +18,16 @@ defined('_JEXEC') or die;
 // include the syndicate functions only once
 require_once __DIR__.'/helper.php';
 
-$pattern = '/(<article .*)margin:(?:\s*)auto;/';
+//$pattern = '/(<article .*)margin:(?:\s*)auto;/';
 
-ModSearchReplaceHelper::getMatches($pattern);
+//$pattern = '/lightnessfaq/';
+//$replacement = 'darkhivefaq';
+
+//$pattern = ['/color:(\s)?#333333;/', '/background-color:(\s)?#fafafa;/'];
+//$replacement = '/* \0 */';
+$pattern = '/background-color:(\s)?white;/';
+$replacement = '/* \0 */';
+
+ModSearchReplaceHelper::getMatches($pattern, $replacement);
 
 require JModuleHelper::getLayoutPath('mod_searchreplace');

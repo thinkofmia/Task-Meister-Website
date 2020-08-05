@@ -7,11 +7,10 @@ CREATE TABLE `reviews` (
     `uid`           INT(11)     UNSIGNED NOT NULL,
     `aid`           INT(11)     UNSIGNED NOT NULL,
     `auid`          BINARY(23) AS (CONCAT(CAST(`aid` AS BINARY), ':', CAST(`uid` AS BINARY))) VIRTUAL UNIQUE,
-    `rating`        TINYINT(4) NOT NULL,
+    `rating`        ENUM('1', '2', '3', '4', '5', '6', '7', '8', '9', '10') NOT NULL,
     `review`        TEXT(255)   NOT NULL,
     `published` TINYINT(4)  NOT NULL DEFAULT '1',
-    PRIMARY KEY (`id`),
-    CHECK (`rating` >= 0 AND `rating` <= 10)
+    PRIMARY KEY (`id`)
 )
     ENGINE =InnoDB
     DEFAULT CHARSET =utf8mb4

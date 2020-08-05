@@ -403,10 +403,10 @@ class ModReviewHelper
     {
         $filled = ' star-colour';
         $html = '<div class="rating" data-vote="0" style="%s">'.
-                    '<div class="star-static hidden">'.
+                    /* '<div class="star-static hidden">'.
                         '<span class="full-static" data-value="0"></span>'.
                         '<span class="half-static" data-value="0"></span>'.
-                    '</div>'.
+                    '</div>'. */
                     '<div class="star-static">'.
                         '<span class="full-static' . ($rating >= 2 ? $filled : '') . '" data-value="2"></span>'.
                         '<span class="half-static' . ($rating >= 1 ? $filled : '') . '" data-value="1"></span>'.

@@ -36,7 +36,7 @@ $document->addScript(JUri::base() . 'modules/mod_review/js/review.js');
                         </div>
                         <div class="review-summary">
                             <?php echo ModReviewHelper::renderStarRating($row->rating); ?>
-                            <div style="padding-top: 30px;">
+                            <div style="padding-top: 53px;">
                                 <p><?php echo ModReviewHelper::replaceYTUrl($row->review, '<p>'); ?></p>
                             </div>
                         </div>
@@ -52,10 +52,11 @@ $document->addScript(JUri::base() . 'modules/mod_review/js/review.js');
     </section>
 </div>
 <div id="review-form">
+    <?php JHtml::_('behavior.framework'); JHtml::_('behavior.formvalidator'); ?>
     <section>
         <?php $form = JForm::getInstance('add_review', __DIR__.'/../models/forms/add_review.xml'); ?>
         <div class="no-text-center">
-            <form action="" method="POST" name="submit_review" id="submit_review">
+            <form action="" method="POST" name="submit_review" id="submit_review" class="form-validate">
                 <div class="form-vertical">
                     <fieldset class="submit_review">
                         <h1>
@@ -82,7 +83,7 @@ $document->addScript(JUri::base() . 'modules/mod_review/js/review.js');
                                     }
                                 ?>
                                 <?php echo JHtml::_('form.token'); ?>
-                                <input class="review-submit" type="submit" value=<?php echo JText::_('MOD_REVIEW_SUBMIT') ?>>
+                                <input onclick="return validateReview()" class="review-submit" type="submit" value=<?php echo JText::_('MOD_REVIEW_SUBMIT') ?>>
                             </div>
                         <?php else : ?>
                             <p class="review-status-msg"><?php echo JText::_('MOD_REVIEW_FORM_NOT_ALLOWED'); ?></p>

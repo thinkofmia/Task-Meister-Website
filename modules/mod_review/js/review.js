@@ -25,6 +25,8 @@ jQuery(document).ready(function ($) {
         }
     });
     
+    console.log($.fn.jquery);
+
     // check which review expansion/compression buttons should be shown
     // no reviews to expand
     if($(".reviews").children(".review.read-more").length == 0){
@@ -112,3 +114,26 @@ jQuery(document).ready(function ($) {
         $("button.read-all").reveal();
     });
 });
+
+function validateReview() {
+    review_rating = document.querySelector("#rating");
+    if(review_rating.value < 1 || review_rating.value > 10) {
+        // check if warning msg already exists in DOM
+        if(!(review_warning_msg = document.querySelector("#review-warning-msg"))) {
+            review_warning_msg = document.createElement("span");
+            review_warning_msg.id = "review-warning-msg";
+            review_warning_msg.style = "padding-left: 10px; color: #ff0000";
+            review_warning_msg.textContent = "Please select a rating using the stars above the text box";
+            document.querySelector(".review-submit").after(review_warning_msg);
+        }
+        return false;
+    }
+    return true;
+}
+
+function removeWarningMsg() {
+    review_warning_msg = document.querySelector("#review-warning-msg");
+    if(review_warning_msg) {
+        review_warning_msg.remove();
+    }
+}

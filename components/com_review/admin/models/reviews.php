@@ -19,7 +19,7 @@ class ReviewModelReviews extends JModelList
     /**
      * Constructor
      * 
-     * @param   array   $config An optional associative array of configuration options
+     * @param   array   $config An optional associative array of configuration options, contains the possible sorting column names
      * 
      * @see     JController
      * @since   1.6
@@ -32,6 +32,7 @@ class ReviewModelReviews extends JModelList
                 'id',
                 'aid',
                 'uid',
+                'updated',
                 'rating',
                 'review',
                 'published'
@@ -97,6 +98,11 @@ class ReviewModelReviews extends JModelList
         $orderDirn  = $this->state->get('list.direction', 'asc');
 
         $query->order($db->escape($orderCol) . ' ' . $db->escape($orderDirn));
+
+        /* $debug_order = "orderCol: $orderCol\\norderDirn: $orderDirn";
+        JFactory::getDocument()->addScriptDeclaration(
+            'console.log("' . $debug_order . '")'
+        ); */
 
         return $query;
     }
