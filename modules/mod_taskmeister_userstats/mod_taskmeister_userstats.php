@@ -70,5 +70,6 @@ else{//If user has already login, show the external user stats
             $preferenceList = json_decode($row['es_userpreference']);
         }
     }
+    //Display html view of user stats
     require JModuleHelper::getLayoutPath('mod_taskmeister_userstats');
 }

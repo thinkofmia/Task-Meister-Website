@@ -2,8 +2,8 @@
 <extension type="module" version="3.1.0" client="site" method="upgrade">
     <name>Featured Article (Task Meister)</name>
     <author>Fremont Teng</author>
-    <version>1.1.0</version>
-    <description>A featured article module for Task Meister. It also works as a carousel. Requires Bootstrap 4 to run. </description>
+    <version>1.1.2</version>
+    <description>A featured article module for Task Meister that displays a maximum of 4 articles. It also works as a carousel. Requires Bootstrap 4 to run. </description>
     <files>
         <filename>mod_taskmeister_featuredarticle.xml</filename>
         <filename module="mod_taskmeister_featuredarticle">mod_taskmeister_featuredarticle.php</filename>
@@ -15,16 +15,6 @@
     <config>
         <fields name="params">
             <fieldset name="basic">
-                <field
-					name="articleID"
-					type="integer"
-					default="900"
-					label="Article ID (Not Automated)"
-					description="Input your featured article id here. "
-					first="1"
-					step="1"
-                    last="9999"
-				/>
                 <field
 					name="videolink"
 					type="textarea"
@@ -52,16 +42,6 @@
 					cols="30"
 					rows="1"
 				/>
-				<field
-					name="automated"
-					type="list"
-					label="Automated"
-					description="Sets if the recommendation is automated or not. "
-					default="yes"
-					>
-                    <option value="choice_yes">Yes</option>
-					<option value="choice_no">No</option>
-				</field>
             </fieldset>
         </fields>
     </config>

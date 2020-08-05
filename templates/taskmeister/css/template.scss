@@ -1,135 +1,187 @@
-/*Variables*/
-$pageBackground: black; //For Background
-$mainFontColor: white; //Default Font Color
-$altFontColor: darkorange; //Alt Default Font Color
+/**
+* SCSS made by Fremont Teng for the Taskmeister Template
+* Last update: 28/07/2020
+* (Fused with Chai Seng CSS)
+*/
 
-/*Default Tags*/
-body {//Body Tag
-    background-color: $pageBackground;
-    color: $mainFontColor;
+/*
+* Template Variables
+* To make a custom variable, add '$' to the front of the variable name.
+*/
+//Universal
+$disabled: gray;
+
+//Taskmeister/Default Theme
+$pageBackground: black;//Page Background
+$navBg: #343a40;//Navigation Bar Background
+$mainFontColor: white; //Font Color 1
+$altFontColor: darkorange; //Font Color 2
+
+//Sky Theme
+$skyBg: lightblue;//Page Background
+$skyNavBg: darkgray;//Navigation Bar Background
+$skyMainFont: gray;//Font Color 1
+$skyAltFont: skyblue;//Font Color 2
+
+//Red theme (Mainly shares the same variables as the default template except for font color 1)
+$redFontColor: crimson;//Font Color 1
+
+//Tree theme
+$treeBg: wheat;//Page Background
+$treeNavBg: darkgreen;//Navigation Bar Background
+$treeMainFont: brown;//Font Color 1
+$treeAltFont: green;//Font Color 2
+
+/*
+*   Default Tags
+*   Tags that use the default names such as body, h2, etc.
+*/
+
+//Sets the CSS for Body Tag
+body {
+    //Set the Height and Width of the whole body
     width: 97vw;
-    overflow-x: hidden;
-    display: inline-block;
-    position: relative;
     height: 100%;
-    margin-left: 1vw;
+    overflow-x: hidden;//Prevent Horizontal Scrolling
+    display: inline-block;//Set items in the body to be inline-block
+    position: relative;//Set position to be relative
+    margin-left: 1vw;//Set the whole body to be pushed to the right by 1vw
+    //Sets all the possible fonts of the webpage. Starts from left to right by default
     font-family: 'Netflix Sans','Helvetica Neue',Helvetica,Arial,sans-serif, Arial, Helvetica, sans-serif, 'BioRhyme', serif;
 }
 
-p {
-    color: $mainFontColor;
+//Sets the CSS for h5 tags
+h5 {
+    font-weight: 700;//Bold the h5 tag
 }
 
-h3 {
-    color: $altFontColor;
-}
-
-h5 {//Follow Netflix style
-    color: $mainFontColor;
-    font-weight: 700;
-}
-
+//Sets the CSS for all tables
 table {
-    position: relative;
-    border: 2px solid white;
-    border-collapse: collapse;
+    position: relative;//Set to relative
+    border: 2px solid white;//Create a 2px white border around the table
+    border-collapse: collapse;//Collapse the borders 
     tr, th, td {
-        border: 2px solid white;
-        text-align: center;
+        border: 2px solid white;//Create a 2px white border around the data
+        text-align: center;//Align contents to the center
     }
 }
 
-/*Custom Classes*/
-.bgMain{//To fit any class with the page bg
-    background-color: $pageBackground;
-    color: $mainFontColor;
+/*
+* Custom Classes
+* Here is where you can put all your custom-made classes and their CSS properties
+*/
+
+//CSS Class for flexing an element/div
+.flex {
+    display: inline-flex;//Set display to be inline-flex
 }
 
-.bgAlt{//To fit any class with the alt bg
-    background-color: $altFontColor;
-    color: $pageBackground;
-    #activeTab { //For Nav Bar: Active selection
-        background-color: $altFontColor;
-        color: $pageBackground;
-    }
-}
-
-.textAlt{
-    color: $altFontColor;
-}
-
-//Buttons
+//CSS Class to create a circular button
 .btn-circle {
+    //Sets Default Width and Height to be equally 45px 
     width: 45px;
     height: 45px;
     line-height: 45px;
-    text-align: center;
-    padding: 0;
-    border-radius: 50%;
+    text-align: center;//Align button contents to center
+    padding: 0;//Remove padding
+    border-radius: 50%;//Create circular surface
   }
   
+  //Set CSS for the icons in the button
   .btn-circle i {
-    position: relative;
-    top: -1px;
+    position: relative;//Set position to be relative
+    top: -1px;//Sets the position of the icon
   }
   
+  //Sets CSS for a small circular button
   .btn-circle-sm {
+    //Sets width and height of the small circular button to be 35px
     width: 35px;
     height: 35px;
     line-height: 35px;
-    font-size: 0.9rem;
+    font-size: 0.9rem;//Sets font-size
   }
-  
+
+  //Sets CSS for a large circular button
   .btn-circle-lg {
+    //Sets width and height of the large circular button to be 55px
     width: 55px;
     height: 55px;
     line-height: 55px;
-    font-size: 1.1rem;
+    font-size: 1.1rem;//Sets font-size
   }
-  
+
+  //Sets CSS for the extra-large circular button
   .btn-circle-xl {
+    //Sets width and height of the extra-large circular button to be 70px
     width: 70px;
     height: 70px;
     line-height: 70px;
-    font-size: 1.3rem;
+    font-size: 1.3rem;//Sets font-size
   }
 
-/*Custom Ids */
-#navLogo {//Sets the nav logo size
+//Sets the CSS for the Top Navigation bar
+.navbar {
+    opacity: 0.9;//Set the bar to be slightly translucent
+    .nav-item:hover{
+        @extend .bgAlt;//when hover over, highlight the nav-item
+    }
+    .dropdown-item{
+        cursor: pointer;//Gives drop down a pointer cursor
+    }
+    .dropdown-item.disabled{
+        color: gray;//Color all disabled dropdown items to be gray
+    }
+}
+
+/*
+* Custom Elements
+* Here is where you can put all your custom-made identified elements and their CSS properties
+*/
+#navLogo {//Refers to the CSS of the navigation logo
+    //Sets the nav logo size
     width: 40px;
     height: 40px;
 }
 
-#tm_contents {//Sets the CSS for the main contents
-    width: 100%;
-    .col-sm-8 {
-        width: 100%;
+#tm_contents {//Refers to the CSS for the main contents
+    width: 100%;//Stretch it to the max
+    .col-sm-8 {//Refers to the left-side of the contents
+        width: 100%;//Stretch it to the max
     }
 
 }
 
 /*
- * --Modules
+ * CSS for individual Modules
  * This contains the CSS for the Taskmeister Modules
  */
 
 /**
     Featured Article Module
-    - Module used to showcase top articles in a carousel
+    - Module used to showcase top articles in a carousel format
 */
-.carousel-item{
+.carousel-item{//Set CSS of the carousel item
     img {
-        height:40vw;
+        height:40vw;//Set the carousel image to be of height 40vw
     }
  }
 
-.featuredArticleVideo{//Set css for video
+.featuredArticleVideo{//Sets CSS of the video
     width: 40vw;
     height: 30vw;
 
-    iframe{
+    iframe{//Stretch the video to fit the div above
         width: 100%;
         height: 100%;
+    }
+}
+
+#featuredArticlesWrapper {//Sets the CSS of the left hand-side of the featured article
+    .card {//Refers to the CSS of the popup/info card.
+        button:hover {//When the Play Button is hovered over
+            scale: 1.5;//Enlarge it
+        }
     }
 }
 
@@ -138,139 +190,131 @@ table {
     - Module used to showcase articles in a net-flix style
 */
 .articlesRow {//Sets CSS for the wrapper for recommend article module
-    display: inline-flex;
-    width: 100%;
-    left: -2vw;
-    position: relative;
+    display: inline-flex;//Put all the article thumbnails in a line
+    width: 100%;//Stretch the row to 100%
+    position: relative;//Set its position as relative
 }
 
 .recommendedArticles:focus-within,
-.recommendedArticles:hover{//When hover over, translate the article to the left- used in conjuction with the zoom effect
+.recommendedArticles:hover{
+//When hover over, translate the article to the left
+//so that it will match well with the zoom effect
   .article {
     transform: translateX(-25%);
   }
 }
 
 .recommendedArticles{//Sets CSS for row of articles in a line (for Recommend Articles Mod)
-    display:inline-flex; 
-    overflow-x: hidden;
-    overflow-y: hidden;
-    height: 100%; 
-    width: 100%;
-    margin-left: 1%;
-    padding-top: 5vw;
-    padding-bottom: 5vw;
-    //animation
-    transition: transform .4s ease-in;
-    .article:focus, .article:hover {//When hover over, zoom/enlarge the article
-        transform: scale(1.5);
-        z-index: 99;
-        overflow-x: visible;
-        overflow-y: visible;
+    display:inline-flex;    //Makes the articles to be on the same row
+    overflow-x: hidden; //Hide the horizontal scrollbar
+    overflow-y: hidden; //Hide the vertical scrollbar
+    height: 100%;   //Stretch the height to fit the div
+    width: 100%;    //Stretch the width to fit the div
+    margin-left: 1%;    //Creates a margin to the left
+    padding-top: 5vw;   //Pad the top of the article row to centralize it
+    padding-bottom: 5vw;    //Pad the bottom of the article row to centralize it
+    transition: transform .4s ease-in;//Animation Settings
+    
+    //When article is focused or hovered over
+    .article:focus, .article:hover {
+        transform: scale(1.5);//Enlarge/Zoom the article
+        z-index: 99;//Sets it to be on top of everything else
+        overflow-x: visible; //Allows it to exceed outside of the div
+        overflow-y: visible; //Allows it to exceed outside of the div
     }
     a:focus ~ a .article,
-    a:hover ~ a .article {//Move all the adjacent articles to the right
-        transform: translateX(25%);
+    a:hover ~ a .article {  //When article is focused or hovered over, all the articles to its left
+        transform: translateX(25%); //Will be translated horizontally to the left as well
     }
-    .article {//Sets CSS for individual articles
-        position: relative;
-        padding-right: 0.5vw;
-        padding-left: 0.5vw; 
-        width: 15vw; 
-        height: 15vw; 
-        text-align: center;
-        transition: transform 500ms;
+    .article {//Sets the CSS for individual articles
+        position: relative;//Set position to be relative
+        padding-right: 0.5vw;//Pads the right of the article (to create some spacing)
+        padding-left: 0.5vw; //Pads the left of the article (to create some spacing)
+        width: 20vw; //Sets the width of the article to fit viewport
+        height: 15vw; //Sets the height of the article to fit viewport
+        text-align: center; //Centralize the article's contents
+        transition: transform 500ms; //Animation Settings
 
         img {//Sets CSS for the image within the article
-            width: 100%;
-            height: 100%;
+            width: 100%;//Stretch the img's width to fit the article div
+            height: 100%;//Stretch the img's height to fit the article div
         }
-        .articleSimilarity {//Sets CSS for the similarity tag above the article
-            position: absolute;
-            bottom: 82%;
-            text-align: left;
-            background-color: darkgreen;
-            opacity: 0.8;
-            color: $mainFontColor;
-            position: absolute;
-            font-size: 1.25vw;
+        .articleSimilarity {//Sets CSS for the similarity label above the article
+            position: absolute;//Fix the positioning to be absolute
+            bottom: 82%;//Shifts the label to the top
+            text-align: left;//Aligns the words to the left
+            opacity: 0.8;//Makes it translucent
+            font-size: 1.25vw;//Sets font-size to fit viewport
         }
         p {//Sets CSS for the caption below the article
-            position: absolute;
-            bottom: -10%;
-            width: 14vw;
-            background-color: $altFontColor;
-            opacity: 0.8;
-            color: $mainFontColor;
-            position: absolute;
-            font-size: 1.25vw;
-            word-wrap: break-word;
+            position: absolute;//Fix the positioning to be absolute
+            bottom: -10%;//Shifts the label to the bottom
+            width: 19vw;//Stretch the labels to fit the width of the article
+            opacity: 0.8;//Makes it translucent
+            font-size: 1.25vw;//Sets font-size to fit viewport
+            word-wrap: break-word;//Break the words if overflows (set the rest to the next line)
         }
     }
-    .rankedArticle{
-        @extend .article;
-        img {
-            float: right;
-            width: 50%;
+    .rankedArticle{//Sets CSS for the Ranked View of the Article
+        @extend .article;//Inherits the CSS from the article
+        img {//Sets the CSS of the image in the article
+            float: right;//Move the image to the right
+            width: 50%;//Sets the image to occupy half of the article div
         }
-        h2 {//Sets CSS for ranking
-            position: absolute;
-            bottom: -40%;
-            left: -20%;
-            width: 100%;
-            opacity: 1;
-            color: darkgray;
-            text-shadow: 2px 2px #FF0000;
-            position: absolute;
-            font-size: 20vw;
-            word-wrap: break-word;
-            z-index: -1;
+        h2 {//Sets CSS for a single digit left-hand side number
+            position: absolute;//Fix the positioning of the number to be absolute
+            bottom: -40%;//Centralize the LHS number
+            left: -20%;//Centralize the LHS number
+            width: 100%;//Stretch the number to occupy the max width
+            opacity: 1;//Set it to have full opacity
+            color: darkgray;//Sets the main color of the number
+            text-shadow: 2px 2px #FF0000;//Sets the shadow color of the number
+            font-size: 20vw;//Sets font-size to be 20vw
+            word-wrap: break-word;//Break the number of it overflows
+            z-index: -1;//Sets the index to be behind the labels
         }
-        h4 {//Sets CSS for ranking
-            position: absolute;
-            bottom: -10%;
-            left: -20%;
-            width: 100%;
-            opacity: 1;
-            color: darkgray;
-            text-shadow: 2px 2px #FF0000;
-            position: absolute;
-            font-size: 13vw;
-            word-wrap: break-word;
-            z-index: -1;
+        h4 {//Sets CSS for a double digit left-hand side number
+            position: absolute;//Fix the positioning of the number to be absolute
+            bottom: -10%;//Centralize the LHS number
+            left: -20%;//Centralize the LHS number
+            width: 100%;//Stretch the number to occupy the max width
+            opacity: 1;//Set it to have full opacity
+            color: darkgray;//Sets the main color of the number
+            text-shadow: 2px 2px #FF0000;//Sets the shadow color of the number
+            font-size: 13vw;//Sets font-size to be 20vw
+            word-wrap: break-word;//Break the number of it overflows
+            z-index: -1;//Sets the index to be behind the labels
         }
     }
 }
 
-.arrow:hover {//Changes color when hover over the recommended articles arrows
-    cursor: pointer;
-    border: solid $altFontColor;
-    border-width: 0 5px 5px 0;
+.arrowLeft:hover, .arrowRight:hover {//Changes color when hover over the recommended articles arrows
+    cursor: pointer;//Set cursor to pointer
+    border: solid $altFontColor;//Changes to the alt font color
+    border-width: 0 7px 7px 0;//Sets the size of the arrows
 }
 
-.arrow {//CSS for Recommend Articles Arrows (Left/Right)
-    border: solid $mainFontColor;
-    border-width: 0 5px 5px 0;
-    display: inline-block;
-    padding: 3px;
-    width: 2vw;
-    height: 2vw;
-    position: relative;
-    cursor: pointer;
-    margin-top: 10vw;
+.arrow {//Set the CSS for Recommend Articles Arrows (Left & Right)
+    display: inline-block;//Sets display to be inline-block
+    position: relative;//Sets the position of the arrows to be relative
+    padding: 3px;//Centralize the arrow
+    margin-top: 10vw;//Centralize the arrow
+    width: 2vw;//Sets the width of the arrow to fit viewport
+    height: 2vw;//Sets the height of the arrow to fit viewport
+    cursor: pointer;//Sets the cursor of the arrow to be pointer
   }
 
-.arrowLeft {//Sets CSS for the left arrow 
-    @extend .arrow;
-    left: 1%;
-    transform: rotate(135deg);
+.arrowLeft {//Sets the CSS for the left arrow 
+    @extend .arrow;//Inherit the CSS from the main arrow class
+    left: 1%;//Moves it horizontally
+    transform: rotate(135deg);//Rotate to make a left-pointed arrow
 }
 
 .arrowRight {//Sets CSS for the right arrow
-    @extend .arrow;
-    transform: rotate(-45deg);
-    position: relative;
-    margin-left: 1%;
+    @extend .arrow;//Inherit the CSS from the main arrow class
+    transform: rotate(-45deg);//Rotate to make a right-pointed arrow
+    position: relative;//Sets the position to be relative
+    margin-left: 1%;//Sets margin to the left
 }
 
 /**
@@ -278,87 +322,702 @@ table {
     - Module used to allow users pick their preferences and classes
 */
 
-.preferenceOptions, .teachersOptions {//CSS for Wrapper for the options/input boxes
-    position: relative;
-    z-index: 1;
-    width: 100%;
-    text-align: center;
-    h3 {//CSS for the header's inputs
-        text-align: center;
+.preferenceOptions, .teachersOptions {//Sets the CSS for the options'/input boxes' wrapper
+    position: relative;//Sets the position to be relative
+    z-index: 1;//Sets the z-index layer to be in front
+    width: 100%;//Stretches the width to the max
+    text-align: center;//Aligns the contents to the center
+    h3 {//CSS for the header
+        text-align: center;//Align the header to the center
     }
     input {//CSS for the inputs
-        display: inline-block;
-        min-width: 20vw; 
-        font-size: 1.5vw;
+        display: inline-block;//Set display to be inline-block
+        min-width: 20vw; //Set minimum width to viewport
+        font-size: 1.5vw;//Set font-size to viewport
     }
 }
 
-#preferenceForm {//CSS for the hidden input boxes 
-    #input_list1, #input_list2, #input_list3 {//Hidden so that it can be submitted to the php database without any injections
-        display: none;
+#preferenceForm {//CSS for the preference form
+    #input_list1, #input_list2, #input_list3 {//CSS for the input fields
+        display: none;//Hide the input fields (since they can't be stretchable atm)
     }
-    text-align: center;
-    width: 90vw;
-    position: relative;
+    text-align: center;//Align the contents to the centre
+    width: 90vw;//Stretch the width to 90vw
+    position: relative;//Set its position to relative
 }
 
-.inputSavePreference {
-    font-size: 1.5vw;
-    text-align: center;
-    border-radius: 8px;
-    background-color: $altFontColor;
-    color: $mainFontColor;
-    margin-top: 0.5vw;
-    margin-bottom: 0.5vw;
+.inputSavePreference {//Set CSS of the save button of the preference form
+    font-size: 1.5vw;//Sets the font-size to fit viewport
+    text-align: center;//Align the button's contents to the centre
+    border-radius: 8px;//Create the circular radius
+    background-color: $altFontColor;//Set the background color of the button to fit the themes
+    color: $mainFontColor;//Set the font color of the button to fit the theme
+    margin-top: 0.5vw;//Create some space at the top
+    margin-bottom: 0.5vw;//Create some space at the bottom
 }
 
-.preferenceList, .teachersList {//Wrapper to contain all the preferences/users
-    width: 90vw;
-    height: 100%;
-    display: inline-block;
-    text-align: center;
-    position: relative;
+.preferenceList, .teachersList {//Sets the CSS for the list of the preferences/users
+    width: 90vw;//Stretches the width to fit the view screen
+    height: 100%;//Expand height to the max
+    display: inline-block;//Makes the items in the list to inline by block
+    text-align: center;//Align the contents to the center
+    position: relative;//Sets position to relative
 }
  
-.userPreferred, .teacherSelected {//Color the state if the tag is preferred or the teacher is selected
-    @extend .preferenceBox; 
-    background-color: green;
-    border-radius: 8px;
+.userPreferred, .teacherSelected {//Sets the CSS of a preferred tag/selected user
+    @extend .preferenceBox; //Inherits the CSS from the preferenceBox Class
+    background-color: green;//Highlights the background green
+    border-radius: 8px;//Sets the circular shape of the highlight
 }
  
-.userNotPreferred {//Color the state if the tag is not preferred
-    @extend .preferenceBox;
-    background-color: red;
-    border-radius: 8px;       
+.userNotPreferred {//Sets the CSS of an against tag
+    @extend .preferenceBox;//Inherits the CSS from the preferenceBox Class
+    background-color: red;//Highlights the background red
+    border-radius: 8px;//Sets the circular shape of the highlight      
 }
 
-.userMayTry {//Color the state if the tag is considered to be tried
-    @extend .preferenceBox;
-    background-color: goldenrod;
-    border-radius: 8px;       
+.userMayTry {//Sets the CSS of a may try tag
+    @extend .preferenceBox;//Inherits the CSS from the preferenceBox Class
+    background-color: goldenrod;//Highlights the background gold
+    border-radius: 8px; //Sets the circular shape of the highlight
 }
 
-.preferenceBox, .teacherBox {//CSS for the individual boxes.
-    height: 15vw;
-    width: 15vw;
-    position: relative;
-    display: inline-flex;
-    padding: 1vw;
+.preferenceBox, .teacherBox {//Sets the CSS for the individual boxes
+    height: 20vw;//Sets the height of the box
+    width: 20vw;//Sets the width of the box
+    position: relative;//Sets the position of the boxes to be relative
+    display: inline-flex;//Lines the contents of the box in the same row
+    padding: 1vw;//Pad the box by viewport
+    cursor: pointer;//Set cursor to be pointer when hover over
+
+    .preferenceStats{//Sets the CSS for the statistics of the particular tag
+        //The statistics refers to the number of thumbs up and deployed labelled in the box
+        background-color: blue;//Sets the blue background
+        color: white;//Sets the font color to be white
+    }
+
+    p {//Sets the CSS for the label of the particular tag/user
+        position: absolute;//Sets position to be absolute
+        z-index: 10;//Overlay the labels to be above the image
+        opacity: 0.9;//Makes it slightly translucent
+        text-align: center;//Align the text contents to the center
+        width: 18vw;//Stretch the width of the labels to fit the width of the image
+        word-wrap: anywhere;//Allows breaking of words into lines
+        font-size: 1.5vw;//Sets the label's font-size to fit viewport
+    }
+    .preferenceLabel, .teacherLabel {//Sets the CSS for the label of the particular tag/user
+        bottom: -0.5vw;//Sets the label to be at the bottom
+        background-color: $altFontColor;//Sets the background of the label to fit the theme
+    }
+}
+
+/**
+    Login Component/Module
+    - Affects the default login component/module
+*/
+
+.login-button {//Sets the CSS for the login button
+    cursor: pointer;//Set the cursor as Pointer when hovered over
+}
+
+.userdata, .input-prepend, #form-login-submit {//Sets the CSS for the inputs
+    padding: 2%;//Pad the inputs
+}
+
+#modlgn-passwd, #modlgn-username, .login-button {//Sets the CSS for the login inputs, e.g. username and password
+    width: 80%;//Expands the input to resemble the pptx prototype
+    padding-top: 2%;//Pad the top of the inputs
+    font-size: 1.5vw;//Sets the font-size to fit the viewports
+    text-align: center;//Align the inside's contents to the center
+    border-radius: 8px;//Create the circular border for the inputs
+}
+
+.login {//Sets the CSS for the login class
+    #username, #password {//Gets the Username and Password input fields
+        width: 80%;//Stretches the width of the input field to fit the pptx prototype
+        padding-top: 2%;//Pads the top of the inputs
+        font-size: 1.5vw;//Sets the font-size to fit the viewports
+        text-align: center;//Align the inside's contents to the center
+        border-radius: 8px;//Create the circular border for the inputs
+    }
+    #username-lbl, #password-lbl {//Sets the CSS for the inputs' headers
+        display: none;//Hide labels
+    }
+    .control-group {//Sets the CSS for individual input groups
+        margin-bottom: 0.5vw;//Create some space at the bottom so the inputs are not clustered
+    }
+}
+
+/**
+    Popup/Modal Module
+    - The Module is used to create one-time popups on specific pages
+    - Uses cookies to store information if it has been read or not
+*/
+.modal {//Sets the CSS of the popup module
+    display: block;//Sets the contents display to be block
+    #closePopup {//Sets the CSS for the 'x'/close button of the pop up
+        font-size: 5vw;//Enlarge the size based on request to fit font-size
+    }
+  }
+
+/**
+    CSS for Chai Seng's Articles
+*/
+#review-form{//Sets the CSS of the review form (Review Mod)
+    #review {//Sets the CSS of the div of the review
+        width: 100%;//Stretch the review div to fit the contents containers
+    }
+}
+
+legend { /* To be filled by Chai Seng */
+	display: block;
+	width: 100%;
+	padding: 0;
+	margin-bottom: 18px;
+	font-size: 19.5px;
+	line-height: 36px;
+	color: #979797; /* added */
+	border: 0;
+	border-bottom: 1px solid #e5e5e5;
+}
+
+.well { /* To be filled by Chai Seng */
+	min-height: 20px;
+	padding: 19px;
+	margin-bottom: 20px;
+	background-color: #1d1f24; /* added */
+	border: 1px solid #e3e3e3;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+	-webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,0.05);
+	-moz-box-shadow: inset 0 1px 1px rgba(0,0,0,0.05);
+	box-shadow: inset 0 1px 1px rgba(0,0,0,0.05);
+}
+
+.breadcrumb { /* To be filled by Chai Seng */
+	padding: 8px 15px;
+	margin: 0 0 18px;
+	list-style: none;
+	background-color: #1d1f24; /* added */
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+  	border: 1px solid #e3e3e3; /* added */
+}
+
+.brand { /* To be filled by Chai Seng */
+	color: #09d; /* added */
+	-webkit-transition: color .5s linear;
+	-moz-transition: color .5s linear;
+	-o-transition: color .5s linear;
+	transition: color .5s linear;
+}
+
+.brand:hover { /* To be filled by Chai Seng */
+	color: #0ae; /* added */
+	text-decoration: none;
+}
+
+.login-night { /* To be filled by Chai Seng */
+  background-color: #1d1f24;
+}
+
+/* To be filled by Chai Seng */
+/* the following is css for action-button's */
+.action-button-unset:enabled {/* To be filled by Chai Seng */
+    /* background-color: Transparent; */
+    background-color: #8a8a8a;
+    background-repeat: no-repeat;
+    /* border: solid white 1px; */
+    /* border-radius: 20px; */
+    padding: 10px;
     cursor: pointer;
-    .preferenceStats{//CSS for the preference stats
-        background-color: blue;
+    overflow: hidden;
+    outline: none;
+    /* color: white; */
+    color: black;
+    transition-property: all;
+    transition-duration: 0.25s;
+    font-weight: bold;
+}
+
+.action-button-unset:hover:enabled {/* To be filled by Chai Seng */
+    box-shadow: 6px 4px 10px 1px white;
+    transform: translate(-5px, -5px) scale(1.2);
+}
+
+.action-button-unset:active:enabled {/* To be filled by Chai Seng */
+    transition-duration: 0.1s;
+    box-shadow: -1px -1px 5px 1px white;
+    transform: translate(2px, 2px) scale(0.9);
+}
+
+.action-button-set {/* To be filled by Chai Seng */
+    background-repeat: no-repeat;
+    background-color: #515151;
+    border-style: inset;
+    padding: 10px;
+    cursor: pointer;
+    overflow: hidden;
+    outline: none;
+    color: black;
+    font-weight: bold;
+    transform: scale(0.9);
+    box-shadow: 0px 0px 5px 3px #0af;
+    border-color: black;
+}
+
+.action-button-set:hover {/* To be filled by Chai Seng */
+  	transition: none;
+}
+
+.action-button-set:active {/* To be filled by Chai Seng */
+	transition: none;
+}
+
+
+/**
+    CSS for Articles
+*/
+.item-page {//Get the page's items
+    .img-container{//Get the image container
+        a{//Create overlay effect for the thumbnail in article
+            opacity: 0.4;
+            position: absolute;
+        }
     }
-    p {
-        position: absolute;
-        z-index: 10;
-        opacity: 0.9;
-        text-align: center;
-        width: 13vw;
-        word-wrap: anywhere;
-        font-size: 1.5vw;
+}
+
+/**
+    CSS THEMES
+    - Comes with 4 themes:
+        - Default (Black/Orange)
+        - Ice (Gray/Skyblue)
+        - Red (Black/Red)
+        - Tree (Wheat/Green/Red)
+    - Allows users to customize the display and color of their website
+    - Uses cookies to save choices of themes
+*/
+
+/**
+*   Default Theme
+*   - Main colors (Black/Orange)
+*   - Original Taskmeister Color Scheme, slightly based on Netflix to create dark environment
+*/
+body.default {//Sets the CSS of the body with the default theme
+    background-color: $pageBackground;//Sets the background with the default theme
+    color: $mainFontColor;//Sets the font color with the default theme
+    h5, p {//Follow Netflix style
+        color: $mainFontColor;//Sets the font color with the main color
     }
-    .preferenceLabel, .teacherLabel {//CSS for the captions below the boxes
-        bottom: -0.5vw;
-        background-color: $altFontColor;
+    h3, a {
+        color: $altFontColor;//Sets the font color with the alt color
+    }
+    .bgMain{//To fit any class with the page bg
+        background-color: $pageBackground;//Sets background with the theme bg
+        color: $mainFontColor;//Sets font color with the main color
+    }
+    
+    .bgAlt{//To fit any class with the alt bg
+        background-color: $altFontColor;//Sets the background with the alt color
+        color: $pageBackground;//Sets the font color with the theme bg
+
+        #activeTab { //Sets the CSS for an active Nav-item 
+            background-color: $altFontColor;//Highlights the background with the alt color
+            color: $pageBackground;//Sets the font color with the theme bg
+        }
+    }
+    .textAlt{//Sets the CSS of the alt text
+        color: $altFontColor;//Sets the font color with the alt color
+    }
+    .arrow {//Set the CSS for the arrows in the recommended articles mod
+        border: solid $mainFontColor;//Sets the color of the arrow
+        border-width: 0 0.75vw 0.75vw 0;//Sets the size of the arrow
+    }
+    .navbar {//Sets the CSS for the navigation bar
+        background-color: $navBg;//Sets the bg color to the theme
+        .nav-link{//Sets the CSS of the nav links
+            color: $mainFontColor;//Sets the font color to the theme
+        }
+        .dropdown-menu {//Sets the CSS of the dropdown menu
+            background-color: $navBg;//Sets the background of the dropdown
+            .dropdown-item {//Sets the CSS of the dropdown item
+                color: $mainFontColor;//Sets the font color to the theme
+            }
+            .dropdown-item:hover{//Sets the CSS of the dropdown item when hovered over
+                color: $pageBackground;//Sets the font color to the theme
+            }
+            .dropdown-item.disabled {//Sets the CSS of an disabled dropdown item
+                color: $disabled;//Sets the font color to be disabled
+            }
+        }
+    }
+    .article{//Sets the CSS of the article box (Recommend Article Mod)
+        .articleSimilarity{//Sets the CSS of the article similarity label
+            background-color: darkgreen;//Sets background as green
+            color: $mainFontColor;//Sets font color as to the theme
+        }
+        p {//Sets the CSS of the article labels
+            background-color: $altFontColor;//Sets background to the theme
+            color: $mainFontColor;//Sets the font color as to the theme
+        }
+    }
+    .rankedArticle{//Sets the CSS of the Ranked Article View (Recommend Articles Mod)
+        h2,h4{//The numbered labels of the ranked articles
+            //h2 refers to the single digit numbers
+            //h4 refers to the double digit numbers
+            text-shadow: 2px 2px $altFontColor;//Creates shadow/3D effect
+        }
+    }
+    #featuredArticlesWrapper {//Sets the CSS for the featured articles wrapper (Featured Articles Mod)
+        .card-body{//Sets the CSS for the left-side card
+            background-color: #343a40;//Sets the bg to be dark gray
+            .card-text {//Sets the CSS for the text of the card
+                color: $mainFontColor;//Sets the font color to be as to the theme
+            }
+        }
+    }
+    .preferenceBox, .teacherBox {//Sets the CSS for the preference/user box (Choose Class/Choose Preferences Mod)
+        .preferenceLabel, .teacherLabel{//Sets the CSS for the box labels
+            background-color: $altFontColor;//Sets the bg color to the theme
+            color: $mainFontColor;//Sets the font color to the theme
+        }
+    }
+    .inputSavePreference {//Sets the CSS for the submit/save button (Choose Class/Choose Preference Mod)
+        background-color: $altFontColor;//Sets the bg color to the theme
+        color: $mainFontColor;//Sets the font color to the theme
+    }
+    #tm_contents{//Sets the CSS for the main contents div
+        .col-sm-4 {//Sets the CSS of the right-hand side container (Position: Right)
+            background-color: #343a40;//Sets bg color to the theme
+        }
+    }
+    .login-button{//Set the CSS for the login button
+        background-color: $altFontColor;//Sets the bg color to the theme
+        color: $mainFontColor;//Sets the font color to the theme
+    }
+    .well {//Set the CSS for the wells
+        background-color: #1d1f24;//Sets the bg color to the theme
+        label {//Sets the CSS for the labels in the wells
+            color: gray;//Sets the font color to the theme
+        }
+    }
+}
+
+/**
+*   Red Theme
+*   - Main colors (Black/Red)
+*   - Color Scheme to resemble Netflix, similar to the default TM theme
+*/
+body.red {//Sets the CSS of the Red Theme to the entire body
+    background-color: $pageBackground;//Sets the bg to the theme
+    color: $mainFontColor;//Sets the default font-color to the theme
+    //Default contents
+    h5, p {//Follow Netflix style
+        color: $mainFontColor;//Sets the font-color to the theme
+    }
+    h3, a {
+        color: $redFontColor;//Sets the font-color to the theme
+    }
+    //Classes
+    .bgMain{//Sets the CSS class of a bgMain (Can be used anywhere)
+        background-color: $pageBackground;//Sets the bg to the theme
+        color: $mainFontColor;//Sets the font-color to the theme
+    }
+    .bgAlt{//Sets the CSS class of a bgAlt (Can be used anywhere)
+        background-color: $redFontColor;//Sets the bg to the theme
+        color: $mainFontColor;//Sets the font-color to the theme
+        #activeTab {//Sets the CSS of an active nav-item (Navigation bar)
+            background-color: $redFontColor;//Sets the bg to the theme
+            color: $mainFontColor;//Sets the font-color to the theme
+        }
+    }
+    .textAlt{//Sets the CSS class of a textAlt (Can be used anywhere)
+        color: $redFontColor;//Sets the font-color to the theme
+    }
+    .arrow {//Sets the CSS of the arrows (Recommend Articles Mod)
+        border: solid $mainFontColor;//Sets the color of the arrow to the theme
+        border-width: 0 0.75vw 0.75vw 0;//Sets the size/shape of the arrow to viewport
+    }
+    .navbar {//Sets the CSS of the navigation bar (Navigation Bar)
+        background-color: $navBg;//Sets the bg color of the Nav bar to the theme
+        .nav-link{//Sets the CSS of the nav items
+            color: $mainFontColor;//Sets the font color of the nav items to the theme
+        }
+        .dropdown-menu {//Sets the CSS of the dropdown menu
+            background-color: $navBg;//Sets the bg color of the dropdown to the theme
+            .dropdown-item {//Sets the CSS of the dropdown item
+                color: $mainFontColor;//Sets the font color of the dropdown item to the theme
+            }
+            .dropdown-item:hover{//Sets the CSS of the dropdown item when hovered over
+                color: $pageBackground;//Changes the font color when hovered over (to the theme)
+            }
+        }
+    }
+    .article{//Sets the CSS of the article box (Recommend Articles Mod)
+        .articleSimilarity{//Sets the CSS of the similarity label 
+            background-color: darkgreen;//Sets the bg to green
+            color: $mainFontColor;//Sets the font color to the theme
+        }
+        p {//Sets the CSS of the labels in the box
+            background-color: $redFontColor;//Sets the bg to the theme
+            color: $mainFontColor;//Sets the font color to the theme
+        }
+    }
+    .rankedArticle{//Sets the CSS of the ranked article box (Recommend Articles Mod)
+        h2, h4{//Sets the CSS of the numbered labels on the left
+            text-shadow: 2px 2px $redFontColor;//Creates the shadow/3D effect
+        }
+    }
+    #featuredArticlesWrapper {//Sets the CSS of the featured article wrapper (Featured Articles Mod)
+        .card-body{//Sets the CSS of the card body
+            background-color: #343a40;//Sets the bg of the card to the theme
+            .card-text {//Sets the CSS of the card contents
+                color: $mainFontColor;//Sets the font color to the theme
+            }
+        }
+    }
+    .preferenceBox, .teacherBox {//Sets the CSS for the preference/user box (Choose Class/Choose Preferences Mod)
+        .preferenceLabel, .teacherLabel{//Sets the CSS for the box labels
+            background-color: $redFontColor;//Sets the bg color to the theme
+            color: $mainFontColor;//Sets the font color to the theme
+        }
+    }
+    .inputSavePreference {//Sets the CSS for the submit/save button (Choose Class/Choose Preference Mod)
+        background-color: $redFontColor;//Sets the bg color to the theme
+        color: $mainFontColor;//Sets the font color to the theme
+    }
+    #tm_contents{//Sets the CSS for the main contents div
+        .col-sm-4 {//Sets the CSS of the right-hand side container (Position: Right)
+            background-color: #343a40;//Sets bg color to the theme
+        }
+    }
+    .login-button{//Set the CSS for the login button
+        background-color: $redFontColor;//Sets the bg color to the theme
+        color: $mainFontColor;//Sets the font color to the theme
+    }
+    .well {//Set the CSS for the wells
+        background-color: #1d1f24;//Sets the bg color to the theme
+        label {//Sets the CSS for the labels in the wells
+            color: gray;//Sets the font color to the theme
+        }
+    }
+}
+
+/**
+*   Ice Theme
+*   - Main colors (Gray/Lightblue)
+*   - A custom light theme
+*/
+body.day {//Sets the CSS of the Ice Theme to the entire body
+    background-color: $skyBg;//Sets the bg to the theme
+    color: $skyMainFont;//Sets the default font-color to the theme
+    //Default contents
+    h5, h3, p {
+        color: $skyMainFont;//Sets the font-color to the theme
+    }
+    a{//Sets the CSS of the links
+        color: blue;//Sets the font-color to the theme
+    }
+    .bgMain{//Sets the CSS class of a bgMain (Can be used anywhere)
+        background-color: $skyBg;//Sets the bg to the theme
+        color: $skyMainFont;//Sets the font-color to the theme
+    }
+    
+    .bgAlt{//Sets the CSS class of a bgAlt (Can be used anywhere)
+        background-color: $skyAltFont;//Sets the bg to the theme
+        color: $mainFontColor;//Sets the font-color to the theme
+        #activeTab { //Sets the CSS of an active nav-item (Navigation bar)
+            background-color: $skyAltFont;//Sets the bg to the theme
+            color: $pageBackground;//Sets the font-color to the theme
+        }
+    }
+    
+    .textAlt{//Sets the CSS class of a textAlt (Can be used anywhere)
+        color: $skyAltFont;//Sets the font-color to the theme
+    }
+    .arrow {//Sets the CSS of the arrows (Recommend Articles Mod)
+        border: solid $skyMainFont;//Sets the color of the arrow to the theme
+        border-width: 0 0.75vw 0.75vw 0;//Sets the size/shape of the arrow to viewport
+    }
+    .navbar{//Sets the CSS of the navigation bar (Navigation Bar)
+        background-color: $skyNavBg;//Sets the bg color of the Nav bar to the theme
+        .nav-link{//Sets the CSS of the nav items
+            color: $pageBackground;//Sets the font color of the nav items to the theme
+        }
+        .dropdown-menu {//Sets the CSS of the dropdown menu
+            background-color: $skyNavBg;//Sets the bg color of the dropdown to the theme
+            .dropdown-item:hover{//Sets the CSS of the dropdown item when hovered over
+                background-color: $skyAltFont;//Changes the font color when hovered over (to the theme)
+            }
+            .dropdown-item.disabled {//Sets the CSS of a disabled dropdown item
+                color: $disabled;//Sets the font-color to the disabled var
+            }
+        }
+    }
+    .article{//Sets the CSS of the article box (Recommend Articles Mod)
+        .articleSimilarity{//Sets the CSS of the similarity label 
+            background-color: darkgreen;//Sets the bg to green
+            color: $mainFontColor;//Sets the font color to the theme
+        }
+        p {//Sets the CSS of the labels in the box
+            background-color: $skyNavBg;//Sets the bg to the theme
+            color: $mainFontColor;//Sets the font color to the theme
+        }
+    }
+    .rankedArticle{//Sets the CSS of the ranked article box (Recommend Articles Mod)
+        h2, h4{//Sets the CSS of the numbered labels on the left
+            text-shadow: 2px 2px blue;//Creates the shadow/3D effect
+        }
+    }
+    #featuredArticlesWrapper {//Sets the CSS of the featured article wrapper (Featured Articles Mod)
+        .card-body{//Sets the CSS of the card body
+            background-color: $skyMainFont;//Sets the bg of the card to the theme
+            .card-text {//Sets the CSS of the card contents
+                color: $mainFontColor;//Sets the font color to the theme
+            }
+        }
+    }
+    .preferenceBox, .teacherBox {//Sets the CSS for the preference/user box (Choose Class/Choose Preferences Mod)
+        .preferenceLabel, .teacherLabel{//Sets the CSS for the box labels
+            background-color: $skyNavBg;//Sets the bg color to the theme
+            color: $mainFontColor;//Sets the font color to the theme
+        }
+    }
+    .inputSavePreference {//Sets the CSS for the submit/save button (Choose Class/Choose Preference Mod)
+        background-color: $skyNavBg;//Sets the bg color to the theme
+        color: $mainFontColor;//Sets the font color to the theme
+    }
+    #tm_contents{//Sets the CSS for the main contents div
+        .col-sm-4 {//Sets the CSS of the right-hand side container (Position: Right)
+            background-color: lightgray;//Sets bg color to the theme
+        }
+    }
+    .login-button{//Set the CSS for the login button
+        background-color: $skyAltFont;//Sets the bg color to the theme
+        color: $mainFontColor;//Sets the font color to the theme
+    }
+    .well {//Set the CSS for the wells
+        background-color: $skyMainFont;//Sets the bg color to the theme
+        label {//Sets the CSS for the labels in the wells
+            color: white;//Sets the font color to the theme
+        }
+    }
+    .accordionfaqheader.accordion3, .accordionfaqheader.accordion4{//Attempt to change the CSS of the accordionfaq (Not working)
+            background: $skyMainFont;
+            background-color: $skyMainFont;
+    }
+    
+}
+
+/**
+*   Tree Theme
+*   - Main colors (Wheat, Green & Red)
+*   - Another custom light theme
+*/
+body.tree {//Sets the CSS of the Tree Theme to the entire body
+    background-color: $treeBg;//Sets the bg to the theme
+    color: $treeMainFont;//Sets the default font-color to the theme
+    //Default contents
+    h5, h3, p {
+        color: $treeMainFont;//Sets the font-color to the theme
+    }
+    a{//Sets the CSS of the links
+        color: $treeAltFont;//Sets the font-color to the theme
+    }
+    .bgMain{//Sets the CSS class of a bgMain (Can be used anywhere)
+        background-color: $treeBg;//Sets the bg to the theme
+        color: $treeMainFont;//Sets the font-color to the theme
+    }
+    
+    .bgAlt{//Sets the CSS class of a bgAlt (Can be used anywhere)
+        background-color: $treeMainFont;//Sets the bg to the theme
+        color: $mainFontColor;//Sets the font-color to the theme
+        #activeTab { //Sets the CSS of an active nav-item (Navigation bar)
+            background-color: $treeMainFont;//Sets the bg to the theme
+            color: $mainFontColor;//Sets the font-color to the theme
+        }
+    }
+    
+    .textAlt{//Sets the CSS class of a textAlt (Can be used anywhere)
+        color: $treeAltFont;//Sets the font-color to the theme
+    }
+    .arrow {//Sets the CSS of the arrows (Recommend Articles Mod)
+        border: solid $treeMainFont;//Sets the color of the arrow to the theme
+        border-width: 0 0.75vw 0.75vw 0;//Sets the size/shape of the arrow to viewport
+    }
+    .navbar{//Sets the CSS of the navigation bar (Navigation Bar)
+        background-color: $treeNavBg;//Sets the bg color of the Nav bar to the theme
+        .nav-link{//Sets the CSS of the nav items
+            color: white;//Sets the font color of the nav items to the theme
+        }
+        .nav-link:hover{//Sets the CSS when the nav-link is hovered
+            background-color: $treeMainFont;//Changes the bg color to the theme
+        }
+        .dropdown-menu {//Sets the CSS of the dropdown menu
+            background-color: $treeNavBg;//Sets the bg color of the dropdown to the theme
+            .dropdown-item{//Sets the CSS of the dropdown item
+                color: white;//Sets the font color to the theme
+            }
+            .dropdown-item:hover{//Sets the CSS of the dropdown item when hovered over
+                background-color: $treeMainFont;//Changes the font color when hovered over (to the theme)
+            }
+            .dropdown-item.disabled {//Sets the CSS of a disabled dropdown item
+                color: $disabled;//Sets the font-color to the disabled var
+            }
+        }
+    }
+    .article{//Sets the CSS of the article box (Recommend Articles Mod)
+        .articleSimilarity{//Sets the CSS of the similarity label 
+            background-color: darkgreen;//Sets the bg to green
+            color: $mainFontColor;//Sets the font color to the theme
+        }
+        p {//Sets the CSS of the labels in the box
+            background-color: $treeMainFont;//Sets the bg to the theme
+            color: $mainFontColor;//Sets the font color to the theme
+        }
+    }
+    .rankedArticle{//Sets the CSS of the ranked article box (Recommend Articles Mod)
+        h2,h4{//Sets the CSS of the numbered labels on the left
+            text-shadow: 2px 2px $treeAltFont;//Creates the shadow/3D effect
+        }
+    }
+    #featuredArticlesWrapper {//Sets the CSS of the featured article wrapper (Featured Articles Mod)
+        .card-body{//Sets the CSS of the card body
+            background-color: $treeBg;//Sets the bg of the card to the theme
+            .card-text {//Sets the CSS of the card contents
+                color: $treeMainFont;//Sets the font color to the theme
+            }
+        }
+    }
+    .preferenceBox, .teacherBox {//Sets the CSS for the preference/user box (Choose Class/Choose Preferences Mod)
+        .preferenceLabel, .teacherLabel{//Sets the CSS for the box labels
+            background-color: $treeNavBg;//Sets the bg color to the theme
+            color: $mainFontColor;//Sets the font color to the theme
+        }
+    }
+    .inputSavePreference {//Sets the CSS for the submit/save button (Choose Class/Choose Preference Mod)
+        background-color: $treeNavBg;//Sets the bg color to the theme
+        color: $mainFontColor;//Sets the font color to the theme
+    }
+    #tm_contents{//Sets the CSS for the main contents div
+        .col-sm-4 {//Sets the CSS of the right-hand side container (Position: Right)
+            background-color: lightgreen;//Sets bg color to the theme
+        }
+    }
+    .login-button{//Set the CSS for the login button
+        background-color: $treeAltFont;//Sets the bg color to the theme
+        color: $mainFontColor;//Sets the font color to the theme
+    }
+    .well {//Set the CSS for the wells
+        background-color: $treeMainFont;//Sets the bg color to the theme
+        label {//Sets the CSS for the labels in the wells
+            color: white;//Sets the font color to the theme
+        }
+    }
+    .badge{//Sets the CSS for the badges
+        background-color: $treeNavBg;//Sets the bg color to the theme
+        color: $treeBg;//Sets the font color to the theme
     }
 }

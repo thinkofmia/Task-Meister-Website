@@ -19,49 +19,53 @@ require_once dirname(__FILE__) . '/helper.php';//used because our helper functio
 
 $displayHeader = ModHomeArticlesHelper::getHeader($params);//invoke helper class method
 $displayText = ModHomeArticlesHelper::getText($params);//invoke helper class method
-$displayMode = $params->get('display');
-$checkMayTry = $params->get('maytry');
+$displayMode = $params->get('display');//Get the display mode of the home articles
+$checkMayTry = $params->get('maytry');//Get the boolean if to include may try preferences
 
+//Use the factory
 use Joomla\CMS\Factory;
-$me = Factory::getUser();//Gets user
-$db = Factory::getDbo();//Gets database
-$userid = $me->id;
+$me = Factory::getUser();//Sets the variable for user
+$db = Factory::getDbo();//Sets the variable for database
+$userid = $me->id;//Gets the user id
 
-//Set Default tags
+//Set Default tags to be Physics, Chemistry, Mathematics and Biology
 if(!isset($tagList)) $tagList = array("Physics","Chemistry","Mathematics","Biology");
 
-if ($userid==0){
-    $tagList = array("Physics","Chemistry","Mathematics","Chinese","Biology");
+if ($userid==0){//If the user is a guest
+    //Display guest msg
+    echo "Because you have yet to login, your default tags are: Physics, Chemistry, Mathematics, Chinese and Biology";
+    $tagList = array("Physics","Chemistry","Mathematics","Chinese","Biology");//Sets default tag list
 }
 else {//Get User preference
-    //Get external user table (custom table) To find out list of liked, deployed and disliked articles
+    //Query the database
     $query = $db->getQuery(true);
-    $query->select($db->quoteName(array('es_userid','es_userpreference')))
-        ->from($db->quoteName('#__customtables_table_userstats'))
-        ->where($db->quoteName('es_userid') . ' = ' . $userid);
+    $query->select($db->quoteName(array('es_userid','es_userpreference')))//Get the user id and their preferences
+        ->from($db->quoteName('#__customtables_table_userstats'))//From the custom user statistics table
+        ->where($db->quoteName('es_userid') . ' = ' . $userid);//Where the user id matches the current user
     $db->setQuery($query);
-    $results_ext = $db->loadAssocList();
-    //Save information into a list
-    foreach ($results_ext as $row){
+    $results_ext = $db->loadAssocList();//Save results as $results_ext
+    foreach ($results_ext as $row){//Loop for each user found (should only return 1 row)
         if ($row['es_userid']==$userid){//Just to be sure if user id is same
-            $preferenceList = json_decode($row['es_userpreference']);
-            if ($preferenceList)$tagList = array();
-            foreach ($preferenceList as $tag=>$value){
-                if ($value==2) array_push($tagList,$tag);
-                else if ($value==1 && $checkMayTry =="display_yes") array_push($tagList,$tag);
+            $preferenceList = json_decode($row['es_userpreference']);//Gets the preference list
+            if ($preferenceList)$tagList = array();//If preference list exists, initialize $taglist as an array
+            foreach ($preferenceList as $tag=>$value){//Loop for each preference in the list
+                if ($value==2) array_push($tagList,$tag);//If the user prefers the tag, add to list
+                else if ($value==1 && $checkMayTry =="display_yes") array_push($tagList,$tag);//If the user may try the tag and the settings allow for may try preferences, also add to the list
             }
             
         }
     }
 }
 
-//Call our recommender
+//Call our recommender to get the article list
 $resultsSelected= ModHomeArticlesHelper::getArticleList($params->get('noOfArticles'), $userid, $tagList);
 //Get Contents
 $recommendedContents = array();
-foreach ($resultsSelected as $tag => $result){
-    $recommendedContents[$tag] = ModHomeArticlesHelper::getArticles($result);
+foreach ($resultsSelected as $tag => $result){//Loop for each article list found
+    $recommendedContents[$tag] = ModHomeArticlesHelper::getArticles($result);//Get the contents for the relevant lists
 }
 
+//Show debug message of the article lists
 echo "<script>console.log('".json_encode($resultsSelected)."')</script>";
-require JModuleHelper::getLayoutPath('mod_taskmeister_homearticles');//Calls out default.php
+//Display html view of homearticles
+require JModuleHelper::getLayoutPath('mod_taskmeister_homearticles');

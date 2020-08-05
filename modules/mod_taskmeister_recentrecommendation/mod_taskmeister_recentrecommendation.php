@@ -20,7 +20,7 @@ require_once dirname(__FILE__) . '/helper.php';//used because our helper functio
 
 $displayHeader = modRecentRecommend::getHeader($params);//set variable of header using helper class
 $displayText = modRecentRecommend::getText($params);//set variable of text using helper class
-$size = $params->get('size');
+$size = $params->get('size');//Gets the max size of the recent recommendations to show
 
 
 //Database code
@@ -29,11 +29,11 @@ $db = Factory::getDbo();//Get database
 
 //Querying SQL database for recent recommendations
 $query = $db->getQuery(true);
-$query->select($db->quoteName(array('es_uid','es_aid','es_date','es_action')))//Sets which columns of database
-    ->from($db->quoteName('#__customtables_table_recommendationstats'))
-    ->order($db->quoteName('id') . ' DESC');//Sets which database
+$query->select($db->quoteName(array('es_uid','es_aid','es_date','es_action')))//Gets the user id, article id, date of action and type of action
+    ->from($db->quoteName('#__customtables_table_recommendationstats'))//From the recommendation stats table
+    ->order($db->quoteName('id') . ' DESC');//Where the action is the latest
 $db->setQuery($query);
-$results = $db->loadAssocList();//Save results of external article database query
+$results = $db->loadAssocList();//Save results to $results
 
 if ($results){//If inside article table
     $counter = 0;//Initialize counter

@@ -1,27 +1,27 @@
-/*Variables*/
-/*Default Tags*/
+/**
+* SCSS made by Fremont Teng for the Taskmeister Template
+* Last update: 28/07/2020
+* (Fused with Chai Seng CSS)
+*/
+/*
+* Template Variables
+* To make a custom variable, add '$' to the front of the variable name.
+*/
+/*
+*   Default Tags
+*   Tags that use the default names such as body, h2, etc.
+*/
 body {
-  background-color: black;
-  color: white;
   width: 97vw;
+  height: 100%;
   overflow-x: hidden;
   display: inline-block;
   position: relative;
-  height: 100%;
   margin-left: 1vw;
   font-family: "Netflix Sans", "Helvetica Neue", Helvetica, Arial, sans-serif, Arial, Helvetica, sans-serif, "BioRhyme", serif;
 }
 
-p {
-  color: white;
-}
-
-h3 {
-  color: darkorange;
-}
-
 h5 {
-  color: white;
   font-weight: 700;
 }
 
@@ -35,23 +35,12 @@ table tr, table th, table td {
   text-align: center;
 }
 
-/*Custom Classes*/
-.bgMain {
-  background-color: black;
-  color: white;
-}
-
-.bgAlt {
-  background-color: darkorange;
-  color: black;
-}
-.bgAlt #activeTab {
-  background-color: darkorange;
-  color: black;
-}
-
-.textAlt {
-  color: darkorange;
+/*
+* Custom Classes
+* Here is where you can put all your custom-made classes and their CSS properties
+*/
+.flex {
+  display: inline-flex;
 }
 
 .btn-circle {
@@ -89,7 +78,20 @@ table tr, table th, table td {
   font-size: 1.3rem;
 }
 
-/*Custom Ids */
+.navbar {
+  opacity: 0.9;
+}
+.navbar .dropdown-item {
+  cursor: pointer;
+}
+.navbar .dropdown-item.disabled {
+  color: gray;
+}
+
+/*
+* Custom Elements
+* Here is where you can put all your custom-made identified elements and their CSS properties
+*/
 #navLogo {
   width: 40px;
   height: 40px;
@@ -103,12 +105,12 @@ table tr, table th, table td {
 }
 
 /*
- * --Modules
+ * CSS for individual Modules
  * This contains the CSS for the Taskmeister Modules
  */
 /**
     Featured Article Module
-    - Module used to showcase top articles in a carousel
+    - Module used to showcase top articles in a carousel format
 */
 .carousel-item img {
   height: 40vw;
@@ -123,6 +125,10 @@ table tr, table th, table td {
   height: 100%;
 }
 
+#featuredArticlesWrapper .card button:hover {
+  scale: 1.5;
+}
+
 /**
     Recommend Article Module
     - Module used to showcase articles in a net-flix style
@@ -130,7 +136,6 @@ table tr, table th, table td {
 .articlesRow {
   display: inline-flex;
   width: 100%;
-  left: -2vw;
   position: relative;
 }
 
@@ -166,7 +171,7 @@ table tr, table th, table td {
   position: relative;
   padding-right: 0.5vw;
   padding-left: 0.5vw;
-  width: 15vw;
+  width: 20vw;
   height: 15vw;
   text-align: center;
   transition: transform 500ms;
@@ -179,20 +184,14 @@ table tr, table th, table td {
   position: absolute;
   bottom: 82%;
   text-align: left;
-  background-color: darkgreen;
   opacity: 0.8;
-  color: white;
-  position: absolute;
   font-size: 1.25vw;
 }
 .recommendedArticles .article p, .recommendedArticles .rankedArticle p {
   position: absolute;
   bottom: -10%;
-  width: 14vw;
-  background-color: darkorange;
+  width: 19vw;
   opacity: 0.8;
-  color: white;
-  position: absolute;
   font-size: 1.25vw;
   word-wrap: break-word;
 }
@@ -208,7 +207,6 @@ table tr, table th, table td {
   opacity: 1;
   color: darkgray;
   text-shadow: 2px 2px #FF0000;
-  position: absolute;
   font-size: 20vw;
   word-wrap: break-word;
   z-index: -1;
@@ -221,28 +219,25 @@ table tr, table th, table td {
   opacity: 1;
   color: darkgray;
   text-shadow: 2px 2px #FF0000;
-  position: absolute;
   font-size: 13vw;
   word-wrap: break-word;
   z-index: -1;
 }
 
-.arrow:hover, .arrowRight:hover, .arrowLeft:hover {
+.arrowLeft:hover, .arrowRight:hover {
   cursor: pointer;
   border: solid darkorange;
-  border-width: 0 5px 5px 0;
+  border-width: 0 7px 7px 0;
 }
 
 .arrow, .arrowRight, .arrowLeft {
-  border: solid white;
-  border-width: 0 5px 5px 0;
   display: inline-block;
+  position: relative;
   padding: 3px;
+  margin-top: 10vw;
   width: 2vw;
   height: 2vw;
-  position: relative;
   cursor: pointer;
-  margin-top: 10vw;
 }
 
 .arrowLeft {
@@ -318,8 +313,8 @@ table tr, table th, table td {
 }
 
 .preferenceBox, .userPreferred, .teacherSelected, .userNotPreferred, .userMayTry, .teacherBox {
-  height: 15vw;
-  width: 15vw;
+  height: 20vw;
+  width: 20vw;
   position: relative;
   display: inline-flex;
   padding: 1vw;
@@ -327,19 +322,585 @@ table tr, table th, table td {
 }
 .preferenceBox .preferenceStats, .userPreferred .preferenceStats, .teacherSelected .preferenceStats, .userNotPreferred .preferenceStats, .userMayTry .preferenceStats, .teacherBox .preferenceStats {
   background-color: blue;
+  color: white;
 }
 .preferenceBox p, .userPreferred p, .teacherSelected p, .userNotPreferred p, .userMayTry p, .teacherBox p {
   position: absolute;
   z-index: 10;
   opacity: 0.9;
   text-align: center;
-  width: 13vw;
+  width: 18vw;
   word-wrap: anywhere;
   font-size: 1.5vw;
 }
 .preferenceBox .preferenceLabel, .userPreferred .preferenceLabel, .teacherSelected .preferenceLabel, .userNotPreferred .preferenceLabel, .userMayTry .preferenceLabel, .preferenceBox .teacherLabel, .userPreferred .teacherLabel, .teacherSelected .teacherLabel, .userNotPreferred .teacherLabel, .userMayTry .teacherLabel, .teacherBox .preferenceLabel, .teacherBox .teacherLabel {
   bottom: -0.5vw;
   background-color: darkorange;
+}
+
+/**
+    Login Component/Module
+    - Affects the default login component/module
+*/
+.login-button {
+  cursor: pointer;
+}
+
+.userdata, .input-prepend, #form-login-submit {
+  padding: 2%;
+}
+
+#modlgn-passwd, #modlgn-username, .login-button {
+  width: 80%;
+  padding-top: 2%;
+  font-size: 1.5vw;
+  text-align: center;
+  border-radius: 8px;
+}
+
+.login #username, .login #password {
+  width: 80%;
+  padding-top: 2%;
+  font-size: 1.5vw;
+  text-align: center;
+  border-radius: 8px;
+}
+.login #username-lbl, .login #password-lbl {
+  display: none;
+}
+.login .control-group {
+  margin-bottom: 0.5vw;
+}
+
+/**
+    Popup/Modal Module
+    - The Module is used to create one-time popups on specific pages
+    - Uses cookies to store information if it has been read or not
+*/
+.modal {
+  display: block;
+}
+.modal #closePopup {
+  font-size: 5vw;
+}
+
+/**
+    CSS for Chai Seng's Articles
+*/
+#review-form #review {
+  width: 100%;
+}
+
+legend {
+  /* To be filled by Chai Seng */
+  display: block;
+  width: 100%;
+  padding: 0;
+  margin-bottom: 18px;
+  font-size: 19.5px;
+  line-height: 36px;
+  color: #979797;
+  /* added */
+  border: 0;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.well {
+  /* To be filled by Chai Seng */
+  min-height: 20px;
+  padding: 19px;
+  margin-bottom: 20px;
+  background-color: #1d1f24;
+  /* added */
+  border: 1px solid #e3e3e3;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+  -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+
+.breadcrumb {
+  /* To be filled by Chai Seng */
+  padding: 8px 15px;
+  margin: 0 0 18px;
+  list-style: none;
+  background-color: #1d1f24;
+  /* added */
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  border: 1px solid #e3e3e3;
+  /* added */
+}
+
+.brand {
+  /* To be filled by Chai Seng */
+  color: #09d;
+  /* added */
+  -webkit-transition: color 0.5s linear;
+  -moz-transition: color 0.5s linear;
+  -o-transition: color 0.5s linear;
+  transition: color 0.5s linear;
+}
+
+.brand:hover {
+  /* To be filled by Chai Seng */
+  color: #0ae;
+  /* added */
+  text-decoration: none;
+}
+
+.login-night {
+  /* To be filled by Chai Seng */
+  background-color: #1d1f24;
+}
+
+/* To be filled by Chai Seng */
+/* the following is css for action-button's */
+.action-button-unset:enabled {
+  /* To be filled by Chai Seng */
+  /* background-color: Transparent; */
+  background-color: #8a8a8a;
+  background-repeat: no-repeat;
+  /* border: solid white 1px; */
+  /* border-radius: 20px; */
+  padding: 10px;
+  cursor: pointer;
+  overflow: hidden;
+  outline: none;
+  /* color: white; */
+  color: black;
+  transition-property: all;
+  transition-duration: 0.25s;
+  font-weight: bold;
+}
+
+.action-button-unset:hover:enabled {
+  /* To be filled by Chai Seng */
+  box-shadow: 6px 4px 10px 1px white;
+  transform: translate(-5px, -5px) scale(1.2);
+}
+
+.action-button-unset:active:enabled {
+  /* To be filled by Chai Seng */
+  transition-duration: 0.1s;
+  box-shadow: -1px -1px 5px 1px white;
+  transform: translate(2px, 2px) scale(0.9);
+}
+
+.action-button-set {
+  /* To be filled by Chai Seng */
+  background-repeat: no-repeat;
+  background-color: #515151;
+  border-style: inset;
+  padding: 10px;
+  cursor: pointer;
+  overflow: hidden;
+  outline: none;
+  color: black;
+  font-weight: bold;
+  transform: scale(0.9);
+  box-shadow: 0px 0px 5px 3px #0af;
+  border-color: black;
+}
+
+.action-button-set:hover {
+  /* To be filled by Chai Seng */
+  transition: none;
+}
+
+.action-button-set:active {
+  /* To be filled by Chai Seng */
+  transition: none;
+}
+
+/**
+    CSS for Articles
+*/
+.item-page .img-container a {
+  opacity: 0.4;
+  position: absolute;
+}
+
+/**
+    CSS THEMES
+    - Comes with 4 themes:
+        - Default (Black/Orange)
+        - Ice (Gray/Skyblue)
+        - Red (Black/Red)
+        - Tree (Wheat/Green/Red)
+    - Allows users to customize the display and color of their website
+    - Uses cookies to save choices of themes
+*/
+/**
+*   Default Theme
+*   - Main colors (Black/Orange)
+*   - Original Taskmeister Color Scheme, slightly based on Netflix to create dark environment
+*/
+body.default {
+  background-color: black;
+  color: white;
+}
+body.default h5, body.default p {
+  color: white;
+}
+body.default h3, body.default a {
+  color: darkorange;
+}
+body.default .bgMain {
+  background-color: black;
+  color: white;
+}
+body.default .bgAlt, body.default .navbar .nav-item:hover, .navbar body.default .nav-item:hover {
+  background-color: darkorange;
+  color: black;
+}
+body.default .bgAlt #activeTab, body.default .navbar .nav-item:hover #activeTab, .navbar body.default .nav-item:hover #activeTab {
+  background-color: darkorange;
+  color: black;
+}
+body.default .textAlt {
+  color: darkorange;
+}
+body.default .arrow, body.default .arrowLeft, body.default .arrowRight {
+  border: solid white;
+  border-width: 0 0.75vw 0.75vw 0;
+}
+body.default .navbar {
+  background-color: #343a40;
+}
+body.default .navbar .nav-link {
+  color: white;
+}
+body.default .navbar .dropdown-menu {
+  background-color: #343a40;
+}
+body.default .navbar .dropdown-menu .dropdown-item {
+  color: white;
+}
+body.default .navbar .dropdown-menu .dropdown-item:hover {
+  color: black;
+}
+body.default .navbar .dropdown-menu .dropdown-item.disabled {
+  color: gray;
+}
+body.default .article .articleSimilarity, body.default .recommendedArticles .rankedArticle .articleSimilarity, .recommendedArticles body.default .rankedArticle .articleSimilarity {
+  background-color: darkgreen;
+  color: white;
+}
+body.default .article p, body.default .recommendedArticles .rankedArticle p, .recommendedArticles body.default .rankedArticle p {
+  background-color: darkorange;
+  color: white;
+}
+body.default .rankedArticle h2, body.default .rankedArticle h4 {
+  text-shadow: 2px 2px darkorange;
+}
+body.default #featuredArticlesWrapper .card-body {
+  background-color: #343a40;
+}
+body.default #featuredArticlesWrapper .card-body .card-text {
+  color: white;
+}
+body.default .preferenceBox .preferenceLabel, body.default .userPreferred .preferenceLabel, body.default .teacherSelected .preferenceLabel, body.default .userNotPreferred .preferenceLabel, body.default .userMayTry .preferenceLabel, body.default .preferenceBox .teacherLabel, body.default .userPreferred .teacherLabel, body.default .teacherSelected .teacherLabel, body.default .userNotPreferred .teacherLabel, body.default .userMayTry .teacherLabel, body.default .teacherBox .preferenceLabel, body.default .teacherBox .teacherLabel {
+  background-color: darkorange;
+  color: white;
+}
+body.default .inputSavePreference {
+  background-color: darkorange;
+  color: white;
+}
+body.default #tm_contents .col-sm-4 {
+  background-color: #343a40;
+}
+body.default .login-button {
+  background-color: darkorange;
+  color: white;
+}
+body.default .well {
+  background-color: #1d1f24;
+}
+body.default .well label {
+  color: gray;
+}
+
+/**
+*   Red Theme
+*   - Main colors (Black/Red)
+*   - Color Scheme to resemble Netflix, similar to the default TM theme
+*/
+body.red {
+  background-color: black;
+  color: white;
+}
+body.red h5, body.red p {
+  color: white;
+}
+body.red h3, body.red a {
+  color: crimson;
+}
+body.red .bgMain {
+  background-color: black;
+  color: white;
+}
+body.red .bgAlt, body.red .navbar .nav-item:hover, .navbar body.red .nav-item:hover {
+  background-color: crimson;
+  color: white;
+}
+body.red .bgAlt #activeTab, body.red .navbar .nav-item:hover #activeTab, .navbar body.red .nav-item:hover #activeTab {
+  background-color: crimson;
+  color: white;
+}
+body.red .textAlt {
+  color: crimson;
+}
+body.red .arrow, body.red .arrowLeft, body.red .arrowRight {
+  border: solid white;
+  border-width: 0 0.75vw 0.75vw 0;
+}
+body.red .navbar {
+  background-color: #343a40;
+}
+body.red .navbar .nav-link {
+  color: white;
+}
+body.red .navbar .dropdown-menu {
+  background-color: #343a40;
+}
+body.red .navbar .dropdown-menu .dropdown-item {
+  color: white;
+}
+body.red .navbar .dropdown-menu .dropdown-item:hover {
+  color: black;
+}
+body.red .article .articleSimilarity, body.red .recommendedArticles .rankedArticle .articleSimilarity, .recommendedArticles body.red .rankedArticle .articleSimilarity {
+  background-color: darkgreen;
+  color: white;
+}
+body.red .article p, body.red .recommendedArticles .rankedArticle p, .recommendedArticles body.red .rankedArticle p {
+  background-color: crimson;
+  color: white;
+}
+body.red .rankedArticle h2, body.red .rankedArticle h4 {
+  text-shadow: 2px 2px crimson;
+}
+body.red #featuredArticlesWrapper .card-body {
+  background-color: #343a40;
+}
+body.red #featuredArticlesWrapper .card-body .card-text {
+  color: white;
+}
+body.red .preferenceBox .preferenceLabel, body.red .userPreferred .preferenceLabel, body.red .teacherSelected .preferenceLabel, body.red .userNotPreferred .preferenceLabel, body.red .userMayTry .preferenceLabel, body.red .preferenceBox .teacherLabel, body.red .userPreferred .teacherLabel, body.red .teacherSelected .teacherLabel, body.red .userNotPreferred .teacherLabel, body.red .userMayTry .teacherLabel, body.red .teacherBox .preferenceLabel, body.red .teacherBox .teacherLabel {
+  background-color: crimson;
+  color: white;
+}
+body.red .inputSavePreference {
+  background-color: crimson;
+  color: white;
+}
+body.red #tm_contents .col-sm-4 {
+  background-color: #343a40;
+}
+body.red .login-button {
+  background-color: crimson;
+  color: white;
+}
+body.red .well {
+  background-color: #1d1f24;
+}
+body.red .well label {
+  color: gray;
+}
+
+/**
+*   Ice Theme
+*   - Main colors (Gray/Lightblue)
+*   - A custom light theme
+*/
+body.day {
+  background-color: lightblue;
+  color: gray;
+}
+body.day h5, body.day h3, body.day p {
+  color: gray;
+}
+body.day a {
+  color: blue;
+}
+body.day .bgMain {
+  background-color: lightblue;
+  color: gray;
+}
+body.day .bgAlt, body.day .navbar .nav-item:hover, .navbar body.day .nav-item:hover {
+  background-color: skyblue;
+  color: white;
+}
+body.day .bgAlt #activeTab, body.day .navbar .nav-item:hover #activeTab, .navbar body.day .nav-item:hover #activeTab {
+  background-color: skyblue;
+  color: black;
+}
+body.day .textAlt {
+  color: skyblue;
+}
+body.day .arrow, body.day .arrowLeft, body.day .arrowRight {
+  border: solid gray;
+  border-width: 0 0.75vw 0.75vw 0;
+}
+body.day .navbar {
+  background-color: darkgray;
+}
+body.day .navbar .nav-link {
+  color: black;
+}
+body.day .navbar .dropdown-menu {
+  background-color: darkgray;
+}
+body.day .navbar .dropdown-menu .dropdown-item:hover {
+  background-color: skyblue;
+}
+body.day .navbar .dropdown-menu .dropdown-item.disabled {
+  color: gray;
+}
+body.day .article .articleSimilarity, body.day .recommendedArticles .rankedArticle .articleSimilarity, .recommendedArticles body.day .rankedArticle .articleSimilarity {
+  background-color: darkgreen;
+  color: white;
+}
+body.day .article p, body.day .recommendedArticles .rankedArticle p, .recommendedArticles body.day .rankedArticle p {
+  background-color: darkgray;
+  color: white;
+}
+body.day .rankedArticle h2, body.day .rankedArticle h4 {
+  text-shadow: 2px 2px blue;
+}
+body.day #featuredArticlesWrapper .card-body {
+  background-color: gray;
+}
+body.day #featuredArticlesWrapper .card-body .card-text {
+  color: white;
+}
+body.day .preferenceBox .preferenceLabel, body.day .userPreferred .preferenceLabel, body.day .teacherSelected .preferenceLabel, body.day .userNotPreferred .preferenceLabel, body.day .userMayTry .preferenceLabel, body.day .preferenceBox .teacherLabel, body.day .userPreferred .teacherLabel, body.day .teacherSelected .teacherLabel, body.day .userNotPreferred .teacherLabel, body.day .userMayTry .teacherLabel, body.day .teacherBox .preferenceLabel, body.day .teacherBox .teacherLabel {
+  background-color: darkgray;
+  color: white;
+}
+body.day .inputSavePreference {
+  background-color: darkgray;
+  color: white;
+}
+body.day #tm_contents .col-sm-4 {
+  background-color: lightgray;
+}
+body.day .login-button {
+  background-color: skyblue;
+  color: white;
+}
+body.day .well {
+  background-color: gray;
+}
+body.day .well label {
+  color: white;
+}
+body.day .accordionfaqheader.accordion3, body.day .accordionfaqheader.accordion4 {
+  background: gray;
+  background-color: gray;
+}
+
+/**
+*   Tree Theme
+*   - Main colors (Wheat, Green & Red)
+*   - Another custom light theme
+*/
+body.tree {
+  background-color: wheat;
+  color: brown;
+}
+body.tree h5, body.tree h3, body.tree p {
+  color: brown;
+}
+body.tree a {
+  color: green;
+}
+body.tree .bgMain {
+  background-color: wheat;
+  color: brown;
+}
+body.tree .bgAlt, body.tree .navbar .nav-item:hover, .navbar body.tree .nav-item:hover {
+  background-color: brown;
+  color: white;
+}
+body.tree .bgAlt #activeTab, body.tree .navbar .nav-item:hover #activeTab, .navbar body.tree .nav-item:hover #activeTab {
+  background-color: brown;
+  color: white;
+}
+body.tree .textAlt {
+  color: green;
+}
+body.tree .arrow, body.tree .arrowLeft, body.tree .arrowRight {
+  border: solid brown;
+  border-width: 0 0.75vw 0.75vw 0;
+}
+body.tree .navbar {
+  background-color: darkgreen;
+}
+body.tree .navbar .nav-link {
+  color: white;
+}
+body.tree .navbar .nav-link:hover {
+  background-color: brown;
+}
+body.tree .navbar .dropdown-menu {
+  background-color: darkgreen;
+}
+body.tree .navbar .dropdown-menu .dropdown-item {
+  color: white;
+}
+body.tree .navbar .dropdown-menu .dropdown-item:hover {
+  background-color: brown;
+}
+body.tree .navbar .dropdown-menu .dropdown-item.disabled {
+  color: gray;
+}
+body.tree .article .articleSimilarity, body.tree .recommendedArticles .rankedArticle .articleSimilarity, .recommendedArticles body.tree .rankedArticle .articleSimilarity {
+  background-color: darkgreen;
+  color: white;
+}
+body.tree .article p, body.tree .recommendedArticles .rankedArticle p, .recommendedArticles body.tree .rankedArticle p {
+  background-color: brown;
+  color: white;
+}
+body.tree .rankedArticle h2, body.tree .rankedArticle h4 {
+  text-shadow: 2px 2px green;
+}
+body.tree #featuredArticlesWrapper .card-body {
+  background-color: wheat;
+}
+body.tree #featuredArticlesWrapper .card-body .card-text {
+  color: brown;
+}
+body.tree .preferenceBox .preferenceLabel, body.tree .userPreferred .preferenceLabel, body.tree .teacherSelected .preferenceLabel, body.tree .userNotPreferred .preferenceLabel, body.tree .userMayTry .preferenceLabel, body.tree .preferenceBox .teacherLabel, body.tree .userPreferred .teacherLabel, body.tree .teacherSelected .teacherLabel, body.tree .userNotPreferred .teacherLabel, body.tree .userMayTry .teacherLabel, body.tree .teacherBox .preferenceLabel, body.tree .teacherBox .teacherLabel {
+  background-color: darkgreen;
+  color: white;
+}
+body.tree .inputSavePreference {
+  background-color: darkgreen;
+  color: white;
+}
+body.tree #tm_contents .col-sm-4 {
+  background-color: lightgreen;
+}
+body.tree .login-button {
+  background-color: green;
+  color: white;
+}
+body.tree .well {
+  background-color: brown;
+}
+body.tree .well label {
+  color: white;
+}
+body.tree .badge {
+  background-color: darkgreen;
+  color: wheat;
 }
 
 /*# sourceMappingURL=template.css.map */

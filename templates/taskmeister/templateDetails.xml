@@ -7,11 +7,13 @@
 	<authorUrl>https://github.com/FremontTeng</authorUrl>
 	<copyright>Task Meister 2020</copyright>
 	<license>GNU/GPL</license>
-	<version>1.2.0</version>
-	<description>Template for Task Meister. By Fremont Teng</description>
+	<version>1.2.2</version>
+	<description>Template for Task Meister. Includes 4 themes. By Fremont Teng</description>
 	<files>
 		<filename>index.php</filename>
 		<filename>templateDetails.xml</filename>
+		<filename>template_preview.png</filename>
+		<filename>template_thumbnail.png</filename>
 		<folder>images</folder>
 		<folder>css</folder>
 	</files>
@@ -22,5 +24,6 @@
 		<position>bottom</position>
 		<position>footer</position>
 		<position>right</position>
+		<position>advertisement</position>
 	</positions>
 </extension>

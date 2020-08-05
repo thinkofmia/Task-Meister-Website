@@ -28,9 +28,11 @@ class ModHomeArticlesHelper
     {
         return $params->get('customheader');
     }
-    function getUserPreference($userid){
-
-    }
+    /**
+     * getArticles()
+     * Function: Get the articles' contents of the list of id provided
+     * Parameter: The list of articles id to take from
+     */
     function getArticles($list){
         //Call our recommender
         JPluginHelper::importPlugin('taskmeister','tm_recommender');
@@ -39,22 +41,30 @@ class ModHomeArticlesHelper
         //Return string results of the article contents
         return $results[0] ;
     }
-    function getArticleList($noOfArticles, $userid, $tagList){//Function to get selection from parameter fields
+    /**
+     * getArticleList()
+     * Function: Get the list of article ids from the user preferences
+     * Parameter: 
+     *  - $noOfArticles: Maximum number of articles to get
+     *  - $userid: Current id of the user
+     *  - $tagList: List of tags that the user prefers (and may try)
+     */
+    function getArticleList($noOfArticles, $userid, $tagList){
         //Call our recommender
         JPluginHelper::importPlugin('taskmeister','tm_recommender');
         $dispatcher = JDispatcher::getInstance();
         //Initialize result
         $results = array("Calculating... ");
-        //If never set no of articles
+        //If never set no of articles, sets default to 10
         if (!$noOfArticles) $noOfArticles=10;
         //Set up Dictionary array
         $dict = array();
-        foreach ($tagList as $tag){
-            //Get Selected Tag
+        foreach ($tagList as $tag){//Loop for each tag found in the list
+            //Gets the list of articles for the particular tag
             $results = $dispatcher->trigger( 'recommendPersonalArticles', array("Selected Tag",$noOfArticles,$userid,$tag));
-            $dict[$tag] = json_encode($results[0],JSON_FORCE_OBJECT);
+            $dict[$tag] = json_encode($results[0],JSON_FORCE_OBJECT);//Save the tag results into the dictionary
         }
-        //Return string results of recommended articles
+        //Return the whole dictionary
         return $dict;
     }
 }

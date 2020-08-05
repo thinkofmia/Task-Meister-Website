@@ -6,14 +6,17 @@ defined('_JEXEC') or die;
 
 <head>
 
-<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+<!--Use BootStrap 4 carousel slider-->
+<!--Wrapper for the carousel-->
+<div id="featuredArticlesWrapper" class="carousel slide" data-ride="carousel">
+  <!--Carousel Indiciators-->
   <ol class="carousel-indicators bgAlt">
     <?php $counter = 0; //Counter to count number of stuffs in dict ?>
     <?php foreach ($articlesDict as $key => $value) : ?>
       <?php if ($counter==0) : ?>
-        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+        <li data-target="#featuredArticlesWrapper" data-slide-to="0" class="active"></li>
       <?php else : ?>
-        <li data-target="#carouselExampleIndicators" data-slide-to="<?php echo $counter; ?>"></li>
+        <li data-target="#featuredArticlesWrapper" data-slide-to="<?php echo $counter; ?>"></li>
       <?php endif; ?>
       <?php $counter+=1; //Increase counter by 1 ?>
     <?php endforeach; ?>
@@ -36,7 +39,7 @@ defined('_JEXEC') or die;
               <div class="carousel-caption d-none d-md-block mb-5">
                 <!-- Card-->
                 <div class="card" style="width: 18rem; height:100%;">
-                  <div class="card-body bg-dark">
+                  <div class="card-body">
                     <h5 class="card-title textAlt"><?php echo $value["title"]; ?></h5>
                     <p class="card-text">
                       <!--Displays Number of likes-->

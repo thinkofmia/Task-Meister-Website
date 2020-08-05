@@ -1,6 +1,6 @@
 <?php
 /**
- * Your Class Stats Module Entry Point
+ * Class Modifier Module Entry Point
  * 
  * @package    Joomla.Tutorials
  * @subpackage Modules
@@ -22,23 +22,21 @@ $displayHeader = modClassModifier::getHeader($params);//invoke helper class meth
 $displayText = modClassModifier::getText($params);//invoke helper class method
 $showTable = modClassModifier::checkTable($params->get('tablestats'));
 
-//Database code
-use Joomla\CMS\Factory;
-//Set database variable
-$db = Factory::getDbo();
-$me = Factory::getUser();
-$userID = $me->id;
+use Joomla\CMS\Factory;//Use Factory
+$db = Factory::getDbo();//Set database variable
+$me = Factory::getUser();//Sets user variable
+$userID = $me->id;//Gets user id
 
 if ($userID!=0){//if User id isnt a guest
     //Querying for stats of the entire database of the external teacher stats
     $query = $db->getQuery(true);
     $query->select($db->quoteName(array('es_bonustags','es_preferencelink','es_weightagemaytry','es_weightagenotpreferred','es_teacherid','es_weightagelikes','es_weightagedeployment','es_weightagetouched','es_weightagepreferred')))//Get everything from
-        ->from($db->quoteName('#__customtables_table_teacherstats'))
-        ->where($db->quoteName('es_teacherid') . ' = ' . $userID);//From our external teacher stats table
+        ->from($db->quoteName('#__customtables_table_teacherstats'))//From our external teacher stats table
+        ->where($db->quoteName('es_teacherid') . ' = ' . $userID);//Where the teacher id is the same as the current user id
     $db->setQuery($query);
     $results = $db->loadAssocList();//Save results as $results2
 
-    //Set Defauly Values of Weightages
+    //Initializes Default Values of Weightages
     $likesWeightage = 100;
     $deploymentWeightage = 100;
     $touchedWeightage = 100;
@@ -60,15 +58,15 @@ if ($userID!=0){//if User id isnt a guest
             if ($row['es_preferencelink'])$preferenceLinked = intval($row['es_preferencelink']);
             if ($row['es_bonustags']) $bonusTags = $row['es_bonustags'];
         }
-       
+       //Display the html view of class modifier
         require JModuleHelper::getLayoutPath('mod_taskmeister_classmodifier');
     }
     else{
-        echo "<br><h3>You have to be a teacher to see this feature</h3>";
+        echo " ";//Hide any confusing msg
     }   
 }
 else{
-    echo "<br><h3>You have to be a teacher to see this feature</h3>";
+    echo " ";//Don't display any confusing msg
 }
 
 if (isset($_POST["submitClassModifier"])){

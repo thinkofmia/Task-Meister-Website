@@ -14,10 +14,14 @@ defined('_JEXEC') or die;
     <?php endif; ?>
 </div>
 
-<!--Display-->
+<!--Display all the home articles-->
+<!--Loop for each tag recommended-->
 <?php foreach ($recommendedContents as $tag => $contents) : ?>
+  <!--Header for tag-->
   <h5>Because you liked <?php echo $tag; ?>...</h5>
+  <!--If there exists articles for the tag-->
   <?php if ($contents || sizeof($contents)>0) : ?>
+  <!--Display the articles-->
   <ul class="scrollbarnews<?php echo $moduleclass_sfx; ?> mod-list">
   <div class="articlesRow">
     <!-- Arrow button to scroll left-->
@@ -77,8 +81,10 @@ defined('_JEXEC') or die;
   </div>
   </ul>
   <?php else : ?>
-          No relevant articles found.
+    <!--Else if no articles found for the tag, display the below msg-->
+    No relevant articles found.
   <?php endif; ?>
   <?php endforeach; ?>
 
+  <!--Script to allow js dragscroll, only allowed for browser-->
   <script type="text/javascript" src="https://cdn.rawgit.com/asvd/dragscroll/master/dragscroll.js"></script>

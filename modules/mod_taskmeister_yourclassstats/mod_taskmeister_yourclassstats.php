@@ -20,22 +20,21 @@ require_once dirname(__FILE__) . '/helper.php';//used because our helper functio
 
 $displayHeader = modYourClassesStats::getHeader($params);//invoke helper class method
 $displayText = modYourClassesStats::getText($params);//invoke helper class method
-$displayMode = $params->get('display');
-$maxTags = intval($params->get('maxTags'));
+$displayMode = $params->get('display');//Gets display mode of the stats
+$maxTags = intval($params->get('maxTags'));//Gets the max number of tags to display
 
-//Database code
+//Use factory
 use Joomla\CMS\Factory;
-//Set database variable
-$db = Factory::getDbo();
-$me = Factory::getUser();
-$userID = $me->id;
+$db = Factory::getDbo();//Sets database variable
+$me = Factory::getUser();//Sets user variable
+$userID = $me->id;//Sets user id
 
 if ($userID!=0){//if User id isnt a guest
-    //Querying for stats of the entire database of the external teacher stats
+    //Querying the database
     $query = $db->getQuery(true);
-    $query->select($db->quoteName(array('es_teacherid','es_students')))//Get everything from
-        ->from($db->quoteName('#__customtables_table_teacherstats'))
-        ->where($db->quoteName('es_teacherid') . ' = ' . $userID);//From our external teacher stats table
+    $query->select($db->quoteName(array('es_teacherid','es_students')))//Gets the teacher id and their class
+        ->from($db->quoteName('#__customtables_table_teacherstats'))//From the custom teacher stats table
+        ->where($db->quoteName('es_teacherid') . ' = ' . $userID);//Where the teacher id is equal to the current user id
     $db->setQuery($query);
     $results = $db->loadAssocList();//Save results as $results2
 
@@ -43,10 +42,10 @@ if ($userID!=0){//if User id isnt a guest
         foreach ($results as $row){//Extract teacher data
             $teacher = JFactory::getUser($row['es_teacherid']);//Get Teacher Profile
             $teacherName = $teacher->name;//Get Teacher Name
-            //Get the student list
+            //Gets the class
             $studentsList = json_decode($row['es_students']);
         }
-        //Create Preferences Score Array
+        //Initialize Preferences Score Array
         $fullPreferencesScore = array();
         $dislikedPreferencesScore = array();
         //Loop base on students list
@@ -57,13 +56,13 @@ if ($userID!=0){//if User id isnt a guest
                 ->where($db->quoteName('es_userid') . ' = ' . $row);//Where it is the current user's userid
             $db->setQuery($query);
             $results2 = $db->loadAssocList();//Save results as $results2
-            foreach ($results2 as $row2){
-                $studentPreferences = json_decode($row2['es_userpreference']);
-                foreach ($studentPreferences as $key => $value){
-                    if (isset($fullPreferencesScore[$key])) $fullPreferencesScore[$key] += $value;
-                    else $fullPreferencesScore[$key] = $value;
-                    if ($value == 0){//If user dislikes this
-                        if ($dislikedPreferencesScore[$key]) $dislikedPreferencesScore[$key] += 1;
+            foreach ($results2 as $row2){//Loop for each student found
+                $studentPreferences = json_decode($row2['es_userpreference']);//Gets the student's preferences
+                foreach ($studentPreferences as $key => $value){//Loop for each student's preference
+                    if (isset($fullPreferencesScore[$key])) $fullPreferencesScore[$key] += $value;//If alr exists in the dictionary, increment the score
+                    else $fullPreferencesScore[$key] = $value;//Else create as a new score
+                    if ($value == 0){//If the student dislikes the tag
+                        if ($dislikedPreferencesScore[$key]) $dislikedPreferencesScore[$key] += 1;//Increment its dislike score instead
                         else $dislikedPreferencesScore[$key] = 1;
                     }
                 }
@@ -81,30 +80,35 @@ if ($userID!=0){//if User id isnt a guest
         $dislikedPreferencesScore = array();
         //Push array base on limited value
         $count=0;//Initialize count
+        //Loop for each preference recorded
         foreach($oldFullPreferencesScore as $key => $value){
-            if ($maxTags==0 || $count<$maxTags){
-                $fullPreferencesScore[$key] = $value;
-                $count+=1;
+            if ($maxTags==0 || $count<$maxTags){//If yet to exceed the max number of tags or if max tags == 0
+                $fullPreferencesScore[$key] = $value;//Save the tag into new array
+                $count+=1;//Increment counter
             } 
         }
-        $count=0; //Reset count
+        $count=0; //Reset counter
+        //Loop for each disliked preference recorded
         foreach($oldDislikedPreferencesScore as $key => $value){
-            if ($maxTags==0 || $count<$maxTags){
-                $dislikedPreferencesScore[$key] = $value;
-                $count+=1;
+            if ($maxTags==0 || $count<$maxTags){//If yet to exceed max number of tags or max number == 0
+                $dislikedPreferencesScore[$key] = $value;//Save the tag into new array
+                $count+=1;//Increment counter
             } 
         }
-        //Set up arrays
+        //Sets up arrays
         $likePreferencesScore = array();
-        foreach ($fullPreferencesScore as $key => $value){
-            if ($value>0) $likePreferencesScore[$key] = $value;
+        foreach ($fullPreferencesScore as $key => $value){//Loop for each preference
+            if ($value>0) $likePreferencesScore[$key] = $value;//If value is more than 0, Save tag into new array
         }
+        //Display html view of your class stats
         require JModuleHelper::getLayoutPath('mod_taskmeister_yourclassstats');
     }
     else{
-        echo "<br><h3>You have to be a teacher to see this feature</h3>";
+        //Hide confusing debug msg
+        //echo "<br><h3>You have to be a teacher to see this feature</h3>";
     }   
 }
 else{
-    echo "<br><h3>You have to be a teacher to see this feature</h3>";
+    //Hide confusing debug msg
+    //echo "<br><h3>You have to be a teacher to see this feature</h3>";
 }

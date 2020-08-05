@@ -69,7 +69,7 @@ JHtml::_('bootstrap.tooltip');
 			<?php if ($usersConfig->get('allowUserRegistration')) : ?>
 				<li>
 					<a href="<?php echo JRoute::_('index.php?option=com_users&view=registration'); ?>">
-					<?php echo JText::_('MOD_LOGIN_REGISTER'); ?> <span class="icon-arrow-right"></span></a>
+					Sign up<span class="icon-arrow-right"></span></a>
 				</li>
 			<?php endif; ?>
 			</ul>

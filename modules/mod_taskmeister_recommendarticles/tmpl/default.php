@@ -7,7 +7,7 @@ defined('_JEXEC') or die;
 <!-- Display out custom header/text-->
 <div class="customtext">
     <?php if ($displayHeader) : ?>
-        <h3><?php echo $displayHeader; ?></h3>
+        <h5><?php echo $displayHeader; ?></h5>
     <?php endif; ?>
 </div>
 
@@ -24,6 +24,8 @@ $list2 = json_decode($recommendedContents);
       <?php foreach ($teachersRecommendationDict as $name => $contents) : ?>
         <ul>
         <h3><?php echo $name; ?>'s Recommendation</h3>
+        <?php $contentList = json_decode($contents); ?>
+        <?php if ($contentList) : ?>
         <div class="articlesRow">
           <!-- Arrow button to scroll left-->
           <i class="arrowLeft" onmouseover="var left = this.closest('div').querySelector('.recommendedArticles').scrollLeft; this.closest('div').querySelector('.recommendedArticles').scrollTo({
@@ -37,7 +39,6 @@ $list2 = json_decode($recommendedContents);
           <!--Displays list of recommended articles based on the article contents-->
           <div class="recommendedArticles dragscroll" id= "recommendation">
             <!--For loop for the items in the list-->
-            <?php $contentList = json_decode($contents); ?>
             <?php foreach ($contentList as $key => $value) : ?>
             <!--Url link to the article page-->
             <a href="?option=com_content&view=article&id=<?php echo $key; ?>" itemprop="url">
@@ -60,6 +61,9 @@ $list2 = json_decode($recommendedContents);
                   behavior: 'smooth',
                 });"></i>
         </div>
+        <?php else : ?>
+          Your teacher has yet to recommend anything.
+        <?php endif; ?>
         </ul>
       <?php endforeach; ?>
   <?php else : ?>
@@ -95,7 +99,17 @@ $list2 = json_decode($recommendedContents);
                 <h2><?php echo $count;?></h2>
               <?php endif; ?>
               <!--Image of the article-->
-              <img onerror="this.src='/taskmeisterx/modules/mod_taskmeister_recommendarticles/img/default.jpg';" src="<?php echo json_decode($value[1])->image_intro; ?>" width="100%" height="100%" />
+              <?php if (json_decode($value[1])->image_intro) : ?><!--If intro img found-->
+                <img onerror="this.src='/taskmeisterx/modules/mod_taskmeister_recommendarticles/img/default.jpg';" src="<?php echo json_decode($value[1])->image_intro; ?>" width="100%" height="100%" />
+              <?php elseif (json_decode($value[1])->image_fulltext) : ?><!--If intro fulltext found-->
+                <img onerror="this.src='/taskmeisterx/modules/mod_taskmeister_recommendarticles/img/default.jpg';" src="<?php echo json_decode($value[1])->image_fulltext; ?>" width="100%" height="100%" />
+              <?php elseif (json_decode($value[1])->image_intro_alt) : ?><!--If intro img found-->
+                <img onerror="this.src='/taskmeisterx/modules/mod_taskmeister_recommendarticles/img/default.jpg';" src="<?php echo json_decode($value[1])->image_intro_alt; ?>" width="100%" height="100%" />
+              <?php elseif (json_decode($value[1])->image_fulltext_alt) : ?><!--If intro fulltext found-->
+                <img onerror="this.src='/taskmeisterx/modules/mod_taskmeister_recommendarticles/img/default.jpg';" src="<?php echo json_decode($value[1])->image_fulltext_alt; ?>" width="100%" height="100%" />
+              <?php else : ?>
+                <img src="/taskmeisterx/modules/mod_taskmeister_recommendarticles/img/default.jpg" width="100%" height="100%" />
+              <?php endif; ?>  
               <!--Text found on the article-->
               <p>
               <?php if (strlen($value[0])>50) echo substr($value[0], 0, 50)."...";
@@ -104,8 +118,18 @@ $list2 = json_decode($recommendedContents);
           <?php else : ?>
             <div class="article">
               <!--Image of the article-->
-              <img onerror="this.src='/taskmeisterx/modules/mod_taskmeister_recommendarticles/img/default.jpg';" src="<?php echo json_decode($value[1])->image_intro; ?>" width="100%" height="100%" />
-              <!--Text found on the article-->
+              <?php if (json_decode($value[1])->image_intro) : ?><!--If intro img found-->
+                <img onerror="this.src='/taskmeisterx/modules/mod_taskmeister_recommendarticles/img/default.jpg';" src="<?php echo json_decode($value[1])->image_intro; ?>" width="100%" height="100%" />
+              <?php elseif (json_decode($value[1])->image_fulltext) : ?><!--If intro fulltext found-->
+                <img onerror="this.src='/taskmeisterx/modules/mod_taskmeister_recommendarticles/img/default.jpg';" src="<?php echo json_decode($value[1])->image_fulltext; ?>" width="100%" height="100%" />
+              <?php elseif (json_decode($value[1])->image_intro_alt) : ?><!--If intro img found-->
+                <img onerror="this.src='/taskmeisterx/modules/mod_taskmeister_recommendarticles/img/default.jpg';" src="<?php echo json_decode($value[1])->image_intro_alt; ?>" width="100%" height="100%" />
+              <?php elseif (json_decode($value[1])->image_fulltext_alt) : ?><!--If intro fulltext found-->
+                <img onerror="this.src='/taskmeisterx/modules/mod_taskmeister_recommendarticles/img/default.jpg';" src="<?php echo json_decode($value[1])->image_fulltext_alt; ?>" width="100%" height="100%" />
+              <?php else : ?>
+                <img src="/taskmeisterx/modules/mod_taskmeister_recommendarticles/img/default.jpg" width="100%" height="100%" />
+              <?php endif; ?>  
+                <!--Text found on the article-->
               <p class="articleSimilarity">Match: <?php echo json_encode($value[2]); ?>%</p>
               <p>
               <?php if (strlen($value[0])>50) echo substr($value[0], 0, 50)."...";

@@ -1,3 +1,6 @@
+/**
+    Chai Seng's CSS
+*/
 .keen-slider {
     display: flex;
     -webkit-user-select: none;
@@ -86,7 +89,7 @@
     background: darkorange;
 }
 
-.arrow {
+.carousel-arrow {
     width: 30px;
     height: 30px;
     position: absolute;
@@ -100,15 +103,15 @@
     stroke-linejoin: round;
 }
 
-.arrow--left {
+.carousel-arrow--left {
     left: 5px;
 }
 
-.arrow--right {
+.carousel-arrow--right {
     left: auto;
     right: 5px;
 }
 
-.arrow--disabled {
+.carousel-arrow--disabled {
     fill: rgba(255, 255, 255, 0.5);
 }

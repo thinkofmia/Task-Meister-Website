@@ -18,11 +18,11 @@ defined('_JEXEC') or die; // ensures that this file is being invoked from the Jo
 require_once dirname(__FILE__) . '/helper.php';//used because our helper functions are defined within a class, and we only want the class defined once. 
 
 
-use Joomla\CMS\Factory;
-$user = Factory::getUser();
+use Joomla\CMS\Factory;//Uses Factory
+$user = Factory::getUser();//Gets User
 $db = Factory::getDbo();//Gets database
 
-if ($user->guest) {
+if ($user->guest) {//If the user is a guest, display guest message
 	echo "<h3>You must login to see the content. Click on the account icon on the right.</h3>";
 } else {
     $displayHeader = ModChoosePreferenceHelper::getHeader($params);//Get and save out custom header

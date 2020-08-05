@@ -17,7 +17,7 @@ defined('_JEXEC') or die; // ensures that this file is being invoked from the Jo
 // Include the syndicate functions only once
 require_once dirname(__FILE__) . '/helper.php';//used because our helper functions are defined within a class, and we only want the class defined once. 
 
-use Joomla\CMS\Factory;
+use Joomla\CMS\Factory;//Use Joomla's Factory
 $displayHeader = ModFeaturedArticleHelper::getHeader($params);//Set variable of inputtable header
 $displayText = ModFeaturedArticleHelper::getText($params);//Set variable of inputtable text
 $keyword = "";//By default, set keyword as none
@@ -26,87 +26,99 @@ $keyword = "";//By default, set keyword as none
 if (isset($_REQUEST["keyword"])&& strlen($_REQUEST["keyword"])>0){
     //Echo message to show search result, for debug
     echo "<h3>You have searched for ".$_REQUEST["keyword"]."...</h3>";
-    //Set keyword
+    //Sets keyword
     $keyword = $_REQUEST["keyword"];
 } 
 
-//Check if its to be automated or manual
-if ($params->get('automated')=="choice_no"){
-    $articleID = $params->get('articleID');
-}
-else {
-    $me = Factory::getUser();//Gets user
-    $userid = $me->id;
-    //Get the top articles
-    $articleList = ModFeaturedArticleHelper::recommendArticles($userid, $keyword);
-}
+
+$me = Factory::getUser();//Gets user
+$userid = $me->id;//Gets user id
+//Get the top articles for the particular user
+$articleList = ModFeaturedArticleHelper::recommendArticles($userid, $keyword);
 
 //Set global dummy image
 $dummyArticleImg = "/taskmeisterx/modules/mod_taskmeister_featuredarticle/images/noimagefound.png";
-//Set up dictionary
+//Initialize dictionary
 $articlesDict = array();
 $counter_dict = 0;
-//Loop the list
+//Loop for each article found
 foreach ($articleList as $articleID){
-    $counter_dict += 1;
-    $articlesDict[$counter_dict] = array();
-    //Set variables
+    $counter_dict += 1;//Increment the counter by 1
+    $articlesDict[$counter_dict] = array();//Create an array in the dict
+    //Display debug msg
     echo "<script>console.log('Getting video for article #".$counter_dict."')</script>";
-    $videoLink = ModFeaturedArticleHelper::getVideo($params, $params->get('automated'), $articleID);//Set variable of video link
+    //Get video link for the article
+    $videoLink = ModFeaturedArticleHelper::getVideo($params, $articleID);//Set variable of video link
+    //Initialize the rest of the variables
     $articleLikedUsers = "None";
     $articleDeployedUsers = "None";
     $articleTotalLikes = 0;
     
-    //Check if video exists
+    //Check if video exists: Display debug msg accordingly
     if ($videoLink) echo "<script>console.log('Crawling Video link: " . $videoLink . "' );</script>";
     else echo "<script>console.log('Debug Objects: No Video Found' );</script>";
     
     //Article Contents
-    $articleContents = ModFeaturedArticleHelper::getArticle($articleID);
-    if ($articleContents == "No article found. "){
-        $articleTitle = "No article found. ";
-        $articleImage = "No article found. ";
+    $articleContents = ModFeaturedArticleHelper::getArticle($articleID);//Get article content
+    if ($articleContents == "No article found. "){//If nothing is found
+        $articleTitle = "No article found. ";//Show default article title: not found
+        $articleImage = "No article found. ";//Show default article image: not found
     }
-    else{
+    else{//Else if article content exists
+        //Save variables accordingly
         $articleTitle = $articleContents['title'];
-        $articleImage = json_decode($articleContents['images'])->image_intro;
+        if (json_decode($articleContents['images'])->image_intro) $articleImage = json_decode($articleContents['images'])->image_intro;
+        elseif (json_decode($articleContents['images'])->image_fulltext) $articleImage = json_decode($articleContents['images'])->image_fulltext;
+        elseif (json_decode($articleContents['images'])->image_intro_alt) $articleImage = json_decode($articleContents['images'])->image_intro_alt;
+        elseif (json_decode($articleContents['images'])->image_fulltext_alt) $articleImage = json_decode($articleContents['images'])->image_fulltext_alt;
+        else $articleImage = $dummyArticleImg;
     }
-    //External contents
-$externalContents = ModFeaturedArticleHelper::getArticleExternalStats($articleID);
-if ($externalContents != "Nothing is found. "){
-    if ($externalContents['es_totallikes']) $articleTotalLikes = $externalContents['es_totallikes'];
-    $deployedUsersList = json_decode($externalContents['es_deployed']);
-    $articleTotalDeployed = sizeof($deployedUsersList);
-    $usersPreferenceList = json_decode($externalContents['es_userchoice']);
-    //For Loops
-    if ($deployedUsersList){
-        $newArray = array();
-        foreach($deployedUsersList as $row){
-            $user = JFactory::getUser(intval($row))->name;
-            array_push($newArray, $user);
-        }
-        $articleDeployedUsers = implode(", ", $newArray);
-    } 
-    if ($articleTotalLikes>0){
-        $newArray = array();
-        foreach($usersPreferenceList as $key => $value){
-            if ($value=="Liked"){
-                $user = JFactory::getUser(intval($key))->name;
-                array_push($newArray, $user);
+    //Get external contents of the article
+    $externalContents = ModFeaturedArticleHelper::getArticleExternalStats($articleID);
+    //If external contents of the article is found
+    if ($externalContents != "Nothing is found. "){
+        //Save total likes if exists
+        if ($externalContents['es_totallikes']) $articleTotalLikes = $externalContents['es_totallikes'];
+        //Save delployed users list
+        $deployedUsersList = json_decode($externalContents['es_deployed']);
+        //Get number of users that deployed
+        $articleTotalDeployed = sizeof($deployedUsersList);
+        //Save the user opinions as a list
+        $usersPreferenceList = json_decode($externalContents['es_userchoice']);
+        if ($deployedUsersList){//If there exists the deployed users list
+            $newArray = array();//Initialize the array
+            foreach($deployedUsersList as $row){
+                //Loop for each user that deploys the article
+                $user = JFactory::getUser(intval($row))->name;//Get the user name
+                array_push($newArray, $user);//Push the user into the list
+            }
+            //Implode all the deployed users into a string
+            $articleDeployedUsers = implode(", ", $newArray);
+        } 
+        //If the total likes of article is more than 0
+        if ($articleTotalLikes>0){
+            $newArray = array();//Initialize the array
+            foreach($usersPreferenceList as $key => $value){
+                //Loop for each user's opinion
+                if ($value=="Liked"){//If their opinion== liked
+                    $user = JFactory::getUser(intval($key))->name;//Get their user name
+                    array_push($newArray, $user);//Push the user into the list
+                }
+            }
+            //Implode all the liked users into a string
+            $articleLikedUsers = implode(", ", $newArray);
             }
         }
-        $articleLikedUsers = implode(", ", $newArray);
-        }
+        //Save all the variables of the article
+        $articlesDict[$counter_dict]["videoLink"] = $videoLink;
+        $articlesDict[$counter_dict]["likedUsers"] = $articleLikedUsers;
+        $articlesDict[$counter_dict]["deployedUsers"] = $articleDeployedUsers;
+        $articlesDict[$counter_dict]["noOfLikes"] =  $articleTotalLikes;
+        $articlesDict[$counter_dict]["noOfDeployed"] =  $articleTotalDeployed;
+        $articlesDict[$counter_dict]["title"] =  $articleTitle;
+        $articlesDict[$counter_dict]["image"] =  $articleImage;
+        $articlesDict[$counter_dict]["id"] = $articleID;
     }
-    //Save variables
-    $articlesDict[$counter_dict]["videoLink"] = $videoLink;
-    $articlesDict[$counter_dict]["likedUsers"] = $articleLikedUsers;
-    $articlesDict[$counter_dict]["deployedUsers"] = $articleDeployedUsers;
-    $articlesDict[$counter_dict]["noOfLikes"] =  $articleTotalLikes;
-    $articlesDict[$counter_dict]["noOfDeployed"] =  $articleTotalDeployed;
-    $articlesDict[$counter_dict]["title"] =  $articleTitle;
-    $articlesDict[$counter_dict]["image"] =  $articleImage;
-    $articlesDict[$counter_dict]["id"] = $articleID;
-}
 
-require JModuleHelper::getLayoutPath('mod_taskmeister_featuredarticle');//Opens up default.php
+//Displays the necessary html view
+require JModuleHelper::getLayoutPath('mod_taskmeister_featuredarticle');

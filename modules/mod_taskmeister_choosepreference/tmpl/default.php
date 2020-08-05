@@ -140,9 +140,9 @@ Display left hand side text
             list3 refers to the May Try List
     -->
     <form id="preferenceForm" method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>" >
-        <br><span style="background-color: green;">Preferred</span>: <span id="text_list1">[]</span><input type="text" name="list1" id="input_list1" placeholder = "[]"> 
-        <br><span style="background-color: red;">Against</span>: <span id="text_list2">[]</span><input type="text" name="list2" id="input_list2" placeholder = "[]"> 
-        <br><span style="background-color: goldenrod;">May Try</span>: <span id="text_list3">[]</span><input type="text" name="list3" id="input_list3" placeholder = "[]"> 
+        <br><span style="background-color: green; color: white;">Preferred</span>: <span id="text_list1">[]</span><input type="text" name="list1" id="input_list1" placeholder = "[]"> 
+        <br><span style="background-color: red; color: white;">Against</span>: <span id="text_list2">[]</span><input type="text" name="list2" id="input_list2" placeholder = "[]"> 
+        <br><span style="background-color: goldenrod; color: white;">May Try</span>: <span id="text_list3">[]</span><input type="text" name="list3" id="input_list3" placeholder = "[]"> 
         <br><input class="inputSavePreference" type="submit" name="submit" value="Save Preferences">
     </form>
     <input onkeyup="filterName(this.value);" onchange="filterName(this.value);" type="text" name="filter" id="name_filter" placeholder = "filter by name">
@@ -162,10 +162,10 @@ Display left hand side text
                 Displays image of based on the images folder and img name in the mod: Width and Height 100%
                 If no image is found, give it default image using onerror func
             -->
-            <img src="/taskmeisterx/modules/mod_taskmeister_choosepreference/images/<?php echo $key;?>.jpg" width="100%" height="100%" onerror="this.src='/taskmeisterx/modules/mod_taskmeister_choosepreference/images/default.jpg';"/>
+            <img title="<?php echo $key; ?>" src="/taskmeisterx/modules/mod_taskmeister_choosepreference/images/<?php echo $key;?>.jpg" width="100%" height="100%" onerror="this.src='/taskmeisterx/modules/mod_taskmeister_choosepreference/images/default.jpg';"/>
             <!--Display label of tags, including tag name and number of uses-->
             <p class = "preferenceLabel"><?php echo $key; ?></p>
-            <p class = "preferenceStats"><?php echo $value["likes"]; ?> 👍 <?php echo $value["deployed"]; ?> 👨‍💻</p>
+            <p class = "preferenceStats" title="Total # of Likes: <?php echo $value["likes"]; ?>, Total # of Deployment: <?php echo $value["deployed"]; ?>"><?php echo $value["likes"]; ?> 👍 <?php echo $value["deployed"]; ?> 👨‍💻</p>
         </div>
         <?php $count = $count + 1; ?>
         <?php if ($count==25): ?>
@@ -174,7 +174,7 @@ Display left hand side text
         <?php endif; ?>
         </script>
     <?php endforeach; ?>
-    <!--Make a get more button-->
+    <!--Make a get more button, currently not in used-->
     <?php if ($count>=25): ?>
             <?php echo "</span>"; ?>
     <?php endif; ?>
@@ -182,33 +182,43 @@ Display left hand side text
 
 <script>
 var moreText = document.getElementById("getMore");
-//moreText.style.display = "none";
 
+/**
+*   JavaScript function to get all tags in the list
+*   Currently not in use since we have the search filter
+ */
 function getAllTags() {
+  //Set up the necessary elements as variables
   var moreText = document.getElementById("getMore");
   var btnText = document.getElementById("getMoreBtn");
-
+  
+  //If clicked on "Hide Rest" Button
   if (moreText.style.display == "inline") {
-    btnText.innerHTML = "Get All"; 
-    moreText.style.display = "none";
+    btnText.innerHTML = "Get All";//Change the button text to "Get All" 
+    moreText.style.display = "none";//Hide the rest of the tags
   } 
-  else {
-    btnText.innerHTML = "Hide Rest"; 
-    moreText.style.display = "inline";
+  else {//Else if clicked on "Get All"
+    btnText.innerHTML = "Hide Rest"; //Change the button text to "Hide Rest"
+    moreText.style.display = "inline";//Show the rest of the tag
   }
 }
-//Function to add current list to menu
+
+/**
+*   JavaScript function to add current list to front end
+ */
+//Loop for each preference in the current list
 <?php foreach ($currentList as $key => $value) : ?>
     <?php if ($key): ?>
-        <?php if ($value==0): ?>//No way
+        //If preference exists
+        <?php if ($value==0): ?>//If the user is against the preference
+            togglePreference('<?php echo $key; ?>');//Toggle it twice (to get red)
             togglePreference('<?php echo $key; ?>');
+        <?php elseif ($value==1) : ?>//If the user is considering/may try the preference
+            togglePreference('<?php echo $key; ?>');//Toggle it thrice
+            togglePreference('<?php echo $key; ?>');//To get yellow
             togglePreference('<?php echo $key; ?>');
-        <?php elseif ($value==1) : ?>
-            togglePreference('<?php echo $key; ?>');
-            togglePreference('<?php echo $key; ?>');
-            togglePreference('<?php echo $key; ?>');
-        <?php elseif ($value==2) : ?>//$value ==2
-            togglePreference('<?php echo $key; ?>');
+        <?php elseif ($value==2) : ?>//If the user prefers this
+            togglePreference('<?php echo $key; ?>');//Toggle it once to get green
         <?php endif; ?>
     <?php endif; ?>
 <?php endforeach; ?>

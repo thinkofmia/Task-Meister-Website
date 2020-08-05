@@ -2,8 +2,8 @@
 <extension type="module" version="3.1.0" client="site" method="upgrade">
     <name>Article Stats Module (Task Meister)</name>
     <author>Fremont Teng</author>
-    <version>1.0.3</version>
-    <description>A module for Task Meister, to display the stats of an article from the external database.</description>
+    <version>1.1.3</version>
+    <description>A module for Task Meister, to display the stats of an article from the external database. Uses Bootstrap 4.</description>
     <files>
         <filename>mod_taskmeister_articlestats.xml</filename>
         <filename module="mod_taskmeister_articlestats">mod_taskmeister_articlestats.php</filename>
