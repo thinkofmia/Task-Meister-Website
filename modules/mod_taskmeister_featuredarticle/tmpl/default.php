@@ -8,7 +8,7 @@ defined('_JEXEC') or die;
 
 <!--Use BootStrap 4 carousel slider-->
 <!--Wrapper for the carousel-->
-<div id="featuredArticlesWrapper" class="carousel slide" data-ride="carousel">
+<div id="featuredArticlesWrapper" class="carousel slide" data-ride="carousel" data-interval="false">
   <!--Carousel Indiciators-->
   <ol class="carousel-indicators bgAlt">
     <?php $counter = 0; //Counter to count number of stuffs in dict ?>
