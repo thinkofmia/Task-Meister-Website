@@ -34,7 +34,7 @@ if(!isset($tagList)) $tagList = array("Physics","Chemistry","Mathematics","Biolo
 if ($userid==0){//If the user is a guest
     //Display guest msg
     echo "Because you have yet to login, your default tags are: Physics, Chemistry, Mathematics, Chinese and Biology";
-    $tagList = array("Physics","Chemistry","Mathematics","Chinese","Biology");//Sets default tag list
+    $tagList = array("Physics","Chemistry","Mathematics","Chinese Language","Biology");//Sets default tag list
 }
 else {//Get User preference
     //Query the database
