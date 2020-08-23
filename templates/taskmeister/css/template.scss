@@ -1,7 +1,6 @@
 /**
-* SCSS made by Fremont Teng for the Taskmeister Template
-* Last update: 28/07/2020
-* (Fused with Chai Seng CSS)
+* SCSS made by Fremont Teng and Chai Seng for the Taskmeister Template
+* Last update: 23/08/2020
 */
 
 /*
@@ -71,9 +70,24 @@ table {
 * Here is where you can put all your custom-made classes and their CSS properties
 */
 
+//CSS Class for removing bullets
+.no-bullets{
+    list-style-type:none;
+}
+
+//CSS Class for inline tags
+ul.tags.inline{
+    list-style: none;
+}
+
 //CSS Class for flexing an element/div
 .flex {
     display: inline-flex;//Set display to be inline-flex
+}
+
+//CSS class for blocking an element/div
+.block{
+    display: inline-block;
 }
 
 //CSS Class to create a circular button
