@@ -1,7 +1,7 @@
 <!-- This prevents naughty peeps from looking at code  -->
 <?php defined( '_JEXEC' ) or die( 'Restricted access' );
 
-//This updated template is based on the personalized changes requested by Lawrence
+//This template is last updated back in 23/08/2020
 
 //Database code
 use Joomla\CMS\Factory;
