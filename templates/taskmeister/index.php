@@ -131,7 +131,7 @@ $doc->addScript($this->baseurl . '/templates/' . $this->template . '/js/keen-sli
         <a class="nav-link dropdown-toggle" href="#" id="themeDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Themes
         </a>
-         <!--Dropdown tab for account-->
+         <!--Dropdown tab for Themes-->
          <div class="dropdown-menu" aria-labelledby="themeDropdown">
         <!--Dropdown tab for themes-->
             <!--Choosing one of the options below will set the theme. JavaScript has to be enabled for it to work.-->
@@ -151,13 +151,13 @@ $doc->addScript($this->baseurl . '/templates/' . $this->template . '/js/keen-sli
     <!--Check if current directory is on user page-->
     <?php if(($urlPath==$this->baseurl."/index.php/user/")||($urlPath==$this->baseurl."/index.php/user")) : ?>
         <!--If so, highlight the nav-item-->
-        <li class="nav-item bgAlt" style="list-style-type: none;">
+        <li class="nav-item bgAlt ml-1" style="list-style-type: none;">
             <a class="nav-link" href="<?php echo $this->baseurl."/index.php/user/"; ?>">
               <?php echo $username; ?>
             </a>
       <?php else : ?>  
         <!--Else, leave it as a default nav-item-->
-        <li class="nav-item" style="list-style-type: none;">
+        <li class="nav-item ml-1" style="list-style-type: none;">
             <a class="nav-link" href="<?php echo $this->baseurl."/index.php/user/"; ?>"><?php echo $username; ?></a>
       <?php endif; ?>
         </li>

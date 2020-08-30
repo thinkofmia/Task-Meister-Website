@@ -105,10 +105,12 @@ defined('_JEXEC') or die;
     *   Parameter: None
      */
     function editClass() {
-    //Set the variables for the edit button, input and list
+    //Set the variables for the edit button, input and list and graph
     var classInput = document.getElementById("preferenceForm");
     var editBtn = document.getElementById("editClassBtn");
     var classList = document.querySelector(".teachersList");
+    var graph = document.querySelector(".chart-container");
+
     //If the button text contains "Edit Class"
     if (editBtn.innerHTML=="Edit Class"){
         //Change inner html = "Cancel Edit", change mode to edit class
@@ -116,6 +118,7 @@ defined('_JEXEC') or die;
         //Show the class selections
         classInput.style.display = "inline-block";
         classList.style.display = "inline-block";
+        if (graph) graph.style.display = "none"; //Hide the graph
     }
     else {//Else if Cancel Edit is pressed
         //Change mode back to normal
@@ -123,6 +126,7 @@ defined('_JEXEC') or die;
         //Hide the edit class selection
         classInput.style.display = "none";
         classList.style.display = "none";
+        if (graph) graph.style.display = "inline-flex"; //Show the graph
     }
 }
 
