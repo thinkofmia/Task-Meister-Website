@@ -32,8 +32,9 @@ $userid = $me->id;//Gets the user id
 if(!isset($tagList)) $tagList = array("Physics","Chemistry","Mathematics","Biology");
 
 if ($userid==0){//If the user is a guest
-    //Display guest msg
-    echo "Because you have yet to login, your default tags are: Physics, Chemistry, Mathematics, Chinese and Biology";
+    //Display guest msg, hide by request of Lawrence
+    //echo "Because you have yet to login, your default tags are: Physics, Chemistry, Mathematics, Chinese and Biology";
+    //Set default tags
     $tagList = array("Physics","Chemistry","Mathematics","Chinese Language","Biology");//Sets default tag list
 }
 else {//Get User preference
