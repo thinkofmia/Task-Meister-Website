@@ -165,7 +165,7 @@ document.addEventListener('DOMContentLoaded', function(){
 </script>
 
 <!--Display of the module-->
-<div class="customtext teachersOptions">
+<div class="customtext teachersOptions sticky-top">
     <!--If header exists, display header-->
     <?php if ($displayHeader) : ?>
         <h3><?php echo $displayHeader; ?></h3>

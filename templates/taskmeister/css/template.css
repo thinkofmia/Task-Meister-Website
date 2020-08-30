@@ -267,10 +267,11 @@ ul.tags.inline {
     - Module used to allow users pick their preferences and classes
 */
 .preferenceOptions, .teachersOptions {
-  position: relative;
-  z-index: 1;
+  position: sticky;
+  z-index: 1000;
   width: 100%;
   text-align: center;
+  padding-top: 7vw;
 }
 .preferenceOptions h3, .teachersOptions h3 {
   text-align: center;
@@ -614,6 +615,9 @@ body.default #featuredArticlesWrapper .card-body {
 body.default #featuredArticlesWrapper .card-body .card-text {
   color: white;
 }
+body.default .preferenceOptions, body.default .teachersOptions {
+  background-color: black;
+}
 body.default .preferenceBox .preferenceLabel, body.default .userPreferred .preferenceLabel, body.default .teacherSelected .preferenceLabel, body.default .userNotPreferred .preferenceLabel, body.default .userMayTry .preferenceLabel, body.default .preferenceBox .teacherLabel, body.default .userPreferred .teacherLabel, body.default .teacherSelected .teacherLabel, body.default .userNotPreferred .teacherLabel, body.default .userMayTry .teacherLabel, body.default .teacherBox .preferenceLabel, body.default .teacherBox .teacherLabel {
   background-color: darkorange;
   color: white;
@@ -702,6 +706,9 @@ body.red #featuredArticlesWrapper .card-body {
 body.red #featuredArticlesWrapper .card-body .card-text {
   color: white;
 }
+body.red .preferenceOptions, body.red .teachersOptions {
+  background-color: black;
+}
 body.red .preferenceBox .preferenceLabel, body.red .userPreferred .preferenceLabel, body.red .teacherSelected .preferenceLabel, body.red .userNotPreferred .preferenceLabel, body.red .userMayTry .preferenceLabel, body.red .preferenceBox .teacherLabel, body.red .userPreferred .teacherLabel, body.red .teacherSelected .teacherLabel, body.red .userNotPreferred .teacherLabel, body.red .userMayTry .teacherLabel, body.red .teacherBox .preferenceLabel, body.red .teacherBox .teacherLabel {
   background-color: crimson;
   color: white;
@@ -789,6 +796,9 @@ body.day #featuredArticlesWrapper .card-body {
 }
 body.day #featuredArticlesWrapper .card-body .card-text {
   color: white;
+}
+body.day .preferenceOptions, body.day .teachersOptions {
+  background-color: lightblue;
 }
 body.day .preferenceBox .preferenceLabel, body.day .userPreferred .preferenceLabel, body.day .teacherSelected .preferenceLabel, body.day .userNotPreferred .preferenceLabel, body.day .userMayTry .preferenceLabel, body.day .preferenceBox .teacherLabel, body.day .userPreferred .teacherLabel, body.day .teacherSelected .teacherLabel, body.day .userNotPreferred .teacherLabel, body.day .userMayTry .teacherLabel, body.day .teacherBox .preferenceLabel, body.day .teacherBox .teacherLabel {
   background-color: darkgray;
@@ -887,6 +897,9 @@ body.tree #featuredArticlesWrapper .card-body {
 }
 body.tree #featuredArticlesWrapper .card-body .card-text {
   color: brown;
+}
+body.tree .preferenceOptions, body.tree .teachersOptions {
+  background-color: wheat;
 }
 body.tree .preferenceBox .preferenceLabel, body.tree .userPreferred .preferenceLabel, body.tree .teacherSelected .preferenceLabel, body.tree .userNotPreferred .preferenceLabel, body.tree .userMayTry .preferenceLabel, body.tree .preferenceBox .teacherLabel, body.tree .userPreferred .teacherLabel, body.tree .teacherSelected .teacherLabel, body.tree .userNotPreferred .teacherLabel, body.tree .userMayTry .teacherLabel, body.tree .teacherBox .preferenceLabel, body.tree .teacherBox .teacherLabel {
   background-color: darkgreen;

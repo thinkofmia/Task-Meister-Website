@@ -337,10 +337,12 @@ ul.tags.inline{
 */
 
 .preferenceOptions, .teachersOptions {//Sets the CSS for the options'/input boxes' wrapper
-    position: relative;//Sets the position to be relative
-    z-index: 1;//Sets the z-index layer to be in front
+    position: sticky;//Sets the position to be sticky
+    z-index: 1000;//Sets the z-index layer to be in front
     width: 100%;//Stretches the width to the max
     text-align: center;//Aligns the contents to the center
+    padding-top: 7vw;//Pads the top by 7vw
+
     h3 {//CSS for the header
         text-align: center;//Align the header to the center
     }
@@ -692,6 +694,9 @@ body.default {//Sets the CSS of the body with the default theme
             }
         }
     }
+    .preferenceOptions, .teachersOptions {//Sets CSS for the preference/user options (Choose Class/Choose Preference Mod)
+        background-color: $pageBackground;//Sets the bg color to the theme
+    }
     .preferenceBox, .teacherBox {//Sets the CSS for the preference/user box (Choose Class/Choose Preferences Mod)
         .preferenceLabel, .teacherLabel{//Sets the CSS for the box labels
             background-color: $altFontColor;//Sets the bg color to the theme
@@ -791,6 +796,9 @@ body.red {//Sets the CSS of the Red Theme to the entire body
                 color: $mainFontColor;//Sets the font color to the theme
             }
         }
+    }
+    .preferenceOptions, .teachersOptions {//Sets CSS for the preference/user options (Choose Class/Choose Preference Mod)
+        background-color: $pageBackground;//Sets the bg color to the theme
     }
     .preferenceBox, .teacherBox {//Sets the CSS for the preference/user box (Choose Class/Choose Preferences Mod)
         .preferenceLabel, .teacherLabel{//Sets the CSS for the box labels
@@ -892,6 +900,9 @@ body.day {//Sets the CSS of the Ice Theme to the entire body
                 color: $mainFontColor;//Sets the font color to the theme
             }
         }
+    }
+    .preferenceOptions, .teachersOptions {//Sets CSS for the preference/user options (Choose Class/Choose Preference Mod)
+        background-color: $skyBg;//Sets the bg color to the theme
     }
     .preferenceBox, .teacherBox {//Sets the CSS for the preference/user box (Choose Class/Choose Preferences Mod)
         .preferenceLabel, .teacherLabel{//Sets the CSS for the box labels
@@ -1004,6 +1015,9 @@ body.tree {//Sets the CSS of the Tree Theme to the entire body
                 color: $treeMainFont;//Sets the font color to the theme
             }
         }
+    }
+    .preferenceOptions, .teachersOptions {//Sets CSS for the preference/user options (Choose Class/Choose Preference Mod)
+        background-color: $treeBg;//Sets the bg color to the theme
     }
     .preferenceBox, .teacherBox {//Sets the CSS for the preference/user box (Choose Class/Choose Preferences Mod)
         .preferenceLabel, .teacherLabel{//Sets the CSS for the box labels
