@@ -6,6 +6,7 @@ defined('_JEXEC') or die;
 
 <!-- Display out custom header/text-->
 <div class="customtext">
+    <br><br>
     <?php if ($displayHeader) : ?>
         <h5><?php echo $displayHeader; ?></h5>
     <?php endif; ?>
@@ -67,7 +68,7 @@ $list2 = json_decode($recommendedContents);
         </ul>
       <?php endforeach; ?>
   <?php else : ?>
-    You don't have a teacher yet.
+    Nothing to show for now. (Choose a teacher first!)
   <?php endif; ?>
 <!--Default display if not choice_teacher-->
 <?php else : ?>

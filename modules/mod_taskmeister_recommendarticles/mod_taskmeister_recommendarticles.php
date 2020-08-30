@@ -38,7 +38,7 @@ if (isset($_REQUEST["keyword"])&& strlen($_REQUEST["keyword"])>0){
 if (($params->get('filter'))=="choice_teacher"){//If choose to show teachers' preferences
     $teachersRecommendationDict= ModRecommendArticlesHelper::getTeachersRecommendations($params->get('noOfArticles'), $userid, $db);
     if ($userid!=0) require JModuleHelper::getLayoutPath('mod_taskmeister_recommendarticles');//Calls out default.php
-    else echo "You need to login to use this feature. ";
+    else echo " ";
 }
 else{//If mode selected is others
     $resultsSelected= ModRecommendArticlesHelper::getArticleList($params->get('filter'),$params->get('noOfArticles'), $userid, $params->get('selectedtag'), $keyword);

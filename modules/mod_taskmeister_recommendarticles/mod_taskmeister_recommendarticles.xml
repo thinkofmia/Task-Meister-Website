@@ -2,7 +2,7 @@
 <extension type="module" version="3.1.0" client="site" method="upgrade">
     <name>Recommend Articles (Task Meister)</name>
     <author>Fremont Teng</author>
-    <version>1.0.6</version>
+    <version>1.0.7</version>
     <description>A recommend articles module for Task Meister. With lots of parameters and varying displays.</description>
     <files>
         <filename>mod_taskmeister_recommendarticles.xml</filename>

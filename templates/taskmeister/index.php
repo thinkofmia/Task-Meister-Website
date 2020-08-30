@@ -20,7 +20,7 @@ $urlPath = $uri->getPath();
 $userID = $me->id;//Get user id
 $user = JFactory::getUser($userID);//Get user
 if (isset($user->name))$username = $user->name; //Get user's name
-else $username = "Login/Sign Up";//Replace user's name with login
+else $username = "Sign in";//Replace user's name with login
 
 // Add JavaScript Frameworks
 JHtml::_('bootstrap.framework');
@@ -91,54 +91,41 @@ $doc->addScript($this->baseurl . '/templates/' . $this->template . '/js/keen-sli
             <a class="nav-link" href="<?php echo $urlPath==$this->baseurl; ?>">Home</a>
       <?php endif; ?>
         </li>
-      <!--Check if current directory is on school levels page-->
-      <?php if(($urlPath==$this->baseurl."/index.php/school/")||($urlPath==$this->baseurl."/index.php/school")) : ?>
+      <!--Check if current directory is on activity page-->
+    <?php if(($urlPath==$this->baseurl."/index.php/mylist/")||($urlPath==$this->baseurl."/index.php/mylist")) : ?>
         <!--If so, highlight the nav-item-->
         <li class="nav-item bgAlt">
-            <a class="nav-link" href="<?php echo $this->baseurl."/index.php/school/"; ?>">By School</a>
+            <a class="nav-link" href="<?php echo $this->baseurl."/index.php/mylist/"; ?>">
+              My Activities
+            </a>
       <?php else : ?>  
         <!--Else, leave it as a default nav-item-->
         <li class="nav-item">
-            <a class="nav-link" href="<?php echo $this->baseurl."/index.php/school/"; ?>">By School</a>
+            <a class="nav-link" href="<?php echo $this->baseurl."/index.php/mylist/"; ?>">My Activities</a>
       <?php endif; ?>
-        </li>
-      <!--Check if current directory is on subjects page-->
-      <?php if(($urlPath==$this->baseurl."/index.php/subjects/")||($urlPath==$this->baseurl."/index.php/subjects")) : ?>
+        </li>   
+        <!--Check if current directory is on preferences page-->
+    <?php if(($urlPath==$this->baseurl."/index.php/preferences/")||($urlPath==$this->baseurl."/index.php/preferences")) : ?>
         <!--If so, highlight the nav-item-->
         <li class="nav-item bgAlt">
-            <a class="nav-link" href="<?php echo $this->baseurl."/index.php/subjects/"; ?>">By Subjects</a>
+            <a class="nav-link" href="<?php echo $this->baseurl."/index.php/preferences/"; ?>">My Preferences</a>
       <?php else : ?>  
         <!--Else, leave it as a default nav-item-->
         <li class="nav-item">
-            <a class="nav-link" href="<?php echo $this->baseurl."/index.php/subjects/"; ?>">By Subjects</a>
+            <a class="nav-link" href="<?php echo $this->baseurl."/index.php/preferences/"; ?>">My Preferences</a>
       <?php endif; ?>
-        </li>
-      <!--Dropdown menu for account tabs-->  
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Account
-        </a>
-        <!--Dropdown tab for account-->
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <!--If Guest, disable the remaining tabs-->
-          <?php if ($userID==0) : ?>
-            <a class="dropdown-item" href="<?php echo $this->baseurl."/index.php/login"?>">Login/Sign Up</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item disabled" href="#">My List</a>
-            <a class="dropdown-item disabled" href="#">My Preferences</a>
-            <a class="dropdown-item disabled" href="#">My Class</a>
-            <a class="dropdown-item disabled" href="#">Logout</a>
-          <?php else: ?>
-            <!--Else if logined, enable the remaining tabs-->
-            <a class="dropdown-item" href="<?php echo $this->baseurl."/index.php/user"?>"><?php echo $username; ?></a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="<?php echo $this->baseurl."/index.php/mylist"?>">My List</a>
-            <a class="dropdown-item" href="<?php echo $this->baseurl."/index.php/preferences"?>">My Preferences</a>
-            <a class="dropdown-item" href="<?php echo $this->baseurl."/index.php/class"?>">My Class</a>
-            <a class="dropdown-item" href="<?php echo $this->baseurl."/index.php/logout"?>">Logout</a>
-          <?php endif; ?>  
-        </div>
-      </li>
+        </li>    
+        <!--Check if current directory is on class page-->
+    <?php if(($urlPath==$this->baseurl."/index.php/class/")||($urlPath==$this->baseurl."/index.php/class")) : ?>
+        <!--If so, highlight the nav-item-->
+        <li class="nav-item bgAlt">
+            <a class="nav-link" href="<?php echo $this->baseurl."/index.php/class/"; ?>">My Class</a>
+      <?php else : ?>  
+        <!--Else, leave it as a default nav-item-->
+        <li class="nav-item">
+            <a class="nav-link" href="<?php echo $this->baseurl."/index.php/class/"; ?>">My Class</a>
+      <?php endif; ?>
+        </li>      
       <!--Dropdown menu for themes-->  
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="themeDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -161,6 +148,19 @@ $doc->addScript($this->baseurl . '/templates/' . $this->template . '/js/keen-sli
       <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" value = "<?php echo $_REQUEST["keyword"]; ?>" name="keyword">
       <button class="btn bgAlt my-2 my-sm-0" type="submit">🔍</button>
     </form>
+    <!--Check if current directory is on user page-->
+    <?php if(($urlPath==$this->baseurl."/index.php/user/")||($urlPath==$this->baseurl."/index.php/user")) : ?>
+        <!--If so, highlight the nav-item-->
+        <li class="nav-item bgAlt" style="list-style-type: none;">
+            <a class="nav-link" href="<?php echo $this->baseurl."/index.php/user/"; ?>">
+              <?php echo $username; ?>
+            </a>
+      <?php else : ?>  
+        <!--Else, leave it as a default nav-item-->
+        <li class="nav-item" style="list-style-type: none;">
+            <a class="nav-link" href="<?php echo $this->baseurl."/index.php/user/"; ?>"><?php echo $username; ?></a>
+      <?php endif; ?>
+        </li>
   </div>
 </nav>
 
