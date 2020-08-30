@@ -36,19 +36,19 @@ defined('_JEXEC') or die;
         data: { 
             labels: ['<?php echo implode("', '",array_keys($likePreferencesScore)); ?>'],//Loop the keys of the dictionary as labels
             datasets: [{
-                label: 'Recommended Preferences Score',
+                label: 'Recommended Preferences Score (+2 for Preferred, +1 for May Try)',
                 data: [<?php echo implode(', ',$likePreferencesScore); ?>],//Loop the values of the dictionaries as the data
                 backgroundColor: [//Randomize the colors based on number of tags
                     <?php foreach ($likePreferencesScore as $key => $value) : ?>
-                        "<?php echo 'rgba('.rand(50, 255).', '.rand(50, 255).', '.rand(50, 255).', 0.7) '; ?>",
+                        "<?php echo 'rgba('.(255-intval(150/$value)).', 0, 0, 0.7) ';//Display shades of red ?>",
                     <?php endforeach; ?>
-                    "<?php echo 'rgba('.rand(50, 255).', '.rand(50, 255).', '.rand(50, 255).', 0.7) '; ?>"
+                    "<?php echo 'rgba(255, 0, 0, 0.7) ';//Display red ?>"
                 ],
                 borderColor: [//Randomize the colors based on number of tags
                     <?php foreach ($likePreferencesScore as $key => $value) : ?>
-                        "<?php echo 'rgba('.rand(50, 255).', '.rand(50, 255).', '.rand(50, 255).', 0.7)'; ?>",
+                        "<?php echo 'rgba(255,255,255, 0.7)'; ?>",
                     <?php endforeach; ?>
-                    "<?php echo 'rgba('.rand(50, 255).', '.rand(50, 255).', '.rand(50, 255).', 0.7) '; ?>"
+                    "<?php echo 'rgba(255,255,255, 0.7) '; ?>"
                 ],
                 borderWidth: 1
             }]
@@ -57,7 +57,8 @@ defined('_JEXEC') or die;
             scales: {
                 yAxes: [{
                     ticks: {
-                        beginAtZero: true
+                        beginAtZero: true,
+                        stepSize: 1
                     }
                 }]
             }
@@ -78,15 +79,15 @@ defined('_JEXEC') or die;
                 data: [<?php echo implode(', ',$dislikedPreferencesScore); ?>],//Sets the data to the value of the dictionary
                 backgroundColor: [//Randomize the color based on number of tags
                     <?php foreach ($dislikedPreferencesScore as $key => $value) : ?>
-                        "<?php echo 'rgba('.rand(50, 255).', '.rand(50, 255).', '.rand(50, 255).', 0.7) '; ?>",
+                        "<?php echo 'rgba(0, 0, '.(255-intval(150/$value)).', 0.7) ';//Display shades of blue ?>",
                     <?php endforeach; ?>
-                    "<?php echo 'rgba('.rand(50, 255).', '.rand(50, 255).', '.rand(50, 255).', 0.7) '; ?>"
+                    "<?php echo 'rgba(0, 0, 255, 0.7) '; ?>"
                 ],
                 borderColor: [//Randomize the color based on number of tags
                     <?php foreach ($dislikedPreferencesScore as $key => $value) : ?>
-                        "<?php echo 'rgba('.rand(50, 255).', '.rand(50, 255).', '.rand(50, 255).', 0.7)'; ?>",
+                        "<?php echo 'rgba(255,255,255, 0.7)'; ?>",
                     <?php endforeach; ?>
-                    "<?php echo 'rgba('.rand(50, 255).', '.rand(50, 255).', '.rand(50, 255).', 0.7) '; ?>"
+                    "<?php echo 'rgba(255,255,255, 0.7) '; ?>"
                 ],
                 borderWidth: 1
             }]
@@ -95,7 +96,8 @@ defined('_JEXEC') or die;
             scales: {
                 yAxes: [{
                     ticks: {
-                        beginAtZero: true
+                        beginAtZero: true,
+                        stepSize: 1
                     }
                 }]
             }
